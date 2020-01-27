@@ -1,0 +1,13 @@
+/*//META{"name":"Mojave","description":"Dunes from spectra but it works.","author":"preston#3970","version":"1.5","website":"https://github.com/goodname69","source":"https://github.com/goodname69/Mojave"}*//**/
+@import url('https://goodname69.github.io/Mojave/import.css');
+:root {
+    --main: rgb(29, 29, 37);
+    --hover: rgba(29, 29, 37, 0.555);
+    --roundness: 3px;
+    --transparent: rgba(0, 0, 0, 0.8);
+    --button: rgb(49, 49, 53);
+    --button-hover: rgb(66, 66, 71);
+    --font: 'Nunito'; /* you can use any google font*/
+    --fontsize: .9em;
+    --textcolor: #fff;
+}
