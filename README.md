@@ -30,8 +30,6 @@ Click on these badges to see how you might be able to help:
 
 [![Contributors](https://contrib.rocks/image?repo=Vaporjawn/better-discord-themes)](https://github.com/Vaporjawn/better-discord-themes/graphs/contributors)
 
-Special thanks to [Project Gutenberg](https://www.gutenberg.org/) for providing free books.
-
 ## Your Support means a lot
 
 Give a ⭐ to show support for the project.
