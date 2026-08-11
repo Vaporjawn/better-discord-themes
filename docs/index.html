@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Better Discord Themes — Victor Williams</title>
+<meta name="description" content="a compilcation of better discord themes" />
+<meta name="theme-color" content="#0b0c10" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'1'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%236366f1'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%2300b8ff'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'14'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" />
+<style>
+  :root{
+    --bg:#0b0c10;
+    --bg-elevated:#14161d;
+    --text:#e7e9ee;
+    --text-dim:#9aa0ad;
+    --violet:#6366f1;
+    --cyan:#00b8ff;
+    --border:rgba(255,255,255,0.09);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow-x:hidden;
+  }
+  @font-face{
+    font-family:'Space Grotesk Fallback';
+    src:local('Space Grotesk');
+  }
+  .vapor{
+    position:fixed;
+    inset:-20% -20% auto -20%;
+    height:70vh;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(45% 55% at 30% 30%, color-mix(in srgb, var(--violet) 55%, transparent) 0%, transparent 70%),
+      radial-gradient(40% 50% at 70% 45%, color-mix(in srgb, var(--cyan) 45%, transparent) 0%, transparent 72%);
+    filter:blur(60px) saturate(120%);
+    opacity:0.55;
+    animation:drift 26s ease-in-out infinite alternate;
+  }
+  @keyframes drift{
+    0%{ transform:translate3d(-2%, -1%, 0) rotate(0deg); }
+    100%{ transform:translate3d(3%, 2%, 0) rotate(4deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .vapor{ animation:none; }
+  }
+  header, main, footer{ position:relative; z-index:1; }
+  header{
+    max-width:920px;
+    margin:0 auto;
+    width:100%;
+    padding:2rem 1.5rem 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .brand{
+    font-family:'JetBrains Mono','IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    color:var(--text-dim);
+    text-decoration:none;
+  }
+  .brand:hover{ color:var(--text); }
+  main{
+    max-width:920px;
+    margin:0 auto;
+    width:100%;
+    padding:5.5rem 1.5rem 3rem;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono','IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    margin:0 0 1.1rem;
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 10px 2px color-mix(in srgb, var(--cyan) 70%, transparent);
+    flex:none;
+  }
+  h1{
+    font-family:'Space Grotesk','Space Grotesk Fallback',Inter,system-ui,sans-serif;
+    font-weight:600;
+    font-size:clamp(2.2rem, 5.5vw, 3.6rem);
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    margin:0 0 1.1rem;
+    background:linear-gradient(100deg, var(--text) 45%, var(--cyan) 110%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  p.desc{
+    font-size:1.1rem;
+    line-height:1.65;
+    color:var(--text-dim);
+    max-width:60ch;
+    margin:0 0 2.1rem;
+  }
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.85rem;
+    margin-bottom:2.6rem;
+  }
+  .btn{
+    font-family:inherit;
+    font-size:0.95rem;
+    font-weight:600;
+    padding:0.75rem 1.35rem;
+    border-radius:10px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:2px;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg, var(--violet), var(--cyan));
+    color:#08090c;
+  }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 8px 24px -8px color-mix(in srgb, var(--violet) 70%, transparent); }
+  .btn-secondary{
+    background:var(--bg-elevated);
+    color:var(--text);
+    border:1px solid var(--border);
+  }
+  .btn-secondary:hover{ border-color:color-mix(in srgb, var(--cyan) 60%, var(--border)); transform:translateY(-1px); }
+  .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.55rem;
+    font-family:'JetBrains Mono','IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .chip{
+    font-size:0.76rem;
+    color:var(--text-dim);
+    border:1px solid var(--border);
+    background:var(--bg-elevated);
+    padding:0.32rem 0.65rem;
+    border-radius:999px;
+  }
+  .chip.lang{ color:var(--cyan); border-color:color-mix(in srgb, var(--cyan) 35%, var(--border)); }
+  footer{
+    max-width:920px;
+    margin:0 auto;
+    width:100%;
+    padding:1.6rem 1.5rem 2.2rem;
+    font-family:'JetBrains Mono','IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:0.78rem;
+    color:var(--text-dim);
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.5rem;
+  }
+  footer a{ color:var(--text-dim); }
+  footer a:hover{ color:var(--cyan); }
+</style>
+</head>
+<body>
+  <div class="vapor" aria-hidden="true"></div>
+  <header>
+    <a class="brand" href="https://vaporjawn.dev">vaporjawn.dev</a>
+    <a class="brand" href="https://github.com/Vaporjawn">github.com/Vaporjawn</a>
+  </header>
+  <main>
+    <p class="eyebrow">OPEN SOURCE PROJECT</p>
+    <h1>Better Discord Themes</h1>
+    <p class="desc">a compilcation of better discord themes</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/Vaporjawn/better-discord-themes">View source on GitHub</a>
+      
+    </div>
+    <div class="meta">
+      <span class="chip lang">CSS</span>
+      <span class="chip">discord</span>
+      <span class="chip">themes</span>
+      <span class="chip">discordthemes</span>
+      <span class="chip">better</span>
+      <span class="chip">betterdiscord</span>
+      <span class="chip">betterdiscord-theme</span>
+      <span class="chip">updated Oct 2025</span>
+    </div>
+  </main>
+  <footer>
+    <span>Part of Victor Williams' project catalog</span>
+    <a href="https://vaporjawn.dev">← back to vaporjawn.dev</a>
+  </footer>
+</body>
+</html>
