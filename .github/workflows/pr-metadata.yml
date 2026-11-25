@@ -1,0 +1,75 @@
+name: Fill pull request fields
+
+# Runs on every new pull request and fills in the assignee, reviewer, labels,
+# milestone and (when empty) the description. It never checks out or runs the
+# pull request's code, so pull_request_target is safe here.
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pr = context.payload.pull_request;
+            const number = pr.number;
+            const maintainer = owner;
+
+            const files = await github.paginate(github.rest.pulls.listFiles, { owner, repo, pull_number: number, per_page: 100 });
+            const paths = files.map((f) => f.filename);
+
+            // Assignee: always the maintainer.
+            await github.rest.issues.addAssignees({ owner, repo, issue_number: number, assignees: [maintainer] });
+
+            // Reviewer: the maintainer, unless they wrote the pull request (GitHub forbids that).
+            if (pr.user.login.toLowerCase() !== maintainer.toLowerCase()) {
+              await github.rest.pulls.requestReviewers({ owner, repo, pull_number: number, reviewers: [maintainer] }).catch(() => {});
+            }
+
+            // Labels, chosen from the files and the author.
+            const labels = new Set();
+            if (paths.some((p) => /^(curated|themes|archive)\//.test(p) || p.endsWith('.theme.css'))) labels.add('theme-submission');
+            if (paths.some((p) => /\.md$/.test(p) || p.startsWith('docs/'))) labels.add('documentation');
+            if (paths.some((p) => p.startsWith('.github/'))) labels.add('github_actions');
+            if (pr.user.login === 'dependabot[bot]') labels.add('dependencies');
+            if (/^fix/i.test(pr.title)) labels.add('bug');
+            if (labels.size === 0) labels.add('enhancement');
+            await github.rest.issues.addLabels({ owner, repo, issue_number: number, labels: [...labels] });
+
+            // Milestone: the open "Theme collection" one.
+            const milestones = await github.rest.issues.listMilestones({ owner, repo, state: 'open' });
+            const milestone = milestones.data.find((m) => m.title === 'Theme collection');
+            if (milestone) await github.rest.issues.update({ owner, repo, issue_number: number, milestone: milestone.number });
+
+            // Description: fill from the template when the author left it empty.
+            if (!pr.body || !pr.body.trim()) {
+              const list = paths.slice(0, 30).map((p) => `- \`${p}\``).join('\n');
+              const more = paths.length > 30 ? `\n- and ${paths.length - 30} more` : '';
+              const body = [
+                '## What changed',
+                '',
+                pr.title,
+                '',
+                'Files:',
+                list + more,
+                '',
+                '## Checklist',
+                '',
+                '- [ ] One theme per pull request',
+                '- [ ] Meta block has @name, @author, @version and @source',
+                '- [ ] License of any third-party theme is stated and listed in THIRD_PARTY_NOTICES.md',
+                '- [ ] `python3 scripts/validate-themes.py` passes',
+                '- [ ] Screenshot attached for visual changes',
+              ].join('\n');
+              await github.rest.pulls.update({ owner, repo, pull_number: number, body });
+            }
