@@ -1,0 +1,62 @@
+name: Fill issue fields
+
+# Runs on every new or reopened issue and fills in the assignee, labels, issue type,
+# milestone and (when empty) the description. It only reads the issue's own fields and
+# never runs anything from the issue text.
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue = context.payload.issue;
+            const number = issue.number;
+            const maintainer = owner;
+            const text = `${issue.title}\n${issue.body ?? ""}`.toLowerCase();
+            const existing = new Set((issue.labels ?? []).map((l) => l.name));
+
+            // Assignee: always the maintainer.
+            await github.rest.issues.addAssignees({ owner, repo, issue_number: number, assignees: [maintainer] });
+
+            // Labels: keep what the form set; add one when none describes the kind of issue.
+            const kinds = ["bug", "enhancement", "documentation", "question", "theme-submission"];
+            if (!kinds.some((k) => existing.has(k))) {
+              let kind = "question";
+              if (/\b(broken|bug|crash|error|regression|stopped working|fails?)\b/.test(text)) kind = "bug";
+              else if (/\b(theme request|add (a )?theme|new theme|feature|support for)\b/.test(text)) kind = "enhancement";
+              else if (/\b(readme|docs?|documentation|typo)\b/.test(text)) kind = "documentation";
+              existing.add(kind);
+              await github.rest.issues.addLabels({ owner, repo, issue_number: number, labels: [kind] });
+            }
+
+            // Issue type: Bug, Feature or Task, from the labels.
+            const type = existing.has("bug") ? "Bug" : existing.has("enhancement") || existing.has("theme-submission") ? "Feature" : "Task";
+            await github.rest.issues.update({ owner, repo, issue_number: number, type }).catch((e) => core.warning(`Issue type not set: ${e.message}`));
+
+            // Milestone: the open "Theme collection" milestone.
+            const milestones = await github.paginate(github.rest.issues.listMilestones, { owner, repo, state: "open", per_page: 100 });
+            const milestone = milestones.find((m) => m.title === "Theme collection");
+            if (milestone && !issue.milestone) {
+              await github.rest.issues.update({ owner, repo, issue_number: number, milestone: milestone.number });
+            }
+
+            // Description: only when the author left it empty.
+            if (!(issue.body ?? "").trim()) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: number,
+                body: "## What is wrong or needed\n\nNo description was given. Please add the theme name, your Discord and BetterDiscord versions, and what you expected to happen.",
+              });
+            }
