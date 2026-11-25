@@ -1,0 +1,29 @@
+MIT License
+
+Copyright (c) 2026 Victor Williams
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the original material in this repository (the README, documentation, the
+GitHub Pages site, scripts, workflows, and themes whose header names
+"Vaporjawn" as author), to deal in that material without restriction,
+including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies, and to permit persons to whom it is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of that material.
+
+THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE MATERIAL OR THE USE OR OTHER DEALINGS IN THE
+MATERIAL.
+
+---
+
+Third-party themes: this repository collects themes written by other people.
+They are NOT covered by the license above. Each one stays under its own
+author's terms; see THIRD_PARTY_NOTICES.md for the author, source and license
+of every theme.

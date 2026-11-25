@@ -1,0 +1,30 @@
+name: Broken theme
+description: A theme looks wrong or stopped working after a Discord update.
+labels: [bug]
+body:
+  - type: input
+    id: theme
+    attributes:
+      label: Theme name
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong?
+      description: Describe what you see and what you expected. Attach a screenshot.
+    validations:
+      required: true
+  - type: input
+    id: bd
+    attributes:
+      label: BetterDiscord version
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows, macOS, Linux]
+    validations:
+      required: true

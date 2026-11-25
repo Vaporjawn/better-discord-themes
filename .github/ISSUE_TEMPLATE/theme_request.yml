@@ -1,0 +1,21 @@
+name: Add a theme
+description: Suggest a theme to include in the collection.
+labels: [enhancement, good first issue]
+body:
+  - type: input
+    id: link
+    attributes:
+      label: Link to the theme
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: The theme must allow redistribution. Write "unknown" if you cannot tell.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why should it be included?

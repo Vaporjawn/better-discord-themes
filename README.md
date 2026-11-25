@@ -33,3 +33,11 @@ Click on these badges to see how you might be able to help:
 ## Your Support means a lot
 
 Give a ⭐ to show support for the project.
+
+## License
+
+Original material is MIT licensed, see [LICENSE](LICENSE). Most themes here were written by other people and keep their own licenses: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the author, source and license of each one.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and the [Security policy](SECURITY.md). Add a theme or fix a broken selector: both are welcome.
