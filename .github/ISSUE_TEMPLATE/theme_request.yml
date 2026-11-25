@@ -1,11 +1,28 @@
-name: Add a theme
-description: Suggest a theme to include in the collection.
-labels: [enhancement, good first issue]
+name: Submit a theme
+description: Propose a theme for the collection. No Git knowledge needed.
+labels: [theme-submission, enhancement]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! A maintainer will check the license and add the theme, crediting you as the submitter.
+  - type: input
+    id: name
+    attributes:
+      label: Theme name
+    validations:
+      required: true
   - type: input
     id: link
     attributes:
       label: Link to the theme
+      description: Repository or file URL.
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Theme author
     validations:
       required: true
   - type: input
@@ -15,7 +32,14 @@ body:
       description: The theme must allow redistribution. Write "unknown" if you cannot tell.
     validations:
       required: true
+  - type: checkboxes
+    id: mine
+    attributes:
+      label: Ownership
+      options:
+        - label: I wrote this theme and agree to release it under the MIT license
   - type: textarea
     id: why
     attributes:
       label: Why should it be included?
+      description: Add a screenshot if you can.

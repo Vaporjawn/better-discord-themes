@@ -84,11 +84,30 @@ The color strips are the colors each theme uses most, read from its own styleshe
 
 Run `npm run build:index` after adding or renaming a theme in `curated/`. It rewrites the table above, the color strips, the banner and `docs/themes.json`.
 
-## Contribute
+## Contribute in three ways
 
-Add a theme, fix a selector Discord broke, or correct an author credit. [CONTRIBUTING.md](CONTRIBUTING.md) has the steps and the required header fields. Please follow the [code of conduct](.github/CODE_OF_CONDUCT.md); security reports go through the [security policy](.github/SECURITY.md).
+| I want to... | Do this |
+| --- | --- |
+| **Suggest a theme** (no coding) | [Open the theme form](https://github.com/Vaporjawn/better-discord-themes/issues/new?template=theme_request.yml) |
+| **Report a broken theme** | [Open the bug form](https://github.com/Vaporjawn/better-discord-themes/issues/new?template=bug_report.yml) |
+| **Add or fix a theme myself** | Fork the repo, or [add a file in your browser](https://github.com/Vaporjawn/better-discord-themes/new/main) (GitHub offers to fork for you), then open a pull request |
 
-<a href="https://github.com/Vaporjawn/better-discord-themes/graphs/contributors"><img src="https://contrib.rocks/image?repo=Vaporjawn/better-discord-themes" alt="Contributors" height="40"></a>
+What happens next:
+
+1. You open an issue or pull request. First-time contributors get a welcome message.
+2. The **Validate themes** check runs on every pull request and says which theme is missing which meta field.
+3. A maintainer reviews the license and the result, and merges or replies.
+4. Your name appears in the Contributors list below once your pull request is merged.
+
+Looking for a first task? See the [good first issues](https://github.com/Vaporjawn/better-discord-themes/issues?q=is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/Vaporjawn/better-discord-themes/issues?q=is%3Aopen+label%3A%22help+wanted%22). Full rules are in [CONTRIBUTING.md](CONTRIBUTING.md), the [code of conduct](.github/CODE_OF_CONDUCT.md) and the [security policy](.github/SECURITY.md).
+
+## Contributors
+
+Everyone who has contributed code, fixes or themes:
+
+[![Contributors](https://contrib.rocks/image?repo=Vaporjawn/better-discord-themes)](https://github.com/Vaporjawn/better-discord-themes/graphs/contributors)
+
+Theme authors are credited in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## License
 
