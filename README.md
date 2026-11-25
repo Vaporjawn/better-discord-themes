@@ -102,7 +102,10 @@ Looking for a first task? See the [good first issues](https://github.com/Vaporja
 
 Everyone who has contributed code, fixes or themes:
 
-[![Contributors](https://contrib.rocks/image?repo=Vaporjawn/better-discord-themes)](https://github.com/Vaporjawn/better-discord-themes/graphs/contributors)
+<a href="https://github.com/Vaporjawn"><img src="https://github.com/Vaporjawn.png?size=64" width="64" height="64" alt="Vaporjawn" title="Vaporjawn"></a>
+<a href="https://github.com/aaas72"><img src="https://github.com/aaas72.png?size=64" width="64" height="64" alt="aaas72" title="aaas72"></a>
+
+The full list, with commit counts, is on the [contributors graph](https://github.com/Vaporjawn/better-discord-themes/graphs/contributors).
 
 Theme authors are credited in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
