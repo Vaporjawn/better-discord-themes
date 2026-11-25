@@ -4,7 +4,7 @@ Every theme below is vendored under [`themes/`](themes/) with its upstream `LICE
 
 **814 themes from 215 repositories**, sorted by upstream stars. Only repositories with an open-source license are included.
 
-The original hand-picked collection (the `*.theme.css` files in the repo root and `New Themes/`) is listed in the README and `themes.json`. The repo's own validation scripts only check those files, not `themes/`.
+The original hand-picked collection (the `*.theme.css` files in [`curated/`](curated/)) is listed in the README and `docs/themes.json`. The repo's own validation scripts only check those files, not `themes/`.
 
 ## [refact0r/system24](https://github.com/refact0r/system24) · MIT · ★2469
 

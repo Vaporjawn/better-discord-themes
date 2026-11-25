@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Better Discord Themes — Victor Williams</title>
-<meta name="description" content="a compilation of better discord themes" />
+<meta name="description" content="Hand-picked BetterDiscord themes with color previews, install links and licenses." />
 <meta name="theme-color" content="#0b0c10" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'1'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%236366f1'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%2300b8ff'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'14'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" />
 <style>
@@ -207,6 +207,11 @@
   .theme-actions button:hover, .theme-actions a:hover{ border-color:var(--cyan); }
   .theme-actions button:focus-visible, .theme-actions a:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
   .themes-msg{ color:var(--text-dim); }
+  .swatch{ display:flex; height:34px; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
+  .swatch span{ flex:1; }
+  .swatch.none{ background:repeating-linear-gradient(135deg, var(--bg) 0 8px, var(--bg-elevated) 8px 16px); color:var(--text-dim);
+    font-size:0.72rem; align-items:center; justify-content:center; font-family:'JetBrains Mono',ui-monospace,Menlo,monospace; }
+  .theme-card:hover{ border-color:color-mix(in srgb, var(--cyan) 45%, var(--border)); }
 </style>
 </head>
 <body>
@@ -218,10 +223,11 @@
   <main>
     <p class="eyebrow">OPEN SOURCE PROJECT</p>
     <h1>Better Discord Themes</h1>
-    <p class="desc">a compilation of better discord themes</p>
+    <p class="desc">Thirty hand-picked BetterDiscord themes with the colors each one uses, install links, and the author, source and license of every theme.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://github.com/Vaporjawn/better-discord-themes">View source on GitHub</a>
-      
+      <a class="btn btn-primary" href="#themes-title">Browse the themes</a>
+      <a class="btn btn-secondary" href="https://github.com/Vaporjawn/better-discord-themes/blob/main/THEMES.md">Full catalog (800+)</a>
+      <a class="btn btn-secondary" href="https://github.com/Vaporjawn/better-discord-themes">View source on GitHub</a>
     </div>
     <div class="meta">
       <span class="chip lang">CSS</span>
@@ -231,7 +237,7 @@
       <span class="chip">better</span>
       <span class="chip">betterdiscord</span>
       <span class="chip">betterdiscord-theme</span>
-      <span class="chip">updated Oct 2025</span>
+      <span class="chip">MIT + upstream licenses</span>
     </div>
   </main>
   <section class="themes" aria-labelledby="themes-title">
@@ -278,6 +284,16 @@
   }
   function card(t) {
     var c = el("div", "", "theme-card");
+    var sw = el("div", "", "swatch" + (t.palette && t.palette.length ? "" : " none"));
+    sw.setAttribute("role", "img");
+    sw.setAttribute("aria-label", t.palette && t.palette.length ? "Colors used by " + t.name : "Colors load from the author's host");
+    if (t.palette && t.palette.length) {
+      t.palette.forEach(function (hex) {
+        if (!/^#[0-9a-f]{6}$/i.test(hex)) return;
+        var s = document.createElement("span"); s.style.background = hex; sw.appendChild(s);
+      });
+    } else { sw.textContent = "remote styles"; }
+    c.appendChild(sw);
     c.appendChild(el("h3", t.name + (t.version ? " " + t.version : "")));
     c.appendChild(el("span", t.author ? "by " + t.author : "", "by"));
     c.appendChild(el("p", t.description || "No description."));

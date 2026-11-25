@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check that every root-level *.theme.css has a valid BetterDiscord meta block.
 
-Usage: python3 scripts/validate-themes.py [folder]   (default: repo root)
+Usage: python3 scripts/validate-themes.py [folder]   (default: curated/)
 Exits 1 and lists problems if any theme lacks a required field.
 """
 import pathlib
@@ -25,7 +25,7 @@ def check(path: pathlib.Path) -> list[str]:
 
 def main() -> int:
     """Validate all themes under the given folder and print a report."""
-    root = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else ".")
+    root = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "curated")
     themes = sorted(root.glob("*.theme.css"))
     failed = 0
     for theme in themes:

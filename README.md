@@ -1,92 +1,95 @@
-<h1 align="center"><img src='./assets/discord_flag.png' width='50' height='30' align='center' alt='discord_flag' />
-Better Discord Themes
-<img src='./assets/discord_flag.png' width='50' height='30' align='center' alt='discord_flag' />
-</h1>
+<p align="center">
+  <img src="assets/banner.svg" alt="Better Discord Themes" width="100%">
+</p>
 
-<h2 align="center">A compilation of better discord themes</h2>
+<p align="center">
+  A collection of BetterDiscord themes with the author, source and license of every one.<br>
+  Thirty are hand-picked and previewed below. More than eight hundred open-source themes sit in the catalog beside them.
+</p>
 
-<div align="center" markdown="1">
+<p align="center">
+  <a href="https://vaporjawn.dev/better-discord-themes/"><b>Browse the site</b></a> &nbsp;|&nbsp;
+  <a href="#install">Install</a> &nbsp;|&nbsp;
+  <a href="#hand-picked-themes">Hand-picked themes</a> &nbsp;|&nbsp;
+  <a href="THEMES.md">Full catalog</a> &nbsp;|&nbsp;
+  <a href="CONTRIBUTING.md">Contribute</a>
+</p>
 
-[![GitHub repo forks](https://img.shields.io/github/forks/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=whitesmoke&label=Forks)](https://github.com/Vaporjawn/better-discord-themes/network)&#160;[![GitHub repo stars](https://img.shields.io/github/stars/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=whitesmoke&label=Stars)](https://github.com/Vaporjawn/better-discord-themes/stargazers)&#160;[![GitHub repo contributors](https://img.shields.io/github/contributors-anon/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=whitesmoke&label=Contributors)](https://github.com/Vaporjawn/better-discord-themes/graphs/contributors)[![GitHub org sponsors](https://img.shields.io/github/sponsors/Vaporjawn?style=flat&logo=github&logoColor=whitesmoke&label=Sponsors)](https://github.com/sponsors/Vaporjawn)&#160;[![GitHub repo watchers](https://img.shields.io/github/watchers/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=whitesmoke&label=Watchers)](https://github.com/Vaporjawn/better-discord-themes/watchers)&#160;[![GitHub repo size](https://img.shields.io/github/repo-size/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=whitesmoke&label=Repo%20Size)](https://github.com/Vaporjawn/better-discord-themes/archive/refs/heads/main.zip)
-
-</div>
-
-A collection of BetterDiscord themes, most of them gathered from their original authors, plus a few of my own. Each theme keeps its original author, version and source in its header.
+<p align="center">
+  <a href="https://github.com/Vaporjawn/better-discord-themes/stargazers"><img src="https://img.shields.io/github/stars/Vaporjawn/better-discord-themes?style=flat-square&color=6366f1" alt="Stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT%20%2B%20upstream-6366f1?style=flat-square" alt="License"></a>
+  <a href="https://github.com/Vaporjawn/better-discord-themes/commits/main"><img src="https://img.shields.io/github/last-commit/Vaporjawn/better-discord-themes?style=flat-square&color=6366f1" alt="Last commit"></a>
+  <a href="https://github.com/Vaporjawn/better-discord-themes/issues"><img src="https://img.shields.io/github/issues/Vaporjawn/better-discord-themes?style=flat-square&color=6366f1" alt="Open issues"></a>
+</p>
 
 ## Install
 
-1. Open Discord with BetterDiscord installed, then go to **Settings > Themes > Open Themes Folder**.
-2. Download the `.theme.css` file you want from the table below (use the raw link, then save the file) and drop it into that folder.
-3. Enable it in **Settings > Themes**.
+1. In Discord with [BetterDiscord](https://betterdiscord.app) installed, open **Settings > Themes > Open Themes Folder**.
+2. Save the `.theme.css` file you want into that folder. Every theme below has a **Raw** link: open it, then save the page.
+3. Switch the theme on in **Settings > Themes**.
 
-Most themes load the rest of their styles from their authors' hosts through `@import`, so they need an internet connection. Themes with options (colors, background images) list them near the top of the file.
+Most themes pull the rest of their styles from the author's own host, so they need an internet connection. Options such as colors and background images are listed at the top of each file.
 
-## Themes
+## Hand-picked themes
+
+The color strips are the colors each theme uses most, read from its own stylesheet. Themes that load all of their styles from a remote file have no strip.
 
 <!-- BEGIN THEMES -->
-| Name | Author | Version | Description | Raw link | Original source |
-| --- | --- | --- | --- | --- | --- |
-| BasicBackground Personal | Vaporjawn | 1.0.0 | Allows you to use a background image in Discord without greatly altering the basic look of Discord. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/basic.theme.css) | [source](https://github.com/Vaporjawn/better-discord-themes) |
-| BasicBackground | DevilBro | 1.0.5 | Allows you to use a Background Image without greatly altering the basic Layout of Discord | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/BasicBackground.theme.css) | [source](https://github.com/mwittrien/BetterDiscordAddons/tree/master/Themes/BasicBackground/) |
-| BetterDocsBlock | Unknown (collected by Vaporjawn) | 1.0.0 | Styles the warning embed and link logos used to flag blocked BetterDocs links. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/BetterDocsBlock.theme.css) | [source](https://github.com/Vaporjawn/better-discord-themes) |
-| Black Hole | MonsterDev | 1.0 | Jump into space with this theme. It's just a bedazzled base Discord theme | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/Black-Hole.theme.css) | [source](https://github.com/monstrousdev/themes/theme-files/Black-Hole.theme.css) |
-| BlurpleRecolor | DevilBro | 1.0.0 | Replaces Discord's native blurple with your own color. Change the color in the theme file. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/BlurpleRecolor.theme.css) | [source](https://github.com/mwittrien/BetterDiscordAddons/tree/master/Themes/BlurpleRecolor) |
-| ClearVision | ClearVision Team | 6.3.0 | Highly customizable theme for BetterDiscord. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/ClearVision_v6.theme.css) | [source](https://github.com/ClearVision/ClearVision-v6) |
-| Comfy | Nyria#3863 | 2.4 | Stay comfy while talking to your friends | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/comfy.theme.css) | [source](https://github.com/Comfy-Themes/Discord) |
-| Discord Dark | SyndiShanX | 1.39 | A Github Dark Theme for Discord, meant to be used with Discord Dark Mode | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/discorddark.theme.css) | [source](https://github.com/SyndiShanX/Discord-Dark) |
-| dracula | slowstab | 1.3.1 | a dark mode discord theme based on the dracula color palette. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/dracula.theme.css) | [source](https://github.com/slowstab/dracula/blob/main/dracula.scss) |
-| Frosted Glass | Gibbu#1211 | 2.0.0 | Display your picture of choice with adjustable blur and brightness. Dark theme is required. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/FrostedGlass.theme.css) | [source](https://github.com/DiscordStyles/FrostedGlass) |
-| Horizontal Server List | Gibbu#1211 | 2.1.0 | Moves the server list from the left to the top of Discord. Compatible with Server Folders and most basic transparent themes | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/HorizontalServerList.theme.css) | [source](https://github.com/DiscordStyles/HorizontalServerList) |
-| Material Discord | CapnKitten | 3.0.4 | A theme based on Google's Material Design | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/Material-Discord.theme.css) | [source](https://github.com/CapnKitten/BetterDiscord/blob/master/Themes/Material-Discord/css/source.css) |
-| midnight | refact0r | 1.6.1 | A darkened discord theme. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/Midnight.theme.css) | [source](https://github.com/refact0r/midnight-discord) |
-| MinimalCord | Gibbu#1211 | 2.0.0 | Changes Discord enough to give it a fresh feel while also making it darker. Supports both Light and Dark themes. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/MinimalCord.theme.css) | [source](https://github.com/DiscordStyles/MinimalCord) |
-| Discord+ | PlusInsta | 3.1.1 | A sleek, customizable Discord theme. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/New%20Themes/DiscordPlus.theme.css) | [source](https://github.com/PlusInsta/discord-plus/blob/master/DiscordPlus-source.theme.css) |
-| Vibrant Glass | Kaynooo#8080 | 1.0 | Simple customizable glass theme. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/New%20Themes/glass_local.theme.css) | [source](https://github.com/Kayno0o/vibrant-glass-theme) |
-| kaleidoscope | mackenzie#0173 | 2.4.2 | A vibrant, colourful dark theme inspired by the 2077 theme for VSCode. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/New%20Themes/kaleidoscope.theme.css) | [source](https://github.com/spinfish/kaleidoscope) |
-| Newcord | ₊˚ʚ 𝑘𝑎𝑖𝑑𝑜ˊ˗ | 1.0.1 | A colorful theme inspired by the first page of Discord's website. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/New%20Themes/newcord.theme.css) | [source](https://github.com/kaiidoo/Newcord) |
-| OperaGxGamingTheme | TomRdh | 0.0.9 | Opera GX Gaming Theme! A (transparent) gaming theme inspired by Opera GX. Very customizable in the theme file. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/New%20Themes/OperaGxGamingTheme.theme.css) | [source](https://github.com/Tomrdh/discord-addons/blob/master/download-themes-here/OperaGxGamingTheme) |
-| Weed | Trator de Jacare#3219 | 1 | Don't worry about a thing, every little thing is gonna be alright. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/New%20Themes/Weed-Leaf.theme.css) | [source](https://github.com/jpmn333/Weed-Leaf) |
-| Nocturnal | Spectra | 3.0.1 | For when default discord just isn't dark enough, a theme for those who live a night | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/nocturnal.theme.css) | [source](https://github.com/xcruxiex/themes) |
-| NotAnotherAnimeTheme | puckzxz#2080 | 3.2 | An easily customizable and automatically updating theme | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/NotAnotherAnimeTheme.theme.css) | [source](https://github.com/puckzxz/NotAnotherAnimeTheme) |
-| RadialStatus | Gibbu#1211 | 2.0.0 | Changes the status icons to wrap around the avatar. Shape can be changed inside the theme file. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/RadialStatus.theme.css) | [source](https://github.com/DiscordStyles/RadialStatus) |
-| Reborn | MonsterDev | 1.5 | Phoenix Theme Bundle: Transparent, fully customizable theme with multiple addons | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/Reborn.theme.css) | [source](https://github.com/monstrousdev/themes/theme-files/Reborn.theme.css) |
-| ServerColumns | DevilBro | 1.0.6 | Changes the Server List to a grid-like Structure which allows any Amount of Columns | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/ServerColumns.theme.css) | [source](https://github.com/mwittrien/BetterDiscordAddons/tree/master/Themes/ServerColumns/) |
-| Spotify Discord | CapnKitten | 2.0.0 | Combine Discord and Spotify into one | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/Spotify-Discord.theme.css) | [source](https://github.com/CapnKitten/BetterDiscord/blob/master/Themes/Spotify-Discord/css/source.css) |
-| ThemeDevBadge | Unknown (collected by Vaporjawn) | 1.0.0 | Adds a theme developer badge image through a CSS variable. | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/ThemeDevBadge.theme.css) | [source](https://github.com/Vaporjawn/better-discord-themes) |
-| Tokyo Night | Ashtrath | 2.0.2 | Discord Port of Visual Studio Code Theme | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/tokyo-night.theme.css) | [source](https://github.com/ashtrath/Tokyo-Night) |
-| Tranquil | MonsterDev | 1.5 | Phoenix Theme Bundle: Primarily dark theme that's easy on the eyes [Also supports light theme which is less easy on the eyes] | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/Tranquil.theme.css) | [source](https://github.com/monstrousdev/themes/theme-files/Tranquil.theme.css) |
-| Zelk | schnensch | 1.2.2 | a smooth theme inspired by zorin | [raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/zelkBD.theme.css) | [source](https://github.com/schnensch0/zelk) |
+| Colors | Theme | Author | About | Links |
+| --- | --- | --- | --- | --- |
+|  | **BasicBackground Personal** 1.0.0 | Vaporjawn | Allows you to use a background image in Discord without greatly altering the basic look of Discord. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/basic.theme.css) · [Source](https://github.com/Vaporjawn/better-discord-themes) |
+| <img src="assets/palettes/basicbackground.svg" width="96" alt="BasicBackground colors"> | **BasicBackground** 1.0.5 | DevilBro | Allows you to use a Background Image without greatly altering the basic Layout of Discord | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/BasicBackground.theme.css) · [Source](https://github.com/mwittrien/BetterDiscordAddons/tree/master/Themes/BasicBackground/) |
+| <img src="assets/palettes/betterdocsblock.svg" width="96" alt="BetterDocsBlock colors"> | **BetterDocsBlock** 1.0.0 | Unknown (collected by Vaporjawn) | Styles the warning embed and link logos used to flag blocked BetterDocs links. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/BetterDocsBlock.theme.css) · [Source](https://github.com/Vaporjawn/better-discord-themes) |
+|  | **Black Hole** 1.0 | MonsterDev | Jump into space with this theme. It's just a bedazzled base Discord theme | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Black-Hole.theme.css) · [Source](https://github.com/monstrousdev/themes/theme-files/Black-Hole.theme.css) |
+|  | **BlurpleRecolor** 1.0.0 | DevilBro | Replaces Discord's native blurple with your own color. Change the color in the theme file. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/BlurpleRecolor.theme.css) · [Source](https://github.com/mwittrien/BetterDiscordAddons/tree/master/Themes/BlurpleRecolor) |
+| <img src="assets/palettes/clearvision_v6.svg" width="96" alt="ClearVision colors"> | **ClearVision** 6.3.0 | ClearVision Team | Highly customizable theme for BetterDiscord. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/ClearVision_v6.theme.css) · [Source](https://github.com/ClearVision/ClearVision-v6) |
+| <img src="assets/palettes/comfy.svg" width="96" alt="Comfy colors"> | **Comfy** 2.4 | Nyria#3863 | Stay comfy while talking to your friends | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/comfy.theme.css) · [Source](https://github.com/Comfy-Themes/Discord) |
+| <img src="assets/palettes/discorddark.svg" width="96" alt="Discord Dark colors"> | **Discord Dark** 1.39 | SyndiShanX | A Github Dark Theme for Discord, meant to be used with Discord Dark Mode | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/discorddark.theme.css) · [Source](https://github.com/SyndiShanX/Discord-Dark) |
+| <img src="assets/palettes/discordplus.svg" width="96" alt="Discord+ colors"> | **Discord+** 3.1.1 | PlusInsta | A sleek, customizable Discord theme. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/DiscordPlus.theme.css) · [Source](https://github.com/PlusInsta/discord-plus/blob/master/DiscordPlus-source.theme.css) |
+|  | **dracula** 1.3.1 | slowstab | a dark mode discord theme based on the dracula color palette. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/dracula.theme.css) · [Source](https://github.com/slowstab/dracula/blob/main/dracula.scss) |
+| <img src="assets/palettes/frostedglass.svg" width="96" alt="Frosted Glass colors"> | **Frosted Glass** 2.0.0 | Gibbu#1211 | Display your picture of choice with adjustable blur and brightness. Dark theme is required. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/FrostedGlass.theme.css) · [Source](https://github.com/DiscordStyles/FrostedGlass) |
+|  | **Vibrant Glass** 1.0 | Kaynooo#8080 | Simple customizable glass theme. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/glass_local.theme.css) · [Source](https://github.com/Kayno0o/vibrant-glass-theme) |
+|  | **Horizontal Server List** 2.1.0 | Gibbu#1211 | Moves the server list from the left to the top of Discord. Compatible with Server Folders and most basic transparent themes | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/HorizontalServerList.theme.css) · [Source](https://github.com/DiscordStyles/HorizontalServerList) |
+|  | **kaleidoscope** 2.4.2 | mackenzie#0173 | A vibrant, colourful dark theme inspired by the 2077 theme for VSCode. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/kaleidoscope.theme.css) · [Source](https://github.com/spinfish/kaleidoscope) |
+|  | **Material Discord** 3.0.4 | CapnKitten | A theme based on Google's Material Design | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Material-Discord.theme.css) · [Source](https://github.com/CapnKitten/BetterDiscord/blob/master/Themes/Material-Discord/css/source.css) |
+| <img src="assets/palettes/midnight.svg" width="96" alt="midnight colors"> | **midnight** 1.6.1 | refact0r | A darkened discord theme. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Midnight.theme.css) · [Source](https://github.com/refact0r/midnight-discord) |
+|  | **MinimalCord** 2.0.0 | Gibbu#1211 | Changes Discord enough to give it a fresh feel while also making it darker. Supports both Light and Dark themes. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/MinimalCord.theme.css) · [Source](https://github.com/DiscordStyles/MinimalCord) |
+|  | **Newcord** 1.0.1 | ₊˚ʚ 𝑘𝑎𝑖𝑑𝑜ˊ˗ | A colorful theme inspired by the first page of Discord's website. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/newcord.theme.css) · [Source](https://github.com/kaiidoo/Newcord) |
+| <img src="assets/palettes/nocturnal.svg" width="96" alt="Nocturnal colors"> | **Nocturnal** 3.0.1 | Spectra | For when default discord just isn't dark enough, a theme for those who live a night | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/nocturnal.theme.css) · [Source](https://github.com/xcruxiex/themes) |
+| <img src="assets/palettes/notanotheranimetheme.svg" width="96" alt="NotAnotherAnimeTheme colors"> | **NotAnotherAnimeTheme** 3.2 | puckzxz#2080 | An easily customizable and automatically updating theme | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/NotAnotherAnimeTheme.theme.css) · [Source](https://github.com/puckzxz/NotAnotherAnimeTheme) |
+| <img src="assets/palettes/operagxgamingtheme.svg" width="96" alt="OperaGxGamingTheme colors"> | **OperaGxGamingTheme** 0.0.9 | TomRdh | Opera GX Gaming Theme! A (transparent) gaming theme inspired by Opera GX. Very customizable in the theme file. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/OperaGxGamingTheme.theme.css) · [Source](https://github.com/Tomrdh/discord-addons/blob/master/download-themes-here/OperaGxGamingTheme) |
+| <img src="assets/palettes/radialstatus.svg" width="96" alt="RadialStatus colors"> | **RadialStatus** 2.0.0 | Gibbu#1211 | Changes the status icons to wrap around the avatar. Shape can be changed inside the theme file. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/RadialStatus.theme.css) · [Source](https://github.com/DiscordStyles/RadialStatus) |
+| <img src="assets/palettes/reborn.svg" width="96" alt="Reborn colors"> | **Reborn** 1.5 | MonsterDev | Phoenix Theme Bundle: Transparent, fully customizable theme with multiple addons | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Reborn.theme.css) · [Source](https://github.com/monstrousdev/themes/theme-files/Reborn.theme.css) |
+|  | **ServerColumns** 1.0.6 | DevilBro | Changes the Server List to a grid-like Structure which allows any Amount of Columns | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/ServerColumns.theme.css) · [Source](https://github.com/mwittrien/BetterDiscordAddons/tree/master/Themes/ServerColumns/) |
+| <img src="assets/palettes/spotify-discord.svg" width="96" alt="Spotify Discord colors"> | **Spotify Discord** 2.0.0 | CapnKitten | Combine Discord and Spotify into one | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Spotify-Discord.theme.css) · [Source](https://github.com/CapnKitten/BetterDiscord/blob/master/Themes/Spotify-Discord/css/source.css) |
+| <img src="assets/palettes/themedevbadge.svg" width="96" alt="ThemeDevBadge colors"> | **ThemeDevBadge** 1.0.0 | Unknown (collected by Vaporjawn) | Adds a theme developer badge image through a CSS variable. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/ThemeDevBadge.theme.css) · [Source](https://github.com/Vaporjawn/better-discord-themes) |
+| <img src="assets/palettes/tokyo-night.svg" width="96" alt="Tokyo Night colors"> | **Tokyo Night** 2.0.2 | Ashtrath | Discord Port of Visual Studio Code Theme | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/tokyo-night.theme.css) · [Source](https://github.com/ashtrath/Tokyo-Night) |
+| <img src="assets/palettes/tranquil.svg" width="96" alt="Tranquil colors"> | **Tranquil** 1.5 | MonsterDev | Phoenix Theme Bundle: Primarily dark theme that's easy on the eyes [Also supports light theme which is less easy on the eyes] | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Tranquil.theme.css) · [Source](https://github.com/monstrousdev/themes/theme-files/Tranquil.theme.css) |
+|  | **Weed** 1 | Trator de Jacare#3219 | Don't worry about a thing, every little thing is gonna be alright. | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/Weed-Leaf.theme.css) · [Source](https://github.com/jpmn333/Weed-Leaf) |
+| <img src="assets/palettes/zelkbd.svg" width="96" alt="Zelk colors"> | **Zelk** 1.2.2 | schnensch | a smooth theme inspired by zorin | [Raw](https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/zelkBD.theme.css) · [Source](https://github.com/schnensch0/zelk) |
 <!-- END THEMES -->
 
-Run `npm run build:index` to regenerate this table and `docs/themes.json` from the theme headers. Older themes that no longer match Discord's markup are in [archive/](archive/).
+## What is where
 
-## How To Contribute
+| Folder | Contents |
+| --- | --- |
+| [`curated/`](curated/) | The hand-picked themes in the table above |
+| [`themes/`](themes/) | The catalog: open-source themes copied from their repositories as `owner/repo`, each with its upstream license. See [THEMES.md](THEMES.md) |
+| [`archive/`](archive/) | Themes written for Discord's 2018 class names that no longer match |
+| [`vendor/`](vendor/) | An unmodified copy of an older theme collection, kept for its SCSS sources |
+| [`docs/`](docs/) | The GitHub Pages site and its `themes.json` |
+| [`assets/`](assets/) | Banner, color strips and images |
+| [`scripts/`](scripts/), [`test/`](test/) | Theme validators and the index builder, with tests |
+| [`.github/`](.github/) | Workflows, issue templates, code of conduct, security policy |
 
-Click on these badges to see how you might be able to help:
+Run `npm run build:index` after adding or renaming a theme in `curated/`. It rewrites the table above, the color strips, the banner and `docs/themes.json`.
 
-<div align="center" markdown="1">
+## Contribute
 
-[![GitHub repo Issues](https://img.shields.io/github/issues/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=red&label=Issues)](https://github.com/Vaporjawn/better-discord-themes/issues)&#160;[![GitHub repo Good Issues for newbies](https://img.shields.io/github/issues/Vaporjawn/better-discord-themes/good%20first%20issue?style=flat&logo=github&logoColor=green&label=Good%20First%20issues)](https://github.com/Vaporjawn/better-discord-themes/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)&#160;[![GitHub Help Wanted issues](https://img.shields.io/github/issues/Vaporjawn/better-discord-themes/help%20wanted?style=flat&logo=github&logoColor=b545d1&label=%22Help%20Wanted%22%20issues)](https://github.com/Vaporjawn/better-discord-themes/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)[![GitHub repo PRs](https://img.shields.io/github/issues-pr/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=orange&label=PRs)](https://github.com/Vaporjawn/better-discord-themes/pulls)&#160;[![GitHub repo Merged PRs](https://img.shields.io/github/issues-search/Vaporjawn/better-discord-themes?style=flat&logo=github&logoColor=green&label=Merged%20PRs&query=is%3Amerged)](https://github.com/Vaporjawn/better-discord-themes/pulls?q=is%3Apr+is%3Amerged)&#160;[![GitHub Help Wanted PRs](https://img.shields.io/github/issues-pr/Vaporjawn/better-discord-themes/help%20wanted?style=flat&logo=github&logoColor=b545d1&label=%22Help%20Wanted%22%20PRs)](https://github.com/Vaporjawn/better-discord-themes/pulls?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
+Add a theme, fix a selector Discord broke, or correct an author credit. [CONTRIBUTING.md](CONTRIBUTING.md) has the steps and the required header fields. Please follow the [code of conduct](.github/CODE_OF_CONDUCT.md); security reports go through the [security policy](.github/SECURITY.md).
 
-</div>
-
-## Thanks to all Contributors 💪
-
-- **Thank you** for considering to contribute
-- Feel free to submit feature requests, UI updates, bugs as issues.
-- Checkout [Contribution Guidelines](https://github.com/Vaporjawn/better-discord-themes/blob/main/CONTRIBUTING.md) for more information.
-- Have a feature request? Feel free to create a issue for it.
-
-[![Contributors](https://contrib.rocks/image?repo=Vaporjawn/better-discord-themes)](https://github.com/Vaporjawn/better-discord-themes/graphs/contributors)
-
-## Your Support means a lot
-
-Give a ⭐ to show support for the project.
+<a href="https://github.com/Vaporjawn/better-discord-themes/graphs/contributors"><img src="https://contrib.rocks/image?repo=Vaporjawn/better-discord-themes" alt="Contributors" height="40"></a>
 
 ## License
 
-Original material is MIT licensed, see [LICENSE](LICENSE). Most themes here were written by other people and keep their own licenses: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the author, source and license of each one.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and the [Security policy](SECURITY.md). Add a theme or fix a broken selector: both are welcome.
+The repository's own files (README, site, scripts, workflows) are MIT licensed: see [LICENSE](LICENSE). Every theme keeps its author's license: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Themes marked "Unknown (collected by Vaporjawn)" have no identified author and are listed so their origin can be corrected.

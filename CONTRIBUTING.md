@@ -12,7 +12,7 @@ contributions are one of: add a theme, fix a theme, or improve the docs.
 
 ## Adding a theme
 
-- Put the file in the repo root as `<Name>.theme.css`.
+- Put the file in `curated/` as `<Name>.theme.css`. (`themes/` holds the vendored upstream catalog; do not add files there by hand.)
 - Start it with a BetterDiscord meta block. These fields are required:
 
   ```css
@@ -55,6 +55,6 @@ BetterDiscord version, your operating system and a screenshot.
 
 ## Conduct
 
-By taking part you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+By taking part you agree to follow the [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 Contributions to original material are accepted under the MIT license in
 [LICENSE](LICENSE).
