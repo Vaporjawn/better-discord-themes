@@ -1,6 +1,6 @@
 name: Fill issue fields
 
-# Runs on every new or reopened issue and fills in the assignee, labels, issue type,
+# Runs on every new or reopened issue and fills in the labels, issue type,
 # milestone and (when empty) the description. It only reads the issue's own fields and
 # never runs anything from the issue text.
 on:
@@ -22,12 +22,8 @@ jobs:
             const repo = context.repo.repo;
             const issue = context.payload.issue;
             const number = issue.number;
-            const maintainer = owner;
             const text = `${issue.title}\n${issue.body ?? ""}`.toLowerCase();
             const existing = new Set((issue.labels ?? []).map((l) => l.name));
-
-            // Assignee: always the maintainer.
-            await github.rest.issues.addAssignees({ owner, repo, issue_number: number, assignees: [maintainer] });
 
             // Labels: keep what the form set; add one when none describes the kind of issue.
             const kinds = ["bug", "enhancement", "documentation", "question", "theme-submission"];
