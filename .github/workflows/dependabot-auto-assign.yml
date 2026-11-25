@@ -1,4 +1,4 @@
-﻿name: Auto-assign Dependabot PRs
+name: Auto-assign Dependabot PRs
 
 on:
   pull_request:

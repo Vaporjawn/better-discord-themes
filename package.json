@@ -1,0 +1,16 @@
+{
+  "name": "better-discord-themes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A compilation of BetterDiscord themes",
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check-themes.mjs",
+    "upstream": "node scripts/check-upstream.mjs",
+    "build:index": "node scripts/build-theme-index.mjs"
+  },
+  "repository": { "type": "git", "url": "git+https://github.com/Vaporjawn/better-discord-themes.git" },
+  "author": "Victor Williams <victor.williams.dev@gmail.com>",
+  "license": "MIT"
+}

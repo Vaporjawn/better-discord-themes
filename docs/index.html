@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Better Discord Themes — Victor Williams</title>
-<meta name="description" content="a compilcation of better discord themes" />
+<meta name="description" content="a compilation of better discord themes" />
 <meta name="theme-color" content="#0b0c10" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'g'%20x1%3D'0'%20y1%3D'0'%20x2%3D'1'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%236366f1'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%2300b8ff'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'14'%20fill%3D'url(%23g)'%2F%3E%3C%2Fsvg%3E" />
 <style>
@@ -182,6 +182,31 @@
   }
   footer a{ color:var(--text-dim); }
   footer a:hover{ color:var(--cyan); }
+  .themes{ max-width:920px; margin:0 auto; width:100%; padding:0 1.5rem 2.4rem; }
+  .themes h2{ font-size:1.3rem; margin:0 0 0.9rem; }
+  .themes-tools{ display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; margin-bottom:1.1rem; }
+  .themes-tools input{
+    flex:1 1 220px; min-width:0; font:inherit; color:var(--text); background:var(--bg-elevated);
+    border:1px solid var(--border); border-radius:10px; padding:0.65rem 0.9rem;
+  }
+  .themes-tools input:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+  .themes-count{ color:var(--text-dim); font-size:0.85rem; }
+  .theme-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:0.9rem; }
+  .theme-card{
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:12px; padding:1rem;
+    display:flex; flex-direction:column; gap:0.45rem; min-width:0;
+  }
+  .theme-card h3{ margin:0; font-size:1rem; overflow-wrap:anywhere; }
+  .theme-card .by{ color:var(--text-dim); font-size:0.8rem; }
+  .theme-card p{ margin:0; color:var(--text-dim); font-size:0.88rem; flex:1; overflow-wrap:anywhere; }
+  .theme-actions{ display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.3rem; }
+  .theme-actions button, .theme-actions a{
+    font:inherit; font-size:0.8rem; font-weight:600; color:var(--text); background:transparent; cursor:pointer;
+    border:1px solid var(--border); border-radius:8px; padding:0.35rem 0.7rem; text-decoration:none;
+  }
+  .theme-actions button:hover, .theme-actions a:hover{ border-color:var(--cyan); }
+  .theme-actions button:focus-visible, .theme-actions a:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+  .themes-msg{ color:var(--text-dim); }
 </style>
 </head>
 <body>
@@ -193,7 +218,7 @@
   <main>
     <p class="eyebrow">OPEN SOURCE PROJECT</p>
     <h1>Better Discord Themes</h1>
-    <p class="desc">a compilcation of better discord themes</p>
+    <p class="desc">a compilation of better discord themes</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://github.com/Vaporjawn/better-discord-themes">View source on GitHub</a>
       
@@ -209,9 +234,86 @@
       <span class="chip">updated Oct 2025</span>
     </div>
   </main>
+  <section class="themes" aria-labelledby="themes-title">
+    <h2 id="themes-title">Themes</h2>
+    <div class="themes-tools">
+      <input id="theme-search" type="search" placeholder="Search by name, author or description" aria-label="Search themes" />
+      <span class="themes-count" id="theme-count" aria-live="polite"></span>
+    </div>
+    <p class="themes-msg" id="theme-msg">Loading themes...</p>
+    <div class="theme-grid" id="theme-grid"></div>
+  </section>
   <footer>
     <span>Part of Victor Williams' project catalog</span>
     <a href="https://vaporjawn.dev">← back to vaporjawn.dev</a>
   </footer>
+<script>
+(function () {
+  var grid = document.getElementById("theme-grid");
+  var msg = document.getElementById("theme-msg");
+  var count = document.getElementById("theme-count");
+  var search = document.getElementById("theme-search");
+  var themes = [];
+  function legacyCopy(text) {
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { var ok = document.execCommand("copy"); document.body.removeChild(ta); ok ? resolve() : reject(new Error("copy failed")); }
+      catch (e) { document.body.removeChild(ta); reject(e); }
+    });
+  }
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(function () { return legacyCopy(text); });
+    }
+    return legacyCopy(text);
+  }
+  function el(tag, text, cls) {
+    var n = document.createElement(tag);
+    if (text) n.textContent = text;
+    if (cls) n.className = cls;
+    return n;
+  }
+  function card(t) {
+    var c = el("div", "", "theme-card");
+    c.appendChild(el("h3", t.name + (t.version ? " " + t.version : "")));
+    c.appendChild(el("span", t.author ? "by " + t.author : "", "by"));
+    c.appendChild(el("p", t.description || "No description."));
+    var actions = el("div", "", "theme-actions");
+    var btn = el("button", "Copy raw URL");
+    btn.type = "button";
+    btn.addEventListener("click", function () {
+      copyText(t.raw).then(function () { btn.textContent = "Copied"; }).catch(function () { btn.textContent = "Copy failed"; });
+      setTimeout(function () { btn.textContent = "Copy raw URL"; }, 2000);
+    });
+    actions.appendChild(btn);
+    if (/^https:\/\//.test(t.source)) {
+      var a = el("a", "Source"); a.href = t.source; a.target = "_blank"; a.rel = "noopener noreferrer";
+      actions.appendChild(a);
+    }
+    c.appendChild(actions);
+    return c;
+  }
+  function render() {
+    var q = search.value.trim().toLowerCase();
+    var shown = themes.filter(function (t) {
+      return !q || (t.name + " " + t.author + " " + t.description).toLowerCase().indexOf(q) !== -1;
+    });
+    grid.textContent = "";
+    shown.forEach(function (t) { grid.appendChild(card(t)); });
+    count.textContent = shown.length + " of " + themes.length;
+    msg.hidden = shown.length > 0;
+    if (!shown.length) msg.textContent = "No themes match that search.";
+  }
+  fetch("themes.json").then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }).then(function (data) { themes = data; render(); })
+    .catch(function () { msg.textContent = "Could not load the theme list. See the table in the README on GitHub."; });
+  search.addEventListener("input", render);
+})();
+</script>
 </body>
 </html>

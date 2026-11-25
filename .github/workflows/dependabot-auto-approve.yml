@@ -1,12 +1,12 @@
-﻿name: Auto-approve Dependabot Minor Updates
+name: Auto-approve Dependabot Minor Updates
 
+# pull_request_target is safe here: this workflow never checks out or runs code from the PR.
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
 permissions:
   pull-requests: write
-  contents: write
 
 jobs:
   auto-approve:

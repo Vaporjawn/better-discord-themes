@@ -1,5 +1,11 @@
-//META{"name":"BasicBackground","description":"Allows you to use a background image in Discord without greatly altering the basic look of Discord.","author":"Vaporjawn","version":"1.0.0","website":"https://github.com/Vaporjawn/better-discord-themes","source":"https://github.com/Vaporjawn/better-discord-themes"}*//{}
-
+/**
+ * @name BasicBackground Personal
+ * @description Allows you to use a background image in Discord without greatly altering the basic look of Discord.
+ * @author Vaporjawn
+ * @version 1.0.0
+ * @website https://github.com/Vaporjawn/better-discord-themes
+ * @source https://github.com/Vaporjawn/better-discord-themes
+ */
 @import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/BasicBackground/BasicBackground.css);
 
 :root {
@@ -13,7 +19,7 @@
 	--font:							Whitney, Helvetica Neue, Helvetica, Arial, sans-serif;		/* font used in most places														*/
 	--textshadow:					transparent;				/* default: transparent			(add a textshadow to text that might be unreadable due to bright accentcolor)	*/
 
-	--background:					url(https://github.com/Vaporjawn/better-discord-themes/blob/master/personal%20themes/background.jpg);	/* general background image					*/
+	--background:					url(https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/background.jpg);	/* general background image					*/
 	--backgroundsize:				cover;						/* default: cover				(sizefit of general background - values: [cover/contain/auto])					*/
 	--backgroundblur:				0px;						/* default: 0px					(only works when --background is set to an image)								*/
 

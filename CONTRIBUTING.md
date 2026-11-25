@@ -7,7 +7,7 @@ contributions are one of: add a theme, fix a theme, or improve the docs.
 
 1. Fork the repo and clone your fork.
 2. Create a branch in your fork for the change.
-3. Make the change, then run the checks: `python3 scripts/validate-themes.py`.
+3. Make the change, then run the checks: `python3 scripts/validate-themes.py`, `npm test` and `npm run check` (the last one also requires `@description` and an https `@source`).
 4. Push and open a pull request using the template.
 
 ## Adding a theme
@@ -20,6 +20,7 @@ contributions are one of: add a theme, fix a theme, or improve the docs.
    * @name Example
    * @author Your Name
    * @version 1.0.0
+   * @description One sentence about what it does.
    * @source https://github.com/you/example
    */
   ```
@@ -41,6 +42,7 @@ fix there too.
 
 ## Style
 
+- After adding or renaming a theme, run `npm run build:index` to refresh the README table and `docs/themes.json`.
 - Two-space indentation, LF line endings (see `.editorconfig`).
 - Prefer CSS variables at the top of the file for anything a user may want to
   change.

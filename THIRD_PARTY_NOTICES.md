@@ -36,8 +36,8 @@ will be handled promptly.
 | kaleidoscope | mackenzie | [spinfish/kaleidoscope](https://github.com/spinfish/kaleidoscope) | MIT |
 | OperaGxGamingTheme | TomRdh | [Tomrdh/discord-addons](https://github.com/Tomrdh/discord-addons) | Unverified (repository not found) |
 | Newcord | kaidoo | [kaiidoo/Newcord](https://github.com/kaiidoo/Newcord) | Unverified (repository not found) |
-| Comfy | Nyria | no source listed | Unverified |
-| Tokyo Night | Ashtrath | no source listed | Unverified |
+| Comfy | Nyria | [Comfy-Themes/Discord](https://github.com/Comfy-Themes/Discord) | WTFPL |
+| Tokyo Night | Ashtrath | [ashtrath/Tokyo-Night](https://github.com/ashtrath/Tokyo-Night) | MIT |
 
 The `vendor/` folder holds an unmodified copy of a larger BetterDiscord theme
 collection with its own per-theme readmes. The `archive/` folder holds two
