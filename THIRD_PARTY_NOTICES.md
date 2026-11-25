@@ -28,7 +28,7 @@ will be handled promptly.
 | NotAnotherAnimeTheme | puckzxz | [puckzxz/NotAnotherAnimeTheme](https://github.com/puckzxz/NotAnotherAnimeTheme) | Unlicense |
 | Discord Dark | SyndiShanX | [SyndiShanX/Discord-Dark](https://github.com/SyndiShanX/Discord-Dark) | None found |
 | dracula | slowstab | [slowstab/dracula](https://github.com/slowstab/dracula) | ISC |
-| Nocturnal | Spectra | [xcruxiex/themes](https://github.com/xcruxiex/themes) | Unverified (non-standard) |
+| Nocturnal | Spectra (xcruxiex) | [xcruxiex/themes](https://github.com/xcruxiex/themes) | All rights reserved (no redistribution) |
 | Zelk | schnensch | [schnensch0/zelk](https://github.com/schnensch0/zelk) | MIT |
 | Discord+ | PlusInsta | [PlusInsta/discord-plus](https://github.com/PlusInsta/discord-plus) | MIT |
 | Weed Leaf | Trator de Jacare | [jpmn333/Weed-Leaf](https://github.com/jpmn333/Weed-Leaf) | MIT |
