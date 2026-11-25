@@ -1,0 +1,38 @@
+name: Project task
+description: A concrete piece of work on the collection, its scripts or its docs.
+labels: [help wanted]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why this matters, with numbers or links where you have them.
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: Task
+      description: What to do, in a few sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: A checklist a reviewer can tick off.
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: Where to look
+      description: Files, scripts or pages involved.
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      options: [Small (under an hour), Medium (an evening), Large (several sessions)]
+    validations:
+      required: true
