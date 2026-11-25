@@ -50,9 +50,10 @@ const main = () => {
   const rows = themes.map((t) => {
     const preview = t.palette.length ? `<img src="assets/palettes/${t.slug}.svg" width="96" alt="${cell(t.name)} colors">` : "";
     const links = [`[Raw](${t.raw})`, t.source ? `[Source](${t.source})` : ""].filter(Boolean).join(" · ");
-    return `| ${preview} | **${cell(t.name)}** ${cell(t.version)} | ${cell(t.author)} | ${cell(t.description)} | ${links} |`;
+    const by = t.author ? `<br><sub>by ${cell(t.author)}</sub>` : "";
+    return `| ${preview} | **${cell(t.name)}** ${cell(t.version)}${by} | ${cell(t.description)} | ${links} |`;
   });
-  const table = [BEGIN, "| Colors | Theme | Author | About | Links |", "| --- | --- | --- | --- | --- |", ...rows, END].join("\n");
+  const table = [BEGIN, "| Colors | Theme | About | Links |", "| --- | --- | --- | --- |", ...rows, END].join("\n");
   const readmePath = join(root, "README.md");
   const readme = readFileSync(readmePath, "utf8");
   const start = readme.indexOf(BEGIN);
