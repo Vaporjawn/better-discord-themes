@@ -28,14 +28,11 @@ will be handled promptly.
 | NotAnotherAnimeTheme | puckzxz | [puckzxz/NotAnotherAnimeTheme](https://github.com/puckzxz/NotAnotherAnimeTheme) | Unlicense |
 | Discord Dark | SyndiShanX | [SyndiShanX/Discord-Dark](https://github.com/SyndiShanX/Discord-Dark) | None found |
 | dracula | slowstab | [slowstab/dracula](https://github.com/slowstab/dracula) | ISC |
-| Nocturnal | Spectra (xcruxiex) | [xcruxiex/themes](https://github.com/xcruxiex/themes) | All rights reserved (no redistribution) |
 | Zelk | schnensch | [schnensch0/zelk](https://github.com/schnensch0/zelk) | MIT |
 | Discord+ | PlusInsta | [PlusInsta/discord-plus](https://github.com/PlusInsta/discord-plus) | MIT |
 | Weed Leaf | Trator de Jacare | [jpmn333/Weed-Leaf](https://github.com/jpmn333/Weed-Leaf) | MIT |
 | Vibrant Glass | Kaynooo | [Kayno0o/vibrant-glass-theme](https://github.com/Kayno0o/vibrant-glass-theme) | MIT |
 | kaleidoscope | mackenzie | [spinfish/kaleidoscope](https://github.com/spinfish/kaleidoscope) | MIT |
-| OperaGxGamingTheme | TomRdh | [Tomrdh/discord-addons](https://github.com/Tomrdh/discord-addons) | Unverified (repository not found) |
-| Newcord | kaidoo | [kaiidoo/Newcord](https://github.com/kaiidoo/Newcord) | Unverified (repository not found) |
 | Comfy | Nyria | [Comfy-Themes/Discord](https://github.com/Comfy-Themes/Discord) | WTFPL |
 | Tokyo Night | Ashtrath | [ashtrath/Tokyo-Night](https://github.com/ashtrath/Tokyo-Night) | MIT |
 
@@ -47,3 +44,13 @@ Themes with an author of "Vaporjawn" (for example `basic.theme.css`) are
 original work under the MIT license in [LICENSE](LICENSE). Themes marked
 "Unknown (collected by Vaporjawn)" have no identified author; they are listed
 here so their provenance is clear and can be corrected.
+
+## Removed themes
+
+These were removed because they cannot be redistributed or their license cannot be confirmed (see issue #7).
+
+| Theme | Author | Reason |
+| --- | --- | --- |
+| Nocturnal | Spectra (xcruxiex) | The upstream [LICENSE](https://github.com/xcruxiex/themes/blob/master/LICENSE) reserves all rights and forbids redistribution without permission. |
+| OperaGxGamingTheme | TomRdh | The source repository `Tomrdh/discord-addons` no longer exists and no license could be found. |
+| Newcord | kaidoo | The source repository `kaiidoo/Newcord` no longer exists and no license could be found. |

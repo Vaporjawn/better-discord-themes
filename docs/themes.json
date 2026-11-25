@@ -232,34 +232,6 @@
     "palette": []
   },
   {
-    "file": "curated/newcord.theme.css",
-    "slug": "newcord",
-    "name": "Newcord",
-    "author": "₊˚ʚ 𝑘𝑎𝑖𝑑𝑜ˊ˗",
-    "version": "1.0.1",
-    "description": "A colorful theme inspired by the first page of Discord's website.",
-    "source": "https://github.com/kaiidoo/Newcord",
-    "raw": "https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/newcord.theme.css",
-    "palette": []
-  },
-  {
-    "file": "curated/nocturnal.theme.css",
-    "slug": "nocturnal",
-    "name": "Nocturnal",
-    "author": "Spectra",
-    "version": "3.0.1",
-    "description": "For when default discord just isn't dark enough, a theme for those who live a night",
-    "source": "https://github.com/xcruxiex/themes",
-    "raw": "https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/nocturnal.theme.css",
-    "palette": [
-      "#1e2731",
-      "#2275c9",
-      "#43b581",
-      "#faa61a",
-      "#00f260"
-    ]
-  },
-  {
     "file": "curated/NotAnotherAnimeTheme.theme.css",
     "slug": "notanotheranimetheme",
     "name": "NotAnotherAnimeTheme",
@@ -274,23 +246,6 @@
       "#43b581",
       "#faa61a",
       "#c8c8c8"
-    ]
-  },
-  {
-    "file": "curated/OperaGxGamingTheme.theme.css",
-    "slug": "operagxgamingtheme",
-    "name": "OperaGxGamingTheme",
-    "author": "TomRdh",
-    "version": "0.0.9",
-    "description": "Opera GX Gaming Theme! A (transparent) gaming theme inspired by Opera GX. Very customizable in the theme file.",
-    "source": "https://github.com/Tomrdh/discord-addons/blob/master/download-themes-here/OperaGxGamingTheme",
-    "raw": "https://raw.githubusercontent.com/Vaporjawn/better-discord-themes/main/curated/OperaGxGamingTheme.theme.css",
-    "palette": [
-      "#121019",
-      "#fa1e46",
-      "#00d451",
-      "#00ff81",
-      "#eaea22"
     ]
   },
   {
