@@ -1,0 +1,145 @@
+
+/**
+ * @name Matrix24 pour systeme24 
+ * @description Matrix theme for discord Vencord V3.1
+ * @author WarZob
+ * @version 2.1.0
+ * @website https://github.com/Warzob
+ * @source https://github.com/Warzob/MidnightMountains
+ * @invite Xe6D5GwkwC
+*/
+
+
+/* ========== import theme modules ========== */ 
+/*@import url('https://raw.githubusercontent.com/Warzob/ThemedependanceWZ/refs/heads/main/build/teste24.css');*/
+
+@import url('https://raw.githubusercontent.com/Warzob/ThemedependanceWZ/refs/heads/main/test/system224.css');
+body {
+    /* ========== Font, change to '' for default discord font ========== */ 
+    --font: 'Victor Mono', monospace;
+    font-weight: 400 /* normal text font weight. DOES NOT AFFECT BOLD TEXT */;
+
+   /* ========== Image Emote Discord ========== */ 
+        --customEmojiIconURL: url(https://cdn.discordapp.com/emojis/1217110775601172591.gif?size=240&quality=lossless);
+        --customEmojiIconMask: url(https://cdn.discordapp.com/emojis/1217110775601172591.gif?size=240&quality=lossless);
+
+    /* ========== ON/OFF ========== */
+        --animations: on; /* off: disable animations/transitions, on: enable animations/transitions */
+        --top-bar-title-position: off; /* off: default centered position, hide: hide title completely, left: left align title (like old discord) */
+        --subtle-top-bar-title: off; /* off: default, on: hide the icon and use subtle text color (like old discord) */
+        --custom-window-controls: on; /* off: default window controls, on: custom window controls */
+        --custom-dms-icon: on; /* off: use default discord icon, hide: remove icon entirely, custom: use custom icon */
+        --custom-dms-background: off; /* off to disable, image to use a background image (must set url variable below), color to use a custom color/gradient */
+        --background-image: on; /* off: no background image, on: enable background image (must set url variable below) */
+        --transparency-tweaks: off; /* off: no changes, on: remove some elements for better transparency */
+        --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+        --panel-blur: off; /* off: no changes, on: blur the background of panels */
+        --small-user-panel: off; /* off: default user panel, on: smaller user panel like in old discord */
+        --unrounding: on; /* off: default, on: remove rounded corners from panels */
+        --custom-spotify-bar: on; /* off: default, on: custom text-like spotify progress bar */
+        --ascii-titles: on; /* off: default, on: use ascii font for titles at the start of a channel */
+        --panel-labels: on; /* off: default, on: add labels to panels */
+
+    /* ========== Sizes ========== */ 
+        --gap: 12px; /* spacing between panels */
+        --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
+        --border-thickness: 2px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
+        --border-hover-transition: 0.2s ease; /* transition for borders when hovered */
+
+    /* ========== Animation/Transition Options ========== */
+        --list-item-transition: 0.5s cubic-bezier(1, -0.8, 0.2, 1.8);/* transition for list items */
+        --dms-icon-svg-transition: 0.8s cubic-bezier(0.9, -0.6, 0.1, 1.6);/* transition for the dms icon */
+
+    /* ========== Top Bar Options ========== */
+        --top-bar-height: var(--gap); /* height of the top bar (discord default is 36px, old discord style is 24px, var(--gap) recommended if button position is set to titlebar) */
+        --top-bar-button-position: titlebar; /* off: default position, hide: hide buttons completely, serverlist: move inbox button to server list, titlebar: move inbox button to channel titlebar (will hide title) */
+
+    /* ========== Window Controls ========== */
+        --window-control-size: 14px; /* size of custom window controls */
+
+    /* ========== Dms Button Options ========== */
+        --dms-icon-svg-url: url('https://raw.githubusercontent.com/Warzob/ThemedependanceWZ/7129f0e8521e45164e2c999da19284a0a08fc797/assets/pills-svgrepo-com%20(1).svg');
+        --dms-icon-svg-size: 100%;
+        --dms-icon-color-before: oklch(42% 0.1816 266.29);
+        --dms-icon-color-after: oklch(56% 0.2289 29.23);
+        --dms-background-image-url: transparent; /* url of the background image */
+        --dms-background-image-size: color; /* size of the background image (css background-size property) */
+        --dms-background-color: transparent; /* fixed color/gradient (css background property) */
+
+    /* ========== Background Image options ========== */
+        --background-image-url: url(''); /* url of the background image */
+
+    /* ========== Transparency/Blur options  NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); ========== */
+        --blur-amount: 12px; /* amount of blur */
+        --bg-floating: oklch(0.18 0.0038 164.58 / 0.98); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
+
+    /* ========== Styling options ========== */
+        --ascii-loader: matrix; /* off: default, system24: use system24 ascii loader, cats: use cats loader */
+
+    /* ========== Panel labels ========== */
+        --label-color: var(--text-muted); /* color of labels */
+        --label-font-weight: 500; /* font weight of labels */
+}
+
+:root {
+    /* ========== Color Options ========== */   
+        --colors: on; /* off: discord default colors, on: midnight custom colors */
+
+    /* ========== Couleurs de texte ========== */
+        --text-0: oklch(0.07 0.0275 29.23);/* Texte sur les éléments colorés */
+        --text-1: oklch(0.5 0.1599 143.98);/* Autre texte normalement blanc */
+        --text-2: oklch(0.88 0.199188 160.1355 / 30%);/* Titres et texte important */
+        --text-3: oklch(0.57 0.0019 145.55);/* Texte normal */
+        --text-4: oklch(0.57 0.0019 145.55);/* Boutons d'icônes et canaux */
+        --text-5: oklch(0.57 0.0019 145.55);/* Canaux/chats en sourdine et horodatages */
+
+    /* ========== Couleurs de fond et sombres ========== */
+        --bg-1: oklch(0.18 0.0038 164.58 / 0.98);/* Boutons sombres lorsqu'ils sont cliqués */
+        --bg-2: oklch(0.18 0.0038 164.58 / 0.98);/* Boutons sombres */
+        --bg-3: oklch(0.18 0.0038 164.58 / 0.98);/* Espacement, éléments secondaires */
+        --bg-4: oklch(0.26 0.0205 150.73 / 0.2);/* Couleur de fond principale */
+            --hover: oklch(0.48 0.0678 313.43 / 10%); /* Canaux et boutons au survol */
+            --active: oklch(0.49 0.0447 264.03 / 20%);/* Canaux et boutons lorsqu'ils sont cliqués ou sélectionnés */
+            --active-2: oklch(0.49 0.0447 264.03 / 30%);/* État supplémentaire pour les boutons transparents */
+            --message-hover: oklch(0.63 0.1971 144.38 / 0.10);/* Messages au survol
+
+    /* ========== Couleurs d'accentuation ========== */
+        --accent-1: oklch(0.5 0.1599 143.98);/* Liens et texte d'accentuation */
+        --accent-2: oklch(0.88 0.199188 160.1355 / 30%);/* Petits éléments d'accentuation */
+        --accent-3: oklch(0.88 0.199188 160.1355 / 30%);/* Boutons d'accentuation */
+        --accent-4: oklch(0.88 0.199188 160.1355 / 30%);/* Boutons d'accentuation au survol */
+        --accent-5: oklch(0.88 0.199188 160.1355 / 30%);/* Boutons d'accentuation lorsqu'ils sont cliqués */
+        --accent-new: oklch(0.88 0.199188 160.1355 / 30%);/* Éléments comme les boutons de sourdine/désactivation */
+            --mention: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 90%) 40%, transparent);/* Fond des messages qui vous mentionnent */
+            --mention-hover: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 95%) 40%, transparent);/* Fond des messages qui vous mentionnent au survol */
+            --reply: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 90%) 40%, transparent);/* Fond des messages qui vous répondent */
+            --reply-hover: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 95%) 40%, transparent);/* Fond des messages qui vous répondent au survol */
+
+    /* ========== Couleurs des indicateurs de statut ========== */ 
+        --online: oklch(70% 0.12 170); /* change to #40a258 for default */
+        --dnd: oklch(70% 0.13 0); /* change to #d83a41 for default */
+        --idle: oklch(75% 0.12 90); /* change to #cc954c for default */
+        --streaming: oklch(70% 0.12 310); /* change to ##9147ff for default */
+        --offline: oklch(0.57 0.0019 145.55); /* change to #82838b for default offline color */
+
+    /* ========== Couleurs des bordures ========== */
+        --border-light: oklch(0.48 0.0678 313.43 / 10%); /* general light border color */
+        --border: oklch(0.49 0.0447 264.03 / 20%); /* general normal border color */
+        --border-hover: oklch(0.88 0.199188 160.1355 / 30%); /* border color of panels when hovered */
+        --button-border: hsl(220, 0%, 100%, 0.1); /* neutral border color of buttons */
+
+    /* base colors */
+        --matrix-green: oklch(0.71 0.1958 149.62);
+        --matrix-green-1: oklch(63% 0.3 160);
+        --matrix-green-2: oklch(0.61 0.1677 149.43 / 0.3);
+        --matrix-dark: oklch(3% 0 0);
+        --matrix-main: oklch(0.71 0.1958 149.62);
+        --matrix-main-1: oklch(63% 0.3 160);
+        --matrix-main-2: oklch(0.73 0.2131 146.83 / 0.3);
+}
+
+
+/* Fond avec GIF animé */
+#app-mount {background: oklch(3% 0 0);position: relative;overflow: hidden;}
+#app-mount::before {content: '';position: fixed;inset: 0;background: url('https://c.tenor.com/yasksYy1XekAAAAC/tenor.gif') repeat;opacity: 1;z-index: -2;}
+#app-mount::after {content: '';position: fixed;inset: 0;background: oklch(0 0 0 / 50%);background-blend-mode: overlay;opacity: 1;z-index: -1;pointer-events: none;}

@@ -1,0 +1,33 @@
+/**
+ * @name Defaultlook New-UI
+ * @author Krazytrain
+ * @version 1.0.0
+ * @description A soft and comfy feel for Discord.
+*/
+/*=============================================
+=         Main Theme Don't Remove             =
+=============================================*/
+@import url('https://krazytrain.github.io/Theme/New UI/Theme Links.css');
+/*=============================================
+=                Custom Addons                =
+=============================================*/
+@import url('https://krazytrain.github.io/Theme/New UI/Radial chat Status.css');
+@import url('https://krazytrain.github.io/Theme/New UI/Radial Status.css');
+:root {
+  --rs-small-spacing: 2px;
+  --rs-medium-spacing: 2px;
+  --rs-large-spacing: 2px;
+  --rs-small-width: 2px;
+  --rs-medium-width: 3px;
+  --rs-large-width: 3px;
+  --rs-avatar-shape: 50%;
+  --rs-online-color: #43b581;
+  --rs-idle-color: #faa61a;
+  --rs-dnd-color: #f04747;
+  --rs-offline-color: #636b75;
+  --rs-streaming-color: #643da7;
+  --rs-phone-visible: block;
+}
+/*=============================================
+=              Custom CSS Code                =
+=============================================*/

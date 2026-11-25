@@ -1,0 +1,21 @@
+/**
+ * @name Template
+ * @author Saltssaumure
+ * @authorLink https://github.com/Saltssaumure
+ * @description A template theme for multiple client mod support.
+ * @license AGPL-3.0-or-later
+ * @version 1.0
+ * @invite uy8nKQVatp
+ * @source https://github.com/Saltssaumure/template-discord-theme
+ * @donate https://ko-fi.com/saltssaumure
+*/
+
+@import url("https://saltssaumure.github.io/template-discord-theme/temp.min.css");
+
+/* See https://github.com/Saltssaumure/template-discord-theme#customisation for customisation settings. */
+:root {
+    --temp-bg-color: #000;
+    --temp-bg-height: 100vh;
+    --temp-scanline: block;
+    --temp-flicker: none;
+}

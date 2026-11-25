@@ -1,0 +1,1249 @@
+/**
+ * @name Ambxst
+ * @author ReCore
+ * @description Ambxst's Material You rose shell, reconstructed from Colors.qml, Styling.qml, StyledRect.qml and config/defaults/theme.js. It carries the full colour-role set, all sr* surface variants, the shell's bar/dock/overview/notch/compositor style settings, and native ReCore mappings.
+ * @version 2.0.0
+ * @license GPL-3.0-or-later
+ * @website https://axeni.de/ambxst
+ * @source https://github.com/Axenide/Ambxst
+ */
+
+/*
+ * This file is a translation of Ambxst's style system into CSS custom
+ * properties and Discord selectors, not a copy of its QML. The inventory and
+ * limits are in docs/ambxst.md.
+ *
+ * The dark palette is the exact adapter in modules/theme/Colors.qml. The
+ * light palette is the Material light counterpart ReCore shipped before this
+ * revision, kept so existing layouts survive. The sr-* variables carry the
+ * gradient type, stops, angle, centre, opacity, border, item colour and
+ * halftone settings of assets/presets/Ambxst Default/theme.json. The
+ * component variables at the foot come from StyledRect, BarPopup, OptionsMenu,
+ * SearchInput, StyledSlider, ToggleButton, SegmentedSwitch and
+ * NotificationDelegate.
+ */
+
+@property --ambxst-roundness { syntax: "<length>"; inherits: true; initial-value: 16px; }
+@property --ambxst-font-size { syntax: "<length>"; inherits: true; initial-value: 14px; }
+@property --ambxst-mono-font-size { syntax: "<length>"; inherits: true; initial-value: 14px; }
+@property --ambxst-anim-duration { syntax: "<time>"; inherits: true; initial-value: 300ms; }
+@property --ambxst-shadow-opacity { syntax: "<percentage>"; inherits: true; initial-value: 50%; }
+@property --ambxst-blur-size { syntax: "<length>"; inherits: true; initial-value: 4px; }
+@property --ambxst-primary { syntax: "<color>"; inherits: true; initial-value: #ffb3ae; }
+@property --ambxst-surface { syntax: "<color>"; inherits: true; initial-value: #302625; }
+@property --ambxst-background { syntax: "<color>"; inherits: true; initial-value: #1a1111; }
+
+:root,
+.theme-dark {
+    color-scheme: dark;
+
+    /* Modules/theme/Colors.qml: the adapter's exact default Material roles. */
+    --ambxst-background: #1a1111;
+    --ambxst-blue: #cebdfe;
+    --ambxst-blue-container: #4c3e76;
+    --ambxst-blue-source: #0000ff;
+    --ambxst-blue-value: #0000ff;
+    --ambxst-cyan: #84d5c4;
+    --ambxst-cyan-container: #005045;
+    --ambxst-cyan-source: #00ffff;
+    --ambxst-cyan-value: #00ffff;
+    --ambxst-error: #ffb4ab;
+    --ambxst-error-container: #93000a;
+    --ambxst-green: #b7d085;
+    --ambxst-green-container: #3a4d10;
+    --ambxst-green-source: #00ff00;
+    --ambxst-green-value: #00ff00;
+    --ambxst-inverse-on-surface: #382e2d;
+    --ambxst-inverse-primary: #904a46;
+    --ambxst-inverse-surface: #f1dedd;
+    --ambxst-light-blue: #cebdfe;
+    --ambxst-light-cyan: #84d5c4;
+    --ambxst-light-green: #b7d085;
+    --ambxst-light-magenta: #fcb0d5;
+    --ambxst-light-red: #ffb4ab;
+    --ambxst-light-yellow: #dec56e;
+    --ambxst-magenta: #fcb0d5;
+    --ambxst-magenta-container: #6c3353;
+    --ambxst-magenta-source: #ff00ff;
+    --ambxst-magenta-value: #ff00ff;
+    --ambxst-over-background: #f1dedd;
+    --ambxst-over-blue: #35275e;
+    --ambxst-over-blue-container: #e8ddff;
+    --ambxst-over-cyan: #00382f;
+    --ambxst-over-cyan-container: #9ff2e0;
+    --ambxst-over-error: #690005;
+    --ambxst-over-error-container: #ffdad6;
+    --ambxst-over-green: #253600;
+    --ambxst-over-green-container: #d3ec9e;
+    --ambxst-over-magenta: #521d3c;
+    --ambxst-over-magenta-container: #ffd8e8;
+    --ambxst-over-primary: #571d1c;
+    --ambxst-over-primary-container: #ffdad7;
+    --ambxst-over-primary-fixed: #3b0809;
+    --ambxst-over-primary-fixed-variant: #733331;
+    --ambxst-over-red: #561e19;
+    --ambxst-over-red-container: #ffdad6;
+    --ambxst-over-secondary: #442928;
+    --ambxst-over-secondary-container: #ffdad7;
+    --ambxst-over-secondary-fixed: #2c1514;
+    --ambxst-over-secondary-fixed-variant: #5d3f3d;
+    --ambxst-over-surface: #f1dedd;
+    --ambxst-over-surface-variant: #d8c2c0;
+    --ambxst-over-tertiary: #402d04;
+    --ambxst-over-tertiary-container: #ffdea7;
+    --ambxst-over-tertiary-fixed: #271900;
+    --ambxst-over-tertiary-fixed-variant: #594319;
+    --ambxst-over-white: #00363d;
+    --ambxst-over-white-container: #9eeffd;
+    --ambxst-over-yellow: #3b2f00;
+    --ambxst-over-yellow-container: #fce186;
+    --ambxst-outline: #a08c8b;
+    --ambxst-outline-variant: #534342;
+    --ambxst-primary: #ffb3ae;
+    --ambxst-primary-container: #733331;
+    --ambxst-primary-fixed: #ffdad7;
+    --ambxst-primary-fixed-dim: #ffb3ae;
+    --ambxst-red: #ffb4ab;
+    --ambxst-red-container: #73332e;
+    --ambxst-red-source: #ff0000;
+    --ambxst-red-value: #ff0000;
+    --ambxst-scrim: #000000;
+    --ambxst-secondary: #e7bdb9;
+    --ambxst-secondary-container: #5d3f3d;
+    --ambxst-secondary-fixed: #ffdad7;
+    --ambxst-secondary-fixed-dim: #e7bdb9;
+    --ambxst-shadow: #000000;
+    --ambxst-surface: #302625;
+    --ambxst-surface-bright: #453a3a;
+    --ambxst-surface-container: #271d1d;
+    --ambxst-surface-container-high: #322827;
+    --ambxst-surface-container-highest: #3d3231;
+    --ambxst-surface-container-low: #231919;
+    --ambxst-surface-container-lowest: #140c0c;
+    --ambxst-surface-dim: #1a1111;
+    --ambxst-surface-tint: #ffb3ae;
+    --ambxst-surface-variant: #534342;
+    --ambxst-tertiary: #e2c28c;
+    --ambxst-tertiary-container: #594319;
+    --ambxst-tertiary-fixed: #ffdea7;
+    --ambxst-tertiary-fixed-dim: #e2c28c;
+    --ambxst-white: #82d3e0;
+    --ambxst-white-container: #004f58;
+    --ambxst-white-source: #ffffff;
+    --ambxst-white-value: #ffffff;
+    --ambxst-yellow: #dec56e;
+    --ambxst-yellow-container: #554500;
+    --ambxst-yellow-source: #ffff00;
+    --ambxst-yellow-value: #ffff00;
+    --ambxst-source-color: #7f2424;
+    --ambxst-critical-text: #FF6B08;
+    --ambxst-critical-red: #FF0028;
+    --ambxst-warning: var(--ambxst-yellow);
+    --ambxst-success: var(--ambxst-green);
+
+    /* ReCore's native palette, read exactly when --rl-ink exists. */
+    --rl-accent: var(--ambxst-primary);
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: color-mix(in srgb, var(--rl-accent) 80%, var(--rl-tint));
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 58%, var(--rl-tint));
+    --rl-signal-dim: color-mix(in srgb, var(--rl-accent) 76%, #000);
+    --rl-signal-deep: color-mix(in srgb, var(--rl-accent) 50%, #000);
+    --rl-tint: var(--ambxst-over-primary);
+    --rl-void: var(--ambxst-surface-container-lowest);
+    --rl-ink: var(--ambxst-background);
+    --rl-coal: var(--ambxst-surface-container);
+    --rl-panel: var(--ambxst-surface-container-low);
+    --rl-raised: var(--ambxst-surface-container-high);
+    --rl-high: var(--ambxst-surface-container-highest);
+    --rl-higher: var(--ambxst-surface-bright);
+    --rl-line: var(--ambxst-surface-variant);
+    --rl-line-hot: color-mix(in srgb, var(--rl-signal) 34%, transparent);
+    --rl-line-soft: color-mix(in srgb, var(--rl-bone) 12%, transparent);
+    --rl-paper: var(--ambxst-primary-fixed);
+    --rl-cream: var(--ambxst-over-background);
+    --rl-bone: var(--ambxst-over-background);
+    --rl-smoke: var(--ambxst-over-surface-variant);
+    --rl-ash: var(--ambxst-outline);
+    --rl-faint: var(--ambxst-outline-variant);
+    --rl-teal: var(--ambxst-cyan);
+    --rl-teal-deep: var(--ambxst-cyan-container);
+    --rl-night-teal: color-mix(in srgb, var(--ambxst-cyan-container) 40%, #000);
+    --rl-green: var(--ambxst-green);
+    --rl-amber: var(--ambxst-yellow);
+    --rl-red: var(--ambxst-error);
+    --rl-purple: var(--ambxst-blue);
+    --rl-offline: var(--ambxst-outline);
+    --rl-font: var(--ambxst-font);
+    --rl-font-display: var(--ambxst-font);
+    --rl-font-mono: var(--ambxst-font-mono);
+    --rl-weight: var(--ambxst-font-weight);
+    --rl-tracking: var(--ambxst-tracking);
+    --rl-radius: var(--ambxst-roundness);
+    --rl-surface: 100%;
+    --rl-panel-opacity: 100%;
+    --rl-motion: full;
+    --rl-icons: off;
+    --rl-lite: off;
+    --rl-scanline-opacity: 0;
+    --rl-grain-opacity: 0;
+    --rl-vignette-opacity: 0.12;
+    --rl-flicker-duration: 0s;
+    --rl-frame-opacity: 0;
+    --rl-beam-opacity: 0;
+    --rl-avatar-filter: none;
+    --rl-avatar-scanline: 0;
+    --rl-background-image: none;
+    --rl-background-dim: 70%;
+    --rl-background-size: cover;
+
+    /* Discord's semantic roles, using the Material surfaces rather than the
+       generator's lossy darken() shortcuts. The old DiscordRecolor names
+       point to the same roles so both generations agree. */
+    --background-primary: var(--ambxst-background);
+    --background-primary-alt: var(--ambxst-surface-container);
+    --background-secondary: var(--ambxst-surface-container-low);
+    --background-secondary-alt: var(--ambxst-surface-container-lowest);
+    --background-tertiary: var(--ambxst-surface-container-lowest);
+    --background-accent: var(--ambxst-primary-container);
+    --background-floating: var(--ambxst-surface-container-high);
+    --background-nested-floating: var(--ambxst-surface-container);
+    --background-base-lowest: var(--ambxst-surface-container-lowest);
+    --background-base-lower: var(--ambxst-background);
+    --background-base-low: var(--ambxst-surface-container-low);
+    --background-surface-high: var(--ambxst-surface-container-high);
+    --background-surface-higher: var(--ambxst-surface-bright);
+    --background-surface-highest: var(--ambxst-surface-container-highest);
+    --background-brand: var(--ambxst-primary);
+    --background-code: var(--ambxst-surface-container-lowest);
+    --background-tooltip: var(--ambxst-surface-container-high);
+    --card-background-default: var(--ambxst-surface-container);
+    --chat-background: var(--ambxst-background);
+    --modal-background: var(--ambxst-surface-container-high);
+    --modal-footer-background: var(--ambxst-surface-container);
+    --background-message-hover: color-mix(in srgb, var(--ambxst-primary) 5%, transparent);
+    --background-mentioned: color-mix(in srgb, var(--ambxst-primary) 10%, transparent);
+    --background-mentioned-hover: color-mix(in srgb, var(--ambxst-primary) 14%, transparent);
+    --background-modifier-hover: color-mix(in srgb, var(--ambxst-primary) 7%, transparent);
+    --background-modifier-active: color-mix(in srgb, var(--ambxst-primary) 12%, transparent);
+    --background-modifier-selected: color-mix(in srgb, var(--ambxst-primary) 16%, transparent);
+    --background-modifier-accent: var(--ambxst-surface-variant);
+    --interactive-background-hover: var(--background-modifier-hover);
+    --interactive-background-active: var(--background-modifier-active);
+    --interactive-background-selected: var(--background-modifier-selected);
+    --message-background-hover: var(--background-message-hover);
+    --text-normal: var(--ambxst-over-background);
+    --text-default: var(--ambxst-over-background);
+    --text-strong: var(--ambxst-primary-fixed);
+    --text-muted: var(--ambxst-over-surface-variant);
+    --text-subtle: var(--ambxst-outline);
+    --text-faint: var(--ambxst-outline-variant);
+    --text-invert: var(--ambxst-over-primary);
+    --text-link: var(--ambxst-blue);
+    --text-brand: var(--ambxst-primary-fixed);
+    --header-primary: var(--ambxst-primary-fixed);
+    --header-secondary: var(--ambxst-over-surface-variant);
+    --channels-default: var(--ambxst-over-surface-variant);
+    --channel-icon: var(--ambxst-outline);
+    --interactive-normal: var(--ambxst-over-surface-variant);
+    --interactive-hover: var(--ambxst-over-background);
+    --interactive-active: var(--ambxst-primary-fixed);
+    --interactive-muted: var(--ambxst-outline-variant);
+    --spine-default: var(--ambxst-surface-variant);
+    --icon-feedback-critical: var(--ambxst-error);
+    --brand-experiment: var(--ambxst-primary);
+    --brand-360: var(--ambxst-primary-fixed);
+    --brand-500: var(--ambxst-primary);
+    --brand-530: color-mix(in srgb, var(--ambxst-primary) 90%, #000);
+    --brand-560: color-mix(in srgb, var(--ambxst-primary) 80%, #000);
+    --brand-600: color-mix(in srgb, var(--ambxst-primary) 70%, #000);
+    --control-primary-background-default: var(--ambxst-primary);
+    --control-primary-background-hover: var(--ambxst-primary-fixed-dim);
+    --control-primary-background-active: var(--ambxst-primary-container);
+    --control-primary-text-default: var(--ambxst-over-primary);
+    --control-secondary-background-default: var(--ambxst-surface-container-high);
+    --control-secondary-background-hover: var(--ambxst-surface-container-highest);
+    --control-critical-primary-background-default: var(--ambxst-error);
+    --control-critical-primary-background-hover: var(--ambxst-error-container);
+    --control-critical-primary-text-default: var(--ambxst-over-error);
+    --status-positive: var(--ambxst-green);
+    --status-warning: var(--ambxst-yellow);
+    --status-danger: var(--ambxst-error);
+    --status-green: var(--ambxst-green);
+    --status-yellow: var(--ambxst-yellow);
+    --online: var(--ambxst-green);
+    --idle: var(--ambxst-yellow);
+    --border-subtle: var(--ambxst-surface-container-high);
+    --border-normal: var(--ambxst-surface-variant);
+    --border-strong: var(--ambxst-outline);
+    --border-muted: var(--ambxst-outline-variant);
+    --app-frame-background: var(--ambxst-surface-container-lowest);
+    --app-frame-border: var(--ambxst-surface-container-high);
+    --channeltextarea-background: var(--ambxst-surface-container-low);
+    --input-background-default: var(--ambxst-surface-container-low);
+    --avatar-background: var(--ambxst-surface-container-high);
+    --font-primary: var(--ambxst-font);
+    --font-display: var(--ambxst-font);
+    --font-headline: var(--ambxst-font);
+    --font-code: var(--ambxst-font-mono);
+    --font-size: var(--ambxst-font-size);
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --letter-spacing: var(--ambxst-tracking);
+    --radius-none: 0px;
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-xxl: 24px;
+    --radius-round: 9999px;
+
+    /* Old DiscordRecolor and legacy token names. */
+    --accentcolor: var(--ambxst-primary);
+    --accentcolor2: var(--ambxst-secondary);
+    --linkcolor: var(--ambxst-blue);
+    --mentioncolor: var(--ambxst-yellow);
+    --textbrightest: var(--ambxst-over-background);
+    --textbrighter: color-mix(in srgb, var(--ambxst-over-background) 82%, #000);
+    --textbright: color-mix(in srgb, var(--ambxst-over-background) 68%, #000);
+    --textdark: color-mix(in srgb, var(--ambxst-over-background) 52%, #000);
+    --textdarker: color-mix(in srgb, var(--ambxst-over-background) 43%, #000);
+    --textdarkest: color-mix(in srgb, var(--ambxst-over-background) 30%, #000);
+    --font: var(--ambxst-font), gg sans;
+    --backgroundaccent: var(--background-accent);
+    --backgroundprimary: var(--background-primary);
+    --backgroundsecondary: var(--background-secondary);
+    --backgroundsecondaryalt: var(--background-secondary-alt);
+    --backgroundtertiary: var(--background-tertiary);
+    --backgroundfloating: var(--background-floating);
+    --settingsicons: 1;
+
+    /* Ambxst shell settings, from config/defaults and the component QML. */
+    --ambxst-oled-mode: off;
+    --ambxst-light-mode: off;
+    --ambxst-roundness: 16px;
+    --ambxst-font-size: 14px;
+    --ambxst-mono-font-size: 14px;
+    --ambxst-tint-icons: off;
+    --ambxst-enable-corners: on;
+    --ambxst-anim-duration: 300ms;
+    --ambxst-fast-anim-duration: 150ms;
+    --ambxst-tooltip-delay: 500ms;
+    --ambxst-tooltip-show-delay: 1000ms;
+    --ambxst-bar-position: top;
+    --ambxst-bar-thickness: 44px;
+    --ambxst-bar-launcher-icon: none;
+    --ambxst-bar-launcher-icon-tint: on;
+    --ambxst-bar-launcher-icon-full-tint: on;
+    --ambxst-bar-launcher-icon-size: 24px;
+    --ambxst-bar-pill-style: default;
+    --ambxst-bar-frame: off;
+    --ambxst-bar-frame-thickness: 6px;
+    --ambxst-bar-pinned: on;
+    --ambxst-bar-hover-reveal: on;
+    --ambxst-bar-hover-height: 8px;
+    --ambxst-bar-pin-button: on;
+    --ambxst-bar-fullscreen: off;
+    --ambxst-bar-12h: off;
+    --ambxst-bar-contain: off;
+    --ambxst-bar-shadow: off;
+    --ambxst-bar-border: off;
+    --ambxst-bar-padding: 4px;
+    --ambxst-bar-radius: calc(var(--ambxst-roundness) + 4px);
+    --ambxst-bar-margin: 4px;
+    --ambxst-bar-corner-cutout: calc(var(--ambxst-roundness) + 4px);
+    --ambxst-workspaces-shown: 10;
+    --ambxst-workspaces-app-icons: on;
+    --ambxst-workspaces-numbers: off;
+    --ambxst-workspaces-always-numbers: off;
+    --ambxst-workspaces-dynamic: off;
+    --ambxst-dock-enabled: on;
+    --ambxst-dock-theme: default;
+    --ambxst-dock-position: bottom;
+    --ambxst-dock-height: 48px;
+    --ambxst-dock-icon-size: 24px;
+    --ambxst-dock-spacing: 4px;
+    --ambxst-dock-margin: 4px;
+    --ambxst-dock-hover-height: 16px;
+    --ambxst-dock-radius: calc(var(--ambxst-roundness) + 4px);
+    --ambxst-dock-shadow-space: 32px;
+    --ambxst-dock-show-running: on;
+    --ambxst-dock-show-pin: on;
+    --ambxst-dock-show-overview: on;
+    --ambxst-notch-enabled: on;
+    --ambxst-notch-theme: default;
+    --ambxst-notch-position: top;
+    --ambxst-notch-height: 44px;
+    --ambxst-notch-radius: calc(var(--ambxst-roundness) + 4px);
+    --ambxst-notch-hover-height: 8px;
+    --ambxst-notch-hover-reveal: on;
+    --ambxst-notch-disable-hover-expansion: on;
+    --ambxst-notch-custom-text: Ambxst;
+    --ambxst-overview-enabled: on;
+    --ambxst-overview-rows: 2;
+    --ambxst-overview-columns: 5;
+    --ambxst-overview-scale: 0.15;
+    --ambxst-overview-workspace-gap: 8px;
+    --ambxst-lockscreen-enabled: on;
+    --ambxst-lockscreen-position: bottom;
+    --ambxst-lockscreen-blur: 64px;
+    --ambxst-desktop-enabled: off;
+    --ambxst-desktop-icon-size: 40px;
+    --ambxst-desktop-spacing: 16px;
+    --ambxst-desktop-text-color: var(--ambxst-over-background);
+    --ambxst-desktop-blur-wallpaper: on;
+    --ambxst-ai-sidebar-width: 400px;
+    --ambxst-ai-sidebar-position: right;
+    --ambxst-notifications-width: 350px;
+    --ambxst-notifications-margin: 8px;
+    --ambxst-notifications-anchor: top-right;
+
+    /* Ambxst compositor settings. */
+    --ambxst-active-border-color: var(--ambxst-primary);
+    --ambxst-active-border-angle: 45deg;
+    --ambxst-inactive-border-color: var(--ambxst-surface);
+    --ambxst-inactive-border-angle: 45deg;
+    --ambxst-border-size: 2px;
+    --ambxst-border-rounding: var(--ambxst-roundness);
+    --ambxst-sync-roundness: on;
+    --ambxst-sync-border-width: off;
+    --ambxst-sync-border-color: off;
+    --ambxst-sync-shadow-opacity: off;
+    --ambxst-sync-shadow-color: off;
+    --ambxst-window-gap-in: 2px;
+    --ambxst-window-gap-out: 4px;
+    --ambxst-shadow-enabled: on;
+    --ambxst-shadow-color: var(--ambxst-shadow);
+    --ambxst-shadow-color-inactive: var(--ambxst-shadow);
+    --ambxst-shadow-opacity: 50%;
+    --ambxst-shadow-range: 8px;
+    --ambxst-shadow-render-power: 3;
+    --ambxst-shadow-sharp: off;
+    --ambxst-shadow-offset: 0px;
+    --ambxst-shadow-scale: 1;
+    --ambxst-shadow-blur: 0px;
+    --ambxst-shadow-x: 0px;
+    --ambxst-shadow-y: 0px;
+    --ambxst-blur-enabled: on;
+    --ambxst-blur-size: 4px;
+    --ambxst-blur-passes: 2;
+    --ambxst-blur-noise: 0;
+    --ambxst-blur-contrast: 1;
+    --ambxst-blur-brightness: 1;
+    --ambxst-blur-vibrancy: 0;
+    --ambxst-blur-vibrancy-darkness: 0;
+    --ambxst-blur-popups: off;
+    --ambxst-blur-input-methods: off;
+    --ambxst-blur-transition: on;
+    --ambxst-wavy-lines: on;
+    --ambxst-rotate-cover-art: on;
+    --ambxst-pause-wallpapers-fullscreen: on;
+    --ambxst-dashboard-persist-tabs: off;
+    --ambxst-dashboard-max-tabs: 2;
+
+    /* Components: StyledRect, BarPopup, OptionsMenu, SearchInput, sliders. */
+    --ambxst-radius-none: 0px;
+    --ambxst-radius-xs: 4px;
+    --ambxst-radius-sm: 8px;
+    --ambxst-radius-md: 12px;
+    --ambxst-radius-lg: 16px;
+    --ambxst-radius-xl: 20px;
+    --ambxst-radius-xxl: 24px;
+    --ambxst-radius-round: 9999px;
+    --ambxst-popup-padding: 8px;
+    --ambxst-popup-visual-margin: 8px;
+    --ambxst-popup-shadow-margin: 16px;
+    --ambxst-popup-scale: 0.9;
+    --ambxst-popup-content-width: 220px;
+    --ambxst-popup-content-height: 150px;
+    --ambxst-popup-radius: calc(var(--ambxst-roundness) + 8px);
+    --ambxst-menu-width: 140px;
+    --ambxst-menu-item-height: 36px;
+    --ambxst-menu-padding: 8px;
+    --ambxst-menu-border-width: 2px;
+    --ambxst-menu-radius: var(--ambxst-roundness);
+    --ambxst-menu-item-radius: calc(var(--ambxst-roundness) - 6px);
+    --ambxst-search-height: 48px;
+    --ambxst-search-padding: 8px;
+    --ambxst-search-radius: calc(var(--ambxst-roundness) + 4px);
+    --ambxst-search-icon-size: 20px;
+    --ambxst-search-prefix-size: 32px;
+    --ambxst-slider-thickness: 4px;
+    --ambxst-slider-handle-width: 4px;
+    --ambxst-slider-handle-height: 16px;
+    --ambxst-slider-handle-drag-width: 2px;
+    --ambxst-slider-handle-drag-height: 20px;
+    --ambxst-slider-handle-spacing: 4px;
+    --ambxst-slider-icon-size: 18px;
+    --ambxst-toggle-size: 36px;
+    --ambxst-toggle-icon-size: 18px;
+    --ambxst-segment-size: 28px;
+    --ambxst-segment-spacing: 2px;
+    --ambxst-segment-padding: 2px;
+    --ambxst-segment-radius: calc(var(--ambxst-roundness) - 4px);
+    --ambxst-segment-highlight-radius: calc(var(--ambxst-roundness) - 6px);
+    --ambxst-notification-radius: 8px;
+    --ambxst-notification-padding: 8px;
+    --ambxst-notification-gap: 8px;
+    --ambxst-notification-icon: 32px;
+    --ambxst-notification-icon-large: 48px;
+    --ambxst-notification-critical-margin: 16px;
+    --ambxst-tooltip-radius: calc(var(--ambxst-roundness) - 8px);
+    --ambxst-bar-button-size: 36px;
+    --ambxst-dock-content-padding: 20px;
+    --ambxst-context-menu-width: 160px;
+    --ambxst-context-menu-item-height: 32px;
+    --ambxst-action-button-size: 48px;
+    --ambxst-action-icon-size: 20px;
+    --ambxst-action-spacing: 4px;
+    --ambxst-action-columns: 3;
+    --ambxst-action-text-spacing: 8px;
+    --ambxst-circular-control-size: 48px;
+    --ambxst-circular-handle-spacing: 6px;
+    --ambxst-circular-handle-size: 8px;
+    --ambxst-circular-line-width: 4px;
+    --ambxst-circular-gap-angle: 45deg;
+    --ambxst-carousel-dot-size: 4px;
+    --ambxst-carousel-dot-spacing: 6px;
+    --ambxst-separator-opacity: 10%;
+    --ambxst-separator-radius: var(--ambxst-roundness);
+
+    /* Typography and motion easing. */
+    --ambxst-font: "Roboto Condensed", "gg sans", "Noto Sans", sans-serif;
+    --ambxst-font-mono: "Iosevka Nerd Font Mono", "Cascadia Code", monospace;
+    --ambxst-font-weight: 400;
+    --ambxst-font-weight-medium: 500;
+    --ambxst-font-weight-bold: 700;
+    --ambxst-heading-size: 20px;
+    --ambxst-small-size: 12px;
+    --ambxst-tracking: 0.01em;
+    --ambxst-line-height: 1.35;
+    --ambxst-easing-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+    --ambxst-easing-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+
+    /* Every sr* surface, resolved from Ambxst Default's theme.json. */
+    --ambxst-sr-bg-fill: var(--ambxst-background);
+    --ambxst-sr-bg-gradient-type: linear;
+    --ambxst-sr-bg-angle: 0deg;
+    --ambxst-sr-bg-center-x: 50.0%;
+    --ambxst-sr-bg-center-y: 0%;
+    --ambxst-sr-bg-opacity: 100%;
+    --ambxst-sr-bg-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-bg-border-width: 0px;
+    --ambxst-sr-bg-item-color: var(--ambxst-over-background);
+    --ambxst-sr-bg-dot-min: 0px;
+    --ambxst-sr-bg-dot-max: 2px;
+    --ambxst-sr-bg-halftone-start: 0%;
+    --ambxst-sr-bg-halftone-end: 100%;
+    --ambxst-sr-bg-dot-color: var(--ambxst-surface);
+    --ambxst-sr-bg-halftone-ground: var(--ambxst-background);
+    --ambxst-sr-popup-fill: var(--ambxst-background);
+    --ambxst-sr-popup-gradient-type: linear;
+    --ambxst-sr-popup-angle: 0deg;
+    --ambxst-sr-popup-center-x: 50.0%;
+    --ambxst-sr-popup-center-y: 50.0%;
+    --ambxst-sr-popup-opacity: 100%;
+    --ambxst-sr-popup-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-popup-border-width: 2px;
+    --ambxst-sr-popup-item-color: var(--ambxst-over-background);
+    --ambxst-sr-popup-dot-min: 0px;
+    --ambxst-sr-popup-dot-max: 2px;
+    --ambxst-sr-popup-halftone-start: 0%;
+    --ambxst-sr-popup-halftone-end: 100%;
+    --ambxst-sr-popup-dot-color: var(--ambxst-surface);
+    --ambxst-sr-popup-halftone-ground: var(--ambxst-background);
+    --ambxst-sr-internal-bg-fill: var(--ambxst-background);
+    --ambxst-sr-internal-bg-gradient-type: linear;
+    --ambxst-sr-internal-bg-angle: 0deg;
+    --ambxst-sr-internal-bg-center-x: 50.0%;
+    --ambxst-sr-internal-bg-center-y: 50.0%;
+    --ambxst-sr-internal-bg-opacity: 100%;
+    --ambxst-sr-internal-bg-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-internal-bg-border-width: 0px;
+    --ambxst-sr-internal-bg-item-color: var(--ambxst-over-background);
+    --ambxst-sr-internal-bg-dot-min: 0px;
+    --ambxst-sr-internal-bg-dot-max: 2px;
+    --ambxst-sr-internal-bg-halftone-start: 0%;
+    --ambxst-sr-internal-bg-halftone-end: 100%;
+    --ambxst-sr-internal-bg-dot-color: var(--ambxst-surface);
+    --ambxst-sr-internal-bg-halftone-ground: var(--ambxst-background);
+    --ambxst-sr-bar-bg-fill: var(--ambxst-surface-dim);
+    --ambxst-sr-bar-bg-gradient-type: linear;
+    --ambxst-sr-bar-bg-angle: 0deg;
+    --ambxst-sr-bar-bg-center-x: 50.0%;
+    --ambxst-sr-bar-bg-center-y: 50.0%;
+    --ambxst-sr-bar-bg-opacity: 0%;
+    --ambxst-sr-bar-bg-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-bar-bg-border-width: 0px;
+    --ambxst-sr-bar-bg-item-color: var(--ambxst-over-background);
+    --ambxst-sr-bar-bg-dot-min: 0px;
+    --ambxst-sr-bar-bg-dot-max: 2px;
+    --ambxst-sr-bar-bg-halftone-start: 0%;
+    --ambxst-sr-bar-bg-halftone-end: 100%;
+    --ambxst-sr-bar-bg-dot-color: var(--ambxst-surface);
+    --ambxst-sr-bar-bg-halftone-ground: var(--ambxst-surface-dim);
+    --ambxst-sr-pane-fill: var(--ambxst-surface);
+    --ambxst-sr-pane-gradient-type: linear;
+    --ambxst-sr-pane-angle: 0deg;
+    --ambxst-sr-pane-center-x: 50.0%;
+    --ambxst-sr-pane-center-y: 50.0%;
+    --ambxst-sr-pane-opacity: 100%;
+    --ambxst-sr-pane-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-pane-border-width: 0px;
+    --ambxst-sr-pane-item-color: var(--ambxst-over-background);
+    --ambxst-sr-pane-dot-min: 0px;
+    --ambxst-sr-pane-dot-max: 2px;
+    --ambxst-sr-pane-halftone-start: 0%;
+    --ambxst-sr-pane-halftone-end: 100%;
+    --ambxst-sr-pane-dot-color: var(--ambxst-surface-bright);
+    --ambxst-sr-pane-halftone-ground: var(--ambxst-surface);
+    --ambxst-sr-common-fill: var(--ambxst-surface);
+    --ambxst-sr-common-gradient-type: linear;
+    --ambxst-sr-common-angle: 0deg;
+    --ambxst-sr-common-center-x: 50.0%;
+    --ambxst-sr-common-center-y: 50.0%;
+    --ambxst-sr-common-opacity: 100%;
+    --ambxst-sr-common-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-common-border-width: 0px;
+    --ambxst-sr-common-item-color: var(--ambxst-over-background);
+    --ambxst-sr-common-dot-min: 0px;
+    --ambxst-sr-common-dot-max: 2px;
+    --ambxst-sr-common-halftone-start: 0%;
+    --ambxst-sr-common-halftone-end: 100%;
+    --ambxst-sr-common-dot-color: var(--ambxst-background);
+    --ambxst-sr-common-halftone-ground: var(--ambxst-surface);
+    --ambxst-sr-focus-fill: var(--ambxst-surface-bright);
+    --ambxst-sr-focus-gradient-type: linear;
+    --ambxst-sr-focus-angle: 0deg;
+    --ambxst-sr-focus-center-x: 50.0%;
+    --ambxst-sr-focus-center-y: 50.0%;
+    --ambxst-sr-focus-opacity: 100%;
+    --ambxst-sr-focus-border-color: var(--ambxst-surface-bright);
+    --ambxst-sr-focus-border-width: 0px;
+    --ambxst-sr-focus-item-color: var(--ambxst-over-background);
+    --ambxst-sr-focus-dot-min: 0px;
+    --ambxst-sr-focus-dot-max: 2px;
+    --ambxst-sr-focus-halftone-start: 0%;
+    --ambxst-sr-focus-halftone-end: 100%;
+    --ambxst-sr-focus-dot-color: var(--ambxst-surface-variant);
+    --ambxst-sr-focus-halftone-ground: var(--ambxst-surface-bright);
+    --ambxst-sr-primary-fill: var(--ambxst-primary);
+    --ambxst-sr-primary-gradient-type: linear;
+    --ambxst-sr-primary-angle: 0deg;
+    --ambxst-sr-primary-center-x: 50.0%;
+    --ambxst-sr-primary-center-y: 50.0%;
+    --ambxst-sr-primary-opacity: 100%;
+    --ambxst-sr-primary-border-color: var(--ambxst-primary);
+    --ambxst-sr-primary-border-width: 0px;
+    --ambxst-sr-primary-item-color: var(--ambxst-over-primary);
+    --ambxst-sr-primary-dot-min: 0px;
+    --ambxst-sr-primary-dot-max: 2px;
+    --ambxst-sr-primary-halftone-start: 0%;
+    --ambxst-sr-primary-halftone-end: 100%;
+    --ambxst-sr-primary-dot-color: var(--ambxst-over-primary-container);
+    --ambxst-sr-primary-halftone-ground: var(--ambxst-primary);
+    --ambxst-sr-primary-focus-fill: var(--ambxst-over-primary-container);
+    --ambxst-sr-primary-focus-gradient-type: linear;
+    --ambxst-sr-primary-focus-angle: 0deg;
+    --ambxst-sr-primary-focus-center-x: 50.0%;
+    --ambxst-sr-primary-focus-center-y: 50.0%;
+    --ambxst-sr-primary-focus-opacity: 100%;
+    --ambxst-sr-primary-focus-border-color: var(--ambxst-over-background);
+    --ambxst-sr-primary-focus-border-width: 0px;
+    --ambxst-sr-primary-focus-item-color: var(--ambxst-over-primary);
+    --ambxst-sr-primary-focus-dot-min: 0px;
+    --ambxst-sr-primary-focus-dot-max: 2px;
+    --ambxst-sr-primary-focus-halftone-start: 0%;
+    --ambxst-sr-primary-focus-halftone-end: 100%;
+    --ambxst-sr-primary-focus-dot-color: var(--ambxst-primary);
+    --ambxst-sr-primary-focus-halftone-ground: var(--ambxst-over-primary-container);
+    --ambxst-sr-over-primary-fill: var(--ambxst-over-primary);
+    --ambxst-sr-over-primary-gradient-type: linear;
+    --ambxst-sr-over-primary-angle: 0deg;
+    --ambxst-sr-over-primary-center-x: 50.0%;
+    --ambxst-sr-over-primary-center-y: 50.0%;
+    --ambxst-sr-over-primary-opacity: 100%;
+    --ambxst-sr-over-primary-border-color: var(--ambxst-over-primary);
+    --ambxst-sr-over-primary-border-width: 0px;
+    --ambxst-sr-over-primary-item-color: var(--ambxst-primary);
+    --ambxst-sr-over-primary-dot-min: 0px;
+    --ambxst-sr-over-primary-dot-max: 2px;
+    --ambxst-sr-over-primary-halftone-start: 0%;
+    --ambxst-sr-over-primary-halftone-end: 100%;
+    --ambxst-sr-over-primary-dot-color: var(--ambxst-primary-container);
+    --ambxst-sr-over-primary-halftone-ground: var(--ambxst-over-primary);
+    --ambxst-sr-secondary-fill: var(--ambxst-secondary);
+    --ambxst-sr-secondary-gradient-type: linear;
+    --ambxst-sr-secondary-angle: 0deg;
+    --ambxst-sr-secondary-center-x: 50.0%;
+    --ambxst-sr-secondary-center-y: 50.0%;
+    --ambxst-sr-secondary-opacity: 100%;
+    --ambxst-sr-secondary-border-color: var(--ambxst-secondary);
+    --ambxst-sr-secondary-border-width: 0px;
+    --ambxst-sr-secondary-item-color: var(--ambxst-over-secondary);
+    --ambxst-sr-secondary-dot-min: 0px;
+    --ambxst-sr-secondary-dot-max: 2px;
+    --ambxst-sr-secondary-halftone-start: 0%;
+    --ambxst-sr-secondary-halftone-end: 100%;
+    --ambxst-sr-secondary-dot-color: var(--ambxst-over-secondary-container);
+    --ambxst-sr-secondary-halftone-ground: var(--ambxst-secondary);
+    --ambxst-sr-secondary-focus-fill: var(--ambxst-over-secondary-container);
+    --ambxst-sr-secondary-focus-gradient-type: linear;
+    --ambxst-sr-secondary-focus-angle: 0deg;
+    --ambxst-sr-secondary-focus-center-x: 50.0%;
+    --ambxst-sr-secondary-focus-center-y: 50.0%;
+    --ambxst-sr-secondary-focus-opacity: 100%;
+    --ambxst-sr-secondary-focus-border-color: var(--ambxst-over-background);
+    --ambxst-sr-secondary-focus-border-width: 0px;
+    --ambxst-sr-secondary-focus-item-color: var(--ambxst-over-secondary);
+    --ambxst-sr-secondary-focus-dot-min: 0px;
+    --ambxst-sr-secondary-focus-dot-max: 2px;
+    --ambxst-sr-secondary-focus-halftone-start: 0%;
+    --ambxst-sr-secondary-focus-halftone-end: 100%;
+    --ambxst-sr-secondary-focus-dot-color: var(--ambxst-secondary);
+    --ambxst-sr-secondary-focus-halftone-ground: var(--ambxst-over-secondary-container);
+    --ambxst-sr-over-secondary-fill: var(--ambxst-over-secondary);
+    --ambxst-sr-over-secondary-gradient-type: linear;
+    --ambxst-sr-over-secondary-angle: 0deg;
+    --ambxst-sr-over-secondary-center-x: 50.0%;
+    --ambxst-sr-over-secondary-center-y: 50.0%;
+    --ambxst-sr-over-secondary-opacity: 100%;
+    --ambxst-sr-over-secondary-border-color: var(--ambxst-over-secondary);
+    --ambxst-sr-over-secondary-border-width: 0px;
+    --ambxst-sr-over-secondary-item-color: var(--ambxst-secondary);
+    --ambxst-sr-over-secondary-dot-min: 0px;
+    --ambxst-sr-over-secondary-dot-max: 2px;
+    --ambxst-sr-over-secondary-halftone-start: 0%;
+    --ambxst-sr-over-secondary-halftone-end: 100%;
+    --ambxst-sr-over-secondary-dot-color: var(--ambxst-secondary-container);
+    --ambxst-sr-over-secondary-halftone-ground: var(--ambxst-over-secondary);
+    --ambxst-sr-tertiary-fill: var(--ambxst-tertiary);
+    --ambxst-sr-tertiary-gradient-type: linear;
+    --ambxst-sr-tertiary-angle: 0deg;
+    --ambxst-sr-tertiary-center-x: 50.0%;
+    --ambxst-sr-tertiary-center-y: 50.0%;
+    --ambxst-sr-tertiary-opacity: 100%;
+    --ambxst-sr-tertiary-border-color: var(--ambxst-tertiary);
+    --ambxst-sr-tertiary-border-width: 0px;
+    --ambxst-sr-tertiary-item-color: var(--ambxst-over-tertiary);
+    --ambxst-sr-tertiary-dot-min: 0px;
+    --ambxst-sr-tertiary-dot-max: 2px;
+    --ambxst-sr-tertiary-halftone-start: 0%;
+    --ambxst-sr-tertiary-halftone-end: 100%;
+    --ambxst-sr-tertiary-dot-color: var(--ambxst-over-tertiary-container);
+    --ambxst-sr-tertiary-halftone-ground: var(--ambxst-tertiary);
+    --ambxst-sr-tertiary-focus-fill: var(--ambxst-over-tertiary-container);
+    --ambxst-sr-tertiary-focus-gradient-type: linear;
+    --ambxst-sr-tertiary-focus-angle: 0deg;
+    --ambxst-sr-tertiary-focus-center-x: 50.0%;
+    --ambxst-sr-tertiary-focus-center-y: 50.0%;
+    --ambxst-sr-tertiary-focus-opacity: 100%;
+    --ambxst-sr-tertiary-focus-border-color: var(--ambxst-over-background);
+    --ambxst-sr-tertiary-focus-border-width: 0px;
+    --ambxst-sr-tertiary-focus-item-color: var(--ambxst-over-tertiary);
+    --ambxst-sr-tertiary-focus-dot-min: 0px;
+    --ambxst-sr-tertiary-focus-dot-max: 2px;
+    --ambxst-sr-tertiary-focus-halftone-start: 0%;
+    --ambxst-sr-tertiary-focus-halftone-end: 100%;
+    --ambxst-sr-tertiary-focus-dot-color: var(--ambxst-tertiary);
+    --ambxst-sr-tertiary-focus-halftone-ground: var(--ambxst-over-tertiary-container);
+    --ambxst-sr-over-tertiary-fill: var(--ambxst-over-tertiary);
+    --ambxst-sr-over-tertiary-gradient-type: linear;
+    --ambxst-sr-over-tertiary-angle: 0deg;
+    --ambxst-sr-over-tertiary-center-x: 50.0%;
+    --ambxst-sr-over-tertiary-center-y: 50.0%;
+    --ambxst-sr-over-tertiary-opacity: 100%;
+    --ambxst-sr-over-tertiary-border-color: var(--ambxst-over-tertiary);
+    --ambxst-sr-over-tertiary-border-width: 0px;
+    --ambxst-sr-over-tertiary-item-color: var(--ambxst-tertiary);
+    --ambxst-sr-over-tertiary-dot-min: 0px;
+    --ambxst-sr-over-tertiary-dot-max: 2px;
+    --ambxst-sr-over-tertiary-halftone-start: 0%;
+    --ambxst-sr-over-tertiary-halftone-end: 100%;
+    --ambxst-sr-over-tertiary-dot-color: var(--ambxst-tertiary-container);
+    --ambxst-sr-over-tertiary-halftone-ground: var(--ambxst-over-tertiary);
+    --ambxst-sr-error-fill: var(--ambxst-error);
+    --ambxst-sr-error-gradient-type: linear;
+    --ambxst-sr-error-angle: 0deg;
+    --ambxst-sr-error-center-x: 50.0%;
+    --ambxst-sr-error-center-y: 50.0%;
+    --ambxst-sr-error-opacity: 100%;
+    --ambxst-sr-error-border-color: var(--ambxst-error);
+    --ambxst-sr-error-border-width: 0px;
+    --ambxst-sr-error-item-color: var(--ambxst-over-error);
+    --ambxst-sr-error-dot-min: 0px;
+    --ambxst-sr-error-dot-max: 2px;
+    --ambxst-sr-error-halftone-start: 0%;
+    --ambxst-sr-error-halftone-end: 100%;
+    --ambxst-sr-error-dot-color: var(--ambxst-over-error-container);
+    --ambxst-sr-error-halftone-ground: var(--ambxst-error);
+    --ambxst-sr-error-focus-fill: var(--ambxst-over-background);
+    --ambxst-sr-error-focus-gradient-type: linear;
+    --ambxst-sr-error-focus-angle: 0deg;
+    --ambxst-sr-error-focus-center-x: 50.0%;
+    --ambxst-sr-error-focus-center-y: 50.0%;
+    --ambxst-sr-error-focus-opacity: 100%;
+    --ambxst-sr-error-focus-border-color: var(--ambxst-over-background);
+    --ambxst-sr-error-focus-border-width: 0px;
+    --ambxst-sr-error-focus-item-color: var(--ambxst-over-error);
+    --ambxst-sr-error-focus-dot-min: 0px;
+    --ambxst-sr-error-focus-dot-max: 2px;
+    --ambxst-sr-error-focus-halftone-start: 0%;
+    --ambxst-sr-error-focus-halftone-end: 100%;
+    --ambxst-sr-error-focus-dot-color: var(--ambxst-error);
+    --ambxst-sr-error-focus-halftone-ground: var(--ambxst-over-error-container);
+    --ambxst-sr-over-error-fill: var(--ambxst-over-error);
+    --ambxst-sr-over-error-gradient-type: linear;
+    --ambxst-sr-over-error-angle: 0deg;
+    --ambxst-sr-over-error-center-x: 50.0%;
+    --ambxst-sr-over-error-center-y: 50.0%;
+    --ambxst-sr-over-error-opacity: 100%;
+    --ambxst-sr-over-error-border-color: var(--ambxst-over-error);
+    --ambxst-sr-over-error-border-width: 0px;
+    --ambxst-sr-over-error-item-color: var(--ambxst-error);
+    --ambxst-sr-over-error-dot-min: 0px;
+    --ambxst-sr-over-error-dot-max: 2px;
+    --ambxst-sr-over-error-halftone-start: 0%;
+    --ambxst-sr-over-error-halftone-end: 100%;
+    --ambxst-sr-over-error-dot-color: var(--ambxst-error-container);
+    --ambxst-sr-over-error-halftone-ground: var(--ambxst-over-error);
+
+    /* Component values that are not configurable in the shell but are part
+       of its look. */
+    --ambxst-selection-color: var(--ambxst-primary);
+    --ambxst-selection-text: var(--ambxst-over-primary);
+    --ambxst-scrollbar-width: 8px;
+    --ambxst-scrollbar-track: transparent;
+    --ambxst-scrollbar-thumb: var(--ambxst-outline-variant);
+    --ambxst-scrollbar-thumb-hover: var(--ambxst-outline);
+}
+
+html.theme-light,
+.theme-light {
+    color-scheme: light;
+
+    /* Material light counterpart. Kept from ReCore's previous Ambxst light
+       palette so existing layouts keep their paper look. */
+    --ambxst-background: #fff8f7;
+    --ambxst-blue: #6848a8;
+    --ambxst-blue-container: #e8ddff;
+    --ambxst-blue-source: #0000ff;
+    --ambxst-blue-value: #0000ff;
+    --ambxst-cyan: #006b5f;
+    --ambxst-cyan-container: #9ff2e0;
+    --ambxst-cyan-source: #00ffff;
+    --ambxst-cyan-value: #00ffff;
+    --ambxst-error: #ba1a1a;
+    --ambxst-error-container: #ffdad6;
+    --ambxst-green: #3f5f1d;
+    --ambxst-green-container: #d3ec9e;
+    --ambxst-green-source: #00ff00;
+    --ambxst-green-value: #00ff00;
+    --ambxst-inverse-on-surface: #fbf2f0;
+    --ambxst-inverse-primary: #ffb3ae;
+    --ambxst-inverse-surface: #221a19;
+    --ambxst-light-blue: #6848a8;
+    --ambxst-light-cyan: #006b5f;
+    --ambxst-light-green: #3f5f1d;
+    --ambxst-light-magenta: #8f3f6b;
+    --ambxst-light-red: #ba1a1a;
+    --ambxst-light-yellow: #6e5600;
+    --ambxst-magenta: #8f3f6b;
+    --ambxst-magenta-container: #ffd8e8;
+    --ambxst-magenta-source: #ff00ff;
+    --ambxst-magenta-value: #ff00ff;
+    --ambxst-over-background: #221a19;
+    --ambxst-over-blue: #ffffff;
+    --ambxst-over-blue-container: #221a19;
+    --ambxst-over-cyan: #ffffff;
+    --ambxst-over-cyan-container: #00201c;
+    --ambxst-over-error: #ffffff;
+    --ambxst-over-error-container: #410002;
+    --ambxst-over-green: #ffffff;
+    --ambxst-over-green-container: #102000;
+    --ambxst-over-magenta: #ffffff;
+    --ambxst-over-magenta-container: #3a0b29;
+    --ambxst-over-primary: #ffffff;
+    --ambxst-over-primary-container: #2a1716;
+    --ambxst-over-primary-fixed: #2a1716;
+    --ambxst-over-primary-fixed-variant: #733331;
+    --ambxst-over-red: #ffffff;
+    --ambxst-over-red-container: #410002;
+    --ambxst-over-secondary: #ffffff;
+    --ambxst-over-secondary-container: #221a19;
+    --ambxst-over-secondary-fixed: #221a19;
+    --ambxst-over-secondary-fixed-variant: #534342;
+    --ambxst-over-surface: #221a19;
+    --ambxst-over-surface-variant: #534342;
+    --ambxst-over-tertiary: #ffffff;
+    --ambxst-over-tertiary-container: #221a19;
+    --ambxst-over-tertiary-fixed: #221a19;
+    --ambxst-over-tertiary-fixed-variant: #6848a8;
+    --ambxst-over-white: #ffffff;
+    --ambxst-over-white-container: #00201c;
+    --ambxst-over-yellow: #ffffff;
+    --ambxst-over-yellow-container: #2b2100;
+    --ambxst-outline: #6e5a59;
+    --ambxst-outline-variant: #d3b9b7;
+    --ambxst-primary: #904a46;
+    --ambxst-primary-container: #ffdad7;
+    --ambxst-primary-fixed: #ffdad7;
+    --ambxst-primary-fixed-dim: #ffb3ae;
+    --ambxst-red: #ba1a1a;
+    --ambxst-red-container: #ffdad6;
+    --ambxst-red-source: #ff0000;
+    --ambxst-red-value: #ff0000;
+    --ambxst-scrim: #000000;
+    --ambxst-secondary: #534342;
+    --ambxst-secondary-container: #f5dddc;
+    --ambxst-secondary-fixed: #f5dddc;
+    --ambxst-secondary-fixed-dim: #534342;
+    --ambxst-shadow: #000000;
+    --ambxst-surface: #f5dddc;
+    --ambxst-surface-bright: #e0c6c5;
+    --ambxst-surface-container: #f8edeb;
+    --ambxst-surface-container-high: #eed6d5;
+    --ambxst-surface-container-highest: #e0c6c5;
+    --ambxst-surface-container-low: #f5dddc;
+    --ambxst-surface-container-lowest: #fbf2f0;
+    --ambxst-surface-dim: #fbf2f0;
+    --ambxst-surface-tint: #904a46;
+    --ambxst-surface-variant: #eed6d5;
+    --ambxst-tertiary: #6848a8;
+    --ambxst-tertiary-container: #e8ddff;
+    --ambxst-tertiary-fixed: #e8ddff;
+    --ambxst-tertiary-fixed-dim: #6848a8;
+    --ambxst-white: #006b7a;
+    --ambxst-white-container: #9eeffd;
+    --ambxst-white-source: #ffffff;
+    --ambxst-white-value: #ffffff;
+    --ambxst-yellow: #6e5600;
+    --ambxst-yellow-container: #fce186;
+    --ambxst-yellow-source: #ffff00;
+    --ambxst-yellow-value: #ffff00;
+    --ambxst-source-color: #904a46;
+
+    --rl-accent: var(--ambxst-primary);
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: color-mix(in srgb, var(--rl-accent) 80%, var(--rl-tint));
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 58%, var(--rl-tint));
+    --rl-signal-dim: color-mix(in srgb, var(--rl-accent) 76%, #fff);
+    --rl-signal-deep: color-mix(in srgb, var(--rl-accent) 50%, #fff);
+    --rl-tint: var(--ambxst-over-primary);
+    --rl-void: var(--ambxst-surface-container-lowest);
+    --rl-ink: var(--ambxst-background);
+    --rl-coal: var(--ambxst-surface-container);
+    --rl-panel: var(--ambxst-surface-container-low);
+    --rl-raised: var(--ambxst-surface-container-high);
+    --rl-high: var(--ambxst-surface-container-highest);
+    --rl-higher: var(--ambxst-surface-bright);
+    --rl-line: var(--ambxst-surface-variant);
+    --rl-line-hot: color-mix(in srgb, var(--rl-signal) 28%, transparent);
+    --rl-line-soft: color-mix(in srgb, var(--rl-bone) 16%, transparent);
+    --rl-paper: var(--ambxst-primary-container);
+    --rl-cream: var(--ambxst-over-background);
+    --rl-bone: var(--ambxst-over-background);
+    --rl-smoke: var(--ambxst-over-surface-variant);
+    --rl-ash: var(--ambxst-outline);
+    --rl-faint: var(--ambxst-outline-variant);
+    --rl-teal: var(--ambxst-cyan);
+    --rl-teal-deep: var(--ambxst-cyan-container);
+    --rl-night-teal: color-mix(in srgb, var(--ambxst-cyan-container) 30%, #fff);
+    --rl-green: var(--ambxst-green);
+    --rl-amber: var(--ambxst-yellow);
+    --rl-red: var(--ambxst-error);
+    --rl-purple: var(--ambxst-blue);
+    --rl-offline: var(--ambxst-outline);
+
+    --background-primary: var(--ambxst-background);
+    --background-primary-alt: var(--ambxst-surface-container);
+    --background-secondary: var(--ambxst-surface-container-low);
+    --background-secondary-alt: var(--ambxst-surface-container-lowest);
+    --background-tertiary: var(--ambxst-surface-container-lowest);
+    --background-accent: var(--ambxst-primary-container);
+    --background-floating: var(--ambxst-surface-container-high);
+    --background-nested-floating: var(--ambxst-surface-container);
+    --background-base-lowest: var(--ambxst-surface-container-lowest);
+    --background-base-lower: var(--ambxst-background);
+    --background-base-low: var(--ambxst-surface-container-low);
+    --background-surface-high: var(--ambxst-surface-container-high);
+    --background-surface-higher: var(--ambxst-surface-bright);
+    --background-surface-highest: var(--ambxst-surface-container-highest);
+    --background-brand: var(--ambxst-primary);
+    --background-code: var(--ambxst-surface-container-lowest);
+    --background-tooltip: var(--ambxst-surface-container-high);
+    --card-background-default: var(--ambxst-surface-container);
+    --chat-background: var(--ambxst-background);
+    --modal-background: var(--ambxst-surface-container-high);
+    --modal-footer-background: var(--ambxst-surface-container);
+    --background-message-hover: color-mix(in srgb, var(--ambxst-primary) 5%, transparent);
+    --background-mentioned: color-mix(in srgb, var(--ambxst-primary) 9%, transparent);
+    --background-mentioned-hover: color-mix(in srgb, var(--ambxst-primary) 13%, transparent);
+    --background-modifier-hover: color-mix(in srgb, var(--ambxst-primary) 6%, transparent);
+    --background-modifier-active: color-mix(in srgb, var(--ambxst-primary) 11%, transparent);
+    --background-modifier-selected: color-mix(in srgb, var(--ambxst-primary) 15%, transparent);
+    --background-modifier-accent: var(--ambxst-surface-variant);
+    --interactive-background-hover: var(--background-modifier-hover);
+    --interactive-background-active: var(--background-modifier-active);
+    --interactive-background-selected: var(--background-modifier-selected);
+    --message-background-hover: var(--background-message-hover);
+    --text-normal: var(--ambxst-over-background);
+    --text-default: var(--ambxst-over-background);
+    --text-strong: var(--ambxst-primary-container);
+    --text-muted: var(--ambxst-over-surface-variant);
+    --text-subtle: var(--ambxst-outline);
+    --text-faint: var(--ambxst-outline-variant);
+    --text-invert: var(--ambxst-over-primary);
+    --text-link: var(--ambxst-blue);
+    --text-brand: var(--ambxst-primary);
+    --header-primary: var(--ambxst-primary-container);
+    --header-secondary: var(--ambxst-secondary);
+    --channels-default: var(--ambxst-secondary);
+    --channel-icon: var(--ambxst-outline);
+    --interactive-normal: var(--ambxst-secondary);
+    --interactive-hover: var(--ambxst-over-background);
+    --interactive-active: var(--ambxst-primary-container);
+    --interactive-muted: var(--ambxst-outline-variant);
+    --spine-default: var(--ambxst-outline-variant);
+    --icon-feedback-critical: var(--ambxst-error);
+    --brand-experiment: var(--ambxst-primary);
+    --brand-360: var(--ambxst-primary-container);
+    --brand-500: var(--ambxst-primary);
+    --brand-530: color-mix(in srgb, var(--ambxst-primary) 88%, #000);
+    --brand-560: color-mix(in srgb, var(--ambxst-primary) 78%, #000);
+    --brand-600: color-mix(in srgb, var(--ambxst-primary) 68%, #000);
+    --control-primary-background-default: var(--ambxst-primary);
+    --control-primary-background-hover: var(--ambxst-primary-container);
+    --control-primary-background-active: var(--ambxst-primary-fixed-dim);
+    --control-primary-text-default: var(--ambxst-over-primary);
+    --control-secondary-background-default: var(--ambxst-surface-container-high);
+    --control-secondary-background-hover: var(--ambxst-surface-container-highest);
+    --control-critical-primary-background-default: var(--ambxst-error);
+    --control-critical-primary-background-hover: var(--ambxst-error-container);
+    --control-critical-primary-text-default: var(--ambxst-over-error);
+    --status-positive: var(--ambxst-green);
+    --status-warning: var(--ambxst-yellow);
+    --status-danger: var(--ambxst-error);
+    --status-green: var(--ambxst-green);
+    --status-yellow: var(--ambxst-yellow);
+    --online: var(--ambxst-green);
+    --idle: var(--ambxst-yellow);
+    --border-subtle: var(--ambxst-surface-container-high);
+    --border-normal: var(--ambxst-surface-variant);
+    --border-strong: var(--ambxst-outline);
+    --border-muted: var(--ambxst-outline-variant);
+    --app-frame-background: var(--ambxst-surface-container-lowest);
+    --app-frame-border: var(--ambxst-surface-container-high);
+    --channeltextarea-background: var(--ambxst-surface-container-low);
+    --input-background-default: var(--ambxst-surface-container-low);
+    --avatar-background: var(--ambxst-surface-container-high);
+    --accentcolor: var(--ambxst-primary);
+    --accentcolor2: var(--ambxst-secondary);
+    --linkcolor: var(--ambxst-blue);
+    --mentioncolor: var(--ambxst-yellow);
+    --textbrightest: var(--ambxst-over-background);
+    --textbrighter: color-mix(in srgb, var(--ambxst-over-background) 88%, #fff);
+    --textbright: color-mix(in srgb, var(--ambxst-over-background) 82%, #fff);
+    --textdark: color-mix(in srgb, var(--ambxst-over-background) 72%, #fff);
+    --textdarker: color-mix(in srgb, var(--ambxst-over-background) 64%, #fff);
+    --textdarkest: color-mix(in srgb, var(--ambxst-over-background) 54%, #fff);
+    --font: var(--ambxst-font), gg sans;
+    --backgroundaccent: var(--background-accent);
+    --backgroundprimary: var(--background-primary);
+    --backgroundsecondary: var(--background-secondary);
+    --backgroundsecondaryalt: var(--background-secondary-alt);
+    --backgroundtertiary: var(--background-tertiary);
+    --backgroundfloating: var(--background-floating);
+    --settingsicons: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ambxst surfaces. The variables above are editable in Appearance. */
+
+#app-mount {
+    color: var(--ambxst-sr-bg-item-color);
+    background: var(--ambxst-sr-bg-fill);
+}
+
+[class*="guilds_"] {
+    background: var(--ambxst-surface-container-lowest);
+    border-right: 1px solid var(--ambxst-surface-variant);
+}
+
+[class*="sidebar_"],
+[class*="sidebarList_"],
+[class*="privateChannels_"] {
+    background: var(--ambxst-sr-pane-fill);
+}
+
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: var(--ambxst-sr-bg-fill);
+}
+
+[class*="membersWrap_"],
+[class*="memberList_"] {
+    background: var(--ambxst-surface-container-low);
+    border-left: 1px solid var(--ambxst-surface-container-high);
+}
+
+[class*="header_"],
+[class*="title_"] {
+    background: var(--ambxst-surface-container-lowest);
+    border-bottom: var(--ambxst-sr-popup-border-width) solid var(--ambxst-surface-container-high);
+}
+
+[class*="channelTextArea_"],
+[class*="textArea_"] {
+    background: var(--ambxst-sr-internal-bg-fill);
+    border: var(--ambxst-sr-internal-bg-border-width) solid var(--ambxst-sr-internal-bg-border-color);
+    border-radius: var(--ambxst-search-radius);
+}
+
+[class*="message_"]:hover {
+    background: var(--ambxst-sr-focus-fill);
+    border-radius: var(--ambxst-radius-sm);
+}
+
+[class*="member_"]:hover,
+[class*="channel_"]:hover {
+    background: var(--ambxst-sr-focus-fill);
+    border-radius: var(--ambxst-radius-sm);
+}
+
+[class*="selected_"],
+[class*="selected-"] {
+    background: var(--ambxst-sr-focus-fill);
+    color: var(--ambxst-sr-focus-item-color);
+    border-radius: var(--ambxst-radius-md);
+}
+
+[class*="card_"],
+[class*="modal_"],
+[class*="popout_"],
+[class*="menu_"],
+[class*="tooltip_"] {
+    color: var(--ambxst-sr-popup-item-color);
+    background: var(--ambxst-sr-popup-fill);
+    border: var(--ambxst-sr-popup-border-width) solid var(--ambxst-sr-popup-border-color);
+    border-radius: var(--ambxst-popup-radius);
+    box-shadow: var(--ambxst-shadow-x) var(--ambxst-shadow-y) var(--ambxst-shadow-range) color-mix(in srgb, var(--ambxst-shadow) var(--ambxst-shadow-opacity), transparent);
+}
+
+[class*="button_"] {
+    border-radius: var(--ambxst-radius-round);
+    font-weight: var(--ambxst-font-weight-medium);
+    transition: background-color var(--ambxst-anim-duration) var(--ambxst-easing-out-cubic),
+                color var(--ambxst-anim-duration) var(--ambxst-easing-out-cubic);
+}
+
+[class*="button_"]:hover {
+    background-color: var(--ambxst-surface-container-highest);
+}
+
+[class*="primary_"] [class*="button_"],
+[class*="button_"].primary,
+[class*="button_"][class*="brand"] {
+    color: var(--ambxst-sr-primary-item-color);
+    background: var(--ambxst-sr-primary-fill);
+}
+
+[class*="checkbox_"],
+[class*="switch_"],
+[class*="slider_"] {
+    accent-color: var(--ambxst-primary);
+}
+
+[class*="scroller_"],
+[class*="scrollbar_"] {
+    scrollbar-color: var(--ambxst-scrollbar-thumb) var(--ambxst-scrollbar-track);
+    scrollbar-width: var(--ambxst-scrollbar-width);
+}
+
+::selection {
+    color: var(--ambxst-selection-text);
+    background: var(--ambxst-selection-color);
+}
+
+::-webkit-scrollbar {
+    width: var(--ambxst-scrollbar-width);
+    height: var(--ambxst-scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ambxst-scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ambxst-scrollbar-thumb);
+    border: 2px solid var(--ambxst-background);
+    border-radius: var(--ambxst-radius-round);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ambxst-scrollbar-thumb-hover);
+}
+
+/* Dialog and menus follow OptionsMenu.qml: a solid ground, a two-pixel
+   surface-bright edge and a highlight inset eight pixels. */
+[class*="menu_"] {
+    padding: var(--ambxst-menu-padding);
+    border-radius: var(--ambxst-menu-radius);
+}
+
+[class*="menu_"] [class*="item_"] {
+    min-height: var(--ambxst-menu-item-height);
+    border-radius: var(--ambxst-menu-item-radius);
+}
+
+[class*="menu_"] [class*="item_"]:hover {
+    background: var(--ambxst-sr-focus-fill);
+}
+
+/* Tooltips use the popup surface and a tighter radius, as StyledToolTip. */
+[class*="tooltip_"] {
+    border-radius: calc(var(--ambxst-popup-radius) - 8px);
+}
+
+/* SearchInput.qml: a pane with a 48 px body, 8 px padding and a 20 px icon. */
+[class*="searchBar_"],
+[class*="search_"] input {
+    min-height: var(--ambxst-search-height);
+    padding: var(--ambxst-search-padding);
+    border-radius: var(--ambxst-search-radius);
+    background: var(--ambxst-sr-pane-fill);
+}
+
+/* The bar's quiet floating frame, the dock's bottom capsule and the
+   notification stack. */
+[class*="bar_"],
+[class*="dock_"] {
+    --ambxst-surface: var(--ambxst-surface-container);
+}
+
+[class*="notification_"] {
+    border-radius: var(--ambxst-notification-radius);
+    padding: var(--ambxst-notification-padding);
+    background: var(--ambxst-sr-popup-fill);
+    border: var(--ambxst-sr-popup-border-width) solid var(--ambxst-sr-popup-border-color);
+}
+
+/* Ambxst's animated ground: the body uses the srBg surface and a slow
+   secondary/tertiary drift. */
+body {
+    background: var(--ambxst-sr-bg-fill);
+    animation: ambxst-drift 24s var(--ambxst-easing-out-cubic) infinite;
+}
+
+@keyframes ambxst-drift {
+    from { background-color: var(--ambxst-secondary); opacity: 0.96; }
+    50% { background-color: var(--ambxst-tertiary); opacity: 1; }
+    to { background-color: var(--ambxst-secondary); opacity: 0.96; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body { animation: none; }
+}

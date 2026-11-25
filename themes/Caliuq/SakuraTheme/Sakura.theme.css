@@ -1,0 +1,159 @@
+/**
+ * @name Sakura Detail Pastel
+ * @author Cali
+ * @version 1.1.0
+ * @description Tema combinado con tonos rosados pastel, suaves y aesthetic, adaptativo entre claro y oscuro, con la fuente Anonymous Pro.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400&display=swap');
+
+:root {
+    /* Paleta de colores - Modo Claro */
+    --light-primary-bg: #ffeef2; /* Fondo principal (rosa claro pálido) */
+    --light-secondary-bg: #fddde6; /* Fondo secundario (rosa claro) */
+    --light-accent-color: #f99aaa; /* Rosa pastel intenso */
+    --light-text-color: #2C2C2C; /* Negro suave para texto principal */
+    --light-secondary-text-color: #333333; /* Gris más oscuro para texto secundario */
+    --light-placeholder-color: #6C6C6C; /* Gris oscuro para textos de relleno */
+    --light-border-color: #E4A3B7; /* Rosa medio para bordes */
+    --light-scrollbar-color: #f99aaa; /* Color fijo de la barra de scroll */
+    --light-scrollbar-hover: #ffadc6; /* Color de hover en la barra de scroll */
+    --light-widget-bg: #fddde6; /* Fondo del widget de música */
+    --light-widget-text: #2c2c2c; /* Texto del widget */
+    --light-selection-bg: #ffadc6; /* Fondo de selección de texto */
+    --light-selection-text: #ffffff; /* Texto seleccionado */
+
+    /* Paleta de colores - Modo Oscuro */
+    --dark-primary-bg: #1a1a1a; /* Fondo principal oscuro */
+    --dark-secondary-bg: #2a2a2a; /* Fondo secundario oscuro */
+    --dark-accent-color: #f78ca0; /* Rosa pastel fuerte */
+    --dark-text-color: #fddde6; /* Texto claro */
+    --dark-secondary-text-color: #cccccc; /* Gris claro para textos secundarios */
+    --dark-placeholder-color: #777777; /* Gris medio */
+    --dark-border-color: #f78ca0; /* Rosa fuerte para bordes */
+    --dark-scrollbar-color: #f78ca0; /* Color fijo de la barra de scroll */
+    --dark-scrollbar-hover: #f99aaa; /* Color de hover en la barra de scroll */
+    --dark-widget-bg: #2a2a2a; /* Fondo del widget de música */
+    --dark-widget-text: #fddde6; /* Texto del widget */
+    --dark-selection-bg: #f56a85; /* Fondo de selección de texto */
+    --dark-selection-text: #ffffff; /* Texto seleccionado */
+
+    /* Fuentes */
+    --font-family: 'Anonymous Pro', monospace;
+}
+
+/* Estilos generales */
+body, .layerContainer-yqaFcK, .chatContent-a9vAAp, .contentRegion-3nDuYy {
+    font-family: var(--font-family) !important;
+    background-color: var(--primary-bg) !important;
+    color: var(--text-color) !important;
+    background-attachment: fixed !important;
+    backdrop-filter: blur(8px) !important; /* Difuminado del fondo */
+}
+
+/* Personalización de selección de texto */
+::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
+}
+
+/* Barra de scroll */
+::-webkit-scrollbar {
+    width: 8px !important;
+    background-color: var(--primary-bg) !important;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color) !important;
+    border-radius: 10px !important;
+    transition: background-color 0.3s ease !important;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-hover) !important;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--primary-bg) !important;
+}
+
+/* Widget de música */
+.now-playing {
+    background: var(--widget-bg) !important;
+    color: var(--widget-text) !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Mensajes */
+.message {
+    background: var(--secondary-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 10px !important;
+    color: var(--text-color) !important;
+    transition: background-color 0.2s ease !important;
+}
+.message:hover {
+    background: var(--hover-transparency) !important;
+}
+
+/* Botones */
+.button {
+    background: var(--accent-color) !important;
+    color: #ffffff !important;
+    border-radius: 16px !important;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+.button:hover {
+    background: #ffadc6 !important; /* Un tono más claro para hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Enlaces */
+a {
+    color: var(--accent-color) !important;
+    text-decoration: none !important;
+}
+a:hover {
+    text-decoration: underline !important;
+    color: #ffadc6 !important;
+}
+
+/* Ajuste de nombres de usuario en mensajes privados */
+.dm-channel {
+    color: var(--text-color) !important;
+}
+
+/* Modo Claro */
+.theme-light {
+    --primary-bg: var(--light-primary-bg) !important;
+    --secondary-bg: var(--light-secondary-bg) !important;
+    --accent-color: var(--light-accent-color) !important;
+    --text-color: var(--light-text-color) !important;
+    --secondary-text-color: var(--light-secondary-text-color) !important;
+    --placeholder-color: var(--light-placeholder-color) !important;
+    --border-color: var(--light-border-color) !important;
+    --scrollbar-color: var(--light-scrollbar-color) !important;
+    --scrollbar-hover: var(--light-scrollbar-hover) !important;
+    --widget-bg: var(--light-widget-bg) !important;
+    --widget-text: var(--light-widget-text) !important;
+    --selection-bg: var(--light-selection-bg) !important;
+    --selection-text: var(--light-selection-text) !important;
+}
+
+/* Modo Oscuro */
+.theme-dark {
+    --primary-bg: var(--dark-primary-bg) !important;
+    --secondary-bg: var(--dark-secondary-bg) !important;
+    --accent-color: var(--dark-accent-color) !important;
+    --text-color: var(--dark-text-color) !important;
+    --secondary-text-color: var(--dark-secondary-text-color) !important;
+    --placeholder-color: var(--dark-placeholder-color) !important;
+    --border-color: var(--dark-border-color) !important;
+    --scrollbar-color: var(--dark-scrollbar-color) !important;
+    --scrollbar-hover: var(--dark-scrollbar-hover) !important;
+    --widget-bg: var(--dark-widget-bg) !important;
+    --widget-text: var(--dark-widget-text) !important;
+    --selection-bg: var(--dark-selection-bg) !important;
+    --selection-text: var(--dark-selection-text) !important;
+}

@@ -1,0 +1,1368 @@
+/**
+ * @name IRC Theme
+ * @author Clio
+ * @version 0.2.0
+ * @description A dark late-90s IRC client-inspired theme for Vesktop: dense transcript, bracketed timestamps, nick colors, channel tree, beveled chrome, and a proper nicklist.
+ * @license GPL-3.0-or-later
+ * @source https://github.com/alderban107/irc-theme
+ * @website https://github.com/alderban107/irc-theme
+ */
+
+/*
+ * IRC Theme
+ * ---------
+ * Designed for Vesktop/Vencord and Discord's current Visual Refresh UI.
+ * Best used with Settings -> Appearance -> Message Display -> Compact.
+ * Optional: enable Vencord's IrcColors plugin for stable per-user nick colors.
+ *
+ * This file is deliberately self-contained: no remote imports, fonts, images,
+ * tracking, or floating dependencies. Selector strategy and compatibility
+ * research drew on foxf4ce/discord-css (CC0), refact0r/system24 (MIT), and
+ * refact0r/midnight-discord (MIT).
+ */
+
+/* -------------------------------------------------------------------------
+   01. Palette and user-facing options
+   ------------------------------------------------------------------------- */
+
+:root,
+body,
+.theme-dark:not(.custom-user-profile-theme),
+.theme-darker:not(.custom-user-profile-theme),
+.theme-midnight:not(.custom-user-profile-theme),
+.theme-light:not(.custom-user-profile-theme) {
+    color-scheme: dark;
+
+    /* Core surfaces */
+    --irc-void: #000000;
+    --irc-canvas: #020202;
+    --irc-chat: #000000;
+    --irc-panel: #060606;
+    --irc-raised: #0c0c0c;
+    --irc-raised-2: #141414;
+    --irc-selection: #191919;
+    --irc-selection-strong: #242424;
+
+    /* Beveled chrome */
+    --irc-edge-black: #000000;
+    --irc-edge-dark: #030303;
+    --irc-edge: #242424;
+    --irc-edge-light: #3a3a3a;
+    --irc-divider: #1c1c1c;
+
+    /* Text */
+    --irc-text-bright: #ffffff;
+    --irc-text: #f2f2f2;
+    --irc-text-soft: #c8c8c8;
+    --irc-muted: #969696;
+    --irc-faint: #6f6f6f;
+    --irc-link: #8fd6d6;
+
+    /* Neutral signals; native role/IrcColors username colors stay untouched. */
+    --irc-cyan: #f2f2f2;
+    --irc-blue: #d8d8d8;
+    --irc-violet: #d0d0d0;
+    --irc-pink: #e2e2e2;
+    --irc-amber: #dedede;
+    --irc-green: #ececec;
+    --irc-red: #ffffff;
+
+    /* Typography: all local, so the theme works offline */
+    --irc-ui-font: "DejaVu Sans", "Noto Sans", sans-serif;
+    --irc-chat-font: "JetBrainsMono Nerd Font", "DejaVu Sans Mono", monospace;
+    --irc-chat-size: 15px;
+    --irc-chat-line: 1.42rem;
+
+    /* Layout */
+    --irc-radius: 1px;
+    --irc-panel-gap: 5px;
+    --irc-member-avatar-size: 18px;
+    --irc-chat-avatar-display: none;
+    --channels-spine-offset-left: 18px;
+    --channels-spine-inverted-offset-top: 4px;
+    --thread-channel-spine: var(--irc-edge);
+
+    /* Reusable bevels */
+    --irc-bevel-raised:
+        inset 1px 1px 0 var(--irc-edge-light),
+        inset -1px -1px 0 var(--irc-edge-black);
+    --irc-bevel-sunken:
+        inset 1px 1px 0 var(--irc-edge-black),
+        inset -1px -1px 0 var(--irc-edge-light);
+    --irc-bevel-button:
+        inset 1px 1px 0 color-mix(in srgb, var(--irc-edge-light), white 8%),
+        inset -1px -1px 0 var(--irc-edge-black);
+
+    /* Discord/Vencord compatibility variables */
+    --font-primary: var(--irc-ui-font);
+    --font-display: var(--irc-ui-font);
+    --font-headline: var(--irc-ui-font);
+    --font-code: var(--irc-chat-font);
+
+    --radius-none: 0px;
+    --radius-xs: var(--irc-radius);
+    --radius-sm: var(--irc-radius);
+    --radius-md: var(--irc-radius);
+    --radius-lg: var(--irc-radius);
+    --radius-xl: var(--irc-radius);
+    --radius-xxl: var(--irc-radius);
+
+    --app-frame-background: var(--irc-void);
+    --app-frame-border: var(--irc-edge);
+    --background-base-lowest: var(--irc-canvas);
+    --background-base-lower: var(--irc-chat);
+    --background-base-low: var(--irc-panel);
+    --background-surface-high: var(--irc-panel);
+    --background-surface-higher: var(--irc-raised);
+    --background-surface-highest: var(--irc-raised-2);
+    --background-primary: var(--irc-chat);
+    --background-secondary: var(--irc-panel);
+    --background-secondary-alt: var(--irc-raised);
+    --background-tertiary: var(--irc-canvas);
+    --background-accent: var(--irc-raised-2);
+    --background-floating: var(--irc-raised);
+    --background-code: var(--irc-canvas);
+    --background-mod-subtle: color-mix(in srgb, var(--irc-blue), transparent 92%);
+    --background-mod-muted: color-mix(in srgb, var(--irc-blue), transparent 87%);
+    --background-mod-normal: var(--irc-raised);
+    --background-mod-strong: var(--irc-raised-2);
+    --background-modifier-hover: color-mix(in srgb, var(--irc-blue), transparent 90%);
+    --background-modifier-active: color-mix(in srgb, var(--irc-blue), transparent 82%);
+    --background-modifier-selected: var(--irc-selection);
+    --background-mentioned: color-mix(in srgb, var(--irc-amber), transparent 88%);
+    --background-mentioned-hover: color-mix(in srgb, var(--irc-amber), transparent 83%);
+    --home-background: var(--irc-chat);
+    --modal-background: var(--irc-panel);
+    --modal-footer-background: var(--irc-canvas);
+    --card-background-default: var(--irc-panel);
+    --bg-surface-raised: var(--irc-raised);
+    --bg-surface-overlay-tmp: var(--irc-raised);
+
+    --text-default: var(--irc-text);
+    --text-normal: var(--irc-text);
+    --text-strong: var(--irc-text-bright);
+    --text-muted: var(--irc-muted);
+    --text-subtle: var(--irc-text-soft);
+    --text-brand: var(--irc-cyan);
+    --text-link: var(--irc-link);
+    --header-primary: var(--irc-text-bright);
+    --header-secondary: var(--irc-text-soft);
+    --channels-default: var(--irc-muted);
+    --channel-icon: var(--irc-faint);
+    --interactive-text-default: var(--irc-text-soft);
+    --interactive-text-hover: var(--irc-text-bright);
+    --interactive-text-active: var(--irc-text-bright);
+    --interactive-icon-default: var(--irc-muted);
+    --interactive-icon-hover: var(--irc-text);
+    --interactive-icon-active: var(--irc-cyan);
+    --interactive-muted: var(--irc-faint);
+
+    --brand-260: var(--irc-cyan);
+    --brand-360: var(--irc-cyan);
+    --brand-500: var(--irc-cyan);
+    --blurple-50: var(--irc-cyan);
+    --control-brand-foreground: var(--irc-cyan);
+    --background-brand: var(--irc-cyan);
+    --background-feedback-notification: var(--irc-chat);
+
+    --border-subtle: var(--irc-divider);
+    --border-muted: var(--irc-edge);
+    --border-normal: var(--irc-edge);
+    --border-strong: var(--irc-edge-light);
+    --border-focus: var(--irc-cyan);
+    --input-background-default: var(--irc-canvas);
+    --input-border-default: var(--irc-edge);
+    --input-border-hover: var(--irc-edge-light);
+    --input-border-active: var(--irc-cyan);
+    --input-text-default: var(--irc-text);
+    --input-placeholder-text-default: var(--irc-faint);
+    --channeltextarea-background: var(--irc-canvas);
+    --channel-text-area-placeholder: var(--irc-faint);
+
+    --message-background-hover: color-mix(in srgb, var(--irc-blue), transparent 95%);
+    --message-mentioned-background-default: color-mix(in srgb, var(--irc-amber), transparent 90%);
+    --message-mentioned-background-hover: color-mix(in srgb, var(--irc-amber), transparent 85%);
+    --message-highlight-background-default: color-mix(in srgb, var(--irc-violet), transparent 92%);
+    --message-highlight-background-hover: color-mix(in srgb, var(--irc-violet), transparent 87%);
+    --mention-background: color-mix(in srgb, var(--irc-amber), transparent 82%);
+    --mention-foreground: var(--irc-amber);
+    --spine-default: var(--irc-faint);
+
+    --reaction-background-default: var(--irc-panel);
+    --reaction-background-hover: var(--irc-raised);
+    --reaction-background-reacted-default: color-mix(in srgb, var(--irc-cyan), transparent 78%);
+    --reaction-border-default: var(--irc-edge);
+    --reaction-border-hover: var(--irc-edge-light);
+    --reaction-border-reacted-default: var(--irc-cyan);
+    --reaction-text-default: var(--irc-text-soft);
+    --reaction-text-reacted-default: var(--irc-text-bright);
+
+    --status-online: var(--irc-green);
+    --status-positive: var(--irc-green);
+    --status-speaking: var(--irc-green);
+    --status-idle: var(--irc-amber);
+    --status-warning: var(--irc-amber);
+    --status-danger: var(--irc-red);
+    --icon-status-online: var(--irc-green);
+    --icon-status-idle: var(--irc-amber);
+    --icon-status-dnd: var(--irc-red);
+    --icon-status-offline: var(--irc-faint);
+
+    --scrollbar-auto-thumb: var(--irc-edge-light);
+    --scrollbar-auto-track: var(--irc-canvas);
+    --scrollbar-thin-thumb: var(--irc-edge);
+    --scrollbar-thin-track: transparent;
+    --elevation-low: none;
+    --elevation-medium: none;
+    --elevation-high: none;
+}
+
+/* Keep custom profile themes from making basic text unreadable. */
+.custom-user-profile-theme {
+    --text-default: var(--irc-text);
+    --text-muted: var(--irc-muted);
+}
+
+/* -------------------------------------------------------------------------
+   02. Global chrome
+   ------------------------------------------------------------------------- */
+
+html,
+body,
+#app-mount,
+#app-mount > [class^="app_"],
+.bg__960e4,
+[class^="bg_"][class*="960e4"] {
+    background: var(--irc-void) !important;
+}
+
+body {
+    font-family: var(--irc-ui-font);
+    text-rendering: geometricPrecision;
+}
+
+::selection {
+    color: var(--irc-text-bright);
+    background: var(--irc-selection-strong);
+}
+
+:focus-visible {
+    outline: 1px solid var(--irc-cyan) !important;
+    outline-offset: -1px;
+}
+
+/* Restrained square geometry instead of globally destroying every mask. */
+:is(button, input, textarea, select, [role="button"], [role="menu"], [role="dialog"]),
+[class*="menu_"],
+[class*="popout_"],
+[class*="modal_"] {
+    border-radius: var(--irc-radius) !important;
+}
+
+/* Native-feeling narrow scrollbars. */
+::-webkit-scrollbar {
+    width: 11px !important;
+    height: 11px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--irc-canvas) !important;
+    border-left: 1px solid var(--irc-edge-black);
+}
+
+::-webkit-scrollbar-thumb {
+    min-height: 28px;
+    background: var(--irc-raised-2) !important;
+    border: 1px solid var(--irc-edge-black) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-button);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--irc-selection-strong) !important;
+}
+
+/* Vesktop/Discord top frame: a quiet title strip, not a fake menu. */
+.bar_c38106,
+[class^="bar_"][class*="c38106"] {
+    color: var(--irc-text-soft);
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 50%, transparent 50%) 0 0 / 100% 2px,
+        linear-gradient(180deg, var(--irc-raised-2), var(--irc-panel)) !important;
+    border-bottom: 1px solid var(--irc-edge-black);
+    box-shadow: inset 0 -1px 0 var(--irc-edge);
+}
+
+/* -------------------------------------------------------------------------
+   03. Main panes and title bars
+   ------------------------------------------------------------------------- */
+
+:is(
+    [class^="guilds_"],
+    [class^="sidebarList_"],
+    [class^="panels_"],
+    [class^="subtitleContainer_"],
+    [class^="messagesWrapper_"],
+    [class^="channelTextArea_"],
+    [class^="membersWrap_"]
+) {
+    border-color: var(--irc-edge) !important;
+    border-radius: var(--irc-radius) !important;
+}
+
+[class^="guilds_"] {
+    background: var(--irc-canvas) !important;
+    border-right: 1px solid var(--irc-edge-black) !important;
+    box-shadow: inset -1px 0 0 var(--irc-edge);
+}
+
+[class^="sidebarList_"] {
+    background: var(--irc-panel) !important;
+    border-right: 1px solid var(--irc-edge-black) !important;
+    box-shadow: inset -1px 0 0 var(--irc-edge);
+}
+
+[class^="subtitleContainer_"] {
+    position: relative;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 50%, transparent 50%) 0 0 / 100% 2px,
+        linear-gradient(180deg, var(--irc-raised), var(--irc-panel)) !important;
+    border-bottom: 1px solid var(--irc-edge-black) !important;
+    box-shadow: inset 0 -1px 0 var(--irc-edge);
+}
+
+[class^="subtitleContainer_"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg, var(--irc-cyan), transparent 32%);
+    opacity: 0.55;
+}
+
+[class^="title_"][class*="f75fb0"],
+[class^="container_"][class*="9293f"] {
+    color: var(--irc-text-bright);
+    background: transparent !important;
+}
+
+/* Replace Discord's visually noisy SVG channel glyph with one baseline-aligned
+   textual prefix. This keeps the title looking like an IRC channel name. */
+[class^="subtitleContainer_"] .children__9293f > .iconWrapper__9293f,
+[class^="subtitleContainer_"] [class^="children_"][class*="9293f"] > [class^="iconWrapper_"][class*="9293f"] {
+    display: none !important;
+}
+
+[class^="subtitleContainer_"] .titleWrapper__9293f,
+[class^="subtitleContainer_"] [class^="titleWrapper_"][class*="9293f"] {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    color: var(--irc-text-bright);
+    font-family: var(--irc-chat-font) !important;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+[class^="subtitleContainer_"] .children__9293f:has(> .iconWrapper__9293f) > .titleWrapper__9293f::before,
+[class^="subtitleContainer_"] [class^="children_"][class*="9293f"]:has(> [class^="iconWrapper_"][class*="9293f"]) > [class^="titleWrapper_"][class*="9293f"]::before {
+    content: "#";
+    flex: none;
+    margin-right: 0.65ch;
+    color: var(--irc-cyan);
+    font: inherit;
+}
+
+[class^="subtitleContainer_"] .titleWrapper__9293f > [class*="defaultColor"],
+[class^="subtitleContainer_"] [class^="titleWrapper_"][class*="9293f"] > [class*="defaultColor"] {
+    overflow: hidden;
+    color: var(--irc-text-bright) !important;
+    font: inherit !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+[class^="toolbar_"] [class^="iconWrapper_"],
+[class^="toolbar_"] [class^="clickable_"] {
+    color: var(--irc-muted);
+}
+
+[class^="toolbar_"] [class^="iconWrapper_"]:hover,
+[class^="toolbar_"] [class^="clickable_"]:hover {
+    color: var(--irc-cyan);
+    background: var(--irc-selection) !important;
+    box-shadow: var(--irc-bevel-button);
+}
+
+[class^="chatContent_"] {
+    background: var(--irc-chat) !important;
+}
+
+[class^="messagesWrapper_"] {
+    background: var(--irc-chat) !important;
+    box-shadow: inset 1px 0 0 var(--irc-edge-black);
+}
+
+[class^="membersWrap_"],
+[class^="members_"] {
+    background: var(--irc-panel) !important;
+}
+
+[class^="membersWrap_"] {
+    border-left: 1px solid var(--irc-edge-black) !important;
+    box-shadow: inset 1px 0 0 var(--irc-edge);
+}
+
+/* -------------------------------------------------------------------------
+   04. Server rail
+   ------------------------------------------------------------------------- */
+
+[class^="guilds_"] [class^="scroller_"] {
+    background: transparent !important;
+}
+
+/* Square server tiles, while preserving status/badge overlays. */
+[class^="guilds_"] foreignObject {
+    mask: none !important;
+    -webkit-mask: none !important;
+}
+
+[class^="guilds_"] foreignObject [class^="icon_"],
+[class^="guilds_"] [class^="childWrapper_"] {
+    border-radius: 2px !important;
+    filter: saturate(0.72) brightness(0.88);
+    transition: filter 90ms linear, box-shadow 90ms linear;
+}
+
+[class^="guilds_"] [class^="listItem_"]:hover foreignObject [class^="icon_"],
+[class^="guilds_"] [class^="listItem_"]:hover [class^="childWrapper_"] {
+    filter: saturate(1) brightness(1.08);
+    box-shadow: 0 0 0 1px var(--irc-edge-light);
+}
+
+[class^="guilds_"] [class^="pill_"] [class^="item_"] {
+    width: 3px !important;
+    border-radius: 0 !important;
+    background: var(--irc-cyan) !important;
+    box-shadow: 1px 0 0 color-mix(in srgb, var(--irc-cyan), transparent 55%);
+}
+
+[class^="guilds_"] [class^="circleIconButton_"] {
+    color: var(--irc-cyan) !important;
+    background: var(--irc-panel) !important;
+    border: 1px solid var(--irc-edge);
+    box-shadow: var(--irc-bevel-button);
+}
+
+[class^="guilds_"] [class^="circleIconButton_"]:hover {
+    color: var(--irc-void) !important;
+    background: var(--irc-cyan) !important;
+}
+
+[class^="guilds_"] [class^="guildSeparator_"] {
+    background: var(--irc-edge) !important;
+    box-shadow: 0 1px 0 var(--irc-edge-black);
+}
+
+/* -------------------------------------------------------------------------
+   05. Channel tree and direct messages
+   ------------------------------------------------------------------------- */
+
+.header_f37cb1,
+[class^="header_"][class*="f37cb1"] {
+    color: var(--irc-text-bright) !important;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 50%, transparent 50%) 0 0 / 100% 2px,
+        linear-gradient(180deg, var(--irc-raised-2), var(--irc-panel)) !important;
+    border-bottom: 1px solid var(--irc-edge-black);
+    box-shadow: inset 0 -1px 0 var(--irc-edge);
+}
+
+/* Category rows read like old client tree headings. */
+[class^="sidebarList_"] h3,
+[class^="sidebarList_"] [class*="containerDefault"] > [class*="wrapper"]:has([aria-expanded]) {
+    font-family: var(--irc-chat-font);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+/* Dense native channel rows. Keep Discord's own hierarchy rather than
+   drawing a second fake tree over threads and nested channels. */
+[class^="sidebarList_"] :is(.wrapper__2ea32, [class^="wrapper_"][class*="2ea32"]) > :is(.link__2ea32, [class^="link_"][class*="2ea32"]),
+[class^="sidebarList_"] li[class*="containerDefault"] > [class*="wrapper"] > [class*="link"] {
+    min-height: 28px;
+    margin: 1px 5px;
+    padding-inline: 7px;
+    color: var(--irc-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+    font-family: var(--irc-chat-font);
+    font-size: 13px;
+    transition: none;
+}
+
+[class^="sidebarList_"] :is(.wrapper__2ea32, [class^="wrapper_"][class*="2ea32"]):hover > :is(.link__2ea32, [class^="link_"][class*="2ea32"]),
+[class^="sidebarList_"] li[class*="containerDefault"] > [class*="wrapper"]:hover > [class*="link"] {
+    color: var(--irc-text);
+    background: var(--irc-raised) !important;
+    border-color: var(--irc-edge) !important;
+    box-shadow: var(--irc-bevel-button) !important;
+}
+
+[class^="sidebarList_"] :is(.modeSelected__2ea32, [class*="modeSelected"]) > :is(.link__2ea32, [class^="link_"][class*="2ea32"]),
+[class^="sidebarList_"] li[class*="containerDefault"] > [class*="wrapper"] > [class*="link"][aria-selected="true"] {
+    color: var(--irc-text-bright) !important;
+    background: var(--irc-selection) !important;
+    border-color: var(--irc-edge-light) !important;
+    box-shadow: var(--irc-bevel-sunken) !important;
+}
+
+[class^="sidebarList_"] :is(.modeSelected__2ea32, [class*="modeSelected"]) :is([class^="name_"], [class^="icon_"]) {
+    color: var(--irc-text-bright) !important;
+}
+
+/* De-emphasize Discord's real nested-channel spine instead of replacing it. */
+[class^="sidebarList_"] [class*="spine"] {
+    color: var(--irc-edge-light) !important;
+    opacity: 0.55;
+}
+
+/* Discord's unread pill becomes a small amber terminal marker. */
+.unread__2ea32,
+[class^="sidebarList_"] li[class*="containerDefault"] [class^="unread_"] {
+    left: 1px !important;
+    width: 3px !important;
+    height: 14px !important;
+    margin-top: -7px;
+    border-radius: 0 !important;
+    background: var(--irc-amber) !important;
+    box-shadow: 1px 0 0 color-mix(in srgb, var(--irc-amber), transparent 55%);
+}
+
+[class*="modeUnreadImportant"] [class*="name"],
+[class*="modeUnreadImportant"] [class*="icon"] {
+    color: var(--irc-text-bright) !important;
+}
+
+[class^="numberBadge_"],
+[class^="mentionsBadge_"] {
+    color: var(--irc-void) !important;
+    background: var(--irc-red) !important;
+    border: 1px solid var(--irc-edge-black);
+    border-radius: 1px !important;
+    box-shadow: var(--irc-bevel-button);
+    font-family: var(--irc-chat-font);
+    font-weight: 700;
+}
+
+/* DM rows use the same dense selection language. */
+.channel__972a0,
+[class^="privateChannels_"] [class^="channel_"] {
+    margin: 1px 5px;
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+}
+
+.channel__972a0:hover,
+[class^="privateChannels_"] [class^="channel_"]:hover {
+    background: var(--irc-raised) !important;
+    border-color: var(--irc-edge);
+}
+
+.interactiveSelected__972a0,
+[class^="privateChannels_"] [class*="interactiveSelected"] {
+    background: var(--irc-selection) !important;
+    border-color: var(--irc-edge-light);
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+/* -------------------------------------------------------------------------
+   06. IRC transcript — compact mode
+   Adapted from foxf4ce/discord-css (CC0), then substantially restyled.
+   ------------------------------------------------------------------------- */
+
+/* Remove Discord's artificial group spacing so the transcript is continuous. */
+.group-spacing-0 [class*="groupStart_"],
+[class^="scrollerInner_"] > [class^="messageListItem_"] [class*="groupStart_"] {
+    margin-top: 0 !important;
+}
+
+[id^="chat-messages"],
+[class^="preview_"] {
+    --custom-message-padding-vertical-container-compact: 0;
+}
+
+[id^="chat-messages"] div[class*="compact_"]:not(:has([class*="groupStart_"])),
+[class^="preview_"] div[class*="compact_"]:not(:has([class*="groupStart_"])) {
+    margin-bottom: -0.0625rem;
+    margin-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 3ch;
+}
+
+[id^="chat-messages"] div[class*="compact_"]:has([class*="groupStart_"]),
+[class^="preview_"] div[class*="compact_"]:has([class*="groupStart_"]) {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 3ch;
+}
+
+[class*="compact_"] {
+    --custom-message-meta-space: 1ch;
+    --custom-message-margin-compact-indent: 7ch;
+    color: var(--irc-text);
+    font-family: var(--irc-chat-font) !important;
+    font-size: var(--irc-chat-size);
+}
+
+[class*="compact_"] > [class^="contents_"] {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    text-indent: 0;
+}
+
+[class*="compact_"] :is(
+    [class^="markup_"],
+    [class^="messageContent_"],
+    [class^="header_"],
+    [class^="username_"],
+    [class*="timestamp_"],
+    [class^="repliedMessage_"]
+) {
+    font-family: var(--irc-chat-font) !important;
+    font-size: var(--irc-chat-size) !important;
+    line-height: var(--irc-chat-line) !important;
+}
+
+/* Keep rich Discord widgets legible instead of forcing mono into every control. */
+[class*="compact_"] :is(
+    [class^="embedWrapper_"],
+    [class^="attachment_"],
+    [class^="children_"],
+    [class*="button_"]
+),
+[class*="compact_"] :is(
+    [class^="embedWrapper_"],
+    [class^="attachment_"],
+    [class^="children_"],
+    [class*="button_"]
+) * {
+    font-family: var(--irc-ui-font);
+}
+
+/* Avatars vanish from the transcript, as they should in an IRC buffer. */
+[class*="compact_"] > [class^="contents_"] > [class^="avatar_"],
+[class*="compact_"] [class^="avatarDecoration_"] {
+    display: var(--irc-chat-avatar-display) !important;
+}
+
+/* Always-visible [timestamp]. */
+[class*="compact_"] [class*="timestamp_"] {
+    width: auto !important;
+    height: auto;
+    margin-right: 1ch !important;
+    opacity: 1 !important;
+    color: var(--irc-text-bright) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+[class*="compact_"] [class*="timestamp_"]:not(:has([aria-label*="Edited"]))::before {
+    content: "[";
+    color: var(--irc-text-bright);
+}
+
+[class*="compact_"] [class*="timestamp_"]:not(:has([aria-label*="Edited"]))::after {
+    content: "]";
+    color: var(--irc-text-bright);
+}
+
+/* <nickname> — native role/IrcColors color is intentionally preserved. */
+[class*="compact_"] [class^="username_"] {
+    margin-right: 1ch !important;
+    font-weight: 700;
+}
+
+[class*="compact_"] [class^="username_"]::before {
+    content: "<";
+    color: var(--irc-text-bright);
+}
+
+[class*="compact_"] [class^="username_"]::after {
+    content: ">";
+    color: var(--irc-text-bright);
+}
+
+/* [BOT] and related metadata should look textual, not like pills. */
+[class*="compact_"] [class^="botTagCompact_"] {
+    display: inline;
+    top: 0;
+    height: auto;
+    margin: 0 1ch 0 0;
+    padding: 0;
+    border: 0;
+    color: var(--irc-violet);
+    background: transparent !important;
+    vertical-align: baseline;
+    font-family: var(--irc-chat-font) !important;
+    font-size: var(--irc-chat-size);
+}
+
+[class*="compact_"] [class^="botTagCompact_"]::before {
+    content: "[";
+}
+
+[class*="compact_"] [class^="botTagCompact_"]::after {
+    content: "]";
+}
+
+[class*="compact_"] [class^="botTagVerified_"] {
+    width: 2ch;
+    height: 2ch;
+    margin: 0;
+    vertical-align: text-bottom;
+}
+
+/* Replies become a quiet textual branch above the message. */
+[class*="compact_"] [class^="repliedMessage_"] {
+    margin-left: 5ch !important;
+    padding-left: 0 !important;
+    color: var(--irc-muted);
+    text-indent: 0;
+}
+
+[class*="compact_"] [class^="repliedMessage_"]::before {
+    content: "↳";
+    position: static !important;
+    display: inline-block !important;
+    width: 2ch !important;
+    height: auto !important;
+    margin-right: 1ch;
+    border: 0 !important;
+    color: var(--irc-violet);
+}
+
+[class*="compact_"] [class^="repliedMessageClickableSpine_"],
+[class*="compact_"] [class^="replyBadge_"] {
+    display: none !important;
+}
+
+[class*="compact_"] [class^="repliedTextPreview_"] {
+    max-height: none;
+}
+
+/* System lines read like IRC notices. */
+[class*="compact_"][class*="isSystemMessage"],
+[class*="compact_"] [class*="isSystemMessage"] {
+    color: var(--irc-muted);
+    font-style: italic;
+}
+
+[class*="compact_"][class*="isSystemMessage"] [class^="iconContainer_"],
+[class*="compact_"] [class*="isSystemMessage"] [class^="iconContainer_"] {
+    width: 2ch;
+    height: 2ch;
+    margin-right: 1ch;
+    padding: 0;
+    color: var(--irc-green);
+}
+
+[class^="blockedSystemMessage_"] {
+    min-height: 22px;
+    padding: 0 8px !important;
+    color: var(--irc-muted);
+    background: var(--irc-canvas) !important;
+    border-top: 1px solid var(--irc-divider);
+    border-bottom: 1px solid var(--irc-divider);
+    opacity: 0.82;
+}
+
+[class^="blockedSystemMessage_"],
+[class^="blockedSystemMessage_"] * {
+    font-family: var(--irc-chat-font) !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+}
+
+[class^="blockedSystemMessage_"]:hover {
+    opacity: 1;
+}
+
+/* Emoji stay close to text size unless Discord needs a rich accessory. */
+[class*="compact_"] {
+    --custom-emoji-size-emoji: 2ch;
+}
+
+[class*="compact_"] .emoji {
+    top: -1px;
+    vertical-align: middle;
+}
+
+[class*="compact_"] .mention,
+[class*="compact_"] [class^="roleMention_"] {
+    padding: 0 0.25ch;
+    border: 1px solid color-mix(in srgb, var(--irc-amber), transparent 55%);
+    border-radius: 0 !important;
+    font-weight: 600;
+}
+
+/* Compact code treatment. */
+[class*="compact_"] code.inline {
+    margin: 0;
+    padding: 0 0.35ch;
+    border: 1px solid var(--irc-edge);
+    border-radius: 0 !important;
+    color: var(--irc-cyan);
+    background: var(--irc-canvas);
+    box-shadow: inset 1px 1px 0 var(--irc-edge-black);
+    font-family: var(--irc-chat-font) !important;
+    font-size: 0.95em !important;
+}
+
+[class*="compact_"] pre,
+[class*="compact_"] pre * {
+    line-height: 1.4;
+}
+
+[class^="codeContainer_"] code,
+[class^="textContainer_"] code {
+    border: 1px solid var(--irc-edge) !important;
+    border-radius: 0 !important;
+    background: var(--irc-canvas) !important;
+    box-shadow: var(--irc-bevel-sunken);
+    font-family: var(--irc-chat-font) !important;
+}
+
+/* Message hover and state lines: full-width, sharp, readable. */
+[id^="chat-messages"] > [class^="message_"]:hover,
+[class^="messageListItem_"] > [class^="message_"]:hover {
+    background: color-mix(in srgb, var(--irc-blue), transparent 95%) !important;
+}
+
+[id^="chat-messages"] > [class^="message_"][class*="mentioned"],
+[class^="messageListItem_"] > [class^="message_"][class*="mentioned"] {
+    background: color-mix(in srgb, var(--irc-amber), transparent 91%) !important;
+    box-shadow: inset 3px 0 0 var(--irc-amber);
+}
+
+[id^="chat-messages"] > [class^="message_"][class*="replying"],
+[class^="messageListItem_"] > [class^="message_"][class*="replying"] {
+    background: color-mix(in srgb, var(--irc-violet), transparent 92%) !important;
+    box-shadow: inset 3px 0 0 var(--irc-violet);
+}
+
+[id^="chat-messages"] > [class^="message_"]:is([class*="mentioned"], [class*="replying"], [class*="ephemeral"])::before,
+[class^="messageListItem_"] > [class^="message_"]:is([class*="mentioned"], [class*="replying"], [class*="ephemeral"])::before {
+    display: none !important;
+}
+
+/* Discord's action flyout becomes a tiny title-bar button bank. */
+[class^="buttons_"][class*="f7ecac"],
+[class^="buttonContainer_"] [class^="buttons_"] {
+    padding: 1px;
+    background: var(--irc-raised) !important;
+    border: 1px solid var(--irc-edge-black);
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-raised);
+}
+
+[class^="buttons_"][class*="f7ecac"] [role="button"],
+[class^="buttonContainer_"] [class^="buttons_"] [role="button"] {
+    border-radius: 0 !important;
+}
+
+[class^="buttons_"][class*="f7ecac"] [role="button"]:hover,
+[class^="buttonContainer_"] [class^="buttons_"] [role="button"]:hover {
+    color: var(--irc-cyan) !important;
+    background: var(--irc-selection) !important;
+}
+
+/* Unread-message bar: black surface, white label. */
+[class^="newMessagesBar_"] {
+    color: var(--irc-text-bright) !important;
+    background: var(--irc-chat) !important;
+}
+
+[class^="newMessagesBar_"] button {
+    color: var(--irc-text-bright) !important;
+    background: transparent !important;
+}
+
+/* New-message separator styled like an IRC buffer marker. */
+[class^="messagesWrapper_"] [class^="divider_"],
+[class^="messageListItem_"] + [class^="divider_"] {
+    border-color: var(--irc-red) !important;
+}
+
+[class^="messagesWrapper_"] [class^="divider_"] [class^="content_"],
+[class^="messageListItem_"] + [class^="divider_"] [class^="content_"] {
+    color: var(--irc-red) !important;
+    background: var(--irc-chat) !important;
+    border: 1px solid var(--irc-edge);
+    border-radius: 0 !important;
+    font-family: var(--irc-chat-font);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Links resemble old clickable client text rather than app-blue buttons. */
+[class^="messageContent_"] a,
+[class^="markup_"] a {
+    color: var(--irc-link) !important;
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+}
+
+[class^="messageContent_"] a:hover,
+[class^="markup_"] a:hover {
+    color: var(--irc-text-bright) !important;
+    background: color-mix(in srgb, var(--irc-link), transparent 84%);
+}
+
+/* -------------------------------------------------------------------------
+   07. Attachments, embeds, reactions, and polls
+   ------------------------------------------------------------------------- */
+
+:is(
+    [class^="embedFull_"],
+    [class^="embedWrapper_"],
+    [class^="attachment_"],
+    [class^="fileWrapper_"],
+    [class^="pollContainer_"],
+    [class^="container_"][class*="9271d"]
+) {
+    border-radius: 0 !important;
+    border-color: var(--irc-edge) !important;
+    background: var(--irc-panel) !important;
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+[class^="embedFull_"] {
+    border-left: 3px solid var(--irc-cyan) !important;
+}
+
+[class^="imageWrapper_"] img,
+[class^="imageWrapper_"] video,
+[class^="mediaAttachmentsContainer_"] img {
+    border-radius: 0 !important;
+}
+
+[class^="reaction_"],
+[class^="reactionBtn_"] {
+    min-height: 24px;
+    border: 1px solid var(--irc-edge) !important;
+    border-radius: 0 !important;
+    background: var(--irc-panel) !important;
+    box-shadow: var(--irc-bevel-button);
+}
+
+[class^="reaction_"]:hover,
+[class^="reactionBtn_"]:hover {
+    border-color: var(--irc-edge-light) !important;
+    background: var(--irc-raised) !important;
+}
+
+[class^="reaction_"][class*="reactionMe"] {
+    border-color: var(--irc-cyan) !important;
+    background: color-mix(in srgb, var(--irc-cyan), transparent 82%) !important;
+}
+
+[class^="spoilerContent_"] {
+    border-radius: 0 !important;
+}
+
+/* -------------------------------------------------------------------------
+   08. Input line and typing state
+   ------------------------------------------------------------------------- */
+
+[class^="form_"][class*="f75fb0"] {
+    padding: 0 8px 8px !important;
+    background: var(--irc-chat) !important;
+}
+
+[class^="channelTextArea_"] {
+    margin-bottom: 0 !important;
+    background: var(--irc-canvas) !important;
+    border: 1px solid var(--irc-edge-black) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+[class^="channelTextArea_"]:focus-within {
+    border-color: var(--irc-edge-light) !important;
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+[class^="channelTextArea_"] [class*="scrollableContainer_"] {
+    position: relative;
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+
+[class^="channelTextArea_"] [class^="textArea_"] {
+    position: relative;
+    font-family: var(--irc-chat-font) !important;
+}
+
+[class^="channelTextArea_"] [class^="slateTextArea_"],
+[class^="channelTextArea_"] [class^="textArea_"] [contenteditable="true"] {
+    color: var(--irc-text) !important;
+    font-family: var(--irc-chat-font) !important;
+    font-size: var(--irc-chat-size) !important;
+    line-height: 1.4 !important;
+}
+
+/* The composer gets one outer focus treatment; suppress Chromium's inner
+   contenteditable rectangle. */
+[class^="channelTextArea_"] [contenteditable="true"]:focus,
+[class^="channelTextArea_"] [contenteditable="true"]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+[class^="channelTextArea_"] [class^="slateTextArea_"]::placeholder,
+[class^="channelTextArea_"] [class^="textArea_"] [data-slate-placeholder="true"] {
+    color: var(--irc-faint) !important;
+}
+
+[class^="attachWrapper_"],
+[class^="buttons_"][class*="74017"] {
+    color: var(--irc-muted);
+}
+
+[class^="attachWrapper_"] [role="button"]:hover,
+[class^="buttons_"][class*="74017"] [role="button"]:hover {
+    color: var(--irc-cyan) !important;
+    background: var(--irc-selection) !important;
+    box-shadow: var(--irc-bevel-button);
+}
+
+/* Typing indicators add movement and vertical jitter to an IRC-style buffer. */
+[class^="typing_"],
+.vc-typing-indicator {
+    display: none !important;
+}
+
+/* -------------------------------------------------------------------------
+   09. Nicklist / member pane
+   ------------------------------------------------------------------------- */
+
+[class^="membersGroup_"] {
+    height: auto;
+    padding: 14px 8px 5px;
+    color: var(--irc-amber) !important;
+    font-family: var(--irc-chat-font);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+[class^="membersGroup_"]::before {
+    content: "-- ";
+    color: var(--irc-faint);
+}
+
+[class^="membersGroup_"]::after {
+    content: " --";
+    color: var(--irc-faint);
+}
+
+[class^="members_"] [class^="member_"] {
+    max-width: none;
+    margin: 0 4px;
+    border-left: 2px solid transparent;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+[class^="members_"] [class^="member_"]:hover,
+[class^="members_"] [class*="selected"] {
+    border-left-color: var(--irc-cyan);
+    background: var(--irc-selection) !important;
+}
+
+[class^="members_"] [class^="layout_"] {
+    min-height: 30px;
+    padding: 0 6px;
+    border-radius: 0 !important;
+}
+
+[class^="members_"] [class^="avatar_"] {
+    width: var(--irc-member-avatar-size) !important;
+    height: var(--irc-member-avatar-size) !important;
+    min-width: var(--irc-member-avatar-size);
+    border-radius: 1px !important;
+}
+
+[class^="members_"] foreignObject {
+    mask: none !important;
+    -webkit-mask: none !important;
+}
+
+[class^="members_"] [class^="name_"] {
+    font-family: var(--irc-chat-font);
+    font-size: 13px;
+}
+
+[class^="members_"] [class^="activity_"] {
+    color: var(--irc-muted) !important;
+    font-family: var(--irc-chat-font);
+    font-size: 11px;
+}
+
+/* -------------------------------------------------------------------------
+   10. User/status panel
+   ------------------------------------------------------------------------- */
+
+[class^="panels_"] {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.015) 50%, transparent 50%) 0 0 / 100% 2px,
+        linear-gradient(180deg, var(--irc-raised), var(--irc-panel)) !important;
+    border-top: 1px solid var(--irc-edge-light) !important;
+    box-shadow: inset 0 1px 0 var(--irc-edge-black);
+}
+
+[class^="panels_"] [class^="container_"][class*="37e49"] {
+    background: transparent !important;
+}
+
+[class^="panels_"] [class^="avatarWrapper_"] {
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+}
+
+[class^="panels_"] [class^="avatarWrapper_"]:hover {
+    background: var(--irc-selection) !important;
+    border-color: var(--irc-edge);
+}
+
+[class^="panels_"] [class^="button_"] {
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+}
+
+[class^="panels_"] [class^="button_"]:hover {
+    color: var(--irc-cyan) !important;
+    background: var(--irc-selection) !important;
+    border-color: var(--irc-edge);
+    box-shadow: var(--irc-bevel-button);
+}
+
+/* Vencord Spotify controls inherit the same status-strip language. */
+#vc-spotify-player {
+    color: var(--irc-text-soft);
+    background: var(--irc-panel) !important;
+    border-top: 1px solid var(--irc-edge);
+    font-family: var(--irc-chat-font);
+}
+
+#vc-spotify-progress-bar [class*="barFill"] {
+    background: var(--irc-cyan) !important;
+}
+
+/* -------------------------------------------------------------------------
+   11. Menus, popouts, dialogs, and settings
+   ------------------------------------------------------------------------- */
+
+[role="menu"],
+[class*="menu_"][class*="flexible_"],
+[class^="messagesPopoutWrap_"],
+[class^="contentWrapper_"],
+[class^="recentMentionsPopout_"],
+[class^="browser_"][class*="container_"] {
+    color: var(--irc-text);
+    background: var(--irc-raised) !important;
+    border: 1px solid var(--irc-edge-black) !important;
+    border-radius: 0 !important;
+    box-shadow:
+        var(--irc-bevel-raised),
+        0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+[role="menuitem"],
+[role="menuitemcheckbox"],
+[role="menuitemradio"] {
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+}
+
+[role="menuitem"]:hover,
+[role="menuitemcheckbox"]:hover,
+[role="menuitemradio"]:hover,
+[role="menuitem"][aria-selected="true"] {
+    color: var(--irc-text-bright) !important;
+    background: var(--irc-selection) !important;
+    border-color: var(--irc-edge);
+}
+
+[role="dialog"] [class^="root_"],
+[class^="root_"][class*="modal"],
+[class^="modal_"] {
+    color: var(--irc-text);
+    background: var(--irc-panel) !important;
+    border: 1px solid var(--irc-edge-black);
+    border-radius: 0 !important;
+    box-shadow:
+        var(--irc-bevel-raised),
+        0 12px 40px rgba(0, 0, 0, 0.55) !important;
+}
+
+[class^="footer_"][class*="modal"],
+[role="dialog"] [class^="footer_"] {
+    background: var(--irc-canvas) !important;
+    border-top: 1px solid var(--irc-edge);
+}
+
+/* Inputs */
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]), textarea, select),
+[class^="input_"],
+[class^="select_"],
+[class*="searchBar_"] {
+    color: var(--irc-text) !important;
+    background: var(--irc-canvas) !important;
+    border-color: var(--irc-edge) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]), textarea, select):focus,
+[class^="input_"]:focus-within,
+[class^="select_"]:focus-within,
+[class*="searchBar_"]:focus-within {
+    border-color: var(--irc-cyan) !important;
+}
+
+/* Buttons retain semantic colors but acquire physical, late-90s geometry. */
+button,
+[class*="lookFilled_"],
+[class*="lookOutlined_"],
+[class*="lookLink_"] {
+    border-radius: 0 !important;
+}
+
+[class*="lookFilled_"][class*="colorBrand_"],
+[class*="lookFilled_"][class*="colorPrimary_"] {
+    color: var(--irc-text-bright) !important;
+    background: var(--irc-selection) !important;
+    border: 1px solid var(--irc-edge-black);
+    box-shadow: var(--irc-bevel-button);
+}
+
+[class*="lookFilled_"][class*="colorBrand_"]:hover,
+[class*="lookFilled_"][class*="colorPrimary_"]:hover {
+    background: var(--irc-selection-strong) !important;
+}
+
+[class*="lookOutlined_"] {
+    color: var(--irc-text) !important;
+    border-color: var(--irc-edge-light) !important;
+    box-shadow: var(--irc-bevel-button);
+}
+
+/* Switches and checks: square, obvious states. */
+[class^="container_"][class*="3f21e"],
+.vc-switch-container {
+    background: var(--irc-canvas) !important;
+    border: 1px solid var(--irc-edge) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+[class^="container_"][class*="3f21e"][class*="checked"],
+.vc-switch-container.vc-switch-checked {
+    background: var(--irc-cyan) !important;
+}
+
+[class^="container_"][class*="3f21e"] rect,
+.vc-switch-container rect {
+    rx: 0 !important;
+}
+
+/* Settings pages */
+[class^="standardSidebarView_"],
+[class^="contentRegion_"],
+[class^="contentRegionScroller_"],
+[class^="sidebarRegionScroller_"] {
+    background: var(--irc-canvas) !important;
+}
+
+[class^="sidebarRegionScroller_"] {
+    border-right: 1px solid var(--irc-edge);
+}
+
+[class^="side_"] [class^="item_"] {
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+    font-family: var(--irc-ui-font);
+}
+
+[class^="side_"] [class^="item_"]:hover {
+    background: var(--irc-raised) !important;
+    border-color: var(--irc-edge);
+}
+
+[class^="side_"] [class^="item_"][class*="selected"] {
+    color: var(--irc-text-bright) !important;
+    background: var(--irc-selection) !important;
+    border-color: var(--irc-edge-light);
+    box-shadow: var(--irc-bevel-sunken);
+}
+
+.vc-addon-card {
+    background: var(--irc-panel) !important;
+    border: 1px solid var(--irc-edge) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-raised);
+}
+
+.vc-addon-card:hover {
+    border-color: var(--irc-cyan) !important;
+}
+
+/* Tooltips resemble compact status hints. */
+[class^="tooltip_"] {
+    color: var(--irc-text-bright) !important;
+    background: var(--irc-raised-2) !important;
+    border: 1px solid var(--irc-edge-black);
+    border-radius: 0 !important;
+    box-shadow: var(--irc-bevel-raised);
+    font-family: var(--irc-ui-font);
+}
+
+/* -------------------------------------------------------------------------
+   12. Responsive and motion safeguards
+   ------------------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+    :root,
+    body,
+    .theme-dark:not(.custom-user-profile-theme),
+    .theme-darker:not(.custom-user-profile-theme),
+    .theme-midnight:not(.custom-user-profile-theme),
+    .theme-light:not(.custom-user-profile-theme) {
+        --irc-chat-size: 14px;
+        --irc-member-avatar-size: 16px;
+    }
+}
+
+@media (max-width: 850px) {
+    [class^="membersWrap_"] {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

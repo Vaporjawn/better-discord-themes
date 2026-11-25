@@ -1,0 +1,243 @@
+/**
+ * @name Kittycord Candy
+ * @author Kittycord
+ * @description The Kittycord installer look for your whole Discord — deep plum, candy pink, rounded everything.
+ * @version 1.2.0
+ * @website https://kittycord.dev
+ * @source https://github.com/CenturyRV/Kittycord
+*/
+
+:root {
+    --kc-bg-0: #0d0709;
+    --kc-bg-1: #110a0e;
+    --kc-bg-2: #190f15;
+    --kc-bg-3: #1f1319;
+    --kc-bg-4: #271721;
+    --kc-bg-5: #301e28;
+    --kc-line: #402835;
+    --kc-pink: #ff5fa6;
+    --kc-pink-strong: #f0509b;
+    --kc-pink-hi: #ff8ac4;
+    --kc-blush: #d6a4c0;
+    --kc-faint: #9a7389;
+}
+
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.visual-refresh.theme-dark,
+.visual-refresh .theme-dark {
+    /* classic tokens — the main surfaces are slightly translucent so the painted
+       installer backdrop (see #app-mount below) shimmers through everywhere */
+    --background-primary: rgb(31 19 25 / 78%);
+    --background-secondary: rgb(25 15 21 / 72%);
+    --background-secondary-alt: rgb(25 15 21 / 72%);
+    --background-tertiary: rgb(17 10 14 / 60%);
+    --background-floating: var(--kc-bg-2);
+    --background-nested-floating: var(--kc-bg-2);
+    --background-mobile-primary: var(--kc-bg-3);
+    --background-mobile-secondary: var(--kc-bg-2);
+    --background-accent: var(--kc-bg-5);
+    --background-modifier-hover: rgb(255 95 166 / 7%);
+    --background-modifier-active: rgb(255 95 166 / 10%);
+    --background-modifier-selected: rgb(255 95 166 / 13%);
+    --background-modifier-accent: var(--kc-line);
+    --channeltextarea-background: var(--kc-bg-4);
+    --modal-background: var(--kc-bg-2);
+    --modal-footer-background: var(--kc-bg-1);
+    --activity-card-background: var(--kc-bg-2);
+    --background-message-hover: rgb(255 95 166 / 4%);
+    --background-message-highlight: rgb(255 138 196 / 9%);
+
+    /* visual refresh tokens */
+    --background-base-lowest: rgb(13 7 9 / 55%);
+    --background-base-lower: rgb(17 10 14 / 60%);
+    --background-base-low: rgb(25 15 21 / 72%);
+    --background-surface-high: var(--kc-bg-4);
+    --background-surface-higher: var(--kc-bg-5);
+    --background-surface-highest: #382330;
+    --bg-overlay-chat: rgb(31 19 25 / 78%);
+    --bg-base-primary: rgb(31 19 25 / 78%);
+    --bg-base-secondary: rgb(25 15 21 / 72%);
+    --bg-base-tertiary: rgb(17 10 14 / 60%);
+    --bg-surface-raised: var(--kc-bg-2);
+    --bg-surface-overlay: var(--kc-bg-2);
+    --border-subtle: var(--kc-line);
+    --border-faint: rgb(64 40 53 / 60%);
+
+    /* text */
+    --header-primary: #fff;
+    --header-secondary: var(--kc-blush);
+    --text-normal: #f3e6ee;
+    --text-muted: var(--kc-faint);
+    --text-link: var(--kc-pink-hi);
+    --text-positive: #a6ffc9;
+    --channels-default: var(--kc-faint);
+    --channel-icon: var(--kc-faint);
+    --interactive-normal: var(--kc-blush);
+    --interactive-hover: #fff;
+    --interactive-active: #fff;
+    --interactive-muted: #6b4d5e;
+
+    /* pink brand */
+    --brand-experiment: var(--kc-pink);
+    --brand-experiment-360: var(--kc-pink-hi);
+    --brand-experiment-500: var(--kc-pink);
+    --brand-experiment-560: var(--kc-pink-strong);
+    --brand-experiment-600: #de4790;
+    --brand-260: #ffc7e2;
+    --brand-360: var(--kc-pink-hi);
+    --brand-500: var(--kc-pink);
+    --brand-560: var(--kc-pink-strong);
+    --brand-600: #de4790;
+    --mention-foreground: var(--kc-pink-hi);
+    --mention-background: rgb(255 95 166 / 14%);
+    --info-help-foreground: var(--kc-pink-hi);
+    --control-brand-foreground: var(--kc-pink);
+    --control-brand-foreground-new: var(--kc-pink);
+    --focus-primary: var(--kc-pink);
+
+    /* scrollbars */
+    --scrollbar-auto-thumb: var(--kc-bg-5);
+    --scrollbar-auto-track: transparent;
+    --scrollbar-thin-thumb: var(--kc-bg-5);
+    --scrollbar-thin-track: transparent;
+    --scrollbar-auto-scrollbar-color-thumb: var(--kc-bg-5);
+    --scrollbar-auto-scrollbar-color-track: transparent;
+}
+
+/* ---- the installer backdrop ----------------------------------------------------------
+   Painted once on the app root: candy glows, outlined diamond geometry, sweeping arcs and
+   plus-sparkles, exactly like Kittycord-Installer.exe. The translucent surfaces above let
+   it shimmer through the whole client. */
+#app-mount {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none'%3E%3Cg stroke='%23ff5fa6' stroke-opacity='.32' stroke-width='.7'%3E%3Cpath d='M100 8 192 100 100 192 8 100Z'/%3E%3Cpath d='M100 30 170 100 100 170 30 100Z' stroke-dasharray='3 4' stroke-opacity='.55'/%3E%3C/g%3E%3Cg stroke='%23ff8ac4' stroke-opacity='.22' stroke-width='.6'%3E%3Ccircle cx='170' cy='30' r='92'/%3E%3Ccircle cx='170' cy='30' r='76' stroke-dasharray='2 5'/%3E%3C/g%3E%3Cg stroke='%23ff8ac4' stroke-opacity='.6' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M28 44h12M34 38v12'/%3E%3Cpath d='M58 132h9M62.5 127.5v9'/%3E%3Cpath d='M148 152h9M152.5 147.5v9'/%3E%3C/g%3E%3C/svg%3E") no-repeat right -140px top -160px / 640px 640px,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none'%3E%3Cg stroke='%23ff8ac4' stroke-width='.7'%3E%3Ccircle cx='100' cy='100' r='88' stroke-opacity='.30' stroke-dasharray='3 5'/%3E%3Ccircle cx='100' cy='100' r='62' stroke-opacity='.18'/%3E%3C/g%3E%3Cg stroke='%23ff8ac4' stroke-opacity='.5' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M150 60h10M155 55v10'/%3E%3C/g%3E%3C/svg%3E") no-repeat left -200px bottom -220px / 560px 560px,
+        radial-gradient(1000px 620px at 10% -12%, rgb(255 95 166 / 13%), transparent 62%),
+        radial-gradient(880px 700px at 98% 34%, rgb(255 138 196 / 9%), transparent 58%),
+        var(--kc-bg-1);
+}
+
+#app-mount [class*="bg_"] {
+    background: transparent;
+}
+
+/* ---- low-overdraw fallback -------------------------------------------------------------
+   The shimmer above works by layering translucent surfaces over the painted #app-mount, and
+   that overdraw is what makes weak GPUs stutter while scrolling. When the user asks for reduced
+   transparency, or has PerformanceMode on, keep the exact same colors but make the big surfaces
+   opaque and drop the painted backdrop — identical palette, none of the per-scroll compositing.
+   The alpha values above are literally the --kc-bg-* tokens, so this changes nothing but the cost. */
+@media (prefers-reduced-transparency: reduce) {
+    .theme-dark,
+    .theme-darker,
+    .theme-midnight,
+    .visual-refresh.theme-dark,
+    .visual-refresh .theme-dark {
+        --background-primary: var(--kc-bg-3);
+        --background-secondary: var(--kc-bg-2);
+        --background-secondary-alt: var(--kc-bg-2);
+        --background-tertiary: var(--kc-bg-1);
+        --background-base-lowest: var(--kc-bg-0);
+        --background-base-lower: var(--kc-bg-1);
+        --background-base-low: var(--kc-bg-2);
+        --bg-overlay-chat: var(--kc-bg-3);
+        --bg-base-primary: var(--kc-bg-3);
+        --bg-base-secondary: var(--kc-bg-2);
+        --bg-base-tertiary: var(--kc-bg-1);
+    }
+
+    #app-mount {
+        background: var(--kc-bg-1);
+    }
+}
+
+html.kc-perf-noblur .theme-dark,
+html.kc-perf-noblur .theme-darker,
+html.kc-perf-noblur .theme-midnight,
+html.kc-perf-noblur .visual-refresh.theme-dark,
+html.kc-perf-noblur .visual-refresh .theme-dark,
+html.kc-idle-noblur .theme-dark,
+html.kc-idle-noblur .theme-darker,
+html.kc-idle-noblur .theme-midnight,
+html.kc-idle-noblur .visual-refresh.theme-dark,
+html.kc-idle-noblur .visual-refresh .theme-dark {
+    --background-primary: var(--kc-bg-3);
+    --background-secondary: var(--kc-bg-2);
+    --background-secondary-alt: var(--kc-bg-2);
+    --background-tertiary: var(--kc-bg-1);
+    --background-base-lowest: var(--kc-bg-0);
+    --background-base-lower: var(--kc-bg-1);
+    --background-base-low: var(--kc-bg-2);
+    --bg-overlay-chat: var(--kc-bg-3);
+    --bg-base-primary: var(--kc-bg-3);
+    --bg-base-secondary: var(--kc-bg-2);
+    --bg-base-tertiary: var(--kc-bg-1);
+}
+
+html.kc-perf-noblur #app-mount,
+html.kc-idle-noblur #app-mount {
+    background: var(--kc-bg-1);
+}
+
+/* The message box paints its own inner background, so variables alone don't reach it. */
+[class*="channelTextArea"] [class*="themedBackground"],
+[class*="channelTextArea"] [class*="scrollableContainer"] {
+    background: var(--kc-bg-4);
+}
+
+[class*="channelTextArea"] [class*="scrollableContainer"] {
+    border: 1px solid var(--kc-line);
+    border-radius: 14px;
+}
+
+/* selected channel / member rows get the candy pill */
+[class*="containerDefault"] [class*="modeSelected"] [class*="link"],
+[class*="containerDefault"] [class*="modeSelected"] [class*="name_"] {
+    color: #fff;
+}
+
+/* pink unread pills on the server rail */
+[class*="sidebar"] [class*="unreadMentionsIndicator"] span,
+span[class*="unread_"] {
+    background: var(--kc-pink) !important;
+}
+
+/* embeds, cards and popouts pick up the plum panel + soft border */
+[class*="embedFull"],
+[class*="wrapper"][class*="standardEmbed"] {
+    background: var(--kc-bg-2);
+    border-color: var(--kc-line);
+    border-radius: 12px;
+}
+
+[class*="codeContainer"] code,
+code[class*="inline"] {
+    background: var(--kc-bg-1);
+    border-color: var(--kc-line);
+}
+
+/* tooltips stay plum */
+[class*="tooltipPrimary"] {
+    background-color: var(--kc-bg-5);
+    color: #fff;
+}
+
+/* calls/no-mic banner and friendly notices keep readable contrast */
+[class*="notice"][class*="colorDefault"] {
+    background: var(--kc-bg-5);
+}
+
+/* No backdrop-filter anywhere on purpose: blur on menu/popout layers turns them into
+   containing blocks for position:fixed and teleports Discord's submenus across the screen. */
+
+/* Optional: pixel headlines like the installer. Remove the comment markers to enable.
+@import url("https://fonts.googleapis.com/css2?family=Jersey+15&display=swap");
+
+[class*="guildHeader"] [class*="name_"] {
+    font-family: "Jersey 15", var(--font-display), sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+}
+*/

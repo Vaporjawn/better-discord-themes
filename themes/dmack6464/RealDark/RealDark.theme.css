@@ -1,0 +1,1408 @@
+/**
+ * @name RealDark
+ * @author D Mack (dmack6464)
+ * @version 2.6
+ * @description A dark/black theme that boasts enhanced usability, readability, customisation and experimental features!
+ * @source https://github.com/dmack6464/RealDark/
+ * @website https://discord.gg/pB2SmhC/
+*/
+
+/* RealDark began as a mod for another theme back in mid 2018,
+   since then I made the theme into its' own thing and have been improving and optimising it since. */
+
+:root /* autoconfiguration of discord vars, RadialStatus */ {
+	/* refer to RealDarkConfiguration.theme.css for referenced variables. */
+	--TSCompatREADME:"below are technical settings, do not override";
+
+	--font-display: var(--font);
+
+	--background-secondary:var(--RDbackground-secondary);
+	--background-primary:var(--RDbackground-primary);
+	--background-tertiary:var(--RDbackground-tertiary); /* shade colour 0 */
+
+	/* Discord variable overrides */
+	--background-mentioned-hover:var(--background-mentioned);
+	--channels-default:var(--text);
+	/*--text-muted:var(--text);*/
+	--deprecated-card-editable-bg:var(--background-tertiary);
+	--background-accent:var(--accentColour);
+	--background-modifier-selected:var(--shade1);
+	--background-modifier-hover:var(--shade1a);
+	--background-message-hover:var(--shade2);
+	--deprecated-quickswitcher-input-background:var(--background-tertiary);
+	--text-link:var(--links);
+	--background-floating:var(--shade1a); /* default is shade1a, changed to shadeTransparent for an experiment */
+	--background-secondary-alt:var(--shade1);
+	--header-primary:var(--text);
+	--text-normal:var(--text);
+
+	--text-muted:var(--text2);
+	--interactive-muted:var(--text2);
+	--header-secondary:var(--text2);
+
+	/* custom configuration for RadialStatus 1.0.0 by Gibbu#1211 */
+	--rs-small-spacing: 0px!important;  /* spacing between avatar and status */
+	--rs-large-spacing: 0px!important;  /* spacing between avatar and status for profile popouts & modals/profiles | MUST end in px */
+	--rs-avatar-shape: var(--icon-rounding)!important;  /* defined in ReaLDark Configuration */
+}
+
+/* major functionality changing stuff goes near the top */
+
+/* config warning */
+.channelTextArea-rNsIhG:before {
+	display: var(--disableWarning);
+	color: red;
+	content: "RealDark requires RealDarkConfiguration(.theme).css, which appears to be missing!!!";
+}
+
+html.newBrand, ::-webkit-input-placeholder, body, button, select, div {
+    --font-family: var(--font)!important;
+    --font-display:var(--font)!important;
+}
+
+/* text selection, text highlight hack */
+
+body, div,
+body::selection,
+div::selection {
+	user-select: auto!important;
+	-webkit-user-select: auto!important;
+}
+
+*::selection {
+	color: orange;
+	background: var(--background-mentioned);
+	background-color: var(--background-mentioned);
+}
+
+/* custom title bar, text */
+
+.typeWindows-1za-n7,
+.bg-h5JY_x {
+	background-color: var(--titlebar);
+}
+.wordmark-2L03Wr svg,
+.wordmark-2iDDfm svg {
+	height:0px;
+	width:0px;
+}
+.wordmark-2L03Wr:after, .wordmark-2iDDfm:after {
+	position: static;
+	content: var(--title);
+	font-size: 16px;
+	color:var(--text);
+	top: 4px;
+	font-weight: bold;
+}
+.wordmark-2iDDfm {
+	text-align:var(--title-align);
+	opacity: .6;
+	width: 100%;
+}
+
+@keyframes flicker {
+  0% {
+  	padding-left: 4px;
+  	color: var(--accentColour2);
+  	animation-timing-function: steps(1, end);
+  }
+  50% {
+  	padding-right: 4px;
+  	color: var(--links);
+  	animation-timing-function: steps(1, end);
+  }
+  100% {}
+}
+
+.preview-2nSL_2:after {
+	display: block;
+	font-family: var(--secondaryFont);
+	text-align: center;
+	content: var(--title);
+	animation: flicker 0.06s infinite backwards;
+}
+
+/* stupid #00e621 colour hack */
+@keyframes rainbow {
+  from {
+	-webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+	-webkit-filter: hue-rotate(360deg);
+  }
+}
+span[style="color: rgb(0, 230, 33);"],
+button[style*="color: rgb(0, 230, 33);"],
+input[style*="color: rgb(0, 230, 33);"],
+div[style*="color: rgb(0, 230, 33);"] {
+	color: #0f0;
+	animation: rainbow 0.5s infinite linear;
+}
+
+/* experimenting with backdrop blur */
+.jumpToPresentBar-G1R9s6,
+.root-SR8cQa,
+.theme-dark .autocomplete-1vrmpx,
+/*,.menu-3sdvDG*/
+.tooltip-2QfLtc, /* all tooltips */
+.newMessagesBar-265mhP, /* channel message area, "xx new messages since xx:xx" */
+[class*="messagesPopout"],
+[class*="recentMentionsPopout"] [class*="scroller-"] {
+	backdrop-filter:blur(var(--background-blur));
+}
+/*.menu-3sdvDG*/
+.theme-dark .autocomplete-1vrmpx,
+.theme-dark .tooltipPrimary-1d1ph4, /* all tooltips */
+.newMessagesBar-265mhP, /* channel message area, "xx new messages since xx:xx" */
+[class*="messagesPopout"],
+[class*="recentMentionsPopout"] [class*="scroller-"] {
+	background-color: var(--shadeTransparent);
+}
+.root-SR8cQa,
+[class*="messagesPopoutWrap"],
+[class*="recentMentionsPopout"] {
+	background-color: transparent;
+}
+
+.noUserDrag-5Mb43F /* enable people to drag/drop stuff on desktop, creating shortcuts!! */ {
+    -webkit-user-drag: element;
+}
+
+/* fixes for either deprecated or derpy discord items, hopefully i can soon remove */
+
+/* why, discord..  (light theme objects) */
+.theme-light .focusLock-Ns3yie * {
+	background: var(--shade2)!important;
+	background-color: var(--shade2)!important;
+	color: var(--text);
+}
+
+/* role members temp fix */
+.popoutRight-1veHKi {
+	top: 100px!important;
+	left: 100px!important;
+}
+
+.sparkles-fvfHK0 { /* an active user of my theme found this bug, this image associated made the Guild Settings > Enable Community area unusable, rather than actually fixing the root of the problem, i just remove the symptom... */
+	display: none;
+}
+
+.card-FDVird:before /* user settings > keybinds hover thing */ {
+	display: none;
+}
+
+.scrollableContainer-2NUZem /* channel text area scrollbar shows unnecessarily, this should fix it */ {
+	overflow-y: auto;
+}
+
+/* Discord History Tracker, idk if itll work every time due to the broad nature of dht
+(this fix is for if the Add Server button is drawn under or over the left side) */
+#dht-ctrl {
+	margin-left: 75px!important;
+	width: calc(100% - 75px)!important;
+}
+
+.chat-3bRxxu .messagesWrapper-3lZDfY {
+  z-index: unset;
+}
+
+/* ------------ 2.6 stuff, thought it was 2.7 but forgot that the public version was still 2.5 */
+
+[id*="popout"] [class*="userPopout"] {
+	width: 400px!important;
+	max-height: 80vh;
+	overflow-y: scroll;
+}
+
+.body-3iLsc4 {
+	overflow: visible!important;
+	max-height: 300px;
+}
+
+/* additional highlight experiment */
+#channels [class*="modeMuted"] svg {
+	color: var(--textDanger);
+}
+#channels [class*="modeUnread"] svg {
+	color: var(--accentColour2);
+}
+#channels [class*="modeSelected"] /* accidental selected channel highlight found again! */ {
+	background-color: var(--accentColour);
+}
+
+/* anti-rebrand */
+[class*="reaction-"] {
+	background-color: var(--shade1);
+}
+[class*="reactionMe-"],
+[class*="reaction-"]:hover {
+	background-color: var(--shadeHighlight)!important;
+}
+
+/* friend tabs buttons, first 2 selectors are to fix unrelated selections */
+#app-mount :not([class*="tabBarContainer-"]) > [class*="tabBar-"] [aria-controls*="-tab"] {
+	color: #fff;
+}
+#app-mount :not([class*="tabBarContainer-"]) > [class*="tabBar-"] [aria-controls*="-tab"]:not([class*="selected-"]):hover {
+	background-color: var(--accentColour2)!important;
+}
+#app-mount [aria-controls='ONLINE-tab'] {
+	background-color: var(--accentColour);
+}
+#app-mount [aria-controls='ALL-tab'] {
+	order: -1;
+}
+#app-mount [aria-controls='PENDING-tab'] {
+	background-color: var(--textWarning);
+}
+#app-mount [aria-controls='BLOCKED-tab'] {
+	background-color: var(--textDanger);
+}
+#app-mount [aria-controls='ADD_FRIEND-tab'],
+#app-mount [aria-controls='ALL-tab'] {
+	background-color: var(--shadeHighlight)!important;
+}
+
+/* slider customisation! */
+[class*="slider-"] [class*="bar-"] {
+	background-color: var(--shade2);
+}
+[class*="slider-"] [class*="barFill-"] {
+	background-color: var(--shadeHighlight);
+}
+[class*="slider-"] [class*="grabber-"] {
+	width: 20px;
+	height: 20px;
+	margin-left: -10px;
+	margin-top: -10px;
+	background-color: var(--accentColour2);
+}
+
+[class*="message-"] [class*="buttonContainer-"] [class*="wrapper-"] {
+	background-color: var(--shade1a);
+}
+
+[role*="dialog"]:not([class*="userPopout"]) [class*="root-"] { /* universal dialog upper */
+	background-color: var(--shade1a);
+}
+
+/* ------------ 2.6 stuff */
+
+
+
+.theme-dark span[class*="searchFilter-"],
+.theme-dark span[class*="searchAnswer-"] {
+	background-color: var(--background-tertiary);
+	border-radius: 0px;
+}
+.theme-dark span[class*="searchAnswer-"] {
+	color: var(--accentColour2)
+}
+
+
+
+
+
+
+
+/* Checkboxes - Slate Theme - Tropical */
+.control-2BBjec [class*="container-"] .input-rwLH4i, /* guild settings > roles */
+.control-2BBjec [class*="container-"] [class*="input-"], /* .input-3ITkQf, experimental */
+#app-mount .checkboxWrapper-SkhIWG .input-rwLH4i,
+#app-mount .checkboxWrapper-SkhIWG .input-3ITkQf {
+	margin: 0;
+	opacity: 1;
+	height: 16px !important;
+	width: 16px !important;
+	position: relative;
+	-webkit-appearance: checkbox;
+	appearance: checkbox;
+	cursor: pointer;
+}
+.control-2BBjec [class*="container-"], /* guild settings > roles */
+[class*="checkboxWrapper-"] { /* #app-mount .checkboxWrapper-SkhIWG */
+	width: auto;
+	background: transparent !important;
+	display: flex;
+	align-items: center;
+	cursor: default;
+}
+.control-2BBjec [class*="container-"] [class*="slider-"],
+#app-mount .checkboxWrapper-SkhIWG .slider-TkfMQL {
+	display: none;
+}
+
+
+
+[class*="checkboxWrapper-"] [class*="checkbox-"] {
+	display: none;
+}
+
+/* ------------ 2.5 stuff */
+
+/* experimental selectors that provides its context in how it selects shit */
+[class*="activityUserPopout-"] button,
+[class*="activityProfile-"] button {
+	background-color: var(--shade1);
+}
+[class*="activityUserPopout-"] button:hover,
+[class*="activityProfile-"] button:hover {
+	background-color: var(--shadeHighlight);
+}
+
+
+.message-2qnXI6:hover {
+	background-color: var(--background-message-hover);
+}
+
+/* universal caption buttons */
+.theme-dark .lookFilled-1Gx00P.colorBrand-3pXr91,
+.button-1YfofB.buttonColor-7qQbGO.buttonActive-3FrkXp /* Video Streaming, bottom left buttons */ {
+    background-color:var(--accentColour);
+}
+.theme-dark .lookFilled-1Gx00P.colorBrand-3pXr91:hover,
+.button-1YfofB.buttonColor-7qQbGO.buttonActive-3FrkXp:hover /* Video Streaming, bottom left buttons */ {
+    background-color:var(--accentColour2);
+}
+.theme-dark .lookFilled-1Gx00P.colorGreen-29iAKY,
+.theme-dark .lookFilled-1Gx00P.colorGrey-2DXtkV {
+	background-color: var(--shade1);
+}
+.theme-dark .lookFilled-1Gx00P.colorGreen-29iAKY:hover,
+.theme-dark .lookFilled-1Gx00P.colorGrey-2DXtkV:hover {
+	background-color: var(--shadeHighlight);
+}
+
+/* custom selectors for unread messages divider */
+.isUnread-3Ef-o9 /* 1px divider */ {
+	border-color: var(--accentColour);
+}
+.isUnread-3Ef-o9 .content-1o0f9g /* new date text */ {
+	color: var(--accentColour);
+}
+.isUnread-3Ef-o9 .unreadPill-2HyYtt /* pill text box */ {
+	background-color: var(--accentColour);
+	font-size:12px;
+}
+.isUnread-3Ef-o9 path /* attached to left of text */ {
+	color: var(--accentColour);
+	fill: var(--accentColour);
+}
+[class*="unreadPill-"]:after {
+	content: "\2009messages";
+}
+
+.theme-dark .mention {
+	color: var(--accentColour);
+}
+.theme-dark .mention:hover {
+	color: var(--accentColour2)!important;
+}
+
+.guildSeparator-33mFX6 /* Guild separator, line at top of guild list */ {
+    background-color:var(--accentColour);
+}
+
+.emojiButton-3uL3Aw /* channel text area, distance emoji/emote button from right side */ {
+	margin-right: 16px;
+}
+
+/* pending friend request action buttons */
+.actionButton-uPB8Fs {
+	color: var(--text);
+}
+.actionButton-uPB8Fs.actionAccept-LV-szU:hover {
+	color: var(--textWarning)!important;
+}
+
+.colorDefault-2K3EoJ.focused-3afm-j /* context menu buttons hover */ {
+	background-color: var(--background-tertiary);
+}
+
+/* dropdown menus */
+.css-gvi9bl-control,
+.css-6fzn47-control, /* focused */
+.css-rzbxvl-option, /* hover */
+.css-17e1tep-control /* some other state */ {
+	background-color: var(--background-tertiary);
+}
+.css-1yz4bi9-option /* available options */ {
+	background-color: var(--shade1a);
+}
+
+[class*="lookLink"]:hover > div /* Reveal button in user settings > my account and maybe more? */ {
+	background-image:none;
+	text-decoration:underline;
+}
+
+.tipTitle-GL9qAt /* "Did you know" text. */ {
+	color:var(--accentColour);
+}
+
+/* beans additions ====== */
+
+/* Friend Notifications log button below home button */
+.friendsOnline-2JkivW {
+    color:var(--accentColour);
+}
+.label-2wRs_g:hover {
+    color:var(--accentColour2);
+}
+
+/* Two Factor Auth Typing */
+.userSettingsSecurity-3IYeMF .isEnabled-24g9qA {
+	color: var(--accentColour);
+}
+
+/* beans additions end ==== */
+
+/* ------------ 2.4 stuff */
+
+.tooltipContent-bqVLWK /* tooltip inner */ {
+	border: 1px solid var(--shadeHighlight);
+}
+
+/* experimental divider / bottom divider style intended for user settings */
+.h4-AQvcAz,
+.h5-18_1nd {
+	border-bottom: 1px solid var(--shadeHighlight);
+}
+
+
+.input-cIJ7To /* profile popout, "Message @user" text box */ {
+	background-color: var(--textboxcolour);
+}
+
+/* ------------ 2.3 stuff */
+
+.uploadModal-2ifh8j .icon-kyxXVr:not(.image-2yrs5j) /* file upload dialog, icon */ {
+	filter: invert(0.80);
+}
+.theme-dark .uploadModal-2ifh8j /* file upload dialog primary colour */ {
+	background-color: var(--background-tertiary);
+}
+
+.theme-dark .option-96V44q.selected-rZcOL- /* guild message search buttons */ {
+	background-color: var(--background-tertiary);
+}
+
+.theme-dark .option-96V44q:after /* guild message search buttons, fade effect */  {
+	display: none;
+}
+
+.protip-YaFfgO { /* user profile popout with roles, right click tip on bottom */
+	display: none;
+}
+
+/* recolouring warnings, independent border radius */
+.colorStatusYellow-3sKKh2,
+.warning-3C2pOH,
+.warning-3C2pOH .icon-1jlFSw {
+	color: var(--textWarning);
+	background-color: var(--background-mentioned);
+	border-color:var(--textWarning);;
+	border-radius: 0px;
+}
+
+.theme-dark .headerExpanded-CUEwZ5 /* expanded log */ {
+	background-color: var(--background-tertiary);
+}
+
+.theme-dark .radioBar-bMNUI- {
+	border-left: 3px solid var(--radio-bar-accent-color)!important;
+}
+
+/* ------------ new additions for 2.1 that aren't extending on existing ones */
+
+.theme-dark .children-19S4PO:after /* top bar weird gradient fix */{
+	background: unset;
+	border-left: 2px solid var(--accentColour2);
+}
+
+.noChannel-3LgMRp:before {
+	position: relative;
+	font-size: 20px;
+	animation: flicker 0.06s infinite backwards;
+	display: block;
+	font-family: var(--secondaryFont);
+	text-align: center;
+	content: "ooh shit someone fucked up for realz";
+
+}
+
+.theme-dark .footer-2gL1pp { /* "change username" footer */
+	background-color: var(--background-tertiary);
+}
+
+.jumpToPresentBar-G1R9s6 {
+	background-color: var(--shadeTransparent);
+}
+
+/* classic RealDark search */
+.searchBar-3dMhjb,
+.container-cMG81i /* new server settings role manager role search box */  {
+	border-radius: 0px;
+	background-color: var(--shadeHighlight);
+	border-bottom: 2px solid var(--textBoxUnderLine);
+}
+
+/* mentions / mention badges: recolouring to accent colour */
+.mention-1f5kbO, /* guild list/channel list top/bottom auto scroll things */
+.base-PmTxvP, /* amount of guild mentions/guild mention counter */
+[class*="quickswitcher-"] [class*="badge-"] {
+	background-color: var(--accentColour)!important; /* important is required for the guild colour as its an inline property */
+}
+
+/* guild list / server list button modifications */
+/* thanks to Emma in Powercord staff for fixing powercord/betterdiscord compatibility issues!! */
+
+/* first up, if it  exists, we make "explore public servers" button look the part */
+.scroller-1Bvpku:nth-last-child(2) > .listItem-GuPuDH .circleIconButton-1QV--U, /* this was a pain in the ass to select for some reason */
+.scroller-1Bvpku > .listItem-GuPuDH:nth-last-child(2) /* thanks, powercord support */ {
+    background-color: var(--background-tertiary);
+    color: var(--accentColour);
+    margin: 0;
+}
+/* and then the other 2 buttons */
+.scroller-1Bvpku,
+.platform-win .scroller-1Bvpku /* still required for some reason */ {
+    padding-top: 0px;
+}
+/* Home button (dms) */
+.scroller-1Bvpku:nth-child(2) > .tutorialContainer-2sGCg9 {
+    top: 0;
+    z-index: 999;
+    position: sticky;
+    background-color: var(--background-tertiary);
+}
+/* tile colour override */
+.tutorialContainer-2sGCg9 .childWrapper-anI2G9,
+.tutorialContainer-2sGCg9 .wrapper-1BJsBx:hover .childWrapper-anI2G9 {
+    background-color: var(--background-tertiary);
+    color: var(--accentColour);
+}
+.tutorialContainer-2sGCg9 .wrapper-1BJsBx.selected-bZ3Lue .childWrapper-anI2G9 {
+    background-color: var(--background-tertiary);
+    color: var(--accentColour2);
+}
+/* Add a Server button */
+.scroller-1Bvpku:nth-child(2) > .tutorialContainer-30WoTp {
+    bottom: 0px;
+    padding: 3px 0px 2px 0px;
+    position: sticky;
+    background-color: var(--background-tertiary);
+}
+/* tile colour override */
+.tutorialContainer-30WoTp .circleIconButton-1QV--U {
+    background-color: var(--background-tertiary);
+    color: var(--accentColour);
+}
+.tutorialContainer-30WoTp .circleIconButton-1QV--U.selected-1JjBPm {
+    color: var(--accentColour2);
+}
+.tutorialContainer-30WoTp .listItem-GuPuDH {
+    margin: 0px;
+}
+/* adjusting the top/bottom new mention auto scroll things, as they are now in the way */
+.unreadMentionsIndicatorTop-2-tcdU {
+    top: 48px;
+}
+.unreadMentionsIndicatorBottom-2mDYbI {
+    bottom: 53px;
+}
+
+/* main screen, top and bottom bars modifications */
+.header-2o-2hj,
+.container-1r6BKw.themed-ANHk51,
+.searchBar-6Kv8R2,
+.panels-j1Uci_,
+.header-2V-4Sw /* 2.1 */ {
+	background: var(--background-tertiary);
+}
+
+/* top bar icon colours */
+.container-1r6BKw path[fill="currentColor"],
+.theme-dark .icon-1_QxNX path[fill="currentColor"] {
+	fill:var(--accentColour);
+}
+/* bottom left user utilities icon colours */
+.icon-2doZ3q,
+.iconContainer-2ZxvJk,
+.button-14-BFJ {
+	color: var(--accentColour);
+}
+
+/* ------------------------------ end 2.1 i think */
+
+/* send message box */
+.form-2fGMdU {
+	padding: 0px;
+	margin: 0px; /* for some unknown reason, discord set margin-bottom to -8 !! */
+}
+.base-gE7OpD {
+	bottom:-4px;
+}
+.scrollableContainer-2NUZem {
+	background-color: var(--textboxcolour);
+}
+.channelTextArea-rNsIhG {
+	margin-bottom:0px;
+}
+.channelTextArea-rNsIhG {
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: var(--background-tertiary);
+}
+
+/* "new unreads" box */
+.unread-1xRYoj {
+	background-color: var(--background-tertiary);
+	opacity: 1;
+}
+
+/* guild folders / server folders */
+
+.theme-dark .expandedFolderBackground-1cujaW.hover-2ji_A7 {
+	background-color: var(--background-tertiary);
+}
+.theme-dark .expandedFolderBackground-1cujaW:not(.da-collapsed) {
+	border-radius: 0px;
+	background-color: var(--background-tertiary);
+	border-top: 2px solid var(--accentColour);
+	border-left: 2px solid var(--accentColour);
+	border-right: 2px solid var(--accentColour);
+	width: 44px;
+}
+.theme-dark .expandedFolderBackground-1cujaW:not(.da-collapsed):after {
+	position: absolute;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 4px;
+	bottom: -4px;
+	left: -2px;
+	border-left: 2px solid var(--accentColour);
+	border-right: 2px solid var(--accentColour);
+	border-bottom: 2px solid var(--accentColour);
+	background-color: var(--background-tertiary);
+}
+.expandedFolderIconWrapper-Huv7rA {
+	background-color: var(--background-tertiary);
+	border:2px solid var(--accentColour);
+	width: 44px;
+}
+.folderIconWrapper-1_bOZe {
+	border-radius: 0px;
+}
+.theme-dark .button-OhfaWu.selected-wSa2KV {
+	background-color: var(--background-tertiary);
+}
+
+/* search box / search utility / search messages */
+.searchResult-9tQ1uo:before, /* fading effect, incl :after */
+.searchResult-9tQ1uo:after {
+	background-image: none;
+}
+.searchResultMessage-1fxgXh.hit-1fVM9e /* found messages */ {
+	background-color: var(--background-tertiary);
+}
+
+/* User Settings and Server Settings layout modification */
+
+/* user settings navigation */
+.sidebarRegion-VFTUkN,
+.sidebarRegionScroller-3MXcoP {
+	flex: unset;
+	justify-content: flex-start;
+}
+.sidebar-CFHs9e {
+	padding: 40px 10px;
+	width: auto;
+}
+
+/* cool experimental User Settings header */
+.side-8zPYf6 .header-2RyJ0Y:first-child {
+	background-color: var(--background-tertiary);
+	top: 0px;
+	position: sticky;
+	padding: 10px 10px;
+	margin-bottom: 10px;
+	max-width: 250px;
+	z-index: 1000;
+	border-top:10px solid var(--background-secondary);
+}
+/* user settings main panel / main screen */
+.contentRegion-3nDuYy {
+	flex: 1 1 unset;
+}
+.contentColumn-2hrIYH, .customColumn-Rb6toI {
+	padding-top: 40px;
+	width: 100%;
+	max-width: unset;
+	min-width: unset;
+}
+/* settings main panel header */
+.contentColumn-2hrIYH div:first-child h2,
+.h2-2gWE-o, /* intended to affect user settings > keybinds */ {
+	background-color: var(--background-tertiary);
+	top: 0px;
+	position: sticky;
+	padding: 10px 10px;
+	margin-bottom: 10px;
+	z-index: 1000;
+	border-top:10px solid var(--background-primary);
+}
+
+/* guild settings > roles */
+.sidebarScrollable-1qPI87+.content-1rPSz4,
+.contentWidth-xLB44s, .page-3njELR {
+	max-width: unset;
+}
+
+
+/* ==== MegaSelector Zone ==== */
+
+/* border radius, shadows, border */
+foreignObject {
+	mask: none!important;
+}
+.base-PmTxvP,
+.bar-30k2ka,
+.item-2hkk8m,
+.unread-2lAfLh,
+.searchResultMessage-1fxgXh.hit-1fVM9e,
+.attachment-33OFj0,
+.hljs, /* code block */
+.userPopout-3XzG_A ,/* profile popout */
+.scrollableContainer-2NUZem, /* text box */
+.channelTextArea-rNsIhG, /* text nox v2 */
+.input-2VB9rf, /* ctrl+k text area */
+.content-1x5b-n, /* channel buttons */
+.lookFilled-1Gx00P, /* various caption buttons */
+.jumpToPresentBar-G1R9s6,
+.theme-dark .selected-1Tbx07, /* @mention list autocomplete button */
+.theme-dark .autocomplete-1vrmpx, /* @mention list autocomplete area */
+.root-SR8cQa, /* fullsize user profile */
+.menu-3sdvDG, /* guild options dropdown */
+.side-8zPYf6 .item-PXvHYJ, /* user/guild settings sidebar buttons */
+.background-1QDuV2, /* user name/phone/email etc area, possibly more? */
+.button-38aScr, /* all caption buttons..? */
+.layout-2DM8Md, /* member list members */
+.emptyChannelIcon-cc932w, /* channel history beginning, "#" icon */
+.radioBar-bMNUI-, /* user settings > privacy & safety radio box at top */
+.item-26Dhrx,
+.theme-dark .auditLog-3jNbM6, /* audit log action */
+.theme-dark .card-o7rAq-, /* server settings > intergrations */
+.previewContainer-1KQDJS, /* new server settings role manager role preview */
+.container-_phMUq, /* new server settings role manager @everyone card thing */
+.colorPickerSwatch-5GX3Ve, /* server settings role colour picker */
+.px-10SIf7.botTag-2WPJ74, /* all bot tags..? */
+.topPill-30KHOu .item-PXvHYJ, /* new server settings role manager horizontal tabs */
+.descriptionBox-1EKQKL, /* server template near header */
+.container-3XJ8ns, /* add role */
+.item-2J2GlB, /* add role selection */
+.option-96V44q, /* guild message search buttons */
+.tab-2j5AEF, /* guild message search hit, tab buttons */
+.searchResult-9tQ1uo, /* guild message search hit messages */
+.messageGroupWrapper-o-Zw7G, /* Pinned Messages messages */
+.messagesPopoutWrap-1MQ1bW, /* Pinned Messages Wrapper */
+.theme-dark .uploadModal-2ifh8j, /* file upload dialog primary */
+.theme-dark .footer-3mqk7D, /* file upload dialog secondary */
+.tooltip-2QfLtc, /* all tooltips */
+.input-cIJ7To, /* profile popout, "Message @user" text box */
+[class*="nowPlayingColumn"] [class*="outer-"], /* friend list "Active Now", users */
+[class*="nowPlayingColumn"] section, /* friend list "Active Now", game name box */
+.textContainer-C0szpm, /* code file preview, upper */
+.footer-2yA7Ep, /* code file preview, lower */
+.peopleListItem-2nzedh.active-rhSpJJ, /* friends list friend */
+.peopleListItem-2nzedh:hover, /* friends list friend */
+.actionButton-uPB8Fs, /* friends list friend buttons */
+.result-oB0z--, /* ctrl + k menu, selections */
+.icon-kyxXVr.image-2yrs5j, /* image upload / file upload dialog image preview */
+.imageWrapper-2p5ogY, /* channel messages, image preview */
+.embed-IeVjo6 *, /* everything within a message embed */
+.closeButton-1tv5uR, /* settings area close button */
+.connectionHeader-2MDqhu, /* user settings > connections, connection box upper */
+.connection-1fbD7X, /* user settings > connections, connection box lower, main */
+.inner-2Y6JuD, /* user settings > connections, add connection button icons */
+.accountList-33MS45, /* user settings > connections, first panel where add connection buttons are */
+.container-3ayLPN, /* guild message search context popup */
+.newMessagesBar-265mhP, /* channel message area, "xx new messages since xx:xx" at top */
+.searchBar-6Kv8R2 .searchBarComponent-32dTOx, /* dm list "find or start a conversation" box at top */
+.mention,
+.content-1Wq3SX, /* guild voice channels / vc, member hover */
+.css-1kj8ui-container > div, /* dropdown selector */
+.fieldList-21DyL8, /* user settings > my account, account details inner wrapper */
+.container-3auIfb, .input-rwLH4i, /* checkbox in noise supression area above user */
+.invite-18yqGF, .artwork-1vrmJ_, /* Spotify invite. */
+[id*="-context"] [class*="item-"], /* ctx menu buttons */
+#guild-header-popout [class*="item-"], /* guild options buttons */ 
+[class*="roleDot-"], [class*="RoleDot-"], [class*="roleCircle"],
+[class*="circleButton-"],
+.container-2VW0UT, /* unsaved changes notice */
+[role*="dialog"] [class*="root-"],
+[class*="footer-"],
+[class*="card-"],
+[class*="message-"] [class*="buttonContainer-"] [class*="wrapper-"],
+[class*="scroller-"] [class*="item-"],
+[class*="recentMentionsPopout-"] [class*="button-"],
+[class*="quickswitcher-"] [class*="badge-"],
+[class*="messagesPopout"] [class*="messageContainer"], /* inbox messages */
+[class*="iconActiveMedium"],
+[class*="slider-"] [class*="grabber-"],
+[class*="reaction-"],
+[class*="userPopout"] [class*="headerTop"] {
+	box-shadow: none!important;
+	webkit-box-shadow:none!important;
+	border-radius: 0px!important;
+	border: none!important;
+	/*border: 1px solid var(--accentColour2);*/ /* should be toggleable in devtools */
+}
+.iconInactive-98JN5i, /* mutual servers/friends */
+.wrapper-3t9DeA img,
+.contents-2mQqc9 img, /* avatar border radius */
+.wrapper-1BJsBx img,
+.acronym-2mOFsV, /* guilds in guild list without set icon */
+.avatarUploaderInner-3UNxY3, /* guild settings */
+.iconActiveLarge-2nzn9z, /* server invite guild/server icon */
+.border-Jn5IOt, /* direct vc speaking indicator */
+.overlay-39bWkM, /* direct vc speaking indicator? */
+.voiceAvatar-14IynY, /* direct vc profile pic */
+.avatar-SmRMf2.spotify-cover, /* default Powercord plugin for Spotify, above logged in user in bottom left */
+.avatarSpeaking-2IGMRN, .avatar-3tNQiO, /* vc avatars */
+[class*="wrapperSimple-"], /* small bugfix for guild icons */
+[class*="avatarWrapperNormal"] [class*="avatar-"] {
+	border-radius: var(--icon-rounding)!important/*required for spotify plugin*/;
+	/*border: 1px solid var(--links);*/ /* should be toggleable in devtools */
+}
+.role-2irmRk, /* profile popout, role colour dot */
+.sidebar-2K8pFh /* top left corner of the guild dropdown/channel area */ {
+	border-radius: 0px!important;
+}
+
+/* remove uppercase */
+.header-2RyJ0Y,
+.h2-2gWE-o,
+.container-2ax-kl,
+.bar-30k2ka,
+.contentTitle-2tG_sM,
+.h4-AQvcAz,
+.h5-18_1nd,
+.titleText-1ZIyhl, /* new server settings role manager role text */
+.titleText-1lbERP, /* new server settings role manager title */
+.resultsGroup-r_nuzN .header-2N-gMV, /* guild message search */
+.bodyTitle-Y0qMQz, /* profile popout Role / Note text */
+.headerText-1HLrL7, /* profile popout "Playing a game" */
+[class*="nowPlayingColumn"] > div h3, /* friend list "Active Now" text */
+.header-13MUnb, /* ctrl + k menu, headers */
+.uploadModal-2ifh8j .inner-3nWsbo .comment-4IWttf .label-3aiqT2, /* file upload dialog comment prompt */
+.userInfoSectionHeader-CBvMDh, /* fullscreen user profile, "Note" header */
+.activityHeader-1PExlk, /* fullscreen user profile, activity header */
+.unreadPill-2HyYtt, /* unread messages divider */
+.overrideList-Xc_VCf [class*="header-"], /* notification settings header */
+[class*="subtitle-"][class*="size12"] /* droptown menu subtext (channel categories, etc) */ {
+	text-transform: none!important;
+}
+
+/* after removing uppercase, it is usually necessary to increase the font size. */
+
+/* headers new font size */
+.h2-2gWE-o,
+.side-8zPYf6 .header-2RyJ0Y:first-child,
+.titleText-1ZIyhl, /* new server settings role manager role text */
+.titleText-1lbERP /* new server settings role manager title */ {
+	font-size: 18px;
+}
+/* sub-headers new font size */
+.container-2ax-kl,
+.bar-30k2ka,
+.content-1o0f9g, /* messages divider, new day */
+.contentTitle-2tG_sM,
+.h4-AQvcAz,
+.h5-18_1nd,
+.resultsGroup-r_nuzN .header-2N-gMV, /* guild message search */
+.bodyTitle-Y0qMQz, /* profile popout Role / Note text */
+.headerText-1HLrL7, /* profile popout "Playing a game" */
+[class*="nowPlayingColumn"] > div h3, /* friend list "Active Now" text */ 
+.header-13MUnb, /* ctrl + k menu, headers */
+.uploadModal-2ifh8j .inner-3nWsbo .comment-4IWttf .label-3aiqT2, /* file upload dialog comment prompt */
+.userInfoSectionHeader-CBvMDh, /* fullscreen user profile, "Note" header */
+.activityHeader-1PExlk, /* fullscreen user profile, activity header */
+.overrideList-Xc_VCf [class*="header-"], /* notification settings header */
+[class*="subtitle-"][class*="size12"] /* droptown menu subtext (channel categories, etc) */ {
+	font-size: 16px;
+}
+
+/* align text to centre */
+.side-8zPYf6 .header-2RyJ0Y:first-child,
+.container-2ax-kl,
+.contentColumn-2hrIYH div:first-child h2,
+.h2-2gWE-o {
+	text-align: center;
+}
+
+/* manually add shade highlight */
+
+.searchBar-6Kv8R2 .searchBarComponent-32dTOx, /* dm list "find or start a conversation" box at top */
+.button-14-BFJ.enabled-2cQ-u7:hover, /* bottom left mute/deafen/settings buttons */
+.botTagRegular-2HEhHi, /* Bot tag */
+.theme-dark .mention:hover,
+.topSectionPlaying-1J5E4n, /* user profile screen, activity background override */
+.theme-dark .selected-1Tbx07 /* @mention autocomplete list button hover */ {
+	background-color: var(--shadeHighlight);
+}
+
+/* manually add shade colour 1 */
+
+.closeButton-1tv5uR, /* settings area close button */
+.theme-dark .closeButton-1tv5uR:hover,
+.theme-dark .footer-3mqk7D, /* upload modal secondary colour */
+.header-ykumBX,
+.container-3XJ8ns,
+.container-_phMUq, /* new server settings role manager @everyone */
+.theme-dark .auditLog-3jNbM6, /* guild audit logs, log actions */
+.theme-dark .attachment-33OFj0, /* attached file */
+.theme-dark [class*="nowPlayingColumn"] [class*="outer-"]:hover, /* friend list "Active Now", users */
+
+/* search box / search utility / search messages */
+.theme-dark .container-3ayLPN, /* before search options */
+.searchHeader-2XoQg7, /* search results header */
+
+/* profile popout modifications */
+.userPopout-3XzG_A .headerNormal-T_seeN {
+	background-color: var(--shade1);
+}
+
+/* manually add shade colour 2 */
+
+.messageGroupWrapper-o-Zw7G, /* Pinned Messages messages */
+.footer-2yA7Ep, /* code file preview, lower */
+[class*="nowPlayingColumn"] section, /* friend list "Active Now", game name box */
+
+/* guild list, guild folders modifications */
+.scroller-1Bvpku,
+
+/* search box / search utility / search messages */
+.searchResult-9tQ1uo, /* surrounding messages */
+
+/* friends list / friend list modifications */
+.userPopout-3XzG_A > div:not(.headerNormal-T_seeN) {
+	background-color: var(--shade2);
+}
+
+/* manually add shade colour 3 (--background-secondary) */
+
+.textContainer-C0szpm, /* code file preview, upper */
+
+/* friends list / friend list modifications */
+.peopleColumn-29fq28,
+.theme-dark .container-VSDcQc .sectionTag-pXyto9 > div /* add role */ {
+	background-color: var(--background-secondary);
+}
+
+/* manually add textWarning text colour */
+
+.colorBrand-ROmMP1, /* context menu, Discord blurple option text */
+.required-7sPBq3 /* required* star colour */ {
+	color: var(--textWarning);
+}
+
+/* manually add textWarning background colour */
+[class*="cardWarning-"],
+[class*="lookFilled"][class*="colorYellow"] /* yellow dialog box caption button */ {
+	background-color: var(--textWarning)!important;
+}
+
+/* manually add textDanger text colour */
+
+.strikethrough-1n4ekb, /* bottom left mute/deafen/settings */
+.colorDanger-2qLCe1, /* context menu, red text */
+.actionButton-uPB8Fs.actionDeny-de_uKj:hover, /* pending friend request, deny */
+.deny-3nAuT6:not([class*="selected-"]), /* channel role permissions, deny */
+[aria-controls="logout-tab"],
+
+/* user settings > my account */
+.lookOutlined-3sRXeN.colorRed-1TFJan, /* Delete Account / Remove SMS Auth / associates */
+.theme-dark .lookLink-9FtZy-.colorPrimary-3b3xI6 /* Remove Button (next to edit) */ {
+    color:var(--textDanger)!important;
+}
+
+/* manually add textDanger background colour */
+
+.deny-3nAuT6.selected-2YhbGh, /* channel role permissions, deny selected */
+
+/* user settings > my account */
+.lookFilled-1Gx00P.colorRed-1TFJan, /* Disable account */
+.lookFilled-1Gx00P.colorRed-1TFJan:hover {
+	background-color: var(--textDanger);
+}
+
+/* optional channel / member list bg override */
+
+.scroller-1JbKMe, /* dm list */
+.members-1998pB, .members-1998pB>div, /* member list */
+.container-3w7J-x /* channel list */ {
+	background-color: var(--memberChannelList);
+}
+
+.container-2ax-kl /* taken from v1 and adapted for v2 (guild members hoist / channel categories) */ {
+	font-family: var(--secondaryFont);
+	background-color: var(--shade2);
+	height: auto;
+	margin:18px 0;
+	padding:2px 0;
+	line-height: 14px;
+}
+
+/* Removing ellipsis or at least relaxing it */
+.name-3YKhmS,
+.header-2RyJ0Y,
+.headerText-2F0828, /* fix for the webkit box property, used to be .container-2ax-kl */
+.name-1jkAdW, /* 2.1, guild/server name */
+.overflow-WK9Ogt, /* also 2.1 */
+.container-2ax-kl, /* member list role name */
+.activityName-1IaRLn, /* game activity... */
+.nameNormal-2lqVQK,
+.nameWrap-3Z4G_9, /* end game activity */
+.gameWrapper-1jIQAX .title-eS5yk3, /* own game activity in bottom left above profile */
+.channelName-2YrOjO, .subtitle-3V1p2E /* channel name fix */ {
+	-webkit-box-orient: vertical;
+	white-space: normal;
+	overflow-wrap: break-word;
+	-webkit-line-clamp:2;
+}
+
+/* mention highlight recolour */
+.mentioned-xhSam7:before {
+	background-color: var(--mentionmark);
+}
+
+.theme-dark .mention {
+	background-color: var(--background-mentioned);
+}
+
+.name-3YKhmS {
+	max-height: 48px;
+	overflow-y: scroll;
+}
+
+.icon-WnO6o2 {
+	display: none;
+}
+
+/*
+	fixed radial status snippet, feel free to use in your theme!
+	author: dmack6464
+	note that this snippet uses --icon-rounding for dynamic border radius
+*/
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Idle"] svg rect,
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Online"] svg rect,
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Do Not Disturb"] svg rect,
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Online via mobile"] svg rect,
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Streaming"] svg rect,
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Offline"] svg rect {
+	display: none;
+}
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Idle"]:before {
+	position: absolute;
+	content: "";
+	top: -1px;
+	left: -1px;
+	height: 32px;
+	width: 32px;
+	border: 1px solid #ff4;
+	border-radius: var(--icon-rounding);
+}
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Online"]:before {
+	position: absolute;
+	content: "";
+	top: -1px;
+	left: -1px;
+	height: 32px;
+	width: 32px;
+	border: 1px solid #4f4;
+	border-radius: var(--icon-rounding);
+}
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Online via mobile"]:before {
+	position: absolute;
+	content: "";
+	top: -2px;
+	left: -2px;
+	height: 32px;
+	width: 32px;
+	border: 2px solid #f0f !important;
+	border-radius: var(--icon-rounding);
+}
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Do Not Disturb"]:before {
+	position: absolute;
+	content: "";
+	top: -1px;
+	left: -1px;
+	height: 32px;
+	width: 32px;
+	border: 1px solid #f44;
+	border-radius: var(--icon-rounding);
+}
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Streaming"]:before {
+	position: absolute;
+	content: "";
+	top: -2px;
+	left: -2px;
+	height: 32px;
+	width: 32px;
+	border: 2px solid #593695;
+	border-radius: var(--icon-rounding);
+}
+.avatar-3uk_u9 .wrapper-3t9DeA[aria-label*="Offline"]:before {
+	position: absolute;
+	content: "";
+	top: -2px;
+	left: -2px;
+	height: 32px;
+	width: 32px;
+	border: 2px solid #778;
+	border-radius: var(--icon-rounding);
+}
+
+/* removed partial language support as extended support is provided by the supported RadialStatus mini-theme */
+
+/* channel list */
+
+.unread-2lAfLh /* change colour of unread markers */ {
+	background-color: var(--accentColour2);
+	width: 3px;
+	height: calc(100% - 2px);
+	margin: 0;
+	top: 1px;
+}
+
+/* channel list category modification */
+.wrapper-CU3qI5 svg /* keeping for backwards compat maybe..? */ {
+	display: none;
+}
+.addButtonIcon-2CbG1X, /* new */
+.wrapper-PY0fhH div svg {
+	display: none;
+}
+.wrapper-PY0fhH div[aria-expanded="true"]:before {
+	font-family: var(--secondaryFont);
+	font-size: 20px;
+	width: auto;
+	content:"-";
+}
+.wrapper-PY0fhH div[aria-expanded="false"]:before,
+button[aria-label="Create Channel"] div:before {
+	font-family: var(--secondaryFont);
+	font-size: 20px;
+	width: auto;
+	content: "+";
+}
+button[aria-label="Create Channel"] {
+	top: -2px;
+}
+
+/* message list / messages list */
+
+.embed-IeVjo6 /* message embeds */,
+.wrapper-35wsBm /* server invite / guild invite */ {
+	background-color: var(--shade1a);
+	border-radius: 0px; /* cant add to main border radius because of border property */
+}
+
+.header-2BTCnc /* server invite / guild invite */ {
+	display: none;
+}
+
+/* copypaste from v1 here lol */
+
+.profile-1eT9hT {
+  position: relative;
+}
+
+.profile-1eT9hT:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -3px;
+  
+}
+.profile-1eT9hT:before {
+  right: -3px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d70070, #9c4e97, #0035a9, transparent);
+}
+
+.lookFilled-1Gx00P.colorGreen-29iAKY > .spinner-2enMB9:before {
+	content:"Please Wait...";
+	width: 100%
+}
+
+.base-gE7OpD .ellipsis-19qdx6 {
+	display:none;
+}
+
+.theme-dark .header-Hg_qNF {
+	line-height: 0px;
+	color:transparent;
+}
+
+.customScroller-26gWhv>div {
+	max-width: unset;
+	min-width: unset;
+}
+
+.theme-dark .member-1q7VfX .roleWrapper-1Hde_V {
+	flex-direction: row-reverse;
+}
+
+.platform-win .container-16j22k:before {
+	margin-top: 30px;
+	text-align: center;
+	vertical-align: middle;
+	display: block;
+	color: var(--text);
+	font-size: 20px;
+	position: absolute;
+	content: "Ga jezelf fucken, kut :D";
+}
+
+.quote-3aooyW {
+	font-size: 18px;
+}
+
+.contentBase-11jeVK {
+	text-transform: none;
+}
+
+.links-3Ldd4A:first-child {
+	line-height: 0px;
+	color:transparent;
+	font-size: 0px;
+}
+
+.links-3Ldd4A:not(:first-child) {
+	line-height: 0px;
+	color:transparent;
+	font-size: 0px;
+}
+
+.links-3Ldd4A:first-child:after {
+	color: #00b0f4;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 15px;
+	content:"Complain here, response not guaranteed"
+}
+
+.links-3Ldd4A:not(:first-child):after {
+	color: #00b0f4;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 15px;
+	content:"If you can access this, Discord has probably fucked up their shit again."
+}
+
+.problemsText-1Yx-Kl {
+	line-height: 0px;
+	color:transparent;
+}
+
+.problemsText-1Yx-Kl:after {
+	display: block;
+	color: var(--text);
+	font-size: 14px;
+	margin-bottom: 8px;
+	content:"Think it's Discord's fault again? Try these links."
+}
+
+.container-16j22k {
+	background-color: var(--shade1a);
+}
+
+.connectedAccount-36nQx7{position: relative}
+.connectedAccountIcon-3P3V6F,.connectedAccountName-f8AEe2,.connectedAccountVerifiedIcon-3aZz_K, .body-3ND3kc a {z-index:1;color:white;border-color:transparent}
+:not(.connectionHeader-2MDqhu) > img[src="/assets/f09c1c70a67ceaaeb455d163f3f9cbb8.png"] + div:before {content:"";height:46px;width:262px;background:#191919;position:absolute;margin-left:-38px} /* steam */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/4662875160dc4c56954003ebda995414.png"] + div:before {content:"";height:46px;width:262px;background:#004895;position:absolute;margin-left:-38px} /* twiter */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/3abe9ce5a00cc24bd8aae04bf5968f4c.png"] + div:before {content:"";height:46px;width:262px;background:#882c0d;position:absolute;margin-left:-38px} /* reddit */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/8c289d499232cd8e9582b4a5639d9d1d.png"] + div:before {content:"";height:46px;width:262px;background:#0f6089;position:absolute;margin-left:-38px} /* battle.net */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/edbbf6107b2cd4334d582b26e1ac786d.png"] + div:before {content:"";height:46px;width:262px;background:#220d4b;position:absolute;margin-left:-38px} /* twitch */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/f0655521c19c08c4ea4e508044ec7d8c.png"] + div:before {content:"";height:46px;width:262px;background:#064c12;position:absolute;margin-left:-38px} /* spotify */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/8d8f815f3d81a33b1e70ec7c22e1b6fe.png"] + div:before {content:"";height:46px;width:262px;background:#0f176f;position:absolute;margin-left:-38px} /* facebook */
+/* connections added in 2.1 */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/0d44ba28e39303de3832db580a252456.png"] + div:before {content:"";height:46px;width:262px;background:#397217;position:absolute;margin-left:-38px} /* xbox */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/449cca50c1452b4ace3cbe9bc5ae0fd6.png"] + div:before {content:"";height:46px;width:262px;background:#801010;position:absolute;margin-left:-38px} /* youtube */
+:not(.connectionHeader-2MDqhu) > img[src="/assets/5d69e29f0d71aaa04ed9725100199b4e.png"] + div:before {content:"";height:46px;width:262px;background:#0050af;position:absolute;margin-left:-38px} /* github uwu (placeholder colour lol) */
+
+
+/* scrollbars, but revamped! */
+
+.platform-win .scroller-1Bvpku::-webkit-scrollbar-button, /* buttons are unusable here due to the guild list mods, so just yeet them */
+.platform-win .scroller-1Bvpku:not(:hover)::-webkit-scrollbar /* hide guild list scrollbar when its not being used */ {
+	display: none!important; /* completely hide the scrollbar when not scrolling the guild/channel list */
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-corner,
+::-webkit-resizer {
+	all:unset!important; /* we remove *all* of Discord's scrollbar styling! as I finally sort of know wtf I'm doing... */
+}
+::-webkit-scrollbar {
+	height: 8px!important;
+	width: 8px!important;
+}
+::-webkit-scrollbar-button:decrement:end,
+::-webkit-scrollbar-button:increment:start {
+	display: none!important;
+}
+::-webkit-scrollbar-button:vertical {
+	height: 10px!important; /* scrollbar placeholder, do something with it if you wish... */
+	border-style: solid!important;
+}
+::-webkit-scrollbar-track {
+	background-color:var(--shade1a)!important;
+}
+::-webkit-scrollbar-thumb {
+	background-color: var(--background-tertiary)!important;
+	border:1px solid var(--shadeHighlight)!important;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--shadeHighlight)!important;
+}
+::-webkit-scrollbar-thumb:active {
+	background-color: var(--accentColour2)!important;
+}
+*:not(:hover)::-webkit-scrollbar-thumb {
+	background-color: transparent!important;
+}
+
+/* the 8px makes them pointier */
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+	border-width: 0 4px 8px 4px!important;
+	border-color: transparent transparent var(--shadeHighlight) transparent!important;
+}
+::-webkit-scrollbar-button:single-button:vertical:decrement:active,
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+	border-color: transparent transparent var(--accentColour2) transparent!important;
+}
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+	border-width: 8px 4px 0 4px!important;
+	border-color: var(--shadeHighlight) transparent transparent transparent!important;
+}
+::-webkit-scrollbar-button:vertical:single-button:increment:active,
+::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+	border-color: var(--accentColour2) transparent transparent transparent!important;
+}
+
+/*
+
+#4f006e
+dinosaur_woman has left the game.
+
+revenge cold

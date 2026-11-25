@@ -1,0 +1,24 @@
+/**
+ * @name Settings Icons
+ * @description Adds neat looking icons to the settings menu
+ * @author MulverineX#0001
+ * @version 1.0.0
+ * @authorId 178551656714076161
+ * @website https://github.com/MulverineX/legacy-settings-icons
+ * @source https://github.com/MulverineX/legacy-settings-icons/legacy-settings-icons.theme.css
+ */
+
+@import url("https://mulverinex.github.io/legacy-settings-icons/dist-native.css");
+
+/* Customize */
+:root {
+    /* Icon Fill Color (Default: white) */
+    --settings-icon-color: white;
+
+    /* Nitro/Subscriptions Icon Fill (Default: #7289da) */
+    --settings-subscriptions: #7289da;
+    /* Hypesquad Icon Fill (Default: #fbb848) */
+    --settings-hypesquad: #fbb848;
+    /* Logout Icon Fill (Default: #f04747) */
+    --settings-logout: #f04747;
+}

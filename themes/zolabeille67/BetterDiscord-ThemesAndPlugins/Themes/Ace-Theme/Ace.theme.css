@@ -1,0 +1,33 @@
+/**
+ * @name Ace-Theme
+ * @author Zola
+ * @version 1.0.X
+ * @description A theme with Ace from One Piece
+ * @source https://github.com/zolabeille67/BetterDiscord-ThemesAndPlugins/blob/main/Themes/Ace-Theme/Ace.theme.css
+ */
+
+@import url('https://raw.githubusercontent.com/zolabeille67/BetterDiscord-ThemesAndPlugins/refs/heads/main/Themes/Ace-Theme/core.css');
+
+:root{
+     --background-image: url('https://i.imgur.com/YiKAW2T.jpeg');
+     --activetext-colour: white;
+ 
+     --primary1-colour: red;
+     --primary2-colour: rgba(255,0,0,0.5);
+     --primary3-colour: rgba(100,0,0,0.6);
+     --primary4-colour: rgba(100,0,0,0.4);
+ 
+     --secondary1-colour: rgba(50,50,50,0.3);
+     --secondary2-colour: rgba(100,100,100,0.5);
+     --secondary3-colour: rgba(0,0,0,0.6);
+     --secondary4-colour: rgba(0,0,0,0.3);
+
+}
+  
+/*
+Theme Owned and Made by RoninGFX
+  
+Background Img: https://www.deviantart.com/roningfx/art/Portgas-D-Ace-One-Piece-889605953
+
+The items above are not owned by me, They go to there respected owners 
+*/

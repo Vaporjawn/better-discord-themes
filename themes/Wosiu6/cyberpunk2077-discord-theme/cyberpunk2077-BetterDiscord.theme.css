@@ -1,0 +1,176 @@
+/**
+ * @name Cyberpunk 2077 theme for BetterDiscord
+ * @author Wosiu6
+ * @version 1.0.2
+ * @description Welcome to Night City for BetterDiscord.
+ * @source https://github.com/wosiu6/cyberpunk2077-discord-theme
+ */
+/* IMPORT CSS */
+@import url("https://wosiu6.github.io//cyberpunk2077-discord-theme/main.css");
+@import url("https://wosiu6.github.io//cyberpunk2077-discord-theme/betterdiscord.css");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani");
+/* SETTINGS */
+:root {
+  --neon-yellow-color: #f3e600;
+  --neon-red-color: #c5003c;
+  --dark-red-color: #880425;
+  --light-neon-red-color: #ff4c6d;
+  --neon-purple-color: #bd00ff;
+  --neon-blue-color: #55ead4;
+  --muted-neon-blue-color: #00b8ff;
+  --main-color: #c5003c;
+  --main-color-light: #ff4c6d;
+  --hover-color: #880425;
+  --success-color: #4bff21;
+  --danger-color: #772289;
+  --online-color: #00ff9f;
+  --idle-color: #f8e602;
+  --dnd-color: #710000;
+  --streaming-color: #00f0ff;
+  --offline-color:	#84628d;
+  --darkish-primary-color: rgba(0, 0, 0, 0.5);
+  --dark-primary-color: rgba(0, 0, 0, 0.6);
+  --darker-primary-color: rgba(0, 0, 0, 0.8);
+  --border-normal: var(--neon-red-color);
+  --text-primary: var(--neon-blue-color);
+  --text-muted: var(--muted-neon-blue-color);
+  --message-text-color: var(--smoke-color);
+  --message-link-color: var(--neon-purple-color);
+  --interactive-normal: var(--text-primary);
+  --interactive-muted: var(--text-muted);
+  --divider-color: var(--neon-red-color);
+  --main-font: "Rajdhani";
+  --code-font: "JetBrains Mono", monospace;
+  /* offline status color (hex, rgb or hsl) [default: #808080] */
+  /* APP BACKGROUND */
+  --background-shading-percent: 100%;
+  /* app background shading amount (0 for complete smoothness) [default: 100%] */
+  --background-image: url(https://wosiu6.github.io/cyberpunk2077-discord-theme/assets/nightCity.jpg);
+  --background-position: center;
+  /* app background position [default: center] */
+  --background-size: cover;
+  /* app background size (px) [default: cover] */
+  --background-attachment: fixed;
+  /* app background attachment [default: fixed] */
+  --background-filter: saturate(calc(var(--saturation-factor, 1) * 1));
+  /* app background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: saturate(calc(var(--saturation-factor, 1) * 1))] */
+  /* USER POPOUT BACKGROUND */
+  --user-popout-image: var(--background-image);
+  /* user popout background image (link must be HTTPS) (not applied to nitro users) [default: var(--background-image)] */
+  --user-popout-position: var(--background-position);
+  /* user popout position [default: var(--background-position)] */
+  --user-popout-size: var(--background-size);
+  /* user popout size (px) [default: var(--background-size)] */
+  --user-popout-attachment: var(--background-attachment);
+  /* user popout background attachment [default: var(--background-attachment)] */
+  --user-popout-filter: var(--background-filter);
+  /* user popout background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: var(--background-filter);] */
+  /* USER MODAL BACKGROUND */
+  --user-modal-image: var(--background-image);
+  /* user modal background image (link must be HTTPS) (not applied to nitro users) [default: var(--background-image)] */
+  --user-modal-position: var(--background-position);
+  /* user modal position [default: var(--background-position)] */
+  --user-modal-size: var(--background-size);
+  /* user modal size (px) [default: var(--background-size)] */
+  --user-modal-attachment: var(--background-attachment);
+  /* user modal background attachment [default: var(--background-attachment)] */
+  --user-modal-filter: var(--background-filter);
+  /* user modal background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: var(--background-filter);] */
+  /* HOME ICON */
+  --home-icon: url(https://wosiu6.github.io/cyberpunk2077-discord-theme/assets/discord.svg);
+  --home-size: cover;
+  /* home button icon size (px) [default:cover] */
+  /* CHANNEL COLORS */
+  --channel-normal: var(--interactive-normal);
+  /* channel text color [default: var(--interactive-normal)] */
+  --channel-muted: var(--interactive-muted);
+  /* muted channel text color [default: var(--interactive-muted)] */
+  --channel-hover: var(--interactive-hover);
+  /* hovered channel text color [default: var(--interactive-hover)] */
+  --channel-selected: var(--interactive-active);
+  /* selected channel text color [default: var(--interactive-active)] */
+  --channel-selected-bg: var(--main-color);
+  /* selected channel background [default: var(--main-color)] */
+  --channel-unread: var(--main-color);
+  /* unread channel text color [default: var(--main-color)] */
+  --channel-unread-hover: var(--hover-color);
+  /* unread channel hover color [default: var(--hover-color)] */
+  /* ACCESSIBILITY */
+  --focus-color: var(--main-color);
+  /* outline when pressing TAB key [default: var(--main-color)] */
+}
+
+/* THEME SPECIFIC SHADING */
+/* LIGHT THEME */
+:is(.theme-light, .theme-dark .theme-light) {
+  --background-shading: rgba(252, 252, 252, 0.3);
+  /* app background shading color [default: rgba(252, 252, 252, 0.3)] */
+  --card-shading: rgba(252, 252, 252, 0.3);
+  /* cards background shading color [default: rgba(252, 252, 252, 0.3)] */
+  --popout-shading: rgba(252, 252, 252, 0.7);
+  /* popouts background shading color [default: rgba(252, 252, 252, 0.7)] */
+  --modal-shading: rgba(252, 252, 252, 0.5);
+  /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --input-shading: rgba(0, 0, 0, 0.3);
+  /* inputs background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --normal-text: #55ead4;
+  /* text color [default: #36363c] */
+  --muted-text: #75757e;
+  /* muted text color [default: #75757e] */
+}
+
+/* ASH THEME */
+:is(.theme-dark, .theme-light .theme-dark) {
+  --background-shading: rgba(0, 0, 0, 0.4);
+  /* app background shading color [default: rgba(0, 0, 0, 0.4)] */
+  --card-shading: rgba(0, 0, 0, 0.2);
+  /* cards background shading color [default: rgba(0, 0, 0, 0.2)] */
+  --popout-shading: rgba(0, 0, 0, 0.6);
+  /* popouts background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --modal-shading: rgba(0, 0, 0, 0.4);
+  /* modals background shading color [default: rgba(0, 0, 0, 0.4)] */
+  --input-shading: rgba(255, 255, 255, 0.05);
+  /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #55ead4;
+  /* text color [default: #d8d8db] */
+  --muted-text: #88d1c7;
+  /* muted text color [default: #aeaeb4] */
+}
+
+/* DARK THEME */
+:is(.theme-darker, .theme-light .theme-darker) {
+  --background-shading: rgba(0, 0, 0, 0.6);
+  /* app background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --card-shading: rgba(0, 0, 0, 0.3);
+  /* cards background shading color [default: rgba(0, 0, 0, 0.3)] */
+  --popout-shading: rgba(0, 0, 0, 0.7);
+  /* popouts background shading color [default: rgba(0, 0, 0, 0.7)] */
+  --modal-shading: rgba(0, 0, 0, 0.5);
+  /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --input-shading: rgba(255, 255, 255, 0.05);
+  /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #55ead4;
+  /* text color [default: #fbfbfb] */
+  --muted-text: #94949c;
+  /* muted text color [default: #94949c] */
+}
+
+/* ONYX THEME */
+:is(.theme-midnight, .theme-light .theme-midnight) {
+  --background-shading: rgba(0, 0, 0, 0.8);
+  /* app background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --card-shading: rgba(0, 0, 0, 0.4);
+  /* cards background shading color [default: rgba(0, 0, 0, 0.4)] */
+  --popout-shading: rgba(0, 0, 0, 0.8);
+  /* popouts background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --modal-shading: rgba(0, 0, 0, 0.6);
+  /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --input-shading: rgba(255, 255, 255, 0.05);
+  /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #55ead4;
+  /* text color [default: #dcdcde] */
+  --muted-text: #88d1c7;
+  /* muted text color [default: #86868e] */
+}
+
+/* ADD ADDITIONAL CSS BELOW HERE */

@@ -1,0 +1,333 @@
+/**
+* @name AMOLEDCOMFY
+* @author T3RM1N4L
+* @description Stay comfy while talking to your friends
+* @invite rtBQX5D3bD
+* @version 2.4
+* @donate https://ko-fi.com/nyria
+*/
+
+
+@import "https://raw.githubusercontent.com/T3M1N4L/AMOLED-comfy/main/themes/AMOLEDCOMFY.main.css";
+
+/* ═══════『 ⚠️・Important tips 』═══════
+*
+*   ➥ To comment or uncomment a line you need to put those "/" and "*" characters as you can see at the beginning and ending of my comments.
+*      (You don't need to put a * at each line like I do, it's just for readability). See more here : https://developer.mozilla.org/en-US/docs/Web/CSS/Comments
+*
+*   ➥ You can play with the values and see how it goes, don't delete "px" after the value if you don't have knowledge of CSS.
+*
+*   ➥ To change the colors, replace the HEX code with the one you picked here : https://htmlcolorcodes.com
+*/
+
+/* ═══════『 🚫 ・ No scrollbars 』- Comment the line below if you want the scrollbar back */
+@import "https://raw.githubusercontent.com/T3M1N4L/AMOLED-comfy/main/themes/no-scrollbar.css";
+
+/* ═══════『 🎵 ・ Vencord Spotify Plugin 』- Comment the line below if you don't want this spotify bar FOR VENCORD */
+@import "https://raw.githubusercontent.com/T3M1N4L/AMOLED-comfy/main/themes/vencord-spotify.css";
+
+
+:root {
+  /* ═══════『 💨 ・ Animations 』- If you don't want a high CPU usage, comment the line below */
+  --disable-animations: 2s channel-unread infinite;
+
+  /* ═══════『 ⚙️ / 🎤 / 🎧 ・ User button 』═══════
+*
+*   ➥ A higher value means more space between the icons and a lower ...
+*
+*    ℹ️ : If you want to revert those to the old area, join the support server and check #css-snippets
+*
+*/
+
+  /*The duck*/
+
+  --loader-url:url(https://raw.githubusercontent.com/T3M1N4L/AMOLED-comfy/main/themes/duck.gif);
+
+  /*The discord logo replace*/
+  --discord-logo-replace:url(https://raw.githubusercontent.com/T3M1N4L/DiscordLogos/main/controller_foreground.webp);
+
+  /* Spacing - Default value : 8px */
+  --user-buttons-spacing: 8px !important;
+
+  /* Color - Default value : #096DC0 */
+  --user-buttons-color: #872bff !important;
+
+  /* ═══════『 ⭕ Roundness settings 』═══════
+*
+*    ➥ A higher value means more rounded corners and a lower ...
+*       0 ➜ Square
+*       25 ➜ Circle
+*/
+
+  /* Avatars - Default value : 5px */
+  --avatar-radius: 10px !important;
+
+  /* Status - Default value : 3px */
+  --status-radius: 5px !important;
+
+  /* Servers - Default value : 8px */
+  --server-radius: 10px !important;
+
+  /* ═══════『 😃 Colored emoji picker 』═══════
+*   Change the value to "100%" if you want the default one */
+
+  --colored-emoji: grayscale(0%) !important;
+
+  /* ═══════『 📜 Server/channel list 』═══════ */
+
+  /* Mention - Default value : #F04747 */
+  --mention-color: #8a4bff !important;
+
+  /* Unread - Default value : #7289DA */
+  --unread-color: #ff7676 !important;
+
+  /*  『 🔴 Mention colors in chat 』 */
+
+  /* Bar on the right - Default value : #C66262 */
+  --mention-color-bar: #ae83ff !important;
+
+  /* Background - Default value : #C662621F */
+  --mention-color-background: #ec7efb1f !important;
+
+  /* On hover - Default value : #C6626226 */
+  --mention-color-hover: #7dffd226 !important;
+
+  /* ═══════『 💬 Chat buttons 』═══════ */
+
+  /* Default value : #7289DA */
+  --chat-buttons: #6f6dff !important;
+
+  /* ═══════『 💬 SpotifyControls seek bar 』═══════
+*   ℹ️ : If you don't have the plugin : https://betterdiscord.app/plugin/SpotifyControls */
+
+  /* Default value : #1EDC62 */
+  --spotify-color: #90ffb7 !important;
+
+  /* ═══════『 🟢 Status 』═══════ */
+
+  /* Online - Default value : #43B581 */
+  --online: #40ff80 !important;
+
+  /* Idle - Default value : #FAA61A */
+  --idle: #ffc562 !important;
+
+  /* Do Not Disturb - Default value : #F04747 */
+  --dnd: #ff4848 !important;
+
+  /* Offline - Default value : #747F8D */
+  --offline: #1b1c1f !important;
+
+  /* Streaming - Default value : #593695 */
+  --streaming: #593695 !important;
+
+  /* ═══════『 🔰 User popout 』═══════ */
+
+  /* Playing wave color */
+  --playing: #8426ff !important;
+
+  /* Listening wave color */
+  --listening: #2db15f !important;
+
+  /* Role circle - Default value : 5px */
+  --role-circle: 5px !important;
+
+  /* ═══════『 🗑️ Discord logo 』═══════
+*   Set it to "block" if you still want it */
+
+  --discord-logo: block !important;
+}
+
+.theme-dark {
+  --background-primary: #000000 !important;
+  --background-secondary: #000000 !important;
+  --background-secondary-alt: #000000  !important;
+  --background-tertiary: #000000 !important;
+  --background-accent: #872bff !important;
+
+
+  --modal-background: #000000 !important;
+  --background-mobile-primary: #000000 !important;
+  --background-mobile-secondary: #000000 !important;
+  --channeltextarea-background: #000000 !important;
+  --background-message-hover: transparent !important;
+  --background-modifier-hover: #00000010 !important;
+  --background-modifier-active: #0000001a !important;
+  --background-modifier-selected: #0000001f !important;
+  --deprecated-card-bg: #000000 !important;
+  --background-floating: #000000 !important;
+  --deprecated-quickswitcher-input-background: #101320 !important;
+  --elevation-low: none !important;
+  --scrollbar-auto-thumb: #0a0a0a !important;
+  --scrollbar-auto-track: #0a0a0a !important;
+  --scrollbar-thin-thumb: #0a0a0a !important;
+  --activity-card-background: #101320 !important;
+  --input-background: #000000 !important;
+  --translucency-color: #131313;
+}
+
+.theme-light {
+  --background-primary: #23283d !important;
+  --background-secondary: #1e2233 !important;
+  --background-secondary-alt: #191f2e !important;
+  --background-tertiary: #101320 !important;
+  --background-accent: #3964ff !important;
+  --background-modifier-hover: #262b41 !important;
+  --background-modifier-active: #262b41 !important;
+  --modal-background: var(--background-primary) !important;
+  --header-primary: #fff !important;
+  --header-secondary: #b1b5b9 !important;
+  --text-normal: #8e9297 !important;
+}
+
+
+/*Hide original home icon*/
+[data-list-item-id=guildsnav___home]>[class^=childWrapper_] {
+    display: none;
+}
+/*Add oneko*/
+[data-list-item-id=guildsnav___home]::before {
+    content: "";
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-position: center;
+    background-image: url(https://raw.githubusercontent.com/T3M1N4L/DiscordLogos/main/controller_foreground.webp);
+}
+:root .autocomplete__13533 {
+  background: #000;
+}
+
+.messageListItem__5126c {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.messageListItem__5126c:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #1b1b1b; /*Change this to change the color*/
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  border-radius: 20px;
+  opacity: 30%;
+}
+.messageListItem__5126c:hover,
+.messageListItem__5126c:focus,
+.messageListItem__5126c:active {
+  color: white;
+}
+.messageListItem__5126c:hover:before,
+.messageListItem__5126c:focus:before,
+.messageListItem__5126c:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+.cozy_c19a55 .headerText_c19a55 > .username_c19a55::before {
+  content: ''; 
+  width: calc(100% + 10px); 
+  height: 100%;
+  border-radius: 5px;
+  background-color: currentColor; 
+  opacity: 0.2; 
+  position: absolute; 
+  top: 0; 
+  z-index: -1;
+  left: -5px;
+}
+.cozy_c19a55 .headerText_c19a55 > .username_c19a55 {
+  margin-left: 5px;
+}
+.typing_b88801 .text_b88801 { display: flex; align-items: center;}
+
+.typing_b88801 .text_b88801 strong { 
+    margin: 0 3px;
+    line-height: 21px;
+    animation: slideUp 300ms;
+}
+@keyframes slideUp {
+    0% { margin-top: -50px;}
+    100% { margin-top: 0;}
+}
+.channelTextArea_f75fb0 .buttons__74017 > * { position: relative; top: -44px;}
+.channelTextArea_f75fb0:hover .buttons__74017 > * { top: 0;}
+
+/*.appMount__51fd7 .app_a3002d { opacity: 0; transition: 0.15s;}
+.appMount__51fd7:hover .app_a3002d { opacity: 1; transition: 0.15s;}
+.appMount__51fd7:after {
+    content: "";
+    position: fixed;
+    background: var(--loader-url) center/10% no-repeat;
+    width: 100%; height: 100%;
+    opacity: 1;
+}
+.appMount__51fd7:hover:after { opacity: 0; pointer-events: none;}
+*/
+.role_dfa8b6 {
+  transform: translate(0);
+  overflow: hidden;
+  border: 0;
+
+  --transparency: .4;
+  border-radius: 5px;
+}
+
+.role_dfa8b6 .roleRemoveIcon__48c1c {
+  margin: 0;
+  left: unset;
+  transform: translate(50%, -50%);
+}
+.role_dfa8b6 .roleRemoveButton_dfa8b6 {
+  position: static;
+}
+.role_dfa8b6 .roleCircle__4f569:after {
+  content: '';
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: inherit;
+  opacity: var(--transparency);
+}
+.userPopoutInner_c69a7b,.inner_c0bea0.fullSize_c0bea0, .userProfileModalInner_c69a7b,.inner__74017, .inner_c0bea0.biteSize_c0bea0,.overlay_c0bea0.panel_c0bea0.overlay__325ce, .itemCard__7e549.wrapper__00943.outer_bf1984.padded_bf1984.interactive_bf1984, .overlay_c0bea0.panel_c0bea0.overlay__747b1,  .button_fb7f94.button__201d5, .statusBubbleOuter_af9888::after, .container_d1d9f3, .fullSizeOverlayBackground_c69a7b, .container__8061a, .activityBiteSizePopout_c1d9fd, .statusBubble_af9888, .statusBubbleOuter_af9888::before, statusBubble_af9888.statusBubbleShape_af9888.statusBubbleSingleLineWithTextShape_af9888.statusBubbleWithTextPadding_af9888::after, .biteSizeInner_c69a7b.userProfileInner_c69a7b.biteSizeInnerThemed_c69a7b, .biteSizeOverlayBackground_c69a7b.overlayBackground_c69a7b.card__39ec2.activity__5be3e, .buttonsInner__5126c.popover_f84418.popoverReactionHoverBar_f84418.wrapper_f7ecac  {
+  background-color: var(--background-primary) ;
+}
+
+.autocompleteRowIcon__13533 foreignObject {
+  mask: none;
+}
+
+.autocompleteRowIcon__13533 .avatar__44b0c {
+  border-radius: 7px;
+}
+:root .wrapper__44b0c,
+.theme-dark .container__37e49 .wrapper__44b0c .avatar__44b0c {
+  border-radius: 15%;
+}
+
+.statusBubbleOuter_af9888::after{
+  background-color: var(--background-primary) !important;
+}
+.header__5be3e mask, .mask__68edb mask {
+  display: none;
+}

@@ -1,0 +1,299 @@
+/**
+ * @name SATANCORD
+ * @author chimi420
+ * @version 1.2.0
+ * @description Hell-themed variant of DIKORD: dark blood-red base, an orange-to-gold "hellfire" accent scale, and a molten lava gradient glowing up through the sidebar/chat/member-list panels. Flame icon instead of the eggplant, "SATANCORD" watermark instead of "DIKORD".
+ */
+
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+:root {
+    /* layout: flush panels, minimal rounding, like stock Discord */
+    --gap: 0px;
+    --border-thickness: 1px;
+    --radius-lg: 6px;
+    --radius-md: 4px;
+    --radius-sm: 3px;
+
+    /* backgrounds, darkest -> lightest, dark blood-red-black (back to red - the orange/gold lives in the accent + lava-glow layers below, not the base) */
+    --bg-4: hsla(355, 30%, 7%, 1);   /* main background */
+    --bg-3: hsla(355, 26%, 10%, 1);  /* secondary elements / sidebar */
+    --bg-2: hsla(355, 22%, 13%, 1);  /* buttons */
+    --bg-1: hsla(355, 18%, 17%, 1);  /* buttons clicked */
+    --hover: hsla(28, 90%, 55%, 0.08);
+    --active: hsla(28, 90%, 55%, 0.16);
+    --active-2: hsla(28, 90%, 55%, 0.24);
+    --message-hover: hsla(0, 0%, 0%, 0.12);
+
+    /* text */
+    --text-1: hsl(355, 15%, 95%);
+    --text-2: hsl(355, 10%, 75%);
+    --text-3: hsl(355, 8%, 62%);
+    --text-4: hsl(355, 8%, 42%);
+    --text-5: hsl(355, 8%, 28%);
+
+    /* hellfire accent: dark ember -> orange -> gold, darkest to lightest */
+    --accent-1: #ffd166;
+    --accent-2: #ff8c1a;
+    --accent-3: #ff5a1a;
+    --accent-4: #e8300c;
+    --accent-5: #b81f08;
+
+    /* channel name colors */
+    --channels-default: var(--text-4);
+    --channels-hover: var(--accent-2);
+    --channels-active: var(--accent-1);
+    --channels-icon-hover: var(--accent-2);
+}
+
+/* DMs/home button icon: a real, always-colored flame - not Midnight's monochrome
+   mask silhouette. Midnight paints --dms-icon-svg-url as a CSS mask (alpha shape
+   only, filled with --dms-icon-color-before/-after), so ANY icon set through that
+   variable - including an emoji glyph - gets flattened into a solid-color cutout.
+   That's why it only ever showed a black/red flame outline. Fix: neutralize the
+   mask layer and overlay the flame as plain emoji text instead, which renders
+   with the emoji font's native colors, unaffected by masking. */
+body {
+    --dms-icon-svg-url: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48dGV4dCB4PSIyNTYiIHk9IjM5MCIgZm9udC1zaXplPSI0NDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCflKU8L3RleHQ+PC9zdmc+');
+}
+
+[class*="wrapper__"][data-list-item-id='guildsnav___home'] > [class*="childWrapper"]::before {
+    background: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
+
+[class*="wrapper__"][data-list-item-id='guildsnav___home'] > [class*="childWrapper"]::after {
+    content: "🔥";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* channel names: white -> orange -> gold "flame" gradient on hover */
+[class*="sidebar_"] [class*="link_"]:hover [class*="name_"],
+[class*="sidebar_"] [class*="interactive_"]:hover [class*="name_"] {
+    background: linear-gradient(180deg, #ffffff 0%, var(--accent-2) 55%, var(--accent-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: all 0.15s ease;
+}
+
+/* DM list names: same gradient. The DM row's <li class="channel_ dm_ ...">
+   paints its visible text in a nested .overflowTooltip_ div, not directly on
+   .name_ like channels do, and that div carries its own explicit color that
+   blocks a transparent-color ancestor - so it has to be targeted directly. */
+li[class*="dm_"] [class*="link_"]:hover [class*="name_"] [class*="overflowTooltip_"],
+li[class*="dm_"] [class*="interactive_"]:hover [class*="name_"] [class*="overflowTooltip_"] {
+    background: linear-gradient(180deg, #ffffff 0%, var(--accent-2) 55%, var(--accent-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: all 0.15s ease;
+}
+
+/* emotes inside a channel/DM name: exempt from the gradient/transparent-fill trick above,
+   which otherwise flattens color emoji into solid blobs */
+[class*="sidebar_"] [class*="link_"]:hover [class*="name_"] img,
+[class*="sidebar_"] [class*="interactive_"]:hover [class*="name_"] img,
+[class*="sidebar_"] [class*="name_"] [class*="emoji"],
+li[class*="dm_"] [class*="link_"]:hover [class*="name_"] img,
+li[class*="dm_"] [class*="interactive_"]:hover [class*="name_"] img,
+li[class*="dm_"] [class*="name_"] [class*="emoji"] {
+    -webkit-text-fill-color: initial;
+    color: initial;
+    opacity: 1;
+    filter: none;
+}
+
+/* DM list avatars spin on hover, same as server icons */
+li[class*="dm_"] [class*="link_"] [class*="avatar_"] {
+    transition: transform 0.6s ease;
+}
+li[class*="dm_"] [class*="link_"]:hover [class*="avatar_"] {
+    transform: rotate(360deg);
+}
+
+/* chat message avatars, member list avatars, and the avatar in a user's
+   profile popout/modal all spin on hover too. "user-profile-popout" is a
+   real (non-hashed) class Discord itself adds to the profile card, so it's
+   used directly instead of a wildcard guess. */
+[class*="chat_"] [class*="avatar_"],
+[class*="members_"] [class*="avatar_"],
+[class*="membersWrap_"] [class*="avatar_"],
+.user-profile-popout [class*="avatar_"],
+[class*="userProfileOuter"] [class*="avatar_"],
+[class*="userProfileInner"] [class*="avatar_"] {
+    transition: transform 0.6s ease;
+}
+[class*="chat_"] [class*="avatar_"]:hover,
+[class*="members_"] [class*="avatar_"]:hover,
+[class*="membersWrap_"] [class*="avatar_"]:hover,
+.user-profile-popout [class*="avatar_"]:hover,
+[class*="userProfileOuter"] [class*="avatar_"]:hover,
+[class*="userProfileInner"] [class*="avatar_"]:hover {
+    transform: rotate(360deg);
+}
+
+/* category names: grey -> orange -> gold gradient */
+[class*="sidebar_"] [class*="title_"] {
+    background: linear-gradient(90deg, var(--text-2) 0%, var(--accent-2) 60%, var(--accent-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* server name: white -> orange -> gold "flame" gradient */
+[class*="sidebar_"] [class*="header_"] [class*="name_"] {
+    background: linear-gradient(180deg, #ffffff 0%, var(--accent-2) 55%, var(--accent-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* ---------- molten lava glow, rising up through the panel backgrounds ----------
+   Discord's real panel backgrounds come through as solid CSS custom properties
+   (--bg-1..4) that get consumed via `background-color` all over the client -
+   overriding those vars with a gradient would silently break every one of those
+   (background-color rejects gradient values), so instead each panel container
+   gets its own `background` override directly: a solid base plus a translucent
+   orange/gold gradient glowing up from the bottom, screen-blended so text stays
+   legible. sidebar_/chat_/membersWrap_ are the standard Discord class prefixes
+   for the channel list, message pane, and member list panels - these weren't
+   verified live (no browser connection this session), so check that the chat
+   pane and member list actually picked up the glow and flag it if not. */
+[class*="sidebar_"] {
+    background:
+        linear-gradient(180deg, rgba(255, 90, 10, 0) 0%, rgba(255, 90, 10, 0.16) 55%, rgba(255, 190, 50, 0.3) 100%),
+        var(--bg-3);
+    background-blend-mode: screen;
+}
+
+[class*="chat_"] {
+    background:
+        linear-gradient(180deg, rgba(255, 90, 10, 0) 0%, rgba(255, 90, 10, 0.14) 55%, rgba(255, 190, 50, 0.26) 100%),
+        var(--bg-4);
+    background-blend-mode: screen;
+}
+
+[class*="membersWrap_"],
+[class*="members_"] {
+    background:
+        linear-gradient(180deg, rgba(255, 90, 10, 0) 0%, rgba(255, 90, 10, 0.16) 55%, rgba(255, 190, 50, 0.3) 100%),
+        var(--bg-3);
+    background-blend-mode: screen;
+}
+
+/* server icons spin on hover. real guild items are a plain
+   <div class="wrapper__xxxx" data-list-item-id="guildsnav___<id>"> wrapping
+   an <img class="icon__xxxx">, no nested childWrapper like the home button has */
+[class*="wrapper__"][data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]) [class*="icon__"] {
+    transition: transform 0.6s ease;
+}
+[class*="wrapper__"][data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]):hover [class*="icon__"] {
+    transform: rotate(360deg);
+}
+
+/* server icons: big (56px) + circular, like 2018 Discord.
+   Discord nests every icon: <div.wrapper_ style="width:40px"> > <svg viewBox> >
+   <foreignObject mask="squircle"> > (same again for guilds) > <img>. Instead of
+   fighting the SVG geometry, zoom the outermost 40px wrapper to 56px (x1.4),
+   strip every squircle mask, and leave the icon art unclipped (see --dikord-icon-radius). Column width is set explicitly so nothing is cropped. */
+body {
+    --custom-guild-list-width: 72px;
+}
+/* --dikord-icon-radius: 0 = show the full, uncropped icon art (default);
+   set e.g. 50% for true circles (crops the corners of square icons) */
+[class*="listItem_"] > span > div > [style*="width: 40px"] {
+    zoom: 1.4;
+    overflow: visible;
+    border-radius: var(--dikord-icon-radius, 0);
+}
+[data-list-item-id^="guildsnav___"] [class*="icon_"] {
+    border-radius: var(--dikord-icon-radius, 0);
+}
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
+    border-radius: 50%;
+}
+[class*="listItem_"] foreignObject {
+    mask: none !important;
+    -webkit-mask: none !important;
+}
+[class*="circleIconButton_"] {
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: transparent !important;
+    border: 1px dashed currentColor;
+}
+[data-list-id="guildsnav"] [class*="stack_"] {
+    gap: 8px !important;
+}
+/* add-server / discover buttons: neon glow on hover (green = add, purple = discover).
+   Discord's own hover colours made them vanish against the transparent background */
+[data-list-item-id="guildsnav___create-join-button"]:hover,
+[data-list-item-id="guildsnav___create-join-button"]:focus-visible {
+    color: #39ff14 !important;
+    border: 1px solid #39ff14 !important;
+    background-color: rgba(57, 255, 20, 0.12) !important;
+    box-shadow: 0 0 10px #39ff14, inset 0 0 8px rgba(57, 255, 20, 0.5) !important;
+}
+[data-list-item-id="guildsnav___guild-discover-button"]:hover,
+[data-list-item-id="guildsnav___guild-discover-button"]:focus-visible {
+    color: #bf40ff !important;
+    border: 1px solid #bf40ff !important;
+    background-color: rgba(191, 64, 255, 0.12) !important;
+    box-shadow: 0 0 10px #bf40ff, inset 0 0 8px rgba(191, 64, 255, 0.5) !important;
+}
+[class*="circleIconButton_"] {
+    transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+[class*="circleIconButton_"]:hover [class*="circleIcon_"] {
+    color: inherit !important;
+    filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* ---------- SATANCORD watermark, top-left corner ---------- */
+/* split into two pseudo-elements: gradient-clip transparent fill turns color
+   emoji into flat blobs in Chromium, so the emoji get their own plain-colored layer */
+#app-mount::before {
+    content: "SATANCORD";
+    position: fixed;
+    top: 4px;
+    left: 76px;
+    z-index: 9999;
+    font-family: var(--font-display, "gg sans", sans-serif);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--text-2) 0%, var(--accent-2) 60%, var(--accent-1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    opacity: 0.9;
+    pointer-events: none;
+    user-select: none;
+}
+
+#app-mount::after {
+    content: "🔥";
+    position: fixed;
+    top: 4px;
+    left: 210px;
+    z-index: 9999;
+    font-size: 16px;
+    opacity: 0.9;
+    pointer-events: none;
+    user-select: none;
+}

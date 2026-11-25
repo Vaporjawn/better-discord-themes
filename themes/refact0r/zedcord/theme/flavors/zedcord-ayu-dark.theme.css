@@ -1,0 +1,103 @@
+/**
+ * @name zedcord (ayu dark)
+ * @description discord, but it's zed-themed (ayu dark).
+ * @author refact0r
+ * @version 0.1.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/zedcord
+ * @source https://github.com/refact0r/zedcord/blob/main/theme/flavors/zedcord-ayu-dark.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+ * @donate https://ko-fi.com/refact0r
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=Lilex:wght@400;700&display=swap');
+
+@import url('https://refact0r.github.io/zedcord/build/zedcord.css');
+
+/* zed "Ayu Dark" (assets/themes/ayu/ayu.json, copy in research/). token keys are in theme/zedcord.theme.css */
+:root {
+    /* surfaces: laid out like one dark, with a much darker editor */
+    --zed-title-bar: #313337;
+    --zed-status-bar: #313337;
+    --zed-panel: #1f2127;
+    --zed-surface: #1f2127;
+    --zed-elevated-surface: #1f2127;
+    --zed-tab-bar: #1f2127;
+    --zed-tab-active: #0d1016;
+    --zed-editor: #0d1016;
+    --zed-active-line: #1f2127bf;
+
+    --zed-border: #3f4043;
+    --zed-border-variant: #2d2f34;
+    --zed-border-focused: #1b4a6e;
+    --zed-border-selected: #1b4a6e;
+
+    --zed-element: #1f2127;
+    --zed-element-hover: #2d2f34;
+    --zed-element-active: #3e4043;
+    --zed-element-selected: #3e4043;
+    --zed-ghost-element: #00000000;
+    --zed-ghost-element-hover: #2d2f34;
+    --zed-ghost-element-active: #3e4043;
+    --zed-ghost-element-selected: #3e4043;
+
+    --zed-text: #bfbdb6;
+    --zed-text-muted: #8a8986;
+    --zed-text-placeholder: #696a6a;
+    --zed-text-accent: #5ac1fe;
+    --zed-text-ignored: #696a6a;
+    --zed-editor-fg: #bfbdb6;
+    --zed-line-number: #4b4c4e;
+    --zed-scrollbar-thumb: #bfbdb64c;
+    --zed-selection: #5ac1fe3d;
+
+    --zed-syntax-keyword: #ff8f3f;
+    --zed-syntax-string: #a9d94b;
+    --zed-syntax-number: #d2a6ff;
+    --zed-syntax-function: #ffb353;
+    --zed-syntax-type: #59c2ff;
+    --zed-syntax-operator: #f29668;
+    --zed-syntax-comment: #5c6773;
+    --zed-syntax-comment-style: normal;
+    --zed-syntax-comment-doc: #8c8b88;
+    --zed-syntax-property: #5ac1fe;
+    --zed-syntax-variable: #bfbdb6;
+    --zed-syntax-punctuation: #a6a5a0;
+    --zed-syntax-tag: #5ac1fe;
+    --zed-syntax-attribute: #5ac1fe;
+    --zed-syntax-selector: #d2a6ff;
+    --zed-syntax-emphasis: #5ac1fe;
+    --zed-syntax-emphasis-strong: #5ac1fe;
+
+    /* discord-only: server icon tiles (`background`, as in one dark) */
+    --zed-guild-icon: #313337;
+
+    /* accents. 2 is the theme's value, purple is constant (ayu's "magenta" is cyan). other steps keep one dark's
+       lightness and chroma */
+    --red-1: #fd999b;
+    --red-2: #ef7177;
+    --red-3: #e45460;
+    --red-4: #d43d4e;
+    --red-5: #ba3141;
+    --green-1: #c2e980;
+    --green-2: #aad84c;
+    --green-3: #95c51b;
+    --green-4: #83af00;
+    --green-5: #719800;
+    --blue-1: #9ad7ff;
+    --blue-2: #5ac1fe;
+    --blue-3: #2ab1f6;
+    --blue-4: #00a0e5;
+    --blue-5: #008dca;
+    --yellow-1: #ffcb8d;
+    --yellow-2: #feb454;
+    --yellow-3: #f7a000;
+    --yellow-4: #de8f00;
+    --yellow-5: #be7900;
+    --purple-1: #e5ceff;
+    --purple-2: #d2a6ff;
+    --purple-3: #c191f1;
+    --purple-4: #af7edf;
+    --purple-5: #9a6ec5;
+}

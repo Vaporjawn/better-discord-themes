@@ -1,0 +1,12 @@
+/**
+ * @name Candyfloss
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(180.14deg, var(--bg-gradient-cotton-candy-1) 8.5%, var(--bg-gradient-cotton-candy-2) 94.28%);
+}

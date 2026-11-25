@@ -1,0 +1,17 @@
+/**
+  * @name UserPFP
+  * @author cutekita, FoxStorm1, Pikai
+  * @version 1.0.4
+  * @description A pure CSS implementation of UserPFP
+  * @source https://raw.githubusercontent.com/UserPFP/UserPFP/main/userpfp.theme.css
+  * @website https://github.com/UserPFP/UserPFP
+  * @invite userpfp-1129784704267210844
+*/
+
+/* Avatar Import */
+@import url(https://raw.githubusercontent.com/UserPFP/UserPFP/main/import.css);
+
+/*Secret checkmark for people to check if this file is imported*/
+[class$=-avatar][src^="https://cdn.discordapp.com/avatars/1162809535686262955/"][src$="?size=128"] {
+  content: url(https://raw.githubusercontent.com/UserPFP/img/main/check.png);
+}

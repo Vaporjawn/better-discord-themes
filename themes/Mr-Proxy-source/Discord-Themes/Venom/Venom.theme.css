@@ -1,0 +1,42 @@
+/**
+* @name Venom
+* @description Enjoy this discord theme with pop up elements and venom style ! 
+* @donate https://www.paypal.com/paypalme/Bypasssss
+* @author MrProxy
+* @invite Uerdjskuxb
+* @source https://mr-proxy-source.github.io/Discord-Themes/Venom/src/venom.css
+* @version 1.0.0
+*/  
+
+@import url('https://mr-proxy-source.github.io/Discord-Themes/Venom/src/venom.css');
+
+:root {
+
+    /*Background settings*/
+
+    --app-background: url('https://cdn.discordapp.com/attachments/858894428428828703/876172579008806922/venom-minimal_a2tpbWqUmZqaraWkpJRnamtlrWZpaWU.png'); /*App background*/
+    --app--bg-opacity: 0.40; /*App background opacity*/
+    --background-image: url('https://cdn.discordapp.com/attachments/858894428428828703/876172579008806922/venom-minimal_a2tpbWqUmZqaraWkpJRnamtlrWZpaWU.png'); /*Main background image*/
+    --bg-blur: 0px; /*Main background blur*/
+    --bg-opacity: 0; /*Main background opacity*/
+    --popout-bg: url('https://cdn.discordapp.com/attachments/858894428428828703/876173347757641788/image_16.jpg'); /*Background for popouts*/
+    --popout-blur: 0px; /*Popout background blur*/
+    --popout-opacity: 0; /*Popout background opacity*/
+
+    /*General Settings*/
+
+    --home-icon-image: url('https://c.tenor.com/9cNxYn8aoaYAAAAi/dancing-venom.gif'); /*Home icon*/
+    --main-dark-color: 21, 21, 21; /*Main dark color of the theme | WARNING: USE RGB VALUES IF YOU CHANGE THE COLOR | Default 21, 21, 21*/
+    --scrollbar-dark-color: 6, 6, 6; /*Main dark color of the theme | WARNING: USE RGB VALUES IF YOU CHANGE THE COLOR | Default 21, 21, 21*/
+    --window-padding: 50px; /*Change to modify window size | Default 50px*/
+    --window-border-radius: 12px; /*Modifies the main window border-radius | Default 12px*/
+    --main-radius: 12px; /*Modifies the border-radius of most elements | Default 12px*/
+    --settings-width: 60%; /*Width for the settings window | Default 60%*/
+    --settings-heigth: 85%; /*Width for the settings window | Default 85%*/
+    --embed-border: 0px; /*Makes it so some embeds in chat have their corresponding border | 0px = no borders*/
+    --button-radius: 8px; /*Radius for the buttons | Default 8px*/
+    --accent-color: 142, 255, 174; /*Main accent | WARNING: USE RGB VALUES IF YOU CHANGE THE COLOR | Default 142, 255, 174*/
+
+    /*Text settings*/
+    --server-channel-textc: 198, 198, 198; /*Text color for some elements | WARNING: USE RGB VALUES IF YOU CHANGE THE COLOR | Default 157, 157, 157*/
+}

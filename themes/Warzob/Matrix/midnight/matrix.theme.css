@@ -1,0 +1,233 @@
+/**
+ * @name Matrix31
+ * @description Matrix theme for discord Vencord V3.1
+ * @author WarZob
+ * @version 3.2.0
+ * @website https://github.com/Warzob
+ * @source https://github.com/Warzob/MidnightMountains
+ * @invite Xe6D5GwkwC
+*/
+
+/* ==== import theme modules ==== */ 
+    /* ====  Theme ==== */
+        @import url('https://raw.githubusercontent.com/Warzob/ThemedependanceWZ/refs/heads/main/build/V3.1.css');
+            /* ==== Fonts ==== */
+                @import url('https://fonts.googleapis.com/css2?family=Victor+Mono:wght@400;600&display=swap');
+                    /* ==== Fonts Lecteur Spotify ==== */  
+                         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+body {
+  /* ====  ON/OFF ==== */
+        --animations: on; /* off: disable animations/transitions, on: enable animations/transitions */
+        --top-bar-title-position: off; /* off: default centered position, hide: hide title completely, left: left align title (like old discord) */
+        --subtle-top-bar-title: on; /* off: default, on: hide the icon and use subtle text color (like old discord) */
+        --custom-dms-icon: on; /* off: use default discord icon, hide: remove icon entirely, custom: use custom icon */
+        --custom-dms-background: on; /* off to disable, image to use a background image (must set url variable below), color to use a custom color/gradient */
+        --background-image: on; /* off: no background image, on: enable background image (must set url variable below) */
+        --transparency-tweaks: off; /* off: no changes, on: remove some elements for better transparency */
+        --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+        --panel-blur: off; /* off: no changes, on: blur the background of panels */
+        --custom-chatbar: aligned; /* off: default chatbar, aligned: chatbar aligned with the user panel, separated: chatbar separated from chat */
+        --small-user-panel: off; /* off: default user panel, on: smaller user panel like in old discord */
+        --custom-window-controls: on; /* off: default window controls, on: custom window controls */
+        --ascii-loader: matrix24; /* off: default loader, mountains: mountains loader */
+
+        --showplaying: none; /* off: default, on: show the playing status */
+        --showNitroButton: none; /* off: default, on: show the nitro button */
+        --showStore: none; /* off: default, on: show the store button */
+        --showShop: none; /* off: default, on: show the shop button */
+        --shownul: none; /* off: default, on: show the null button */
+        --showtitle: none; /* off: default, on: show the title */
+
+  /* ==== Font, change to '' for default discord font ==== */  
+        --font: 'Victor Mono', monospace;
+        font-weight: 400 /* normal text font weight. DOES NOT AFFECT BOLD TEXT */;
+ 
+  /* ==== Image Emote Discord ==== */
+        --customEmojiIconURL: url(https://cdn.discordapp.com/emojis/1217110775601172591.gif?size=240&quality=lossless);
+        --customEmojiIconMask: url(https://cdn.discordapp.com/emojis/1217110775601172591.gif?size=240&quality=lossless);
+
+  /* ==== Sizes ==== */ 
+        --gap: 12px; /* spacing between panels */
+        --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
+        --border-thickness: 1px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
+  
+  /* ==== Animation/Transition Options ==== */
+        --list-item-transition: 0.25s ease; /* transition for list items */
+        --dms-icon-svg-transition: 0.45s ease; /* transition for the dms icon */
+  
+  /* ==== Top Bar Options ==== */
+        --top-bar-height: 32px; /* height of the titlebar/top bar (discord default is 36px, 24px recommended if moving/hiding top bar buttons) */
+        --top-bar-button-position: titlebar; /* off: default position, hide: hide inbox/support buttons completely, serverlist: move inbox button to server list, titlebar: move inbox button to titlebar (will hide title) */
+  
+  /* ==== Window Controls ==== */
+        --window-control-size: 12px; /* size of custom window controls */
+
+  /* ==== Dms Button Options ==== */
+        --dms-icon-svg-url: url('https://raw.githubusercontent.com/Warzob/ThemedependanceWZ/7129f0e8521e45164e2c999da19284a0a08fc797/assets/pills-svgrepo-com%20(1).svg');
+        --dms-icon-svg-size: 100%;
+        --dms-icon-color-before: oklch(42% 0.1816 266.29);
+        --dms-icon-color-after: oklch(56% 0.2289 29.23);
+        --dms-background-image-size: cover; /* size of the background image (css background-size property) */
+        --dms-background-color: transparent; /* fixed color/gradient (css background property) */
+
+  /* ==== Background Image options ==== */
+      --background-image-url: '';
+
+  /* ==== Transparency/Blur options  NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); ==== */
+      --blur-amount: 12px; /* amount of blur */
+      --bg-floating: var(--bg-3); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
+
+  /* ==== Chatbar Options ==== */
+      --chatbar-height: 47px; /* height of the chatbar (52px by default, 47px recommended for aligned, 56px recommended for separated) */
+      --chatbar-padding: 8px; /* padding of the chatbar. only applies in aligned mode. */
+}
+
+:root {
+    /* ==== Color Options ==== */  
+      --colors: on; /* off: discord default colors, on: midnight custom colors */
+
+    /* ==== Couleurs de texte ==== */
+        --text-0: oklch(0.07 0.0275 29.23);/* Texte sur les éléments colorés */
+        --text-1: oklch(0.5 0.1599 143.98);/* Autre texte normalement blanc */
+        --text-2: oklch(0.88 0.199188 160.1355 / 30%);/* Titres et texte important */
+        --text-3: oklch(0.57 0.0019 145.55);/* Texte normal */
+        --text-4: oklch(0.57 0.0019 145.55);/* Boutons d'icônes et canaux */
+        --text-5: oklch(0.57 0.0019 145.55);/* Canaux/chats en sourdine et horodatages */
+
+    /* ==== Couleurs de fond et sombres ==== */
+        --bg-1: oklch(0.18 0.0038 164.58 / 0.98);/* Boutons sombres lorsqu'ils sont cliqués */
+        --bg-2: oklch(0.18 0.0038 164.58 / 0.98);/* Boutons sombres */
+        --bg-3: oklch(0.18 0.0038 164.58 / 0.98);/* Espacement, éléments secondaires */
+        --bg-4: oklch(0.26 0.0205 150.73 / 0.2);/* Couleur de fond principale */
+            --hover: oklch(0.48 0.0678 313.43 / 10%); /* Canaux et boutons au survol */
+            --active: oklch(0.49 0.0447 264.03 / 20%);/* Canaux et boutons lorsqu'ils sont cliqués ou sélectionnés */
+            --active-2: oklch(0.49 0.0447 264.03 / 30%);/* État supplémentaire pour les boutons transparents */
+            --message-hover: oklch(0.63 0.1971 144.38 / 0.10);/* Messages au survol */
+
+    /* ==== Couleurs d'accentuation ==== */
+        --accent-1: oklch(0.5 0.1599 143.98);/* Liens et texte d'accentuation */
+        --accent-2: oklch(0.88 0.199188 160.1355 / 30%);/* Petits éléments d'accentuation */
+        --accent-3: oklch(0.88 0.199188 160.1355 / 30%);/* Boutons d'accentuation */
+        --accent-4: oklch(0.88 0.199188 160.1355 / 30%);/* Boutons d'accentuation au survol */
+        --accent-5: oklch(0.88 0.199188 160.1355 / 30%);/* Boutons d'accentuation lorsqu'ils sont cliqués */
+        --accent-new: oklch(0.88 0.199188 160.1355 / 30%);/* Éléments comme les boutons de sourdine/désactivation */
+            --mention: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 90%) 40%, transparent);/* Fond des messages qui vous mentionnent */
+            --mention-hover: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 95%) 40%, transparent);/* Fond des messages qui vous mentionnent au survol */
+            --reply: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 90%) 40%, transparent);/* Fond des messages qui vous répondent */
+            --reply-hover: linear-gradient(to right, color-mix(in oklch, oklch(0.5 0.1599 143.98), transparent 95%) 40%, transparent);/* Fond des messages qui vous répondent au survol */
+
+    /* ==== Couleurs des indicateurs de statut ==== */ 
+        --online: oklch(0.71 0.1958 149.62);
+        --dnd: oklch(63% 0.3 160);
+        --idle: oklch(0.8 0.1641 102.06);
+        --streaming: oklch(0.36 0.1614 320.67);
+        --offline: oklch(0.49 0.1935 28.37);
+
+    /* ==== Couleurs des bordures ==== */
+        --border-light: oklch(0.88 0.199188 160.1355 / 30%);/* Couleur de bordure claire */
+        --border: oklch(0.88 0.199188 160.1355 / 10%);/* Couleur de bordure normale */
+        --button-border: oklch(0.26 0 none / 0.07);/* Couleur de bordure neutre des boutons */
+        --border-hover: oklch(0.88 0.199188 160.1355 / 30%); /* border color of panels when hovered */
+        
+    /* ==== Couleurs de base ==== */
+        --matrix-green: oklch(0.71 0.1958 149.62);
+        --matrix-green-1: oklch(63% 0.3 160);
+        --matrix-green-2: oklch(0.61 0.1677 149.43 / 0.3);
+        --matrix-dark: oklch(3% 0 0);
+        --matrix-main: oklch(0.71 0.1958 149.62);
+        --matrix-main-1: oklch(63% 0.3 160);
+        --matrix-main-2: oklch(0.73 0.2131 146.83 / 0.3);
+}
+
+/* ====  Addons.css ==== */
+.visual-refresh {
+    /* ====  Couleur ==== */
+    .guildSeparator__252b6 {width: 40px !important;background-color: oklch(0.61 0.1677 149.43 / 0.3);margin: 0.38px;}
+    .icon__2ea32 {color: oklch(0.36 0.092 150.85) !important; /* Vert pour les écouteurs */} /* Colorer les icônes des salons vocaux (écouteurs) */
+    
+    /* ==== On/off ==== */
+    div[class^=channelAppLauncher_] {display:  var(--showplaying) !important;}
+    button:has([d^=' M-7,10 C-8' i]) { display: var(--showNitroButton); } /* Hide Gift Button */
+    [href="/store"]{ display: var(--showStore);}
+    [href='/shop'] {display: var(--showShop);}
+    .container__4bbc6 {display: var(--shownul);}
+    .title_c38106 {display: var(--showtitle);}
+
+    /* ==== Emoji ==== */
+        [class*=emojiButton] [class*=spriteColored]{background: var(--customEmojiIconURL) center/contain no-repeat;}
+        [class*=emojiButton] [class*=spriteGreyscale]{mask: var(--customEmojiIconMask) center/contain no-repeat;}
+
+            /* ==== EMOJI ANIMATION.css ==== */
+            div[class*=autocompleteInner] [class*=clickable] [class*=base]:hover{transition: all 0s;transform: scale(1.02);}
+            div[class*=autocompleteInner] [class*=base]{ transition: all 0.3s;}
+
+    /* ==== Search Bar.css ==== */
+        [class*=search]:not([class*=open]) > [class^=searchBar] {width: 22px;margin-top: 6px;margin-right: 8px;background: transparent;border-width: 0px;}
+        [class*=searchBarComponent]{background: transparent;}
+        [class*=search]:not([class*=open]) [class^='iconLayout'] {cursor: pointer;}
+        [class*=search]:not([class*=open]) [class^='iconContainer'] {transform: scale(1.4);}
+        [class*=search]:not([class*=open]) [class^='icon_fea832']{color: var(--interactive-normal);}
+        [class*=search]:not([class*=open]):hover [class^='icon'] {color: var(--interactive-active);}
+
+    /* ==== Fond avec GIF animé ==== */
+        #app-mount {background: oklch(3% 0 0);position: relative;overflow: hidden;}
+        #app-mount::before {content: '';position: fixed;inset: 0;background: url('https://c.tenor.com/yasksYy1XekAAAAC/tenor.gif') repeat;opacity: 1;z-index: -2;}
+        #app-mount::after {content: '';position: fixed;inset: 0;background: oklch(0 0 0 / 50%);background-blend-mode: overlay;opacity: 1;z-index: -1;pointer-events: none;}
+
+    /* ==== Lecteur Spotify ==== */  
+        /* ==== Animations Spotify ==== */
+            @keyframes shimmer {0% { transform: translateX(-100%); }100% { transform: translateX(100%); }}
+            @keyframes pulse {0% { transform: scale(1); }50% { transform: scale(1.02); }100% { transform: scale(1); }}
+
+        /* ==== Modify bounding box ==== */
+            #vc-spotify-player {position: relative;height: 100px;border: 0;--vc-spotify-green: oklch(0.37 0.1124 144.71) !important;z-index: -1;transition: height 0.25s ease-in-out, box-shadow 0.3s ease;background: linear-gradient(135deg, rgba(29, 185, 84, 0.2), rgba(0, 0, 0, 0.5));border-radius: 10px;display: flex; /* Pour aligner pochette et textes */ align-items: center; /* Centrage vertical */justify-content: center; /* Centrage horizontal en mode flou */padding: 10px; /* Espacement interne */}
+
+        /* ==== Grow in size and glowing border when hovered ==== */
+            #vc-spotify-player:hover {height: 125px;justify-content: flex-start; /* Revenir à l’alignement à gauche en mode non flou */}
+
+        /* ==== Background album art with pulse animation ==== */
+            #vc-spotify-player::before {content: "";position: absolute;height: 200%;width: 100%;top: 0;left: 0;z-index: -1;background: var(--vc-spotify-track-image);background-size: 110%;background-position: 60% 60%;filter: blur(5px) brightness(50%);transition: all 0.25s ease-in-out;border-radius: 10px;animation: pulse 2s ease-in-out infinite;}
+            #vc-spotify-player:hover::before {filter: blur(0) brightness(50%);animation: none;}
+
+        /* ==== Album image (visible and centered only when blur is active) petite image ==== */
+            #vc-spotify-album-image {display: block; /* Visible par défaut (quand flou actif) */width: 60px; /* Taille agrandie */height: 60px;margin-top: -15px;margin-left:180px;filter: drop-shadow(0 0 2px black); /* Ombre portée */transition: transform 0.2s ease, opacity 0.2s ease; /* Animation fluide */opacity: 1; /* Visible par défaut */}
+
+        /* Masquer l’image au survol (quand flou désactivé)  ==== */
+            #vc-spotify-player:hover #vc-spotify-album-image {opacity: 0; /* Disparaît en douceur */display: none; /* Assure que l’espace est libéré */}
+
+        /* ==== Increase song title size with neon effect and emoji ==== */
+            #vc-spotify-song-title {font-size: 130%;margin-top: -5px;color: oklch(0.37 0.1124 144.71);filter: drop-shadow(0 0 2px black);text-shadow: 0 0 6px rgba(0, 0, 0, 0.185), 0 0 10px var(--vc-spotify-green);transition: text-shadow 0.3s ease, margin 0.2s ease, text-align 0.2s ease; /* Animation fluide */font-family: 'Poppins', sans-serif !important;}
+
+        /* ==== Positionner le titre en haut à gauche en mode non flou ==== */
+            #vc-spotify-player:hover #vc-spotify-song-title {top: 20px; /* Placer en haut */right: 250px; /* Placer à gauche */margin: 0; /* Supprimer les marges */text-align: left; /* Alignement à gauche */}
+            #vc-spotify-titles span {visibility: visible;position: relative;color: rgb(184, 179, 179);filter: drop-shadow(0 0 2px black);text-shadow: 0 0 6px rgba(0, 0, 0, 0.185);font-family: 'Poppins', sans-serif !important;}
+
+        /* ==== Positionner l’artiste en haut à gauche en mode non flou ==== */
+            #vc-spotify-player:hover #vc-spotify-titles {position: absolute;top: 9px; /* Juste en-dessous du titre */left: 1px; /* Placer à gauche */margin: 2; /* Supprimer les marges */text-align: left; /* Alignement à gauche */}
+
+        /* ==== Change progress bar color with shimmer effect ==== */
+            .barFill_a562c8::after {content: "";position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);animation: shimmer 2s infinite linear;}
+
+        /* ==== Button row with hover animation ==== */
+            .vc-spotify-button-row {filter: drop-shadow(0 0 2px black);position: relative;top: 20px;right:-130px;display: flex;justify-content: center;}
+            .vc-spotify-button-row button {transition: transform 0.2s ease, background-color 0.2s ease;}
+            .vc-spotify-button-row button:hover {transform: scale(1.1);background-color: var(--vc-spotify-green);}
+
+        /* ==== Drop shadow & color for the time text ==== */
+            .vc-spotify-progress-time {filter: drop-shadow(0 0 2px black);font-family: 'Poppins', sans-serif !important;}
+
+        /* ==== Remove clipping for big chars (ex. y, g) ==== */
+            .vc-spotify-ellipoverflow {overflow: visible;}
+
+        /* ==== rop shadow for visibility ==== */
+            .buttons__37e49 button,
+            .avatarWrapper__37e49 {filter: drop-shadow(0 0 2px black);}
+
+        /* ==== Position progress bar (shifted 1cm down in blur mode) ==== */
+            #vc-spotify-progress-bar {position: absolute !important;top: calc(60% + 10px); /* Décalage de 1cm (10px) en mode flou */width: 80% !important;left: 9%;display: block !important; /* Assure la visibilité */z-index: 1; /* Place au-dessus du fond */}
+
+        /* ==== Remonter la barre en mode non flou ==== */
+            #vc-spotify-player:hover #vc-spotify-progress-bar {top: 70%; /* Position par défaut sans décalage */}
+
+}

@@ -1,0 +1,205 @@
+/**
+ * @name Catppuccin Mocha
+ * @author ReCore
+ * @description A soft catppuccin mocha palette with a mauve accent, rounded panels and a quiet animated aurora behind the window.
+ * @version 1.0.0
+ * @license MIT
+ * @source https://github.com/catppuccin/catppuccin
+ */
+
+/*
+ * Catppuccin Mocha, for Discord and ReCore.
+ *
+ * The palette is the community's Mocha flavour: a midnight base, a soft
+ * mantle crust, rosewater text and the mauve accent. ReCore reads both the
+ * Discord tokens and the --rl-* values; a browser reads the tokens and the
+ * rules at the foot.
+ */
+
+:root,
+.theme-dark {
+    color-scheme: dark;
+
+    /* Catppuccin Mocha: palette */
+    --ctp-base: #1e1e2e;
+    --ctp-mantle: #181825;
+    --ctp-crust: #11111b;
+    --ctp-surface0: #313244;
+    --ctp-surface1: #45475a;
+    --ctp-surface2: #585b70;
+    --ctp-text: #cdd6f4;
+    --ctp-subtext1: #bac2de;
+    --ctp-subtext0: #a6adc8;
+    --ctp-overlay0: #6c7086;
+    --ctp-overlay1: #7f849c;
+    --ctp-mauve: #cba6f7;
+    --ctp-pink: #f5c2e7;
+    --ctp-red: #f38ba8;
+    --ctp-green: #a6e3a1;
+    --ctp-yellow: #f9e2af;
+    --ctp-blue: #89b4fa;
+
+    --rl-accent: var(--ctp-mauve);
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: var(--ctp-pink);
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 55%, var(--ctp-text));
+    --rl-radius: 12px;
+    --rl-font: "Inter", "gg sans", "Noto Sans", sans-serif;
+    --rl-tracking: 0.005em;
+    --rl-motion: full;
+    --rl-panel-opacity: 92%;
+    --rl-background-dim: 72%;
+    --rl-background-image: linear-gradient(145deg, #11111b, #1e1e2e 48%, #313244);
+    --rl-scanline-opacity: 0;
+    --rl-grain-opacity: 0.04;
+    --rl-vignette-opacity: 0.2;
+    --rl-flicker-duration: 0s;
+    --rl-beam-opacity: 0;
+    --rl-frame-opacity: 0;
+    --rl-avatar-scanline: 0;
+
+    /* Backgrounds */
+    --background-primary: #1e1e2e;
+    --background-secondary: #181825;
+    --background-secondary-alt: #11111b;
+    --background-tertiary: #11111b;
+    --background-floating: #313244;
+    --background-nested-floating: #27273a;
+    --background-base-lowest: #11111b;
+    --background-base-lower: #1e1e2e;
+    --background-base-low: #181825;
+    --background-surface-high: #313244;
+    --background-surface-higher: #45475a;
+    --background-surface-highest: #585b70;
+    --background-code: #11111b;
+    --background-tooltip: #313244;
+    --chat-background: #1e1e2e;
+    --channeltextarea-background: #181825;
+    --input-background-default: #181825;
+    --background-accent: #45475a;
+
+    /* Text */
+    --text-normal: #cdd6f4;
+    --text-default: #cdd6f4;
+    --text-strong: #f5e0ff;
+    --text-muted: #a6adc8;
+    --text-subtle: #6c7086;
+    --header-primary: #f5e0ff;
+    --header-secondary: #bac2de;
+    --channels-default: #bac2de;
+    --channel-icon: #a6adc8;
+    --interactive-normal: #bac2de;
+    --interactive-hover: #cdd6f4;
+    --interactive-active: #f5e0ff;
+    --interactive-muted: #6c7086;
+    --text-link: #89b4fa;
+
+    /* Accents */
+    --brand-experiment: #cba6f7;
+    --brand-360: #f5c2e7;
+    --brand-500: #cba6f7;
+    --brand-530: #b98ff0;
+    --brand-560: #a97ce5;
+    --brand-600: #9469d4;
+    --control-primary-background-default: #cba6f7;
+    --control-primary-background-hover: #b98ff0;
+    --control-primary-text-default: #1e1e2e;
+    --control-secondary-background-default: #313244;
+    --control-secondary-background-hover: #45475a;
+
+    /* Status */
+    --status-positive: #a6e3a1;
+    --status-warning: #f9e2af;
+    --status-danger: #f38ba8;
+    --status-green: #a6e3a1;
+    --status-yellow: #f9e2af;
+    --online: #a6e3a1;
+    --idle: #f9e2af;
+
+    /* Borders and surfaces */
+    --border-subtle: #313244;
+    --border-normal: #45475a;
+    --border-strong: #585b70;
+    --background-modifier-hover: rgba(203, 166, 247, 0.08);
+    --background-modifier-active: rgba(203, 166, 247, 0.14);
+    --background-modifier-selected: rgba(203, 166, 247, 0.2);
+    --background-modifier-accent: #45475a;
+    --message-background-hover: rgba(203, 166, 247, 0.06);
+    --avatar-background: #45475a;
+    --app-frame-background: #11111b;
+    --app-frame-border: #313244;
+
+    /* Typography and shape */
+    --font-primary: var(--rl-font);
+    --font-display: var(--rl-font);
+    --font-code: "JetBrains Mono", "Cascadia Code", monospace;
+    --radius-xs: 6px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-round: 9999px;
+}
+
+[class*="guilds_"] {
+    background: #11111b;
+    border-right: 1px solid #313244;
+}
+
+[class*="sidebarList_"],
+[class*="privateChannels_"],
+[class*="membersWrap_"] {
+    background: #181825;
+}
+
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: transparent;
+}
+
+[class*="channelTextArea_"],
+[class*="textArea_"] {
+    background: #181825;
+    border: 1px solid #313244;
+    border-radius: 12px;
+}
+
+[class*="message_"]:hover {
+    background: rgba(203, 166, 247, 0.06);
+    border-radius: 8px;
+}
+
+[class*="selected_"],
+[class*="selected-"] {
+    background: rgba(203, 166, 247, 0.2);
+    border-radius: 8px;
+}
+
+::selection {
+    background: #cba6f7;
+    color: #1e1e2e;
+}
+
+@keyframes catppuccin-aurora {
+    from {
+        background-color: rgba(203, 166, 247, 0.07);
+        opacity: 0.25;
+    }
+    50% {
+        background-color: rgba(137, 180, 250, 0.11);
+        opacity: 0.5;
+    }
+    to {
+        background-color: rgba(203, 166, 247, 0.07);
+        opacity: 0.25;
+    }
+}
+
+body {
+    animation: catppuccin-aurora 30s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        animation: none;
+    }
+}

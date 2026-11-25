@@ -1,0 +1,198 @@
+/**
+ * @name Nord Aurora
+ * @author ReCore
+ * @description Nord's arctic blues and snow text with an aurora-green accent, soft panels and a slow, quiet aurora wash.
+ * @version 1.0.0
+ * @license MIT
+ * @source https://www.nordtheme.com/
+ */
+
+/*
+ * Nord Aurora for Discord and ReCore. The grounds and text are Nord's
+ * Polar Night and Snow Storm; the accent is Aurora Green, with Frost blue
+ * for links and a gentle moving aurora behind the panels.
+ */
+
+:root,
+.theme-dark {
+    color-scheme: dark;
+
+    /* Nord: Polar Night and Snow Storm */
+    --nord0: #2e3440;
+    --nord1: #3b4252;
+    --nord2: #434c5e;
+    --nord3: #4c566a;
+    --nord4: #d8dee9;
+    --nord5: #e5e9f0;
+    --nord6: #eceff4;
+    --nord7: #8fbcbb;
+    --nord8: #88c0d0;
+    --nord9: #81a1c1;
+    --nord10: #5e81ac;
+    --nord11: #bf616a;
+    --nord13: #ebcb8b;
+    --nord14: #a3be8c;
+
+    --rl-accent: #a3be8c;
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: #8fbcbb;
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 55%, #eceff4);
+    --rl-radius: 10px;
+    --rl-font: "Inter", "gg sans", "Noto Sans", sans-serif;
+    --rl-tracking: 0.01em;
+    --rl-motion: full;
+    --rl-panel-opacity: 90%;
+    --rl-background-dim: 66%;
+    --rl-background-image: linear-gradient(135deg, #2e3440 0%, #3b4252 52%, #434c5e 100%);
+    --rl-scanline-opacity: 0;
+    --rl-grain-opacity: 0.03;
+    --rl-vignette-opacity: 0.16;
+    --rl-flicker-duration: 0s;
+    --rl-beam-opacity: 0;
+    --rl-frame-opacity: 0;
+
+    /* Backgrounds */
+    --background-primary: #2e3440;
+    --background-secondary: #3b4252;
+    --background-secondary-alt: #292f3a;
+    --background-tertiary: #292f3a;
+    --background-floating: #434c5e;
+    --background-nested-floating: #3b4252;
+    --background-base-lowest: #292f3a;
+    --background-base-lower: #2e3440;
+    --background-base-low: #3b4252;
+    --background-surface-high: #434c5e;
+    --background-surface-higher: #4c566a;
+    --background-surface-highest: #5a657a;
+    --background-code: #292f3a;
+    --background-tooltip: #434c5e;
+    --chat-background: #2e3440;
+    --channeltextarea-background: #3b4252;
+    --input-background-default: #3b4252;
+    --background-accent: #4c566a;
+
+    /* Text */
+    --text-normal: #d8dee9;
+    --text-default: #d8dee9;
+    --text-strong: #eceff4;
+    --text-muted: #aeb8c8;
+    --text-subtle: #7b879b;
+    --header-primary: #eceff4;
+    --header-secondary: #d8dee9;
+    --channels-default: #d8dee9;
+    --channel-icon: #88c0d0;
+    --interactive-normal: #d8dee9;
+    --interactive-hover: #eceff4;
+    --interactive-active: #ffffff;
+    --interactive-muted: #7b879b;
+    --text-link: #88c0d0;
+
+    /* Accents */
+    --brand-experiment: #a3be8c;
+    --brand-360: #8fbcbb;
+    --brand-500: #a3be8c;
+    --brand-530: #91ad7a;
+    --brand-560: #7f9c68;
+    --brand-600: #6e8b57;
+    --control-primary-background-default: #a3be8c;
+    --control-primary-background-hover: #91ad7a;
+    --control-primary-text-default: #2e3440;
+    --control-secondary-background-default: #434c5e;
+    --control-secondary-background-hover: #4c566a;
+
+    /* Status */
+    --status-positive: #a3be8c;
+    --status-warning: #ebcb8b;
+    --status-danger: #bf616a;
+    --status-green: #a3be8c;
+    --status-yellow: #ebcb8b;
+    --online: #a3be8c;
+    --idle: #ebcb8b;
+
+    /* Borders and surfaces */
+    --border-subtle: #434c5e;
+    --border-normal: #4c566a;
+    --border-strong: #5e6a80;
+    --background-modifier-hover: rgba(163, 190, 140, 0.08);
+    --background-modifier-active: rgba(163, 190, 140, 0.14);
+    --background-modifier-selected: rgba(163, 190, 140, 0.2);
+    --background-modifier-accent: #434c5e;
+    --message-background-hover: rgba(163, 190, 140, 0.06);
+    --avatar-background: #434c5e;
+    --app-frame-background: #292f3a;
+    --app-frame-border: #434c5e;
+
+    /* Typography and shape */
+    --font-primary: var(--rl-font);
+    --font-display: var(--rl-font);
+    --font-code: "JetBrains Mono", "Cascadia Code", monospace;
+    --radius-xs: 5px;
+    --radius-sm: 7px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-round: 9999px;
+}
+
+@keyframes aurora-drift {
+    from {
+        background-color: rgba(136, 192, 208, 0.08);
+        opacity: 0.35;
+    }
+    50% {
+        background-color: rgba(163, 190, 140, 0.16);
+        opacity: 0.65;
+    }
+    to {
+        background-color: rgba(136, 192, 208, 0.08);
+        opacity: 0.35;
+    }
+}
+
+body {
+    animation: aurora-drift 28s ease-in-out infinite;
+}
+
+[class*="guilds_"] {
+    background: #292f3a;
+    border-right: 1px solid #434c5e;
+}
+
+[class*="sidebarList_"],
+[class*="privateChannels_"],
+[class*="membersWrap_"] {
+    background: #3b4252;
+}
+
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: transparent;
+}
+
+[class*="channelTextArea_"],
+[class*="textArea_"] {
+    background: #3b4252;
+    border: 1px solid #4c566a;
+    border-radius: 10px;
+}
+
+[class*="message_"]:hover {
+    background: rgba(163, 190, 140, 0.06);
+    border-radius: 7px;
+}
+
+[class*="selected_"],
+[class*="selected-"] {
+    background: rgba(163, 190, 140, 0.2);
+    border-radius: 7px;
+}
+
+::selection {
+    background: #a3be8c;
+    color: #2e3440;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        animation: none;
+    }
+}

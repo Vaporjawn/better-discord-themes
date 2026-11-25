@@ -1,0 +1,61 @@
+/**
+ * @name RWX Luna
+ * @author Rwyn
+ * @version 1.0.0
+ * @description A Windows XP Luna theme that will hopefully take you back to the old, simpler times.
+ * @website https://github.com/rwynx/RWX-Luna
+ * @source https://github.com/rwynx/RWX-Luna
+ */
+
+/* import core css */
+@import url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/RWX-Luna.css");
+
+/* user custom & variables*/
+:root,
+.theme-dark,
+.theme-light,
+#app-mount {
+    /* bliss.bmp default */
+    --luna-wallpaper: url("https://raw.githubusercontent.com/bartekl1/windows-ui-assets/21970f48b8f66b4d44742cb30388c1454512d681/Wallpapers/Windows%20XP/Desktop/Bliss.bmp");
+
+    /* home icon (default: aqua) */
+    --luna-home-icon: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/RWX-Luna-Aqua_96.png");
+
+    /* variants:
+       Aqua (default): url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/RWX-Luna-Aqua_96.png")
+       Glassy Aero:    url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/RWX-Luna-GlassyAero_96.png")
+       Explorer Bliss: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/RWX-Luna-ExplorerBliss_96.png")
+    */
+
+    /* channel icons */
+    --luna-icon-read: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/folder_opened_48.png");
+    --luna-icon-selected: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/folder_opened_48.png");
+    --luna-icon-unread: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/my_documents_48.png");
+    --luna-icon-forum: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/windows_catalog_48.png");
+
+    /* fonts for luna */
+    --luna-font: Tahoma, "Segoe UI", Verdana, sans-serif;
+    --luna-code-font: Consolas, "Lucida Console", monospace;
+
+    /* XP Luna accent colors */
+    --luna-blue-dark: #0054e3;
+    --luna-blue: #3a93ff;
+    --luna-blue-light: #75b8ff;
+    --luna-border: #1648b5;
+    --luna-border-inset: #7f9db9;
+
+    /* surfaces & backgrounds */
+    --luna-surface: #ece9d8;
+    --luna-surface-alt: #f8f7f4;
+    --luna-surface-dark: #dedac9;
+    --luna-chat-bg: #fffef2;
+
+    /* explorer task cards (channel categories & sidebars) */
+    --luna-task-card-bg: #d6dff7;
+    --luna-task-card-hover: #e2eafc;
+
+    /* typography colors */
+    --luna-text: #1b1b1b;
+    --luna-text-navy: #0c327d;
+    --luna-text-blue: #215dc6;
+}

@@ -1,0 +1,28 @@
+/**
+ * @name nFloat Updated
+ * @author Nate9828
+ * @description A practical compact layout with customization.
+ * @version 1.7
+ * @website https://nate9828.github.io
+ * @source https://github.com/nate9828/nFloat-Discordtheme
+ * @updateUrl https://raw.githubusercontent.com/nate9828/nFloat-Discordtheme/main/nFloat.theme.css
+*/
+
+@import url(https://nate9828.github.io/projects/discord/nFloattheme/nFloatCSS.theme.css);
+
+:root{
+    /* Change the values below to customize the theme */
+    --sidebar-delay-close: 1.3s; /* Delay before the sidebar closes when not hovered Default: 1.3s */
+    --sidebar-closed-width: 64px; /* Width of the sidebar when not hovered Default: 64px */
+    --member-list-width-open: -203px; /* Width of the member list when hovered Default: 203px */
+    --member-list-width-close: 62px; /* Width of the member list when not hovered Default: 62px */
+    --member-list-delay-open: 1s; /* Delay before the member list opens when hovered Default: 1s */
+	--member-list-delay-close: 0s; /* Delay before the member list closes when not hovered Default: 0s */
+    --sidebar-no-active-img: url('https://media.tenor.com/bgR1joaDW6AAAAAM/modcheck-discord.gif') no-repeat center center / contain; /* Image for the Active Now sidebar when no friend is active */
+     
+    /* Unused Variables: */
+    --other-custom-value1: 0px;
+    --other-custom-value2: 0px;
+    --other-custom-value3: 0px;
+    --other-custom-value4: 0px;
+}

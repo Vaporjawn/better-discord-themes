@@ -1,0 +1,12 @@
+/**
+ * @name Mars
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(170.82deg, var(--bg-gradient-mars-1) 14.61%, var(--bg-gradient-mars-2) 74.62%);
+}

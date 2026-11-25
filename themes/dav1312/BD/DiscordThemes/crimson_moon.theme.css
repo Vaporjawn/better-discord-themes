@@ -1,0 +1,12 @@
+/**
+ * @name Crimson Moon
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(64.92deg, var(--bg-gradient-crimson-moon-1) 16.17%, var(--bg-gradient-crimson-moon-2) 72%);
+}

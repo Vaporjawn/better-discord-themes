@@ -1,0 +1,562 @@
+/**
+ * @name DIKORD Deluxe 
+ * @author  Chimi
+ * @version 2.4.1
+ * @description 🎵 The lime and the coconut 🎵
+ *              v2.4.1: home button now uses the standard DIKORD eggplant
+ *                      silhouette (--dms-icon-svg-url) instead of a Twemoji
+ *                      PNG override, so midnight's built-in accent-fill and
+ *                      hover behaviour applies again.
+ */
+
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+:root {
+    /* ---------- layout ---------- */
+    --gap: 0px;
+    --border-thickness: 1px;
+
+    /* ---------- corner rounding ---------- */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --chatbar-radius: 20px;
+
+    /* ---------- backgrounds, darkest -> lightest (indigo dusk) ---------- */
+    --bg-4: hsla(260, 22%, 7%, 1);
+    --bg-3: hsla(260, 20%, 10%, 1);
+    --bg-2: hsla(260, 18%, 14%, 1);
+    --bg-1: hsla(260, 16%, 18%, 1);
+    --hover: hsla(45, 90%, 65%, 0.08);
+    --active: hsla(45, 90%, 65%, 0.16);
+    --active-2: hsla(45, 90%, 65%, 0.24);
+    --message-hover: hsla(40, 30%, 30%, 0.10);
+
+    /* ---------- text (warm cream -> dusty tan) ---------- */
+    --text-1: hsl(40, 35%, 96%);
+    --text-2: hsl(40, 25%, 80%);
+    --text-3: hsl(40, 18%, 64%);
+    --text-4: hsl(40, 15%, 46%);
+    --text-5: hsl(40, 12%, 30%);
+
+    /* ---------- savanna gold identity (core accent ramp) ---------- */
+    --accent-1: #ffe9a8;   /* pale gold        */
+    --accent-2: #ffc94d;   /* savanna gold     */
+    --accent-3: #e89b1f;   /* amber            */
+    --accent-4: #b86b12;   /* burnt amber      */
+    --accent-5: #7a4408;   /* deep rust        */
+
+    /* ---------- ACACIA GREEN secondary palette ---------- */
+    --neon-1: #d8f0b0;
+    --neon-2: #a8d94d;
+    --neon-3: #6a9a2a;
+    --neon-glow: hsla(80, 80%, 55%, 0.55);
+
+    /* scrollbar: gold -> pale gold -> cream */
+    --scroll-1: #ffc94d;
+    --scroll-2: #ffe9a8;
+    --scroll-3: #fffaf0;
+    --scroll-glow: hsla(45, 90%, 70%, 0.25);
+
+    --dusk-1: #ffd9a0;     /* formerly lavender-1 */
+    --dusk-2: #d99a5a;     /* formerly lavender-2 */
+
+    --savanna-1: #d8f0b0;  /* formerly cyan-1 */
+    --savanna-2: #a8d94d;  /* formerly cyan-2 */
+    --savanna-glow: hsla(80, 80%, 55%, 0.40);
+
+    --white-1: #fffbf0;
+    --white-2: #fff4dc;
+
+    /* ---------- semantic roles ---------- */
+    --playful: var(--neon-2);
+    --system: var(--savanna-2);
+    --highlight: var(--white-1);
+
+    /* ---------- channel name colors ---------- */
+    --channels-default: var(--text-4);
+    --channels-hover: var(--playful);
+    --channels-active: var(--white-1);
+    --channels-icon-hover: var(--playful);
+
+    /* ---------- glossy surface overlays ---------- */
+    --gloss: linear-gradient(
+        180deg,
+        hsla(45, 60%, 75%, 0.10) 0%,
+        hsla(40, 50%, 40%, 0.00) 60%
+    );
+}
+
+/* ============================================================
+   AMBIENT LIGHTING — sunset radials over indigo dusk
+   ============================================================ */
+#app-mount {
+    background:
+        radial-gradient(ellipse 900px 700px at 12% 8%,
+            hsla(45, 80%, 50%, 0.20), transparent 62%),
+        radial-gradient(ellipse 800px 600px at 88% 92%,
+            hsla(275, 55%, 35%, 0.18), transparent 62%),
+        radial-gradient(ellipse 700px 500px at 92% 10%,
+            hsla(80, 60%, 45%, 0.08), transparent 62%),
+        var(--bg-4);
+}
+
+/* ============================================================
+   SELECTION + SCROLLBARS
+   ============================================================ */
+::selection {
+    background: color-mix(in srgb, var(--playful) 50%, transparent);
+    color: var(--white-1);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        var(--scroll-1) 0%,
+        var(--scroll-2) 55%,
+        var(--scroll-3) 100%
+    );
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        var(--scroll-2) 0%,
+        var(--scroll-3) 100%
+    );
+    background-clip: padding-box;
+}
+
+/* ============================================================
+   DMs / home button
+   Uses the standard DIKORD eggplant silhouette. Midnight sets
+   --dms-icon-svg-url on `body`, not `:root`, so the override has
+   to target `body` too or it gets shadowed by body's own declaration.
+   The accent fill on hover/selected and the silhouette tint are
+   midnight's job — do not pin a resting background here.
+   ============================================================ */
+body {
+    --dms-icon-svg-url: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48dGV4dCB4PSIyNTYiIHk9IjM5MCIgZm9udC1zaXplPSI0NDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfjYY8L3RleHQ+PC9zdmc+Cg==');
+    --custom-guild-list-width: 72px;
+    --dikord-icon-radius: 12px;
+}
+
+/* ============================================================
+   CHANNEL NAMES
+   Hover uses solid color + text-shadow instead of background-clip:text.
+   This tints the label text while leaving unicode emojis untouched,
+   since emoji glyphs ignore both `color` and `text-shadow`.
+   ============================================================ */
+[class*="sidebar_"] [class*="link_"] [class*="name_"],
+[class*="sidebar_"] [class*="interactive_"] [class*="name_"] {
+    color: var(--channels-default) !important;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+[class*="sidebar_"] [class*="link_"]:hover [class*="name_"],
+[class*="sidebar_"] [class*="interactive_"]:hover [class*="name_"] {
+    color: var(--white-1) !important;
+    text-shadow:
+        0 0 4px var(--neon-glow),
+        0 0 8px var(--neon-glow);
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+[class*="sidebar_"] [class*="link_"][class*="selected_"] [class*="name_"],
+[class*="sidebar_"] [class*="interactive_"][class*="selected_"] [class*="name_"] {
+    color: var(--white-1) !important;
+    text-shadow: 0 0 12px var(--neon-glow);
+}
+
+li[class*="dm_"] [class*="link_"] [class*="name_"] [class*="overflowTooltip_"],
+li[class*="dm_"] [class*="interactive_"] [class*="name_"] [class*="overflowTooltip_"] {
+    color: var(--channels-default) !important;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+li[class*="dm_"] [class*="link_"]:hover [class*="name_"] [class*="overflowTooltip_"],
+li[class*="dm_"] [class*="interactive_"]:hover [class*="name_"] [class*="overflowTooltip_"] {
+    color: var(--white-1) !important;
+    text-shadow:
+        0 0 4px var(--neon-glow),
+        0 0 8px var(--neon-glow);
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* ============================================================
+   AVATAR SPIN
+   ============================================================ */
+li[class*="dm_"] [class*="link_"] [class*="avatar_"],
+[class*="chat_"] [class*="avatar_"],
+[class*="members_"] [class*="avatar_"],
+[class*="membersWrap_"] [class*="avatar_"],
+.user-profile-popout [class*="avatar_"],
+[class*="userProfileOuter"] [class*="avatar_"],
+[class*="userProfileInner"] [class*="avatar_"] {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease;
+    border-radius: 50%;
+}
+
+li[class*="dm_"] [class*="link_"]:hover [class*="avatar_"],
+[class*="chat_"] [class*="avatar_"]:hover,
+[class*="members_"] [class*="avatar_"]:hover,
+[class*="membersWrap_"] [class*="avatar_"]:hover,
+.user-profile-popout [class*="avatar_"]:hover,
+[class*="userProfileOuter"] [class*="avatar_"]:hover,
+[class*="userProfileInner"] [class*="avatar_"]:hover {
+    transform: rotate(360deg) scale(1.05);
+    box-shadow: 0 0 16px var(--neon-glow);
+}
+
+/* ============================================================
+   SERVER ICONS — big chunky 2018 look
+   ============================================================ */
+[class*="blobContainer_"] > [class*="wrapper_cc"],
+[class*="listItemWrapper_"] > [class*="wrapper_cc"] {
+    zoom: 1.4 !important;
+    overflow: visible !important;
+}
+
+[class*="listItem_"] foreignObject {
+    mask: none !important;
+    -webkit-mask: none !important;
+}
+
+[data-list-item-id^="guildsnav___"] [class*="icon_"] {
+    border-radius: var(--dikord-icon-radius) !important;
+}
+
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
+    border-radius: 50%;
+}
+
+[class*="listItem_"]:not(:has([class*="wrapper_cc"])) {
+    min-height: 0 !important;
+    height: auto !important;
+}
+[class*="guildSeparator_"] {
+    height: 2px !important;
+    margin: 6px 0 !important;
+}
+[class*="listItem_"]:has([class*="wrapper_cc"]) {
+    min-height: 60px !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+[data-list-id="guildsnav"] [class*="stack_"] {
+    gap: 8px !important;
+}
+
+[class*="wrapper__"][data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]) [class*="icon__"] {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.35s ease;
+}
+[class*="wrapper__"][data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]):hover [class*="icon__"] {
+    transform: rotate(360deg) scale(1.04);
+}
+
+/* ============================================================
+   ADD-SERVER / DISCOVER BUTTONS
+   FIX: no permanent glow, no square shadow.
+   ============================================================ */
+[class*="circleIconButton_"] {
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: transparent !important;
+    border: 1px dashed currentColor;
+    transition: color 0.2s ease, border-color 0.2s ease,
+                transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[class*="circleIconButton_"]:hover {
+    transform: scale(1.06);
+}
+[class*="circleIconButton_"] [class*="circleIcon_"] {
+    color: inherit !important;
+    border-radius: 50%;
+    transition: filter 0.25s ease;
+}
+[class*="circleIconButton_"]:hover [class*="circleIcon_"] {
+}
+
+[data-list-item-id="guildsnav___create-join-button"],
+[data-list-item-id="guildsnav___guild-discover-button"] {
+    color: var(--accent-1) !important;
+    border: 1px solid var(--accent-1) !important;
+    background-color: color-mix(in srgb, var(--accent-1) 12%, transparent) !important;
+    box-shadow: none !important;
+}
+[data-list-item-id="guildsnav___create-join-button"]:hover,
+[data-list-item-id="guildsnav___create-join-button"]:focus-visible,
+[data-list-item-id="guildsnav___guild-discover-button"]:hover,
+[data-list-item-id="guildsnav___guild-discover-button"]:focus-visible {
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-1) 60%, transparent),
+                inset 0 0 8px color-mix(in srgb, var(--accent-1) 30%, transparent) !important;
+}
+[data-list-item-id="guildsnav___create-join-button"]:hover [class*="circleIcon_"],
+[data-list-item-id="guildsnav___guild-discover-button"]:hover [class*="circleIcon_"] {
+}
+
+/* ============================================================
+   CATEGORY NAMES + SERVER NAME
+   ============================================================ */
+[class*="sidebar_"] [class*="title_"] {
+    color: var(--text-2) !important;
+    transition: color 0.2s ease, letter-spacing 0.3s ease;
+}
+[class*="sidebar_"] [class*="title_"]:hover {
+    color: var(--dusk-1) !important;
+    letter-spacing: 0.06em;
+}
+
+[class*="sidebar_"] [class*="header_"] [class*="name_"] {
+    color: var(--white-1) !important;
+    text-shadow: 0 0 10px var(--accent-2);
+}
+
+[class*="chat_"] > [class*="header_"] [class*="name_"] {
+    color: var(--white-1) !important;
+    text-shadow: 0 0 8px var(--accent-2);
+}
+
+/* ============================================================
+   CHAT BOX + SERVER LIST ROUNDING
+   ============================================================ */
+[class*="chatContent_"] [class*="form_"] > div {
+    border-radius: var(--chatbar-radius);
+}
+[class*="chatContent_"] [class*="slidingContainer_"] {
+    border-radius: var(--chatbar-radius);
+}
+
+[class*="chatContent_"] [class*="form_"] [class*="placeholder_"] {
+    color: var(--text-4) !important;
+}
+
+[class*="guilds_"],
+[class*="sidebar_"] {
+    border-radius: var(--radius-lg);
+}
+
+/* ============================================================
+   GLOSSY SURFACES
+   ============================================================ */
+[class*="messagesPopoutWrap_"],
+[class*="popout_"] > [class*="container_"],
+[class*="userPopoutOuter_"],
+.user-profile-popout,
+[class*="modal_"] > [class*="root_"],
+[class*="root_"][role="dialog"] {
+    position: relative;
+    box-shadow:
+        0 1px 0 hsla(45, 60%, 80%, 0.08) inset,
+        0 12px 32px hsla(260, 40%, 4%, 0.55);
+}
+[class*="messagesPopoutWrap_"]::before,
+[class*="userPopoutOuter_"]::before,
+.user-profile-popout::before,
+[class*="modal_"] > [class*="root_"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--gloss);
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* ============================================================
+   MESSAGE ROWS
+   ============================================================ */
+[class*="message_"][class*="groupStart_"]:hover,
+li[class*="messageListItem_"]:hover {
+    background:
+        linear-gradient(90deg,
+            hsla(45, 90%, 55%, 0.08) 0%,
+            hsla(40, 70%, 55%, 0.03) 35%,
+            transparent 70%) !important;
+}
+
+/* Usernames in chat — Savanna Dusk keeps --playful on hover */
+[class*="message_"] [class*="username_"] {
+    color: var(--accent-1) !important;
+    transition: color 0.15s ease;
+}
+[class*="message_"] [class*="username_"]:hover {
+    color: var(--playful) !important;
+    text-shadow: none !important;
+}
+
+/* Member list usernames — Savanna Dusk keeps --playful on hover */
+[class*="members_"] [class*="name_"],
+[class*="membersWrap_"] [class*="name_"] {
+    color: var(--text-2) !important;
+    transition: color 0.15s ease;
+    text-shadow: none !important;
+}
+[class*="members_"] [class*="name_"]:hover,
+[class*="membersWrap_"] [class*="name_"]:hover {
+    color: var(--playful) !important;
+    text-shadow: none !important;
+}
+
+/* Mention pill */
+[class*="mention_"] {
+    background:
+        linear-gradient(180deg,
+            color-mix(in srgb, var(--playful) 35%, transparent),
+            color-mix(in srgb, var(--accent-4) 30%, transparent)) !important;
+    color: var(--white-1) !important;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--playful) 50%, transparent),
+                0 0 12px color-mix(in srgb, var(--playful) 30%, transparent);
+}
+[class*="mention_"]:hover {
+    background:
+        linear-gradient(180deg,
+            color-mix(in srgb, var(--playful) 50%, transparent),
+            color-mix(in srgb, var(--accent-3) 45%, transparent)) !important;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+button[class*="lookFilled_"] {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+}
+button[class*="lookFilled_"]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gloss);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+button[class*="lookFilled_"]:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 18px hsla(260, 40%, 4%, 0.5),
+                0 0 16px color-mix(in srgb, var(--playful) 35%, transparent);
+}
+button[class*="lookFilled_"]:hover::after {
+    opacity: 1;
+}
+button[class*="lookFilled_"]:active {
+    transform: translateY(0) scale(0.98);
+}
+
+button[class*="colorRed_"] {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--neon-2) 50%, transparent) inset;
+}
+button[class*="colorGreen_"] {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--savanna-2) 40%, transparent) inset;
+}
+
+/* ============================================================
+   TYPING INDICATOR + VOICE CONNECTED
+   ============================================================ */
+[class*="typing_"] {
+    color: var(--savanna-1) !important;
+}
+[class*="typing_"] [class*="dots_"] > * {
+    background: var(--savanna-2) !important;
+    box-shadow: 0 0 6px var(--savanna-glow);
+}
+
+[class*="voiceConnected"] [class*="voicePanel"] [class*="connection"] [class*="text"],
+[class*="voiceConnected"] [class*="voicePanel"] [class*="connection"] [class*="subtext"] {
+    color: var(--accent-2) !important;
+}
+[class*="voiceConnected"] [class*="voicePanel"] [class*="connection"] [class*="icon"] {
+    color: var(--accent-1) !important;
+}
+
+/* ============================================================
+   WATERMARK
+   Animated hue-modulated gradient, full brightness.
+   ============================================================ */
+#app-mount::before {
+    content: "DIKORD DELUXE";
+    position: fixed;
+    top: 4px;
+    left: 76px;
+    z-index: 9999;
+    font-family: var(--font-display, "gg sans", sans-serif);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(
+        90deg,
+        #e89b1f 0%,
+        #ffe9a8 25%,
+        #fffbf0 50%,
+        #a8d94d 75%,
+        #e89b1f 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 0 4px var(--neon-glow))
+            drop-shadow(0 0 8px var(--neon-glow));
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+    animation: dikord-hue 8s linear infinite,
+               dikord-pulse 6s ease-in-out infinite;
+}
+
+@keyframes dikord-hue {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+@keyframes dikord-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 4px var(--neon-glow))
+                drop-shadow(0 0 10px var(--neon-glow));
+    }
+    50% {
+        filter: drop-shadow(0 0 7px var(--neon-glow))
+                drop-shadow(0 0 18px var(--neon-glow));
+    }
+}
+
+#app-mount::after {
+    content: "🍆💧💦🍡🥵";
+    position: fixed;
+    top: 4px;
+    left: 244px;
+    z-index: 9999;
+    font-size: 16px;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 0 8px var(--neon-glow));
+    opacity: 1;
+}
+
+/* ============================================================
+   TOOLTIPS
+   ============================================================ */
+[class*="tooltip_"] [class*="tooltipContent_"],
+[class*="tooltipPrimary_"] {
+    border: 1px solid color-mix(in srgb, var(--savanna-2) 35%, transparent) !important;
+    box-shadow: 0 0 14px color-mix(in srgb, var(--savanna-2) 20%, transparent),
+                inset 0 1px 0 hsla(80, 100%, 90%, 0.06);
+}
+
+/* ============================================================
+   FOCUS RINGS
+   ============================================================ */
+:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--playful) 80%, transparent);
+    outline-offset: 2px;
+    border-radius: 6px;
+}

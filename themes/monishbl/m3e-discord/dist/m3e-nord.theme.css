@@ -1,0 +1,1189 @@
+/**
+ * @name M3E Discord Nord
+ * @description M3E Discord in Nord: the exact colours of refact0r's Midnight (nord) flavour (Polar Night panels, Snow Storm text, Frost accent, Aurora highlights).
+ * @author monishbl
+ * @version 1.0.0
+ * @source https://github.com/monishbl/m3e-discord
+ */
+
+/* Midnight provides the panel layout and its many per-screen fixes; this file restyles it. */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght,ROND@6..144,25..151,1..1000,0..100&family=Google+Sans+Code:wght@300..800&display=swap');
+
+/* ════════════════════════════════════════════════════════════════
+   SETTINGS — change these
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --m3e-bubbles: on;          /* on: message bubbles · off: classic flat messages */
+  --m3e-accent: midnight;     /* midnight (cyan, from Midnight) · blurple · lilac */
+  --m3e-shapes: on;           /* on: server icons / avatars use the M3E shape library · off: circles */
+  --m3e-chatbar: floating;    /* floating: pill chat bar island · inline */
+  --m3e-mine: right;          /* right: your messages sit on the right (needs userId in theme/config.json) · left */
+  --m3e-motion: expressive;   /* expressive: presses swell and bounce, panels rise in (iRice's Material look) · calm: no bounce */
+  --m3e-titlebar: off;        /* off: no title bar, the top edge is one --gap · on: Discord's title bar */
+  --m3e-wincontrols: on;      /* on: minimise / maximise / close at the top right · off: use your window manager */
+
+}
+body {
+  --gap: 8px;                 /* space between islands */
+  --m3e-island-radius: 28px;  /* corner of the big panels (M3 extraLarge) */
+  --m3e-bubble-max: 80%;      /* widest a bubble gets (share of the column) */
+  --m3e-chat-max: 1280px;     /* the message column + chat bar are centred at this width (none = full width) */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   GENERATED: shapes, springs, loader keyframes
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --m3e-shape-circle: polygon(50.0% -0.0%,54.9% 0.2%,59.8% 1.0%,64.5% 2.2%,69.1% 3.8%,73.6% 5.9%,77.8% 8.4%,81.7% 11.3%,85.4% 14.6%,88.7% 18.3%,91.6% 22.2%,94.1% 26.4%,96.2% 30.9%,97.8% 35.5%,99.0% 40.2%,99.8% 45.1%,100.0% 50.0%,99.8% 54.9%,99.0% 59.8%,97.8% 64.5%,96.2% 69.1%,94.1% 73.6%,91.6% 77.8%,88.7% 81.7%,85.4% 85.4%,81.7% 88.7%,77.8% 91.6%,73.6% 94.1%,69.1% 96.2%,64.5% 97.8%,59.8% 99.0%,54.9% 99.8%,50.0% 100.0%,45.1% 99.8%,40.2% 99.0%,35.5% 97.8%,30.9% 96.2%,26.4% 94.1%,22.2% 91.6%,18.3% 88.7%,14.6% 85.4%,11.3% 81.7%,8.4% 77.8%,5.9% 73.6%,3.8% 69.1%,2.2% 64.5%,1.0% 59.8%,0.2% 54.9%,-0.0% 50.0%,0.2% 45.1%,1.0% 40.2%,2.2% 35.5%,3.8% 30.9%,5.9% 26.4%,8.4% 22.2%,11.3% 18.3%,14.6% 14.6%,18.3% 11.3%,22.2% 8.4%,26.4% 5.9%,30.9% 3.8%,35.5% 2.2%,40.2% 1.0%,45.1% 0.2%);
+  --m3e-shape-clover8: polygon(50.0% -0.0%,54.9% 0.3%,59.4% 2.6%,62.6% 8.5%,65.3% 13.0%,70.4% 11.7%,76.9% 9.8%,81.7% 11.4%,85.4% 14.6%,88.6% 18.3%,90.2% 23.1%,88.3% 29.6%,87.0% 34.7%,91.5% 37.4%,97.4% 40.6%,99.7% 45.1%,100.0% 50.0%,99.7% 54.9%,97.4% 59.4%,91.5% 62.6%,87.0% 65.3%,88.3% 70.4%,90.2% 76.9%,88.6% 81.7%,85.4% 85.4%,81.7% 88.6%,76.9% 90.2%,70.4% 88.3%,65.3% 87.0%,62.6% 91.5%,59.4% 97.4%,54.9% 99.7%,50.0% 100.0%,45.1% 99.7%,40.6% 97.4%,37.4% 91.5%,34.7% 87.0%,29.6% 88.3%,23.1% 90.2%,18.3% 88.6%,14.6% 85.4%,11.4% 81.7%,9.8% 76.9%,11.7% 70.4%,13.0% 65.3%,8.5% 62.6%,2.6% 59.4%,0.3% 54.9%,-0.0% 50.0%,0.3% 45.1%,2.6% 40.6%,8.5% 37.4%,13.0% 34.7%,11.7% 29.6%,9.8% 23.1%,11.4% 18.3%,14.6% 14.6%,18.3% 11.4%,23.1% 9.8%,29.6% 11.7%,34.7% 13.0%,37.4% 8.5%,40.6% 2.6%,45.1% 0.3%);
+  --m3e-shape-cookie12: polygon(50.0% -0.0%,54.8% 1.2%,59.2% 3.7%,63.6% 5.1%,68.5% 5.3%,73.5% 6.0%,77.5% 8.8%,80.3% 13.1%,83.1% 16.9%,86.9% 19.7%,91.2% 22.5%,94.0% 26.5%,94.7% 31.5%,94.9% 36.4%,96.3% 40.8%,98.8% 45.2%,100.0% 50.0%,98.8% 54.8%,96.3% 59.2%,94.9% 63.6%,94.7% 68.5%,94.0% 73.5%,91.2% 77.5%,86.9% 80.3%,83.1% 83.1%,80.3% 86.9%,77.5% 91.2%,73.5% 94.0%,68.5% 94.7%,63.6% 94.9%,59.2% 96.3%,54.8% 98.8%,50.0% 100.0%,45.2% 98.8%,40.8% 96.3%,36.4% 94.9%,31.5% 94.7%,26.5% 94.0%,22.5% 91.2%,19.7% 86.9%,16.9% 83.1%,13.1% 80.3%,8.8% 77.5%,6.0% 73.5%,5.3% 68.5%,5.1% 63.6%,3.7% 59.2%,1.2% 54.8%,-0.0% 50.0%,1.2% 45.2%,3.7% 40.8%,5.1% 36.4%,5.3% 31.5%,6.0% 26.5%,8.8% 22.5%,13.1% 19.7%,16.9% 16.9%,19.7% 13.1%,22.5% 8.8%,26.5% 6.0%,31.5% 5.3%,36.4% 5.1%,40.8% 3.7%,45.2% 1.2%);
+  --m3e-shape-cookie4: polygon(50.0% 8.0%,54.1% 7.9%,58.4% 7.7%,62.9% 7.4%,67.6% 7.5%,72.4% 8.1%,77.1% 9.4%,81.5% 11.6%,85.4% 14.6%,88.4% 18.5%,90.6% 22.9%,91.9% 27.6%,92.5% 32.4%,92.6% 37.1%,92.3% 41.6%,92.1% 45.9%,92.0% 50.0%,92.1% 54.1%,92.3% 58.4%,92.6% 62.9%,92.5% 67.6%,91.9% 72.4%,90.6% 77.1%,88.4% 81.5%,85.4% 85.4%,81.5% 88.4%,77.1% 90.6%,72.4% 91.9%,67.6% 92.5%,62.9% 92.6%,58.4% 92.3%,54.1% 92.1%,50.0% 92.0%,45.9% 92.1%,41.6% 92.3%,37.1% 92.6%,32.4% 92.5%,27.6% 91.9%,22.9% 90.6%,18.5% 88.4%,14.6% 85.4%,11.6% 81.5%,9.4% 77.1%,8.1% 72.4%,7.5% 67.6%,7.4% 62.9%,7.7% 58.4%,7.9% 54.1%,8.0% 50.0%,7.9% 45.9%,7.7% 41.6%,7.4% 37.1%,7.5% 32.4%,8.1% 27.6%,9.4% 22.9%,11.6% 18.5%,14.6% 14.6%,18.5% 11.6%,22.9% 9.4%,27.6% 8.1%,32.4% 7.5%,37.1% 7.4%,41.6% 7.7%,45.9% 7.9%);
+  --m3e-shape-cookie6: polygon(50.0% 6.0%,54.4% 5.7%,58.9% 5.0%,63.8% 4.5%,68.8% 4.6%,73.5% 6.0%,77.7% 8.6%,80.9% 12.4%,83.2% 16.8%,85.0% 21.2%,86.8% 25.4%,88.9% 29.2%,91.5% 32.8%,94.4% 36.5%,97.2% 40.6%,99.3% 45.1%,100.0% 50.0%,99.3% 54.9%,97.2% 59.4%,94.4% 63.5%,91.5% 67.2%,88.9% 70.8%,86.8% 74.6%,85.0% 78.8%,83.2% 83.2%,80.9% 87.6%,77.7% 91.4%,73.5% 94.0%,68.8% 95.4%,63.8% 95.5%,58.9% 95.0%,54.4% 94.3%,50.0% 94.0%,45.6% 94.3%,41.1% 95.0%,36.2% 95.5%,31.2% 95.4%,26.5% 94.0%,22.3% 91.4%,19.1% 87.6%,16.8% 83.2%,15.0% 78.8%,13.2% 74.6%,11.1% 70.8%,8.5% 67.2%,5.6% 63.5%,2.8% 59.4%,0.7% 54.9%,-0.0% 50.0%,0.7% 45.1%,2.8% 40.6%,5.6% 36.5%,8.5% 32.8%,11.1% 29.2%,13.2% 25.4%,15.0% 21.2%,16.8% 16.8%,19.1% 12.4%,22.3% 8.6%,26.5% 6.0%,31.2% 4.6%,36.2% 4.5%,41.1% 5.0%,45.6% 5.7%);
+  --m3e-shape-cookie7: polygon(50.0% -0.0%,54.8% 0.8%,59.4% 2.9%,63.4% 5.7%,67.3% 8.2%,71.3% 10.2%,75.6% 11.7%,80.3% 13.1%,84.8% 15.2%,88.6% 18.3%,91.2% 22.5%,92.5% 27.3%,93.0% 32.2%,93.3% 36.9%,94.2% 41.2%,95.7% 45.5%,97.5% 50.0%,98.8% 54.8%,99.0% 59.7%,97.6% 64.4%,94.8% 68.5%,91.3% 72.0%,87.8% 75.2%,84.8% 78.6%,82.3% 82.3%,80.0% 86.5%,77.2% 90.6%,73.5% 94.0%,69.1% 96.0%,64.1% 96.6%,59.2% 96.1%,54.5% 95.3%,50.0% 95.0%,45.5% 95.3%,40.8% 96.1%,35.9% 96.6%,30.9% 96.0%,26.5% 94.0%,22.8% 90.6%,20.0% 86.5%,17.7% 82.3%,15.2% 78.6%,12.2% 75.2%,8.7% 72.0%,5.2% 68.5%,2.4% 64.4%,1.0% 59.7%,1.2% 54.8%,2.5% 50.0%,4.3% 45.5%,5.8% 41.2%,6.7% 36.9%,7.0% 32.2%,7.5% 27.3%,8.8% 22.5%,11.4% 18.3%,15.2% 15.2%,19.7% 13.1%,24.4% 11.7%,28.7% 10.2%,32.7% 8.2%,36.6% 5.7%,40.6% 2.9%,45.2% 0.8%);
+  --m3e-shape-cookie9: polygon(50.0% -0.0%,54.8% 1.0%,59.3% 3.3%,63.4% 5.8%,67.7% 7.4%,72.4% 8.2%,77.3% 9.2%,81.7% 11.4%,84.9% 15.1%,87.0% 19.7%,88.5% 24.3%,90.6% 28.3%,93.6% 31.9%,96.8% 35.8%,99.0% 40.3%,99.3% 45.1%,98.0% 50.0%,96.2% 54.6%,95.2% 59.0%,95.0% 63.7%,95.1% 68.7%,94.0% 73.5%,91.3% 77.6%,87.3% 80.6%,82.9% 82.9%,79.2% 85.6%,76.1% 89.0%,72.9% 92.8%,69.1% 96.1%,64.4% 97.6%,59.4% 97.5%,54.6% 96.5%,50.0% 96.0%,45.4% 96.5%,40.6% 97.5%,35.6% 97.6%,30.9% 96.1%,27.1% 92.8%,23.9% 89.0%,20.8% 85.6%,17.1% 82.9%,12.7% 80.6%,8.7% 77.6%,6.0% 73.5%,4.9% 68.7%,5.0% 63.7%,4.8% 59.0%,3.8% 54.6%,2.0% 50.0%,0.7% 45.1%,1.0% 40.3%,3.2% 35.8%,6.4% 31.9%,9.4% 28.3%,11.5% 24.3%,13.0% 19.7%,15.1% 15.1%,18.3% 11.4%,22.7% 9.2%,27.6% 8.2%,32.3% 7.4%,36.6% 5.8%,40.7% 3.3%,45.2% 1.0%);
+  --m3e-shape-flower: polygon(50.0% -0.0%,54.9% 0.6%,59.2% 3.5%,62.7% 8.1%,66.1% 11.2%,70.6% 11.4%,76.3% 10.6%,81.5% 11.6%,85.4% 14.6%,88.4% 18.5%,89.4% 23.7%,88.6% 29.4%,88.8% 33.9%,91.9% 37.3%,96.5% 40.8%,99.4% 45.1%,100.0% 50.0%,99.4% 54.9%,96.5% 59.2%,91.9% 62.7%,88.8% 66.1%,88.6% 70.6%,89.4% 76.3%,88.4% 81.5%,85.4% 85.4%,81.5% 88.4%,76.3% 89.4%,70.6% 88.6%,66.1% 88.8%,62.7% 91.9%,59.2% 96.5%,54.9% 99.4%,50.0% 100.0%,45.1% 99.4%,40.8% 96.5%,37.3% 91.9%,33.9% 88.8%,29.4% 88.6%,23.7% 89.4%,18.5% 88.4%,14.6% 85.4%,11.6% 81.5%,10.6% 76.3%,11.4% 70.6%,11.2% 66.1%,8.1% 62.7%,3.5% 59.2%,0.6% 54.9%,-0.0% 50.0%,0.6% 45.1%,3.5% 40.8%,8.1% 37.3%,11.2% 33.9%,11.4% 29.4%,10.6% 23.7%,11.6% 18.5%,14.6% 14.6%,18.5% 11.6%,23.7% 10.6%,29.4% 11.4%,33.9% 11.2%,37.3% 8.1%,40.8% 3.5%,45.1% 0.6%);
+  --m3e-shape-squircle: polygon(50.0% 2.0%,54.7% 2.0%,59.5% 2.0%,64.6% 2.0%,69.9% 2.0%,75.7% 2.0%,81.6% 2.6%,87.1% 4.8%,91.7% 8.3%,95.2% 12.9%,97.4% 18.4%,98.0% 24.3%,98.0% 30.1%,98.0% 35.4%,98.0% 40.5%,98.0% 45.3%,98.0% 50.0%,98.0% 54.7%,98.0% 59.5%,98.0% 64.6%,98.0% 69.9%,98.0% 75.7%,97.4% 81.6%,95.2% 87.1%,91.7% 91.7%,87.1% 95.2%,81.6% 97.4%,75.7% 98.0%,69.9% 98.0%,64.6% 98.0%,59.5% 98.0%,54.7% 98.0%,50.0% 98.0%,45.3% 98.0%,40.5% 98.0%,35.4% 98.0%,30.1% 98.0%,24.3% 98.0%,18.4% 97.4%,12.9% 95.2%,8.3% 91.7%,4.8% 87.1%,2.6% 81.6%,2.0% 75.7%,2.0% 69.9%,2.0% 64.6%,2.0% 59.5%,2.0% 54.7%,2.0% 50.0%,2.0% 45.3%,2.0% 40.5%,2.0% 35.4%,2.0% 30.1%,2.0% 24.3%,2.6% 18.4%,4.8% 12.9%,8.3% 8.3%,12.9% 4.8%,18.4% 2.6%,24.3% 2.0%,30.1% 2.0%,35.4% 2.0%,40.5% 2.0%,45.3% 2.0%);
+}
+:root {
+  --m3e-spring-fast: linear(0,0.012,0.047,0.098,0.162,0.234,0.313,0.394,0.475,0.554,0.63,0.702,0.768,0.828,0.881,0.928,0.968,1.002,1.029,1.052,1.068,1.081,1.089,1.093,1.095,1.094,1.091,1.086,1.08,1.073,1.065,1.058,1.05,1.043,1.035,1.029,1.022,1.017,1.011,1.007,1);
+  --m3e-dur-fast: 231ms;
+  --m3e-spring-default: linear(0,0.012,0.045,0.092,0.15,0.214,0.282,0.351,0.42,0.486,0.549,0.608,0.663,0.713,0.758,0.799,0.835,0.866,0.894,0.917,0.937,0.954,0.968,0.98,0.989,0.997,1.003,1.007,1.01,1.013,1.014,1.015,1.015,1.015,1.015,1.014,1.013,1.012,1.011,1.01,1);
+  --m3e-dur-default: 335ms;
+  --m3e-spring-slow: linear(0,0.012,0.044,0.091,0.148,0.212,0.28,0.348,0.417,0.483,0.545,0.605,0.659,0.709,0.755,0.795,0.831,0.863,0.891,0.915,0.935,0.952,0.967,0.978,0.988,0.996,1.002,1.007,1.01,1.012,1.014,1.015,1.015,1.015,1.015,1.014,1.013,1.012,1.011,1.01,1);
+  --m3e-dur-slow: 459ms;
+  --m3e-spring-effects: linear(0,0.014,0.049,0.098,0.156,0.218,0.283,0.346,0.408,0.467,0.522,0.573,0.62,0.663,0.702,0.737,0.769,0.797,0.822,0.844,0.864,0.881,0.897,0.91,0.922,0.932,0.941,0.949,0.956,0.962,0.967,0.972,0.976,0.979,0.982,0.984,0.987,0.988,0.99,0.991,1);
+  --m3e-dur-effects: 175ms;
+  --m3e-spring-effectsFast: linear(0,0.014,0.051,0.103,0.163,0.228,0.294,0.36,0.423,0.482,0.538,0.589,0.636,0.679,0.718,0.752,0.783,0.81,0.835,0.856,0.875,0.891,0.906,0.919,0.93,0.939,0.948,0.955,0.961,0.967,0.971,0.975,0.979,0.982,0.984,0.987,0.989,0.99,0.992,0.993,1);
+  --m3e-dur-effectsFast: 117ms;
+  --m3e-spring-loader: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1);
+  --m3e-dur-loader: 452ms;
+  --m3e-spring-press: linear(0,0.036,0.13,0.264,0.42,0.582,0.739,0.88,0.999,1.093,1.161,1.203,1.222,1.222,1.206,1.18,1.147,1.111,1.075,1.041,1.012,0.988,0.971,0.958,0.952,0.95,0.952,0.957,0.963,0.971,0.979,0.987,0.994,1,1.005,1.008,1.01,1.011,1.011,1.01,1);
+  --m3e-dur-press: 515ms;
+  --m3e-spring-rise: linear(0,0.037,0.136,0.275,0.437,0.605,0.765,0.908,1.027,1.119,1.183,1.22,1.233,1.227,1.206,1.175,1.137,1.098,1.06,1.026,0.997,0.975,0.959,0.949,0.946,0.946,0.951,0.958,0.967,0.976,0.985,0.993,1,1.005,1.009,1.012,1.013,1.013,1.012,1.01,1);
+  --m3e-dur-rise: 403ms;
+}
+@keyframes m3e-loader {
+  0.00% { clip-path: polygon(50.0% 6.5%,54.4% 5.6%,59.2% 3.6%,64.5% 2.3%,68.5% 5.2%,71.5% 9.8%,74.3% 13.7%,77.9% 16.1%,82.6% 17.4%,87.9% 18.9%,91.1% 22.5%,91.2% 28.0%,90.9% 33.1%,91.7% 37.4%,94.2% 41.2%,97.7% 45.3%,100.0% 50.0%,97.7% 54.7%,94.2% 58.8%,91.7% 62.6%,90.9% 66.9%,91.2% 72.0%,91.1% 77.5%,87.9% 81.1%,82.6% 82.6%,77.9% 83.9%,74.3% 86.3%,71.5% 90.2%,68.5% 94.8%,64.5% 97.7%,59.2% 96.4%,54.4% 94.4%,50.0% 93.5%,45.6% 94.4%,40.8% 96.4%,35.5% 97.7%,31.5% 94.8%,28.5% 90.2%,25.7% 86.3%,22.1% 83.9%,17.4% 82.6%,12.1% 81.1%,8.9% 77.5%,8.8% 72.0%,9.1% 66.9%,8.3% 62.6%,5.8% 58.8%,2.3% 54.7%,-0.0% 50.0%,2.3% 45.3%,5.8% 41.2%,8.3% 37.4%,9.1% 33.1%,8.8% 28.0%,8.9% 22.5%,12.1% 18.9%,17.4% 17.4%,22.1% 16.1%,25.7% 13.7%,28.5% 9.8%,31.5% 5.2%,35.5% 2.3%,40.8% 3.6%,45.6% 5.6%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  14.29% { clip-path: polygon(50.0% 2.0%,54.9% 0.7%,59.7% 1.0%,64.2% 3.2%,68.1% 6.4%,71.7% 9.4%,75.7% 11.5%,80.3% 13.0%,84.9% 15.1%,88.6% 18.3%,90.8% 22.7%,91.8% 27.6%,92.6% 32.3%,94.2% 36.6%,96.7% 40.7%,99.0% 45.2%,100.0% 50.0%,99.0% 54.8%,96.7% 59.3%,94.2% 63.4%,92.6% 67.7%,91.8% 72.4%,90.8% 77.3%,88.6% 81.7%,84.9% 84.9%,80.3% 87.0%,75.7% 88.5%,71.7% 90.6%,68.1% 93.6%,64.2% 96.8%,59.7% 99.0%,54.9% 99.3%,50.0% 98.0%,45.4% 96.2%,41.0% 95.2%,36.3% 95.0%,31.3% 95.1%,26.5% 94.0%,22.4% 91.3%,19.4% 87.3%,17.1% 82.9%,14.4% 79.2%,11.0% 76.1%,7.2% 72.9%,3.9% 69.1%,2.4% 64.4%,2.5% 59.4%,3.5% 54.6%,4.0% 50.0%,3.5% 45.4%,2.5% 40.6%,2.4% 35.6%,3.9% 30.9%,7.2% 27.1%,11.0% 23.9%,14.4% 20.8%,17.1% 17.1%,19.4% 12.7%,22.4% 8.7%,26.5% 6.0%,31.3% 4.9%,36.3% 5.0%,41.0% 4.8%,45.4% 3.8%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  28.57% { clip-path: polygon(50.0% 7.2%,54.2% 7.2%,58.5% 7.2%,63.0% 7.2%,67.7% 7.2%,72.9% 7.2%,78.2% 7.8%,82.1% 10.9%,84.0% 16.0%,85.5% 20.8%,87.0% 25.3%,88.4% 29.5%,89.7% 33.6%,91.0% 37.6%,92.3% 41.6%,93.6% 45.7%,95.0% 50.0%,96.5% 54.6%,98.1% 59.6%,98.8% 64.8%,96.3% 69.2%,92.0% 72.4%,87.9% 75.4%,84.2% 78.1%,80.7% 80.7%,77.2% 83.2%,73.8% 85.6%,70.4% 88.1%,66.9% 90.7%,63.2% 93.4%,59.2% 96.2%,54.9% 99.4%,50.0% 101.0%,45.1% 99.4%,40.8% 96.2%,36.8% 93.4%,33.1% 90.7%,29.6% 88.1%,26.2% 85.6%,22.8% 83.2%,19.3% 80.7%,15.8% 78.1%,12.1% 75.4%,8.0% 72.4%,3.7% 69.2%,1.2% 64.8%,1.9% 59.6%,3.5% 54.6%,5.0% 50.0%,6.4% 45.7%,7.7% 41.6%,9.0% 37.6%,10.3% 33.6%,11.6% 29.5%,13.0% 25.3%,14.5% 20.8%,16.0% 16.0%,17.9% 10.9%,21.8% 7.8%,27.1% 7.2%,32.3% 7.2%,37.0% 7.2%,41.5% 7.2%,45.8% 7.2%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  42.86% { clip-path: polygon(50.0% 9.4%,53.8% 11.8%,57.0% 14.6%,59.9% 17.4%,62.4% 20.0%,64.8% 22.4%,67.0% 24.6%,69.1% 26.7%,71.2% 28.8%,73.3% 30.9%,75.4% 33.0%,77.6% 35.2%,80.0% 37.6%,82.6% 40.1%,85.4% 43.0%,88.2% 46.2%,90.6% 50.0%,92.4% 54.2%,93.6% 58.7%,94.1% 63.4%,93.9% 68.2%,92.8% 72.9%,91.0% 77.4%,88.5% 81.6%,85.4% 85.4%,81.6% 88.5%,77.4% 91.0%,72.9% 92.8%,68.2% 93.9%,63.4% 94.1%,58.7% 93.6%,54.2% 92.4%,50.0% 90.6%,46.2% 88.2%,43.0% 85.4%,40.1% 82.6%,37.6% 80.0%,35.2% 77.6%,33.0% 75.4%,30.9% 73.3%,28.8% 71.2%,26.7% 69.1%,24.6% 67.0%,22.4% 64.8%,20.0% 62.4%,17.4% 59.9%,14.6% 57.0%,11.8% 53.8%,9.4% 50.0%,7.6% 45.8%,6.4% 41.3%,5.9% 36.6%,6.1% 31.8%,7.2% 27.1%,9.0% 22.6%,11.5% 18.4%,14.6% 14.6%,18.4% 11.5%,22.6% 9.0%,27.1% 7.2%,31.8% 6.1%,36.6% 5.9%,41.3% 6.4%,45.8% 7.6%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  57.14% { clip-path: polygon(50.0% -0.0%,54.7% 2.1%,59.0% 4.6%,63.1% 7.0%,67.0% 8.9%,71.2% 10.3%,75.7% 11.6%,80.5% 12.8%,85.4% 14.6%,87.2% 19.5%,88.4% 24.3%,89.7% 28.8%,91.1% 33.0%,93.0% 36.9%,95.4% 41.0%,97.9% 45.3%,100.0% 50.0%,97.9% 54.7%,95.4% 59.0%,93.0% 63.1%,91.1% 67.0%,89.7% 71.2%,88.4% 75.7%,87.2% 80.5%,85.4% 85.4%,80.5% 87.2%,75.7% 88.4%,71.2% 89.7%,67.0% 91.1%,63.1% 93.0%,59.0% 95.4%,54.7% 97.9%,50.0% 100.0%,45.3% 97.9%,41.0% 95.4%,36.9% 93.0%,33.0% 91.1%,28.8% 89.7%,24.3% 88.4%,19.5% 87.2%,14.6% 85.4%,12.8% 80.5%,11.6% 75.7%,10.3% 71.2%,8.9% 67.0%,7.0% 63.1%,4.6% 59.0%,2.1% 54.7%,-0.0% 50.0%,2.1% 45.3%,4.6% 41.0%,7.0% 36.9%,8.9% 33.0%,10.3% 28.8%,11.6% 24.3%,12.8% 19.5%,14.6% 14.6%,19.5% 12.8%,24.3% 11.6%,28.8% 10.3%,33.0% 8.9%,36.9% 7.0%,41.0% 4.6%,45.3% 2.1%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  71.43% { clip-path: polygon(50.0% 8.0%,54.1% 7.9%,58.4% 7.7%,62.9% 7.4%,67.6% 7.5%,72.4% 8.1%,77.1% 9.4%,81.5% 11.6%,85.4% 14.6%,88.4% 18.5%,90.6% 22.9%,91.9% 27.6%,92.5% 32.4%,92.6% 37.1%,92.3% 41.6%,92.1% 45.9%,92.0% 50.0%,92.1% 54.1%,92.3% 58.4%,92.6% 62.9%,92.5% 67.6%,91.9% 72.4%,90.6% 77.1%,88.4% 81.5%,85.4% 85.4%,81.5% 88.4%,77.1% 90.6%,72.4% 91.9%,67.6% 92.5%,62.9% 92.6%,58.4% 92.3%,54.1% 92.1%,50.0% 92.0%,45.9% 92.1%,41.6% 92.3%,37.1% 92.6%,32.4% 92.5%,27.6% 91.9%,22.9% 90.6%,18.5% 88.4%,14.6% 85.4%,11.6% 81.5%,9.4% 77.1%,8.1% 72.4%,7.5% 67.6%,7.4% 62.9%,7.7% 58.4%,7.9% 54.1%,8.0% 50.0%,7.9% 45.9%,7.7% 41.6%,7.4% 37.1%,7.5% 32.4%,8.1% 27.6%,9.4% 22.9%,11.6% 18.5%,14.6% 14.6%,18.5% 11.6%,22.9% 9.4%,27.6% 8.1%,32.4% 7.5%,37.1% 7.4%,41.6% 7.7%,45.9% 7.9%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  85.71% { clip-path: polygon(50.0% 11.9%,53.9% 10.4%,58.1% 9.2%,62.6% 8.4%,67.4% 8.0%,72.3% 8.4%,77.0% 9.5%,81.5% 11.6%,85.4% 14.6%,88.4% 18.5%,90.5% 23.0%,91.6% 27.7%,92.0% 32.6%,91.6% 37.4%,90.8% 41.9%,89.6% 46.1%,88.1% 50.0%,86.5% 53.6%,84.7% 56.9%,82.9% 60.0%,80.9% 62.8%,79.0% 65.5%,76.9% 68.0%,74.8% 70.4%,72.6% 72.6%,70.4% 74.8%,68.0% 76.9%,65.5% 79.0%,62.8% 80.9%,60.0% 82.9%,56.9% 84.7%,53.6% 86.5%,50.0% 88.1%,46.1% 89.6%,41.9% 90.8%,37.4% 91.6%,32.6% 92.0%,27.7% 91.6%,23.0% 90.5%,18.5% 88.4%,14.6% 85.4%,11.6% 81.5%,9.5% 77.0%,8.4% 72.3%,8.0% 67.4%,8.4% 62.6%,9.2% 58.1%,10.4% 53.9%,11.9% 50.0%,13.5% 46.4%,15.3% 43.1%,17.1% 40.0%,19.1% 37.2%,21.0% 34.5%,23.1% 32.0%,25.2% 29.6%,27.4% 27.4%,29.6% 25.2%,32.0% 23.1%,34.5% 21.0%,37.2% 19.1%,40.0% 17.1%,43.1% 15.3%,46.4% 13.5%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+  100.00% { clip-path: polygon(50.0% -0.0%,54.7% 2.3%,58.8% 5.8%,62.6% 8.3%,66.9% 9.1%,72.0% 8.8%,77.5% 8.9%,81.1% 12.1%,82.6% 17.4%,83.9% 22.1%,86.3% 25.7%,90.2% 28.5%,94.8% 31.5%,97.7% 35.5%,96.4% 40.8%,94.4% 45.6%,93.5% 50.0%,94.4% 54.4%,96.4% 59.2%,97.7% 64.5%,94.8% 68.5%,90.2% 71.5%,86.3% 74.3%,83.9% 77.9%,82.6% 82.6%,81.1% 87.9%,77.5% 91.1%,72.0% 91.2%,66.9% 90.9%,62.6% 91.7%,58.8% 94.2%,54.7% 97.7%,50.0% 100.0%,45.3% 97.7%,41.2% 94.2%,37.4% 91.7%,33.1% 90.9%,28.0% 91.2%,22.5% 91.1%,18.9% 87.9%,17.4% 82.6%,16.1% 77.9%,13.7% 74.3%,9.8% 71.5%,5.2% 68.5%,2.3% 64.5%,3.6% 59.2%,5.6% 54.4%,6.5% 50.0%,5.6% 45.6%,3.6% 40.8%,2.3% 35.5%,5.2% 31.5%,9.8% 28.5%,13.7% 25.7%,16.1% 22.1%,17.4% 17.4%,18.9% 12.1%,22.5% 8.9%,28.0% 8.8%,33.1% 9.1%,37.4% 8.3%,41.2% 5.8%,45.3% 2.3%); animation-timing-function: linear(0,0.012,0.045,0.094,0.156,0.226,0.302,0.381,0.461,0.539,0.614,0.685,0.751,0.811,0.866,0.913,0.955,0.99,1.019,1.043,1.062,1.076,1.085,1.091,1.094,1.095,1.093,1.089,1.084,1.077,1.07,1.063,1.055,1.048,1.041,1.034,1.027,1.021,1.016,1.011,1); }
+}
+@keyframes m3e-spin { to { rotate: 360deg; } }
+
+@property --m3e-bubbles { syntax: 'on | off'; inherits: false; initial-value: on; }
+@property --m3e-accent { syntax: 'midnight | blurple | lilac'; inherits: false; initial-value: midnight; }
+@property --m3e-shapes { syntax: 'on | off'; inherits: false; initial-value: on; }
+@property --m3e-chatbar { syntax: 'floating | inline'; inherits: false; initial-value: floating; }
+@property --m3e-motion { syntax: 'calm | expressive'; inherits: false; initial-value: expressive; }
+@property --m3e-mine { syntax: 'right | left'; inherits: false; initial-value: right; }
+@property --m3e-titlebar { syntax: 'on | off'; inherits: false; initial-value: off; }
+@property --m3e-wincontrols { syntax: 'on | off'; inherits: false; initial-value: on; }
+
+/* ════════════════════════════════════════════════════════════════
+   COLOUR ROLES
+   Surfaces: Midnight's blue-grey (hue 220), pulled darker so islands
+   float on the canvas. Accents: material-color-utilities "expressive"
+   scheme seeded from Midnight's accent oklch(70% .1 215).
+   ════════════════════════════════════════════════════════════════ */
+body {
+  --m3e-canvas: #08090c;
+  --m3e-s-low: #14161b;       /* islands */
+  --m3e-s: #1a1d23;           /* list segments, inputs */
+  --m3e-s-high: #21242c;      /* bubbles, cards, menus */
+  --m3e-s-highest: #292d36;   /* chat bar, hover toolbars */
+  --m3e-s-bright: #333844;
+  --m3e-on-s: #e7ebf3;
+  --m3e-on-s-var: #a4adbe;
+  --m3e-outline: #6e788a;
+  --m3e-outline-var: #353a46;
+
+  /* accents sit at Midnight's own depth (its accent is oklch(.75 .1 215)) with a little more colour: Material's
+     dark-scheme pastels (tone 80–90) read washed out on Midnight's surfaces */
+  --m3e-primary: oklch(0.82 0.12 215);     --m3e-on-primary: oklch(0.24 0.05 215);
+  --m3e-primary-c: oklch(0.75 0.13 215);   --m3e-on-primary-c: oklch(0.22 0.06 215);
+  --m3e-secondary-c: oklch(0.35 0.06 215); --m3e-on-secondary-c: oklch(0.93 0.035 215);
+  --m3e-tertiary: oklch(0.80 0.14 310);
+  --m3e-tertiary-c: oklch(0.73 0.17 310);  --m3e-on-tertiary-c: oklch(0.22 0.08 310);
+  --m3e-error: oklch(0.72 0.17 10);
+  --m3e-error-c: oklch(0.40 0.12 10);      --m3e-on-error-c: oklch(0.94 0.035 10);
+  --m3e-inverse-primary: oklch(0.52 0.11 215);
+  --m3e-inverse-s: #e7ebf3;      --m3e-inverse-on-s: #1a1d23;   /* tooltips */
+  --m3e-on-error: oklch(0.22 0.07 10);
+  --m3e-on-online: #00382a;
+  --m3e-code-bg: #0a0b0e;        /* code blocks sit below the surface */
+  --m3e-inline-code-bg: rgb(0 0 0 / 0.32);
+  --m3e-chip-bg: rgb(255 255 255 / 0.08);
+  --m3e-mention-fg: #e6f9ff;
+  --m3e-state: 164 173 190;      /* r g b of the state-layer tint (hover/press overlays, hairlines) */
+
+  /* Midnight's inputs → our roles (Midnight maps these onto Discord's tokens) */
+  --text-0: var(--m3e-on-primary-c);
+  --text-1: #f1f4fa;
+  --text-2: #cdd4e1;
+  --text-3: #aeb6c6;
+  --text-4: #7b8598;
+  --text-5: #4a5161;
+  --bg-1: var(--m3e-s-bright);
+  --bg-2: var(--m3e-s-highest);
+  --bg-3: var(--m3e-s-high);
+  --bg-4: var(--m3e-s-low);
+  --hover: rgb(var(--m3e-state) / 0.08);
+  --active: rgb(var(--m3e-state) / 0.12);
+  --active-2: rgb(var(--m3e-state) / 0.16);
+  --message-hover: transparent;
+  --accent-1: var(--m3e-primary);
+  --accent-2: var(--m3e-primary-c);
+  --accent-3: var(--m3e-primary-c);
+  --accent-4: color-mix(in oklab, var(--m3e-primary-c), white 14%);
+  --accent-5: color-mix(in oklab, var(--m3e-primary-c), black 10%);
+  --accent-new: var(--m3e-error);
+  --mention: transparent;
+  --mention-hover: transparent;
+  --reply: transparent;
+  --reply-hover: transparent;
+  --online: #5bc4a3;
+  --idle: #c9ab56;
+  --dnd: var(--m3e-error);
+  --border-light: transparent;
+  --border: rgb(var(--m3e-state) / 0.12);
+  --border-hover: transparent;
+  --button-border: transparent;
+}
+@container root style(--m3e-accent: blurple) {
+  body {
+    --m3e-primary: oklch(0.80 0.12 278); --m3e-on-primary: oklch(0.25 0.09 278);
+    --m3e-primary-c: oklch(0.72 0.15 278); --m3e-on-primary-c: oklch(0.20 0.09 278);
+    --m3e-secondary-c: oklch(0.35 0.07 278); --m3e-on-secondary-c: oklch(0.93 0.035 278);
+    --m3e-tertiary: oklch(0.82 0.12 345); --m3e-tertiary-c: oklch(0.74 0.16 345); --m3e-on-tertiary-c: oklch(0.24 0.09 345);
+    --m3e-inverse-primary: oklch(0.52 0.16 278);
+  }
+}
+@container root style(--m3e-accent: lilac) {
+  body {
+    --m3e-primary: oklch(0.80 0.14 310); --m3e-on-primary: oklch(0.24 0.09 310);
+    --m3e-primary-c: oklch(0.73 0.17 310); --m3e-on-primary-c: oklch(0.22 0.08 310);
+    --m3e-secondary-c: oklch(0.35 0.07 310); --m3e-on-secondary-c: oklch(0.93 0.035 310);
+    --m3e-tertiary: oklch(0.82 0.12 215); --m3e-tertiary-c: oklch(0.75 0.13 215); --m3e-on-tertiary-c: oklch(0.22 0.06 215);
+    --m3e-inverse-primary: oklch(0.52 0.15 310);
+  }
+}
+
+body {
+  /* Midnight knobs */
+  --font: 'Google Sans Flex';
+  --code-font: 'Google Sans Code';
+  --border-thickness: 0px;
+  --divider-thickness: 2px;
+  --animations: off;               /* Midnight's margin-slide hovers; we use shape/spring motion instead */
+  --custom-chatbar: separated;
+  --chatbar-height: 56px;
+  --guildbar-avatar-size: 40px;  /* Discord draws icons in a fixed 40×40 foreignObject; bigger gets cut */
+  --list-item-transition: var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+
+  /* Discord's radius tokens on the M3 shape scale */
+  --radius-xs: 6px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: var(--m3e-island-radius);
+  --radius-xl: 32px;
+  --radius-xxl: 48px;
+
+  /* everything that should follow the roles even where Midnight maps elsewhere */
+  --app-frame-background: var(--m3e-canvas);
+  --background-base-lowest: var(--m3e-canvas);
+  --mention-background: color-mix(in oklab, var(--m3e-inverse-primary) 55%, transparent);
+  --mention-foreground: var(--m3e-mention-fg);
+  --message-reacted-background-default: var(--m3e-secondary-c);
+  --message-reacted-text-default: var(--m3e-on-secondary-c);
+  --divider-color: var(--m3e-error);
+}
+.theme-dark:not(.custom-user-profile-theme):not(#m3e-x) {
+  --app-frame-background: var(--m3e-canvas);
+}
+
+/* type: Google Sans Flex, rounder + wider where it's emphasized */
+:root { --m3e-round: "ROND" 100; }
+body, input, textarea, button, select { font-feature-settings: "ss02" on; }
+h1, h2, h3,
+[class*="title_"] h1,
+.headerText_2i8Bfm .username_2i8Bfm,
+.name_yOdhm_,
+.markup_ku1OHH h1, .markup_ku1OHH h2, .markup_ku1OHH h3 {
+  font-variation-settings: var(--m3e-round);
+}
+
+/* respect reduce-motion everywhere */
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ISLANDS — no borders, tonal surfaces on a near-black canvas
+   ════════════════════════════════════════════════════════════════ */
+.guilds_pog62O,
+.sidebarList_pog62O,
+.panels_pog62O,
+.chat_z_gUBg > .subtitleContainer_z_gUBg,
+.chatContent_z_gUBg,
+.messagesWrapper_8AE1Qq,
+.container_86es0b,
+.container_dvN-MP {
+  border: none !important;
+  border-radius: var(--m3e-island-radius);
+}
+.guilds_pog62O { background: transparent !important; }
+.bg_Fd0FEH { background: var(--m3e-canvas) !important; }
+.sidebarList_pog62O { border-top: none !important; }
+
+/* chat title bar */
+.chat_z_gUBg > .subtitleContainer_z_gUBg { border-radius: var(--m3e-island-radius); }
+.title_z_gUBg [class*="titleWrapper_"] h1,
+.title_z_gUBg h1 {
+  font-size: 18px;
+  font-weight: 650;
+  font-variation-settings: "ROND" 100, "wdth" 108;
+}
+
+/* scrollbars: thin rounded */
+[class*="scroller"]::-webkit-scrollbar-thumb,
+[class*="Scroller"]::-webkit-scrollbar-thumb {
+  border-radius: 999px !important;
+  background-color: var(--m3e-s-bright) !important;
+  border: 3px solid transparent !important;
+  background-clip: padding-box !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SERVER RAIL — shape library + morphs
+   rest: circle · hover: rounded square · selected: a cookie / flower
+   ════════════════════════════════════════════════════════════════ */
+@container root style(--m3e-shapes: on) {
+  .listItem_rwEpIL foreignObject[mask],
+  .folderGroup_RTMSuZ foreignObject[mask] {
+    mask: none !important;
+  }
+  /* fill Discord's 40×40 icon box exactly so the shape is never cut by it */
+  .listItem_rwEpIL foreignObject > div, .listItem_rwEpIL .wrapper_JJ-hgR, .listItem_rwEpIL .icon_JJ-hgR { width: 100% !important; height: 100% !important; }
+  .listItem_rwEpIL .wrapper_JJ-hgR,
+  .listItem_rwEpIL .circleIconButton_g8YUxD,
+  .folderIconWrapper_RTMSuZ {
+    border-radius: 0 !important;
+    clip-path: var(--m3e-shape-circle);
+    transition: clip-path var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press),
+                background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+  }
+  /* hover: 8% state layer only (no shape change) */
+  .listItem_rwEpIL:hover .wrapper_JJ-hgR:not(.selected_JJ-hgR) { filter: brightness(1.08); }
+  /* press: morph to a squircle, spring back on release (effects spring, no bounce) */
+  .listItem_rwEpIL .wrapper_JJ-hgR:active,
+  .listItem_rwEpIL .circleIconButton_g8YUxD:active,
+  .folderIconWrapper_RTMSuZ:active { clip-path: var(--m3e-shape-squircle) !important; }
+  .listItem_rwEpIL .wrapper_JJ-hgR.selected_JJ-hgR { clip-path: var(--m3e-shape-cookie9); }
+  .listItem_rwEpIL:nth-child(6n+2) .wrapper_JJ-hgR.selected_JJ-hgR { clip-path: var(--m3e-shape-cookie7); }
+  .listItem_rwEpIL:nth-child(6n+3) .wrapper_JJ-hgR.selected_JJ-hgR { clip-path: var(--m3e-shape-flower); }
+  .listItem_rwEpIL:nth-child(6n+4) .wrapper_JJ-hgR.selected_JJ-hgR { clip-path: var(--m3e-shape-cookie12); }
+  .listItem_rwEpIL:nth-child(6n+5) .wrapper_JJ-hgR.selected_JJ-hgR { clip-path: var(--m3e-shape-clover8); }
+  .listItem_rwEpIL:nth-child(6n+6) .wrapper_JJ-hgR.selected_JJ-hgR { clip-path: var(--m3e-shape-cookie6); }
+
+  /* add-server / discover: soft outline glyphs on a tonal shape */
+  .listItem_rwEpIL .circleIconButton_g8YUxD {
+    background-color: var(--m3e-s-low) !important;
+    color: var(--online);
+  }
+  [data-list-item-id="guildsnav___create-join-button"]:hover {
+    background-color: var(--online) !important; color: var(--m3e-on-online) !important;
+  }
+  [data-list-item-id="guildsnav___guild-discover-button"]:hover {
+    background-color: var(--m3e-primary-c) !important; color: var(--m3e-on-primary-c) !important;
+  }
+  [data-list-item-id^="guildsnav___"]:is([data-list-item-id$="create-join-button"], [data-list-item-id$="discover-button"]) * { color: inherit; }
+}
+
+/* the side pill */
+.item__o8_Xq {
+  background-color: var(--m3e-on-s) !important;
+  width: 6px !important;
+  border-radius: 0 6px 6px 0 !important;
+  transition: height var(--m3e-dur-fast) var(--m3e-spring-fast), translate var(--m3e-dur-fast) var(--m3e-spring-fast) !important;
+}
+.item__o8_Xq.selected__o8_Xq { background-color: var(--m3e-primary) !important; }
+
+/* folders: an open folder is a tonal pill */
+.folderGroupBackground_RTMSuZ {
+  background-color: var(--m3e-s-low) !important;
+  border-radius: 999px !important;
+}
+.folderIconWrapper_RTMSuZ, .folderButton_RTMSuZ { color: var(--m3e-tertiary); }
+
+/* unread/mention counts: the error scheme's own on-colour (Midnight's --text-0 is the primary on-colour) */
+.numberBadge_lMvXrQ { color: var(--m3e-on-error) !important; }
+
+/* badges sit on the canvas */
+.listItem_rwEpIL [class*="lowerBadge_"] [class*="numberBadge_"],
+.listItem_rwEpIL [class*="upperBadge_"] > div {
+  box-shadow: 0 0 0 3px var(--m3e-canvas);
+  font-weight: 800;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CHANNEL LIST — Expressive segmented lists
+   items 2 apart, group corners 16, inner 4; hover 12; selected 16
+   ════════════════════════════════════════════════════════════════ */
+.containerDefault_Wx6SnQ { padding-top: 0 !important; padding-bottom: 2px !important; }
+.wrapper_TNyK-N .link_TNyK-N {
+  min-height: 40px;
+  padding-inline: 10px 8px;
+  margin-inline: 4px;
+  border-radius: 4px;
+  background-color: var(--m3e-s);
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press),
+              background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast),
+              color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+/* Discord lays links out as a row or a column; auto block margins centre the content vertically in both */
+.wrapper_TNyK-N .link_TNyK-N > * { margin-block: auto !important; }
+.wrapper_TNyK-N .link_TNyK-N > .linkBottom_TNyK-N { margin-block: 0 !important; }  /* voice channels: an (often empty) second row */
+/* group ends: first channel after a category / list start, last before the next category */
+:not(.containerDefault_Wx6SnQ) + .containerDefault_Wx6SnQ .link_TNyK-N,
+.containerDefault_Wx6SnQ:first-child .link_TNyK-N {
+  border-top-left-radius: 16px; border-top-right-radius: 16px;
+}
+.containerDefault_Wx6SnQ:not(:has(+ .containerDefault_Wx6SnQ)) .link_TNyK-N {
+  border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+}
+.wrapper_TNyK-N:hover .link_TNyK-N { background-color: var(--m3e-s-high); }
+.wrapper_TNyK-N .link_TNyK-N:active { border-radius: 16px; }
+.wrapper_TNyK-N.modeSelected_TNyK-N .link_TNyK-N {
+  border-radius: 16px;
+  background-color: var(--m3e-primary-c) !important;
+}
+.wrapper_TNyK-N.modeSelected_TNyK-N .name_TNyK-N,
+.wrapper_TNyK-N.modeSelected_TNyK-N .icon_TNyK-N,
+.wrapper_TNyK-N.modeSelected_TNyK-N .children_TNyK-N svg {
+  color: var(--m3e-on-primary-c) !important;
+  font-weight: 700;
+}
+.wrapper_TNyK-N.modeUnreadImportant_TNyK-N .name_TNyK-N { font-weight: 700; color: var(--m3e-on-s); }
+.wrapper_TNyK-N.modeMuted_TNyK-N .link_TNyK-N { background-color: transparent; }
+.unread_TNyK-N { background: var(--m3e-on-s) !important; border-radius: 4px !important; }
+.wrapper_TNyK-N .numberBadge_TNyK-N, .wrapper_TNyK-N [class*="numberBadge_"] { font-weight: 800; }
+/* threads under a channel stay light */
+.typeThread_TNyK-N .link_TNyK-N { background-color: transparent; }
+
+/* categories: label-medium caps */
+.name_yOdhm_ {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.containerDefault_yOdhm_ { padding-top: 14px !important; }
+.containerDefault_yOdhm_ .icon_yOdhm_ { transition: rotate var(--m3e-dur-fast) var(--m3e-spring-fast) !important; }
+
+/* top-of-list rows (Events, Members, Boosts) */
+.sidebarList_pog62O [class*="containerDefault_"]:not(.containerDefault_Wx6SnQ):not(.containerDefault_yOdhm_) > div {
+  border-radius: 999px;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press);
+}
+
+/* DM list */
+.channel_zln_tS [class*="interactive_"] {
+  border-radius: 999px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+.channel_zln_tS [class*="selected_"][class*="interactive_"] {
+  background-color: var(--m3e-secondary-c) !important;
+  border-radius: 16px !important;
+}
+.channel_zln_tS [class*="selected_"] [class*="name_"] { color: var(--m3e-on-secondary-c) !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   USER PANEL — connected button group, tonal toggles
+   ════════════════════════════════════════════════════════════════ */
+.panels_pog62O { overflow: hidden; }
+.container_g6VwXp { padding: 8px 8px 8px 8px; }
+.accountPopoutButton_g6VwXp { border-radius: 999px !important; }
+.buttons_g6VwXp { gap: 2px; }
+.buttons_g6VwXp > button,
+.buttons_g6VwXp .audioButtonParent_gKpIZP {
+  background-color: var(--m3e-s-high) !important;
+  border-radius: 8px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), min-width var(--m3e-dur-effects) var(--m3e-spring-effects), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.buttons_g6VwXp > button { min-width: 32px; }
+.buttons_g6VwXp > .audioButtonParent_gKpIZP { min-width: 49px; }
+.buttons_g6VwXp .audioButtonParent_gKpIZP > button { background: transparent !important; border-radius: inherit !important; }
+.buttons_g6VwXp > :first-child { border-top-left-radius: 18px !important; border-bottom-left-radius: 18px !important; }
+.buttons_g6VwXp > :last-child { border-top-right-radius: 18px !important; border-bottom-right-radius: 18px !important; }
+.buttons_g6VwXp > button:hover,
+.buttons_g6VwXp .audioButtonParent_gKpIZP:hover { background-color: var(--m3e-s-highest) !important; }
+.buttons_g6VwXp > :is(button, .audioButtonParent_gKpIZP):active { border-radius: 4px !important; }
+.buttons_g6VwXp > :first-child:active { border-radius: 18px 4px 4px 18px !important; }
+.buttons_g6VwXp > :last-child:active { border-radius: 4px 18px 18px 4px !important; }
+/* a toggled mic / headset / game: like a QS tile switching on, it expands
+   and rounds into a pill; switched off, it collapses back to its corners */
+.buttons_g6VwXp .audioButtonParent_gKpIZP:has(> [role="switch"][aria-checked="true"]),
+.buttons_g6VwXp > button[aria-checked="true"] {
+  background-color: var(--m3e-error-c) !important;
+  border-radius: 16px !important;
+}
+.buttons_g6VwXp > .audioButtonParent_gKpIZP:has(> [role="switch"][aria-checked="true"]) { min-width: 61px; }
+.buttons_g6VwXp > button[aria-checked="true"] { min-width: 44px; }
+/* pressed while on: a little squarer than the pill (×0.7), not square */
+.buttons_g6VwXp .audioButtonParent_gKpIZP:has(> [role="switch"][aria-checked="true"]):active,
+.buttons_g6VwXp > button[aria-checked="true"]:active { border-radius: 11px !important; }
+
+/* voice connected card */
+.wrapper_9U6LUN { padding-bottom: 4px; }
+.connection_9U6LUN { border-radius: 20px; }
+.actionButtons_9U6LUN { gap: 2px !important; }
+.actionButtons_9U6LUN .button_9U6LUN {
+  border-radius: 8px !important;
+  background-color: var(--m3e-s-high) !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.actionButtons_9U6LUN .button_9U6LUN:first-child { border-radius: 20px 8px 8px 20px !important; }
+.actionButtons_9U6LUN .button_9U6LUN:last-child { border-radius: 8px 20px 20px 8px !important; }
+.actionButtons_9U6LUN .button_9U6LUN:active { border-radius: 4px !important; }
+.actionButtons_9U6LUN .button_9U6LUN:first-child:active { border-radius: 20px 4px 4px 20px !important; }
+.actionButtons_9U6LUN .button_9U6LUN:last-child:active { border-radius: 4px 20px 20px 4px !important; }
+.actionButtons_9U6LUN .button_9U6LUN { transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), flex-grow var(--m3e-dur-effects) var(--m3e-spring-effects), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important; }
+.actionButtons_9U6LUN .buttonActive_9U6LUN { background-color: var(--m3e-secondary-c) !important; border-radius: 20px !important; flex-grow: 1.6 !important; }
+.actionButtons_9U6LUN .buttonActive_9U6LUN:active { border-radius: 14px !important; }
+
+/* channel header toggles (members, threads, pins, inbox): off, a round icon
+   button; on, it expands into a secondary pill, as a QS tile does */
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z {
+  min-width: 32px; height: 32px; margin: 0 !important; border-radius: 16px;
+  transition: min-width var(--m3e-dur-effects) var(--m3e-spring-effects), border-radius var(--m3e-dur-effects) var(--m3e-spring-effects),
+              scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast),
+              color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z:hover { background-color: color-mix(in oklab, var(--m3e-on-s) 8%, transparent); }
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z:active { border-radius: 8px; }
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z:is(.selected_ybUK7Z, [aria-expanded="true"]) {
+  min-width: 52px;
+  background-color: var(--m3e-secondary-c);
+  color: var(--m3e-on-secondary-c) !important;
+}
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z:is(.selected_ybUK7Z, [aria-expanded="true"]):hover {
+  background-color: color-mix(in oklab, var(--m3e-on-secondary-c) 8%, var(--m3e-secondary-c));
+}
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z:is(.selected_ybUK7Z, [aria-expanded="true"]):active { border-radius: 11px; }
+.toolbar_ybUK7Z .iconWrapper_ybUK7Z.clickable_ybUK7Z:is(.selected_ybUK7Z, [aria-expanded="true"]) svg { color: inherit !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   MESSAGES — bubbles (cozy mode only; compact stays flat)
+   ════════════════════════════════════════════════════════════════ */
+@container root style(--m3e-bubbles: on) {
+  .cozy_2i8Bfm .messageContent_2i8Bfm:not(:empty) {
+    width: fit-content;
+    max-width: min(100%, var(--m3e-bubble-max));
+    box-sizing: border-box;
+    padding: 8px 14px 9px !important;
+    margin-left: 0 !important;
+    margin-top: 2px;
+    background-color: var(--m3e-s-high);
+    color: var(--m3e-on-s);
+    border-radius: 6px 22px 22px 6px;
+    overflow-wrap: anywhere;
+    transition: background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+  }
+  /* the last bubble of a group rounds off (next item is a new group, a divider or the end) */
+  /* (type-based so Chrome's :has invalidation stays cheap: rows are <li>, dividers/spacer are <div>) */
+  li.messageListItem_SY_P2T:last-of-type .cozy_2i8Bfm .messageContent_2i8Bfm,
+  li.messageListItem_SY_P2T:has(+ div, + li > .groupStart_SY_P2T) .cozy_2i8Bfm .messageContent_2i8Bfm {
+    border-bottom-left-radius: 22px;
+  }
+  .message_SY_P2T:hover .cozy_2i8Bfm .messageContent_2i8Bfm:not(:empty),
+  .cozy_2i8Bfm:hover .messageContent_2i8Bfm:not(:empty) {
+    background-color: var(--m3e-s-highest);
+  }
+  /* messages that ping you */
+  .mentioned_SY_P2T .messageContent_2i8Bfm:not(:empty) {
+    background-color: color-mix(in oklab, var(--m3e-tertiary-c) 18%, var(--m3e-s-high)) !important;
+    box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--m3e-tertiary) 65%, transparent);
+  }
+  /* emoji-only (jumbo) and system messages: no bubble */
+  .messageContent_2i8Bfm:has(> .emojiJumbo_lTEMT6),
+  .isSystemMessage_2i8Bfm .messageContent_2i8Bfm,
+  .systemMessage_SY_P2T .messageContent_2i8Bfm {
+    background: none !important;
+    box-shadow: none !important;
+    padding-inline: 0;
+  }
+  /* ephemeral ("only you can see this") */
+  .ephemeral_SY_P2T .messageContent_2i8Bfm:not(:empty) {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--m3e-outline-var);
+  }
+  /* the row itself no longer highlights; the bubble does */
+  .message_SY_P2T.mentioned_SY_P2T,
+  .message_SY_P2T.replying_SY_P2T,
+  .message_SY_P2T.selected_SY_P2T,
+  .message_SY_P2T:hover { background: transparent !important; }
+  /* a faint row highlight lives on the list row (li), which has no gaps inside it, so it never flickers
+     between bubbles; it stays on while that message's popout (react picker, menu) is open */
+  li.messageListItem_SY_P2T {
+    border-radius: 16px;
+    transition: background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+  }
+  li.messageListItem_SY_P2T:hover,
+  li.messageListItem_SY_P2T:has(> .selected_SY_P2T) {
+    background-color: color-mix(in oklab, var(--m3e-on-s) 4%, transparent);
+  }
+  .message_SY_P2T.mentioned_SY_P2T::before,
+  .message_SY_P2T.replying_SY_P2T::before { display: none; }
+  .message_SY_P2T.replying_SY_P2T .messageContent_2i8Bfm:not(:empty) {
+    box-shadow: inset 0 0 0 2px var(--m3e-primary);
+  }
+  /* editing a message: the editor becomes the bubble */
+  .cozy_2i8Bfm [class*="channelTextArea_"] { border-radius: 20px !important; }
+}
+
+/* ── title bar and window controls (flags: --m3e-titlebar, --m3e-wincontrols) ──
+   Midnight already moves the bar's buttons (inbox, window controls) into the
+   channel header's right end and pads the header for them; these only shrink
+   the bar or take the controls out. */
+@container root style(--m3e-titlebar: off) {
+  /* the freed title-bar row becomes one --gap (still a strip to drag the window by),
+     so the top edge matches the bottom/left/right */
+  body { --custom-app-top-bar-height: var(--gap) !important; --top-bar-height: var(--gap) !important; }
+  .bar_3zSH5d > :not(.trailing_3zSH5d) { visibility: hidden; }
+}
+@container root style(--m3e-wincontrols: off) {
+  .winButtons_3zSH5d { display: none !important; }
+  /* the header keeps room only for the bar's buttons, not the controls */
+  #app-mount, .base_pog62O { --top-bar-right-margin: calc(32px * var(--button-count, 0) + var(--button-count, 0) * var(--space-xs)) !important; }
+}
+@container root style(--m3e-titlebar: off) and style(--m3e-wincontrols: off) {
+  .bar_3zSH5d { display: none !important; }
+  #app-mount, .base_pog62O { --top-bar-right-margin: 0px !important; }
+}
+
+/* ── the text space: one centred column (max-width + auto inline margins) ── */
+.scrollerInner_8AE1Qq,
+.form_z_gUBg {
+  width: 100%;
+  max-width: var(--m3e-chat-max);
+  margin-inline: auto !important;
+  box-sizing: border-box;
+}
+
+/* ── your messages: right side, accent bubble, mirrored corners ──
+   The (long, unrolled) "is this mine?" selector runs ONCE per message row and only sets flags; everything inside reads
+   the flags with style queries. Putting the chain in front of every descendant rule cost ~250 ms per channel switch. */
+:not(*) { --m3e-own: 1; }
+li.messageListItem_SY_P2T:is(:last-of-type, :has(+ div, + li > .groupStart_SY_P2T)) { --m3e-run-end: 1; }
+@container root style(--m3e-bubbles: on) and style(--m3e-mine: right) {
+  @container style(--m3e-own: 1) {
+    .message_SY_P2T { padding-right: 16px !important; }
+    .avatar_2i8Bfm, .avatarDecoration_2i8Bfm, .headerText_2i8Bfm { display: none !important; }
+    .header_2i8Bfm { text-align: right; justify-content: flex-end; }
+    .repliedMessage_2i8Bfm { margin-left: auto; justify-content: flex-end; }
+    .repliedMessage_2i8Bfm::before, .repliedMessageClickableSpine_2i8Bfm { display: none !important; }  /* the spine points at an avatar we hide */
+    .cozy_2i8Bfm .messageContent_2i8Bfm:not(:empty) {
+      margin-left: auto !important;
+      background-color: var(--m3e-primary-c);
+      color: var(--m3e-on-primary-c);
+      border-radius: 22px 6px 6px 22px;
+    }
+    .cozy_2i8Bfm.message_SY_P2T:hover .messageContent_2i8Bfm:not(:empty) {
+      background-color: color-mix(in oklab, var(--m3e-on-primary-c) 8%, var(--m3e-primary-c));
+    }
+    .messageContent_2i8Bfm a { color: inherit !important; text-decoration: underline; }
+    .messageContent_2i8Bfm code.inline { background: color-mix(in oklab, var(--m3e-on-primary-c) 14%, transparent) !important; color: inherit !important; }
+    .messageContent_2i8Bfm .timestamp_2i8Bfm, .messageContent_2i8Bfm [class*="edited_"] { color: inherit; opacity: 0.7; }
+    /* attachments, embeds, polls and reactions line up on the right too */
+    .container_YUQhib { display: flex !important; flex-direction: column; align-items: flex-end; }
+    .container_YUQhib > * { margin-left: auto; }
+    /* last bubble of your run rounds its bottom-right */
+    @container style(--m3e-run-end: 1) {
+      .cozy_2i8Bfm .messageContent_2i8Bfm:not(:empty) { border-bottom-right-radius: 22px; }
+    }
+  }
+}
+
+/* name / timestamp row */
+.cozy_2i8Bfm .header_2i8Bfm { margin-bottom: 2px; }
+.cozy_2i8Bfm .username_2i8Bfm {
+  font-weight: 650;
+  font-variation-settings: "ROND" 100, "wdth" 104;
+}
+.timestamp_2i8Bfm { font-size: 11.5px; }
+.edited_2i8Bfm { font-size: 11px; opacity: 0.7; }
+
+/* avatars: plain circles — per-message shape morphs were too expensive while scrolling */
+.cozy_2i8Bfm .avatar_2i8Bfm { border-radius: 50%; }
+
+/* replies: a quote chip above the bubble */
+.repliedMessage_2i8Bfm {
+  width: fit-content;
+  max-width: min(100%, var(--m3e-bubble-max));
+  padding: 4px 12px 4px 8px;
+  margin-bottom: 2px;
+  border-radius: 14px;
+  background-color: var(--m3e-s);
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press);
+}
+.repliedMessage_2i8Bfm::before { border-color: var(--m3e-outline-var) !important; border-top-left-radius: 10px !important; }
+.cozy_2i8Bfm .repliedMessage_2i8Bfm .repliedTextContent_2i8Bfm.messageContent_2i8Bfm:not(:empty) {
+  /* the quoted text reuses .messageContent_ — keep it plain text, not a bubble */
+  background: none !important; padding: 0 !important; margin: 0 !important; border-radius: 0 !important;
+  width: auto !important; max-width: none !important; box-shadow: none !important; color: var(--m3e-on-s-var) !important;
+}
+
+/* hover toolbar → small floating toolbar */
+.buttons_SY_P2T .buttonsInner_SY_P2T {
+  border-radius: 999px !important;
+  padding: 2px 4px;
+  background-color: var(--m3e-s-highest) !important;
+  border: none !important;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 0.5) !important;
+  animation: m3e-pop var(--m3e-dur-fast) var(--m3e-spring-fast);
+}
+.buttonsInner_SY_P2T [role="button"],
+.buttonsInner_SY_P2T button {
+  border-radius: 999px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+.buttonsInner_SY_P2T [role="button"]:active { border-radius: 8px !important; }
+@keyframes m3e-pop { from { scale: 0.85; opacity: 0; } to { scale: 1; opacity: 1; } }
+
+/* unread "NEW" line + date chips */
+.divider_4TfzT5.isUnread_4TfzT5 { border-color: var(--m3e-error) !important; }
+.unreadPill_4TfzT5 {
+  background-color: var(--m3e-error) !important;
+  color: var(--m3e-on-error) !important;
+  border-radius: 999px !important;
+  padding: 0 8px !important;
+  font-weight: 800;
+}
+.unreadPillCap_4TfzT5 { display: none; }
+.divider_4TfzT5.hasContent_4TfzT5:not(.isUnread_4TfzT5) .content_4TfzT5 {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background-color: var(--m3e-s-high);
+  color: var(--m3e-on-s-var);
+  font-weight: 600;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FORMATTING inside messages
+   ════════════════════════════════════════════════════════════════ */
+.markup_ku1OHH h1 { font-size: 1.5em; font-weight: 800; font-variation-settings: "ROND" 100, "wdth" 112; letter-spacing: -0.01em; }
+.markup_ku1OHH h2 { font-size: 1.25em; font-weight: 750; font-variation-settings: "ROND" 100, "wdth" 108; }
+.markup_ku1OHH h3 { font-size: 1.06em; font-weight: 700; font-variation-settings: "ROND" 80; }
+.markup_ku1OHH small { opacity: 0.7; }
+.markup_ku1OHH strong { font-weight: 750; }
+.markup_ku1OHH u { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* inline code */
+.markup_ku1OHH code.inline {
+  border-radius: 6px;
+  padding: 1px 6px;
+  background-color: var(--m3e-inline-code-bg);
+  border: none;
+  font-size: 0.86em;
+}
+/* code blocks */
+.markup_ku1OHH pre {
+  border-radius: 14px;
+  overflow: hidden;
+  border: none;
+  max-width: 100%;
+}
+.markup_ku1OHH pre > code, .markup_ku1OHH .codeContainer_ku1OHH code {
+  border: none !important;
+  border-radius: 14px;
+  background-color: var(--m3e-code-bg) !important;
+  padding: 10px 14px !important;
+  line-height: 1.5;
+}
+.codeActions_ku1OHH { border-radius: 999px; }
+.messageContent_2i8Bfm pre:first-child { margin-top: 4px; }
+
+/* quotes */
+.blockquoteDivider_ku1OHH {
+  width: 4px;
+  border-radius: 2px;
+  background-color: currentColor;
+  opacity: 0.35;
+}
+
+/* lists: squircle bullets */
+.markup_ku1OHH ul { list-style: none; padding-left: 4px; }
+.markup_ku1OHH ul > li { position: relative; padding-left: 16px; }
+.markup_ku1OHH ul > li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  background-color: currentColor;
+  opacity: 0.75;
+  clip-path: var(--m3e-shape-cookie4);
+}
+.markup_ku1OHH ol > li::marker { font-weight: 800; }
+
+/* mentions, role mentions, channel links */
+.markup_ku1OHH .mention,
+.mention[class*="wrapper_"] {
+  border-radius: 8px;
+  padding: 0 5px;
+  font-weight: 650;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+
+/* timestamps <t:…> */
+.timestamp_ku1OHH {
+  border-radius: 6px;
+  padding: 0 5px;
+  background-color: var(--m3e-chip-bg);
+}
+
+/* spoilers */
+[class*="spoilerContent_"], [class*="spoilerMarkdownContent_"] {
+  border-radius: 6px !important;
+}
+
+/* links */
+.markup_ku1OHH a { font-weight: 600; }
+
+/* ════════════════════════════════════════════════════════════════
+   ATTACHMENTS, EMBEDS, POLLS, REACTIONS
+   ════════════════════════════════════════════════════════════════ */
+/* images / video mosaic */
+.mosaicItem_BwHv05,
+.container_YUQhib [class*="imageWrapper_"],
+.container_YUQhib [class*="imageContainer_"],
+.container_YUQhib video {
+  border-radius: 20px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press);
+}
+/* files */
+.file_-9z-XO {
+  border: none !important;
+  border-radius: 20px !important;
+  background-color: var(--m3e-s-high) !important;
+}
+/* embeds: tonal card, the embed colour stays as a rounded inner bar */
+.embedFull_XyW1ZT {
+  border-radius: 20px !important;
+  border-left-width: 4px;
+  background-color: var(--m3e-s-high) !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press);
+}
+.embedTitle_XyW1ZT, .embedTitleLink_XyW1ZT { font-weight: 700; font-variation-settings: "ROND" 100; }
+.embedImage_XyW1ZT img, .embedThumbnail_XyW1ZT img, .embedVideo_XyW1ZT { border-radius: 14px !important; }
+.embedFields_XyW1ZT { gap: 2px 8px; }
+
+/* polls: segmented answers */
+.pollContainer_YUQhib > div { border-radius: 24px !important; border: none !important; background-color: var(--m3e-s-high) !important; }
+.answersContainer_D4-WfD { gap: 2px !important; }
+.answer_D4-WfD {
+  border-radius: 4px !important;
+  border: none !important;
+  background-color: var(--m3e-s) !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press) !important;
+}
+.answer_D4-WfD:first-child { border-top-left-radius: 16px !important; border-top-right-radius: 16px !important; }
+.answer_D4-WfD:last-child { border-bottom-left-radius: 16px !important; border-bottom-right-radius: 16px !important; }
+.answer_D4-WfD.selected_D4-WfD { border-radius: 16px !important; box-shadow: inset 0 0 0 2px var(--m3e-primary) !important; }
+.votePercentageBar_D4-WfD { background-color: color-mix(in oklab, var(--m3e-secondary-c) 80%, transparent) !important; }
+
+/* reactions: chips 30 high, corner 10 → pill when you reacted */
+.reaction_MmKct8 {
+  border-radius: 10px !important;
+  border: 1px solid var(--m3e-outline-var) !important;
+  background-color: var(--m3e-s-high) !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press),
+              background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.reaction_MmKct8:hover { background-color: var(--m3e-s-highest) !important; }
+.reaction_MmKct8:active { border-radius: 8px !important; }
+.reaction_MmKct8.reactionMe_MmKct8 {
+  border-radius: 15px !important;
+  border-color: transparent !important;
+  background-color: var(--m3e-secondary-c) !important;
+}
+.reaction_MmKct8.reactionMe_MmKct8 .reactionCount_MmKct8 { color: var(--m3e-on-secondary-c) !important; }
+.reactionCount_MmKct8 { font-weight: 700; }
+.reactionBtn_MmKct8 { border-radius: 10px !important; }
+
+/* thread starter */
+.container_g2fiji { border-radius: 16px !important; background-color: var(--m3e-s-high) !important; border: none !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   CHAT BAR — floating pill island
+   ════════════════════════════════════════════════════════════════ */
+@container root style(--m3e-chatbar: floating) {
+  #app-mount .channelTextArea_z_gUBg {
+    border-radius: 28px !important;
+    background-color: var(--m3e-s-highest) !important;
+    box-shadow: 0 3px 14px rgb(0 0 0 / 0.45);
+  }
+}
+@container root style(--m3e-chatbar: inline) {
+  #app-mount .channelTextArea_z_gUBg {
+    border-radius: 16px !important;
+    background-color: var(--m3e-s-high) !important;
+    box-shadow: none;
+  }
+}
+.channelTextArea_z_gUBg .themedBackground_2x8-Qn { background: transparent !important; }
+.attachButton_7TM4SO, .attachButton_2x8-Qn {
+  border-radius: 999px !important;
+}
+.attachWrapper_7TM4SO .attachButton_7TM4SO {
+  background-color: var(--m3e-s-bright);
+  margin-inline: 4px;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press);
+}
+.attachWrapper_7TM4SO .attachButton_7TM4SO:active { border-radius: 8px !important; }
+.buttons_2x8-Qn .buttonContainer_2x8-Qn [class*="button_"],
+.buttons_2x8-Qn [class*="button_"][role="button"] {
+  border-radius: 999px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+.buttons_2x8-Qn [class*="button_"]:active { border-radius: 8px !important; }
+/* the reply / upload bars above the input */
+.stackedBars_2x8-Qn, .floatingBars_2x8-Qn > * { border-radius: 20px 20px 4px 4px !important; }
+
+/* typing indicator: the M3E loading indicator instead of three dots */
+.typing_U9Tvvz .typingDots_U9Tvvz .dots_U9Tvvz { display: none; }
+.typing_U9Tvvz .typingDots_U9Tvvz::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -3px;
+  background-color: var(--m3e-primary);
+  clip-path: var(--m3e-shape-cookie9);
+  animation: m3e-spin 2400ms linear infinite;
+  will-change: rotate;
+}
+.typing_U9Tvvz { font-weight: 500; }
+
+/* ════════════════════════════════════════════════════════════════
+   MEMBER LIST — segmented
+   ════════════════════════════════════════════════════════════════ */
+.member_86es0b.container_J1Adu_ {
+  margin: 0 8px 2px !important;
+  max-width: none !important;
+  background-color: var(--m3e-s);
+  border-radius: 4px !important;
+  overflow: hidden;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.member_86es0b .childContainer_J1Adu_ { border-radius: inherit !important; }
+.membersGroup_86es0b + .member_86es0b.container_J1Adu_ { border-top-left-radius: 16px !important; border-top-right-radius: 16px !important; }
+.member_86es0b.container_J1Adu_:not(:has(+ .member_86es0b)) { border-bottom-left-radius: 16px !important; border-bottom-right-radius: 16px !important; }
+.member_86es0b.container_J1Adu_:hover { background-color: var(--m3e-s-high); }
+.member_86es0b.container_J1Adu_:active { border-radius: 16px !important; }
+.member_86es0b.container_J1Adu_.selected_J1Adu_ { border-radius: 16px !important; background-color: var(--m3e-secondary-c); }
+.container_86es0b [class*="container_g7esM5"] { border-radius: 20px !important; margin-inline: 8px; }
+.membersGroup_86es0b { padding-top: 18px !important; }
+.membersGroup_86es0b h3, .membersGroupName_86es0b { font-weight: 700; letter-spacing: 0.06em; font-size: 11.5px; }
+
+/* ════════════════════════════════════════════════════════════════
+   BUTTONS — round by default, press morphs to a smaller corner
+   ════════════════════════════════════════════════════════════════ */
+.button_9OQtot:not(.lookBlank_9OQtot):not(.lookLink_9OQtot):not(.sizeIcon_9OQtot) {
+  border-radius: 999px !important;
+  font-weight: 650;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press),
+              background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.button_9OQtot:not(.lookBlank_9OQtot):not(.lookLink_9OQtot):active { border-radius: 8px !important; }
+.button_9OQtot.sizeLarge_9OQtot:not(.lookBlank_9OQtot):not(.lookLink_9OQtot):active { border-radius: 12px !important; }
+.lookFilled_9OQtot.colorBrand_9OQtot { background-color: var(--m3e-primary-c) !important; color: var(--m3e-on-primary-c) !important; }
+.lookFilled_9OQtot.colorPrimary_9OQtot { background-color: var(--m3e-secondary-c) !important; color: var(--m3e-on-secondary-c) !important; }
+.lookFilled_9OQtot.colorRed_9OQtot { background-color: var(--m3e-error-c) !important; color: var(--m3e-on-error-c) !important; }
+.lookOutlined_9OQtot { box-shadow: inset 0 0 0 1px var(--m3e-outline) !important; border: none !important; }
+/* Discord's newer button component */
+button[class*="button_"][class*="sm_"], button[class*="button_"][class*="md_"],
+button[class*="button_"][class*="lg_"] {
+  border-radius: 999px;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press);
+}
+button[class*="button_"][class*="sm_"]:active, button[class*="button_"][class*="md_"]:active,
+button[class*="button_"][class*="lg_"]:active { border-radius: 8px; }
+
+/* ════════════════════════════════════════════════════════════════
+   MENUS, TOOLTIPS, POPOUTS, MODALS
+   ════════════════════════════════════════════════════════════════ */
+.menu_M3qk4j {
+  border-radius: 20px !important;
+  border: none !important;
+  background-color: var(--m3e-s-high) !important;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.55) !important;
+  padding: 6px !important;
+  animation: m3e-menu var(--m3e-dur-fast) var(--m3e-spring-fast);
+  transform-origin: top left;
+}
+@keyframes m3e-menu { from { scale: 0.9; opacity: 0; } to { scale: 1; opacity: 1; } }
+.menu_M3qk4j .item_M3qk4j {
+  min-height: 40px;
+  border-radius: 12px !important;
+  margin: 1px 0;
+  font-weight: 500;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.menu_M3qk4j .item_M3qk4j.focused_M3qk4j {
+  background-color: var(--m3e-tertiary-c) !important;
+  color: var(--m3e-on-tertiary-c) !important;
+}
+/* .focused_ follows the mouse in Discord menus, so it is a hover state: colour only. Press morphs the item. */
+.menu_M3qk4j .item_M3qk4j:active { border-radius: 20px !important; }
+.menu_M3qk4j .item_M3qk4j.focused_M3qk4j * { color: inherit !important; }
+.menu_M3qk4j .item_M3qk4j.colorDanger_M3qk4j.focused_M3qk4j { background-color: var(--m3e-error-c) !important; color: var(--m3e-on-error-c) !important; }
+.menu_M3qk4j [class*="separator_"] { background: none !important; height: 6px !important; margin: 0 !important; position: relative; }
+/* quick reactions: connected button group (2px gap, inner 8 → 4 pressed, pill ends) */
+.wrapper_Qi4I4L { gap: 2px !important; }
+.wrapper_Qi4I4L .button_Qi4I4L {
+  border-radius: 8px !important;
+  background-color: var(--m3e-s-highest) !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+.wrapper_Qi4I4L > :first-child .button_Qi4I4L { border-radius: 999px 8px 8px 999px !important; }
+.wrapper_Qi4I4L > :last-child .button_Qi4I4L { border-radius: 8px 999px 999px 8px !important; }
+.wrapper_Qi4I4L .button_Qi4I4L:hover { background-color: color-mix(in oklab, var(--m3e-on-s) 8%, var(--m3e-s-highest)) !important; }
+.wrapper_Qi4I4L .button_Qi4I4L:active { border-radius: 4px !important; }
+.wrapper_Qi4I4L > :first-child .button_Qi4I4L:active { border-radius: 999px 4px 4px 999px !important; }
+.wrapper_Qi4I4L > :last-child .button_Qi4I4L:active { border-radius: 4px 999px 999px 4px !important; }
+.menu_M3qk4j [class*="separator_"]::after { content: ""; position: absolute; left: 12px; right: 12px; top: 2px; height: 2px; border-radius: 1px; background: var(--m3e-canvas); }
+
+/* tooltips: inverse, rounded, no arrow */
+.tooltip_3_v8qp, .tooltip_ZDdyhE {
+  background-color: var(--m3e-inverse-s) !important;
+  color: var(--m3e-inverse-on-s) !important;
+  border-radius: 10px !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.4) !important;
+  font-weight: 600;
+}
+.tooltip_3_v8qp *, .tooltip_ZDdyhE * { color: inherit !important; }
+.tooltipPointer_3_v8qp, .tooltipPointerBg_3_v8qp, .caretIcon_ZDdyhE { display: none !important; }
+
+/* popouts & modals: dialog corner 28 */
+[role="dialog"] > [class*="root_"],
+[class*="userPopoutOuter_"],
+[class*="userProfileOuter_"],
+.container_dvN-MP {
+  border-radius: 28px !important;
+}
+
+/* inputs: filled field look */
+input[class*="input_"], [class*="inputWrapper_"] input, [class*="searchBar_"], .search_ * > [class*="searchBar_"] {
+  border-radius: 14px;
+}
+[class*="searchBar_"] { border-radius: 999px !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   SETTINGS — nav as pills
+   ════════════════════════════════════════════════════════════════ */
+.side_6zZYhF .item_6zZYhF {
+  border-radius: 999px !important;
+  padding-inline: 14px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.side_6zZYhF .item_6zZYhF.selected_6zZYhF {
+  background-color: var(--m3e-secondary-c) !important;
+  color: var(--m3e-on-secondary-c) !important;
+  font-weight: 700;
+}
+
+/* new settings modal nav */
+.item_xyJHva {
+  border-radius: 999px !important;
+  transition: border-radius var(--m3e-dur-effects) var(--m3e-spring-effects), scale var(--m3e-dur-press) var(--m3e-spring-press), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.item_xyJHva.active_xyJHva {
+  background-color: var(--m3e-secondary-c) !important;
+  color: var(--m3e-on-secondary-c) !important;
+}
+.item_xyJHva.active_xyJHva * { color: inherit !important; font-weight: 700; }
+
+/* ════════════════════════════════════════════════════════════════
+   SWITCHES — M3 switch: track 52×32, handle 16 off / 24 on / 28 pressed
+   ════════════════════════════════════════════════════════════════ */
+.switchIndicator_9AraPt {
+  position: relative;
+  width: 52px !important;
+  height: 32px !important;
+  border: none !important;
+  border-radius: 16px !important;
+  background-color: var(--m3e-s-highest) !important;
+  box-shadow: inset 0 0 0 2px var(--m3e-outline);
+  transition: background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast), box-shadow var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast) !important;
+}
+.switchIndicator_9AraPt .thumb_9AraPt { opacity: 0 !important; }
+.switchIndicator_9AraPt::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--m3e-outline);
+  translate: -50% -50%;
+  transition: left var(--m3e-dur-fast) var(--m3e-spring-fast), width var(--m3e-dur-fast) var(--m3e-spring-fast),
+              height var(--m3e-dur-fast) var(--m3e-spring-fast), background-color var(--m3e-dur-effectsFast) var(--m3e-spring-effectsFast);
+}
+.container_9AraPt:has(input:checked) .switchIndicator_9AraPt {
+  background-color: var(--m3e-primary) !important;
+  box-shadow: none;
+}
+.container_9AraPt:has(input:checked) .switchIndicator_9AraPt::after {
+  left: 36px; width: 24px; height: 24px; background-color: var(--m3e-on-primary);
+}
+.container_9AraPt:active .switchIndicator_9AraPt::after { width: 28px; height: 28px; }
+.container_9AraPt:has(input:disabled) { opacity: 0.38; }
+
+/* ════════════════════════════════════════════════════════════════
+   EXPRESSIVE MOTION — iRice's Material look, in CSS (on by default;
+   :root { --m3e-motion: calm; } turns the bounce off)
+   · hover: a colour tint only, nothing moves
+   · press: the control swells ~6% (≤ ~10 px), its corners square off to 70%,
+     both on the press spring; on release it springs back past its size and settles
+   · opening: panels and menus rise from 86% and fade in on the rise spring, their
+     items staggered one after another
+   · groups: the pressed button widens, its neighbours make room
+   · the typing indicator is Material's morphing loading shape
+   ════════════════════════════════════════════════════════════════ */
+@keyframes m3e-rise { from { scale: 0.86; opacity: 0; } }
+@keyframes m3e-rise-item { from { scale: 0.92; opacity: 0; translate: 0 -4px; } }
+@keyframes m3e-msg-in { from { translate: 0 12px; scale: 0.96; opacity: 0; } }
+@container root style(--m3e-motion: expressive) {
+  /* shape changes (press morphs, selections) on the press spring: a small bounce */
+  body { --m3e-spring-effects: var(--m3e-spring-press); --m3e-dur-effects: var(--m3e-dur-press); }
+
+  /* ── press: swell + bounce ── */
+  .button_9OQtot:not(.lookBlank_9OQtot):not(.lookLink_9OQtot):active,
+  button[class*="button_"][class*="sm_"]:active, button[class*="button_"][class*="md_"]:active, button[class*="button_"][class*="lg_"]:active { scale: 1.05; }
+  .buttons_2x8-Qn [class*="button_"]:active, .attachWrapper_7TM4SO .attachButton_7TM4SO:active,
+  .buttonsInner_SY_P2T [role="button"]:active, .toolbar_ybUK7Z .clickable_ybUK7Z:active,
+  .wrapper_Qi4I4L .button_Qi4I4L:active, .reaction_MmKct8:active { scale: 1.1; }
+  .listItem_rwEpIL .blobContainer_IaPwK5 { transition: scale var(--m3e-dur-press) var(--m3e-spring-press); }
+  .listItem_rwEpIL .blobContainer_IaPwK5:active { scale: 1.08; }
+  .wrapper_TNyK-N .link_TNyK-N:active, .member_86es0b.container_J1Adu_:active,
+  .item_xyJHva:active, .side_6zZYhF .item_6zZYhF:active, .menu_M3qk4j .item_M3qk4j:active { scale: 1.03; }
+
+  /* ── button group: the pressed one widens, the rest make room ── */
+  .buttons_g6VwXp > button:active { min-width: 38px; }
+  .buttons_g6VwXp > .audioButtonParent_gKpIZP:active { min-width: 57px; }
+  .buttons_g6VwXp > button[aria-checked="true"]:active { min-width: 50px; }
+  .buttons_g6VwXp > .audioButtonParent_gKpIZP:has(> [role="switch"][aria-checked="true"]):active { min-width: 67px; }
+
+  /* ── opening: rise in, items one after another ── */
+  .layer_VVADeK > *, .focusLock__KoJTP, .menu_M3qk4j { animation: m3e-rise var(--m3e-dur-rise) var(--m3e-spring-rise) both; transform-origin: top center; }
+  .layer_VVADeK > .menu_M3qk4j, .layer_VVADeK > * .menu_M3qk4j { animation: none; }
+  .menu_M3qk4j .item_M3qk4j, .menu_M3qk4j .wrapper_Qi4I4L {
+    animation: m3e-rise-item var(--m3e-dur-rise) var(--m3e-spring-rise) backwards;
+    animation-delay: calc(min(sibling-index(), 12) * 14ms);
+  }
+  .tooltip_3_v8qp, .tooltip_ZDdyhE { animation: m3e-rise var(--m3e-dur-press) var(--m3e-spring-press); transform-origin: bottom center; }
+
+  /* the newest message rises in (only the last row, so opening a channel animates once) */
+  li.messageListItem_SY_P2T:last-of-type > .message_SY_P2T { animation: m3e-msg-in var(--m3e-dur-rise) var(--m3e-spring-rise) both; transform-origin: left bottom; }
+  @container style(--m3e-own: 1) { li.messageListItem_SY_P2T:last-of-type > .message_SY_P2T { transform-origin: right bottom; } }
+  /* your reactions pop in */
+  .reactionMe_MmKct8 { animation: m3e-rise var(--m3e-dur-press) var(--m3e-spring-press); }
+
+  /* ── selection: emphasized type (one step heavier) ── */
+  .link_TNyK-N [class*="name_"] { font-variation-settings: "wght" 500, "ROND" 100; transition: font-variation-settings var(--m3e-dur-fast) var(--m3e-spring-fast); }
+  .modeSelected_TNyK-N .link_TNyK-N [class*="name_"] { font-variation-settings: "wght" 650, "ROND" 100; }
+
+  /* ── Material's loading indicator for "is typing" ── */
+  .typing_U9Tvvz .typingDots_U9Tvvz::before { animation: m3e-loader 4550ms infinite, m3e-spin 4666ms linear infinite; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  body { --gap: 6px; --m3e-island-radius: 22px; --m3e-bubble-max: 100%; }
+  /* header: keep the channel name readable, let the search pill shrink */
+  .upperContainer_ybUK7Z .children_ybUK7Z { min-width: 110px !important; }
+  .upperContainer_ybUK7Z .toolbar_ybUK7Z { min-width: 0; }
+  .toolbar_ybUK7Z .search_bWCaDq { flex: 0 1 160px !important; min-width: 44px !important; }
+  .toolbar_ybUK7Z .search_bWCaDq > * { width: 100% !important; min-width: 0 !important; }
+  /* member list collapses into an avatar rail so the chat keeps its width */
+  .container_86es0b,
+  .container_86es0b .membersWrap_86es0b,
+  .container_86es0b .members_86es0b { width: 72px !important; min-width: 72px !important; }
+  .container_86es0b .member_86es0b.container_J1Adu_ { margin: 0 6px 2px !important; padding: 0 !important; }
+  .container_86es0b .member_86es0b .content_J1Adu_,
+  .container_86es0b [class*="container_g7esM5"],
+  .container_86es0b .membersGroupHeader_86es0b > :not(:first-child) { display: none !important; }
+  .container_86es0b .memberInner_Iy0c7A, .container_86es0b .layout_J1Adu_ { justify-content: center; padding: 6px 0 !important; }
+  .container_86es0b .avatar_J1Adu_ { margin: 0 !important; }
+  .container_86es0b .membersGroup_86es0b { font-size: 0 !important; height: 14px !important; padding: 8px 0 0 !important; }
+  .container_86es0b .membersGroup_86es0b * { display: none !important; }
+}
+@media (max-height: 640px) {
+  body { --chatbar-height: 48px; }
+}
+
+/* ── variant: nord ── */
+body {
+  /* Polar Night: Midnight (nord) --bg-3 / --bg-4 / --bg-2 / --bg-1, nord3 */
+  --m3e-canvas: #272b35;
+  --m3e-s-low: #2e3440;
+  --m3e-s: #353b49;              /* halfway between #2e3440 and #3b4252, for list segments */
+  --m3e-s-high: #3b4252;
+  --m3e-s-highest: #434c5e;
+  --m3e-s-bright: #4c566a;
+  --m3e-on-s: #eceff4;
+  --m3e-on-s-var: hsl(220, 20%, 67%);
+  --m3e-outline: #616e88;
+  --m3e-outline-var: #3b4252;
+  --m3e-state: 102 115 153;      /* hsl(220 20% 50%), the flavour's hover/active tint */
+
+  /* Frost + Aurora: the flavour's --blue / --purple / --red ramps */
+  --m3e-primary: hsl(193, 43%, 72%);   --m3e-on-primary: #272b35;
+  --m3e-primary-c: hsl(193, 43%, 62%);  --m3e-on-primary-c: #272b35;   /* Midnight (nord) --blue-4: its accent buttons, hovered */
+  --m3e-secondary-c: color-mix(in srgb, #88c0d0 30%, #2e3440);  --m3e-on-secondary-c: #e5e9f0;
+  --m3e-tertiary: hsl(311, 20%, 68%);
+  --m3e-tertiary-c: hsl(311, 20%, 58%); --m3e-on-tertiary-c: #272b35;  /* --purple-4 */
+  --m3e-error: #bf616a;                --m3e-on-error: #eceff4;
+  --m3e-error-c: color-mix(in srgb, #bf616a 38%, #2e3440);       --m3e-on-error-c: #eceff4;
+  --m3e-inverse-primary: hsl(193, 43%, 57%);
+  --m3e-inverse-s: #eceff4;            --m3e-inverse-on-s: #2e3440;
+  --m3e-on-online: #272b35;
+  --m3e-code-bg: #272b35;
+  --m3e-inline-code-bg: hsla(220, 20%, 50%, 0.2);
+  --m3e-chip-bg: hsla(220, 20%, 50%, 0.15);
+  --m3e-mention-fg: #eceff4;
+
+  /* Midnight (nord)'s own text + state values, verbatim */
+  --text-0: #272b35;
+  --text-1: #eceff4;
+  --text-2: #e5e9f0;
+  --text-3: #d8dee9;
+  --text-4: hsl(220, 20%, 67%);
+  --text-5: #4c566a;
+  --hover: hsla(220, 20%, 50%, 0.1);
+  --active: hsla(220, 20%, 50%, 0.2);
+  --active-2: hsla(220, 20%, 50%, 0.3);
+  --border: hsla(220, 20%, 50%, 0.1);
+  --online: #a3be8c;
+  --idle: #ebcb8b;
+  --dnd: #bf616a;
+  --streaming: #b48ead;
+}

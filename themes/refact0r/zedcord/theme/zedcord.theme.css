@@ -1,0 +1,107 @@
+/**
+ * @name zedcord
+ * @description discord, but it's zed-themed
+ * @author refact0r
+ * @version 0.1.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/zedcord
+ * @source https://github.com/refact0r/zedcord/blob/main/theme/zedcord.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+ * @donate https://ko-fi.com/refact0r
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=Lilex:wght@400;700&display=swap');
+
+@import url('https://refact0r.github.io/zedcord/build/zedcord.css');
+
+/* zed "One Dark" (assets/themes/one/one.json). each token's comment is its zed theme key */
+:root {
+    /* surfaces */
+    --zed-title-bar: #3b414d; /* title_bar.background */
+    --zed-status-bar: #3b414d; /* status_bar.background: the user area and the composer */
+    --zed-panel: #2f343e; /* panel.background: server, channel and member lists */
+    --zed-surface: #2f343e; /* surface.background: embeds, code blocks */
+    --zed-elevated-surface: #2f343e; /* elevated_surface.background: popovers, menus, modals */
+    --zed-tab-bar: #2f343e; /* tab_bar.background: page headers */
+    --zed-tab-active: #282c33; /* tab.active_background: the channel tab */
+    --zed-editor: #282c33; /* editor.background: chat */
+    --zed-active-line: #2f343ebf; /* editor.active_line.background: message hover */
+
+    /* borders */
+    --zed-border: #464b57; /* border */
+    --zed-border-variant: #363c46; /* border.variant */
+    --zed-border-focused: #47679e; /* border.focused */
+    --zed-border-selected: #293b5b; /* border.selected */
+
+    /* filled elements (element.*): inputs, filled buttons, project-panel rows (channel and dm lists) */
+    --zed-element: #2e343e;
+    --zed-element-hover: #363c46;
+    --zed-element-active: #454a56;
+    --zed-element-selected: #454a56;
+    /* ghost elements (ghost_element.*): subtle buttons, and list rows (member and friends lists, menus) */
+    --zed-ghost-element: #00000000;
+    --zed-ghost-element-hover: #363c46;
+    --zed-ghost-element-active: #454a56;
+    --zed-ghost-element-selected: #454a56;
+
+    /* text */
+    --zed-text: #dce0e5; /* text */
+    --zed-text-muted: #a9afbc; /* text.muted */
+    --zed-text-placeholder: #878a98; /* text.placeholder */
+    --zed-text-accent: #74ade8; /* text.accent */
+    --zed-text-ignored: #6b717d; /* ignored: muted channels; one dark's (#878a98) is too close to muted */
+    --zed-editor-fg: #acb2be; /* editor.foreground */
+    --zed-line-number: #4e5a5f; /* editor.line_number */
+    --zed-scrollbar-thumb: #c8ccd44c; /* scrollbar.thumb.background */
+    --zed-selection: #74ade83d; /* players[0].selection */
+
+    /* syntax (code blocks) */
+    --zed-syntax-keyword: #b477cf;
+    --zed-syntax-string: #a1c181;
+    --zed-syntax-number: #bf956a;
+    --zed-syntax-function: #73ade9;
+    --zed-syntax-type: #6eb4bf;
+    --zed-syntax-operator: #6eb4bf;
+    --zed-syntax-comment: #5d636f;
+    --zed-syntax-comment-style: normal; /* comment's font_style */
+    --zed-syntax-comment-doc: #878e98; /* comment.doc */
+    --zed-syntax-property: #d07277;
+    --zed-syntax-variable: #acb2be;
+    --zed-syntax-punctuation: #b2b9c6; /* punctuation.bracket */
+    --zed-syntax-tag: #74ade8;
+    --zed-syntax-attribute: #74ade8;
+    --zed-syntax-selector: #dfc184;
+    --zed-syntax-emphasis: #74ade8;
+    --zed-syntax-emphasis-strong: #bf956a;
+
+    /* discord-only: server icon tiles without an image (one dark's `background`) */
+    --zed-guild-icon: #3b414d;
+
+    /* accents. 2 is the theme's value (error, success, accent, warning, keyword) */
+    --red-1: #e0959a;
+    --red-2: #d07277;
+    --red-3: #c45a60;
+    --red-4: #b4474d;
+    --red-5: #9c3a40;
+    --green-1: #b9d29e;
+    --green-2: #a1c181;
+    --green-3: #8cae6a;
+    --green-4: #779a56;
+    --green-5: #638546;
+    --blue-1: #9cc5f0;
+    --blue-2: #74ade8;
+    --blue-3: #5d9ce0;
+    --blue-4: #4d8bd3;
+    --blue-5: #3f78bf;
+    --yellow-1: #e8d3a3;
+    --yellow-2: #dec184;
+    --yellow-3: #d4b064;
+    --yellow-4: #c49c4a;
+    --yellow-5: #a8843a;
+    --purple-1: #c99ade;
+    --purple-2: #b477cf;
+    --purple-3: #a362c2;
+    --purple-4: #9150b1;
+    --purple-5: #7c4199;
+}

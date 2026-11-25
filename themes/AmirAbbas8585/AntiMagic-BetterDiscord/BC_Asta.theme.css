@@ -1,0 +1,556 @@
+/**
+ * @name Anti-Magic Asta
+ * @description Demon-king theme around the Black Clover artwork: liquid-glass panels, blade-cut buttons, status stripes, embers. Light on resources.
+ * @author amirabbas2556
+ * @authorId 1062758325508382770
+ * @version 1.8.2
+ * @source https://github.com/AmirAbbas8585/AntiMagic-BetterDiscord
+ * @website https://github.com/AmirAbbas8585/AntiMagic-BetterDiscord
+ * @updateUrl https://raw.githubusercontent.com/AmirAbbas8585/AntiMagic-BetterDiscord/main/BC_Asta.theme.css
+ */
+
+/* Optional: Apple emoji. Uncomment the line below (or swap "Apple" for another provider) if you want it. */
+/* @import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/Apple.css); */
+
+/* =====================================================================
+   1. SETTINGS - everything you may want to tweak lives here
+   Colours are space-separated R G B so alpha can be added anywhere:  rgb(var(--ab-red) / .5)
+   ===================================================================== */
+:root {
+  --ab-image: url("https://raw.githubusercontent.com/AmirAbbas8585/AntiMagic-BetterDiscord/main/assets/wallpaper.jpg");
+
+  /* palette: neutral near-black base, red is kept for accents only (easier on the eyes) */
+  --ab-ink:      10 8 13;
+  --ab-wine:     38 20 29;
+  --ab-red:      214 40 57;
+  --ab-red-hi:   245 78 96;
+  --ab-red-deep: 120 22 34;
+  --ab-gold:     217 148 43;
+  --ab-rose:     219 170 156;
+  --ab-text:     243 233 233;
+  --ab-text-dim: 176 160 166;
+  /* THE LOGIC: in Asta's world everyone has magic and magic is colour. Asta has none: his power is
+     anti-magic, which is black and crimson. So the default look IS anti-magic.
+     If you ever want to "borrow" a friend's magic, replace the three red lines above with an attribute:
+     WIND (green):       --ab-red: 52 190 120;  --ab-red-hi: 110 225 165; --ab-red-deep: 18 105 66;
+     WATER (blue):       --ab-red: 60 140 235;  --ab-red-hi: 120 185 250; --ab-red-deep: 22 70 140;
+     FIRE (orange):      --ab-red: 235 105 30;  --ab-red-hi: 255 150 70;  --ab-red-deep: 140 52 10;
+     LIGHTNING (gold):   --ab-red: 225 180 25;  --ab-red-hi: 250 210 70;  --ab-red-deep: 130 90 10;
+     DARK (violet glow): --ab-red: 150 80 235;  --ab-red-hi: 185 130 250; --ab-red-deep: 80 30 130; */
+
+  /* status colours (online / idle / do-not-disturb / offline / streaming) */
+  --ab-online: 63 214 160;
+  --ab-idle:   255 180 84;
+  --ab-dnd:    255 77 106;
+  --ab-offline: 110 102 119;
+  --ab-stream: 165 107 255;
+
+  /* wallpaper comfort: lower saturation/brightness = easier on the eyes */
+  --ab-wall-sat:    .88;
+  --ab-wall-bright: .95;
+  --ab-dim:         .06;       /* dark veil over the wallpaper (0 - 1) */
+  --ab-vignette:    .22;       /* dark edges (0 - 1) */
+
+  /* surfaces: three tiers
+     glass = sidebars/header/settings (blurred + tinted), veil = chat area, solid = menus/modals */
+  --ab-glass-a:    .34;        /* tint of glass panels: higher = darker/more readable */
+  --ab-glass-blur: 6px;        /* blur of glass panels: small = sharper art (0px = off, saves GPU) */
+  --ab-glass-sat:  120%;
+  --ab-chat-a:     .22;        /* veil behind messages */
+  --ab-solid-a:    .94;
+  --ab-blur:       12px;       /* blur behind menus/popouts/modals */
+
+  --ab-blade: 3px 14px 3px 14px;
+  --ab-speed: .14s;
+
+  /* Effects: "none" turns the motion off, alpha 0 hides the layer */
+  --ab-embers: ab-rise;
+  --ab-embers-alpha: .7;
+  --ab-pulse: ab-pulse;
+
+  /* ANTI-MAGIC FIELD: other people's flashy "magic" (avatar decorations, nameplates, profile effects)
+     is dispelled. "hidden" = dispelled, "visible" = let the magic through again. */
+  --ab-dispel: hidden;
+
+  /* Anti-magic slash: a blade of light cuts across buttons / server icons / tabs on hover.
+     "ab-slash" = on, "none" = off. */
+  --ab-slash: ab-slash;
+}
+
+/* =====================================================================
+   2. DISCORD COLOUR VARIABLES
+   ===================================================================== */
+:root, .theme-dark, .theme-darker, .theme-midnight, .visual-refresh {
+  --background-base-lowest:  rgb(var(--ab-ink) / .5) !important;
+  --background-base-lower:   rgb(var(--ab-ink) / var(--ab-glass-a)) !important;
+  --background-base-low:     rgb(var(--ab-ink) / var(--ab-chat-a)) !important;
+  --bg-base-primary:         rgb(var(--ab-ink) / var(--ab-chat-a)) !important;
+  --bg-base-secondary:       rgb(var(--ab-ink) / var(--ab-glass-a)) !important;
+  --bg-base-tertiary:        rgb(var(--ab-ink) / .5) !important;
+  --bg-overlay-app-frame:    transparent !important;
+  --background-primary:      rgb(var(--ab-ink) / var(--ab-chat-a)) !important;
+  --background-secondary:    rgb(var(--ab-ink) / var(--ab-glass-a)) !important;
+  --background-secondary-alt:rgb(var(--ab-ink) / var(--ab-glass-a)) !important;
+  --background-tertiary:     rgb(var(--ab-ink) / .5) !important;
+  --chat-background-default: transparent !important;
+  --channeltextarea-background: rgb(var(--ab-ink) / .66) !important;
+  --input-background:        rgb(var(--ab-ink) / .66) !important;
+
+  --background-floating:         rgb(var(--ab-ink) / var(--ab-solid-a)) !important;
+  --background-surface-high:     rgb(var(--ab-ink) / var(--ab-solid-a)) !important;
+  --background-surface-higher:   rgb(var(--ab-wine) / .96) !important;
+  --background-surface-highest:  rgb(var(--ab-wine) / .98) !important;
+
+  /* neutral washes on hover (no red flood), red only on "selected" */
+  --background-modifier-hover:    rgb(255 255 255 / .05) !important;
+  --background-modifier-active:   rgb(255 255 255 / .08) !important;
+  --background-modifier-selected: rgb(var(--ab-red) / .16) !important;
+  --background-modifier-accent:   rgb(255 255 255 / .08) !important;
+  --background-mod-subtle:        rgb(255 255 255 / .04) !important;
+  --background-mod-normal:        rgb(255 255 255 / .07) !important;
+  --background-mod-strong:        rgb(255 255 255 / .11) !important;
+
+  /* accent: every blurple shade becomes crimson (this also fixes the blue home button / focus rings) */
+  --brand-experiment: rgb(var(--ab-red)) !important;
+  --brand-360: rgb(var(--ab-red-hi)) !important;
+  --brand-400: rgb(var(--ab-red-hi)) !important;
+  --brand-430: rgb(var(--ab-red-hi)) !important;
+  --brand-460: rgb(var(--ab-red-hi)) !important;
+  --brand-500: rgb(var(--ab-red)) !important;
+  --brand-530: rgb(var(--ab-red-hi)) !important;
+  --brand-560: rgb(var(--ab-red-hi)) !important;
+  --brand-600: rgb(var(--ab-red-deep)) !important;
+  --brand-630: rgb(var(--ab-red-deep)) !important;
+  --brand-660: rgb(var(--ab-red-deep)) !important;
+  --brand-700: rgb(var(--ab-red-deep)) !important;
+  --bg-brand: rgb(var(--ab-red)) !important;
+  --background-brand: rgb(var(--ab-red)) !important;
+  --button-filled-brand-background: rgb(var(--ab-red)) !important;
+  --button-filled-brand-background-hover: rgb(var(--ab-red-hi)) !important;
+  --button-filled-brand-background-active: rgb(var(--ab-red-deep)) !important;
+  --button-outline-brand-border: rgb(var(--ab-red)) !important;
+  --button-outline-brand-border-hover: rgb(var(--ab-red-hi)) !important;
+  --focus-primary: rgb(var(--ab-red-hi)) !important;
+  --border-focus: rgb(var(--ab-red-hi)) !important;
+  --text-brand: rgb(var(--ab-red-hi)) !important;
+  --text-link: rgb(var(--ab-gold)) !important;
+  --control-brand-foreground: rgb(var(--ab-red)) !important;
+  --control-brand-foreground-hover: rgb(var(--ab-red-hi)) !important;
+  --mention-foreground: rgb(var(--ab-rose)) !important;
+  --mention-background: rgb(var(--ab-red) / .20) !important;
+
+  /* status colours used by Discord's own variables */
+  --status-online: rgb(var(--ab-online)) !important;
+  --status-idle: rgb(var(--ab-idle)) !important;
+  --status-dnd: rgb(var(--ab-dnd)) !important;
+  --status-offline: rgb(var(--ab-offline)) !important;
+  --status-streaming: rgb(var(--ab-stream)) !important;
+
+  --text-normal: rgb(var(--ab-text)) !important;
+  --text-default: rgb(var(--ab-text)) !important;
+  --text-muted: rgb(var(--ab-text-dim)) !important;
+  --header-primary: rgb(var(--ab-text)) !important;
+  --header-secondary: rgb(var(--ab-text-dim)) !important;
+  --channels-default: rgb(var(--ab-text-dim)) !important;
+  --interactive-normal: rgb(var(--ab-text-dim)) !important;
+  --interactive-hover: rgb(var(--ab-text)) !important;
+  --interactive-active: rgb(var(--ab-rose)) !important;
+
+  --scrollbar-thin-thumb: rgb(255 255 255 / .13) !important;
+  --scrollbar-thin-track: transparent !important;
+  --scrollbar-auto-thumb: rgb(255 255 255 / .13) !important;
+  --scrollbar-auto-track: transparent !important;
+  --scrollbar-auto-scrollbar-color-thumb: rgb(255 255 255 / .13) !important;
+  --scrollbar-auto-scrollbar-color-track: transparent !important;
+  --scrollbar-thin-scrollbar-color-thumb: rgb(255 255 255 / .13) !important;
+  --scrollbar-thin-scrollbar-color-track: transparent !important;
+}
+
+/* =====================================================================
+   3. WALLPAPER (own fixed layer, filtered once) + EMBERS
+   ===================================================================== */
+html { background: rgb(var(--ab-ink)) !important; }
+html::before {
+  content: "";
+  position: fixed; inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 45%, rgb(0 0 0 / var(--ab-vignette)) 100%),
+    linear-gradient(rgb(var(--ab-ink) / var(--ab-dim)), rgb(var(--ab-ink) / var(--ab-dim))),
+    var(--ab-image) center / cover no-repeat;
+  filter: saturate(var(--ab-wall-sat)) brightness(var(--ab-wall-bright));
+}
+body, #app-mount,
+#app-mount > [class*="app_"], [class*="app_"] > [class*="layers_"], [class*="layers_"] > [class*="layer_"],
+[class*="bg__"], [class*="base__"], [class*="appAsidePanelWrapper"] { background: transparent !important; }
+
+body::before, body::after {
+  content: "";
+  position: fixed; left: 0; top: 0; width: 100%;
+  height: calc(100% + 420px);
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+  background-size: 420px 420px;
+}
+body::before { background-image: radial-gradient(circle at 40px 60px, rgb(var(--ab-red-hi) / 0.9) 0, rgb(var(--ab-red-hi) / 0.9) 2px, transparent 3.5px), radial-gradient(circle at 150px 300px, rgb(var(--ab-gold) / 0.8) 0, rgb(var(--ab-gold) / 0.8) 1.5px, transparent 3.0px), radial-gradient(circle at 260px 130px, rgb(var(--ab-red-hi) / 0.8) 0, rgb(var(--ab-red-hi) / 0.8) 2.5px, transparent 4.0px), radial-gradient(circle at 330px 360px, rgb(var(--ab-red) / 0.9) 0, rgb(var(--ab-red) / 0.9) 1.5px, transparent 3.0px), radial-gradient(circle at 90px 210px, rgb(var(--ab-rose) / 0.7) 0, rgb(var(--ab-rose) / 0.7) 1px, transparent 2.5px), radial-gradient(circle at 380px 40px, rgb(var(--ab-gold) / 0.7) 0, rgb(var(--ab-gold) / 0.7) 1.5px, transparent 3.0px), radial-gradient(circle at 210px 20px, rgb(var(--ab-red-hi) / 0.8) 0, rgb(var(--ab-red-hi) / 0.8) 1px, transparent 2.5px); opacity: calc(.55 * var(--ab-embers-alpha)); animation: var(--ab-embers) 38s linear infinite; }
+body::after  { background-image: radial-gradient(circle at 100px 120px, rgb(var(--ab-red) / 0.55) 0, rgb(var(--ab-red) / 0.55) 3.5px, transparent 5.0px), radial-gradient(circle at 360px 300px, rgb(var(--ab-gold) / 0.45) 0, rgb(var(--ab-gold) / 0.45) 3px, transparent 4.5px), radial-gradient(circle at 240px 380px, rgb(var(--ab-red-hi) / 0.4) 0, rgb(var(--ab-red-hi) / 0.4) 4px, transparent 5.5px), radial-gradient(circle at 380px 70px, rgb(var(--ab-red) / 0.5) 0, rgb(var(--ab-red) / 0.5) 3px, transparent 4.5px), radial-gradient(circle at 170px 250px, rgb(var(--ab-rose) / 0.4) 0, rgb(var(--ab-rose) / 0.4) 2.5px, transparent 4.0px);  opacity: calc(.5 * var(--ab-embers-alpha));  animation: var(--ab-embers) 70s linear infinite; }
+@keyframes ab-rise { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -420px, 0); } }
+
+/* =====================================================================
+   4. LIQUID GLASS - blurred, tinted, with a light-catching top edge
+   Used by: channel sidebar, members list, chat header, settings panes.
+   ===================================================================== */
+:is([class*="sidebar_"], [class*="members_"], [class*="membersWrap_"],
+    [class*="chat_"] > [class*="title_"], [class*="chat_"] > section[class*="title_"],
+    [class*="standardSidebarView"] [class*="sidebarRegion"], [class*="standardSidebarView"] [class*="contentRegion"]) {
+  background-color: rgb(var(--ab-ink) / var(--ab-glass-a)) !important;
+  background-image:
+    linear-gradient(135deg, rgb(255 255 255 / .09), rgb(255 255 255 / 0) 36%),
+    linear-gradient(315deg, rgb(var(--ab-red) / .05), transparent 50%) !important;
+  -webkit-backdrop-filter: blur(var(--ab-glass-blur)) saturate(var(--ab-glass-sat));
+  backdrop-filter: blur(var(--ab-glass-blur)) saturate(var(--ab-glass-sat));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .10), inset 1px 0 0 rgb(255 255 255 / .05) !important;
+}
+/* the chat area itself: a light veil (no blur) so text stays readable but the art still shows */
+[class*="chatContent_"] {
+  background-color: rgb(var(--ab-ink) / var(--ab-chat-a)) !important;
+}
+/* the input bar is nearly solid so typing is always comfortable */
+[class*="channelTextArea"] { background-color: rgb(var(--ab-ink) / .72) !important; }
+
+/* =====================================================================
+   TITLE BAR + SEARCH: glass strip with a crimson hairline, calm icons, red close button
+   ===================================================================== */
+[class*="titleBar_"] {
+  background: linear-gradient(180deg, rgb(var(--ab-ink) / .78), rgb(var(--ab-ink) / .38)) !important;
+  border-bottom: 1px solid transparent !important;
+  border-image: linear-gradient(90deg, rgb(var(--ab-red) / .75), rgb(var(--ab-red) / .12) 55%, transparent) 1 !important;
+}
+[class*="wordmark"], [class*="wordmark"] svg, [class*="wordmark"] path { color: rgb(var(--ab-rose)) !important; fill: rgb(var(--ab-rose)) !important; opacity: .9; }
+[class*="titleBar_"] [class*="winButton"], [class*="titleBar_"] [class*="button_"] {
+  color: rgb(var(--ab-text-dim)) !important;
+  transition: background-color var(--ab-speed), color var(--ab-speed);
+}
+[class*="titleBar_"] [class*="winButton"]:hover, [class*="titleBar_"] [class*="button_"]:hover { background-color: rgb(255 255 255 / .09) !important; color: rgb(var(--ab-text)) !important; }
+[class*="titleBar_"] [class*="winButtonClose"]:hover { background-color: rgb(var(--ab-red)) !important; color: #fff !important; }
+/* Markers set by the BC_AstaCompanion plugin on the real title bar and window buttons (works whatever Discord calls them) */
+[data-ab="titlebar"] {
+  background: linear-gradient(180deg, rgb(var(--ab-ink) / .82), rgb(var(--ab-ink) / .40)) !important;
+  border-bottom: 1px solid transparent !important;
+  border-image: linear-gradient(90deg, rgb(var(--ab-red) / .8), rgb(var(--ab-red) / .15) 55%, transparent) 1 !important;
+  box-shadow: 0 1px 14px rgb(var(--ab-red) / .12);
+}
+[data-ab="winbtn"], [data-ab="winclose"] {
+  color: rgb(var(--ab-text-dim)) !important;
+  transition: background-color var(--ab-speed), color var(--ab-speed);
+}
+[data-ab="winbtn"]:hover { background-color: rgb(255 255 255 / .10) !important; color: rgb(var(--ab-text)) !important; }
+[data-ab="winclose"]:hover { background-color: rgb(var(--ab-red)) !important; color: #fff !important; }
+
+[class*="searchBar_"] {
+  background-color: rgb(var(--ab-ink) / .6) !important;
+  border: 1px solid rgb(255 255 255 / .08);
+  border-radius: var(--ab-blade) !important;
+  transition: border-color var(--ab-speed), box-shadow var(--ab-speed);
+}
+[class*="searchBar_"]:focus-within { border-color: rgb(var(--ab-red) / .8); box-shadow: 0 0 12px rgb(var(--ab-red) / .22); }
+
+/* =====================================================================
+   5. HOME BUTTON - your Black Clover artwork (default).
+   Alternatives via <html data-ab-home="...">: "clover" = drawn gold clover, "circle" = magic circle, "default" = Discord logo.
+   The BC_AstaCompanion settings panel sets that attribute for you.
+   ===================================================================== */
+:root {
+  /* default: your own artwork (red/black Black Clover emblem, cut out, white outline kept) */
+  --ab-home-n: url("data:image/webp;base64,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");
+  --ab-home-h: var(--ab-home-n);
+  --ab-home-s: var(--ab-home-n);
+  --ab-home-size: 76%;
+  --ab-home-svg: 0;
+}
+/* drawn gold clover (kept as an alternative) */
+html[data-ab-home="clover"] {
+  --ab-home-n: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpath id='p' d='M50.0 50.0 L30.1 21.5 L30.1 21.5 L29.0 19.4 L28.3 17.2 L28.1 14.8 L28.4 12.4 L29.2 10.2 L30.4 8.1 L32.0 6.4 L34.0 5.0 L36.2 4.1 L38.5 3.6 L40.9 3.7 L43.2 4.2 L45.4 5.2 L47.3 6.7 L48.8 8.5 L50.0 10.6 L50.0 10.6 L51.2 8.5 L52.7 6.7 L54.6 5.2 L56.8 4.2 L59.1 3.7 L61.5 3.6 L63.8 4.1 L66.0 5.0 L68.0 6.4 L69.6 8.1 L70.8 10.2 L71.6 12.4 L71.9 14.8 L71.7 17.2 L71.0 19.4 L69.9 21.5 L69.9 21.5Z'/%3E%3C/defs%3E%3Cg fill='%23d9942b'%3E%3Cuse xlink:href='%23p' transform='rotate%280 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%2872 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28144 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28216 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28288 50 50%29'/%3E%3Ccircle cx='50' cy='50' r='10'/%3E%3C/g%3E%3C/svg%3E");
+  --ab-home-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpath id='p' d='M50.0 50.0 L30.1 21.5 L30.1 21.5 L29.0 19.4 L28.3 17.2 L28.1 14.8 L28.4 12.4 L29.2 10.2 L30.4 8.1 L32.0 6.4 L34.0 5.0 L36.2 4.1 L38.5 3.6 L40.9 3.7 L43.2 4.2 L45.4 5.2 L47.3 6.7 L48.8 8.5 L50.0 10.6 L50.0 10.6 L51.2 8.5 L52.7 6.7 L54.6 5.2 L56.8 4.2 L59.1 3.7 L61.5 3.6 L63.8 4.1 L66.0 5.0 L68.0 6.4 L69.6 8.1 L70.8 10.2 L71.6 12.4 L71.9 14.8 L71.7 17.2 L71.0 19.4 L69.9 21.5 L69.9 21.5Z'/%3E%3C/defs%3E%3Cg fill='%23ffc874'%3E%3Cuse xlink:href='%23p' transform='rotate%280 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%2872 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28144 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28216 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28288 50 50%29'/%3E%3Ccircle cx='50' cy='50' r='10'/%3E%3C/g%3E%3C/svg%3E");
+  --ab-home-s: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpath id='p' d='M50.0 50.0 L30.1 21.5 L30.1 21.5 L29.0 19.4 L28.3 17.2 L28.1 14.8 L28.4 12.4 L29.2 10.2 L30.4 8.1 L32.0 6.4 L34.0 5.0 L36.2 4.1 L38.5 3.6 L40.9 3.7 L43.2 4.2 L45.4 5.2 L47.3 6.7 L48.8 8.5 L50.0 10.6 L50.0 10.6 L51.2 8.5 L52.7 6.7 L54.6 5.2 L56.8 4.2 L59.1 3.7 L61.5 3.6 L63.8 4.1 L66.0 5.0 L68.0 6.4 L69.6 8.1 L70.8 10.2 L71.6 12.4 L71.9 14.8 L71.7 17.2 L71.0 19.4 L69.9 21.5 L69.9 21.5Z'/%3E%3C/defs%3E%3Cg fill='%23fff1d9'%3E%3Cuse xlink:href='%23p' transform='rotate%280 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%2872 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28144 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28216 50 50%29'/%3E%3Cuse xlink:href='%23p' transform='rotate%28288 50 50%29'/%3E%3Ccircle cx='50' cy='50' r='10'/%3E%3C/g%3E%3C/svg%3E");
+  --ab-home-size: 64%;
+}
+html[data-ab-home="circle"] {
+  --ab-home-size: 64%;
+  --ab-home-n: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d9942b' stroke-linejoin='round'%3E%3Ccircle cx='50' cy='50' r='45' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='37' stroke-width='2'/%3E%3Cpath d='M50 7 L75.9 85.6 L8.2 36.4 L91.8 36.4 L24.1 85.6 Z' stroke-width='4.5'/%3E%3C/g%3E%3C/svg%3E");
+  --ab-home-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23ffc874' stroke-linejoin='round'%3E%3Ccircle cx='50' cy='50' r='45' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='37' stroke-width='2'/%3E%3Cpath d='M50 7 L75.9 85.6 L8.2 36.4 L91.8 36.4 L24.1 85.6 Z' stroke-width='4.5'/%3E%3C/g%3E%3C/svg%3E");
+  --ab-home-s: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23fff1d9' stroke-linejoin='round'%3E%3Ccircle cx='50' cy='50' r='45' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='37' stroke-width='2'/%3E%3Cpath d='M50 7 L75.9 85.6 L8.2 36.4 L91.8 36.4 L24.1 85.6 Z' stroke-width='4.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+html[data-ab-home="default"] {
+  --ab-home-n: none; --ab-home-h: none; --ab-home-s: none;
+  --ab-home-svg: 1;
+}
+[data-list-item-id="guildsnav___home"] svg { opacity: var(--ab-home-svg) !important; }
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
+  background: rgb(var(--ab-wine) / .85) var(--ab-home-n) center / var(--ab-home-size) no-repeat !important;
+  border-radius: 14px !important;
+  transition: border-radius var(--ab-speed), box-shadow var(--ab-speed), background-color var(--ab-speed);
+}
+[data-list-item-id="guildsnav___home"]:hover [class*="childWrapper"] {
+  background: rgb(var(--ab-red-deep)) var(--ab-home-h) center / var(--ab-home-size) no-repeat !important;
+  border-radius: var(--ab-blade) !important;
+  box-shadow: 0 0 0 2px rgb(var(--ab-red) / .7);
+}
+[data-list-item-id="guildsnav___home"]:has([class*="selected"]) [class*="childWrapper"],
+[data-list-item-id="guildsnav___home"] [class*="selected"] [class*="childWrapper"],
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"][class*="selected"] {
+  background: rgb(var(--ab-red-deep)) var(--ab-home-s) center / var(--ab-home-size) no-repeat !important;
+  border-radius: var(--ab-blade) !important;
+  box-shadow: 0 0 0 2px rgb(var(--ab-red) / .8);
+}
+
+/* =====================================================================
+   6. BUTTONS (including the "Add Friend" tab on the Home page)
+   ===================================================================== */
+[class*="lookFilled"][class*="colorBrand"], [class*="lookFilled"][class*="colorPrimary"],
+[class*="lookFilled"][class*="colorGreen"], [class*="lookFilled"][class*="colorRed"],
+:is([class*="tabBar"] [class*="primary"], [role="tab"][class*="primary"], [role="tab"][class*="addFriend"], [class*="addFriend"]:is(a, button, [role="button"]), [class*="addFriend"][tabindex]:not(:has(input, textarea, form))) {
+  background: linear-gradient(135deg, rgb(var(--ab-red-hi)), rgb(var(--ab-red-deep))) !important;
+  color: #fff !important;
+  border-radius: var(--ab-blade) !important;
+  border: 1px solid rgb(var(--ab-red-hi) / .5) !important;
+  transition: transform var(--ab-speed), box-shadow var(--ab-speed), filter var(--ab-speed);
+}
+[class*="lookFilled"][class*="colorBrand"]:hover, [class*="lookFilled"][class*="colorPrimary"]:hover,
+[class*="lookFilled"][class*="colorGreen"]:hover, [class*="lookFilled"][class*="colorRed"]:hover,
+:is([class*="tabBar"] [class*="primary"], [role="tab"][class*="primary"], [role="tab"][class*="addFriend"], [class*="addFriend"]:is(a, button, [role="button"]), [class*="addFriend"][tabindex]:not(:has(input, textarea, form))):hover {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+  box-shadow: 0 4px 12px rgb(var(--ab-red) / .30);
+}
+/* "Add Friend" while its page is open: outlined instead of filled */
+:is([class*="tabBar"] [class*="primary"], [role="tab"][class*="primary"], [role="tab"][class*="addFriend"], [class*="addFriend"]:is(a, button, [role="button"]), [class*="addFriend"][tabindex]:not(:has(input, textarea, form)))[aria-selected="true"], :is([class*="tabBar"] [class*="primary"], [role="tab"][class*="primary"], [role="tab"][class*="addFriend"], [class*="addFriend"]:is(a, button, [role="button"]), [class*="addFriend"][tabindex]:not(:has(input, textarea, form)))[class*="selected"] {
+  background: rgb(var(--ab-red) / .12) !important;
+  color: rgb(var(--ab-red-hi)) !important;
+  border-color: rgb(var(--ab-red-hi)) !important;
+  box-shadow: none; transform: none; filter: none;
+}
+[class*="lookFilled"]:active { transform: translateY(0); filter: brightness(.92); }
+[class*="lookOutlined"], [class*="lookBlank"][class*="colorPrimary"] {
+  border-radius: var(--ab-blade) !important;
+  border-color: rgb(var(--ab-red) / .55) !important;
+  transition: background-color var(--ab-speed), border-color var(--ab-speed);
+}
+[class*="lookOutlined"]:hover { background-color: rgb(var(--ab-red) / .14) !important; border-color: rgb(var(--ab-red-hi)) !important; }
+[role="switch"][aria-checked="true"], [class*="container_"][class*="checked"] { background-color: rgb(var(--ab-red)) !important; }
+
+/* tabs everywhere (Home: Online/All/Pending, settings, profile): selected = red underline */
+[role="tab"] { transition: background-color var(--ab-speed), color var(--ab-speed); }
+[class*="tabBar"] [role="tab"][aria-selected="true"]:not([class*="primary"]):not([class*="addFriend"]) {
+  background: rgb(255 255 255 / .07) !important;
+  box-shadow: inset 0 -2px 0 rgb(var(--ab-red));
+}
+
+/* =====================================================================
+   7. SERVER LIST
+   ===================================================================== */
+[data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]) [class*="childWrapper"],
+[data-list-item-id^="guildsnav___"] [class*="circleIconButton"] {
+  border-radius: 14px !important;
+  transition: border-radius var(--ab-speed), box-shadow var(--ab-speed), background-color var(--ab-speed);
+}
+[data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]):hover [class*="childWrapper"],
+[data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]) [class*="selected"] [class*="childWrapper"] {
+  border-radius: var(--ab-blade) !important;
+  background-color: rgb(var(--ab-red-deep)) !important;
+  box-shadow: 0 0 0 2px rgb(var(--ab-red) / .75), 0 0 12px rgb(var(--ab-red) / .30);
+}
+[class*="pill_"] > span { background-color: rgb(var(--ab-red-hi)) !important; }
+
+/* =====================================================================
+   8. CHANNELS, CATEGORIES, MEMBERS
+   Category / role titles keep the small-caps look but use a calm, soft colour.
+   ===================================================================== */
+[class*="containerDefault"] [class*="wrapper_"] {
+  border-radius: 2px 12px 2px 12px;
+  transition: background-color var(--ab-speed), box-shadow var(--ab-speed);
+}
+[class*="containerDefault"] [class*="wrapper_"]:hover { background: rgb(255 255 255 / .06) !important; }
+[class*="containerDefault"] [class*="modeSelected"] {
+  background: linear-gradient(90deg, rgb(var(--ab-red) / .24), transparent 88%) !important;
+  box-shadow: inset 3px 0 0 rgb(var(--ab-red));
+}
+[class*="containerDefault"] h3 {                       /* channel categories */
+  color: rgb(var(--ab-text-dim)) !important;
+  letter-spacing: .08em;
+  font-variant: small-caps;
+}
+[class*="containerDefault"]:hover h3 { color: rgb(var(--ab-text)) !important; }
+[class*="membersGroup"] {                              /* role titles: font + the role's own colour (set by the BC_AstaCompanion plugin) */
+  letter-spacing: .08em;
+  font-variant: small-caps;
+  color: var(--ab-role-color, rgb(var(--ab-text-dim))) !important;
+}
+
+/* STATUS AURA: subtle glowing ring around avatars + Discord's native status/mobile badge kept intact
+   so avatars always load reliably and mobile icons never break. */
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]) {
+  position: relative;
+  border-radius: 2px 12px 2px 12px;
+  transition: background-color var(--ab-speed);
+}
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]):hover { background: rgb(255 255 255 / .06) !important; }
+
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]) [class*="avatar_"],
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]) [class*="wrapper_"]:has(svg foreignObject) {
+  border-radius: 50%;
+  transition: box-shadow var(--ab-speed);
+}
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]):has([mask*="status-online"], [mask*="status-mobile"]) [class*="avatar_"] {
+  box-shadow: 0 0 0 1.5px rgb(var(--ab-online) / .65), 0 0 8px rgb(var(--ab-online) / .28);
+}
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]):has([mask*="status-idle"]) [class*="avatar_"] {
+  box-shadow: 0 0 0 1.5px rgb(var(--ab-idle) / .65), 0 0 8px rgb(var(--ab-idle) / .22);
+}
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]):has([mask*="status-dnd"]) [class*="avatar_"] {
+  box-shadow: 0 0 0 1.5px rgb(var(--ab-dnd) / .65), 0 0 8px rgb(var(--ab-dnd) / .25);
+}
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]):has([mask*="status-streaming"]) [class*="avatar_"] {
+  box-shadow: 0 0 0 1.5px rgb(var(--ab-stream) / .75), 0 0 10px rgb(var(--ab-stream) / .35);
+}
+:is([class*="member_"], [class*="peopleListItem"], [data-list-item-id^="private-channels"]):has([mask*="status-offline"]) img { filter: grayscale(.3); }
+[class*="member_"][class*="offline"] { opacity: .6 !important; }
+
+/* the status dots & mobile icons themselves: new colours + a soft glow */
+rect[mask*="status-online"], rect[mask*="status-mobile"] { fill: rgb(var(--ab-online)) !important; }
+rect[mask*="status-idle"]      { fill: rgb(var(--ab-idle)) !important; }
+rect[mask*="status-dnd"]       { fill: rgb(var(--ab-dnd)) !important; }
+rect[mask*="status-offline"]   { fill: rgb(var(--ab-offline)) !important; }
+rect[mask*="status-streaming"] { fill: rgb(var(--ab-stream)) !important; }
+rect[mask*="status-online"], rect[mask*="status-mobile"], rect[mask*="status-dnd"] { filter: drop-shadow(0 0 2px currentColor); }
+
+[class*="avatarSpeaking"] { box-shadow: 0 0 0 2px rgb(var(--ab-red-hi)), 0 0 10px rgb(var(--ab-red) / .6) !important; }
+
+/* =====================================================================
+   9. MESSAGES, INPUT
+   ===================================================================== */
+li[id^="chat-messages-"] > [class*="message_"] { border-radius: 2px 12px 2px 12px; }
+li[id^="chat-messages-"] > [class*="message_"]:hover { background-color: rgb(255 255 255 / .05) !important; box-shadow: inset 3px 0 0 rgb(var(--ab-red) / .6); }
+li[id^="chat-messages-"] > [class*="mentioned"] { background-color: rgb(var(--ab-red) / .14) !important; box-shadow: inset 3px 0 0 rgb(var(--ab-red-hi)); }
+[class*="embedFull"] { border-radius: var(--ab-blade) !important; border-left-color: rgb(var(--ab-red)) !important; background-color: rgb(var(--ab-ink) / .5) !important; }
+code, [class*="markup"] code { background-color: rgb(var(--ab-wine) / .8) !important; border-color: rgb(var(--ab-red-deep)) !important; }
+[class*="channelTextArea"], [class*="channelTextArea"] [class*="scrollableContainer"] { border-radius: var(--ab-blade) !important; transition: box-shadow var(--ab-speed); }
+[class*="channelTextArea"]:focus-within { box-shadow: 0 0 0 1px rgb(var(--ab-red) / .8), 0 0 14px rgb(var(--ab-red) / .22); }
+textarea, [role="textbox"] { caret-color: rgb(var(--ab-red-hi)); }
+
+/* =====================================================================
+   10. SETTINGS PAGE
+   ===================================================================== */
+[class*="sidebarRegion"] [role="tab"] { border-radius: 2px 12px 2px 12px; transition: background-color var(--ab-speed), box-shadow var(--ab-speed); }
+[class*="sidebarRegion"] [role="tab"]:hover { background: rgb(255 255 255 / .06) !important; }
+[class*="sidebarRegion"] [role="tab"][aria-selected="true"] {
+  background: linear-gradient(90deg, rgb(var(--ab-red) / .26), transparent 90%) !important;
+  box-shadow: inset 3px 0 0 rgb(var(--ab-red));
+  color: rgb(var(--ab-text)) !important;
+}
+[class*="sidebarRegion"] [class*="header_"] { letter-spacing: .08em; font-variant: small-caps; color: rgb(var(--ab-text-dim)) !important; }
+[class*="contentRegion"] h1, [class*="contentRegion"] h2:first-child {
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgb(var(--ab-red) / .35);
+}
+[class*="contentRegion"] [class*="card_"], [class*="contentRegion"] [class*="item_"][class*="container"] {
+  background-color: rgb(255 255 255 / .04) !important;
+  border: 1px solid rgb(255 255 255 / .07) !important;
+  border-radius: var(--ab-blade) !important;
+}
+[class*="contentRegion"] [class*="card_"]:hover { border-color: rgb(var(--ab-red) / .45) !important; }
+[class*="contentRegion"] hr, [class*="contentRegion"] [class*="divider"] { border-color: rgb(255 255 255 / .08) !important; background-color: rgb(255 255 255 / .08) !important; }
+
+/* =====================================================================
+   11. MENUS, POPOUTS, TOOLTIPS, MODALS (solid-ish + small blur, red outline)
+   ===================================================================== */
+[class*="menu_"], [class*="popout_"], [class*="modal_"][role="dialog"], [class*="tooltip_"] {
+  border: 1px solid rgb(var(--ab-red) / .50) !important;
+  border-radius: var(--ab-blade) !important;
+  -webkit-backdrop-filter: blur(var(--ab-blur));
+  backdrop-filter: blur(var(--ab-blur));
+}
+[class*="tooltip_"] { border-color: rgb(var(--ab-red-hi) / .65) !important; box-shadow: 0 0 10px rgb(var(--ab-red) / .20); }
+[class*="menu_"] [class*="focused"] { background: linear-gradient(90deg, rgb(var(--ab-red) / .45), rgb(var(--ab-red-deep) / .45)) !important; }
+
+/* =====================================================================
+   ANTI-MAGIC (Asta's power: it cancels other people's magic)
+   - Dispel field: flashy decorations from other users are cancelled (switch: --ab-dispel).
+   - Slash: the NEWEST message that mentions you is cut by a blade of light.
+   - Edge wave: with the BC_AstaCompanion plugin, a crimson wave rolls in from the window edge on that same event.
+   ===================================================================== */
+:is(img, video)[class*="avatarDecoration"],
+[class*="nameplate"] :is(img, video, canvas),
+[class*="profileEffects"] :is(img, video, canvas) { visibility: var(--ab-dispel) !important; }
+
+/* SLASH ON HOVER (switch: --ab-slash): a quick diagonal blade of light cuts across the thing you point at.
+   Only on buttons, server icons and tabs, so scrolling through chat stays calm. */
+:is([class*="lookFilled"], [data-list-item-id^="guildsnav___"] [class*="childWrapper"], [class*="sidebarRegion"] [role="tab"], [class*="tabBar"] [role="tab"]) {
+  position: relative;
+  overflow: hidden;
+}
+:is([class*="lookFilled"], [data-list-item-id^="guildsnav___"] [class*="childWrapper"], [class*="sidebarRegion"] [role="tab"], [class*="tabBar"] [role="tab"])::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .5) 48.5%, rgb(var(--ab-red-hi) / .85) 50%, transparent 58%) no-repeat;
+  background-size: 260% 100%;
+}
+:is([class*="lookFilled"], [data-list-item-id^="guildsnav___"] [class*="childWrapper"], [class*="sidebarRegion"] [role="tab"], [class*="tabBar"] [role="tab"]):hover::after {
+  animation: var(--ab-slash, ab-slash) .5s ease-out 1 both;
+}
+
+li[id^="chat-messages-"]:last-of-type > [class*="mentioned"] { position: relative; animation: ab-ping-detect .01s 1; }
+li[id^="chat-messages-"]:last-of-type > [class*="mentioned"]::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .55) 48.5%, rgb(var(--ab-red-hi) / .9) 50%, transparent 58%) no-repeat;
+  background-size: 260% 100%;
+  animation: var(--ab-slash, ab-slash) .8s ease-out 1 both;
+}
+@keyframes ab-ping-detect { from { opacity: 1; } to { opacity: 1; } }
+@keyframes ab-slash { from { background-position: 100% 0; opacity: 1; } to { background-position: 0% 0; opacity: 0; } }
+
+#ab-edge-wave { position: fixed; inset: 0; z-index: 99999; pointer-events: none; opacity: 0; }
+#ab-edge-wave.ab-on { animation: ab-wave 1.1s ease-out 1; }
+@keyframes ab-wave {
+  0%   { opacity: 1; box-shadow: inset 0 0 18px 2px rgb(var(--ab-red-hi) / .9); }
+  100% { opacity: 0; box-shadow: inset 0 0 170px 70px rgb(var(--ab-red) / 0); }
+}
+
+/* =====================================================================
+   12. DETAILS
+   ===================================================================== */
+::selection { background: rgb(var(--ab-red) / .55); color: #fff; }
+/* keyboard focus ring only on clickable things - never on text boxes (that caused the double orange lines) */
+:is(button, a, [role="button"], [role="tab"], [role="switch"], [role="menuitem"]):focus-visible { outline: 2px solid rgb(var(--ab-red-hi) / .8) !important; outline-offset: 1px; }
+:is(textarea, input, [role="textbox"], [contenteditable="true"]):is(:focus, :focus-visible) { outline: none !important; }
+/* scrollbars: slim, quiet, no track. They glow red only while you hover that scroller or drag the bar. */
+:is([class*="scroller"], [class*="auto_"], [class*="thin_"])::-webkit-scrollbar { width: 8px !important; height: 8px !important; }
+:is([class*="scroller"], [class*="auto_"], [class*="thin_"])::-webkit-scrollbar-track { background: transparent !important; border: 0 !important; }
+:is([class*="scroller"], [class*="auto_"], [class*="thin_"])::-webkit-scrollbar-corner { background: transparent !important; }
+:is([class*="scroller"], [class*="auto_"], [class*="thin_"])::-webkit-scrollbar-thumb {
+  border-radius: 8px !important; border: 2px solid transparent !important; background-clip: padding-box !important; min-height: 48px;
+}
+:is([class*="scroller"], [class*="auto_"], [class*="thin_"]):hover {
+  --scrollbar-thin-thumb: rgb(var(--ab-red) / .55) !important;
+  --scrollbar-auto-thumb: rgb(var(--ab-red) / .55) !important;
+  --scrollbar-auto-scrollbar-color-thumb: rgb(var(--ab-red) / .55) !important;
+  --scrollbar-thin-scrollbar-color-thumb: rgb(var(--ab-red) / .55) !important;
+}
+:is([class*="scroller"], [class*="auto_"], [class*="thin_"])::-webkit-scrollbar-thumb:active { background-color: rgb(var(--ab-red-hi) / .85) !important; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: rgb(255 255 255 / .13); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--ab-red) / .6); background-clip: padding-box; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+[class*="numberBadge"] { background-color: rgb(var(--ab-red)) !important; color: #fff !important; animation: var(--ab-pulse) 2.4s ease-in-out infinite; }
+@keyframes ab-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgb(var(--ab-red) / .55); } 50% { box-shadow: 0 0 0 5px rgb(var(--ab-red) / 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after,
+  #ab-edge-wave.ab-on,
+  [class*="numberBadge"],
+  :is([class*="lookFilled"], [data-list-item-id^="guildsnav___"] [class*="childWrapper"], [class*="sidebarRegion"] [role="tab"], [class*="tabBar"] [role="tab"]):hover::after,
+  li[id^="chat-messages-"]:last-of-type > [class*="mentioned"]::after {
+    animation: none !important;
+  }
+}

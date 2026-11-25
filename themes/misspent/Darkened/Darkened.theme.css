@@ -1,0 +1,137 @@
+/**
+* @name Darkened - Code re-write
+* @author misspent
+* @description Darkness is a gift; embrace it.
+* @authorLink https://github.com/misspent/Darkened
+* @version 1.0.0
+*/
+
+/*
+\==================================================================================\
+\                                     Imports                                      \
+\==================================================================================\
+*/
+
+/* Main Import | --> Don't delete this <-- */
+@import "https://misspent.github.io/Darkened/BetterDiscord/main.css";
+@import /"https://cdn.statically.io/gh/Overimagine1/old-discord-font/main/source.min.css"; /* Discord Font back to normal */
+
+@import url("https://nyri4.github.io/Discolored/main.css");
+@import url("https://misspent.github.io/Darkened/BetterDiscord/DragNDropModal.css"); /* DragNDropModal */
+@import url("https://mwittrien.github.io/BetterDiscordAddons/Themes/_res/SettingsIcons.css"); /* Settings Icons */
+@import url("https://davart154.github.io/Themes/Icon%20Revert%202023/2023%20Icon%20Revert.css"); /* Reverts icon back to what they were */
+
+/* Add a "/" on the left side of the first Quotation mark to cancel out the import */
+@import "https://crearts-community.github.io/Mention-Links/theme.css"; /* Mention Links */
+@import "https://lyght1337.github.io/DarknessCodeBlocks/css/CodeBlocks.css"; /* Codeblocks */
+@import "https://discordstyles.github.io/RadialStatus/dist/RadialStatus.css"; /* Radial Status */
+@import /"https://misspent.github.io/Darkened/BetterDiscord/ContextIconColours.css"; /* ContextIconsColors */
+
+
+:root {
+  /* Home Icon Image */
+  --Home-Image-Icon: url("https://i.ibb.co/k4mXsGW/Mary-Shaw.png"); /* Default: https://i.imgur.com/f1Lpfr3.png / https://i.ibb.co/k4mXsGW/Mary-Shaw.png | Free Upload Site: https://imgbb.com */
+
+  /* Tooltips */
+  --tooltips: block !important; /* Set it to "none" if you don't want it | Default: block */
+
+  /* Other */
+  --dark: #151515; /* Codeblocks Import: Border color | Default: #151515 */
+  --light: #151515; /* Codeblocks Import | Default: #151515 */
+  --Settings-Plugins-Themes-List-Columns: 2; /* More Columns in theme & plugin section in settings */
+  --Normal-Activity-Icon: #c4302b; /* Member list activity Icon | Default: var(--channels-default) | Activity Icons Plugin by Neodymium */
+  --Playing-Game-Icon: #4c8bf5; /* Member list activity Icon | Default: var(--channels-default) | Activity Icons Plugin by Neodymium */
+  --Spotify-Activity-Icon: #1DB954; /* Member list activity Icon | Default: var(--channels-default) | Activity Icons Plugin by Neodymium  */
+
+  /* Channel selected + Server pill colors */
+  --mention-color: #0fffff; /* Default: #0fffff */
+  --unread-color: rgb(0, 195, 209); /* Default: rgb(0, 195, 209) */
+  --accent: 0, 195, 209; /* This works in conjunction with "--unread-color" | Default: 0, 195, 209 */
+
+  /* Mention color in chat */
+  --mention-color-bar: #00b0f4; /* Default: #00b0f4 */
+  --mention-color-background: #00b0f41f; /* Default: #00b0f41f */
+  --mention-color-hover: #00b0f41f; /* Default: #00b0f41f */
+
+  /* Replying to someone in chat */
+  --replying-color-bar: #00b62ed3;
+  --replying-color-background: #00b62d1f;
+
+  /* Toggleable variables */
+  --Titlebar: none; /* flex = ON, none = OFF */
+  --Apps-Chat-Bar-button: none;
+  --discover-button: none;
+
+  /* Radial Status | https://github.com/DiscordStyles/RadialStatus */
+  --rs-small-spacing: 0px;
+  --rs-medium-spacing: 0px;
+  --rs-large-spacing: 0px;
+  --rs-small-width: 1.5px;
+  --rs-medium-width: 1.5px;
+  --rs-large-width: 1.5px;
+  --rs-avatar-shape: 0px;
+  --rs-online-color: #43b581;
+  --rs-idle-color: #faa61a;
+  --rs-dnd-color: #f04747;
+  --rs-offline-color: #636b75;
+  --rs-streaming-color: #643da7;
+  --rs-invisible-color: #747f8d;
+  --rs-phone-color: var(--rs-online-color);
+  --rs-phone-visible: block;
+  --rs-version: "2.0.6";
+}
+
+/*
+\==================================================================================\
+\                                  Main Variables                                  \
+\==================================================================================\
+*/
+
+.theme-dark, * {
+  --background-tertiary: #121212;
+  --background-secondary: #0d0d0d;
+  --background-secondary-alt: #090909;
+  --background-primary: #090909;
+  --background-mobile-primary: #23283d;
+  --background-mobile-secondary: #1e2233;
+  --channeltextarea-background: #101010; /* Main window text bar + reply bar background */
+  --background-accent: #136868;          /* #6e85d3 */
+  --background-message-hover: transparent;
+  --background-modifier-hover: #121212;
+  --background-modifier-active: #1a1e2e;
+  --background-modifier-selected: #171d2b;
+  --deprecated-card-bg: #12141f63;
+  --background-floating: #0d0d0d;
+  --deprecated-quickswitcher-input-background: #101320;
+  --elevation-low: none;
+  --scrollbar-auto-thumb: #101010;
+  --scrollbar-auto-track: #181818;
+  --scrollbar-thin-thumb: #141414;
+  --activity-card-background: #101320;
+  --border-color: #151515;
+  --popout-title: #141414;
+  --popout-background-main: #101010;
+  --jump-newmessage-bars-buttons: #353535;
+  --jump-newmessage-bars: #202020;
+  --Emoji-Menu: #060606;
+  /* New stuff */
+  --home-background: #090909;
+  --bg-mod-faint: #101010;
+  --autocomplete-bg: #101010;
+  --home-card-resting-border: #151515;
+  --background-modifier-accent: #101010;
+  --modal-background: #101010;
+  --modal-footer-background: #131313;
+  --input-background: #090909;
+  --menu-item-default-active-bg: rgba(0, 195, 209, 0.123);
+  --menu-item-default-hover-bg: rgba(0, 195, 209, 0.123);
+  --background-nested-floating: #101010;
+  /* Support channels */
+  --bg-base-primary: #080808 !important;
+  --bg-mod-faint: #101010;
+  --border-faint: #151515;
+}
+
+
+
+/* ==============> Your Custom CSS can go here <============== */

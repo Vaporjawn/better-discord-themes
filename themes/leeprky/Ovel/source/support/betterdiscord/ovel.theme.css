@@ -1,0 +1,347 @@
+/**
+ * @name Ovel
+ * @author Leeprky#2063
+ * @version 1.0.6
+ * @description Ovel Theme | Concept Merge.
+ * @source https://github.com/leeprky/Ovel
+ * @updateUrl https://github.com/leeprky/Ovel/blob/lode/source/support/betterdiscord/ovel.theme.css
+ * @authorId 224524143482241035
+ * @invite Ff3rqAYB89
+ * @donate https://www.paypal.com/paypalme/leeparkinson22
+ * @website https://leeprky.github.io/
+*/
+
+/* ---------------------------------------------
+
+      ░█████╗░  ██╗░░░██╗  ███████╗  ██╗░░░░░
+      ██╔══██╗  ██║░░░██║  ██╔════╝  ██║░░░░░
+      ██║░░██║  ╚██╗░██╔╝  █████╗░░  ██║░░░░░
+      ██║░░██║  ░╚████╔╝░  ██╔══╝░░  ██║░░░░░
+      ╚█████╔╝  ░░╚██╔╝░░  ███████╗  ███████╗
+      ░╚════╝░  ░░░╚═╝░░░  ╚══════╝  ╚══════╝
+
+       █▀▀ █▀█ █▄░█ █▀▀ █ █▀▀  █▀▀ █ █░░ █▀▀
+       █▄▄ █▄█ █░▀█ █▀░ █ █▄█  █▀░ █ █▄▄ ██▄
+
+                By 𝖫𝖤𝖤𝖯𝖱𝖪𝖸#𝟚𝟘𝟞𝟛
+
+   --------------------------------------------- */
+
+/*
+█ █▀▄▀█ █▀█ █▀█ █▀█ ▀█▀ █▀
+█ █░▀░█ █▀▀ █▄█ █▀▄ ░█░ ▄█
+        No Touch
+*/
+
+@import "https://leeprky.github.io/themes/Ovel/master-import.css";
+@import "https://leeprky.github.io/themes/Ovel/imports/09-support/betterdiscord/betterdiscord.css";
+
+
+/*  █▀▀ █▀█ █░░ █▀█ █░█ █▀█   █▀ █▀▀ █░█ █▀▀ █▀▄▀█ █▀▀ █▀
+    █▄▄ █▄█ █▄▄ █▄█ █▄█ █▀▄   ▄█ █▄▄ █▀█ ██▄ █░▀░█ ██▄ ▄█
+             Delete `/*` At Start Of Import                 */
+
+   /* Colours */
+   /* Delete `/*` At Start Of Import */
+   
+   /* Slook Scheme */
+   /* @import url(https://leeprky.github.io/themes/Ovel/imports/08-colours/slook-scheme.css);
+   
+   /* Naive Scheme */
+   /* @import url(https://leeprky.github.io/themes/Ovel/imports/08-colours/naive-scheme.css);
+   
+   /* Custom Scheme By namehere */
+   /* @import url(linkhere);
+   
+   /* ---------------------------------
+   
+          █▀▀ █▀█ █▄░█ █▀▀ █ █▀▀
+          █▄▄ █▄█ █░▀█ █▀░ █ █▄█ v1.0.6
+   
+       --------------------------------- */
+   
+   /* Turn Background Transparent */
+   /*   @import "https://leeprky.github.io/themes/Ovel/imports/09-support/betterdiscord/transparency.css";
+   
+   /* Background & Blur Config - Comment Out To Remove Background & Restore Old Colours */
+   /*
+         :root {
+         --background: url('https://i.imgur.com/6NUSR9H.png'); 
+         --background-blur: 8px; 
+         --background-opacity: 100%; 
+         --background-brightness: 92%; 
+         --background-colour: #14182b9a; 
+
+         --chatbox-colour: #21204238 !important; 
+         --background-primary: transparent !important; 
+         --background-primary-alt: #2d355783 !important; 
+         --background-secondary: transparent !important;
+         --background-secondary-alt: #232942fa !important; 
+         --background-tertiary: var(--background-colour) !important; 
+       }
+
+   /* Rounded Corners - Need Transparency Enabled */
+   /*
+   body{
+    background-color: transparent !important;
+   }
+   #app-mount{
+    border-radius: var(--app-rounding) !important; 
+   }
+   
+/* █▀▀ █▀█ █░░ █▀█ █░█ █▀█ █▀
+   █▄▄ █▄█ █▄▄ █▄█ █▄█ █▀▄ ▄█ */
+
+   :root {
+      /* Gradients */
+      --default-gradient: 315deg, #4657a3 0%, #464186 74%;
+      --special-gradient: 315deg, #333d91 0%, #c987b8 74%;
+      --red-gradient: 315deg, #AA3738 0%, #F04747 74%;
+      --red-hsl: hsl(359, 94%, 53%);
+      --yellow-gradient: 315deg, #c29b1b 0%, #ffa640 74%;
+      --yellow-hsl: hsl(46, 94%, 52%);
+      --green-gradient: 315deg, #507a73 0%, #4b7c72  74%;
+      --grey-gradient: 315deg, #5b55b3 0%, #5b55b3 74%;
+      --white-gradient: 315deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.342) 74%;       
+      /* Channel Icons */
+      --hashtag-colour: var(--interactive-muted);
+      --announcement-colour: var(--interactive-muted);
+      --rules-colour: var(--alt-color2);
+      --stages-colour: var(--interactive-muted);
+      --voice-colour: var(--interactive-muted);
+      --locked-colour: var(--interactive-muted);    
+      /* Transitions */
+      --font-normal: 500;
+      --font-hover: bold;
+      --font-size-hover: 15px;
+      --hover-transition: 0.1s linear;
+      --transform-normal: scale(1);
+      --hover-transform: scale(1.15);
+      --setting-hover-transform: scale(1.025);
+      --button-hover-transform: scale(1.03); 
+      /* Greenple Colour*/
+      --green-color: var(--alt-color2);
+      --green-bar-on: #5c646480;
+      --green-bar-bg: var(--green-color);
+      --green-slider-on: var(--green-color);
+      --green-slider-off: #5c646480;
+      --green-slider-dot: #fff;
+   }
+   
+   .theme-dark, .theme-light {     
+     --border-radius: 8px;    
+     --bg-avatar: url(https://i.imgur.com/g37HbBe.png);       
+     --popout-width: 480px; 
+     --modal-bg: #121524;   
+     --scrollbars: none; 
+     --public-servers: none; /* Remove None For Public Server Button - none */       
+     --app-rounding: 16px;
+     --avatar-radius: 43.5%;      
+     --sidebar-fade: 92%;
+     --friends-sidebar-fade: 68%;
+   }
+   
+/* █▀█ █░█ █▀▀ █░░   ▄▄   █▀▄ ▄▀█ █▀█ █▄▀
+   █▄█ ▀▄▀ ██▄ █▄▄   ░░   █▄▀ █▀█ █▀▄ █░█ */
+    .theme-dark {
+   
+    --chatbox-colour: #222741;
+   
+    --bd-color: #4C46A3; 
+    --bd-color-hover: #4C46A3; 
+    --bdfdb-blurple: #4C46A3;
+    --alt-color: 76, 70, 163; 
+    --alt-color2: #4C46A3; 
+    
+    --playing-color: var(--alt-color2); 
+    --spotify-color: #38CB75; 
+    --streaming-color: rgb(127, 50, 179); 
+    
+     /* Header Colors */
+     --header-primary: #fff; 
+     --header-secondary: #b9bbbe; 
+     --channels-headings: var(--alt-color2); 
+   
+     /* Text Colours */
+     --text-normal: #ccc8fd; 
+     --text-muted: #535170; 
+     --text-link: var(--alt-color2); 
+     --channels-default: #b8b6d6; 
+     --interactive-normal: #b9bbbe; 
+     --interactive-hover: #ccc8fd; 
+     --interactive-hover-icons: var(--background-accent2); 
+     --interactive-active: #fefeff; 
+     --interactive-active-icons: var(--background-accent2); 
+     --interactive-muted: #535170; 
+    
+     /* Background Colours */
+     --background-primary: #1E233A; 
+     --background-primary-alt: #2d3557; 
+     --background-secondary: #1E233A; 
+     --background-secondary-alt: #232942;
+     --background-tertiary: #14182b; 
+     --background-accent: var(--alt-color2); 
+     --background-accent2: #1ABC9C; 
+     --background-accent3: #F52C79; 
+     --background-floating: #111422; 
+    
+     /* Mentioned  Colours */
+     --background-mentioned: #3a339965 !important; 
+     --background-mentioned-hover: #4c46a359; 
+     --background-mentioned-bar: var(--background-accent); 
+    
+     --background-help-warning: rgba(250,166,26,0.1); 
+     --background-help-info: rgba(0,176,244,0.1); 
+    
+     /* Scrollbar Colours */
+     --background-modifier-hover: #4c46a3af; 
+     --background-modifier-active: #4c46a3fa; 
+     --background-modifier-selected: #4c46a39f; 
+     --background-modifier-accent: #4c46a309; 
+    
+    /* Box Shadow On Floating Elements Colours */
+    --elevation-stroke: 0 0 0 1px rgba(4,4,5,0.15); 
+    --elevation-low: 0 1px 0 rgba(18, 20, 36, 0.767),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05);
+    --elevation-medium: 0 4px 4px rgba(0,0,0,0.16); 
+    --elevation-high: 0 8px 16px rgba(0,0,0,0.24); 
+    
+    --scrollbar-thin-thumb: #eaedf100; 
+    --scrollbar-thin-track: transparent;
+    --scrollbar-auto-thumb: var(--alt-color2); 
+    --scrollbar-auto-track: #26272902; 
+    --scrollbar-auto-scrollbar-color-thumb: #f0f3f8; 
+    --scrollbar-auto-scrollbar-color-track: #2f313600; 
+        
+    /* Other */
+    --radio-group-dot-foreground: var(--alt-color); 
+    }
+   
+/* █▀█ █░█ █▀▀ █░░   ▄▄   █░░ █ █▀▀ █░█ ▀█▀
+   █▄█ ▀▄▀ ██▄ █▄▄   ░░   █▄▄ █ █▄█ █▀█ ░█░ */
+
+    .theme-light {
+ 
+  --chatbox-colour: #aba6e6;
+  
+  --popout-width: 480px; 
+  --modal-bg: #121524; 
+ 
+  --bd-color: #4C46A3; 
+  --bd-color-hover: #4C46A3; 
+  --alt-color: 76, 70, 163; 
+  --alt-color2: #4C46A3; 
+  --alt-color3: 244; /* HSL */
+  
+  --scrollbars: block; 
+  --public-servers: block; 
+  --playing-color: var(--alt-color2); 
+  --spotify-color: var(--alt-color2); 
+  --streaming-color: rgb(127, 50, 179); 
+  
+   /* Header Colors */
+   --header-primary: #1e1b58; 
+   --header-secondary: #1b154e; 
+   --channels-headings: var(--alt-color2); 
+ 
+   /* Text Colours */
+   --text-normal: #2e2a5c; 
+   --text-muted: #6c67a0; 
+   --text-link: var(--alt-color2); 
+   --channels-default: #332f79; 
+   --interactive-normal: #908dca; 
+   --interactive-hover: #332f79; 
+   --interactive-hover-icons: var(--background-accent2); 
+   --interactive-active: #101011; 
+    --interactive-active-icons: var(--background-accent2); 
+   --interactive-muted: #535170; 
+  
+   /* Background Colours */
+ --background-primary: #ccc8fd !important; 
+ --background-primary-alt: #ccc8fd !important; 
+ --background-secondary: #ccc8fd !important; 
+ --background-secondary-alt: #ccc8fd !important; 
+ --background-tertiary: #ccc8fd !important; 
+ --background-accent: var(--alt-color2) !important; 
+ --background-accent2: #1ABC9C !important; 
+ --background-accent3: #F52C79 !important; 
+ --background-floating: #342f72 !important; 
+  
+   /* Mentioned  Colours */
+   --background-mentioned: #3124e665 !important; 
+   --background-mentioned-hover: #1f178f59; 
+   --background-mentioned-bar: var(--background-accent); 
+  
+   --background-help-warning: rgba(250,166,26,0.1);
+   --background-help-info: rgba(0,176,244,0.1); 
+  
+   /* Scrollbar Colours */
+   --background-modifier-hover: #a8a2faaf;
+   --background-modifier-active: #9891ffaf; 
+   --background-modifier-selected: #8f8addaf; 
+   --background-modifier-accent: #716ea009; 
+  
+  /* Box Shadow On Floating Elements Colours */
+  --elevation-stroke: 0 0 0 1px rgba(4,4,5,0.15); 
+  --elevation-low: 0 1px 0 rgba(18, 20, 36, 0.767),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05);
+  --elevation-medium: 0 4px 4px rgba(0,0,0,0.16); 
+  --elevation-high: 0 8px 16px rgba(0,0,0,0.24); 
+  
+  --scrollbar-thin-thumb: #01011300; 
+  --scrollbar-thin-track: transparent; 
+  --scrollbar-auto-thumb: var(--alt-color2); 
+  --scrollbar-auto-track: #1b315c02; 
+  --scrollbar-auto-scrollbar-color-thumb: #f0f3f8; 
+  --scrollbar-auto-scrollbar-color-track: #2d56be00; 
+      
+  /* Other */
+  --radio-group-dot-foreground: var(--alt-color2); /* Ignore */
+  }
+   
+ /* █ █▀▀ █▄░█ █▀█ █▀█ █▀▀
+    █ █▄█ █░▀█ █▄█ █▀▄ ██▄ */
+
+   #bd-pub-li{display:var(--public-servers)}
+   [class="size14-e6ZScH title-eS5yk3"] {margin-bottom: 1px;}
+   [class="listItem-GuPuDH friendsOnlineWrap-0gZ63m"] {display: none;}
+   .guilds-1SWlCJ .scroller-1Bvpku .tutorialContainer-2sGCg9 {position: fixed;transform: translate3d(0, 200px, 0);}
+   .guilds-1SWlCJ .scroller-1Bvpku {margin-top: 330px !important;contain: unset !important;}
+   .avatar-SmRMf2, .avatar-VxgULZ, .icon-27yU2q {position: relative;border-radius: 50% !important;}
+   :root {--version: "v1.0.6BD" !important; --build: "150" !important; --outdated_ovel-150: none !important}
+  
+   /* -------------------------------------------------------------------------------
+
+            ░█████╗░██████╗░████████╗██╗░█████╗░███╗░░██╗░█████╗░██╗░░░░░
+            ██╔══██╗██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║██╔══██╗██║░░░░░
+            ██║░░██║██████╔╝░░░██║░░░██║██║░░██║██╔██╗██║███████║██║░░░░░
+            ██║░░██║██╔═══╝░░░░██║░░░██║██║░░██║██║╚████║██╔══██║██║░░░░░
+            ╚█████╔╝██║░░░░░░░░██║░░░██║╚█████╔╝██║░╚███║██║░░██║███████╗              
+            ░╚════╝░╚═╝░░░░░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝
+                     ░██████╗████████╗██╗░░░██╗███████╗███████╗
+                      ██╔════╝╚══██╔══╝██║░░░██║██╔════╝██╔════╝
+                      ╚█████╗░░░░██║░░░██║░░░██║█████╗░░█████╗░░
+                      ░╚═══██╗░░░██║░░░██║░░░██║██╔══╝░░██╔══╝░░
+                      ██████╔╝░░░██║░░░╚██████╔╝██║░░░░░██║░░░░░
+                      ╚═════╝░░░░╚═╝░░░░╚═════╝░╚═╝░░░░░╚═╝░░░░░
+
+    ------------------------------------------------------------------------------- */
+
+   /* Comment If You Do Have User Banner Expierment Enabled */
+    .fieldList-21DyL8 {
+     position: absolute;
+     top: 850px;
+     margin-left: -30px;
+   }
+         
+   /* ---------------------------------------------
+   
+                ███████╗███╗░░██╗██████╗░
+                ██╔════╝████╗░██║██╔══██╗
+                █████╗░░██╔██╗██║██║░░██║
+                ██╔══╝░░██║╚████║██║░░██║
+                ███████╗██║░╚███║██████╔╝
+                ╚══════╝╚═╝░░╚══╝╚═════╝░
+                ╚══════╝╚═╝░░╚══╝╚═════╝░
+                      Version 1.0.6
+   
+      --------------------------------------------- */
+   

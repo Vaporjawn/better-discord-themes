@@ -1,0 +1,142 @@
+/**
+ * @name Focus
+ * @author pixeldesu
+ * @description A Discord theme that removes a lot of UI distractions
+ * @version 0.0.4
+ */
+
+/**
+ * Removal of any kind of status mask from user avatars 
+ */
+mask[id^="svg-mask-avatar-status-round-"] [fill="black"],
+mask[id^="svg-mask-avatar-status-mobile-"] [fill="black"],
+mask[id^="svg-mask-avatar-decoration-profile-status-square-"] [fill="black"] {
+  display: none;
+}
+
+svg[class^="mask__"] mask[id^=":r"] > rect {
+  display: none;
+}
+
+svg[class^="mask__"] rect[mask^="url(#svg-mask-status"] {
+  display: none;
+}
+
+svg[class^="cursorDefault_"] {
+  display: none;
+}
+
+[mask^="url(#svg-mask-avatar-status-round-"] ~ circle[fill="white"] {
+  display: none;
+}
+
+/**
+ * Style reset for unread channels to look like regular channels 
+ */
+[class*="modeUnreadImportant"] [class^="name"],
+[class*="modeUnreadImportant"]:hover [class^="name"] {
+  color: var(--channels-default);
+  font-weight: 500;
+}
+
+[class*="modeUnreadImportant"]:hover [class^="name"] {
+  color: var(--interactive-hover);
+}
+
+/**
+ * Unread pills (channel list and server list)
+ */
+div[class^="unread__"] {
+  display: none;
+}
+
+div[class^="pill__"] {
+  display: none;
+}
+
+/**
+ * Activity text in userlist
+ */
+div[class^="activity_"] {
+  display: none;
+}
+
+/**
+ * User activity in sidebar or popout
+ */
+div[class^="userPanelOverlayBackground__"]:has([class^="activityUserPopoutV2"]) {
+  display: none;
+}
+
+div[class^="section__"]:has([class^="activityUserPopoutV2"]) {
+  display: none;
+}
+
+div[class^="section__"]:has([class^="customStatus__"]) {
+  display: none;
+}
+
+/**
+ * Activity column in friends list
+ */
+div[class^="nowPlayingColumn_"] {
+  display: none;
+}
+
+/**
+ * Typing indicator
+ */
+div[class^="typing__"] {
+  display: none;
+}
+
+/** 
+ * Nitro and Shop link in friends list
+ */
+li[class^="channel_"]:has(a[href="/store"]),
+li[class^="channel_"]:has(a[href="/shop"]) {
+  display: none;
+}
+
+/**
+ * Discord gifting button in text area
+ */
+div[class^="channelTextArea__"] div[class^="buttons_"] > div:not(.expression-picker-chat-input-button) {
+  display: none;
+}
+
+/**
+ * "Discover Community Servers" button in sidebar
+ */
+div[class^="listItem_"]:has(div[data-list-item-id="guildsnav___guild-discover-button"]) {
+  display: none;
+}
+
+/**
+ * Display every server members online status equally
+ */
+h3[class^="membersGroup__"] {
+  display: none;
+}
+
+div[class^="members__"] {
+  padding-block-start: 12px;
+}
+
+[class^="member_"][class*="offline_"] {
+  opacity: initial;
+}
+
+/**
+ * Hide avatar decorations
+ */
+svg[class^="avatarDecoration_"] {
+  display: none;
+}
+
+/**
+ * Hide profile effects
+ */
+div[class^="profileEffects_"] {
+  display: none;
+}

@@ -1,0 +1,84 @@
+/**
+ * @name Defaultlook
+ * @author Krazytrain
+ * @version 1.0.0
+ * @description A soft and comfy feel for Discord.
+*/
+/*==================================================
+=            Main Theme Don't Remove               =
+==================================================*/
+@import url('https://krazytrain.github.io/Theme/Main Theme/fonts.css');
+@import url('https://krazytrain.github.io/Theme/Main Theme/Theme Links.css');
+/*==================================================
+=                  Radial Status                   =
+==================================================*/
+@import url('https://krazytrain.github.io/Theme/Main Theme/Radial Status.css');
+/*==================================================
+=   Radial Chat Status NEED PLATORMINDICATORS ON   =
+==================================================*/
+@import url('https://krazytrain.github.io/Theme/Main Theme/Radial chat Status.css');
+:root {
+  --rs-small-spacing: 2px;
+  --rs-medium-spacing: 2px;
+  --rs-large-spacing: 2px;
+  --rs-small-width: 2px;
+  --rs-medium-width: 3px;
+  --rs-large-width: 3px;
+  --rs-avatar-shape: 50%;
+  --rs-online-color: #43b581;
+  --rs-idle-color: #faa61a;
+  --rs-dnd-color: #f04747;
+  --rs-offline-color: #636b75;
+  --rs-streaming-color: #643da7;
+  --rs-phone-visible: block;
+}
+/*=================================================
+=               Custom CSS Code                   =
+=================================================*/
+
+/* Server shortcuts as Icons */
+.basicChannelRowLink__2ea32 .name__2ea32{
+  display: none;
+}
+li:not([class]):has(.basicChannelRowLink__2ea32),
+div:not([class]):has(.basicChannelRowLink__2ea32) {
+    width: 57px;
+    display: inline-flex;
+}
+.basicChannelRowLink__2ea32 .icon__2ea32{
+  margin-left: 2px;
+  margin-top: 0px;
+  scale: 1.2;
+}
+li:not([class]) > .containerDefault_c69b6d{
+    background-color: transparent;
+}
+.content__99f8c{
+    height: fit-content !important;
+    margin-bottom: 10px;
+}
+.wrapper__2ea32.modeSelected__2ea32 .basicChannelRowLink__2ea32 .icon__2ea32 {
+    color: var(--interactive-active);
+}
+.basicChannelRowLink__2ea32{
+    width: 54px!important;
+    background: var(--input-border);
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--input-border) !important;
+    justify-content: center;
+    margin-left: -6px!important;
+    margin-top: 10px;
+}
+li:not([class]):has(.basicChannelRowLink__2ea32), div:not([class]):has(.basicChannelRowLink__2ea32){
+    margin-left: 5px!important;
+    direction:rtl;
+}
+.basicChannelRowLink__2ea32{
+    border-radius: 10px;
+}
+.basicChannelRowLink__2ea32 .icon__2ea32{
+    margin-left: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+

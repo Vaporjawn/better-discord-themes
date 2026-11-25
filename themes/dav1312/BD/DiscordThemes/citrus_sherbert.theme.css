@@ -1,0 +1,12 @@
+/**
+ * @name Citrus Sherbert
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(180deg, var(--bg-gradient-citrus-sherbert-1) 31.1%, var(--bg-gradient-citrus-sherbert-2) 67.09%);
+}

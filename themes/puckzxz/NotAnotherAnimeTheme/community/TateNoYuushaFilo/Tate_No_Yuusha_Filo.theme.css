@@ -1,0 +1,342 @@
+/**
+* @name "Tate No Yuusha - Filo" from "NotAnotherAnimeTheme"
+* @author puckzxz#2080
+* @version 2.2
+* @description An easily customizable and automatically updating theme
+* @Invite FdZhbjY
+* @source https://github.com/puckzxz/NotAnotherAnimeTheme
+*/
+@import url(https://puckzxz.github.io/NotAnotherAnimeTheme/css/scsl.css);
+
+
+/* Import any custom fonts here */
+
+
+
+/* To make editing this theme easier I recommend using Notepad++ , you can download it for free here - https://notepad-plus-plus.org/download/ */
+
+/* Any images you use MUST end with .jpg or .png or any other image extension */
+/* This is NOT a valid link, https://imgur.com/a/ycjL2 */
+/* THIS IS A VALID LINK https://i.imgur.com/rCqnrQ7.jpg */
+
+/* If you find an image I would STRONGLY recommend rehosting the image on imgur https://imgur.com/upload */
+/*https://i.imgur.com/kIaTpVL.jpg BEST IMG*/ 											 
+
+:root {
+    /*
+    Change the theme background
+    Default: https://i.imgur.com/j1Z6HVc.jpg
+    */
+    --background-image: url(https://i.imgur.com/kIaTpVL.jpg);
+
+    /*
+    Change your friends icon image
+    Default: https://i.imgur.com/63g6Em8.jpg
+    */
+    --friends-icon: url(https://i.imgur.com/ifjdq0G.png);
+
+    /*
+    Change your friends icon iamge position
+    Default: center center
+    */
+    --friends-icon-position: center center;
+
+    /*
+    Change your friends icon image zoom
+    Default: 100% 
+    */
+    --friends-icon-zoom: 150%;
+
+    /*
+    Change the main theme color
+    Default: rgb(67, 181, 129)
+    */
+    --main-color: rgb(100, 212, 232);
+
+    /*
+    Change global transparency
+    You can use this to make your background image lighter or darker
+    Default: rgba(0, 0, 0, 0.8)
+    */
+    --main-transparency: rgba(0, 0, 0, 0.75);
+
+    /*
+    Change the unread server animation.
+    Replace it with "none" in order to remove any animations and use the main color instead
+    Default: rainbow
+    */
+    --unread-server-animation: rainbow;
+
+    /*
+    Change background color when you hover members or friends
+    Default: rgba(255, 255, 255, .15)
+    */
+    --hover-list-bg-color: rgba(250, 233, 207, 0.6);
+
+    /*
+    Change the color of the borders between messages
+    Default: hsla(0,0%,100%,.1)
+    */
+    --border-lines-color: hsla(189.1,74%,65%,0.4);
+
+    /*
+    Change the scroll bar color
+    Default: rgba(255,255,255, .15)
+    */
+    --scroll-bar-color: rgba(0, 33, 106, 0.6);
+
+    /*
+    Change chat messages font size, you can use any unit: px, em, rem, %
+    Default: 16px
+    */
+    --font-size: 16px;
+
+    /*
+    Change the text color of a selected text channel or joined voice channel
+    Default: #f6f6f7
+    */
+    --selected-text-voice-color: rgb(0, 33, 106);
+
+    /*
+    Change the text color of a hovered text or voice channel
+    Default: rgba(255, 255, 255, 0.75)
+    */
+    --channel-hover-text-color: rgba(100, 212, 232,0.75);
+
+
+    /*
+    Change the text color of an unread text channel
+    Default: #dcddde
+    */
+    --unread-text-color: #dcddde;
+
+
+    /*
+    Change the transparency of the user popout when clicking a member
+    Default: rgba(0, 0, 0, 0.8)
+    */
+    --user-popup-background: rgba(0, 33, 106, 0.6);
+}
+
+
+
+/* ADD ANY CUSTOM CODE BELOW */
+
+		/*on friend click from RHS*/
+/* Role and Note and playing */
+.bodyTitle-Y0qMQz {
+    color: rgb(250, 233, 207);
+}
+.theme-dark .activityUserPopout-2yItg2 .headerText-1HLrL7 {
+	color: rgb(250, 233, 207);
+}
+/* Protip */
+.statusGreen-168O6Q {
+    color: rgb(250, 233, 207);
+}
+/*name and no and status*/
+.headerName-fajvi9 {
+	color: rgb(250, 233, 207) ;
+}
+.nameTag-m8r81H .username-2b1r56 {
+	color:rgba(250, 233, 207,0.8);
+}
+.headerTag-2pZJzA {
+	color:rgba(250, 233, 207,0.5);
+}
+
+
+
+/* upload box color */
+.uploadModal-2ifh8j {
+    background-color: rgba(250, 233, 207, 0.6);
+}
+
+
+/*mod tabs on right bar*/
+.container-2ax-kl {
+    color: rgba(250, 233, 207, 0.8);
+}
+
+
+/*general text colour*/
+.markup-2BOw-j {
+    color: white;  /*nice hsl(35, 83%, 90%) */
+}
+
+
+/*members list panel colour*/
+.theme-dark .members-1998pB {
+    background-color: rgba(245,213,163,0.1);
+}
+
+
+/*friends list names*/
+.name-uJV0GL {
+    color: hsl(35, 83%, 80%);
+}
+
+
+/*folder background colour*/
+.folder-21wGz3 {
+    background-color: rgba(33,193,222,0.2);
+}
+
+
+/*inside folder colour*/
+.expandedFolderBackground-2sPsd- {
+    background-color: rgba(131,193,204,0.2);
+}
+	
+/*folder colour hover colour*/
+.folder-21wGz3.hover-2ji_A7 {
+    background-color:rgba(0, 33, 106, 0.6);
+}	
+	
+
+/*custom status on friends view*/
+.activityText-OW8WYb {
+	color: rgba(33,193,222,0.8) ;
+}
+
+/*status text on server*/
+.activityText-yGKsKm {
+	color: rgba(33,193,222,0.8) ;
+}
+
+
+/*all channel names*/
+.name-3_Dsmg {
+	color: hsla(43, 75%, 46%,0.9) ;
+}
+
+
+/* username while not speaking*/
+.usernameFont-aFalyR {
+	color: hsla(222, 60%, 50%, 1) ;
+}
+
+
+/*username while speaking*/
+.usernameSpeaking-2xbKKh {
+	color: hsla(189, 74%, 40%,1) ;
+}
+
+
+/*inline text maybe*/
+.inline {
+	color: rgba(250, 233, 207, 0.8) ;
+}
+	
+	
+
+
+/*names on join*/
+.content-2M3n_H a {
+	color: rgba(250, 233, 207, 0.7) ;
+}	
+
+
+
+
+
+/*users in channel with no rank*/
+.username-_4ZSMR {
+	color: rgba(250, 233, 207, 0.7) ;
+}	
+
+
+/*BLANK*/
+.ELEMENT_HERE {
+	color: COLOR HERE ;
+}	
+
+
+
+
+/*Emoji Picker Top Corners & transparency & stuff*/
+
+.bda-dark .emojiPicker-3m1S-j,.bda-dark .emojiPicker-3m1S-j .category-2U57w6 {
+background-color: rgba(0,0,0,0.4);
+border-radius: 5px 5px 5px 5px;
+}
+
+.emojiPicker-3m1S-j .stickyHeader-1SS0JU {
+background-color: rgba(0,0,0,0.3);
+}
+
+
+
+/*gif picker*/
+.theme-dark .autocomplete-1vrmpx, .header-1TOWci {
+background-color: rgba(0,0,0,0.7);
+}
+
+
+
+/*message background shadow*/
+.containerCozyBounded-1rKFAn {
+    background: rgba(0, 0, 0, 0.2); /* message background color/transparency */
+    margin: 5px 20px; /* space between each message */
+    border-radius: 5px; /* message roundness */
+}
+
+
+
+/*bg image is the discord shadow at beginning of conversation, color is line at beginning of conversation*/
+.theme-dark .base-34jWEe {
+	color: rgba(0,0,0,0) ;
+	background-image: url(nothing)
+}
+
+
+
+/*the roundness of the corners on a folder*/
+.expandedFolderBackground-2sPsd- {
+    position: absolute;
+    top: 0;
+    left: 12px;
+    bottom: 8px;
+    width: 48px;
+    border-radius: 10px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+
+}	
+
+/*server name borders*/
+.content-3at_AU {
+background-color: rgba(0,0,0,0.3);
+border-radius: 8px ;
+}
+
+
+/*move server add/create in line*/
+.scroller-2TZvBN>div:nth-last-child(-n+2) {
+	margin-left: 0px ;
+}
+
+/*server online list name outline*/ 
+.layout-2DM8Md {
+	background-color: rgba(0,0,0,0.1);
+}
+
+
+/* SO MUCH MORE*/
+
+/* DM BG*/
+.flex-1xMQg5 flex-1O1GKY da-flex da-flex horizontal-1ae9ci horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG justifyCenter-3D2jYp alignCenter-1dQNNs noWrap-3jynv6 videoGridWrapper-2BDlMX da-videoGridWrapper minLayout-tDGzv- da-minLayout {
+	color: rgba(0,0,255,0.9);
+}
+
+.members-1998pB>div {
+	background-color: transparent;
+}
+
+
+
+.layout-2DM8Md {
+	background-color: rgba(0,0,0,0.3);
+}

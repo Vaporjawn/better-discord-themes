@@ -1,0 +1,78 @@
+/**
+ * @name PurpleOnyx
+ * @author Zacam
+ * @version 2.1.0
+ * @description Purple Accented NewUI Onyx Compact
+ * @authorId 94933455258783744
+ * @source https://github.com/Zacam/BetterDiscord/tree/main/PurpleOnyx
+*/
+
+@import url("https://zacam.github.io/BetterDiscord/PurpleOnyx/css/PurpleOnyx.css");
+
+/* Plugins Customizations */
+@import url("https://zacam.github.io/BetterDiscord/PurpleOnyx/css/PurpleOnyx-Full.css");
+/* Lite Theme - PurpleOnyx Only
+ * @import url("https://zacam.github.io/BetterDiscord/PurpleOnyx/css/PurpleOnyx-Lite.css");
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+:root, .theme-midnight {
+ /* Purple Onyx NewUI */
+	--font-primary: "Spectral", serif, "Noto Color Emoji";
+	--font-display: "Spectral", serif, "Noto Color Emoji";
+	--font-code: "DejaVuSansM Nerd Font Mono", "DejaVu Sans Mono", "Consolas", monospace;
+	--oPur-21: rgba(164,128,226,0.21);
+	--oPur-32: rgba(164,128,226,0.32);
+	--oPur-42: rgba(164,128,226,0.42);
+	--oPur-64: rgba(164,128,226,0.64);
+	--oPur-84: rgba(164,128,226,0.84);
+	--oPurple: rgb(164,128,226);
+	--app-frame-border: var(--oPur-42);
+	--background-brand: var(--oPur-64);
+	--background-modifier-selected: var(--oPur-32);
+	--badge-background-brand: var(--oPur-64);
+	--border-active: var(--oPur-64);
+	--border-focus: var(--oPur-64);
+	--border-normal: var(--oPur-42);
+	--border-strong: var(--oPur-84);
+	--border-subtle: var(--oPur-32);
+	--brand-10a: rgba(164,128,226,0.15);
+	--brand-300: var(--oPur-64);
+	--brand-500: var(--oPur-84);
+	--checkbox-background-selected-default: var(--oPur-64);
+	--checkbox-background-selected-hover: var(--oPur-42);
+	--control-brand-foreground: var(--oPur-84);
+	--control-overlay-primary-background-default: var(--oPur-32);
+	--control-overlay-primary-background-hover: var(--oPur-42);
+	--control-overlay-primary-border-default: var(--border-normal);
+	--control-overlay-primary-border-hover: var(--border-active);
+	--control-overlay-primary-text-default: var(--text-default);
+	--control-overlay-primary-text-hover: var(--text-default);
+	--control-primary-background-hover: var(--oPur-64);
+	--custom-channel-textarea-text-area-height: 32px;
+	--info-help-foreground: rgb(164,128,226);
+	--input-border-default: var(--oPur-32);
+	--input-border-hover: var(--oPur-42);
+	--input-border-active: var(--oPur-64);
+	--mention-foreground: rgb(164,128,226);
+	--message-highlight-background-default: rgba(164,128,226,0.15);
+	--message-mentioned-background-default: rgba(164,128,226,0.05);
+	--message-mentioned-background-hover: rgba(164,128,226,0.05);
+	--modal-horizontal-padding: 12px;
+	--modal-vertical-padding: 8px;
+	--modal-width-medium: fit-content;
+	--progressbar-indicator-background: var(--oPur-64);
+	--radio-background-selected-default: var(--oPur-64);
+	--spoiler-hidden-background: rgba(164,128,226,0.11);
+	--spoiler-hidden-background-hover: var(--oPur-32);
+	--text-brand: var(--oPur-84);
+	--text-link: var(--oPur-84);
+	--__current--spoiler-background-color: var(--oPur-32);
+	--__spoiler-background-color--revealed: var(--oPur-21);
+}
+
+@keyframes marquee {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
+}

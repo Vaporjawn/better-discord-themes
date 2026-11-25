@@ -1,0 +1,31 @@
+/**
+* @name Amethyst
+* @version 0.2.0
+* @description A dark, minimal, modern rework of Discord's UI, with a purple colour scheme & miscillaneous UI tweaks. 
+* @author kiosion
+* @authorId 346430063006187531
+* @source https://github.com/kiosion/Amethyst
+* @invite kiosion
+*/
+
+@import url('https://kiosion.github.io/Amethyst/css/base.css');
+
+/* change variables to 'unset' from 'none' to show elements */
+:root {
+
+  /* scrollbars */
+  --scrollbars: none;
+
+  /* profile card notes */
+  --notes: none;
+
+  /* profile card dm box */
+  --message: none;
+
+  /* default fonts */
+  --font-primary: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+
+  /* gif/sticker buttons in msg bar */
+  --gif-sticker-buttons: none;
+}

@@ -1,0 +1,83 @@
+/**
+    * @name HLJS Styling
+    * @version 1.0.0
+    * @description Gives customization to Discord's default codeblocks.
+    * @author LuckFire#4800
+    *
+    * @website https://github.com/LuckFire
+    * @source https://github.com/Discord-Theme-Addons/hljs-styling/tree/main/src
+**/
+
+@import url('https://discord-theme-addons.github.io/hljs-styling/src/support/compiled.css');
+
+:root {
+    /* ---- Default Colors -- */
+    --background: var(--background-secondary, #282C34);
+    --text-default: #abb2bf;
+    --color-1: #98c379;
+    --color-2: #d19a66;
+    --color-3: #61aeee;
+    --color-4: #56b6c2;
+    --color-5: #e06c75;
+    --color-6: #c678dd;
+    --color-7: #e6c07b;
+
+    /* ---- HLJS Default -- */
+    --hljs-attribute: var(--color-1);
+    --hljs-nomarkup: var(--color-1);
+    --hljs-variable: var(--color-2);
+    --hljs-meta: var(--color-3);
+    --hljs-meta-string: var(--color-1);
+    --hljs-meta-keyword: var(--hljs-meta);
+    --hljs-literal: var(--color-4);
+    --hljs-section: var(--color-5);
+    --hljs-number: var(--color-2);
+    --hljs-name: var(--color-5);
+    --hljs-selector-tag: var(--color-5);
+    --hljs-selector-class: var(--color-2);
+    --hljs-selector-attr: var(--color-1);
+    --hljs-selector-pseudo: var(--color-1);
+    --hljs-keyword: var(--color-6); 
+    --hljs-built_in: var(--color-2);
+    --hljs-title: var(--color-3);
+    --hljs-link: var(--color-3);
+    --hljs-bullet: var(--color-3);
+    --hljs-symbol: var(--color-3);
+    --hljs-addition: var(--color-1);
+    --hljs-deletion: var(--color-5);
+    --hljs-attr: var(--color-2);
+    --hljs-punctuation: var(--text-default);
+    --hljs-regexp: var(--color-1);
+    --hljs-type: var(--color-2);
+    --hljs-selector-id: var(--color-3);
+    --hljs-operator: var(--text-default);
+    --hljs-rest_arg: var(--text-default);
+    --hljs-template-variable: var(--color-2);
+
+    /* ---- HLJS Specific -- */
+    /* --> Params */
+    --hljs-params: var(--text-default);
+    --hljs-params-attr: var(--hljs-params);
+    /* --> Comment */
+    --hljs-comment: #5c6370;
+    --hljs-comment-doctag: var(--hljs-comment);
+    /* --> String */
+    --hljs-string: var(--color-1);
+    --hljs-string-subst: var(--color-5);
+    --hljs-string-template-variable: var(--color-2);
+    /* --> Tag */
+    --hljs-tag: var(--text-default);
+    --hljs-tag-name: var(--color-5);
+    --hljs-tag-attr: var(--color-2);
+    /* --> Function */
+    --hljs-function: var(--text-default);
+    --hljs-function-keyword: var(--hljs-keyword);
+    --hljs-function-title: var(--hljs-title);
+    --hljs-function-params: var(--hljs-params);
+    --hljs-function-literal: var(--hljs-literal);
+    --hljs-function-operator: var(--hljs-operator);
+    /* --> Class */
+    --hljs-class: var(--text-default);
+    --hljs-class-keyword: var(--color-6);
+    --hljs-class-title: var(--color-7);
+}

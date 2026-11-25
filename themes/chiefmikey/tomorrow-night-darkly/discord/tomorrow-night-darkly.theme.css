@@ -1,0 +1,55 @@
+/**
+ * @name Tomorrow Night Darkly
+ * @author Simply Dark
+ * @description A Simply Dark Theme for Discord.
+ * @version 1.0.1
+ */
+
+:root {
+  /* Backgrounds */
+  --background-primary: #181818;
+  --background-secondary: #202020;
+  --background-secondary-alt: #181818;
+  --background-tertiary: #202020;
+  --background-floating: #181818;
+  --background-mobile-primary: #181818;
+  --background-mobile-secondary: #202020;
+  --channeltextarea-background: #202020;
+  --background-accent: #b294bb;
+
+  /* Text */
+  --text-normal: #c6c6c6;
+  --text-muted: #7d7d7d;
+  --header-primary: #c6c6c6;
+  --header-secondary: #7d7d7d;
+  --text-link: #b294bb;
+
+  /* Interactive states */
+  --interactive-normal: #c6c6c6;
+  --interactive-hover: #ffffff;
+  --interactive-active: #b294bb;
+  --interactive-muted: #7d7d7d;
+
+  /* Borders / hover surfaces */
+  --background-modifier-hover: #2e2e2e;
+  --background-modifier-active: #2e2e2e;
+  --background-modifier-selected: #2e2e2e;
+  --background-modifier-accent: #2e2e2e;
+  --border-color: #2e2e2e;
+
+  /* Brand/blurple remapped to the TND accent */
+  --brand-experiment: #b294bb;
+  --brand-experiment-560: #b294bb;
+  --brand-experiment-600: #b294bb;
+  --brand-500: #b294bb;
+
+  /* Status colors */
+  --green-360: #18845e;
+  --status-danger: #f85149;
+}
+
+/* Safe, minimal touch: plain link color (Discord's hashed class names are
+   intentionally avoided since they change with every client update) */
+a {
+  color: #b294bb;
+}

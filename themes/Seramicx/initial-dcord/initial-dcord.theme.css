@@ -1,0 +1,347 @@
+/**
+ * @name Initial Dcord
+ * @author Seramicx
+ * @version 7.0.1
+ * @description My personal theme with an Initial D aesthetic, custom hover animations, and tweaked visuals.
+ * @source https://github.com/ClearVision/ClearVision-v7
+ * @website https://clearvision.github.io
+ * @invite dHaSxn3
+ */
+
+@import url("https://clearvision.github.io/ClearVision-v7/main.css");
+@import url("https://clearvision.github.io/ClearVision-v7/vencord.css");
+
+:root {
+  /* Accent colors */
+  --main-color: #E12C69;
+  --hover-color: #A10137;
+  --success-color: #D93BB6;
+  --danger-color: #ED4245;
+
+  /* App background */
+  --background-shading-percent: 100%;
+  --background-image: url('https://i.imgur.com/RRp4fPD.gif');
+  --background-position: center;
+  --background-size: cover;
+  --background-attachment: fixed;
+  --background-filter: saturate(calc(var(--saturation-factor, 1) * 1));
+  --background-overlay: rgba(8, 0, 0, 0.6);
+
+  /* User popout background */
+  --user-popout-image: url('https://i.imgur.com/FLsXABC.gif');
+  --user-popout-position: center;
+  --user-popout-size: cover;
+  --user-popout-attachment: fixed;
+  --user-popout-filter: blur(3px);
+
+  /* User modal background */
+  --user-modal-image: url('https://i.imgur.com/zZWPEy6.gif');
+  --user-modal-position: center;
+  --user-modal-size: cover;
+  --user-modal-attachment: fixed;
+  --user-modal-filter: blur(3px);
+
+  /* Home icon */
+  --home-icon: url('https://i.postimg.cc/BQN254fW/4862052-0.png');
+  --home-size: 68px;
+
+  /* Fonts */
+  --main-font: gg sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --code-font: 'Consolas', 'Courier New', monospace;
+
+  /* Channel colors */
+  --channel-normal: var(--interactive-text-default);
+  --channel-muted: var(--interactive-muted);
+  --channel-unread: #FFFFFF;
+  --channel-hover: var(--interactive-text-hover);
+  --channel-selected: var(--interactive-text-active);
+  --channel-selected-bg: var(--main-color);
+  --channel-unread-hover: var(--hover-color);
+
+  /* Status colors */
+  --online-color: #00B361;
+  --idle-color: #faa61a;
+  --dnd-color: #982929;
+  --streaming-color: #593695;
+  --offline-color: #717171;
+
+  /* Accessibility */
+  --focus-color: var(--main-color);
+}
+
+/* Light theme */
+:is(.theme-light, .theme-dark .theme-light) {
+  --background-shading: rgba(252, 252, 252, 0.3);
+  --card-shading: rgba(252, 252, 252, 0.3);
+  --popout-shading: rgba(252, 252, 252, 0.7);
+  --modal-shading: rgba(252, 252, 252, 0.5);
+  --input-shading: rgba(0, 0, 0, 0.3);
+  --normal-text: #36363c;
+  --muted-text: #75757e;
+}
+
+/* Ash theme (Discord default dark) */
+:is(.theme-dark, .theme-light .theme-dark) {
+  --background-shading: rgba(0, 0, 0, 0.4);
+  --card-shading: rgba(0, 0, 0, 0.2);
+  --popout-shading: rgba(0, 0, 0, 0.6);
+  --modal-shading: rgba(0, 0, 0, 0.4);
+  --input-shading: rgba(255, 255, 255, 0.05);
+  --normal-text: #ddd8d5;
+  --muted-text: #b2aead;
+}
+
+/* Dark theme */
+:is(.theme-darker, .theme-light .theme-darker) {
+  --background-shading: rgba(0, 0, 0, 0.6);
+  --card-shading: rgba(0, 0, 0, 0.3);
+  --popout-shading: rgba(0, 0, 0, 0.7);
+  --modal-shading: rgba(0, 0, 0, 0.5);
+  --input-shading: rgba(255, 255, 255, 0.05);
+  --normal-text: #faf8f6;
+  --muted-text: #9a9496;
+}
+
+/* Onyx theme */
+:is(.theme-midnight, .theme-light .theme-midnight) {
+  --background-shading: rgba(0, 0, 0, 0.8);
+  --card-shading: rgba(0, 0, 0, 0.4);
+  --popout-shading: rgba(0, 0, 0, 0.8);
+  --modal-shading: rgba(0, 0, 0, 0.6);
+  --input-shading: rgba(255, 255, 255, 0.05);
+  --normal-text: #e0dbd9;
+  --muted-text: #8e8688;
+}
+
+/* Keyframes */
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Server icon scale on hover (scoped to guild sidebar so picker icons aren't affected) */
+
+nav[class*="guilds"] [class*="listItem"] {
+  transition: transform 0.2s ease;
+}
+
+nav[class*="guilds"] [class*="listItem"]:hover {
+  transform: scale(1.08);
+}
+
+/* Server folder icon color */
+
+[class*="folderIcon"] {
+  color: var(--main-color);
+}
+
+/* Channel hover: nudge + accent bar (excludes category headers via :has) */
+/* Targets the inner link so thread connector spines stay aligned */
+
+[class*="containerDefault_"]:has([class*="link_"]) [class*="link_"] {
+  transition: transform 0.15s ease;
+}
+
+[class*="containerDefault_"]:has([class*="link_"]):hover [class*="link_"] {
+  transform: translateX(4px);
+}
+
+[class*="containerDefault_"]:has([class*="link_"]):hover,
+[class*="containerDragAfter_"]:hover,
+[class*="containerDragBefore_"]:hover {
+  box-shadow: inset 3px 0 0 var(--main-color);
+}
+
+/* Message hover accent bar */
+
+[class*="message_"][class*="cozy_"] {
+  transition: opacity 0.15s ease;
+}
+
+[class*="message_"][class*="cozy_"]:hover {
+  opacity: 0.88;
+  box-shadow: inset 3px 0 0 var(--main-color);
+}
+
+/* Button press-in effect */
+
+[class*="button_"][class*="lookFilled_"],
+[class*="button_"][class*="lookOutlined_"] {
+  transition: transform 0.1s ease;
+}
+
+[class*="button_"][class*="lookFilled_"]:hover,
+[class*="button_"][class*="lookOutlined_"]:hover {
+  transform: scale(1.04);
+}
+
+[class*="button_"][class*="lookFilled_"]:active,
+[class*="button_"][class*="lookOutlined_"]:active {
+  transform: scale(0.96);
+}
+
+/* Member list slide on hover */
+
+[class*="member_"] {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+[class*="member_"]:hover {
+  transform: translateX(3px);
+}
+
+/* Popout corners + entrance animation
+   Animating the container breaks ClearVision's ::before bg layering
+   so the animation goes on the first child instead */
+
+.user-profile-popout {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.user-profile-popout> :first-child {
+  animation: slideUp 0.2s ease-out;
+}
+
+/* Modal corners + entrance (same deal as popout above) */
+
+.user-profile-modal,
+.user-profile-modal-v2 {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.user-profile-modal> :first-child,
+.user-profile-modal-v2> :first-child {
+  animation: scaleIn 0.25s ease-out;
+}
+
+/* Sticker picker header padding fix (ClearVision's packHeader pulls it left) */
+
+[class*="packHeader"],
+[class*="sectionContainer"] {
+  margin-left: 0 !important;
+  padding-left: 8px !important;
+}
+
+/* Board + Wishlist cards: not styled by ClearVision yet so they show up as default gray.
+   These match the Activity tab's transparent dark bg.
+   Hashes: container__62dd3 (Board), card__9ed47 (Wishlist)
+   If they break after an update, re-inspect in DevTools and swap the hashes */
+
+.container__62dd3,
+.card__9ed47 {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+
+/* Context menu slide-in (no 'forwards' so transform clears after animation, won't break submenus) */
+
+[class*="menu_"] {
+  animation: slideInLeft 0.12s ease;
+}
+
+/* Tooltips */
+
+[class*="tooltip_"] {
+  animation: scaleIn 0.1s ease forwards;
+}
+
+/* Selected/connected channel accent */
+
+[class*="containerDefault_"][class*="modeSelected_"],
+[class*="containerDefault_"][class*="modeConnected_"] {
+  box-shadow: inset 3px 0 0 var(--main-color), inset 6px 0 12px -6px var(--main-color);
+}
+
+/* Role pills */
+
+[class*="role_"] {
+  transition: transform 0.12s ease;
+}
+
+[class*="role_"]:hover {
+  transform: scale(1.06);
+}
+
+/* Typing indicator */
+
+[class*="typing_"] {
+  animation: scaleIn 0.15s ease forwards;
+}
+
+/* Voice connection indicator glow */
+
+[class*="rtcConnectionStatus_"] {
+  box-shadow: 0 0 4px var(--success-color);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-color);
+}
+
+/* Unread indicator glow (scoped to guild sidebar pill only) */
+
+nav[class*="guilds"] [class*="unread_"] {
+  box-shadow: 0 0 6px var(--main-color);
+}
+
+/* Reduced motion a11y fallback */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

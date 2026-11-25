@@ -1,0 +1,878 @@
+/**
+ * @name Amethyst WhiteText
+ * @description Elegant purple Discord theme with transparent UI, circular icons, and clean minimal design - PURE WHITE TEXT VARIANT (All member names forced to white, ignores role colors)
+ * @author lunagray932-ctrl
+ * @version 2.0.0
+ * @source https://github.com/lunagray932-ctrl/amethyst-discord-theme
+ * @contact luna1324001@gmail.com
+ * @license MIT
+ */
+
+/* ===== Dark Color Variables ===== */
+.theme-dark, .theme-light, :root {
+    --background-base-lowest: #1C1C28 !important;
+    --background-base-lower: #1E1E2A !important;
+    --background-base-low: #21212D !important;
+    --chat-background: #1C1C28 !important;
+    --background-surface-high: #252537 !important;
+    --background-surface-higher: #2D2D3C !important;
+    --background-surface-highest: #35354A !important;
+    
+    --neutral-1: #FFFFFF !important;
+    --neutral-60: #35354A !important;
+    --neutral-62: #33334A !important;
+    --neutral-64: #31314A !important;
+    --neutral-66: #2F2F4A !important;
+    --neutral-69: #2D2D3C !important;
+    --neutral-73: #2A2A36 !important;
+    --neutral-78: #252537 !important;
+    --neutral-83: #21212D !important;
+    --neutral-87: #1E1E2A !important;
+    --neutral-91: #1C1C28 !important;
+    --neutral-95: #1A1A26 !important;
+    --neutral-97: #181824 !important;
+    --neutral-100: #1C1C28 !important;
+    
+    --brand-experiment: #7C3AED !important;
+    --brand-500: #7C3AED !important;
+    --brand-360: #7C3AED !important;
+    --blurple-50: #7C3AED !important;
+    
+    --background-primary: #1C1C28 !important;
+    --background-secondary: #252537 !important;
+    --background-secondary-alt: #2D2D3C !important;
+    --background-tertiary: #2D2D3C !important;
+    --background-accent: #7C3AED !important;
+    --background-floating: #35354A !important;
+    --channeltextarea-background: #2D2D3C !important;
+    --bg-surface-raised: #2D2D3C !important;
+    --bg-surface-overlay-tmp: #35354A !important;
+    --card-background-default: #252537 !important;
+    --card-primary-pressed-bg: #2D2D3C !important;
+    --card-secondary-bg: rgba(124, 58, 237, 0.08) !important;
+    
+    --background-mentioned-hover: rgba(124, 58, 237, 0.15) !important;
+    --background-mentioned: rgba(124, 58, 237, 0.08) !important;
+    --background-message-hover: rgba(124, 58, 237, 0.04) !important;
+    --background-modifier-hover: rgba(124, 58, 237, 0.08) !important;
+    --background-modifier-active: rgba(124, 58, 237, 0.12) !important;
+    --background-modifier-selected: rgba(124, 58, 237, 0.15) !important;
+    
+    --channels-default: #B5B5C8 !important;
+    --text-normal: #DCDDDE !important;
+    --text-muted: #A3A3B8 !important;
+}
+
+/* ===== Base Backgrounds ===== */
+html, body { background: #1C1C28 !important; }
+#app-mount { background: #1C1C28 !important; }
+._51fd70792ee2e563-appMount { background: #1C1C28 !important; }
+._5e434347c823b592-container { background: #1C1C28 !important; }
+[class*="chat_"], [class*="content_"] { background: #1C1C28 !important; }
+nav, aside, [class*="sidebar"] { background: #252537 !important; }
+
+/* ===== Server List ===== */
+[class*="guilds"] {
+    background: #21212D !important;
+}
+
+/* ===== CIRCULAR SERVER ICONS ===== */
+[class*="guilds"] img[class*="-icon"] {
+    border-radius: 50% !important;
+}
+
+[class*="guilds"] div[class*="-wrapper"] {
+    border-radius: 50% !important;
+}
+
+[class*="guilds"] div[class*="-blobContainer"] svg {
+    border-radius: 50% !important;
+}
+
+[class*="guilds"] svg[class*="-svg"] {
+    border-radius: 50% !important;
+}
+
+[class*="guilds"] foreignObject {
+    border-radius: 50% !important;
+}
+
+/* Badges */
+[class*="numberBadge"],
+[class*="badge"],
+div[class*="-numberBadge"] {
+    background: #7C3AED !important;
+}
+
+/* Server pill */
+[class*="pill"] span {
+    background: #7C3AED !important;
+    border-radius: 0 4px 4px 0 !important;
+}
+
+/* ===== Message Headers - Normal Size ===== */
+[class*="messageContent"] h1,
+[class*="messageContent"] h2,
+[class*="messageContent"] h3,
+[id*="message-content"] h1,
+[id*="message-content"] h2,
+[id*="message-content"] h3 {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    line-height: 1.375rem !important;
+    margin: 0 !important;
+    color: #DCDDDE !important;
+}
+
+[class*="messageContent"] h1 span,
+[class*="messageContent"] h2 span,
+[class*="messageContent"] h3 span {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+}
+
+/* ===== Messages (removed for performance) ===== */
+
+/* ===== DM Channels ===== */
+[class*="channel_"] {
+    border: none !important;
+    border-radius: 8px !important;
+    margin: 1px 4px !important;
+    background: transparent !important;
+}
+
+[class*="channel_"]:hover {
+    background: rgba(124, 58, 237, 0.08) !important;
+}
+
+[class*="channel_"][class*="selected"] {
+    background: rgba(124, 58, 237, 0.12) !important;
+}
+
+/* ===== CLEAN ACTIVITY - NO PURPLE ===== */
+[class*="activity"],
+[class*="activityPanel"],
+[class*="nowPlaying"],
+[class*="userPanelInner"],
+[class*="container"][class*="themed"] {
+    background: transparent !important;
+}
+
+/* ===== ACTIVITY TAB (Top Right) - NO PURPLE ===== */
+[class*="_0f2e83213c878a13-cardRow"],
+[class*="_0f2e83213c878a13-infoSection"],
+[class*="_0f2e83213c878a13-userSection"] {
+    background: transparent !important;
+}
+
+[class*="_0f2e83213c878a13-facePile"],
+[class*="_0f2e83213c878a13-thumbnail"],
+[class*="_42bf58529787eb7a-contentImage"],
+[class*="_635edac6e9713347-badgesContainer"],
+[class*="_635edac6e9713347-badgeContainer"],
+[class*="_635edac6e9713347-badgeLabel"],
+[class*="badgesContainer"],
+[class*="badgeContainer"],
+[class*="badgesContainerCard"],
+[class*="badgeLabel__635ed"],
+div[class*="badgeLabel"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+[class*="_0f2e83213c878a13-userName"],
+[class*="_0f2e83213c878a13-contentTitle"] {
+    background: transparent !important;
+}
+
+/* ===== USER PROFILE POPOUTS - NO PURPLE/BLACK BOXES ===== */
+/* Profile containers */
+[class*="userPopout"],
+[class*="userProfile"],
+[class*="profileBadges"],
+[class*="profileBadge"],
+[class*="profile"],
+[class*="memberSince"],
+[class*="note"],
+[class*="role"],
+[class*="roles"] {
+    background: transparent !important;
+}
+
+/* EXACT badge classes from HTML */
+[class*="_8061a5f9dbf6d829-container"],
+[class*="_8061a5f9dbf6d829-badge"],
+div[class*="_8061a5f9dbf6d829"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Profile body/overlay classes */
+[class*="b32ca49f97332e1b-body"],
+[class*="b32ca49f97332e1b-overlay"],
+[class*="c0bea05627c5dc35-overlay"],
+[class*="bf424dc3dc4c8775-section"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Simplified badge targeting */
+[class*="profileBadges"],
+[class*="profileBadge"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* User info sections */
+[class*="userInfoSection"],
+[class*="userInfoText"],
+[class*="customStatus"],
+[class*="memberSince"],
+[class*="note"] {
+    background: transparent !important;
+}
+
+/* EXACT status class from HTML - remove black boxes */
+[class*="ab86098b36386ff7-statusText"],
+div[class*="ab86098b36386ff7-statusText"],
+[class*="ab86098b36386ff7-statusEmoji"],
+img[class*="ab86098b36386ff7-statusEmoji"],
+[class*="c9d15c8a962de3c8-emoji"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Status emoji containers */
+.emoji[class*="statusEmoji"],
+img.emoji {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Server tag badge/emoji - no purple boxes */
+[class*="_10651c5cfe637db6-badge"],
+img[class*="_10651c5cfe637db6-badge"],
+[class*="_10651c5cfe637db6-chipletContainerInner"],
+[class*="_10651c5cfe637db6-chipletContainerInline"],
+[class*="_63ed30c16c7151f2-guildTag"],
+span[class*="_63ed30c16c7151f2-guildTag"],
+[class*="badge__10651"],
+img[class*="badge__10651"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Server tag text and badge containers */
+[class*="_10651c5cfe637db6-text"],
+[class*="_10651c5cfe637db6-tagText"],
+span[class*="_10651c5cfe637db6"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Custom status - remove black boxes */
+[class*="customStatus"],
+[class*="customStatusText"],
+[class*="statusText"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Profile body elements */
+[class*="profileBody"],
+[class*="popoutBody"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Remove all backgrounds from badge/status containers */
+[aria-label*="Badge"],
+[aria-label*="badge"],
+[aria-label*="User Badges"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Status menu items - transparent backgrounds (fixed capitalization) */
+.ce832809562bf737-statusItem,
+.ce832809562bf737-status,
+.statusItem_ce8328,
+.status_ce8328,
+div.ce832809562bf737-statusItem,
+div.ce832809562bf737-status,
+[class~="ce832809562bf737-statusItem"],
+div[class*="statusItem"][class*="ce832809562bf737"],
+div.statusItem_ce8328,
+div.status_ce8328,
+[class*="statusItem_ce8328"],
+[class*="status_ce8328"]:not([style*="background-color"]) {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove black boxes from hover items and names */
+.nameAndDecorators__20a53,
+.leftName__20a53,
+.name__20a53,
+.name__703b9,
+.username__703b9:not(.twoColorGradient_e5de78):not(.usernameGradient_e5de78):not(.convenienceGlowGradient_e5de78),
+.desaturateUserColors__41f68:not(.twoColorGradient_e5de78):not(.usernameGradient_e5de78):not(.convenienceGlowGradient_e5de78),
+[class*="anchor_edefb8"],
+.anchorUnderlineOnHover_edefb8,
+.interactive_bf202d,
+.interactive__972a0,
+.linkButton__972a0,
+.userName__0f2e8,
+.userSection__0f2e8,
+.infoSection__0f2e8,
+.contentTitle__0f2e8,
+.cardRow__0f2e8,
+.member__5d473,
+.container__91a9d,
+.container__0f2e8 {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Specifically target name containers */
+div.nameAndDecorators__20a53,
+div.leftName__20a53,
+div.name__20a53,
+span.name__703b9,
+span.username__703b9:not(.twoColorGradient_e5de78):not(.usernameGradient_e5de78):not(.convenienceGlowGradient_e5de78),
+span.desaturateUserColors__41f68:not(.twoColorGradient_e5de78):not(.usernameGradient_e5de78):not(.convenienceGlowGradient_e5de78),
+span.userName__0f2e8,
+div.userSection__0f2e8,
+div.infoSection__0f2e8,
+span.container__703b9,
+span.nameContainer__703b9,
+span.username__5d473:not(.twoColorGradient_e5de78):not(.usernameGradient_e5de78):not(.convenienceGlowGradient_e5de78) {
+    background: none !important;
+    background-color: rgba(0,0,0,0) !important;
+    box-shadow: none !important;
+    /* Allow role colors to show - don't force white */
+    color: unset !important;
+    background-image: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    /* Prevent transparent text but allow role colors */
+    -webkit-text-fill-color: unset !important;
+}
+
+/* CRITICAL: Don't remove background-image from gradient usernames - they need it for the gradient effect */
+span.twoColorGradient_e5de78,
+span.usernameGradient_e5de78,
+span.convenienceGlowGradient_e5de78,
+span.username_c19a55.twoColorGradient_e5de78,
+span.username_c19a55.usernameGradient_e5de78,
+span[class*="username"][class*="Gradient"],
+span.nameGlow__703b9,
+span.usernameGlow_e5de78 {
+    /* Only remove backgrounds, NOT background-image (needed for gradient text) */
+    background-color: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    /* Ensure gradient works */
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+/* Remove nameplate backgrounds */
+.container__4bbc6,
+.videoContainer__4bbc6,
+.nameplated__91a9d {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* Specifically remove hover backgrounds */
+.interactive_bf202d:hover,
+.interactive__972a0:hover,
+.linkButton__972a0:hover {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Parent container hover */
+.channel__972a0:hover {
+    background: transparent !important;
+}
+
+/* Remove purple from badges */
+.badge__8061a {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: brightness(1) !important;
+}
+
+/* ===== BOTTOM PANEL - NO PURPLE BOXES ===== */
+[class*="panels"],
+[class*="container_"][class*="withTag"],
+section[class*="panels"] {
+    background: #252537 !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+/* ===== ACTION BUTTONS (Camera, Screen Share, etc.) - NO PURPLE ===== */
+[class*="e131a99484292a19-actionButtons"],
+[class*="e131a99484292a19-button"] {
+    background: transparent !important;
+}
+
+[class*="e131a99484292a19-actionButtons"] button,
+[class*="e131a99484292a19-button"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+[class*="e131a99484292a19-actionButtons"] button:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ===== VOICE CONTROL BUTTONS - NO PURPLE BOXES ===== */
+button[class*="_67645e1530f1195d-button"],
+button[class*="_201d5e8a3c09670a"],
+[class*="e131a99484292a19-voiceButtonsContainer"] button,
+[class*="panels"] button[class*="lookBlank"],
+button[aria-label*="Noise"],
+button[aria-label*="Disconnect"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    filter: none !important;
+}
+
+button[class*="_67645e1530f1195d-button"]:hover,
+button[aria-label*="Noise"]:hover,
+button[aria-label*="Disconnect"]:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Mute/Deafen/Settings buttons */
+[class*="button"][aria-label*="Mute"],
+[class*="button"][aria-label*="Deafen"],
+[class*="button"][aria-label*="User Settings"],
+button[aria-label*="Mute"],
+button[aria-label*="Deafen"],
+button[aria-label*="User Settings"],
+[class*="redGlow"],
+[class*="greenGlow"],
+[class*="plateMuted"],
+[class*="plated"],
+[class*="lookBlank"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    filter: none !important;
+}
+
+/* ===== TYPE BAR BUTTONS - KEEP ICONS VISIBLE ===== */
+[class*="_740174f3d6a2c8fe-buttons"],
+[class*="_740174f3d6a2c8fe-buttonContainer"] {
+    background: transparent !important;
+}
+
+[class*="_740174f3d6a2c8fe-button"],
+[class*="_24af7f4d0326ba4f-button"],
+button[class*="_740174f3d6a2c8fe-button"],
+button[class*="_24af7f4d0326ba4f-button"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+[class*="_740174f3d6a2c8fe-buttons"] svg,
+[class*="_740174f3d6a2c8fe-buttonContainer"] svg,
+[class*="_740174f3d6a2c8fe-button"] svg,
+[class*="_24af7f4d0326ba4f-button"] svg,
+button[class*="_740174f3d6a2c8fe-button"] svg,
+button[class*="_24af7f4d0326ba4f-button"] svg {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    color: #B5B5C8 !important;
+    fill: currentColor !important;
+}
+
+[class*="_740174f3d6a2c8fe-button"] svg path,
+[class*="_24af7f4d0326ba4f-button"] svg path {
+    fill: currentColor !important;
+}
+
+[class*="_740174f3d6a2c8fe-button"]:hover,
+[class*="_24af7f4d0326ba4f-button"]:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+[class*="_740174f3d6a2c8fe-button"]:hover svg,
+[class*="_24af7f4d0326ba4f-button"]:hover svg {
+    color: #DCDDDE !important;
+}
+
+/* ===== INPUT BAR - NO LAYOUT CHANGES ===== */
+/* Only style the inner container background */
+[class*="channelTextArea"] [class*="inner"] {
+    background: #2D2D3C !important;
+    border-radius: 8px !important;
+}
+
+/* ===== MUSIC PLAYER SLIDER - SHOW PURPLE PROGRESS ===== */
+/* Don't override the track or bar structure - let Discord handle it */
+
+/* ===== SCROLLBAR - NO PURPLE IN SERVER LIST ===== */
+::-webkit-scrollbar {
+    width: 12px !important;
+}
+
+/* Default purple scrollbar for most areas - solid color for performance */
+::-webkit-scrollbar-thumb {
+    background: #7C3AED !important;
+    border-radius: 8px !important;
+    border: 2px solid #252537 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8B5CF6 !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #252537 !important;
+}
+
+/* Server list scrollbar - gray for visibility */
+[class*="guilds"] ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid #21212D !important;
+}
+
+[class*="guilds"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ===== Selection ===== */
+::selection {
+    background: #7C3AED !important;
+    color: white !important;
+}
+
+/* ===== Links ===== */
+a {
+    color: #A78BFA !important;
+}
+
+a:hover {
+    color: #C4B5FD !important;
+}
+
+/* ===== Avatars ===== */
+[class*="avatar"] img {
+    border-radius: 50% !important;
+}
+
+/* ===== Buttons ===== */
+[class*="button"] {
+    border-radius: 8px !important;
+}
+
+/* Only color actual brand buttons */
+[class*="button"][class*="colorBrand"]:not([class*="plated"]):not([class*="lookBlank"]):not([class*="lookFilled"]) {
+    background: #7C3AED !important;
+}
+
+[class*="button"][class*="colorBrand"]:not([class*="plated"]):not([class*="lookBlank"]):not([class*="lookFilled"]):hover {
+    background: #8B5CF6 !important;
+}
+
+/* ===== Modals ===== */
+[class*="modal"],
+[class*="popout"] {
+    background: #252537 !important;
+    border-radius: 12px !important;
+}
+
+/* ===== Status Indicators ===== */
+[class*="status"] {
+    border: 2px solid #1C1C28 !important;
+}
+/* ===== MEMBER LIST NAME FIX ===== */
+/* Force override -webkit-text-fill-color: transparent that's hiding names */
+.userList__60ded .member__2qe9d [class*="name"],
+.members__01cce [class*="name"],
+[role="listitem"] [class*="name"],
+.member__2qe9d {
+    -webkit-text-fill-color: var(--text-normal) !important;
+    color: var(--text-normal) !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+}
+
+/* Force specific selectors for nameAndDecorators */
+div.nameAndDecorators__20a53,
+div.leftName__20a53,
+div.name__20a53,
+span.name__703b9,
+.userList__60ded .member__2qe9d .name__703b9,
+.members__01cce .member__2qe9d .name__703b9 {
+    /* Allow role colors to show through - don't force white */
+    -webkit-text-fill-color: revert !important;
+    color: revert !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Remove background boxes behind member names - AGGRESSIVE */
+.member__2qe9d,
+.member__2qe9d > *:not([style*="background-image"]),
+.member__2qe9d > * > *:not([style*="background-image"]),
+.member__2qe9d > * > * > *:not([style*="background-image"]) {
+    background: none !important;
+    background-color: transparent !important;
+}
+
+.nameAndDecorators__20a53,
+.nameAndDecorators__20a53 > *,
+.leftName__20a53,
+.name__20a53,
+.name__703b9 {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove ALL backgrounds from name-related containers */
+[class*="nameAndDecorators"],
+[class*="leftName"],
+[class*="name__"] {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Remove hover/active states on names */
+.member__2qe9d:hover,
+.member__2qe9d:active,
+.member__2qe9d.selected__1e2be,
+.member__2qe9d:hover > *:not([style*="background-image"]),
+.member__2qe9d:hover > * > *:not([style*="background-image"]) {
+    background: none !important;
+    background-color: transparent !important;
+}
+
+/* Ensure member list row backgrounds are transparent */
+.members__01cce [role="listitem"],
+.members__01cce [role="listitem"] > *:not([style*="background-image"]),
+[role="listitem"],
+[role="listitem"] > *:not([style*="background-image"]) {
+    background: none !important;
+    background-color: transparent !important;
+}
+/* Remove black square from custom nameplates/decorations */
+[class*="decoration"],
+[class*="nameplate"],
+[class*="avatarDecoration"],
+[class*="profileEffect"],
+[class*="avatar"] > div:not([style*="background-image"]),
+[class*="avatar"] svg + div:not([style*="background-image"]),
+[class*="avatarStack"],
+[class*="avatarWrap"] {
+    background: none !important;
+    background-color: transparent !important;
+}
+
+/* Target specific nameplate decoration containers */
+.nameAndDecorators__20a53 [class*="decoration"],
+.nameAndDecorators__20a53 > div,
+.leftName__20a53 [class*="decoration"],
+.leftName__20a53 > div {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Remove backgrounds from all SVG parent containers in member list */
+.member__2qe9d svg + *,
+.member__2qe9d svg ~ * {
+    background: none !important;
+    background-color: transparent !important;
+}
+/* Remove box around entire custom status container */
+.content_ab8609,
+[class*="content_"] {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove box around status text */
+[class*="statusText_"],
+.statusText_ab8609,
+.defaultColor__4bd52.statusText_ab8609,
+div.defaultColor__4bd52.text-sm\/normal_cf4812.statusText_ab8609 {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove box around status emoji */
+.statusEmoji_ab8609,
+[class*="statusEmoji"],
+.emoji.statusEmoji_ab8609,
+img.emoji.statusEmoji_ab8609 {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove backgrounds from status popover area */
+[class*="statusPopover"],
+[class*="popover__"] {
+    background: none !important;
+    background-color: transparent !important;
+}
+/* Fix invisible server/folder icons in mutual servers */
+[class*="icon_"][style*="background-image"],
+.icon_f34534,
+[class*="iconInactive"],
+.iconInactive_f34534,
+.iconSizeSmol_f34534,
+[class*="avatar__"] [class*="icon_"],
+div[class*="icon_"][style*="background-image"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    transform: none !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    background-size: cover !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    clip-path: none !important;
+    background-color: transparent !important;
+    background-position: center !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+}
+
+/* Specifically target mutual servers section */
+.section__530ce [class*="icon_"],
+[class*="avatars__"] [class*="icon_"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+
+}
+
+/* FORCE VISIBLE - target exact inactive icon classes - ABSOLUTE NUCLEAR OPTION */
+div.icon_f34534.iconSizeSmol_f34534.iconInactive_f34534,
+.avatar__9ac28 .icon_f34534.iconSizeSmol_f34534.iconInactive_f34534,
+.size16__9ac28 .icon_f34534,
+.avatar__9ac28.size16__9ac28 div.icon_f34534,
+[class*="iconInactive"][style*="background-image"],
+div[class*="icon"][class*="Inactive"],
+div.icon_f34534.iconSizeSmol_f34534.iconInactive_f34534::before,
+div.icon_f34534.iconSizeSmol_f34534.iconInactive_f34534::after,
+div.icon_f34534::before,
+div.icon_f34534::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    /* CRITICAL: Don't override background, allow inline styles */
+    background-color: transparent !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    mask: none !important;
+    -webkit-mask: none !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    mask-size: auto !important;
+    -webkit-mask-size: auto !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    transform: scale(1) !important;
+    -webkit-transform: scale(1) !important;
+    position: relative !important;
+    overflow: visible !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    background-size: 100% 100% !important;
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    pointer-events: auto !important;
+    z-index: 1 !important;
+}
+
+/* Remove content:normal from pseudo-elements only to allow Discord's content */
+div.icon_f34534.iconSizeSmol_f34534.iconInactive_f34534::before,
+div.icon_f34534.iconSizeSmol_f34534.iconInactive_f34534::after,
+div.icon_f34534::before,
+div.icon_f34534::after {
+    content: unset !important;
+}
+
+/* Ensure parent avatar containers don't hide children */
+.avatar__9ac28,
+.size16__9ac28,
+.avatars__9ac28,
+.section__530ce {
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+}
+
+/* Force visibility on any child images or elements inside icons */
+div.icon_f34534 > *,
+div.icon_f34534.iconInactive_f34534 > *,
+div.icon_f34534 img,
+div.icon_f34534.iconInactive_f34534 img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    mask: none !important;
+    -webkit-mask: none !important;
+}
+/* CRITICAL FIX: Ensure icon elements are fully visible with their background images intact */
+div.icon_f34534[style*="background-image"],
+div.iconInactive_f34534[style*="background-image"],
+div.iconSizeSmol_f34534[style*="background-image"],
+div[class*="icon"][style*="background-image"],
+*[class*="icon_"][style*="background-image"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    -webkit-filter: none !important;}

@@ -1,0 +1,12 @@
+/**
+ * @name No Arrows
+ * @author TheBestDeveloper
+ * @version 1.0.0
+ * @description Disable the back and forward arrows on Discord's desktop app.
+ * @source https://github.com/notthebestdev/no-arrows
+ * @authorId 759076162935717901
+ */
+
+.backForwardButtons__63abb {
+  display: none;
+}

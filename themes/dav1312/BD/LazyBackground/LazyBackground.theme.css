@@ -1,0 +1,13 @@
+/**
+ * @name LazyBackground
+ * @author _david_
+ * @description Easiest and laziest way to add a background to Discord
+ * @version 1.0.0
+ */
+
+:root {
+	--background-image: url('https://i.imgur.com/rn0AlMm.jpg');
+	--opacity: .95;
+}
+
+:root{background:var(--background-image) center/cover no-repeat}body{opacity:var(--opacity)}

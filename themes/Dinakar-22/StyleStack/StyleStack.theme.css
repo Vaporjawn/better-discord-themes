@@ -1,0 +1,2037 @@
+/**
+ * @name StyleStack (Self-Contained Fixed Build)
+ * @author gvt22 (Team SNC)
+ * @version 1.3
+ * @description Blue glass Discord theme with an animated Rem wallpaper, spring animations and a one-hue color system.
+ * @source https://github.com/Dinakar-22/StyleStack
+ * @updateUrl https://raw.githubusercontent.com/Dinakar-22/StyleStack/refs/heads/main/stylestack.theme.css
+ * @invite https://discord.gg/RjXukhYxcK
+ * @license MIT
+ */
+
+/*
+ * MAINTENANCE — Discord class hashes
+ * Names that are specific (guilds_, chatContent_, channelTextArea_ ...) are
+ * matched with [class*='name_'] and survive Discord updates. Generic names
+ * (container, wrapper, scroller, header ...) can't be matched that way
+ * because many unrelated elements share them, so they still carry a hash.
+ *
+ * Every class from one Discord module shares ONE hash. If a panel stops
+ * styling after an update: press Ctrl+Shift+I, click the broken element,
+ * read its new hash from the class name, then Find & Replace the old hash
+ * below with the new one across this file.
+ *
+ * Hashes still in use (hash -> classes):
+    f75fb0  ->  chat, content, form, title
+    2ea32  ->  link, unread, wrapper
+    89463  ->  container, contentContainer, toolbar
+    9293f  ->  children, container, toolbar
+    cb9592  ->  callContainer, fullScreen, wrapper
+    0b563  ->  container, header
+    5e434  ->  page, sidebar
+    6e9f8  ->  selected, wrapper
+    7d20c  ->  container, scroller
+    908e2  ->  content, divider
+    972a0  ->  channel, selected
+    aa8da2  ->  item, side
+    c0bea0  ->  inner, outer
+    c38106  ->  title, trailing
+    c8ffbb  ->  container, member
+    ef3116  ->  scroller, wrapper
+    f37cb1  ->  clickable, header
+    fb64c9  ->  chat, container
+    01ae2  ->  container
+    08434  ->  contentWrapper
+    133bf  ->  container
+    1a9ce  ->  headerBar
+    23746  ->  scroller
+    24502  ->  root
+    2637a  ->  container
+    4d3a9  ->  icon
+    5126c  ->  message
+    55c99  ->  container
+    629e4  ->  scroller
+    650eb  ->  listItem
+    6b0e0  ->  autocomplete
+    6db1d  ->  shop
+    722ff  ->  callContainer
+    76f04  ->  popout
+    85643  ->  button
+    8a7fc  ->  headerBar
+    91a9d  ->  container
+    9271d  ->  container
+    99e7c  ->  scroller
+    a44415  ->  chat
+    a592e1  ->  container
+    af017a  ->  imageWrapper
+    c1e9c4  ->  menu
+    c36707  ->  tooltip
+    c791b2  ->  header
+    cdf8a9  ->  wrapper
+    f369db  ->  container
+    f391e3  ->  container
+    fc8177  ->  wrapper
+ */
+
+/* ─── Font Import (Google Fonts — CORS-safe) ─────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap');
+
+/* ─── CSS Custom Property Registrations ──────────────────────────── */
+@property --animations {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: on;
+}
+@property --background-image {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: on;
+}
+@property --panel-blur {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: on;
+}
+@property --transparency-tweaks {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: on;
+}
+@property --small-user-panel {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: on;
+}
+@property --collapsible-members {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: on;
+}
+@property --compact-mode {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: off;
+}
+@property --readability-mode {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: off;
+}
+@property --style-preset {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: glass;
+}
+
+/* ─── Color & Token Definitions (:root) ─────────────────────────── */
+:root {
+    /* ── COLOR KNOBS — change these numbers to recolor the whole theme ──
+       --hue     main accent color (0-360): 198 blue, 330 pink, 280 purple,
+                 150 green, 20 orange, 0 red
+       --hue-hi  lighter highlight used on hover (keep close to --hue)
+       --hue-2   second shade used in gradients (keep close to --hue)
+       --hue-bg  tint of the dark panels (255 indigo, 220 navy, 0 neutral)
+       --dim-top / --dim-bottom  how dark the wallpaper overlay is (0-1) */
+    --hue:        198;
+    --hue-hi:     192;
+    --hue-2:      207;
+    --hue-bg:     255;
+    --dim-top:    0.62;
+    --dim-bottom: 0.45;
+
+    /* ── PALETTE PRESETS — copy ONE block over the four knob lines above
+       (--hue, --hue-hi, --hue-2, --hue-bg). Dim values can stay as they are.
+
+       REM — blue (default)
+           --hue: 198;  --hue-hi: 192;  --hue-2: 207;  --hue-bg: 255;
+
+       RAM — pink & red
+           --hue: 345;  --hue-hi: 352;  --hue-2: 335;  --hue-bg: 340;
+
+       EMILIA — ice purple
+           --hue: 262;  --hue-hi: 252;  --hue-2: 272;  --hue-bg: 260;
+
+       Optional matching wallpaper: replace the --wallpaper line further
+       down in :root. Only the Rem wallpaper ships with this theme; for Ram
+       or Emilia paste the URL of an image you like, e.g.
+           --wallpaper: url('https://example.com/your-image.webp');
+       The DM button icon (--dms-icon-svg-url) can be swapped the same way. */
+
+    /* ── STYLE PRESET — set to  glass  |  solid  |  minimal  ─────────────
+       glass    current look: wallpaper, frosted blur, glowing borders
+       solid    no wallpaper, no blur: plain opaque panels (lightest on GPU)
+       minimal  keeps the wallpaper but flat panels: no blur, glow or shine */
+    --style-preset: glass;
+
+    /* ── USABILITY SWITCHES — set each to  on  or  off  ──────────────────
+       --collapsible-members  member list shrinks to avatars, expands on hover
+       --compact-mode         smaller gaps, corners and message spacing
+       --readability-mode     brighter text + darker panels + darker wallpaper */
+    --collapsible-members: off;
+    --compact-mode:        on;
+    --readability-mode:    off;
+
+    /* Member list widths (used by collapsible-members) */
+    --member-collapsed-width: 72px;
+    --member-expanded-width:  240px;
+
+    /* Text scale */
+    --text-1: hsl(250, 100%, 98%);
+    --text-2: hsl(245, 60%,  88%);
+    --text-3: hsl(240, 35%,  78%);
+    --text-4: hsl(240, 22%,  62%);
+    --text-5: hsl(240, 15%,  42%);
+
+    /* Background scale (semi-transparent for blur effect) */
+    --bg-1: hsla(var(--hue-bg), 40%, 14%, 0.82);
+    --bg-2: hsla(var(--hue-bg), 45%, 10%, 0.80);
+    --bg-3: hsla(var(--hue-bg), 50%,  7%, 0.76);
+    --bg-4: hsla(var(--hue-bg), 55%,  5%, 0.84);
+
+    /* Floating panels */
+    --bg-floating: var(--bg-3);
+
+    /* Interaction states */
+    --hover:         hsla(var(--hue), 100%, 60%, 0.10);
+    --active:        hsla(var(--hue), 100%, 60%, 0.18);
+    --active-2:      hsla(var(--hue), 100%, 60%, 0.28);
+    --message-hover: hsla(var(--hue-bg),  60%,  4%, 0.30);
+
+    /* Accent — blue scale */
+    --blue-1: hsl(calc(var(--hue) - 3), 100%, 78%);
+    --blue-2: hsl(var(--hue), 100%, 66%);
+    --blue-3: hsl(calc(var(--hue) + 4), 100%, 58%);
+    --blue-4: hsl(var(--hue-2), 100%, 52%);
+    --blue-5: hsl(calc(var(--hue-2) + 5), 100%, 46%);
+
+    /* Wallpaper — animated WebP (~6 MB, was a 24 MB GIF).
+       Static fallback for low-end PCs: swap the two lines. */
+    --wallpaper: url('https://raw.githubusercontent.com/Dinakar-22/StyleStack/refs/heads/main/assets/rem-wallpaper.webp');
+    /* --wallpaper: url('https://raw.githubusercontent.com/Dinakar-22/StyleStack/refs/heads/main/assets/rem-wallpaper-static.jpg'); */
+
+    /* Accent palette (Rem's blue hair) */
+    --blue-main:   hsl(var(--hue), 100%, 62%);
+    --blue-hi:     hsl(var(--hue-hi), 100%, 70%);
+    --glow-blue:   hsla(var(--hue), 100%, 62%, 0.45);
+    --glow-hi:     hsla(var(--hue-hi), 100%, 70%, 0.45);
+
+    --accent-1: var(--blue-1);
+    --accent-2: var(--blue-2);
+    --accent-3: var(--blue-3);
+    --accent-4: var(--blue-4);
+    --accent-5: var(--blue-5);
+
+    /* Borders */
+    --border-light:  hsla(var(--hue), 100%, 62%, 0.18);
+    --border:        hsla(var(--hue), 100%, 62%, 0.40);
+    --border-hover:  hsla(var(--hue-hi), 100%, 70%, 0.85);
+    --button-border: hsla(var(--hue), 100%, 62%, 0.35);
+
+    /* Highlights */
+    --mention:       hsla(var(--hue), 100%, 60%, 0.14);
+    --mention-hover: hsla(var(--hue), 100%, 60%, 0.22);
+    --reply:         hsla(var(--hue), 100%, 62%, 0.12);
+    --reply-hover:   hsla(var(--hue), 100%, 62%, 0.20);
+
+    /* Panel effects — the style presets change these */
+    --panel-backdrop:     blur(var(--blur-amount));
+    --panel-shadow:       0 0 0 1px hsla(var(--hue), 100%, 62%, 0.06) inset,
+                          0 0 14px hsla(var(--hue), 100%, 62%, 0.16);
+    --panel-shadow-hover: 0 0 0 1px hsla(var(--hue-hi), 100%, 70%, 0.10) inset,
+                          0 0 20px hsla(var(--hue-hi), 100%, 70%, 0.28);
+    --shine:              1;
+
+    /* Layout */
+    --gap:               12px;
+    --blur-amount:       8px;
+    --border-thickness:  1px;
+    --divider-thickness: 4px;
+    --radius-sm:         4px;
+    --radius-md:         8px;
+    --radius-lg:         16px;
+
+    /* Transitions */
+    --border-hover-transition:    0.15s ease;
+    --list-item-transition:       0.2s  ease;
+    --dms-icon-svg-transition:    0.4s  ease;
+
+    /* DM Icon */
+    --dms-icon-svg-url:    url('https://raw.githubusercontent.com/Dinakar-22/StyleStack/refs/heads/main/assets/Rem.svg');
+    --dms-icon-svg-size:   85%;
+    --dms-icon-color-before: var(--text-4);
+    --dms-icon-color-after:  white;
+
+    /* Window controls */
+    --window-control-size: 14px;
+
+    /* ── VISUAL POLISH KNOBS ─────────────────────────────────────────
+       CSS-only crystal cursors. SVG gradients and translucent facets create
+       the glass finish; 4 3 keeps the hotspot at the arrow tip. */
+    --ring-speed:  7s;
+    --speak-speed: 1.4s;
+    --font-rem:    'Caveat', 'Figtree', cursive;
+    --cursor-default-base: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%0A%20%3ClinearGradient%20id%3D%22glass%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%221%22%2F%3E%0A%20%20%3Cstop%20offset%3D%22.24%22%20stop-color%3D%22%23f1fcff%22%20stop-opacity%3D%22.98%22%2F%3E%0A%20%20%3Cstop%20offset%3D%22.52%22%20stop-color%3D%22%23a8e8ff%22%20stop-opacity%3D%22.94%22%2F%3E%0A%20%20%3Cstop%20offset%3D%22.78%22%20stop-color%3D%22%2345baff%22%20stop-opacity%3D%22.96%22%2F%3E%0A%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230878d1%22%20stop-opacity%3D%221%22%2F%3E%0A%20%3C%2FlinearGradient%3E%0A%20%3ClinearGradient%20id%3D%22facet%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%22.9%22%20y2%3D%221%22%3E%0A%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%22.98%22%2F%3E%0A%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c5f0ff%22%20stop-opacity%3D%22.18%22%2F%3E%0A%20%3C%2FlinearGradient%3E%0A%3C%2Fdefs%3E%3Cpath%20d%3D%22M4%202.2%204.1%2025.2%2010.1%2019.5%2014.7%2029.1%2018.1%2027.5%2013.6%2018.2%2023%2018.2Z%22%0A%20fill%3D%22url%28%23glass%29%22%20stroke%3D%22%23073b70%22%20stroke-width%3D%221.45%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M5.3%204.4%205.4%2022.1%209.9%2017.8%2019.9%2017.2Z%22%20fill%3D%22url%28%23facet%29%22%20opacity%3D%22.9%22%2F%3E%0A%3Cpath%20d%3D%22M5.2%204.2%2020.3%2017.1%2013%2017.2Z%22%20fill%3D%22%23ffffff%22%20opacity%3D%22.55%22%2F%3E%0A%3Cpath%20d%3D%22M6.1%205.1%206.2%2019.2%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%221%22%20stroke-width%3D%221.25%22%20stroke-linecap%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M10.4%2020.2%2014.9%2027.3%22%20fill%3D%22none%22%20stroke%3D%22%23eafaff%22%20stroke-opacity%3D%221%22%20stroke-width%3D%22.95%22%20stroke-linecap%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M5.1%203.6%2021.1%2017.3%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.88%22%20stroke-width%3D%22.75%22%2F%3E%3C%2Fsvg%3E") 4 3;
+    --cursor-pointer-base: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%0A%20%3ClinearGradient%20id%3D%22glass%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%221%22%2F%3E%0A%20%20%3Cstop%20offset%3D%22.24%22%20stop-color%3D%22%23f1fcff%22%20stop-opacity%3D%22.98%22%2F%3E%0A%20%20%3Cstop%20offset%3D%22.52%22%20stop-color%3D%22%23a8e8ff%22%20stop-opacity%3D%22.94%22%2F%3E%0A%20%20%3Cstop%20offset%3D%22.78%22%20stop-color%3D%22%2345baff%22%20stop-opacity%3D%22.96%22%2F%3E%0A%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230878d1%22%20stop-opacity%3D%221%22%2F%3E%0A%20%3C%2FlinearGradient%3E%0A%20%3ClinearGradient%20id%3D%22facet%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%22.9%22%20y2%3D%221%22%3E%0A%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%22.98%22%2F%3E%0A%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c5f0ff%22%20stop-opacity%3D%22.18%22%2F%3E%0A%20%3C%2FlinearGradient%3E%0A%3C%2Fdefs%3E%3Cpath%20d%3D%22M4%202.2%204.1%2025.2%2010.1%2019.5%2014.7%2029.1%2018.1%2027.5%2013.6%2018.2%2023%2018.2Z%22%0A%20fill%3D%22url%28%23glass%29%22%20stroke%3D%22%23073b70%22%20stroke-width%3D%221.45%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M5.3%204.4%205.4%2022.1%209.9%2017.8%2019.9%2017.2Z%22%20fill%3D%22url%28%23facet%29%22%20opacity%3D%22.9%22%2F%3E%0A%3Cpath%20d%3D%22M5.2%204.2%2020.3%2017.1%2013%2017.2Z%22%20fill%3D%22%23ffffff%22%20opacity%3D%22.55%22%2F%3E%0A%3Cpath%20d%3D%22M6.1%205.1%206.2%2019.2%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%221%22%20stroke-width%3D%221.25%22%20stroke-linecap%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M10.4%2020.2%2014.9%2027.3%22%20fill%3D%22none%22%20stroke%3D%22%23eafaff%22%20stroke-opacity%3D%221%22%20stroke-width%3D%22.95%22%20stroke-linecap%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M5.1%203.6%2021.1%2017.3%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.88%22%20stroke-width%3D%22.75%22%2F%3E%3Cpath%20d%3D%22M23.8%203.2%2024.8%206.1%2027.7%207.1%2024.8%208.1%2023.8%2011%2022.8%208.1%2019.9%207.1%2022.8%206.1Z%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%230878d1%22%20stroke-width%3D%22.7%22%20opacity%3D%221%22%2F%3E%3C%2Fsvg%3E") 4 3;
+    --cursor-default: var(--cursor-default-base);
+    --cursor-pointer: var(--cursor-pointer-base);
+}
+
+/* ─── Body / Font Setup ──────────────────────────────────────────── */
+body,
+.theme-dark,
+.theme-light {
+    font-family: 'Figtree', 'gg sans', sans-serif !important;
+    font-weight: 400;
+
+    /* Map Discord's font variables to Figtree */
+    --font-primary:  'Figtree', 'gg sans', sans-serif;
+    --font-display:  'Figtree', 'gg sans', sans-serif;
+    --font-code:     'Fira Code', 'Consolas', monospace;
+
+    /* Discord color variable overrides */
+    --background-primary:         var(--bg-3);
+    --background-secondary:       var(--bg-4);
+    --background-secondary-alt:   var(--bg-4);
+    --background-tertiary:        var(--bg-4);
+    --background-accent:          var(--bg-2);
+    --background-floating:        var(--bg-floating);
+    --background-mobile-primary:  var(--bg-4);
+    --background-mobile-secondary:var(--bg-3);
+
+    --channeltextarea-background:     var(--bg-2);
+    --deprecated-card-bg:             var(--bg-3);
+    --deprecated-store-bg:            var(--bg-4);
+
+    --text-normal:   var(--text-3);
+    --text-muted:    var(--text-5);
+    --text-link:     var(--accent-1);
+    --header-primary:var(--text-2);
+    --header-secondary: var(--text-4);
+    --interactive-normal:  var(--text-4);
+    --interactive-hover:   var(--text-3);
+    --interactive-active:  var(--text-2);
+    --interactive-muted:   var(--text-5);
+
+    --brand-experiment:          var(--accent-3);
+    --brand-experiment-360:      var(--accent-2);
+    --brand-experiment-400:      var(--accent-2);
+    --brand-experiment-430:      var(--accent-2);
+    --brand-experiment-460:      var(--accent-3);
+    --brand-experiment-530:      var(--accent-4);
+    --brand-experiment-560:      var(--accent-5);
+    --brand-500:                 var(--accent-3);
+    --brand-560:                 var(--accent-4);
+
+    --channels-default: var(--text-4);
+    --channel-icon:     var(--text-4);
+
+    --scrollbar-thin-thumb:  hsla(var(--hue), 100%, 62%, 0.35);
+    --scrollbar-thin-track:  transparent;
+    --scrollbar-auto-thumb:  hsla(var(--hue), 100%, 62%, 0.35);
+    --scrollbar-auto-track:  transparent;
+
+    --focus-primary: var(--accent-2);
+}
+
+/* ─── App Root Transparency ──────────────────────────────────────── */
+#app-mount,
+[class*="app_"] {
+    background: transparent !important;
+}
+
+/* ─── Background Image (Rem GIF) ────────────────────────────────── */
+/* Applied to the main Discord background layer */
+[class*="bg_"][class*="theme-"],
+[class^="bg_"] {
+    background-image:
+        linear-gradient(hsla(var(--hue-bg), 60%, 5%, var(--dim-top)), hsla(calc(var(--hue-bg) + 10), 60%, 6%, var(--dim-bottom))),
+        var(--wallpaper) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* ─── Shared Panel Mixin ─────────────────────────────────────────── */
+/* All major panels get: bg, border-radius, border, blur */
+[class*='guilds_'],
+[class*='sidebarList_'],
+[class*='panels_'],
+[class*='chatContent_'],
+.container_c8ffbb,
+.chat_f75fb0 > [class*='subtitleContainer_'],
+.container__133bf > .container__9293f,
+.container_f391e3 > .container__9293f,
+[class*='homeWrapper_'] > .container__9293f,
+.container__01ae2 > .container__9293f,
+.container_fb64c9 > .container__9293f,
+[class*='peopleColumn_'],
+[class*='nowPlayingColumn_'],
+[class*='mainPageScroller_'],
+.headerBar__1a9ce,
+.scroller__23746,
+.container_f391e3 > .content_f75fb0,
+.shop__6db1d,
+.content_f75fb0 > aside > .outer_c0bea0,
+[class*='searchResultsWrap_'],
+.container_f369db,
+.chat_fb64c9,
+.container_a592e1,
+.callContainer_cb9592,
+.callContainer__722ff,
+.chat_f75fb0 > .header_c791b2,
+.chat_f75fb0 > [class*='scrollerBase_'],
+.chat_f75fb0 > .header__0b563,
+.chat_f75fb0 > .container__0b563,
+.container__89463 > .toolbar__89463,
+.container__89463 > .contentContainer__89463 {
+    background-color: var(--bg-3) !important;
+    border-radius: var(--radius-lg) !important;
+    border: var(--border-thickness) solid var(--border) !important;
+    backdrop-filter: var(--panel-backdrop) !important;
+    -webkit-backdrop-filter: var(--panel-backdrop) !important;
+    box-shadow: var(--panel-shadow) !important;
+    box-sizing: border-box;
+    transition: border-color var(--border-hover-transition), box-shadow var(--border-hover-transition);
+}
+
+[class*='guilds_']:hover,
+[class*='sidebarList_']:hover,
+[class*='chatContent_']:hover,
+.container_c8ffbb:hover,
+.container__133bf > .container__9293f:hover,
+[class*='peopleColumn_']:hover,
+[class*='nowPlayingColumn_']:hover,
+.shop__6db1d:hover,
+[class*='searchResultsWrap_']:hover,
+.container_a592e1:hover {
+    border-color: var(--border-hover) !important;
+    box-shadow: var(--panel-shadow-hover) !important;
+}
+
+/* ─── Layout: Sidebar Group ──────────────────────────────────────── */
+.sidebar__5e434 {
+    margin: 0 var(--gap) var(--gap) var(--gap);
+}
+
+/* Server list */
+[class*='guilds_'] {
+    margin-bottom: 0;
+    margin-right: var(--gap);
+}
+
+/* Channel list — ends above the bottom panels.
+   --custom-app-panels-height is set by Discord and always holds the real
+   height of the user / voice / music panels, so it adjusts by itself. */
+[class*='sidebarList_'] {
+    margin-bottom: calc(var(--custom-app-panels-height, 70px) + var(--gap));
+}
+
+/* User panel — pinned to bottom */
+[class*='panels_'] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Remove bottom gradient/shadow from sidebar */
+.sidebar__5e434::after {
+    display: none !important;
+}
+
+/* Remove server list mask/shadow */
+.wrapper_ef3116 {
+    mask: none !important;
+}
+
+/* ─── Layout: Chat Area ──────────────────────────────────────────── */
+.chat_f75fb0 {
+    border: none !important;
+    background: none !important;
+}
+
+[class*='chatContent_'] {
+    overflow: hidden;
+}
+
+/* Chat titlebar */
+[class*='subtitleContainer_'] {
+    margin-bottom: var(--gap);
+}
+
+.title_f75fb0 {
+    border: none !important;
+    background: none !important;
+    margin-bottom: 0;
+}
+
+/* Friends page */
+.container__133bf,
+.page__5e434 {
+    padding-bottom: var(--gap);
+    padding-right: var(--gap);
+    border: none !important;
+    background: none !important;
+}
+
+.page__5e434 > .chat_f75fb0,
+.page__5e434 > .container__133bf {
+    padding: 0;
+}
+
+[class*='tabBody_'] {
+    border: none !important;
+    background: none !important;
+}
+
+/* Friends page titlebar */
+.container__9293f {
+    margin-bottom: var(--gap);
+}
+
+/* ─── Layout: Member List ────────────────────────────────────────── */
+.container_c8ffbb,
+.content_f75fb0 > [class*='membersWrap_'] {
+    margin-left: var(--gap);
+    overflow: hidden;
+    height: auto;
+    min-width: fit-content;
+}
+
+[class*='members_'],
+.member_c8ffbb {
+    background: none !important;
+}
+
+/* ─── Layout: DM List ────────────────────────────────────────────── */
+[class*='privateChannels_'],
+.scroller__99e7c {
+    background: none !important;
+}
+
+.scroller__99e7c {
+    margin-bottom: 0;
+}
+
+/* ─── Layout: Active Now ─────────────────────────────────────────── */
+[class*='nowPlayingColumn_'] {
+    margin-left: var(--gap);
+}
+
+.container__7d20c {
+    background: none !important;
+}
+
+.scroller__7d20c {
+    border: none !important;
+}
+
+/* ─── Layout: Search Results ─────────────────────────────────────── */
+[class*='searchResultsWrap_'] {
+    margin-left: var(--gap);
+}
+
+/* ─── Layout: Member List (Forum) ────────────────────────────────── */
+.content_f75fb0 > [class*='membersWrap_'] {
+    margin-left: var(--gap);
+}
+
+/* ─── Layout: VC ─────────────────────────────────────────────────── */
+.container__01ae2 {
+    border: none !important;
+    background: none !important;
+}
+
+[class*='channelChatWrapper_'] {
+    background: none !important;
+}
+
+.wrapper_cb9592 {
+    background: none !important;
+    margin-bottom: var(--gap);
+}
+
+.wrapper_cb9592.fullScreen_cb9592 {
+    margin-top: var(--gap);
+    margin-left: var(--gap);
+    width: calc(100% - var(--gap));
+    height: calc(100% - var(--gap));
+}
+
+.chat_a44415::before {
+    display: none !important;
+}
+
+/* ─── Layout: Server List Inner ──────────────────────────────────── */
+.scroller_ef3116 {
+    padding-top: 12px !important;
+    padding-bottom: 12px;
+}
+
+[class*='folderGroup_'],
+.listItem__650eb {
+    width: 100%;
+}
+
+.container__2637a {
+    padding-bottom: 0;
+}
+
+.clickable_f37cb1,
+.container__2637a,
+.header_f37cb1 {
+    background: none !important;
+}
+
+.scroller__629e4 {
+    margin-bottom: 0;
+}
+
+/* ─── Fix Server Banners ─────────────────────────────────────────── */
+[class*='bannerImage_'],
+[class*='bannerImg_'] {
+    width: 100%;
+}
+
+[class*='bannerVisible_'] [class*='headerEllipseBackdrop_'] {
+    display: none !important;
+}
+
+[class*='headerGlass_'] {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* ─── Settings Pages ─────────────────────────────────────────────── */
+[class*='standardSidebarView_'],
+[class*='contentRegion_'],
+[class*='sidebarRegionScroller_'],
+[class*='contentRegionScroller_'] {
+    background: none !important;
+}
+
+[class*='standardSidebarView_'] {
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+}
+
+
+/* ─── Chatbar ────────────────────────────────────────────────────── */
+[class*='channelTextArea_'] {
+    border-radius: var(--radius-md);
+}
+
+[class*='themedBackground_'] {
+    background: none !important;
+}
+
+[class*='slateTextArea_'] {
+    margin-left: 2px;
+}
+
+[class*='attachWrapper_'] {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon__4d3a9 {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+[class*='attachButton_'] {
+    display: flex;
+    align-items: center;
+}
+
+/* ─── Unread Divider ─────────────────────────────────────────────── */
+.divider__908e2 {
+    border-width: var(--divider-thickness);
+    border-radius: var(--divider-thickness);
+}
+
+[class*='endCap_'] {
+    margin-top: calc(var(--divider-thickness) / -2);
+}
+
+.divider__908e2 .content__908e2 {
+    margin-top: calc(var(--divider-thickness) - var(--divider-thickness) * 2);
+}
+
+/* ─── Messages ───────────────────────────────────────────────────── */
+.message__5126c {
+    border-radius: var(--radius-md);
+    margin-left: 4px;
+}
+
+/* Highlight left edge */
+.message__5126c[class*='mentioned_']::before,
+[class*='replying_']::before,
+[class*='ephemeral_']::before {
+    width: var(--divider-thickness);
+    border-radius: var(--divider-thickness);
+    height: calc(100% - 2 * var(--radius-sm));
+    top: var(--radius-sm);
+    left: calc(var(--radius-sm) / 2);
+}
+
+/* Unread bar */
+[class*='newMessagesBar_'] {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    border-radius: var(--radius-sm);
+    padding: 0 8px;
+}
+
+/* ─── Embeds ─────────────────────────────────────────────────────── */
+[class*='embedFull_'] {
+    border-radius: var(--radius-md);
+    border: 4px solid var(--border);
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+}
+
+.hljs,
+.imageWrapper_af017a,
+.container__9271d {
+    border-radius: var(--radius-md);
+}
+
+.outer_c0bea0,
+.contentWrapper__08434 {
+    border-radius: var(--radius-lg);
+}
+
+.inner_c0bea0 {
+    border-radius: calc(var(--radius-lg) - 4px);
+}
+
+/* ─── Floating Elements (Tooltips, Menus, Popouts) ───────────────── */
+.tooltip_c36707,
+.menu_c1e9c4,
+.contentWrapper__08434,
+.autocomplete__6b0e0,
+.container__55c99,
+[class*='messagesPopoutWrap_'],
+.popout__76f04,
+[class*='popoverReactionHoverBar_'] {
+    background-color: var(--bg-floating) !important;
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    border: var(--border-thickness) solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+/* ─── Profile Popout ─────────────────────────────────────────────── */
+.outer_c0bea0 {
+    border: var(--border-thickness) solid var(--border);
+    background-position: center;
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+}
+
+.root__24502 {
+    background: none !important;
+}
+
+/* ─── Channel List Animations ────────────────────────────────────── */
+.wrapper__2ea32 .link__2ea32,
+.container__91a9d,
+.channel__972a0,
+.side_aa8da2 .item_aa8da2 {
+    transition: margin-left var(--list-item-transition);
+}
+
+.wrapper__2ea32:hover .link__2ea32,
+.side_aa8da2 .item_aa8da2:hover {
+    margin-left: 10px;
+}
+
+.container__91a9d:hover,
+.channel__972a0:hover {
+    margin-left: 18px;
+}
+
+/* Unread dot animation */
+.unread__2ea32 {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    transition: var(--list-item-transition);
+}
+
+.wrapper__2ea32:hover .unread__2ea32 {
+    margin-left: 4px;
+}
+
+[class*='typeThread_'] .unread__2ea32 {
+    margin-left: -8px;
+}
+
+.wrapper__2ea32[class*='typeThread_']:hover .unread__2ea32 {
+    margin-left: 0;
+}
+
+/* ─── DM Button (Home Icon) ──────────────────────────────────────── */
+/* Hide the default Discord home SVG */
+.wrapper__6e9f8[data-list-item-id='guildsnav___home'] > [class*='childWrapper_'] > svg {
+    display: none;
+}
+
+/*
+ * Use background-image instead of mask-image so the SVG renders
+ * with its own native colors (mask forces a flat single color).
+ * The ::before pseudo-element acts as a positioned image container.
+ */
+.wrapper__6e9f8[data-list-item-id='guildsnav___home'] > [class*='childWrapper_']::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: var(--dms-icon-svg-size);
+    height: var(--dms-icon-svg-size);
+    background-image: var(--dms-icon-svg-url);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform var(--dms-icon-svg-transition), opacity 0.15s ease;
+    opacity: 0.75;
+}
+
+/* Brighten + spin on hover/select */
+.wrapper__6e9f8[data-list-item-id='guildsnav___home']:hover > [class*='childWrapper_']::before,
+.wrapper__6e9f8[data-list-item-id='guildsnav___home'].selected__6e9f8 > [class*='childWrapper_']::before {
+    opacity: 1;
+    transform: rotate(-360deg) scale(0.88);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TOP BAR — Full rewrite
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* 1. Hide Discord's default title + help link */
+.title_c38106,
+.trailing_c38106 > a[href='https://support.discord.com'] {
+    display: none !important;
+}
+
+/* ── 2. Shrink the toolbar so search bar doesn't touch the pill ──── */
+/* toolbar__9293f is the top-right flex row: [icons][search bar][trailing] */
+.toolbar__9293f {
+    padding-right: 150px !important;
+}
+[class*='navBarContent_'],
+[class*='headerBarContent_'],
+.headerBar__8a7fc {
+    padding-right: 150px !important;
+}
+
+/* ── 3. Float the trailing pill (inbox + dots) ───────────────────── */
+.trailing_c38106 {
+    position: fixed !important;
+    top: 42px !important;   /* sit just below the native titlebar strip */
+    right: 22px !important;
+    z-index: 99999 !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    height: 28px !important;
+    padding: 0 8px 0 6px !important;
+
+    background: hsla(var(--hue-bg), 55%, 6%, 0.92) !important;
+    border: 1px solid hsla(var(--hue), 100%, 62%, 0.40) !important;
+    border-radius: 999px !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 2px 12px hsla(0, 0%, 0%, 0.4) !important;
+}
+
+/* ── 4. Inbox button ─────────────────────────────────────────────── */
+.trailing_c38106 > .button__85643,
+[class*='recentsIcon_'] .button__85643 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+    background: none !important;
+    border-radius: 50% !important;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.15s ease, background 0.15s ease;
+}
+.trailing_c38106 > .button__85643:hover {
+    background: hsla(var(--hue), 100%, 62%, 0.22) !important;
+    opacity: 1;
+}
+
+/* ── 5. Divider between inbox and dots ───────────────────────────── */
+[class*='winButtons_'] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0 2px 0 6px !important;
+    margin: 0 !important;
+    height: 100% !important;
+    flex-shrink: 0 !important;
+    /* Left border acts as divider */
+    border-left: 1px solid hsla(var(--hue), 100%, 62%, 0.40) !important;
+}
+
+/* ── 6. Hide Discord's SVG icons from each button ────────────────── */
+[class*='winButton_'] > svg,
+[class*='winButton_'] > * {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ── 7. Each button is just a click target ───────────────────────── */
+[class*='winButton_'] {
+    position: relative !important;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+}
+
+/* ── 8. Color each button + hover effects ────────────────────────── */
+/* Base dot state — slightly desaturated at rest, pops on hover */
+[class*='winButton_'] {
+    position: relative !important;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    transition:
+        transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.15s ease,
+        box-shadow 0.15s ease !important;
+    filter: brightness(0.85) saturate(0.8) !important;
+}
+
+/* Hover: pop scale + full color + glow */
+[class*='winButton_']:hover {
+    transform: scale(1.25) !important;
+    filter: brightness(1.1) saturate(1.3) !important;
+}
+
+/* Click: squish */
+[class*='winButton_']:active {
+    transform: scale(0.82) !important;
+    filter: brightness(0.7) !important;
+    transition: transform 0.08s ease !important;
+}
+
+/* ● RED — Close */
+[class*='winButtonClose_'] {
+    background-color: hsl(4, 82%, 57%) !important;
+    box-shadow: 0 0 0 0 hsla(4, 82%, 57%, 0) !important;
+}
+[class*='winButtonClose_']:hover {
+    box-shadow: 0 0 8px 2px hsla(4, 82%, 57%, 0.6) !important;
+}
+
+/* ● YELLOW — Minimize */
+[class*='winButtonMinMax_']:first-of-type {
+    background-color: hsl(42, 92%, 54%) !important;
+    box-shadow: 0 0 0 0 hsla(42, 92%, 54%, 0) !important;
+}
+[class*='winButtonMinMax_']:first-of-type:hover {
+    box-shadow: 0 0 8px 2px hsla(42, 92%, 54%, 0.6) !important;
+}
+
+/* ● GREEN — Maximize (all selectors to guarantee a hit) */
+[class*='winButtonMinMax_']:last-of-type,
+[class*='winButtonMinMax_']:last-child,
+[class*='winButtonMinMax_']:nth-child(3),
+[class*='winButtonMinMax_'] ~ [class*='winButtonMinMax_'] {
+    background-color: hsl(134, 58%, 46%) !important;
+    box-shadow: 0 0 0 0 hsla(134, 58%, 46%, 0) !important;
+}
+[class*='winButtonMinMax_']:last-of-type:hover,
+[class*='winButtonMinMax_']:last-child:hover,
+[class*='winButtonMinMax_']:nth-child(3):hover,
+[class*='winButtonMinMax_'] ~ [class*='winButtonMinMax_']:hover {
+    box-shadow: 0 0 8px 2px hsla(134, 58%, 46%, 0.6) !important;
+}
+
+/* ─── Transparency Tweaks ────────────────────────────────────────── */
+.children__9293f::after {
+    display: none !important;
+}
+
+[class*='chatGradient_'] {
+    display: none !important;
+}
+
+.form_f75fb0 {
+    margin-top: 0;
+}
+
+/* Remove excess backgrounds */
+.wrapper_cdf8a9,
+.wrapper_cdf8a9 > .wrapper_fc8177 {
+    background: none !important;
+}
+
+.page__5e434 > .container__89463,
+.page__5e434 > .chat_f75fb0 {
+    background: none !important;
+}
+
+#vc-spotify-player {
+    background: none !important;
+}
+
+/* ─── Scrollbar Polish ───────────────────────────────────────────── */
+[class*='scroll'] {
+    scrollbar-width: thin;
+    scrollbar-color: hsla(var(--hue), 100%, 62%, 0.35) transparent;
+}
+
+[class*='burstGlow_'] {
+    display: none !important;
+}
+
+/* ─── Small User Panel ───────────────────────────────────────────── */
+/* Positions user panel only over channel list, not full sidebar width */
+[class*='panels_'] {
+    right: 0;
+    left: unset;
+    width: calc(var(--custom-guild-sidebar-width, 312px) - var(--custom-guild-list-width, 72px));
+}
+
+/* ENHANCEMENT 1 — GPU Optimization (removed)
+   Permanent compositor layers on every panel and scroller used more GPU
+   memory than they saved. The browser promotes layers on its own. */
+
+
+/* ENHANCEMENT 2 — Frosted Message Hover
+   Messages blur + slide 2px on hover, lifting off the glass */
+
+.message__5126c {
+    transition:
+        transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background-color 0.15s ease !important;
+}
+
+.message__5126c:hover {
+    transform: translateY(-2px) translateZ(0) !important;
+    background-color: hsla(var(--hue), 100%, 62%, 0.10) !important;
+    z-index: 1;
+    position: relative;
+}
+
+/* ENHANCEMENT 3 — Micro Interactions (Spring Physics)
+   cubic-bezier(0.34, 1.56, 0.64, 1) on server icons, buttons, reactions */
+
+.wrapper__6e9f8 > [class*='childWrapper_'],
+[class*='iconWrapper_'] {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.wrapper__6e9f8:hover > [class*='childWrapper_'],
+.wrapper__6e9f8:hover > [class*='iconWrapper_'] {
+    transform: scale(1.12) translateZ(0) !important;
+}
+
+.wrapper__6e9f8:active > [class*='childWrapper_'],
+.wrapper__6e9f8:active > [class*='iconWrapper_'] {
+    transform: scale(0.9) translateZ(0) !important;
+    transition-duration: 0.1s !important;
+}
+
+[class*='reaction_'],
+[class*='reactionBtn'] {
+    transition:
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background-color 0.15s ease,
+        border-color 0.15s ease !important;
+}
+
+[class*='reaction_']:hover,
+[class*='reactionBtn']:hover {
+    transform: scale(1.18) translateZ(0) !important;
+}
+
+[class*='reaction_']:active,
+[class*='reactionBtn']:active {
+    transform: scale(0.9) translateZ(0) !important;
+}
+
+[class*='emojiButton'],
+[class*='emoji-picker'] button {
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+[class*='emojiButton']:hover,
+[class*='emoji-picker'] button:hover {
+    transform: scale(1.25) translateZ(0) !important;
+}
+
+/* ENHANCEMENT 4 — Accent Gradient Text Selection
+   Text selection highlights in theme blue instead of Discord gray */
+
+::selection {
+    background: hsla(var(--hue), 100%, 62%, 0.40) !important;
+    color: hsl(250, 100%, 98%) !important;
+}
+
+::-moz-selection {
+    background: hsla(var(--hue), 100%, 62%, 0.40) !important;
+    color: hsl(250, 100%, 98%) !important;
+}
+
+[class*='markup_'] ::selection,
+[class*='messageContent'] ::selection,
+[class*='markup'] ::selection {
+    background: hsla(var(--hue), 100%, 62%, 0.45) !important;
+    color: hsl(250, 100%, 98%) !important;
+    text-shadow: 0 0 12px hsla(var(--hue), 100%, 75%, 0.35);
+}
+
+/* ENHANCEMENT 5 — Channel Hover Slide (GPU-smooth)
+   Uses transform: translateX() instead of margin-left */
+
+.wrapper__2ea32 .link__2ea32,
+.container__91a9d,
+.channel__972a0,
+.side_aa8da2 .item_aa8da2 {
+    transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    margin-left: 0 !important;
+}
+
+.wrapper__2ea32:hover .link__2ea32,
+.side_aa8da2 .item_aa8da2:hover {
+    transform: translateX(10px) translateZ(0) !important;
+    margin-left: 0 !important;
+}
+
+.container__91a9d:hover,
+.channel__972a0:hover {
+    transform: translateX(18px) translateZ(0) !important;
+    margin-left: 0 !important;
+}
+
+.unread__2ea32 {
+    transition: transform var(--list-item-transition) !important;
+    margin-left: -4px !important;
+}
+
+.wrapper__2ea32:hover .unread__2ea32 {
+    transform: translateX(8px) translateZ(0) !important;
+    margin-left: -4px !important;
+}
+
+[class*='typeThread_'] .unread__2ea32 {
+    margin-left: -8px !important;
+}
+
+.wrapper__2ea32[class*='typeThread_']:hover .unread__2ea32 {
+    transform: translateX(8px) translateZ(0) !important;
+    margin-left: -8px !important;
+}
+
+/* ENHANCEMENT 6 — Scrollbar Glow Trail
+   3px slim scrollbar with blue accent glow that intensifies on hover */
+
+::-webkit-scrollbar {
+    width: 3px !important;
+    height: 3px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsla(var(--hue), 100%, 62%, 0.35) !important;
+    border-radius: 99px !important;
+    box-shadow:
+        0 0 4px 1px hsla(var(--hue), 100%, 62%, 0.25),
+        0 0 8px 2px hsla(var(--hue), 100%, 62%, 0.10) !important;
+    transition: background 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsla(var(--hue), 100%, 70%, 0.75) !important;
+    box-shadow:
+        0 0 6px 2px hsla(var(--hue), 100%, 70%, 0.55),
+        0 0 14px 4px hsla(var(--hue), 100%, 70%, 0.30),
+        0 0 22px 6px hsla(var(--hue), 100%, 70%, 0.12) !important;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: hsla(var(--hue), 100%, 74%, 0.9) !important;
+    box-shadow:
+        0 0 8px 3px hsla(var(--hue), 100%, 74%, 0.65),
+        0 0 18px 6px hsla(var(--hue), 100%, 74%, 0.35) !important;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent !important;
+}
+
+[class*='scroll'],
+[class*='Scroller'],
+[class*='scroller'] {
+    scrollbar-width: thin !important;
+    scrollbar-color: hsla(var(--hue), 100%, 62%, 0.35) transparent !important;
+}
+
+/* ENHANCEMENT 7 — Accent Reactive UI
+   Selected channel gradient, chatbar focus ring, mention badge pulse */
+
+.wrapper__2ea32[class*='modeSelected_'] .link__2ea32,
+[class*='selected__'][class*='wrapper__'] [class*='link__'],
+.channel__972a0.selected__972a0 {
+    background: linear-gradient(
+        90deg,
+        hsla(var(--hue), 100%, 62%, 0.26) 0%,
+        hsla(var(--hue-hi), 100%, 70%, 0.10) 60%,
+        transparent 100%
+    ) !important;
+    border-left: 2px solid var(--blue-hi) !important;
+    box-shadow: -4px 0 12px -2px var(--glow-hi) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+[class*='channelTextArea_']:focus-within,
+[class*='channelTextArea']:focus-within {
+    border-color: hsla(var(--hue-hi), 100%, 70%, 0.85) !important;
+    box-shadow:
+        0 0 0 2px hsla(var(--hue-hi), 100%, 70%, 0.18),
+        0 0 18px 3px hsla(var(--hue-hi), 100%, 70%, 0.28) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+@keyframes ss-badge-pulse {
+    0%   { box-shadow: 0 0 0 0   hsla(var(--hue), 100%, 62%, 0.7); }
+    50%  { box-shadow: 0 0 0 4px hsla(var(--hue), 100%, 62%, 0.0); }
+    100% { box-shadow: 0 0 0 0   hsla(var(--hue), 100%, 62%, 0.0); }
+}
+
+[class*='numberBadge'],
+[class*='mentionsBadge'] {
+    animation: ss-badge-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) 4 !important;
+    background: linear-gradient(135deg, var(--accent-3) 0%, var(--accent-4) 100%) !important;
+    border: none !important;
+}
+
+/* ENHANCEMENT 8 — Glass Reflection
+   1px shine gradient across top edge of every panel (simulates light on glass) */
+
+[class*='guilds_'],
+[class*='sidebarList_'],
+[class*='chatContent_'],
+.container_c8ffbb,
+.container__9293f,
+[class*='nowPlayingColumn_'],
+.shop__6db1d,
+[class*='searchResultsWrap_'],
+.container_a592e1 {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+[class*='guilds_']::after,
+[class*='sidebarList_']::after,
+[class*='chatContent_']::after,
+.container_c8ffbb::after,
+.container__9293f::after,
+[class*='nowPlayingColumn_']::after,
+.shop__6db1d::after,
+[class*='searchResultsWrap_']::after,
+.container_a592e1::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        hsla(0, 0%, 100%, 0.12) 20%,
+        hsla(0, 0%, 100%, 0.22) 50%,
+        hsla(0, 0%, 100%, 0.12) 80%,
+        transparent 100%
+    ) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+    opacity: var(--shine, 1) !important;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+}
+
+.tooltip_c36707,
+.menu_c1e9c4,
+.contentWrapper__08434,
+.popout__76f04 {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.tooltip_c36707::after,
+.menu_c1e9c4::after,
+.contentWrapper__08434::after,
+.popout__76f04::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        hsla(0, 0%, 100%, 0.18) 30%,
+        hsla(0, 0%, 100%, 0.28) 50%,
+        hsla(0, 0%, 100%, 0.18) 70%,
+        transparent 100%
+    ) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+    opacity: var(--shine, 1) !important;
+    border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+/* ENHANCEMENT 9 — Smooth Theme Lighting
+   Global transition on all color changes — every state dissolves instead of snapping */
+
+*,
+*::before,
+*::after {
+    transition:
+        background-color 0.18s ease,
+        border-color     0.18s ease,
+        color            0.18s ease,
+        opacity          0.18s ease,
+        box-shadow       0.18s ease !important;
+}
+
+/* Exclude things that must not animate */
+img,
+video,
+canvas,
+svg,
+[class*='animated'],
+[class*='animat'] {
+    transition: none !important;
+}
+
+/* Re-enforce spring physics for window buttons (override wildcard above) */
+[class*='winButton_'] {
+    transition:
+        transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease !important;
+}
+
+/* ENHANCEMENT 10 — Animated Mention Pulse
+   Mentions flash blue then fade in + left bar snaps up + badge sonar ripple ring */
+
+@keyframes ss-mention-flash {
+    0%   { background-color: hsla(var(--hue), 100%, 62%, 0.45); }
+    40%  { background-color: hsla(var(--hue), 100%, 62%, 0.22); }
+    100% { background-color: var(--mention); }
+}
+
+.message__5126c[class*='mentioned_'] {
+    animation: ss-mention-flash 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    background-color: var(--mention) !important;
+}
+
+.message__5126c[class*='mentioned_']::before,
+[class*='mentioned']::before {
+    background: linear-gradient(
+        180deg,
+        var(--accent-2) 0%,
+        var(--accent-3) 50%,
+        var(--accent-4) 100%
+    ) !important;
+    transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes ss-sonar-ring {
+    0%   { box-shadow: 0 0 0 0    hsla(var(--hue), 100%, 62%, 0.6); opacity: 1; }
+    100% { box-shadow: 0 0 0 10px hsla(var(--hue), 100%, 62%, 0.0); opacity: 0; }
+}
+
+[class*='numberBadge'],
+[class*='mentionsBadge'] {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+[class*='numberBadge']::after,
+[class*='mentionsBadge']::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 50% !important;
+    animation: ss-sonar-ring 2s cubic-bezier(0.4, 0, 0.6, 1) 3 !important;
+    pointer-events: none !important;
+}
+
+@keyframes ss-unread-flash {
+    0%   { transform: scaleY(0) translateZ(0); opacity: 0; }
+    60%  { transform: scaleY(1.2) translateZ(0); opacity: 1; }
+    100% { transform: scaleY(1) translateZ(0); opacity: 1; }
+}
+
+.unread__2ea32 {
+    animation: ss-unread-flash 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+/* ENHANCEMENT 11 — Smooth Open Animations
+   Popouts, modals, context menus, sidebar, and messages all animate in
+   with spring physics */
+
+@keyframes ss-spring-enter {
+    0%   { opacity: 0; transform: scale(0.88) translateY(6px) translateZ(0); }
+    60%  { opacity: 1; transform: scale(1.02) translateY(-1px) translateZ(0); }
+    100% { opacity: 1; transform: scale(1)    translateY(0)    translateZ(0); }
+}
+
+@keyframes ss-slide-up {
+    0%   { opacity: 0; transform: translateY(12px) translateZ(0); }
+    60%  { opacity: 1; transform: translateY(-2px) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0)    translateZ(0); }
+}
+
+@keyframes ss-slide-down {
+    0%   { opacity: 0; transform: translateY(-8px) scale(0.95) translateZ(0); }
+    60%  { opacity: 1; transform: translateY(2px)  scale(1.01) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0)    scale(1)    translateZ(0); }
+}
+
+@keyframes ss-sidebar-in {
+    0%   { opacity: 0; transform: translateX(-16px) translateZ(0); }
+    70%  { opacity: 1; transform: translateX(2px)   translateZ(0); }
+    100% { opacity: 1; transform: translateX(0)     translateZ(0); }
+}
+
+@keyframes ss-message-in {
+    0%   { opacity: 0; transform: translateY(8px) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0)   translateZ(0); }
+}
+
+/* Context / right-click menus */
+.menu_c1e9c4,
+[class*='contextMenu'],
+[class*='context-menu'] {
+    animation: ss-spring-enter 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+    transform-origin: top left !important;
+}
+
+/* Popouts (user profiles, server info, etc.) */
+.popout__76f04,
+.outer_c0bea0,
+[class*='popout_'],
+[class*='Popout_'] {
+    animation: ss-spring-enter 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+    transform-origin: center top !important;
+}
+
+/* Modals & dialogs */
+[class*='modal_'],
+[class*='Modal_'],
+[class*='layerContainer_'] > [class*='layer_'] {
+    animation: ss-spring-enter 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+    transform-origin: center center !important;
+}
+
+/* Messages */
+.message__5126c {
+    animation: ss-message-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+/* Autocomplete (emoji / slash command / mention) */
+.autocomplete__6b0e0 {
+    animation: ss-slide-up 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+    transform-origin: bottom center !important;
+}
+
+/* Tooltips */
+.tooltip_c36707 {
+    animation: ss-slide-down 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+    transform-origin: top center !important;
+}
+
+/* Sidebar */
+[class*='sidebarList_'] {
+    animation: ss-sidebar-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+[class*='guilds_'] {
+    animation: ss-sidebar-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+/* New messages bar */
+[class*='newMessagesBar_'] {
+    animation: ss-slide-down 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+
+/* ─── GLOW LAYER ─────────────────────────────────────────────────── */
+/* Titles and headers get a soft text glow */
+.title_f75fb0,
+[class*='headerBar'] [class*='title'],
+[class*='name_'][class*='guildName'],
+h1, h2 {
+    text-shadow: 0 0 10px var(--glow-blue);
+}
+
+/* ─── MENTIONS & COUNTERS ────────────────────────────────────────── */
+/* Bot tags (APP) and server tags (PRX, GODA ...) are left as Discord draws
+   them — no extra box. Only inline @mentions get the blue box. */
+.mention {
+    background: linear-gradient(135deg,
+        hsla(var(--hue), 100%, 62%, 0.30),
+        hsla(var(--hue-2), 100%, 52%, 0.20)) !important;
+    border: 1px solid hsla(var(--hue), 100%, 62%, 0.60) !important;
+    border-radius: 6px !important;
+    color: hsl(250, 100%, 98%) !important;
+    box-shadow: 0 0 8px hsla(var(--hue), 100%, 62%, 0.30) !important;
+}
+
+/* Unread / mention counters: blue fill, pill shape */
+[class*='numberBadge'],
+[class*='mentionsBadge'] {
+    background: linear-gradient(135deg, hsl(var(--hue), 100%, 58%), hsl(var(--hue-2), 100%, 50%)) !important;
+    color: hsl(var(--hue-bg), 60%, 6%) !important;
+    box-shadow: 0 0 10px hsla(var(--hue), 100%, 62%, 0.55) !important;
+}
+
+/* Links glow slightly on hover */
+a:hover {
+    text-shadow: 0 0 8px var(--glow-blue);
+}
+
+/* ─── PERFORMANCE ────────────────────────────────────────────────── */
+/* Respect the OS "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* LITE MODE (for weak GPUs): the easy way is --style-preset: solid in :root.
+   The manual way: remove the comment markers around the block
+   below. It turns off all blur and uses the static wallpaper — set
+   --wallpaper to the .jpg line in :root as well.
+
+*, *::before, *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+:root {
+    --bg-1: hsla(var(--hue-bg), 40%, 14%, 0.94);
+    --bg-2: hsla(var(--hue-bg), 45%, 10%, 0.94);
+    --bg-3: hsla(var(--hue-bg), 50%,  7%, 0.92);
+    --bg-4: hsla(var(--hue-bg), 55%,  5%, 0.95);
+}
+*/
+
+/* ─── NO BOX ON SERVER TAGS ──────────────────────────────────────── */
+/* Server tag chips (PRX, GODA, Anii ...) keep their icon and text but lose
+   the box: no fill, border or glow behind them. */
+[class*='chiplet'],
+[class*='Chiplet'],
+[class*='guildTag'],
+[class*='clanTag'] {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   STYLE PRESETS — chosen with --style-preset in :root
+   glass is the default look, so it needs no block of its own.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── SOLID: no wallpaper, no blur, opaque panels ────────────────── */
+@container style(--style-preset: solid) {
+    body {
+        --blur-amount:   0px;
+        --panel-backdrop: none;
+        --shine:          0;
+
+        --bg-1: hsl(var(--hue-bg), 35%, 14%);
+        --bg-2: hsl(var(--hue-bg), 38%, 11%);
+        --bg-3: hsl(var(--hue-bg), 40%,  9%);
+        --bg-4: hsl(var(--hue-bg), 42%,  7%);
+        --bg-floating: hsl(var(--hue-bg), 40%, 9%);
+    }
+
+    /* Plain colour instead of the wallpaper (the image is never loaded) */
+    [class*="bg_"][class*="theme-"],
+    [class^="bg_"] {
+        background-image: none !important;
+        background-color: hsl(var(--hue-bg), 45%, 5%) !important;
+    }
+}
+
+/* ─── MINIMAL: keeps the wallpaper, flat panels, no glow ─────────── */
+@container style(--style-preset: minimal) {
+    body {
+        --panel-backdrop:     none;
+        --panel-shadow:       none;
+        --panel-shadow-hover: none;
+        --shine:              0;
+        --glow-blue:          transparent;
+        --glow-hi:            transparent;
+
+        --radius-lg: 10px;
+        --radius-md: 6px;
+
+        --border:       hsla(var(--hue), 25%, 60%, 0.16);
+        --border-hover: hsla(var(--hue), 40%, 65%, 0.40);
+
+        --bg-1: hsla(var(--hue-bg), 40%, 12%, 0.94);
+        --bg-2: hsla(var(--hue-bg), 42%,  9%, 0.94);
+        --bg-3: hsla(var(--hue-bg), 45%,  8%, 0.94);
+        --bg-4: hsla(var(--hue-bg), 48%,  6%, 0.96);
+        --bg-floating: hsla(var(--hue-bg), 45%, 8%, 0.97);
+    }
+
+    /* Mention boxes, counters and chat bar: no glow */
+    .mention,
+    [class*='numberBadge'],
+    [class*='mentionsBadge'],
+    [class*='channelTextArea_']:focus-within,
+    [class*='channelTextArea']:focus-within {
+        box-shadow: none !important;
+    }
+
+    [class*='numberBadge'],
+    [class*='mentionsBadge'] {
+        animation: none !important;
+    }
+
+    [class*='numberBadge']::after,
+    [class*='mentionsBadge']::after {
+        display: none !important;
+    }
+
+    /* Scrollbar: plain thumb without the glow trail */
+    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb:hover,
+    ::-webkit-scrollbar-thumb:active {
+        box-shadow: none !important;
+    }
+}
+
+/* ─── SOLID + MINIMAL: switch the remaining blur effects off ─────── */
+@container style(--style-preset: solid) or style(--style-preset: minimal) {
+    .trailing_c38106,
+    .tooltip_c36707,
+    .menu_c1e9c4,
+    .contentWrapper__08434,
+    .autocomplete__6b0e0,
+    .container__55c99,
+    [class*='messagesPopoutWrap_'],
+    .popout__76f04,
+    [class*='popoverReactionHoverBar_'],
+    .outer_c0bea0,
+    [class*='standardSidebarView_'] {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   USABILITY OPTIONS
+   Each block only applies while its switch (see :root) is set to  on.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Collapsible member list ─────────────────────────────────────
+   Resting state: avatars only. Hover anywhere on the list to expand it.
+   Note: the chat area resizes when the list expands/collapses. */
+@container style(--collapsible-members: on) {
+    .container_c8ffbb,
+    .content_f75fb0 > [class*='membersWrap_'],
+    [class*='membersWrap_'] {
+        width: var(--member-collapsed-width) !important;
+        min-width: 0 !important;
+        flex: 0 0 auto !important;
+        overflow: hidden !important;
+        transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .container_c8ffbb:hover,
+    .content_f75fb0 > [class*='membersWrap_']:hover,
+    [class*='membersWrap_']:hover {
+        width: var(--member-expanded-width) !important;
+    }
+
+    /* Keep avatars centred while collapsed */
+    .container_c8ffbb:not(:hover) [class*='member_'] [class*='layout_'],
+    [class*='membersWrap_']:not(:hover) [class*='member_'] [class*='layout_'] {
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* Hide names, status text and role headers while collapsed */
+    .container_c8ffbb:not(:hover) [class*='member_'] [class*='content_'],
+    [class*='membersWrap_']:not(:hover) [class*='member_'] [class*='content_'],
+    .container_c8ffbb:not(:hover) [class*='membersGroup_'],
+    [class*='membersWrap_']:not(:hover) [class*='membersGroup_'] {
+        opacity: 0 !important;
+        max-width: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+
+    .container_c8ffbb:not(:hover) [class*='member_'] [class*='avatar_'],
+    [class*='membersWrap_']:not(:hover) [class*='member_'] [class*='avatar_'] {
+        margin-right: 0 !important;
+    }
+}
+
+/* ─── 2. Compact mode ────────────────────────────────────────────────
+   Tighter gaps, smaller corner radii and less space between messages.
+   Variables are overridden on <body>, so every panel picks them up. */
+@container style(--compact-mode: on) {
+    body {
+        --gap:        6px;
+        --radius-lg:  8px;
+        --radius-md:  5px;
+        --radius-sm:  3px;
+        --divider-thickness: 3px;
+    }
+
+    /* Less vertical space between message groups and rows */
+    [class*='groupStart_'] {
+        margin-top: 0.5rem !important;
+    }
+
+    .message__5126c {
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+        margin-left: 2px !important;
+    }
+
+    /* Tighter chat bar and member rows */
+    [class*='channelTextArea_'] {
+        margin-bottom: 6px !important;
+    }
+
+    [class*='member_'] [class*='layout_'] {
+        min-height: 36px !important;
+    }
+}
+
+/* ─── 3. Readability option ──────────────────────────────────────────
+   Brighter text, darker (more opaque) panels, darker wallpaper overlay
+   and a soft shadow behind message text. Use if the wallpaper makes
+   things hard to read. */
+@container style(--readability-mode: on) {
+    body {
+        /* brighter text scale */
+        --text-1: hsl(0,   0%, 100%);
+        --text-2: hsl(245, 60%, 95%);
+        --text-3: hsl(240, 35%, 90%);
+        --text-4: hsl(240, 22%, 78%);
+        --text-5: hsl(240, 15%, 62%);
+
+        /* darker, more opaque panels */
+        --bg-1: hsla(var(--hue-bg), 40%, 8%, 0.94);
+        --bg-2: hsla(var(--hue-bg), 45%, 6%, 0.94);
+        --bg-3: hsla(var(--hue-bg), 50%, 4%, 0.92);
+        --bg-4: hsla(var(--hue-bg), 55%, 3%, 0.95);
+        --bg-floating: hsla(var(--hue-bg), 50%, 4%, 0.96);
+
+        /* darker wallpaper overlay */
+        --dim-top:    0.85;
+        --dim-bottom: 0.75;
+    }
+
+    [class*='markup_'],
+    [class*='messageContent_'],
+    [class*='channelName_'],
+    [class*='username_'] {
+        text-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.65);
+    }
+}
+
+/* Respect "reduce motion" for the member-list slide */
+@media (prefers-reduced-motion: reduce) {
+    .container_c8ffbb,
+    [class*='membersWrap_'] {
+        transition-duration: 0.001ms !important;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   VISUAL POLISH
+   1. Active server ring   2. Speaking glow
+   3. Profile card   4. Rem touches (Caveat, cursor, loading screen)
+
+   Selectors use [class*='name_'] wherever possible so they survive
+   Discord updates. If one stops matching, inspect it with Ctrl+Shift+I.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@property --ring-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+/* ─── 2. Animated ring on the active server icon ─────────────────────
+   A slowly rotating gradient border drawn on ::after (the ::before of the
+   Home button is already used by the Rem icon).
+   The selected server is found three ways, so the ring survives Discord
+   renaming classes: the "selected" class, any ancestor with a "selected"
+   class, or the white pill (40px tall) that Discord shows next to it. */
+[data-list-item-id^='guildsnav___'][class*='selected_'] > [class*='childWrapper_'],
+[class*='wrapper_'][class*='selected_'] > [class*='childWrapper_'],
+[class*='listItem_']:has([class*='selected_']) [class*='childWrapper_'],
+[class*='listItem_']:has([class*='pill_'] [style*='height: 40px']) [class*='childWrapper_'] {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+[data-list-item-id^='guildsnav___'][class*='selected_'] > [class*='childWrapper_']::after,
+[class*='wrapper_'][class*='selected_'] > [class*='childWrapper_']::after,
+[class*='listItem_']:has([class*='selected_']) [class*='childWrapper_']::after,
+[class*='listItem_']:has([class*='pill_'] [style*='height: 40px']) [class*='childWrapper_']::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    inset: -4px !important;
+    padding: 2px !important;
+    box-sizing: border-box !important;
+    border-radius: 18px !important;
+    background: conic-gradient(
+        from var(--ring-angle),
+        hsl(var(--hue), 100%, 62%),
+        hsl(var(--hue-hi), 100%, 78%),
+        hsl(var(--hue-2), 100%, 52%),
+        hsla(var(--hue), 100%, 62%, 0.15),
+        hsl(var(--hue), 100%, 62%)
+    ) !important;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    filter: drop-shadow(0 0 4px var(--glow-blue));
+    pointer-events: none !important;
+    z-index: 5 !important;
+    animation: ss-ring-spin var(--ring-speed) linear infinite !important;
+}
+
+/* The Home button already draws the Rem icon on ::before, so ::after is free */
+
+@keyframes ss-ring-spin {
+    from { --ring-angle: 0deg; }
+    to   { --ring-angle: 360deg; }
+}
+
+/* ─── 3. Speaking glow in voice channels ─────────────────────────────
+   Soft pulsing ring on whoever is talking (sidebar avatars + call tiles).
+   Matches any class containing "speaking" (any capitalisation) on an
+   avatar, tile or wrapper, so small Discord renames do not break it. */
+@keyframes ss-speak-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 2px hsla(var(--hue), 100%, 62%, 0.85),
+                    0 0 8px 2px hsla(var(--hue), 100%, 62%, 0.35);
+    }
+    50% {
+        box-shadow: 0 0 0 3px hsla(var(--hue-hi), 100%, 70%, 1),
+                    0 0 16px 5px hsla(var(--hue-hi), 100%, 70%, 0.55);
+    }
+}
+
+[class*='avatar'][class*='speaking' i]:not([class*='notSpeaking' i]),
+[class*='avatarSpeaking'],
+[class*='tile'][class*='speaking' i]:not([class*='notSpeaking' i]),
+[class*='voiceAvatar'][class*='speaking' i],
+[class*='wrapperSpeaking'],
+[class*='speaking_']:not([class*='notSpeaking' i]):not(:has(*)) {
+    animation: ss-speak-pulse var(--speak-speed) ease-in-out infinite !important;
+    border-color: transparent !important;
+}
+
+/* ─── 4. Profile card ────────────────────────────────────────────────
+   Blue-tinted overlay on the banner, glass body for popout + full profile. */
+[class*='userProfileOuter_'],
+[class*='userProfileModalOuter_'],
+.outer_c0bea0 {
+    border: var(--border-thickness) solid var(--border) !important;
+    box-shadow: var(--panel-shadow-hover) !important;
+}
+
+[class*='userProfileInner_'],
+[class*='userProfileInnerThemed_'],
+[class*='userProfileModalInner_'],
+.inner_c0bea0 {
+    background-color: var(--bg-3) !important;
+    backdrop-filter: var(--panel-backdrop) !important;
+    -webkit-backdrop-filter: var(--panel-backdrop) !important;
+}
+
+[class*='userProfile'] [class*='banner_'],
+[class*='userProfile'] [class*='bannerSVGWrapper_'],
+[class*='profileBanner_'] {
+    position: relative !important;
+}
+
+[class*='userProfile'] [class*='banner_']::after,
+[class*='userProfile'] [class*='bannerSVGWrapper_']::after,
+[class*='profileBanner_']::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+        180deg,
+        hsla(var(--hue), 100%, 60%, 0.30) 0%,
+        hsla(var(--hue-bg), 60%, 8%, 0.60) 100%
+    ) !important;
+    pointer-events: none !important;
+}
+
+/* ─── 5. Rem touches ─────────────────────────────────────────────────
+   a) Caveat on the server name and channel headers */
+[class*='guildName'],
+[class*='headerContent_'] [class*='name_'],
+[class*='sidebarList_'] [class*='headerContent_'] h2,
+.title_f75fb0,
+[class*='headerBar'] [class*='title_'],
+[class*='titleWrapper_'] h1,
+[class*='chat_'] [class*='title_'] h1 {
+    font-family: var(--font-rem) !important;
+    font-weight: 600 !important;
+    font-size: 1.15em;
+    letter-spacing: 0.02em;
+}
+
+/* b) Rem cursor — default arrow + a lighter one over clickable things.
+   Text fields keep their normal I-beam. */
+html,
+body {
+    cursor: var(--cursor-default), auto;
+}
+
+a,
+button,
+[role='button'],
+[role='menuitem'],
+[role='tab'],
+[class*='clickable_'],
+[class*='pointer_'] {
+    cursor: var(--cursor-pointer), pointer !important;
+}
+
+/* c) Themed loading screen (best effort — Discord's loading markup varies;
+   the desktop updater splash window lives outside the page and can't be
+   themed with CSS). */
+@keyframes ss-loader-pulse {
+    0%, 100% { transform: scale(0.94); opacity: 0.75; filter: drop-shadow(0 0 6px var(--glow-blue)); }
+    50%      { transform: scale(1.06); opacity: 1;    filter: drop-shadow(0 0 18px var(--glow-hi)); }
+}
+
+[class*='loadingScreen'],
+[class*='appLoading'],
+[class*='splashContainer'] {
+    background:
+        radial-gradient(ellipse at 50% 40%, hsla(var(--hue), 100%, 40%, 0.28), transparent 60%),
+        hsl(var(--hue-bg), 45%, 5%) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+}
+
+/* Replace Discord's loading video / logo with the Rem icon */
+[class*='loadingScreen'] video,
+[class*='appLoading'] video,
+[class*='splashContainer'] video {
+    display: none !important;
+}
+
+[class*='loadingScreen']::before,
+[class*='appLoading']::before,
+[class*='splashContainer']::before {
+    content: '' !important;
+    width: 96px;
+    height: 96px;
+    background: var(--dms-icon-svg-url) center / contain no-repeat;
+    animation: ss-loader-pulse 2s ease-in-out infinite;
+}
+
+[class*='loadingScreen']::after,
+[class*='appLoading']::after,
+[class*='splashContainer']::after {
+    content: 'Loading…' !important;
+    font-family: var(--font-rem);
+    font-size: 26px;
+    color: var(--text-2);
+    text-shadow: 0 0 10px var(--glow-blue);
+}
+
+/* ─── Presets: no blur on the profile card in solid / minimal ────── */
+@container style(--style-preset: solid) or style(--style-preset: minimal) {
+    [class*='userProfileInner'],
+    [class*='userProfileModalInner_'],
+    .inner_c0bea0 {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
+/* Calm the new motion for "reduce motion" users (static glow stays visible) */
+@media (prefers-reduced-motion: reduce) {
+    [class*='avatar'][class*='speaking' i],
+    [class*='tile'][class*='speaking' i],
+    [class*='avatarSpeaking'] {
+        animation: none !important;
+        box-shadow: 0 0 0 2px hsla(var(--hue), 100%, 62%, 0.85),
+                    0 0 8px 2px hsla(var(--hue), 100%, 62%, 0.35) !important;
+    }
+    [class*='loadingScreen']::before,
+    [class*='appLoading']::before {
+        animation: none !important;
+    }
+}

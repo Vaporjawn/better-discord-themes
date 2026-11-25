@@ -1,0 +1,2252 @@
+/**
+ * @name Lovelace
+ * @author Enju
+ * @version 4.0.0
+ * @description Clear glass Discord theme with heart accents, a collapsible panel and a blue-pink glow.
+ * @source https://github.com/Enjuchan/Lovelace/blob/main/Lovelace.theme.css
+ * @updateUrl https://raw.githubusercontent.com/Enjuchan/Lovelace/main/Lovelace.theme.css
+ * @website https://github.com/Enjuchan/Lovelace
+ * @license MIT
+ */
+
+/* ============================================================================
+   AUFBAU DIESER DATEI
+   ----------------------------------------------------------------------------
+   1. SCHRIFTART        (war: @import BetterFont.css)
+   2. VARIABLEN         alle Stellschrauben an einem Ort
+   3. GRUNDLAGEN        Hintergrund, Discord-Farbschema
+   4. AUSBLENDEN        (war: @import HideTrash.css) + Titelleiste
+   5. PANELS            das Ein-/Ausklapp-Menue unten links
+   6. OBERFLAECHE       Chat, Menues, Tooltips, Einstellungen, Profil, Voice
+   7. HERZFORM          Avatare und Server-Icons
+   8. GLOW              alle Leucht-Effekte gebuendelt
+   9. SPOTIFY           optional, nur mit dem SpotifyControls-Plugin
+  10. NACHRICHTENLISTE  Erwaehnungen, Hover, Einbettungen
+
+   WICHTIG: Kein @layer. Discords eigenes CSS ist ungelayert und wuerde jede
+   gelayerte Regel schlagen - das Theme waere praktisch wirkungslos.
+
+   HASH-KLASSEN: Alles mit Unterstrich+Hash (z.B. container__37e49) wird von
+   Discord generiert und aendert sich bei Client-Updates. Wo per DOM-Messung
+   belegt war, dass ein Namensteil GENAU EINE Klasse trifft, steht deshalb
+   [class*="name_"] - das ueberlebt einen Hash-Wechsel.
+
+   Nicht umgestellt wurden Namen, die mehrdeutig sind. Gemessen am 02.08.2026:
+   wrapper_ trifft 14 verschiedene Klassen, container_ 17, icon_ 6, title_ 6,
+   avatar_ 5, bar_ 3. Ein [class*="wrapper_"] wuerde also 405 Elemente quer
+   durch Discord treffen statt der einen gemeinten Karte.
+
+   PERFORMANCE: Kein A:has(B) [class*=C]. Aendert sich der :has()-Zustand von A,
+   muss der Browser alle C unter A neu pruefen, und bei [class*=] sind das praktisch
+   alle Elemente. Gemessen hat jede solche Regel die Stilberechnung etwa verzehnfacht.
+
+   Das Panel unten links haengt jetzt an [class*="sidebar_"] [class*="panels_"]
+   statt am Hash: sidebar__5e434, panels__5e434 und base__5e434 teilen sich
+   denselben Hash, stammen also aus einem Discord-Modul. Die Verankerung ueber
+   die Sidebar grenzt es zuverlaessig von der Voice-Bedienleiste (panels_c48ade)
+   ab, die denselben Namensteil traegt.
+
+   Die Tooltip-Regeln hingen auf .tooltip__382e7 - diesen Hash gibt es in
+   Discord nicht mehr, die Regeln liefen also bereits ins Leere. Genau dafuer
+   ist die Umstellung da.
+
+   Nicht ueberpruefbar waren Selektoren fuer Anruf-Ansicht, Stream-Panel,
+   angepinnte Nachrichten und Voice-Bedienleiste - die Elemente existieren nur
+   in genau diesen Situationen. Dort steht weiterhin der Hash.
+
+   Wenn nach einem Discord-Update etwas nicht mehr greift, sind fast immer die
+   verbliebenen Hash-Klassen die Ursache.
+   ========================================================================= */
+
+
+/* ============================================================================
+   1. SCHRIFTART
+   ========================================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+:root,
+:root:lang(bg),
+:root:lang(el),
+:root:lang(ru),
+:root:lang(uk) {
+  --font-primary:  "Montserrat", Arial, sans-serif;
+  --font-display:  "Montserrat", Arial, sans-serif;
+  --font-headline: "Montserrat", Arial, sans-serif;
+}
+
+
+/* ============================================================================
+   2. VARIABLEN
+   ========================================================================= */
+:root {
+  /* --- Panels --------------------------------------------------------- */
+  --panel-gap:      16px;
+  /* Kantig, nicht gerundet. Bei dunklem Glas ist die Schnittkante das, was es
+     nach Material aussehen laesst - Rundungen machen daraus Knoepfe.
+
+     Auf 8px oder 10px gesetzt kehrt die weiche Optik zurueck, falls die Kanten
+     irgendwann zu hart wirken. */
+  --panel-radius:   0px;
+  /* Bewusst schwach. Die Flaechen sollen Glas sein, nicht Milchglasplatten -
+     je hoeher der Wert, desto massiver wirken sie und desto weniger kommt vom
+     Hintergrund durch. Die Trennung leisten Unschaerfe und Lichtkanten, nicht
+     die Deckkraft. */
+  --panel-color:    rgba(255, 255, 255, 0.035);
+  --panel-collapsed: 56px;
+  /* Freiraum am unteren Ende von Server-Leiste, Kanalliste und DM-Liste.
+     Ohne ihn laufen sie hinter dem Panel weiter und die untersten Eintraege
+     verschwinden dahinter. Groesser = die Listen enden frueher. */
+  /* Muss mindestens so hoch sein wie das eingeklappte Panel, sonst liegt der
+     Rest der Liste darunter. Stand frueher auf 34px bei 56px Panelhoehe - die
+     fehlenden 22px waren nicht bloss unschoen, die untersten DMs liessen sich
+     gar nicht mehr anklicken.
+
+     Deshalb aus --panel-collapsed abgeleitet statt fest eingetragen: wer die
+     Panelgroesse aendert, muss hier nicht daran denken. Die 8px obendrauf
+     halten den letzten Eintrag von der Kante weg. */
+  --panel-reserve: calc(var(--panel-collapsed) + 8px);
+  /* Laenge des weichen Uebergangs am unteren Listenende. */
+  --panel-fade: 42px;
+  /* Laenge des weichen Uebergangs. Getrennt von --panel-fade, weil dessen Wert
+     beim aufgeklappten Panel auf mehrere hundert Pixel steigt - der Uebergang
+     soll dabei kurz bleiben. */
+  --panel-fade-soft: 42px;
+  --panel-expanded:  300px;
+  --panel-speed:    0.35s;
+
+  /* --- Reihenfolge im Panel-Stapel ------------------------------------ */
+  --order-stream:          2;
+  --order-spotify:         3;
+  --order-voice:           4;
+  --order-profile:         5;
+
+  /* --- Hintergrund -----------------------------------------------------
+     --bg-image ist die einzige Stelle, die man zum Wechseln anfassen muss.
+     --bg-base ist die Farbe, die zu sehen ist, solange das Bild noch laedt
+     oder falls die URL nicht erreichbar ist.                              */
+  /* Standard ist ein gerechneter Verlauf, kein Foto.
+
+     Vorteile gegenueber einer Bilddatei: nichts wird geladen, es gibt keinen
+     toten Link wenn der Hoster verschwindet, und er ist bei jeder Aufloesung
+     gestochen scharf statt hochskaliert.
+
+     Der eigentliche Grund ist aber, dass er aus den Glow-Farben gebaut ist:
+     Wer im Plugin die Farbe wechselt, aendert damit auch den Hintergrund. Bild
+     und Oberflaeche koennen also nicht mehr auseinanderlaufen.
+
+     Ein eigenes Bild setzt man wie bisher:
+         :root { --bg-image: url("https://..."); }                          */
+  /* Feines Rauschen gegen Streifenbildung.
+
+     Ein Verlauf ueber eine bildschirmgrosse Flaeche hat pro Farbstufe hunderte
+     Pixel, und der Sprung zur naechsten wird als Band sichtbar - es sieht aus
+     wie eine Grafik mit zu wenig Farben. Ein aufgelegtes Rauschen bricht diese
+     Kanten auf; bei dieser Deckkraft nimmt man es nicht als Koernung wahr,
+     sondern nur das Fehlen der Streifen.
+
+     Als SVG direkt eingebettet, damit keine Datei geladen werden muss. */
+  --bg-noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
+
+  /* Die Werte sind bewusst SEHR hell angesetzt. Der Hintergrund laeuft durch
+     brightness(--brightness-bg-image), das standardmaessig auf 40% steht - ein
+     bereits dunkler Verlauf kommt dort als Schwarz heraus. Was hier im Code
+     grell wirkt, ist auf dem Bildschirm richtig.
+
+     Die Farbflecken nutzen die vollen Glow-Toene, nicht die weichen: nach der
+     Abdunklung bleibt von den weichen nichts uebrig.
+
+     Mehrere Zwischenstopps im Verlauf, weil weite Spruenge das Banding
+     verstaerken - je kuerzer der Weg zwischen zwei Farben, desto weniger
+     sichtbare Stufen. */
+  --bg-image:
+    radial-gradient(circle at 22% 18%, var(--glow-blue) 0%, transparent 42%),
+    radial-gradient(circle at 82% 80%, var(--glow-pink) 0%, transparent 45%),
+    linear-gradient(148deg,
+      #6f6aa0 0%, #7d6ba8 22%, #8a6fa4 42%,
+      #7a679c 62%, #625a8c 82%, #4e4a76 100%);
+  --bg-base:   #0a0a11;
+  /* 1 = unveraendert, 0.4 = auf 40% abgedunkelt. Dunkler heisst besser
+     lesbarer Text und ruhigere Glaspanels. */
+  --brightness-bg-image: 0.4;
+  /* Weichzeichnung des Hintergrunds. Haelt das Motiv als Stimmung erkennbar,
+     ohne dass es mit dem Text um Aufmerksamkeit kaempft. 0px schaltet ab. */
+  --bg-blur: 14px;
+
+  /* --- Glaseffekt ------------------------------------------------------
+     Zwei Stufen, weil backdrop-filter der teuerste Effekt im Theme ist und
+     die Kosten mit dem Radius steigen:
+
+       --blur-other  fuer Flaechen, die stehen bleiben (Panels, Fenster)
+       --blur-popup  fuer alles, was staendig auf- und zugeht (Menues,
+                     Tooltips, Popouts). Dort faellt ein kleinerer Radius
+                     kaum auf, wird aber bei jedem Oeffnen neu berechnet.
+
+     Wenn das Theme auf schwacher Hardware hakt: beide auf 0px setzen.
+     Das ist die wirksamste einzelne Stellschraube.                       */
+  --blur-other:     10px;
+  --blur-popup:     6px;
+  --border-main:    1px solid rgba(255, 255, 255, 0.1);
+  --border-subtle:  1px solid rgba(255, 255, 255, 0.1);
+
+  /* Weichzeichnung fuer die Befehlsliste ueber dem Eingabefeld.
+
+     Deutlich hoeher als --blur-popup, und das ist der Punkt: Die Liste liegt
+     ueber dem Chat, und was stoert, ist der TEXT darunter. Genau den zeichnet
+     backdrop-filter weg. Eine deckende Flaeche haette ihn nur verdeckt, das
+     sah wie ein Fremdkoerper aus.
+
+     Der hohe Radius ist hier vertretbar, obwohl backdrop-filter der teuerste
+     Effekt im Theme ist: Die Liste ist nur waehrend des Tippens sichtbar, nicht
+     dauerhaft wie die Seitenleisten. Die Kostenwarnung bei --blur-popup gilt
+     fuer Flaechen, die staendig auf- und zugehen. */
+  --blur-autocomplete: 24px;
+  --boxshadow:      inset 0 0 10px rgba(100, 100, 100, 0.1);
+
+  /* ============ SCHALTER ============================================
+     Diese Variablen sind An-/Aus-Schalter fuer einzelne Funktionen.
+     CSS kennt kein "wenn", deshalb der Umweg: die betroffenen Regeln lesen
+     ihren Wert aus einer Variable mit Standard. Bleibt sie ungesetzt, gilt
+     der Standard und die Funktion ist an. Setzt jemand sie auf "revert",
+     faellt Discords eigenes Verhalten zurueck und die Funktion ist aus.
+
+     Gedacht sind sie fuer das Plugin LovelaceSettings, das sie ueber eine
+     Oberflaeche setzt. Von Hand geht es genauso - einfach in der Custom CSS
+     ueberschreiben, z.B.:
+         :root { --lv-hearts: none; --lv-mask: revert; }   (Herzform aus)
+     ================================================================= */
+  --lv-hearts:      var(--heart-clip);   /* Herzform: none = aus          */
+  --lv-mask:        none;                /* dazu: revert = Originalmasken */
+  --lv-icon-glow:   drop-shadow(0 0 4px var(--glow-pink-soft));
+  /* Seit 4.0 ohne Wirkung: Das Theme hat keine Dauer-Animation mehr, die
+     diese Variable steuern koennte. Sie bleibt, weil LovelaceSettings sie
+     noch setzt. */
+  --lv-glow-anim:   none;
+  /* --lv-panel-size bleibt bewusst UNGESETZT - die Regel nutzt den Fallback
+     var(--lv-panel-size, var(--panel-collapsed)). Auf revert gesetzt klappt
+     das Panel nicht mehr ein. */
+  --lv-panel-child: none;                /* revert = Inhalte immer zeigen   */
+  --lv-timestamp:   0;                   /* revert = kurze Zeitstempel      */
+  --lv-timestamp-content: attr(aria-label);
+  --lv-picker:      100%;                /* revert = normale GIF-Auswahl    */
+  --lv-titlebar:    0px;                 /* 32px = Titelleiste wieder da    */
+  --lv-titlebar-pos: fixed;              /* revert = Leiste bleibt oben     */
+
+  /* --- Material: klares Glas ---------------------------------------------
+     Blur mit verstaerkter Saettigung, kaum Toenung, duenne helle Kante.
+     --blur-list und --list-color setzt LovelaceSettings: --blur-list kommt
+     zum Blur der Spalten hinzu, --list-color liegt als Schicht ueber der
+     Toenung der Listen. */
+  --list-color:  rgba(255, 255, 255, 0.04);
+  --blur-list:   0px;
+  --lv-blur:     16px;
+  --lv-saturate: 1.7;
+  --lv-glass:    blur(calc(var(--lv-blur) + var(--blur-list))) saturate(var(--lv-saturate));
+  --lv-tint-list: rgba(10, 10, 16, 0.28);   /* Kanal-, DM- und Mitgliederliste */
+  --lv-tint-rail: rgba(10, 10, 16, 0.38);   /* Serverleiste, eine Stufe dunkler */
+  --lv-tint-chat: rgba(8, 8, 14, 0.50);     /* Chat, ohne Blur                  */
+  --lv-edge:      rgba(255, 255, 255, 0.14);
+  --lv-edge-head: rgba(255, 255, 255, 0.10);
+
+  /* --- Rundungen --------------------------------------------------------- */
+  --lv-radius-l:    16px;
+  --lv-radius-m:    10px;
+  --lv-radius-full: 999px;
+
+  /* --- Akzent: folgt den Glow-Farben von LovelaceSettings; der Rueckfallwert
+     gilt, wenn diese fehlen. */
+  --lv-accent:   var(--glow-blue, rgba(90, 140, 255, 0.9));
+  --lv-accent-2: var(--glow-pink, rgba(255, 90, 190, 0.9));
+
+  /* --- Linien und Rest der alten Staffelung ------------------------------
+     --depth-rail fuellt noch die Liste ueber dem Eingabefeld, --edge-light
+     die Linien im Panel und neben den Rollen, --edge-strong die Linien neben
+     Kategorien, --app-gap den Panelabstand. */
+  --depth-rail:   rgba(0, 0, 0, 0.42);
+  --edge-light:   rgba(255, 255, 255, 0.06);
+  --edge-strong:  rgba(255, 255, 255, 0.22);
+  --app-gap:      0px;
+  --list-border: rgba(255, 255, 255, 0.06);
+
+  /* --- Glow ------------------------------------------------------------
+     *-soft = Grundleuchten, ohne Suffix = kraeftig (Hover / aktiv)      */
+  --glow-blue:      rgba(90, 140, 255, 0.9);
+  --glow-blue-soft: rgba(90, 140, 255, 0.35);
+  --glow-pink:      rgba(255, 90, 190, 0.9);
+  --glow-pink-soft: rgba(255, 90, 190, 0.35);
+
+  /* Fertige Schatten-Rezepte - einmal definiert, ueberall wiederverwendet */
+  /* Nach aussen gerichtet. Ein Zwischenstand hatte ihn nach innen verlegt, weil
+     ein aeusserer Ring an kantigen Flaechen der Kante folgt und dadurch wie
+     eine gezogene Umrandung wirken kann. In der Praxis sah der aeussere
+     Schein besser aus - er hebt die Flaeche vom Hintergrund ab, waehrend der
+     innere sie eher truebte.
+
+     Wichtig ist nur, dass BEIDE Stufen dieselbe Richtung haben. Gemischt
+     springt beim Hovern nicht die Staerke, sondern die Art des Effekts. */
+  --glow-ring:        0 0 8px 1px var(--glow-blue-soft),
+                      0 0 13px 2px var(--glow-pink-soft);
+  /* Etwas zurueckgenommen gegenueber frueher: Beim Hovern wirkte der Schein
+     ueberstrahlt, weil die Flaechen inzwischen duenner sind und weniger Licht
+     schlucken. */
+  --glow-ring-strong: 0 0 6px 1px var(--glow-blue-soft),
+                      0 0 11px 2px var(--glow-pink-soft);
+
+  /* --- Spotify (optional, siehe Abschnitt 9) ---------------------------
+     Wie stark das Cover als Hintergrund zurueckgenommen wird. Beim Hover
+     wird es automatisch schaerfer und heller.                            */
+  --spotify-cover-blur:       9px;
+  --spotify-cover-brightness: 0.5;
+
+  /* --- Nachrichtenliste (Abschnitt 10) ---------------------------------
+     Erwaehnungen, Hover und Einbettungen.
+
+     Die Erwaehnungsfarben werden aus --glow-pink bzw. --glow-blue GEMISCHT
+     statt fest hingeschrieben. Sonst blieben sie stur pink, waehrend das
+     Plugin die Leuchtfarbe umstellt - genau das sah falsch aus.
+     color-mix() rechnet den Alphawert zur Laufzeit aus, die Erwaehnung folgt
+     der eingestellten Farbe also automatisch.                             */
+  --msg-hover:        rgba(255, 255, 255, 0.035);
+  --msg-hover-edge:   var(--glow-pink-soft);
+  --mention-fill:     color-mix(in srgb, var(--glow-pink) 12%, transparent);
+  --mention-bar:      var(--glow-pink);
+  --mention-inline:   color-mix(in srgb, var(--glow-blue) 20%, transparent);
+  --embed-fill:       rgba(255, 255, 255, 0.045);
+  --embed-border:     rgba(255, 255, 255, 0.09);
+
+  /* --- Glow-Stufen (Abschnitt 8) ---------------------------------------
+     Zwei Techniken, weil es zwei Arten von Elementen gibt:
+
+       shape = filter: drop-shadow(). Folgt der Alpha-Maske, also der
+               Herz-Silhouette. Fuer alles Beschnittene.
+       box   = box-shadow. Folgt dem Rechteck. Fuer Kaesten und Knoepfe.
+
+     LEITGEDANKE: Leuchten heisst "hier passiert gerade etwas".
+
+     Im Ruhezustand leuchtet nichts. Frueher lag ein schwacher Schein auf
+     saemtlichen Server-Icons, Knoepfen und Panels gleichzeitig - wenn aber
+     alles glimmt, ist Glimmen der Normalzustand und sagt nichts mehr aus.
+
+     Dafuer duerfen die uebrigen Stufen kraeftiger sein als zuvor: Sie treffen
+     jeweils nur ein einzelnes Element, und weil sie selten sind, faellt jedes
+     davon auf. Weniger Stellen, dafuer deutlich.
+
+       ruhe   = gar nichts
+       hover  = was man gerade anfasst
+       aktiv  = wo man ist, was ungelesen ist, wer spricht           */
+  --lv-glow-shape-hover:  drop-shadow(0 0 6px var(--lv-accent))
+                          drop-shadow(0 0 11px color-mix(in srgb, var(--lv-accent-2) 40%, transparent));
+  --lv-glow-shape-active: drop-shadow(0 0 5px var(--lv-accent))
+                          drop-shadow(0 0 12px color-mix(in srgb, var(--lv-accent-2) 55%, transparent));
+  --lv-glow-box-hover:    0 0 6px 1px var(--lv-accent),
+                          0 0 12px 2px color-mix(in srgb, var(--lv-accent-2) 40%, transparent);
+  --lv-glow-box-active:   0 0 5px 1px var(--lv-accent),
+                          0 0 12px 2px color-mix(in srgb, var(--lv-accent-2) 40%, transparent);
+
+  /* --- Herzform -------------------------------------------------------
+     Prozentwerte, funktioniert dadurch bei jeder Icon-Groesse gleich.
+
+     Die Punkte sind nicht von Hand gesetzt, sondern aus der klassischen
+     Herzkurve gerechnet und gleichmaessig abgetastet:
+         x = 16 sin³t
+         y = 13 cos t - 5 cos 2t - 2 cos 3t - cos 4t
+     danach auf 0-100% normiert und die y-Achse gedreht, weil CSS nach
+     unten zaehlt.
+
+     48 Stuetzpunkte. polygon() verbindet je zwei davon mit einer GERADEN -
+     die Vorgaengerform hatte nur zwoelf, und weil ausgerechnet die beiden
+     oberen Boegen die wenigsten abbekamen, sahen sie kantig aus. Mehr als
+     48 bringt bei den Groessen, in denen Discord Avatare zeigt (32-80px),
+     sichtbar nichts mehr.
+
+     Andere Form gewuenscht? Die Kurve oben umschreiben und neu abtasten,
+     nicht einzelne Punkte hier verschieben - sonst wird es wieder krumm. */
+  --heart-clip: polygon(
+    50% 23.9%, 50.1% 22.7%, 50.9% 19.4%, 52.8% 14.6%, 56.3% 9.2%, 61.3% 4.4%,
+    67.7% 1.1%, 75% 0%, 82.5% 1.5%, 89.4% 5.4%, 95.1% 11.5%, 98.7% 19%,
+    100% 27.4%, 98.7% 36%, 95.1% 44.5%, 89.4% 52.6%, 82.5% 60.2%, 75% 67.5%,
+    67.7% 74.4%, 61.3% 81%, 56.3% 87.1%, 52.8% 92.3%, 50.9% 96.4%, 50.1% 99.1%,
+    50% 100%, 49.9% 99.1%, 49.1% 96.4%, 47.2% 92.3%, 43.7% 87.1%, 38.7% 81%,
+    32.3% 74.4%, 25% 67.5%, 17.5% 60.2%, 10.6% 52.6%, 4.9% 44.5%, 1.3% 36%,
+    0% 27.4%, 1.3% 19%, 4.9% 11.5%, 10.6% 5.4%, 17.5% 1.5%, 25% 0%,
+    32.3% 1.1%, 38.7% 4.4%, 43.7% 9.2%, 47.2% 14.6%, 49.1% 19.4%, 49.9% 22.7%
+  );
+}
+
+/* Wer keine Animationen mag oder mit Motion-Sickness zu tun hat, bekommt
+   das Theme ohne Puls - kostet nichts und ist einfach guter Stil. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ============================================================================
+   3. GRUNDLAGEN
+   ========================================================================= */
+
+/* Der Hintergrund kommt komplett aus dem DynamicBackgrounds-Plugin. Das legt
+   eine eigene Ebene in Discords baseLayer und bringt Transitions, Dimming,
+   Blur und Position mit. Hier steht nur noch die Notfall-Farbe, falls das
+   Plugin aus ist. Im Plugin muss "overwriteCSS" AUS sein. */
+body {
+  background: var(--bg-base);
+}
+
+/* Der Hintergrund.
+
+   WICHTIG - er sitzt auf Discords eigener Hintergrundebene, NICHT auf body.
+   body liegt hinter der gesamten App; sobald irgendeine App-Ebene deckend ist,
+   sieht man davon nichts. Deshalb haengt auch das DynamicBackgrounds-Plugin
+   seine Bildebene genau hier ein.
+
+   Eigenes Bild? Eine Zeile in der Custom CSS genuegt, die Theme-Datei bleibt
+   unangetastet:
+     :root { --bg-image: url("https://..."); }
+   Zu hell oder zu unscharf? --brightness-bg-image und --bg-blur.           */
+[class*="bg_"]::before {
+  content: "";
+  position: fixed;
+  /* Bewusst UEBER den Bildschirmrand hinaus: blur() zieht die Kanten nach
+     innen weich, sodass am Rand sonst ein heller Saum entstuende. Drei mal
+     der Blur-Radius reicht, um ihn ausserhalb des Sichtfelds zu halten. */
+  inset: calc(var(--bg-blur, 0px) * -3);
+  /* Unter die Ebene des DynamicBackgrounds-Plugins (z-index: -1), damit sie
+     sich nicht gegenseitig verdecken. */
+  z-index: -2;
+  pointer-events: none;
+  background-color: var(--bg-base);
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(var(--bg-blur, 0px)) brightness(var(--brightness-bg-image, 1));
+}
+
+/* Das Rauschen liegt auf einer EIGENEN Ebene, nicht in --bg-image.
+
+   Gegen Streifenbildung im Verlauf gedacht: Ein Farbverlauf ueber eine
+   bildschirmgrosse Flaeche springt zwischen den Farbstufen sichtbar, ein
+   feines Rauschen bricht diese Kanten auf.
+
+   Frueher stand es als erste Ebene mit im Hintergrundbild. Das ging schief,
+   sobald jemand ein eigenes Bild eintrug: Die Groessenangaben sind pro Ebene,
+   und eine einzelne Bild-URL erbte die des Rauschens - das Bild wurde dann in
+   160px-Kacheln wiederholt statt formatfuellend gezeigt.
+
+   Getrennt gehalten stoert es nichts, und wer ein Foto einsetzt, bekommt es
+   ebenfalls: Ein wenig Korn schadet auch dort nicht. Wer es nicht will, setzt
+   --bg-noise auf none. */
+[class*="bg_"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: var(--bg-noise);
+  background-size: 160px 160px;
+  background-repeat: repeat;
+  opacity: 0.5;
+}
+
+/* Zeitstempel als Volltext statt Kurzform.
+   Der Trick: font-size:0 blendet den Originaltext aus, ::before holt sich
+   ueber attr(aria-label) die ausgeschriebene Fassung zurueck. */
+[class*="timestampInline_"] {
+  font-size: var(--lv-timestamp) !important;
+}
+
+[class*="timestampInline_"] time::before {
+  content: var(--lv-timestamp-content);
+  font-size: 12px;
+}
+
+/* Discord-Flaechen transparent schalten, damit der Hintergrund durchkommt */
+.visual-refresh .theme-darker,
+.visual-refresh.theme-darker {
+  --background-base-lowest: transparent;
+  --background-base-lower:  transparent;
+  --background-base-low:    transparent;
+  --background-primary:     transparent;
+  --background-secondary:   transparent;
+  --background-tertiary:    transparent;
+  --bg-base-tertiary:       transparent;
+  --custom-channel-members-bg: transparent;
+
+  --bg-brand:                            rgba(255, 255, 255, 0.2);
+  --background-code:                     rgba(255, 255, 255, 0.05);
+  --button-filled-brand-background:       rgba(255, 255, 255, 0.1);
+  --button-filled-brand-background-hover: rgba(255, 255, 255, 0.2);
+  --background-surface-high:             rgba(255, 255, 255, 0.15);
+  --background-secondary-alt:            rgba(255, 255, 255, 0.1);
+  --background-modifier-hover:           rgba(255, 255, 255, 0.15);
+  --background-mod-subtle:               rgba(255, 255, 255, 0.15);
+  --card-primary-bg:                     rgba(255, 255, 255, 0.15);
+  --bg-base-secondary:                   rgba(255, 255, 255, 0.15);
+  --brand-500:                           rgba(91, 103, 234, 0.4);
+  --text-feedback-positive:              rgba(255, 255, 255, 0.65);
+  --green-360:                           rgba(255, 255, 255, 0.65);
+}
+
+[class*="sidebar_"] { overflow: visible !important; }
+[class*="scroller_"][class*="scrollerBase_"] { margin-bottom: 0 !important; }
+[class*="bottom_"] { bottom: 0 !important; }
+/* Die Ebene selbst bleibt transparent - der Hintergrund steckt im ::before
+   darueber, damit sich Helligkeit und Bild getrennt steuern lassen. */
+/* KEIN position: relative hier! Das DynamicBackgrounds-Plugin haengt seinen
+   Container mit position:absolute in diese Ebene. Ist sie positioniert, richtet
+   sich der Container nach IHR statt nach einem hoeheren Vorfahren - hat sie
+   keine eigene Ausdehnung, schrumpft er auf null und die Bilder verschwinden.
+   Der Theme-Hintergrund braucht das ohnehin nicht, sein ::before liegt fix. */
+[class*="bg_"] { background: transparent; }
+
+/* Laeuft das DynamicBackgrounds-Plugin, tritt der Theme-Hintergrund komplett
+   zurueck. Beide haengen ihre Ebene an DASSELBE Element - liegen sie
+   uebereinander, gewinnt eine und die andere ist wirkungslos.
+
+   Konkret hiess das: der Theme-Hintergrund verdeckte die Plugin-Ebene, also
+   waren Uebergaenge und Dauereffekte unsichtbar, und Blur und Abdunklung kamen
+   aus dem Theme statt aus den Plugin-Reglern.
+
+   Mit dieser Regel gehoert die Flaeche dem Plugin, sobald es aktiv ist. Dessen
+   Einstellung "Override theme CSS variable" wird dann NICHT mehr gebraucht -
+   sie sollte ausgeschaltet sein.
+
+   Bis 3.0.2 stand hier zusaetzlich .BackgroundManager-bgContainer, der alte
+   Klassenname vor der Umbenennung in DynamicBackgrounds 3.7.2. Entfernt, weil
+   3.7.2 zu dem Zeitpunkt noch niemand geladen hatte - es gab also keine
+   Installation, die auf die alte Schreibweise angewiesen gewesen waere. */
+[class*="bg_"]:has(.DynamicBackgrounds-bgContainer)::before {
+  display: none;
+}
+
+
+/* ============================================================================
+   4. AUSBLENDEN & TITELLEISTE
+   ========================================================================= */
+
+/* --- Nitro, Shop und Quests in der DM-Liste ----------------------------
+   Der href-Vergleich ist sprachunabhaengig - anders als die aria-label-
+   Selektoren aus dem alten HideTrash, die nur auf Russisch griffen.
+   Sollte Quests bei dir bleiben: Rechtsklick -> Untersuchen und schauen,
+   welches href der Eintrag wirklich hat, dann hier ergaenzen. */
+/* ACHTUNG beim Aendern: [href*="quest"] trifft auch /message-requests -
+   "requests" enthaelt "quest". Deshalb hier exakte Pfade statt Teilstrings,
+   sonst verschwinden die Nachrichtenanfragen gleich mit. */
+[class*="channel_"] [class*="link_"][href="/shop"],
+[class*="channel_"] [class*="link_"][href="/store"],
+[class*="channel_"] [class*="link_"][href="/quests"],
+[class*="privateChannels_"] a[href="/shop"],
+[class*="privateChannels_"] a[href="/store"],
+[class*="privateChannels_"] a[href="/quests"],
+[class*="privateChannels_"] a[href="/quest-home"] {
+  display: none !important;
+}
+
+/* Geschenk-Knopf in der Schreibleiste.
+
+   Hier steht bewusst ein Hash statt eines Attribut-Selektors: "container_"
+   trifft in Discord 17 verschiedene Klassen, ein [class*="container_"] wuerde
+   also halb Discord ausblenden. Der Selektor ist zusaetzlich auf den
+   Chat-Bereich eingegrenzt, damit er nichts ausserhalb erwischt.
+
+   Wenn der Knopf nach einem Discord-Update wieder auftaucht, hat sich der Hash
+   geaendert - dann hier den neuen eintragen. Ein sprachabhaengiges
+   [aria-label="Geschenk senden"] waere die Alternative, wuerde aber nur auf
+   Deutsch greifen. */
+[class*="chat_"] [class*="channelTextArea_"] [class*="buttons_"] > [class*="container_"] {
+  display: none !important;
+}
+
+/* --- Restlicher Ballast ------------------------------------------------ */
+.app-launcher-entrypoint,                       /* App-Launcher im Eingabefeld */
+[class*="channelAppLauncher_"],                 /* Befehle-Button rechts im Chat */
+[class*="listItemWrapper_"]:has([data-list-item-id="guildsnav___guild-discover-button"]), /* "Entdecken" unten links */
+[class*="indicators_"],                         /* "Live"-Marker auf Streams */
+[class*="overlayButtonContainer_"],       /* Stream-Vollbild-Bedienung */
+[class*="gradientBackground-"],                 /* Nitro-Werbung Streamqualitaet */
+[class*="artContainer_"],                       /* Illustration im Stream-Modal */
+.bd-switch-symbol,                              /* BD-Schaltersymbol */
+[class*="slider__3f21e"] > svg,                 /* Slider-Icon */
+[class*="controlButton__1405b"][class*="fauxDisabled__"],
+[class*="listItemWrapper_"]:has([data-list-item-id="guildsnav___create-join-button"]),
+[class*="children__9293f"] > [class*="akaBadge__"],
+[class*="children__9293f"] > [class*="nicknames__"],
+[class*="children__9293f"] > [class*="divider__9293f"] {
+  display: none !important;
+}
+
+/* Deaktivierte Buttons in der Chat-Leiste. Das :not() schuetzt die
+   Action-Buttons im Voice-Panel davor, mit ausgeblendet zu werden. */
+div:not([class*="actionButtons_"]):has(> span[class*="disabledButtonWrapper_"]) {
+  display: none !important;
+}
+
+/* BEWUSST NICHT AUSGEBLENDET: [class*="buttonContainer__1405b"].
+   Das sind die Haupt-Buttons im Voice-Panel (Soundboard, Kamera,
+   Bildschirm teilen). Im alten HideTrash waren die weg. Falls du sie doch
+   nicht brauchst, entferne einfach die Kommentarzeichen: */
+/*
+[class*="buttonContainer__1405b"] { display: none !important; }
+*/
+
+
+/* --- Titelleiste zusammenlegen ------------------------------------------
+   Discord hat oben ZWEI Zeilen: die schmale Fensterleiste (Titel, Posteingang,
+   Fensterknoepfe) und darunter die Kopfzeile mit Suche, Pins und den Knoepfen
+   der Plugins. Die obere Zeile wird hier auf null gefahren, die Fensterknoepfe
+   wandern in die Kopfzeile.
+
+   WICHTIG - die Fensterleiste ist die Flaeche, an der man das Fenster mit der
+   Maus verschiebt. Ohne Ersatz waere Discord nicht mehr bewegbar. Deshalb wird
+   die Kopfzeile per -webkit-app-region: drag zur neuen Ziehflaeche, und alles
+   Bedienbare darin bekommt no-drag zurueck, damit Klicks weiter ankommen.
+
+   ABSCHALTBAR: der gesamte Abschnitt haengt an :not(.lv-classic-titlebar).
+   Setzt das Plugin diese Klasse aufs html-Element, greift keine der Regeln
+   mehr und Discords urspruengliche Titelleiste ist zurueck - samt
+   Fensterknoepfen. Einzelne Werte per Variable zurueckzunehmen reichte nicht,
+   weil die Knopfgroesse an mehreren Regeln gleichzeitig haengt.
+
+   Die Klasse sitzt am html-Element, nicht am body: .visual-refresh liegt
+   ebenfalls dort, und ein body-Praefix koennte Regeln, die darauf aufbauen,
+   prinzipiell nie treffen.                                                 */
+:root {
+  /* Hoehe der Kopfzeile - bestimmt, wie hoch die Fensterknoepfe werden. */
+  --titlebar-height: 40px;
+  /* Platz, den die Fensterknoepfe rechts brauchen. Ueberlappen sie die Pins
+     oder den Plugin-Knopf, diesen Wert erhoehen. */
+  --winbuttons-space: 140px;
+  /* Hoehe EINES BetterDiscord-Hinweisbanners. Der Wert stammt aus
+     BetterDiscords eigenem Stylesheet (.bd-notice { height: 36px }). */
+  --lv-notice-height: 36px;
+}
+
+/* DAS ist die entscheidende Zeile.
+
+   Der App-Rahmen ist ein Grid, dessen erste Zeile "titleBar" ihre Hoehe aus
+   Discords eigener Variable bezieht - standardmaessig 32px. Die Leiste selbst
+   auf height: 0 zu setzen reicht deshalb NICHT: sie schrumpft zwar, das Grid
+   haelt die Zeile aber weiter offen und der Streifen bleibt sichtbar.
+   Erst wenn die Variable auf 0 steht, verschwindet die Zeile wirklich und
+   alles darunter rutscht nach oben. */
+/* Die Variable NUR auf dem App-Grid nullen - dort bestimmt sie die Hoehe der
+   titleBar-Zeile. Sie global zu nullen war ein Fehler: Discord leitet aus
+   derselben Variable auch die BREITE der Fensterknoepfe ab, die dadurch auf
+   0px schrumpften und unsichtbar wurden.
+
+   Innerhalb der Leiste wird sie deshalb wieder auf ihren Normalwert gehoben.
+   CSS-Variablen vererben sich, also gilt drinnen 32px und draussen 0px. */
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] {
+  --custom-app-top-bar-height: 0px;
+}
+
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] {
+  --custom-app-top-bar-height: 32px;
+}
+
+/* Die echte Titelleiste verlaesst das Grid und schwebt oben rechts.
+
+   Sie enthaelt die funktionierenden Fensterknoepfe. Sie im Grid platt zu
+   druecken hat sie unbrauchbar gemacht - stattdessen wird sie per fixed aus
+   dem Layout genommen: die Grid-Zeile bleibt bei 0 (siehe Variable oben), die
+   Leiste selbst behaelt ihre Hoehe und legt sich ueber die Kopfzeile.
+
+   Discord hat noch eine zweite, gleichnamige Leiste (systemBar) direkt an
+   appMount. Die ist hier nur ein 8px breiter Platzhalter ohne Knoepfe und
+   bleibt ausgeblendet. */
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: auto !important;
+  height: var(--titlebar-height) !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  /* Muss ueber der Kopfzeile liegen. Die ist als Fenster-Ziehflaeche markiert,
+     und das Betriebssystem prueft beim Klick, welches Element an dieser Stelle
+     OBEN liegt. Gewinnt die Ziehflaeche, werden die Klicks als "Fenster
+     verschieben" gewertet und die Knoepfe reagieren nicht. */
+  z-index: 100000;
+  pointer-events: auto !important;
+  -webkit-app-region: no-drag !important;
+}
+
+/* BetterDiscord-Hinweisbanner.
+
+   BetterDiscord haengt seine Banner als eigene Grid-Zeile (#bd-notices) ueber
+   die App. Alles darunter rutscht entsprechend nach unten - die Leiste hier
+   aber nicht, die ist fixed und klebt an der Fensteroberkante.
+
+   Damit lag sie unsichtbar UEBER dem Banner. Und weil ihr z-index alles
+   ueberragt, fing sie dessen Klicks ab: der Griff zum Schliessen des Banners
+   landete auf dem Fenster-X darunter. Die Fensterknoepfe selbst waren
+   gleichzeitig nicht mehr zu sehen, weil der Banner sie verdeckte.
+
+   Also muss die Leiste um die Bannerhoehe mitwandern. CSS kann nicht zaehlen,
+   deshalb drei gestaffelte Regeln - mehr als drei Banner gleichzeitig sind
+   nicht zu erwarten, und beim vierten sitzt die Leiste lediglich wieder zu
+   hoch, statt gar nicht zu funktionieren.
+
+   Gleiche Spezifitaet, also gewinnt die zuletzt notierte Regel: bei drei
+   Bannern greifen alle drei, gerechnet wird mit dem dreifachen Wert. */
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > #bd-notices:has(> .bd-notice) ~ [class*="bar_"] {
+  top: var(--lv-notice-height) !important;
+}
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > #bd-notices:has(> .bd-notice + .bd-notice) ~ [class*="bar_"] {
+  top: calc(var(--lv-notice-height) * 2) !important;
+}
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > #bd-notices:has(> .bd-notice + .bd-notice + .bd-notice) ~ [class*="bar_"] {
+  top: calc(var(--lv-notice-height) * 3) !important;
+}
+
+[class*="systemBar_"] { display: none !important; }
+
+/* Jeder einzelne Knopf zusaetzlich ausgestanzt. no-drag vererbt sich nicht
+   zuverlaessig ueber mehrere Ebenen, deshalb hier noch einmal direkt. */
+html:not(.lv-classic-titlebar) [class*="winButtons_"],
+html:not(.lv-classic-titlebar) [class*="winButton_"],
+html:not(.lv-classic-titlebar) [class*="winButton_"] * {
+  pointer-events: auto !important;
+  -webkit-app-region: no-drag !important;
+}
+
+/* Titel, Toolbar und der linke Bereich der alten Leiste fallen weg. */
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] > [class*="title_"],
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] > [class*="toolbar_"],
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] > [class*="leading_"] {
+  display: none !important;
+}
+
+/* Rechts alles ausblenden AUSSER dem, was die Fensterknoepfe enthaelt.
+   :not(:has(...)) ist entscheidend - die Knoepfe koennen eine Ebene tiefer
+   liegen, eine simple Regel "alles ausser winButton" haette ihren
+   Zwischencontainer erwischt und sie mitgenommen. */
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] > [class*="trailing_"] > *:not([class*="winButton"]):not(:has([class*="winButton"])) {
+  display: none !important;
+}
+
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] > [class*="trailing_"],
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] > [class*="bar_"] > [class*="trailing_"] :has([class*="winButton"]),
+.visual-refresh:not(.lv-classic-titlebar) [class*="base_"] [class*="winButtons_"] {
+  display: flex !important;
+  align-items: center;
+  height: 100% !important;
+  width: auto !important;
+  overflow: visible !important;
+  -webkit-app-region: no-drag;
+}
+
+html:not(.lv-classic-titlebar) [class*="winButtonsWithDivider_"]::before,
+[class*="backForwardButtons__"] { display: none !important; }
+
+/* Kopfzeile: Ziehflaeche UND Platz fuer die Fensterknoepfe.
+
+   Der Knackpunkt: -webkit-app-region: no-drag stanzt nur dann zuverlaessig
+   aus, wenn das Element INNERHALB der Ziehflaeche liegt. Die Fensterknoepfe
+   sitzen aber in einer eigenen, darueber schwebenden Leiste - also ausserhalb.
+   Deshalb schluckte die Ziehflaeche ihre Klicks, egal wie hoch ihr z-index war.
+
+   html:not(.lv-classic-titlebar) Statt auszustanzen wird die Kopfzeile deshalb einfach KUERZER: sie endet dort,
+   wo die Knoepfe beginnen. Die Ziehflaeche reicht damit gar nicht erst unter
+   sie. Nebeneffekt: der Platz fuer die Knoepfe ist automatisch frei, ein
+   separater Abstand an der Knopfgruppe eruebrigt sich.
+
+   Gilt fuer beide Ansichten, weil Server und Freundesliste dieselbe
+   Kopfzeilen-Komponente benutzen. */
+html:not(.lv-classic-titlebar) section:has([class*="toolbar_"]) {
+  width: calc(100% - var(--winbuttons-space)) !important;
+  -webkit-app-region: drag;
+}
+
+/* Alles Bedienbare bleibt anklickbar - ohne das waere die halbe Kopfzeile
+   tot, weil eine Ziehflaeche keine Klicks durchlaesst. */
+html:not(.lv-classic-titlebar) section[class*="title_"] :is(button, a, input, textarea, [role="button"], [role="textbox"], [role="tab"], [class*="search"], svg) {
+  -webkit-app-region: no-drag;
+}
+
+
+/* ============================================================================
+   5. PANELS - das Ein-/Ausklapp-Menue unten links
+   ----------------------------------------------------------------------------
+   DOM-Struktur (live verifiziert 28.07.2026):
+     section[class*="sidebar_"] [class*="panels_"]            Groesse + Klapp-Logik
+       div[class*="panel_"]               Stream
+       div.wrapper_e131a9             Voice-Huelle
+         div.container_e131a9         Voice-Inhalt (fehlt ohne aktiven Channel)
+       div.container__37e49           Account
+         div.accountPopoutButtonWrapper__37e49
+           div.wrapper__44b0c.avatar__37e49   Avatar
+         div[class*="nameTag_"]
+         div.buttons__37e49           Mute / Deaf / Einstellungen
+
+   Diese Hash-Klassen brauchen echte Namen (zu generisch fuer [class*=]):
+   panel_, wrapper_, container_ kommen an hunderten Stellen vor.
+   ========================================================================= */
+
+/* Der Container waechst beim Hover wieder mit - aber OHNE transition.
+   Das ist der Kern der Loesung:
+
+   - Er muss wachsen, weil seine Box die Luecken zwischen den Panels abdeckt.
+     Bei fester Groesse (56x56) liegt die Maus in den gaps ueber gar nichts,
+     :hover faellt weg und alles klappt mitten in der Bewegung zusammen.
+   - Er darf nicht animiert werden, weil width/height pro Frame ein Layout der
+     ganzen Sidebar ausloesen - und height:auto laesst sich ohne
+     interpolate-size (Chrome 129+) sowieso nicht interpolieren.
+
+   Also: Groesse schaltet in einem einzigen Schritt um, die sichtbare Bewegung
+   machen ausschliesslich die Kinder per opacity/transform. Das ist auch das
+   Verhalten, das man von guten Flyout-Menues kennt - der Rahmen steht sofort,
+   der Inhalt blendet hinein. */
+[class*="sidebar_"] [class*="panels_"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;        /* Stapel waechst nach OBEN */
+  gap: var(--panel-gap);
+  border: none;
+  /* Der Hintergrund wird in FESTER Groesse gemalt, nicht flaechendeckend.
+
+     Deckt er den ganzen Container, blitzt er beim Einklappen als breiter
+     grauer Kasten auf: der Container steht dann verzoegert noch in voller
+     Breite, waehrend die Glaskarten darueber schon verblasst sind. Auf
+     Avatargroesse begrenzt kann das nicht passieren, und die Flaeche hinter
+     dem eingeklappten Avatar bleibt trotzdem gedeckt.
+
+     Ein background-image laesst sich mit background-size begrenzen,
+     unabhaengig von der Elementgroesse. Der Verlauf aus zwei gleichen Farben
+     ist der uebliche Weg, eine Farbe als Bild zu behandeln -
+     background-color kennt keine Groesse.
+
+     Kein Pseudo-Element, weil das einen positionierten Vorfahren braeuchte
+     und position: relative hier die Verankerung des Panels zerstoert - es
+     rutscht dann aus der unteren Ecke heraus.
+
+     NICHT geloest: Die DM-Liste laeuft weiterhin sichtbar hinter dem Panel
+     durch, anders als Server- und Kanalliste. Ihr Scrollbereich traegt den
+     margin-bottom nachweislich (34px, im DOM geprueft), es liegt also nicht
+     am Selektor in "PLATZ FUER DAS PANEL". Ursache ungeklaert, Auswirkung
+     gering - bewusst offen gelassen. */
+  background:
+    linear-gradient(var(--background-base-lowest), var(--background-base-lowest))
+    no-repeat left bottom / var(--panel-collapsed) var(--panel-collapsed) !important;
+  /* --lv-panel-size: revert schaltet das Einklappen ab, das Panel bleibt
+     dann dauerhaft offen. */
+  width:  var(--lv-panel-size, var(--panel-collapsed)) !important;
+  height: var(--lv-panel-size, var(--panel-collapsed)) !important;
+  overflow: visible !important;
+  /* Das Schrumpfen wird VERZOEGERT, nicht animiert: 0s Dauer nach 0.28s
+     Wartezeit. Die Groesse springt also weiterhin in einem Schritt um - nur
+     eben erst, wenn die Kinder fertig ausgeblendet sind. Ohne das wurden sie
+     mitten in der Bewegung in einen 56x56-Kasten umbrochen, was unten links
+     wie ein Zappeln aussah. */
+  transition: width 0s 0.28s, height 0s 0.28s;
+}
+
+/* Beim Aufklappen sofort, ohne Wartezeit. Der Rahmen muss stehen, bevor sich
+   etwas bewegt - sonst liegt die Maus in den Luecken zwischen den Karten ueber
+   nichts und :hover bricht mitten in der Bewegung ab. */
+[class*="sidebar_"] [class*="panels_"]:hover {
+  width:  var(--panel-expanded) !important;
+  height: auto !important;
+  transition: none;
+}
+
+/* Glaskarten */
+[class*="panel_"],
+:where([class*="panels_"]) > [class*="wrapper_"],
+:where([class*="panels_"]) > [class*="container_"] {
+  position: relative;                       /* Anker fuer den Glow in Abschnitt 8 */
+  background-color: var(--panel-color);
+  border: var(--border-subtle);
+  border-radius: var(--panel-radius);
+  backdrop-filter: blur(var(--blur-other));
+}
+
+/* Reihenfolge */
+[class*="panel_"]     { order: var(--order-stream); }
+:where([class*="panels_"]) > [class*="wrapper_"] { order: var(--order-voice); }
+:where([class*="panels_"]) > [class*="container_"] { order: var(--order-profile); }
+
+/* Stream + Voice: eingeklappt weg, ausgeklappt gleiten sie von unten ein.
+   opacity und transform laufen komplett auf der GPU - kein Layout, kein
+   Neuzeichnen, daher fluessig. allow-discrete blendet display:none mit ein;
+   fehlt die Unterstuetzung, schaltet display hart und der Rest gleitet
+   trotzdem - also kein Totalausfall auf aelteren Builds. */
+/* Ausblenden laeuft rueckwaerts: was zuletzt erschienen ist, geht zuerst.
+   Die Reihenfolge bleibt dadurch in beiden Richtungen nachvollziehbar, statt
+   dass der Stapel beim Schliessen einfach verschwindet.
+
+   Kuerzer als das Aufklappen (0.2s statt 0.3s) - beim Oeffnen will man den
+   Effekt sehen, beim Schliessen will man ihn hinter sich haben. */
+[class*="sidebar_"] [class*="panels_"] > [class*="panel_"],
+[class*="sidebar_"] [class*="panels_"] > [class*="wrapper_"] {
+  display: var(--lv-panel-child);
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+  transition: opacity 0.2s ease, transform 0.2s ease, display 0.2s allow-discrete;
+}
+
+/* Stream sitzt oben und geht als Erstes. */
+[class*="sidebar_"] [class*="panels_"] > [class*="panel_"] {
+  transition-delay: 0s;
+}
+
+[class*="sidebar_"] [class*="panels_"] > [class*="wrapper_"] {
+  transition-delay: 0.05s;
+}
+
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="panel_"],
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="wrapper_"] {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease, display 0.3s allow-discrete;
+}
+
+/* Gestaffelt statt gleichzeitig.
+
+   Alle Karten zusammen loslaufen zu lassen wirkt wie ein Aufblitzen: der
+   Stapel ist da, ohne dass man eine Bewegung wahrnimmt. Mit Versatz zieht er
+   sich sichtbar auf, und weil die Verzoegerung nur die Startzeit verschiebt,
+   kostet sie nichts.
+
+   Von unten nach oben, also in der Reihenfolge, in der sie erscheinen: Account
+   ist der Anker und liegt bei 0, dann Voice, dann Stream. Bei nur einem Panel
+   faellt die Staffelung weg und es bleibt eine ruhige Bewegung - genau darum
+   haengt der Effekt an den Kindern und nicht an einer festen Richtung. */
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="wrapper_"] {
+  transition-delay: 0.09s;
+}
+
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="panel_"] {
+  transition-delay: 0.18s;
+}
+
+@starting-style {
+  [class*="sidebar_"] [class*="panels_"]:hover > [class*="panel_"],
+  [class*="sidebar_"] [class*="panels_"]:hover > [class*="wrapper_"] {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Voice-Huelle ohne aktiven Channel komplett weg */
+[class*="sidebar_"] [class*="panels_"] > [class*="wrapper_"]:not(:has(> [class*="container_"])) {
+  display: none !important;
+}
+
+:where([class*="panels_"]) > [class*="wrapper_"] > [class*="container_"] { min-height: 90px; }
+
+/* --- Account-Panel ----------------------------------------------------- */
+
+/* Das Panel rueckt vom Rand ab, damit es als eigenes Element auf der
+   Grundplatte liegt statt in der Ecke zu kleben. */
+[class*="sidebar_"] [class*="panels_"] {
+  margin: 0 0 var(--app-gap) var(--app-gap) !important;
+}
+
+/* Eingeklappt: nur der Avatar, ohne Karte. Ausgeklappt volle Karte.
+
+   Groesse und Innenabstand schalten weiterhin HART um - beides loest ein
+   Layout aus und ist nicht animierbar, ohne die ganze Sidebar pro Bild neu
+   rechnen zu lassen.
+
+   Flaeche, Rahmen und Weichzeichnung dagegen sind reine Malarbeit und lassen
+   sich ueberblenden. Genau das fehlte: die Karte sprang samt Hintergrund
+   schlagartig ins Bild, waehrend die Panels darueber sauber einglitten. Der
+   Rahmen steht damit weiterhin sofort, aber er blendet auf statt aufzupoppen. */
+[class*="sidebar_"] [class*="panels_"] > [class*="container_"] {
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: var(--panel-collapsed) !important;
+  height: var(--panel-collapsed) !important;
+  min-height: var(--panel-collapsed) !important;
+  padding: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  /* Kein Rahmen, keine Rundung - dieselbe Sprache wie die Spalten daneben.
+
+     Ein Zwischenstand hatte hier eine Karte mit eigenem Rand. Die hob sich ab
+     wie aufgeklebt, weil sonst im Bild nichts umrandet ist: Die Flaechen
+     trennen sich ueber Helligkeit und Lichtkanten, nicht ueber Konturen.
+
+     Nur eine Lichtkante oben, wie an jedem anderen Uebergang auch.
+
+     Die Flaeche ist bewusst duenner als die Liste darueber: Das Panel liegt
+     vorn und soll durchlaessig wirken, nicht wie ein massiver Sockel. */
+  background-color: rgba(0, 0, 0, 0.14) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: inset 0 1px 0 0 var(--edge-light) !important;
+  backdrop-filter: blur(var(--blur-other)) !important;
+  z-index: 10 !important;
+  /* Dieselbe Wartezeit wie der aeussere Container. Ohne sie sprang die Karte
+     sofort auf Avatargroesse zurueck, waehrend die Panels darueber noch
+     ausblendeten - sie schnappte sichtbar nach links, und Name und Knoepfe
+     wurden dabei in einen 56px-Kasten gequetscht.
+
+     Die Layout-Werte springen weiterhin in einem Schritt (0s Dauer), nur eben
+     spaeter. Flaeche und Rahmen verblassen davor, damit die Karte leer und
+     unsichtbar ist, wenn sie zusammenfaellt. */
+  transition:
+    width 0s 0.28s, height 0s 0.28s, min-height 0s 0.28s,
+    padding 0s 0.28s, gap 0s 0.28s, justify-content 0s 0.28s,
+    background-color 0.2s ease 0.08s, border-color 0.2s ease 0.08s !important;
+}
+
+/* Ausgeklappt: volle Karte. Der Uebergang liegt auch hier nur im
+   Hover-Zustand - beim Einklappen soll die Flaeche sofort weg sein, sonst
+   bleibt ein Rahmen um den Avatar stehen, waehrend der schon geschrumpft
+   ist. */
+/* Breite und Hoehe als KONKRETE Werte, nicht auto.
+
+   Zwischen auto und 56px gibt es keinen Zwischenwert - der Browser verwirft
+   eine solche Transition samt Verzoegerung und springt sofort. Genau deshalb
+   schnappte die Karte beim Einklappen nach links, obwohl die Wartezeit
+   eingetragen war. Mit zwei Laengenangaben greift sie.
+
+   --panel-expanded ist die Breite des aeusseren Containers; box-sizing steht
+   auf border-box, das Innenabstand ist also enthalten. */
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="container_"] {
+  width: var(--panel-expanded) !important;
+  height: var(--panel-collapsed) !important;
+  padding: 8px !important;
+  gap: 8px !important;
+  justify-content: flex-start !important;
+  /* Aufgeklappt etwas heller als eingeklappt, aber weiterhin ohne Rahmen -
+     der Unterschied entsteht ueber die Flaeche, nicht ueber eine Kontur. */
+  background-color: var(--panel-color) !important;
+  border: none !important;
+  backdrop-filter: blur(var(--blur-other)) !important;
+  /* Beim Aufklappen ohne Wartezeit - die Groesse steht sofort, nur die Flaeche
+     blendet auf. */
+  transition: background-color 0.26s ease !important;
+}
+
+/* Avatar bleibt in beiden Zustaenden gleich gross und wird NICHT ueber margin
+   ausgerichtet.
+
+   Frueher wechselte er zwischen margin: 0 und margin: 0 auto. Beim Einklappen
+   zentrierte er sich dadurch sofort in der noch breiten Karte und sprang
+   sichtbar nach rechts, bevor sie zusammenfiel - und weil auto kein
+   interpolierbarer Wert ist, laesst sich dieser Sprung auch nicht verzoegern.
+
+   Die Ausrichtung macht jetzt allein das justify-content der Karte, das
+   ohnehin schon wartet. Eine Methode statt zweier konkurrierender. */
+[class*="sidebar_"] [class*="panels_"] > [class*="container_"] :where([class*="accountPopoutButtonWrapper_"]) > [class*="avatar_"] {
+  transform: scale(1.3) !important;
+  transform-origin: center !important;
+  overflow: visible !important;
+  /* In BEIDEN Zustaenden dasselbe margin. Vorher wechselte es zwischen 0 und
+     0 auto, und weil auto kein interpolierbarer Wert ist, laesst sich dieser
+     Wechsel nicht verzoegern - der Avatar zentrierte sich beim Einklappen
+     sofort in der noch breiten Karte und sprang sichtbar nach rechts.
+
+     Bleibt es konstant, gibt es nichts zu springen. Zentriert wird damit
+     innerhalb der Huelle, in der der Avatar sitzt; die Karte richtet die
+     Huelle aus. */
+  margin: 0 auto !important;
+  flex: none !important;
+}
+
+/* Name + Buttons nur im ausgeklappten Zustand.
+
+   display allein wuerde sie schlagartig hinstellen. Mit allow-discrete laesst
+   sich der Wechsel mit opacity und transform ueberblenden - dasselbe Muster
+   wie bei Stream und Voice weiter oben.
+
+   Sie kommen NACH der Karte, mit leichtem Versatz zueinander: erst steht die
+   Flaeche, dann fuellt sie sich. Umgekehrt wirkt es, als haetten die Elemente
+   auf den Rahmen gewartet. */
+/* Sichtbarkeit und Platzbedarf sind hier BEWUSST entkoppelt.
+
+   Der Avatar traegt margin: 0 auto, und ein auto-margin im Flex-Layout
+   schluckt freien Platz. Solange Name und Knoepfe daneben stehen, gibt es
+   keinen - der Avatar bleibt links. Sobald sie auf display: none gehen, wird
+   Platz frei und er zentriert sich schlagartig.
+
+   Genau dazwischen klaffte eine Luecke: Sie verschwanden nach rund 0.25s, die
+   Karte schrumpfte erst bei 0.28s. In diesen Millisekunden stand der Avatar
+   allein in einer noch breiten Karte und sprang sichtbar nach rechts.
+
+   Deshalb blendet opacity frueh aus, waehrend display erst zum Schrumpfen
+   wechselt: unsichtbar, aber weiterhin Platz belegend. Der Avatar bekommt so
+   nie einen Moment, in dem er zentrieren koennte. */
+[class*="sidebar_"] [class*="panels_"] > [class*="container_"] [class*="nameTag_"],
+[class*="sidebar_"] [class*="panels_"] > [class*="container_"] [class*="buttons_"] {
+  display: none !important;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease,
+              display 0s allow-discrete !important;
+  /* Kein Umbruch. Im Moment des Zusammenfallens ist der Name noch im Layout -
+     genau das verhindert den Avatarsprung -, und bei 56px Breite brach sein
+     Text um und wurde dadurch fuer ein Bild sichtbar hoeher. */
+  white-space: nowrap !important;
+}
+
+/* Reihenfolge: opacity, transform, display. Die Knoepfe kamen zuletzt und
+   gehen zuerst; display wartet in beiden Faellen auf das Schrumpfen. */
+[class*="sidebar_"] [class*="panels_"] > [class*="container_"] [class*="buttons_"] {
+  transition-delay: 0s, 0s, 0.28s !important;
+}
+
+[class*="sidebar_"] [class*="panels_"] > [class*="container_"] [class*="nameTag_"] {
+  transition-delay: 0.05s, 0.05s, 0.28s !important;
+}
+
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="container_"] [class*="nameTag_"] {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;          /* laesst lange Namen kuerzen statt umbrechen */
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.26s ease, transform 0.26s ease,
+              display 0.26s allow-discrete !important;
+  transition-delay: 0.12s;
+}
+
+[class*="sidebar_"] [class*="panels_"]:hover > [class*="container_"] [class*="buttons_"] {
+  display: flex !important;
+  margin-left: auto !important;     /* Mute/Deaf/Settings rechts anschlagen */
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.26s ease, transform 0.26s ease,
+              display 0.26s allow-discrete !important;
+  transition-delay: 0.2s;
+}
+
+/* Ohne diesen Block starten sie beim ersten Aufklappen bereits sichtbar:
+   ein Element, das gerade erst dargestellt wird, hat keinen Vorzustand, von
+   dem aus ueberblendet werden koennte. */
+@starting-style {
+  [class*="sidebar_"] [class*="panels_"]:hover > [class*="container_"] [class*="nameTag_"],
+  [class*="sidebar_"] [class*="panels_"]:hover > [class*="container_"] [class*="buttons_"] {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+
+/* ============================================================================
+   6. OBERFLAECHE
+   ========================================================================= */
+
+/* --- Chat und Anrufe --------------------------------------------------- */
+.visual-refresh .root_bfe55a { background: transparent; }
+
+[class*="callContainer_"] {
+  margin: 10px;
+  border: var(--border-main);
+  border-radius: var(--panel-radius);
+  background: transparent;
+  /* inset = leichter Innenschein, danach der Aussen-Glow */
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05),
+              0 0 8px 0 var(--glow-blue-soft);
+}
+
+/* Im Vollbild-Anruf faellt die Rahmung weg */
+[class*="callContainer_"]:has([class*="actionRow_"]) {
+  margin: unset;
+  border: unset;
+  border-radius: unset;
+  box-shadow: unset;
+}
+
+[class*="gradientContainer_"] {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+[class*="chat_"]:has([class*="actionRow_"]) { border: unset !important; }
+[class*="chat_"]:has([class*="actionRow_"]) form { margin: unset !important; }
+
+/* Der Schein liegt auf dem Fokus, nicht im Ruhezustand - siehe Abschnitt 8.
+   Vorher leuchtete die Leiste dauerhaft, obwohl es dort nichts zu melden gab;
+   sie war damit die auffaelligste Stelle des Fensters, ohne Anlass. */
+[class*="channelBottomBarArea_"] {
+  border-radius: var(--panel-radius);
+  position: relative;
+  transition: box-shadow 0.25s ease;
+}
+
+/* Der Blur liegt auf ::before statt auf der Leiste selbst - dieselbe Loesung
+   wie bei den Menues weiter unten, hier aber aus einem anderen Grund.
+
+   Ein Element mit backdrop-filter wird zur Bezugsebene fuer alles, was darin
+   liegt. Der Chat dahinter gehoert dann nicht mehr zu dem, was ein Kindelement
+   weichzeichnen kann. Genau das ist der Befehlsliste passiert: Ihr
+   backdrop-filter lief, hatte aber nichts mehr zu tun, und sie stand mit ihrer
+   Fuellung praktisch nackt ueber dem Chat.
+
+   Auf dem Pseudoelement wirkt die Weichzeichnung unveraendert, ohne die
+   Kindelemente einzuschliessen - ::before hat selbst keine. */
+[class*="channelBottomBarArea_"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  backdrop-filter: blur(var(--blur-other));
+}
+
+html:not(.lv-no-glow) [class*="channelBottomBarArea_"]:focus-within {
+  box-shadow: var(--lv-glow-box-hover);
+}
+
+[class*="channelTextArea_"] { background: transparent !important; }
+
+[class*="scrollableContainer_"] {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: var(--border-main);
+  box-shadow: var(--boxshadow);
+}
+
+[class*="minimum_"] { background: transparent !important; }
+
+/* --- Menues und Tooltips ----------------------------------------------- */
+[class*="menu_"] {
+  background: rgba(0, 0, 0, 0.158);
+  border: var(--border-main);
+  box-shadow: var(--glow-ring);
+}
+
+/* Blur liegt auf ::before statt direkt auf dem Menue - sonst wuerde der
+   Blur auch den Menueinhalt selbst erwischen. */
+[class*="menu_"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 8px;
+  backdrop-filter: blur(var(--blur-popup));
+}
+
+#image-context[class*="menu_"] { backdrop-filter: blur(var(--blur-popup)); }
+
+/* --- Befehls-, Emoji- und Erwaehnungsliste ueber dem Eingabefeld --------
+
+   Der Selektor trifft nur den aeusseren Kasten. autocompleteInner__,
+   autocompleteRow__ und autocompleteAttached__ enthalten die Zeichenfolge
+   "autocomplete__" nicht, bleiben also unangetastet - ihre Hintergruende sind
+   transparent und sollen es bleiben, sonst waeren Hover und Auswahl weg.
+
+   Die Fuellung ist --depth-rail, dieselbe wie bei der Serverleiste. Damit
+   spricht die Liste die Sprache des Themes, statt als deckende Platte
+   herauszufallen. Vorher stand hier --background-surface-high, also ein
+   WEISSER Schleier von 15 Prozent ganz ohne Weichzeichnung - ueber einem
+   hellen Hintergrundbild war der Text praktisch weg. */
+.autocomplete_rg6La1 {
+  background: var(--depth-rail);
+  border: var(--border-main);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(var(--blur-autocomplete));
+}
+
+[class*="tooltip_"] {
+  background: rgba(0, 0, 0, 0.15) !important;
+  backdrop-filter: blur(var(--blur-popup));
+  box-shadow: var(--glow-ring);
+}
+
+[class*="tooltipPrimary_"] [class*="tooltipPointer_"] { display: none; }
+
+[class*="reactionTooltip_"] {
+  background: transparent !important;
+  backdrop-filter: blur(var(--blur-popup));
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.visual-refresh .wrapper_f7ecac {
+  background: transparent;
+  backdrop-filter: blur(var(--blur-other));
+  border: var(--border-main);
+}
+
+/* --- Einstellungsfenster -----------------------------------------------
+   Die transparenten --background-* Variablen aus Abschnitt 3 wuerden dieses
+   Vollbild-Modal ohne jeden Hintergrund lassen. Deshalb hier eigene Flaeche. */
+[class*="modalContentInner_"] > [class*="container_"]:has(> aside[class*="sidebar_"]) {
+  background: rgba(20, 20, 20, 0.55) !important;
+  backdrop-filter: blur(var(--blur-other));
+  border-radius: var(--panel-radius);
+  box-shadow: 0 0 10px 0 var(--glow-blue-soft), 0 0 16px 1px var(--glow-pink-soft);
+}
+
+aside[class*="sidebar_"] {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-right: var(--border-main);
+}
+
+[class*="contentHeader_"],
+[class*="contentBody_"] { background: transparent !important; }
+
+/* --- Profile ------------------------------------------------------------ */
+[class*="header_"] > [class*="banner_"] { background: rgba(255, 255, 255, 0.05) !important; }
+
+.root_ZhNJfE {
+  background: transparent !important;
+  backdrop-filter: blur(var(--blur-other));
+}
+
+[class*="outer_"][class*="user-profile-"] { background: rgba(255, 255, 255, 0.05) !important; }
+
+[class*="outer_"][class*="user-profile-"] > [class*="inner_"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(var(--blur-other));
+}
+
+.outer_ZhNJfE { background: transparent; }
+
+:where(.overlay_P1YEjQ) {
+  background: rgba(145, 145, 145, 0.1);
+  border: var(--border-main) !important;
+}
+
+[class*="accountPopout_"] > [class*="outer_"] { border: var(--border-main); }
+
+/* --- Voice-Bedienleiste -------------------------------------------------- */
+.visual-refresh .panels_c48ade {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: var(--border-main) !important;
+  box-shadow: var(--boxshadow);
+}
+
+[class*="buttonSection_"] {
+  border: none;
+  backdrop-filter: blur(var(--blur-other));
+  background: radial-gradient(90.42% 100% at 50% 100%, rgba(19, 18, 18, 0.5) 60%, transparent 100%),
+              linear-gradient(270deg, rgba(40, 39, 43, 0.5) 0, rgba(29, 29, 32, 0.5) 100%) !important;
+}
+
+[class*="disconnect_"] {
+  border: none;
+  background: radial-gradient(90.42% 100% at 50% 100%, rgba(19, 18, 18, 0.5) 60%, transparent 100%),
+              linear-gradient(270deg, rgba(122, 71, 90, 0.5) 0, rgba(122, 71, 86, 0.5) 100%) !important;
+}
+
+/* --- Fortschrittsbalken (Gold) ------------------------------------------ */
+[class*="barFill_"] {
+  border: none;
+  background-color: transparent !important;
+  background-image:
+    radial-gradient(ellipse farthest-corner at right bottom, #fedb37 0%, #FDB931 8%, #9f7928 30%, #8a6e2f 40%, transparent 80%),
+    radial-gradient(ellipse farthest-corner at left top,     #ffffff 0%, #ffffac 8%, #d1b464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+/* --- Angepinnte Nachrichten --------------------------------------------- */
+.visual-refresh [class*="messagesPopoutWrap_"],
+.visual-refresh [class*="messageGroupWrapper_"] {
+  background: rgba(120, 120, 120, 0.1);
+  backdrop-filter: blur(var(--blur-popup));
+}
+
+.visual-refresh .file__0ccae { background: rgba(0, 0, 0, 0.3); }
+
+.visual-refresh [class*="messagesPopoutWrap_"] [class*="actionButtons_"] > [class*="buttonContainer_"]:first-child {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+.visual-refresh [class*="messagesPopoutWrap_"] > [class*="header_"] {
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: var(--border-main) !important;
+}
+
+/* --- GIF-Auswahl --------------------------------------------------------- */
+[class*="layerContainer_"] [class*="positionLayer_"] { height: var(--lv-picker) !important; }
+
+[class*="layerContainer_"] [class*="positionLayer_"] [class*="drawerSizingWrapper_"] {
+  top: 3.5em !important;
+  height: calc(100% - 9em);
+}
+
+/* --- Kleinkram ----------------------------------------------------------- */
+[class*="hoverButtonGroup_"] {
+  background: rgba(255, 255, 255, 0.1);
+  border: var(--border-main) !important;
+  backdrop-filter: blur(var(--blur-popup));
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.root__KoJTP {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(var(--blur-popup));
+}
+
+.footer__KoJTP { background: transparent; }
+
+:where(.visual-refresh) [class*="checkbox_"][class*="checked_"] {
+  border: none;
+  background: radial-gradient(90.42% 100% at 50% 100%, rgba(226, 135, 135, 0.5) 60%, transparent 100%),
+              linear-gradient(270deg, rgba(31, 17, 119, 0.5) 0, rgba(130, 110, 238, 0.5) 100%) !important;
+}
+
+.container__87bf1.checked__87bf1 { background-color: rgba(255, 255, 255, 0.24) !important; }
+
+[class*="artContainer_"] { display: none !important; }
+
+.border_a55fdc,
+.modalFooter_a55fdc {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(var(--blur-popup));
+}
+
+.visual-refresh .container_XFjmsP {
+  background: radial-gradient(90.42% 100% at 50% 100%, rgba(0, 0, 0, 0) 60%, transparent 100%),
+              linear-gradient(270deg, rgba(27, 27, 29, 0.5) 0, rgba(35, 35, 39, 0.5) 100%);
+}
+
+
+/* ============================================================================
+   7. HERZFORM
+   ----------------------------------------------------------------------------
+   Herzen gibt es nur noch an zwei Stellen: dem eigenen Avatar im Panel unten
+   links und dem Symbol des gerade geoeffneten Servers. Alles andere zeigt
+   Discords eigene Form samt Masken (Statuspunkt, Ungelesen-Aussparung).
+
+   Discord formt Avatare und Server-Symbole ueber eine SVG-Maske auf einem
+   <foreignObject mask="...">. Ein Herz-clip-path allein reicht nicht, die
+   Maske schneidet weiter mit; sie wird deshalb nur an diesen zwei Stellen
+   abgeschaltet. Das geht ueber Selektoren und nicht ueber eine Variable: die
+   Maske kommt aus einem Attribut, und "revert" wuerde sie auf "keine Maske"
+   zuruecksetzen. html.lv-no-hearts laesst die Regeln gar nicht erst greifen.
+
+   clip-path beschneidet auch die Klickflaeche, die Ecken des Herzens
+   reagieren nicht auf Klicks.
+   ========================================================================= */
+
+/* --- Eigener Avatar im Panel ------------------------------------------- */
+html:not(.lv-no-hearts) [class*="panels_"] foreignObject[mask] {
+  mask: none !important;
+  -webkit-mask: none !important;
+}
+
+/* Nur das Bild: Layout-Container mit "avatar_" im Namen sind groesser als der
+   Avatar, dort sitzt der Statuspunkt ausserhalb. border-radius muss weg, sonst
+   schneidet der Kreis Spitze und Boegen des Herzens ab. */
+html:not(.lv-no-hearts) [class*="panels_"] img[class*="avatar_"] {
+  clip-path: var(--heart-clip) !important;
+  border-radius: 0 !important;
+}
+
+/* --- Geoeffneter Server ------------------------------------------------
+   data-list-item-id und aria-selected gehoeren zur Funktion und ueberleben
+   Hash-Wechsel. Die Klasse selected_ taugt nicht: Discord setzt sie auch auf
+   das Symbol unter der Maus, das Herz wuerde dem Hover folgen. Die
+   Startseite (___home) ist kein Server und bleibt aussen vor. Hat der Server
+   Zaehler-Aussparungen, sitzt die Maske auf einem aeusseren foreignObject,
+   deshalb :has() ueber alle Vorfahren statt nur den Elternteil. Danach folgt
+   kein Compound mit [class*=]. */
+html:not(.lv-no-hearts)
+[data-list-id="guildsnav"] foreignObject[mask]:has([data-list-item-id^="guildsnav___"][aria-selected="true"]:not([data-list-item-id$="___home"])) {
+  mask: none !important;
+  -webkit-mask: none !important;
+}
+
+/* Der Wrapper zeigt die Form und schneidet zugleich das Bild ab, das ohne die
+   Original-Maske ueber die Box hinausragen wuerde. */
+html:not(.lv-no-hearts)
+[data-list-id="guildsnav"] [data-list-item-id^="guildsnav___"][aria-selected="true"]:not([data-list-item-id$="___home"]) {
+  clip-path: var(--heart-clip) !important;
+  border-radius: 0 !important;
+}
+
+
+/* ============================================================================
+   8. GLOW
+   ----------------------------------------------------------------------------
+   Glow ist ein Signal in der Akzentfarbe (--lv-accent, zweiter Ton
+   --lv-accent-2): Hover, geoeffneter Server, ungelesen und Erwaehnung,
+   Sprechen, Fokus der Schreibleiste. Im Ruhezustand leuchtet nichts, nur der
+   eigene Avatar traegt als Ankerpunkt einen ruhigen Schein. Es gibt keine
+   Dauerbewegung: Zustaende sind statisch, Hover blendet kurz ueber.
+
+   Die Formen der Scheine stehen als Variablen in :root (--lv-glow-shape-*,
+   --lv-glow-box-*). Abschalten ueber html.lv-no-glow.
+
+   Server-Symbole bekommen drop-shadow auf dem Container, nicht auf dem Bild:
+   box-shadow folgt der Box, und clip-path wird erst nach dem Filter
+   angewendet und wuerde einen Schatten auf dem Bild selbst wegschneiden.
+   ========================================================================= */
+
+/* --- Server-Symbole ----------------------------------------------------- */
+html:not(.lv-no-glow) [data-list-id="guildsnav"] [class*="blobContainer_"] {
+  transition: filter 0.2s ease;
+}
+
+html:not(.lv-no-glow) [data-list-id="guildsnav"] [class*="blobContainer_"]:hover {
+  filter: var(--lv-glow-shape-hover);
+}
+
+html:not(.lv-no-glow)
+[data-list-id="guildsnav"] [class*="blobContainer_"]:has([data-list-item-id^="guildsnav___"][aria-selected="true"]:not([data-list-item-id$="___home"])) {
+  filter: var(--lv-glow-shape-active);
+}
+
+/* --- Eigener Avatar unten links -----------------------------------------
+   Der Schein wird selbst gemalt statt per drop-shadow abgeleitet: eine
+   Flaeche in Herzform, weichgezeichnet, hinter dem Avatar. Ein drop-shadow
+   scheitert hier auf jeder Ebene (Rechteck ueber dem foreignObject, vom
+   clip-path weggeschnitten direkt am Bild). Der Weichzeichner ist fest, die
+   Staerke aendert sich nur ueber opacity, das kostet nichts. */
+html:not(.lv-no-glow) [class*="panels_"] :where([class*="accountPopoutButtonWrapper_"]) > [class*="avatar_"] {
+  position: relative;
+}
+
+html:not(.lv-no-glow) [class*="panels_"] :where([class*="accountPopoutButtonWrapper_"]) > [class*="avatar_"]::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--lv-accent);
+  filter: blur(5px);
+  opacity: 0.4;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+html:not(.lv-no-glow):not(.lv-no-hearts) [class*="panels_"] :where([class*="accountPopoutButtonWrapper_"]) > [class*="avatar_"]::before {
+  clip-path: var(--heart-clip);
+  border-radius: 0;
+}
+
+html:not(.lv-no-glow) [class*="sidebar_"] [class*="panels_"]:hover :where([class*="accountPopoutButtonWrapper_"]) > [class*="avatar_"]::before {
+  opacity: 0.8;
+}
+
+/* --- Ring der Panel-Karten beim Hover -----------------------------------
+   Ein ::after mit box-shadow ist rechteckig. Eingeklappt ist das Panel genau
+   so gross wie der herzfoermige Avatar, deshalb gibt es den Ring nur im
+   Hover-Zustand, wenn das Panel aufgeklappt ist. Der Ausgangswert ist ein
+   transparenter Schatten statt none, sonst laesst sich nicht ueberblenden. */
+html:not(.lv-no-glow) [class*="sidebar_"] [class*="panels_"] > :is(
+  [class*="panel_"],
+  [class*="wrapper_"],
+  [class*="container_"]
+)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 transparent;
+  transition: box-shadow 0.18s ease;
+}
+
+/* Beim Aufklappen ohne Uebergang: das Panel waechst hart, ein einblendender
+   Ring wirkte nachgezogen. */
+html:not(.lv-no-glow) [class*="sidebar_"] [class*="panels_"]:hover > :is(
+  [class*="panel_"],
+  [class*="wrapper_"],
+  [class*="container_"]
+)::after {
+  box-shadow: var(--glow-ring-strong);
+  transition: none;
+}
+
+/* --- Sprechen im Voice-Chat --------------------------------------------- */
+html:not(.lv-no-glow) [class*="border_"][class*="speaking_"] {
+  border-radius: 50%;
+  box-shadow: var(--lv-glow-box-hover);
+}
+
+/* --- Knoepfe und DM-Liste ------------------------------------------------
+   Im Ruhezustand ohne Schein; Hover und der geoeffnete Eintrag leuchten. */
+:where([class*="panels_"]) [class*="buttons_"] button { border-radius: var(--panel-radius); }
+[class*="channel_"] [class*="interactive_"] { border-radius: var(--panel-radius); }
+
+html:not(.lv-no-glow) :where([class*="panels_"]) [class*="buttons_"] button,
+html:not(.lv-no-glow) [class*="channel_"] [class*="interactive_"] {
+  transition: box-shadow 0.2s ease;
+}
+
+html:not(.lv-no-glow) :where([class*="panels_"]) [class*="buttons_"] button:hover,
+html:not(.lv-no-glow) [class*="channel_"] [class*="interactive_"]:hover {
+  box-shadow: var(--lv-glow-box-hover);
+}
+
+html:not(.lv-no-glow) [class*="channel_"] [class*="interactiveSelected_"] {
+  box-shadow: var(--lv-glow-box-active);
+}
+
+/* --- Der leuchtende Punkt ------------------------------------------------
+   Discords schmaler Balken am Rand (ungelesen, geoeffnet) wird zum Punkt mit
+   Schein; Form und Groesse bleiben Discords. Ohne [class*="visible_"] leuchtet
+   auch der unsichtbare Indikator jedes gelesenen Servers. Ungelesen in
+   --lv-accent-2, geoeffnet in --lv-accent: Form und Farbe trennen "hier bin
+   ich" von "hier ist etwas neu". */
+html:not(.lv-no-glow)
+[data-list-id="guildsnav"] [class*="item_"][class*="visible_"] {
+  background: var(--lv-accent-2) !important;
+  box-shadow: 0 0 6px 1px var(--lv-accent-2),
+              0 0 11px 2px color-mix(in srgb, var(--lv-accent-2) 40%, transparent);
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+html:not(.lv-no-glow)
+[data-list-id="guildsnav"] [class*="item_"][class*="selected_"] {
+  background: var(--lv-accent) !important;
+  box-shadow: 0 0 6px 1px var(--lv-accent),
+              0 0 12px 2px color-mix(in srgb, var(--lv-accent) 40%, transparent);
+}
+
+/* --- Erwaehnungszaehler --------------------------------------------------
+   Discords runder Zaehler in der Akzentfarbe statt Rot, mit Schein. */
+html:not(.lv-no-glow) [data-list-id="guildsnav"] [class*="numberBadge_"],
+html:not(.lv-no-glow) [data-list-id="guildsnav"] [class*="baseShapeRound_"][class*="badge_"] {
+  background: var(--lv-accent-2) !important;
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--lv-accent-2) 60%, transparent);
+}
+
+/* Schreibleiste: ihr Fokus-Schein steht in Abschnitt 6 bei der Leiste selbst,
+   dort liegen auch Rahmen und Weichzeichnung. */
+
+
+/* ============================================================================
+   9. SPOTIFY  (optional)
+   ----------------------------------------------------------------------------
+   Greift nur, wenn das BetterDiscord-Plugin "SpotifyControls" installiert ist
+   und gerade Musik laeuft. Ohne das Plugin existieren diese Elemente nicht und
+   die Regeln bleiben wirkungslos - das Theme funktioniert unveraendert.
+
+   Aus dem kleinen Vorschaubild wird ein FLAECHIGER Hintergrund: das Cover wird
+   auf die volle Playerbreite gezogen, weichgezeichnet und abgedunkelt, Titel
+   und Bedienelemente legen sich darueber. Beim Hover wird es schaerfer und
+   heller - das Album tritt hervor, solange man hinsieht.
+
+   Der Player wird ueber :has([class*="coverWrapper_"]) erkannt statt ueber
+   seinen Hash. Damit ueberlebt die Regel Updates des Plugins.
+   ========================================================================= */
+
+[class*="sidebar_"] [class*="panels_"] > div:has([class*="coverWrapper_"]) {
+  order: var(--order-spotify);
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  border: var(--border-subtle);
+  border-radius: var(--panel-radius);
+  background-color: var(--panel-color);
+  backdrop-filter: blur(var(--blur-other));
+  box-shadow: var(--glow-ring);
+  transition: box-shadow 0.3s ease;
+}
+
+[class*="sidebar_"] [class*="panels_"] > div:has([class*="coverWrapper_"]):hover {
+  box-shadow: var(--glow-ring-strong);
+}
+
+/* Das Cover fuellt den gesamten Player und liegt hinter allem anderen.
+   scale() ueberdeckt den weichen Rand, den blur() sonst am Bildrand erzeugt. */
+[class*="sidebar_"] [class*="panels_"] [class*="coverWrapper_"] {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  z-index: 0;
+  border-radius: 0 !important;
+  overflow: hidden;
+  transform: scale(1.18);
+  filter: blur(var(--spotify-cover-blur)) brightness(var(--spotify-cover-brightness));
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+[class*="sidebar_"] [class*="panels_"] [class*="coverWrapper_"] img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+}
+
+[class*="sidebar_"] [class*="panels_"] > div:hover [class*="coverWrapper_"] {
+  transform: scale(1.08);
+  filter: blur(calc(var(--spotify-cover-blur) / 3))
+          brightness(calc(var(--spotify-cover-brightness) + 0.25));
+}
+
+/* Verlauf zur Lesbarkeit: unten kraeftig, oben fast durchsichtig, damit das
+   Album oben sichtbar bleibt und der Text unten trotzdem trägt. */
+[class*="sidebar_"] [class*="panels_"] > div:has([class*="coverWrapper_"])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.42) 55%,
+    rgba(0, 0, 0, 0.12) 100%);
+}
+
+/* Bezugsrahmen des Covers.
+
+   Der Zwischencontainer darf NICHT positioniert sein: sonst wird er zum
+   Bezugsrahmen fuer das absolut gesetzte Cover, und das fuellt dann nur die
+   obere Zeile statt des ganzen Players - genau der Streifen-Effekt.
+   Also bleibt er statisch, und stattdessen werden seine Geschwister einzeln
+   ueber den Verlauf gehoben. */
+[class*="sidebar_"] [class*="panels_"] > div > [class*="inner_"]:has(> [class*="coverWrapper_"]) {
+  position: static !important;
+}
+
+[class*="sidebar_"] [class*="panels_"] > div > [class*="inner_"] > [class*="coverWrapper_"] ~ :not([class*="coverWrapper_"]),
+[class*="sidebar_"] [class*="panels_"] > div > [class*="inner_"]:has(> [class*="coverWrapper_"]) ~ [class*="timeline_"] {
+  position: relative;
+  z-index: 2;
+}
+
+[class*="sidebar_"] [class*="panels_"] [class*="details_"] {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+/* Bedienelemente: erst dezent, beim Hover voll da */
+[class*="sidebar_"] [class*="panels_"] > div:has([class*="coverWrapper_"]) button {
+  opacity: 0.75;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+[class*="sidebar_"] [class*="panels_"] > div:has([class*="coverWrapper_"]) button:hover {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+/* Die Fortschrittsleiste nimmt keine Maus mehr an. Beim Hover blendete das
+   Plugin sonst einen Ziehpunkt ein und ersetzte dabei den goldenen Balken -
+   und springen laesst sich damit ohnehin nicht. Ohne Mausereignisse entsteht
+   der Hover-Zustand gar nicht erst, der Balken bleibt durchgehend stehen.
+   Der Hover auf den Player selbst bleibt davon unberuehrt. */
+[class*="sidebar_"] [class*="panels_"] [class*="timeline_"] {
+  margin-top: 6px;
+  pointer-events: none;
+}
+
+[class*="sidebar_"] [class*="panels_"] [class*="barText_"] {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+
+/* --- Spalten: klares Glas ------------------------------------------------
+   Serverleiste, Kanal-/DM-Liste und Mitgliederliste: Blur mit Saettigung, dazu
+   nur eine schwache dunkle Toenung als Lesehilfe. --blur-list (Plugin) addiert
+   sich zum Blur, --list-color (Plugin) liegt als Schicht ueber der Toenung.
+   Die Ebenen darueber tragen weder Filter noch Deckkraft, sonst wuerde der
+   Blur ins Leere laufen.
+
+   privateChannels_ steht bewusst nicht hier: die DM-Liste liegt INNERHALB von
+   sidebarList_, beide zu fuellen liesse die Toenung sich addieren. */
+nav[class*="guilds_"],
+[class*="sidebarList_"],
+[class*="membersWrap_"] {
+  background-color: var(--lv-tint-list) !important;
+  background-image: linear-gradient(var(--list-color), var(--list-color)) !important;
+  backdrop-filter: var(--lv-glass);
+}
+
+/* Die gedaempften Namen erreichten ueber hellen Bildern mit der Toenung der
+   Vorlage (0.16) nur Kontrast 3.8 bis 4.2; die Toenung liegt deshalb hoeher,
+   dazu ein weicher Schatten fuer helle Stellen unter dem Text. */
+[class*="sidebarList_"] [class*="name_"],
+[class*="membersWrap_"] [class*="name_"] {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
+/* Eine Stufe dunkler, damit die Serverleiste von den Listen unterscheidbar bleibt. */
+nav[class*="guilds_"] {
+  background-color: var(--lv-tint-rail) !important;
+}
+
+/* Lichtkante zur Nachbarspalte. inset sitzt exakt am Uebergang und
+   verschiebt nichts, anders als ein border. */
+nav[class*="guilds_"],
+[class*="sidebarList_"] {
+  box-shadow: inset -1px 0 0 0 var(--lv-edge);
+}
+
+[class*="membersWrap_"] {
+  box-shadow: inset 1px 0 0 0 var(--lv-edge);
+}
+
+/* --- Chat ----------------------------------------------------------------
+   Ruhige, dunklere Flaeche ohne Blur, damit Text auch ueber hellen Bildern
+   lesbar bleibt. Buendig zu den Spalten. */
+[class*="base_"] [class*="chat_"] {
+  background-color: var(--lv-tint-chat) !important;
+}
+
+/* Kopfzeile des Chats: feine Unterkante statt Trennschatten. */
+[class*="chat_"] section[class*="title_"] {
+  box-shadow: inset 0 -1px 0 0 var(--lv-edge-head) !important;
+}
+
+[class*="privateChannels_"] {
+  background-color: transparent !important;
+}
+
+
+/* ============================================================================
+   PANEL DAUERHAFT OFFEN  (html.lv-panel-open)
+   ----------------------------------------------------------------------------
+   Setzt das Plugin diese Klasse, gilt der aufgeklappte Zustand permanent -
+   das Panel klappt nicht mehr ein.
+
+   Warum nicht per Variable: der eingeklappte Zustand steckt in einem Dutzend
+   Eigenschaften ueber mehrere Regeln, und der aufgeklappte haengt an :hover.
+   Eine Variable kann Werte aendern, aber keinen Selektor abschalten. Hier
+   werden deshalb schlicht dieselben Deklarationen noch einmal ohne :hover
+   ausgesprochen.
+   ========================================================================= */
+
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] {
+  width:  var(--panel-expanded) !important;
+  height: auto !important;
+}
+
+/* Dauerhaft offen steht das Panel permanent in voller Hoehe - der Abstand fuer
+   den eingeklappten Zustand reicht dann nicht, und die untersten Eintraege
+   liegen unerreichbar darunter.
+
+   Der Wert kommt aus --lv-panel-height, das LovelaceSettings schreibt. Die
+   Hoehe schwankt stark - Kontokarte allein rund 60px, mit Sprachchat,
+   Uebertragung und Spotify ueber 370 -, und CSS kann sie nicht auslesen.
+
+   Zwei Anlaeufe mit geschaetzten Werten lagen um mehr als das Doppelte
+   daneben, weil einzelne Bestandteile in keiner Annahme vorkamen. Deshalb
+   gemessen statt geraten.
+
+   Der Rueckfallwert gilt ohne Plugin: dann bleibt der Abstand wie im
+   eingeklappten Zustand. Das ist zu wenig, sobald etwas im Panel liegt - aber
+   ohne Plugin gibt es den dauerhaft offenen Zustand ohnehin nicht, denn die
+   Klasse lv-panel-open setzt genau dieses Plugin. */
+html.lv-panel-open {
+  --panel-reserve: calc(var(--lv-panel-height, var(--panel-collapsed)) + 8px);
+}
+
+/* Die Serverleiste ist davon ausgenommen.
+
+   Sie steht in einer eigenen Spalte, deren Container ohnehin oberhalb des
+   Panels endet - Discord haelt den Platz dort bereits selbst frei. Unserer kam
+   nur obendrauf: gemessen endete sie 154px UEBER dem Panel, waehrend Kanal-
+   und DM-Liste bei identischem Abstand 206px darunter ragten.
+
+   Sie bekommen deshalb nur die Luft, die den letzten Eintrag von der Kante
+   fernhaelt. Gleicher Abstand zum Panel heisst hier: unterschiedliche Werte -
+   weil Discord die Spalten unterschiedlich behandelt.
+
+   Fuer die KANALLISTE gilt dasselbe: gemessen blieben bei ihr 360px Luecke bis
+   zum Panel, waehrend die DM-Liste bei identischem Wert darunter lag. Discord
+   kuerzt beide Server-Ansichten selbst, die DM-Ansicht nicht.
+
+   Gilt in JEDEM Zustand, nicht nur bei dauerhaft offenem Panel: auch
+   eingeklappt blieben bei ihnen 48px Luecke ungenutzt.
+
+   Die DM-Liste ist damit die einzige, die den vollen Abstand behaelt - und die
+   einzige, die ihn braucht.
+
+   Die Regel dazu steht im Abschnitt PLATZ FUER DAS PANEL, direkt hinter der
+   Grundregel - sie muss spaeter kommen, sonst gewinnt bei gleicher
+   Spezifitaet die allgemeinere. */
+
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > [class*="panel_"],
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > [class*="wrapper_"] {
+  display: block !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > [class*="container_"] {
+  width: auto !important;
+  height: auto !important;
+  padding: 8px !important;
+  justify-content: flex-start !important;
+  background-color: var(--panel-color) !important;
+  border: var(--border-subtle) !important;
+  backdrop-filter: blur(var(--blur-other)) !important;
+}
+
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > [class*="container_"] :where([class*="accountPopoutButtonWrapper_"]) > [class*="avatar_"] {
+  margin: 0 !important;
+}
+
+/* opacity und transform muessen mit. Der eingeklappte Zustand blendet Name und
+   Knoepfe nicht nur per display aus, sondern schiebt sie auch zur Seite und
+   auf durchsichtig - ohne diese beiden Zeilen sind sie zwar eingeblendet,
+   aber unsichtbar. */
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > [class*="container_"] [class*="nameTag_"] {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > [class*="container_"] [class*="buttons_"] {
+  display: flex !important;
+  margin-left: auto !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html.lv-panel-open [class*="sidebar_"] [class*="panels_"] > div:has([class*="coverWrapper_"]) {
+  display: block !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+/* ============================================================================
+   PLATZ FUER DAS PANEL
+   ----------------------------------------------------------------------------
+   Server-Leiste, Kanalliste und DM-Liste enden oberhalb des Panels, statt
+   dahinter weiterzulaufen. Ohne das schoben sich die untersten Eintraege unter
+   den Avatar - sichtbar vor allem im eingeklappten Zustand.
+
+   Wichtig ist MARGIN, nicht padding: eine Polsterung haengt nur am ENDE der
+   Liste Platz an. Wer viele Server hat und mittendrin scrollt, sieht die Icons
+   trotzdem hinter dem Avatar durchlaufen. Ein Aussenabstand verkuerzt dagegen
+   den Scrollbereich selbst - die Icons werden oberhalb des Panels sauber
+   abgeschnitten, unabhaengig davon, wo man gerade steht.
+   ========================================================================= */
+
+/* Solange das Panel aufgeklappt ist, reicht die Ausblendung weiter hoch.
+
+   Das Panel ist Milchglas, die Eintraege darunter scheinen also hindurch -
+   besonders unruhig in den Luecken zwischen den Karten. Die Liste zu kuerzen
+   waere der falsche Weg: das aendert ihr Layout, sie wuerde bei jeder
+   Mausbewegung springen und der Scrollstand mitwandern.
+
+   Die Maske dagegen kostet kein Layout. Sie blendet den Bereich aus, der
+   ohnehin verdeckt ist, und gibt ihn beim Einklappen wieder frei. Erreichbar
+   bleibt alles - Maus weg, Eintrag da.
+
+   Ausgeblendet wird genau der Teil, der unter dem Panel liegt: dessen
+   gemessene Hoehe minus dem ohnehin freigehaltenen Abstand. Die 40px obendrauf
+   sind der weiche Uebergang, damit die Kante nicht hart abschneidet.
+
+   Ein fester Wert stand hier vorher (230px) und war schlicht geraten - bei
+   einem 368px hohen Panel reichte er nicht, die untersten Eintraege blieben
+   sichtbar. --lv-panel-height kommt von LovelaceSettings; ohne Plugin greift
+   der Rueckfallwert.
+
+   NUR beim Hover. Bleibt das Panel dauerhaft offen, ist ueber --panel-reserve
+   bereits Platz freigehalten - dann wuerde die Maske zusaetzlich ausblenden,
+   was ohnehin schon oberhalb liegt. Beides zusammen verschluckte die
+   untersten Server vollstaendig, auch wenn man ganz nach unten scrollte.
+
+   Der Bezug steht bewusst auf body und nicht auf [class*="sidebar_"]: die
+   DM-Liste haengt in einem eigenen nav[class*="privateChannels_"], das nicht
+   zwingend darin liegt.
+
+   NUR die DM-Liste. Server- und Kanalliste kuerzt Discord selbst - gemessen
+   endeten sie beim Hovern 48px UEBER dem Panel, ragten also gar nicht
+   darunter. Sie mit auszublenden nahm ihnen sichtbar Platz weg, ohne ein
+   Problem zu loesen. Dieselbe Aufteilung wie beim Abstand weiter unten. */
+body:has([class*="panels_"]:hover) [data-list-id^="private-channels"] {
+  --panel-fade: calc(
+    var(--lv-panel-height, 260px) - var(--panel-reserve) + 40px);
+}
+
+nav[class*="guilds_"] [class*="scroller_"],
+[class*="sidebarList_"] [class*="scroller_"],
+[class*="privateChannels_"] [class*="scroller_"] {
+  margin-bottom: var(--panel-reserve) !important;
+  overflow-y: auto !important;
+
+  /* Weiches Ausblenden statt harter Kante.
+
+     Ein Scrollbereich schneidet seinen Inhalt an der Unterkante ab - mitten
+     durch einen Kanalnamen sieht das nach Fehler aus. Die Maske laesst die
+     letzten Pixel stattdessen durchsichtig werden, der Eintrag loest sich
+     also auf, statt abgetrennt zu werden.
+
+     --panel-fade sagt, WO die Ausblendung beginnt, --panel-fade-soft, wie lang
+     der Uebergang dorthin dauert. Beides getrennt zu halten ist entscheidend:
+     Lief der Verlauf ueber die ganze Strecke, war die Liste an ihrem Beginn
+     erst zu wenigen Prozent durchsichtig und damit praktisch voll sichtbar -
+     vollstaendig unsichtbar wurde sie erst ganz unten.
+
+     Solange beide Werte gleich sind, ergibt das denselben weichen Rand wie
+     zuvor. Waechst --panel-fade beim aufgeklappten Panel auf mehrere hundert
+     Pixel, bleibt der Uebergang kurz und alles darunter verschwindet
+     wirklich. */
+  mask-image: linear-gradient(to bottom,
+    #000 calc(100% - var(--panel-fade)),
+    transparent calc(100% - var(--panel-fade) + var(--panel-fade-soft)));
+  -webkit-mask-image: linear-gradient(to bottom,
+    #000 calc(100% - var(--panel-fade)),
+    transparent calc(100% - var(--panel-fade) + var(--panel-fade-soft)));
+
+  /* Zusaetzlicher Scrollweg am Ende, damit sich der letzte Eintrag komplett
+     aus dem Uebergang herausschieben laesst. */
+  padding-bottom: var(--panel-fade) !important;
+  transition: mask-image 0.25s ease, -webkit-mask-image 0.25s ease;
+}
+
+/* Server- und Kanalliste kuerzt Discord bereits selbst.
+
+   Gemessen blieben bei ihnen 48px Luecke bis zum Panel ungenutzt, waehrend die
+   DM-Liste bei identischem Wert 307px darunter lag - die Server-Ansichten
+   werden also von Discord hochgeschoben, die DM-Ansicht nicht. Der volle
+   Abstand kam dort nur obendrauf und nahm sichtbar Platz weg.
+
+   Hier bleibt nur die Luft, die den letzten Eintrag von der Kante fernhaelt.
+   Die DM-Liste ist die einzige, die den vollen Abstand braucht - und behaelt.
+
+   Muss NACH der Regel oben stehen: gleiche Spezifitaet, also gewinnt die
+   spaetere. */
+:is(
+  nav[class*="guilds_"],
+  [class*="sidebarList_"]
+) [class*="scroller_"] {
+  margin-bottom: 16px !important;
+}
+
+/* ============================================================================
+   11. ZENTRIERTE KANALLISTE
+   ----------------------------------------------------------------------------
+   Kategorien und Kanalnamen sitzen mittig statt links angeschlagen. Das ist
+   der auffaelligste Unterschied zu Standard-Discord und zu praktisch jedem
+   anderen Theme - die richten alle links aus.
+
+   Kategorien bekommen zusaetzlich zwei kurze Linien, die den Text einfassen.
+   Sie ersetzen die Einrueckung als Gliederung: Statt "weiter links heisst
+   uebergeordnet" gilt "eingefasst heisst Ueberschrift".
+
+   Kategorien sind h3, das ist in der Kanalliste eindeutig. Die Kanalzeile ist
+   ein Flex-Container mit linkTop_ darin - dort wird zentriert, nicht am
+   Link selbst, sonst wandert auch das Hover-Feld.
+   ========================================================================= */
+
+/* display: flex wird erzwungen. Ohne das laeuft justify-content ins Leere,
+   falls Discord die Ueberschrift als Block auszeichnet - und text-align allein
+   verschiebt den Textknoten nicht, weil er in einem eigenen Kind steckt. */
+/* width: 100% ist hier das Entscheidende, nicht justify-content.
+
+   Die Ueberschrift ist von Haus aus nur so breit wie ihr Text und sitzt links
+   im Container - gemessen 114px von 247px. Zentrieren wirkte deshalb ins
+   Leere: Innerhalb dieser 114px gab es nichts zu verteilen, der Text fuellte
+   sie vollstaendig aus.
+
+   Erst auf voller Breite hat justify-content etwas zu tun. Drei Versuche
+   haben vorher an den Kindern gedreht, das Problem lag aber eine Ebene
+   hoeher. */
+[class*="sidebarList_"] h3 {
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  position: relative;
+  letter-spacing: 1.4px;
+}
+
+/* Discords Plus-Knopf sitzt als letztes Kind darin und wuerde mitzentriert -
+   er gehoert aber an den rechten Rand. */
+[class*="sidebarList_"] h3 > span:last-child {
+  position: absolute !important;
+  right: 4px;
+}
+
+/* KEIN Kind darf sich strecken.
+
+   Der Text steckt in einem eigenen Element, und solange das die volle Breite
+   einnimmt, nuetzt ein zentrierter Container nichts - der Text beginnt dann an
+   dessen linker Kante. Zwei Versuche haben einzelne Kinder benannt und lagen
+   daneben; sicherer ist, es allen zu verbieten.
+
+   Der Plus-Knopf ist davon nicht betroffen, der liegt absolut. */
+[class*="sidebarList_"] h3 > * {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  text-align: center !important;
+}
+
+/* Die Linien sind FLEX-Kinder, nicht absolut positioniert.
+
+   Dadurch teilen sie sich den Raum, der nach dem Text uebrig bleibt, und
+   reichen von aussen bis an ihn heran - unabhaengig davon, wie lang die
+   Kategorie heisst. Mit fester Breite waeren sie bei "Allgemein" zu lang und
+   bei "Gaming Talk" zu kurz.
+
+   Der Verlauf laesst sie zum Text hin heller werden: aussen fast unsichtbar,
+   innen deutlich. Eine durchgehend gleich starke Linie wirkt wie ein Trenner,
+   dieser Verlauf fasst den Text ein. */
+[class*="sidebarList_"] h3::before,
+[class*="sidebarList_"] h3::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 2px;
+  min-width: 8px;
+  pointer-events: none;
+}
+
+[class*="sidebarList_"] h3::before {
+  margin-right: 10px;
+  background: linear-gradient(to right, transparent, var(--edge-strong));
+}
+
+/* Rechts ist zusaetzlich Platz fuer Discords Plus-Knopf noetig, sonst laeuft
+   die Linie darunter durch. */
+[class*="sidebarList_"] h3::after {
+  margin-left: 10px;
+  margin-right: 22px;
+  background: linear-gradient(to left, transparent, var(--edge-strong));
+}
+
+/* Kanalnamen bleiben BEWUSST linksbuendig.
+
+   Ein Zwischenstand hatte sie zentriert. Das sah ordentlich aus, liest sich
+   aber schlechter: Beim Ueberfliegen einer Liste sucht das Auge eine feste
+   linke Kante, und die faellt weg, wenn jede Zeile woanders beginnt. Bei
+   Ueberschriften ist das anders - die liest man einzeln, nicht im Lauf. */
+
+/* Der geoeffnete Kanal bekommt eine Farbkante links und einen Schein nach
+   innen, statt nur heller hinterlegt zu sein. Die Kante steht senkrecht zur
+   zentrierten Schrift und markiert die Zeile, ohne sie zu verschieben. */
+[class*="sidebarList_"] [class*="modeSelected_"] {
+  box-shadow: inset 2px 0 0 0 var(--glow-pink),
+              inset 0 0 16px rgba(255, 90, 190, 0.10);
+}
+
+/* --- Mitgliederliste ------------------------------------------------------
+   Dieselbe Sprache wie die Kanalliste: Rollenueberschriften zentriert und
+   eingefasst, Eintraege mittig.
+
+   Die Namen bleiben neben dem Avatar, nicht darunter. Im Entwurf standen sie
+   untereinander, was gut aussah - bei langen Namen und vielen Mitgliedern
+   kostet das aber deutlich Hoehe, und die Liste ist ohnehin schon lang. */
+[class*="membersWrap_"] h2,
+[class*="membersWrap_"] h3 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  position: relative;
+  letter-spacing: 1.4px;
+}
+
+[class*="membersWrap_"] :is(h2, h3)::before,
+[class*="membersWrap_"] :is(h2, h3)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: var(--edge-light);
+  pointer-events: none;
+}
+[class*="membersWrap_"] :is(h2, h3)::before { left: 8px; }
+[class*="membersWrap_"] :is(h2, h3)::after  { right: 8px; }
+
+/* Avatar und Name zusammen mittig statt links angeschlagen. */
+[class*="membersWrap_"] [class*="layout_"] {
+  justify-content: center !important;
+}
+
+[class*="membersWrap_"] [class*="layout_"] [class*="content_"] {
+  flex: 0 1 auto !important;
+}
+
+
+/* ============================================================================
+   10. NACHRICHTENLISTE
+   ----------------------------------------------------------------------------
+   Erwaehnungen, Hover und Einbettungen - die drei Stellen, an denen Discords
+   eigenes Aussehen bisher unveraendert durchschlug.
+
+   Das faellt auf, weil man genau hier die meiste Zeit hinsieht. Der Rahmen des
+   Clients war durchgestaltet, die Nachrichtenliste selbst nicht: ein gelber
+   Erwaehnungsbalken in einem blau-pinken Theme, graue Kaesten beim Ueberfahren,
+   und Link-Vorschauen als einzige Flaeche ohne Milchglas.
+
+   Alle Farben haengen an Variablen aus Abschnitt 2. Wer einen der Effekte
+   loswerden will, setzt die betreffende Variable auf transparent - die Regeln
+   greifen dann weiter, malen aber nichts.
+   ========================================================================= */
+
+/* --- Erwaehnungen ---------------------------------------------------------
+   Discord faerbt die ganze Nachricht gelb und setzt links einen gelben Balken.
+   Beides wird uebernommen, nur in den Theme-Farben: ein nach rechts
+   auslaufender Verlauf statt einer vollen Flaeche, damit der Text lesbar
+   bleibt und die Nachricht nicht wie ein Kasten wirkt.
+
+   Der Balken kommt von Discord als ::before und braucht nur eine neue Farbe -
+   Position und Groesse stimmen bereits. */
+[class*="mentioned_"] {
+  background: linear-gradient(90deg,
+    var(--mention-fill) 0%, transparent 55%) !important;
+}
+
+[class*="mentioned_"]::before {
+  background: var(--mention-bar) !important;
+}
+
+/* Die Erwaehnung IM Text. .mention traegt keinen Hash - eine der wenigen
+   Discord-Klassen, die sich seit Jahren nicht aendert. */
+.mention {
+  background: var(--mention-inline) !important;
+  border-radius: 4px !important;
+  transition: background-color 120ms ease;
+}
+
+.mention:hover {
+  background: var(--glow-blue-soft) !important;
+}
+
+/* --- Hover ----------------------------------------------------------------
+   Statt Discords grauem Kasten ein schwacher Schimmer, der nach rechts
+   ausblendet, plus eine Lichtkante links.
+
+   Bewusst KEIN backdrop-filter: Diese Regel greift bei jeder Mausbewegung neu,
+   und Weichzeichnung ist der teuerste Effekt im Theme. Eine halbtransparente
+   Flaeche kostet dagegen nichts.
+
+   Erwaehnte Nachrichten sind ausgenommen, sonst wuerde sich der Schimmer mit
+   ihrem Verlauf ueberlagern und die Faerbung ausbleichen. */
+[class*="messageListItem_"]:hover [class*="message_"]:not([class*="mentioned_"]) {
+  background: linear-gradient(90deg,
+    var(--msg-hover) 0%, transparent 70%) !important;
+  box-shadow: inset 2px 0 0 var(--msg-hover-edge);
+}
+
+/* --- Einbettungen ---------------------------------------------------------
+   Link-Vorschauen, Antworten von Bots und Befehlsausgaben. Bisher graue
+   Bloecke - die einzige groessere Flaeche im Chat ohne Glasoptik.
+
+   Der farbige Streifen links bleibt: den setzt Discord pro Einbettung, oft in
+   der Farbe der verlinkten Seite oder des Bots. Ihn zu ueberschreiben wuerde
+   Information wegnehmen, keine hinzufuegen. */
+[class*="embedFull_"],
+[class*="embedWrapper_"] {
+  background: var(--embed-fill) !important;
+  border-color: var(--embed-border) !important;
+  border-radius: 8px !important;
+  backdrop-filter: blur(var(--blur-list));
+  -webkit-backdrop-filter: blur(var(--blur-list));
+}
+
+/* Die Vorschaubilder in Einbettungen bekommen dieselbe Rundung wie ihr
+   Rahmen - sonst sitzen eckige Bilder in runden Kaesten. */
+[class*="embedFull_"] img[class*="embedImage"],
+[class*="embedWrapper_"] img[class*="embedImage"] {
+  border-radius: 6px !important;
+}

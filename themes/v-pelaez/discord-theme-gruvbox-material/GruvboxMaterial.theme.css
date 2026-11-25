@@ -1,0 +1,196 @@
+/**
+ * @name          Gruvbox Material Theme
+ * @version       1.0
+ * @description   Gruvbox Material Dark palette with subtle rounded corners. Monospace UI chrome, native typography. Compatible with BetterDiscord and Vencord.
+ */
+
+:root, .theme-dark, .visual-refresh.theme-dark, .visual-refresh .theme-dark {
+  /* Global border radius configuration */
+  --subtle-corner-radius: 6px;
+
+  /* Warm theme color base */
+  --background-primary: #292828 !important;
+  --background-secondary: #242221 !important;
+  --background-secondary-alt: #1e1c1b !important;
+  --background-tertiary: #1a1817 !important;
+  --background-floating: #32302f !important;
+  --background-accent: #3c3836 !important;
+  
+  --background-modifier-hover: rgba(221, 199, 161, 0.05) !important;
+  --background-modifier-active: rgba(221, 199, 161, 0.08) !important;
+  --background-modifier-selected: rgba(221, 199, 161, 0.1) !important;
+
+  --app-frame-background: var(--background-tertiary) !important;
+  --home-background: var(--background-primary) !important;
+  --chat-background: var(--background-primary) !important;
+  --chat-background-default: var(--background-primary) !important;
+  
+  --background-base-lowest: var(--background-tertiary) !important;
+  --background-base-lower: var(--background-secondary) !important;
+  --background-base-low: var(--background-primary) !important;
+  
+  --background-surface-high: var(--background-floating) !important;
+  --background-surface-higher: var(--background-accent) !important;
+  --background-surface-highest: var(--background-accent) !important;
+  --bg-surface-raised: var(--background-floating) !important;
+
+  /* Typography color tokens */
+  --text-normal: #ddc7a1 !important;
+  --text-muted: #8e8071 !important;
+  --header-primary: #ebdbb2 !important;
+  --header-secondary: #d5c4a1 !important;
+
+  /* Theme semantic variables */
+  --vscode-green: #a9b665;
+  --vscode-green-dark: #404a1e;
+  --vscode-green-hover: #525e26;
+  
+  --vscode-teal: #7daea3;
+  --vscode-teal-hover: #89b482;
+  
+  --vscode-yellow: #d8a657;
+  --vscode-red: #ea6962;
+
+  /* Atomic core overrides */
+  --red-400: var(--vscode-red) !important;
+  --red-430: var(--vscode-red) !important;
+  --red-500: var(--vscode-red) !important;
+  --red-530: var(--vscode-red) !important;
+
+  --green-330: var(--vscode-green) !important;
+  --green-360: var(--vscode-green-dark) !important;
+  --green-400: var(--vscode-green-dark) !important;
+  --green-430: var(--vscode-green-hover) !important;
+
+  --yellow-300: var(--vscode-yellow) !important;
+  --yellow-330: var(--vscode-yellow) !important;
+  --yellow-400: var(--vscode-yellow) !important;
+
+  --blue-330: var(--vscode-teal) !important;
+  --blue-345: var(--vscode-teal) !important;
+  --blue-400: var(--vscode-teal) !important;
+  --blue-430: var(--vscode-teal-hover) !important;
+  --blue-500: var(--vscode-teal) !important;
+  --blue-530: var(--vscode-teal-hover) !important;
+
+  --brand-experiment: var(--vscode-teal) !important;
+  --brand-experiment-560: var(--vscode-teal) !important;
+  --brand-experiment-600: var(--vscode-teal-hover) !important;
+  --blurple-50: var(--vscode-teal) !important;
+  --brand-500: var(--vscode-teal) !important;
+  --text-brand: var(--vscode-teal) !important;
+  --text-link: var(--vscode-teal) !important;
+  --control-brand-foreground: var(--vscode-teal) !important;
+  --control-brand-foreground-new: var(--vscode-teal) !important;
+
+  --text-positive: var(--vscode-green) !important;
+  --status-positive: var(--vscode-green) !important;
+  --text-status-online: var(--vscode-green) !important;
+  --status-positive-background: var(--vscode-green-dark) !important;
+  
+  --control-connected-background-default: var(--vscode-green-dark) !important;
+  --control-connected-background-hover: var(--vscode-green-hover) !important;
+  --control-connected-background-active: var(--vscode-green-hover) !important;
+  --control-connected-border-default: var(--vscode-green-dark) !important;
+  --control-connected-border-hover: var(--vscode-green-hover) !important;
+  --control-connected-border-active: var(--vscode-green-hover) !important;
+  
+  --button-positive-background: var(--vscode-green-dark) !important;
+  --button-positive-background-hover: var(--vscode-green-hover) !important;
+  --button-positive-background-active: var(--vscode-green-hover) !important;
+
+  --text-warning: var(--vscode-yellow) !important;
+  --status-warning: var(--vscode-yellow) !important;
+  --text-status-idle: var(--vscode-yellow) !important;
+  --status-warning-background: var(--vscode-yellow) !important;
+
+  --text-danger: var(--vscode-red) !important;
+  --status-danger: var(--vscode-red) !important;
+  --text-status-dnd: var(--vscode-red) !important;
+  
+  --control-primary-background-default: var(--vscode-teal) !important;
+  --control-primary-background-hover: var(--vscode-teal-hover) !important;
+  --control-primary-background-active: var(--vscode-teal-hover) !important;
+  
+  --scrollbar-thin-thumb: var(--background-floating) !important;
+  --scrollbar-auto-thumb: var(--background-floating) !important;
+  --scrollbar-auto-track: var(--background-primary) !important;
+
+  --voice-color: var(--vscode-green) !important;
+  --status-speaking: var(--vscode-green) !important;
+  --text-feedback-positive: var(--vscode-green) !important;
+  --icon-feedback-positive: var(--vscode-green) !important;
+}
+
+code,
+pre,
+#app-mount [class*="markup"] code,
+#app-mount [class*="markup"] pre,
+div[class*="embed_"],
+div[class*="embedWrapper_"],
+div[class*="reaction_"],
+section[class*="panels_"] {
+  border-radius: var(--subtle-corner-radius) !important;
+}
+
+foreignObject[mask],
+[class*="avatar_"],
+img[class*="avatar_"],
+div[class*="avatar_"],
+svg[class*="avatar_"],
+.wrapper_edb6e0 {
+  -webkit-mask: none !important;
+  mask: none !important;
+  border-radius: var(--subtle-corner-radius) !important;
+}
+
+div[class*="embed_"],
+div[class*="embedWrapper_"] {
+  background-color: var(--background-floating) !important;
+  border-left: 3px solid var(--vscode-teal) !important;
+}
+
+div[class*="reaction_"] {
+  background-color: var(--background-floating) !important;
+  border: 1px solid var(--background-secondary) !important;
+}
+
+div[class*="reactionMe_"] {
+  background-color: rgba(125, 174, 163, 0.2) !important;
+  border: 1px solid var(--vscode-teal) !important;
+}
+
+div[class*="mentioned_"] {
+  background-color: rgba(216, 166, 87, 0.08) !important;
+}
+
+div[class*="mentioned_"]::before {
+  background-color: var(--vscode-yellow) !important;
+}
+
+section[class*="panels_"] {
+  flex-shrink: 0 !important;
+  min-height: 52px !important;
+  background-color: var(--background-tertiary) !important;
+}
+
+section[class*="panels_"] button[class*="button_"] {
+  background-color: var(--background-modifier-active) !important;
+  color: var(--text-normal) !important;
+}
+
+section[class*="panels_"] button[class*="button_"]:hover {
+  background-color: var(--vscode-teal) !important;
+  color: var(--header-primary) !important;
+}
+
+section[class*="panels_"] button[class*="button_"][aria-checked="true"],
+section[class*="panels_"] button[class*="button_"][aria-expanded="true"] {
+  background-color: var(--vscode-teal) !important;
+  color: var(--header-primary) !important;
+}
+
+section[class*="panels_"] button[class*="button_"][aria-checked="true"]:hover,
+section[class*="panels_"] button[class*="button_"][aria-expanded="true"]:hover {
+  background-color: var(--vscode-teal-hover) !important;
+}

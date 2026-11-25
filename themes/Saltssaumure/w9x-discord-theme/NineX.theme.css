@@ -1,0 +1,41 @@
+/**
+ * @name NineX
+ * @author Saltssaumure
+ * @authorLink https://github.com/Saltssaumure
+ * @description A Windows 9x style Discord theme.
+ * @license AGPL-3.0-or-later
+ * @version 1.7
+ * @invite uy8nKQVatp
+ * @source https://github.com/Saltssaumure/w9x-discord-theme
+ * @donate https://ko-fi.com/saltssaumure
+*/
+
+@import url("https://saltssaumure.github.io/w9x-discord-theme/w9x.min.css");
+
+/* See https://github.com/Saltssaumure/w9x-discord-theme#customisation for customisation settings. */
+:root {
+    --w9x-background-image: none;
+    --w9x-background-color: #008080;
+    --w9x-start-text:       "Windows95";
+
+    --w9x-titlebar-color:   #000080;
+    --w9x-warning-color:    #FF0000;
+    --w9x-positive-color:   #008000;
+    --w9x-highlight-color:  #0000FF;
+
+    --w9x-box-color-1:      #FFFFFF;
+    --w9x-box-color-2:      #DFDFDF;
+    --w9x-box-color-3:      #C0C0C0;
+    --w9x-box-color-4:      #808080;
+    --w9x-box-color-5:      #000000;
+}
+
+.theme-light {
+    --w9x-bg-color:     #FFFFFF;
+    --w9x-text-color:   #000000;
+}
+
+.theme-dark {
+    --w9x-bg-color:     #000000;
+    --w9x-text-color:   #DFDFDF;
+}

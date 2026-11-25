@@ -1,0 +1,78 @@
+/**
+ * @name Modern Animations
+ * @description More modern, better and smoother animations
+ * @author itsmarianmc
+ * @version 2.0.0
+ * @website https://github.com/itsmarianmc
+ * @authorId 508863359777505290
+ * @authorLink https://itsmarianmc.github.io/
+*/
+
+/*--------------------------------------------------------------
+                          Load Resource
+If you don't want to use JSDelivr, you can also change the source to
+"https://raw.githubusercontent.com/itsmarianmc/ModernAnimations/refs/heads/main/build/ModernAnimations.css"
+---------------------------------------------------------------*/
+@import url("https://cdn.jsdelivr.net/gh/itsmarianmc/ModernAnimations/build/ModernAnimations.css");
+
+/*--------------------------------------------------------------
+                           Set variables
+---------------------------------------------------------------*/
+:root {
+	--main-color: #5865f2;
+	--hover-color: #4752c4;
+	--background-primary: #313338;
+	--background-secondary: #2b2d31;
+	--background-tertiary: #1e1f22;
+	--background-floating: #18191c;
+	--text-normal: #dcddde;
+	--text-muted: #949ba4;
+	--header-primary: #ffffff;
+	--interactive-normal: #b5bac1;
+	--interactive-hover: #dcddde;
+	--interactive-active: #ffffff;
+	--booster-main: #f47fff;
+
+	/* Animation Variables */
+	--transition-time-short: 0.1s;
+	--transition-time: 0.2s;
+	--transition-time-long: 0.35s;
+	--ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	--ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+	--bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+	/* Transitions */
+	--transition-xl: transform var(--transition-time-long) var(--ease-in-out);
+	--transition-l: transform 0.4s var(--ease-in-out);
+	--transition-mid: transform 0.33s var(--ease-in-out);
+	--transition-m: transform var(--transition-time) var(--ease-in-out);
+	--transition-s: transform 0.15s var(--ease-in-out);
+	--transition-xs: transform var(--transition-time-short) var(--ease-in-out);
+	--transition-min: transform 0.1s var(--ease-in-out);
+
+	/* Others */
+	--inf: infinite;
+	--lin: linear;
+}
+
+/*--------------------------------------------------------------  
+                      Third Party Contents
+
+ Please note that third-party content can be updated or deleted
+   at any time. ModernAnimations has no control over this and
+ reserves the right not to change or remove certain or specific
+                           content.
+If you want to remove one of these addons, you can either delete
+   it from the code, remove the URL or have it evaluated as a
+						   comment.
+---------------------------------------------------------------*/
+
+/* HorizontalServerList (Deactivated for safety reasons)
+@import url("https://cdn.jsdelivr.net/gh/itsmarianmc/ModernAnimations/addons/HorizontalServerList.css");
+*/
+
+/* ReadAllNotificationsButton */
+@import url("https://cdn.jsdelivr.net/gh/itsmarianmc/ModernAnimations/addons/ReadAllNotificationsButton.css");
+
+/* Spotify Embed */
+@import url("https://cdn.jsdelivr.net/gh/itsmarianmc/ModernAnimations/addons/SpotifyControls.css");

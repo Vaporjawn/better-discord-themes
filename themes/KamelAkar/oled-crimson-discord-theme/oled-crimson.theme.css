@@ -1,0 +1,928 @@
+/**
+ * @name OLED Crimson
+ * @author Ravnow
+ * @version 3.4.0
+ * @description True-black OLED theme (#000000) with a crimson accent and Material finishes. Single file, built for the Discord 2025-2026 visual refresh. Works with Vencord, Vesktop, BetterDiscord and Legcord.
+ * @authorLink https://github.com/KamelAkar
+ * @website https://github.com/KamelAkar/oled-crimson-discord-theme
+ * @source https://raw.githubusercontent.com/KamelAkar/oled-crimson-discord-theme/main/oled-crimson.theme.css
+ * @updateUrl https://raw.githubusercontent.com/KamelAkar/oled-crimson-discord-theme/main/oled-crimson.theme.css
+ */
+
+/* Police de l'interface. Seule ressource externe du thème : supprime cette
+   ligne pour un fichier 100 % hors ligne, --oc-font retombera alors sur les
+   polices système (Segoe UI Variable sur Windows). */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* ============================================================================
+   1. PALETTE : la seule zone à modifier pour personnaliser le thème
+   ========================================================================= */
+
+:root {
+  /* Teinte de l'accent. 355 = rouge sang. Exemples : 264 violet, 195 cyan,
+     150 vert, 30 orange. Modifie uniquement ces trois valeurs.
+     La clarté est le réglage sensible : au-delà de ~52 %, un rouge saturé
+     vire au rose framboise. Descends vers 40 % pour un bordeaux. */
+  --oc-hue: 355;
+  --oc-sat: 82%;
+  --oc-light: 45%;
+
+  /* Accent dérivé (format HSL sans virgules : requis par les tokens Discord) */
+  --oc-accent-hsl: var(--oc-hue) var(--oc-sat) var(--oc-light);
+  --oc-accent: hsl(var(--oc-accent-hsl));
+  --oc-accent-bright: hsl(var(--oc-hue) var(--oc-sat) 58%);
+  --oc-accent-dim: hsl(var(--oc-hue) var(--oc-sat) 36%);
+  --oc-on-accent: #ffffff;
+
+  /* Surfaces : noir absolu partout, la séparation se fait par les bordures */
+  --oc-black: #000000;
+
+  /* Bordures neutres : teintées d'accent, elles dessinaient un quadrillage
+     rouge autour de chaque message et de chaque popout. Le rouge est réservé
+     aux éléments actifs (sélection, mentions, liens, focus). */
+  --oc-border: rgba(255, 255, 255, 0.07);
+  --oc-border-strong: rgba(255, 255, 255, 0.13);
+
+  /* États interactifs : de l'accent translucide plutôt que du gris */
+  --oc-hover: hsl(var(--oc-accent-hsl) / 0.09);
+  --oc-active: hsl(var(--oc-accent-hsl) / 0.16);
+  --oc-selected: hsl(var(--oc-accent-hsl) / 0.24);
+  --oc-hover-neutral: rgba(255, 255, 255, 0.04);
+
+  /* Texte */
+  --oc-text: #f2f3f5;
+  --oc-text-soft: #c4c6cd;
+  --oc-text-muted: #82858f;
+  --oc-text-faint: #5c5f68;
+
+  /* Scrollbars. Trop désaturées, elles se noyaient dans le noir : le curseur
+     reprend franchement la teinte d'accent. */
+  --oc-scrollbar-size: 8px;
+  --oc-scrollbar-thumb: hsl(var(--oc-hue) 70% 40%);
+  --oc-scrollbar-thumb-hover: hsl(var(--oc-hue) 85% 55%);
+
+  /* --- Finitions Material ------------------------------------------------ */
+
+  /* Police de l'interface */
+  --oc-font: "Inter", "Segoe UI Variable Display", "Segoe UI", "Roboto", sans-serif;
+
+  /* Arrondi global. 16px = bulles franches, 8px = plus sobre, 4px = anguleux. */
+  --oc-radius: 16px;
+
+  /* Opacité des bulles de message. Mets 0 pour un OLED strict : les bulles
+     ne seront alors dessinées que par leur bordure. */
+  --oc-bubble-alpha: 0.028;
+  --oc-bubble: rgba(255, 255, 255, var(--oc-bubble-alpha));
+
+  /* Retrait des bulles par rapport au bord gauche du chat. */
+  --oc-bubble-inset: 12px;
+
+  /* Courbe de mouvement Material (standard easing) */
+  --oc-motion: cubic-bezier(0.2, 0, 0, 1);
+  --oc-motion-fast: 120ms var(--oc-motion);
+  --oc-motion-slow: 220ms var(--oc-motion);
+}
+
+/* ============================================================================
+   2. TOKENS DISCORD
+   Discord fait cohabiter deux générations de variables : les tokens actuels
+   (--bg-*, --background-base-*, --background-surface-*) issus de la refonte
+   visuelle, et les tokens historiques encore lus par certains écrans et
+   plugins. Les deux sont redéfinis pour éviter les zones grises résiduelles.
+   ========================================================================= */
+
+:is(.theme-dark, .theme-darker, .theme-midnight, .theme-light, .visual-refresh),
+#app-mount {
+  color-scheme: dark;
+
+  /* --- Surfaces actuelles --- */
+  --background-base-lowest: var(--oc-black) !important;
+  --background-base-lower: var(--oc-black) !important;
+  --background-base-low: var(--oc-black) !important;
+  --background-surface-high: var(--oc-black) !important;
+  --background-surface-higher: var(--oc-black) !important;
+  --background-surface-highest: var(--oc-black) !important;
+  --bg-base-primary: var(--oc-black) !important;
+  --bg-base-secondary: var(--oc-black) !important;
+  --bg-base-tertiary: var(--oc-black) !important;
+  --bg-surface-raised: var(--oc-black) !important;
+  --bg-surface-overlay: var(--oc-black) !important;
+  --bg-surface-overlay-tmp: var(--oc-black) !important;
+  --app-frame-background: var(--oc-black) !important;
+  --__header-bar-background: var(--oc-black) !important;
+
+  /* --- Surfaces historiques --- */
+  --background-primary: var(--oc-black) !important;
+  --background-secondary: var(--oc-black) !important;
+  --background-secondary-alt: var(--oc-black) !important;
+  --background-tertiary: var(--oc-black) !important;
+  --background-accent: var(--oc-black) !important;
+  --background-floating: var(--oc-black) !important;
+  --background-nested-floating: var(--oc-black) !important;
+  --background-mobile-primary: var(--oc-black) !important;
+  --background-mobile-secondary: var(--oc-black) !important;
+  --home-background: var(--oc-black) !important;
+  --chat-background-default: var(--oc-black) !important;
+  --channel-background-default: var(--oc-black) !important;
+  --custom-channel-members-bg: var(--oc-black) !important;
+  --activity-card-background: var(--oc-black) !important;
+  --card-background-default: var(--oc-black) !important;
+  --card-primary-bg: var(--oc-black) !important;
+  --modal-background: var(--oc-black) !important;
+  --modal-footer-background: var(--oc-black) !important;
+
+  /* Voiles de modale : jamais opaques, sinon la fenêtre des Paramètres se
+     détache d'un aplat noir au lieu de laisser voir l'application derrière. */
+  --modal-backdrop: rgba(0, 0, 0, 0.7) !important;
+  --bg-backdrop: rgba(0, 0, 0, 0.7) !important;
+  --bg-overlay-app-frame: rgba(0, 0, 0, 0.7) !important;
+  --backdrop-primary: rgba(0, 0, 0, 0.7) !important;
+  --channeltextarea-background: var(--oc-black) !important;
+  --input-background: var(--oc-black) !important;
+  --input-background-default: var(--oc-black) !important;
+  --embed-background: var(--oc-black) !important;
+  --embed-background-alternate: var(--oc-black) !important;
+  --background-code: var(--oc-black) !important;
+  --deprecated-card-bg: var(--oc-black) !important;
+  --deprecated-card-editable-bg: var(--oc-black) !important;
+  --deprecated-store-bg: var(--oc-black) !important;
+  --deprecated-quickswitcher-input-background: var(--oc-black) !important;
+  --deprecated-text-input-bg: var(--oc-black) !important;
+  --deprecated-text-input-border: var(--oc-border) !important;
+
+  /* --- États interactifs --- */
+  --background-mod-muted: var(--oc-hover-neutral) !important;
+  --background-mod-subtle: var(--oc-hover) !important;
+  --background-mod-normal: var(--oc-active) !important;
+  --background-mod-strong: var(--oc-selected) !important;
+  --background-modifier-hover: var(--oc-hover) !important;
+  --background-modifier-active: var(--oc-active) !important;
+  --background-modifier-selected: var(--oc-selected) !important;
+  --background-modifier-accent: var(--oc-border) !important;
+  --interactive-background-hover: var(--oc-hover) !important;
+  --interactive-background-active: var(--oc-active) !important;
+  --interactive-background-selected: var(--oc-selected) !important;
+  /* Le survol des messages est géré par la bulle, pas par ces tokens :
+     les laisser actifs superposait deux couches de survol. */
+  --message-background-hover: transparent !important;
+  --message-background-hover-default: transparent !important;
+  --background-mentioned: hsl(var(--oc-accent-hsl) / 0.14) !important;
+  --background-mentioned-hover: hsl(var(--oc-accent-hsl) / 0.20) !important;
+  --background-message-highlight: hsl(var(--oc-accent-hsl) / 0.14) !important;
+  --background-message-highlight-hover: hsl(var(--oc-accent-hsl) / 0.20) !important;
+
+  /* --- Bordures --- */
+  --border-faint: var(--oc-border) !important;
+  --border-muted: var(--oc-border) !important;
+  --border-subtle: var(--oc-border) !important;
+  --border-normal: var(--oc-border-strong) !important;
+  --border-strong: var(--oc-border-strong) !important;
+  --app-frame-border: var(--oc-border) !important;
+  --input-border: var(--oc-border) !important;
+
+  /* --- Ombres neutralisées : sur du noir pur, elles ne créent que des halos --- */
+  --elevation-low: none !important;
+  --elevation-medium: none !important;
+  --elevation-high: none !important;
+  --elevation-stroke: none !important;
+  --legacy-elevation-low: none !important;
+  --legacy-elevation-border: none !important;
+  --legacy-elevation-high: none !important;
+  --shadow-low: none !important;
+  --shadow-medium: none !important;
+  --shadow-high: none !important;
+  --shadow-border: none !important;
+
+  /* --- Texte --- */
+  --header-primary: var(--oc-text) !important;
+  --header-secondary: var(--oc-text-soft) !important;
+  --text-normal: var(--oc-text) !important;
+  --text-default: var(--oc-text) !important;
+  --text-primary: var(--oc-text) !important;
+  --text-secondary: var(--oc-text-soft) !important;
+  --text-tertiary: var(--oc-text-muted) !important;
+  --text-muted: var(--oc-text-muted) !important;
+  --text-feedback-muted: var(--oc-text-faint) !important;
+  --channels-default: var(--oc-text-soft) !important;
+  --interactive-normal: var(--oc-text-soft) !important;
+  --interactive-hover: #ffffff !important;
+  --interactive-active: #ffffff !important;
+  --interactive-muted: var(--oc-text-faint) !important;
+
+  /* --- Liens et marque --- */
+  --text-link: var(--oc-accent-bright) !important;
+  --text-link-low-saturation: var(--oc-accent) !important;
+  --text-brand: var(--oc-accent) !important;
+  --text-brand-low-saturation: var(--oc-accent-bright) !important;
+  --icon-brand: var(--oc-accent) !important;
+  --background-brand: var(--oc-accent) !important;
+  --border-brand: var(--oc-accent) !important;
+  --bg-brand: var(--oc-accent) !important;
+  --brand-360: var(--oc-accent-bright) !important;
+  --brand-400: var(--oc-accent-bright) !important;
+  --brand-500: var(--oc-accent) !important;
+  --brand-500-hsl: var(--oc-accent-hsl) !important;
+  --brand-560: var(--oc-accent-dim) !important;
+  --brand-560-hsl: var(--oc-hue) var(--oc-sat) 54% !important;
+  --brand-600: var(--oc-accent-dim) !important;
+  --brand-600-hsl: var(--oc-hue) var(--oc-sat) 54% !important;
+  --brand-experiment: var(--oc-accent) !important;
+  --brand-experiment-360: var(--oc-accent-bright) !important;
+  --brand-experiment-400: var(--oc-accent-bright) !important;
+  --brand-experiment-500: var(--oc-accent) !important;
+  --brand-experiment-560: var(--oc-accent-dim) !important;
+  --brand-experiment-600: var(--oc-accent-dim) !important;
+  --button-filled-brand-background: var(--oc-accent) !important;
+  --button-filled-brand-background-hover: var(--oc-accent-dim) !important;
+  --button-filled-brand-background-active: var(--oc-accent-dim) !important;
+  --button-filled-brand-text: var(--oc-on-accent) !important;
+  --button-outline-brand-text: var(--oc-accent) !important;
+  --button-outline-brand-border: var(--oc-accent) !important;
+  --control-brand-foreground: var(--oc-accent) !important;
+  --control-brand-foreground-new: var(--oc-accent) !important;
+
+  /* --- Boutons secondaires --- */
+  --button-secondary-background: var(--oc-black) !important;
+  --button-secondary-background-hover: var(--oc-hover) !important;
+  --button-secondary-background-active: var(--oc-active) !important;
+  --button-secondary-text: var(--oc-text) !important;
+
+  /* --- Scrollbars --- */
+  --scrollbar-auto-thumb: var(--oc-scrollbar-thumb) !important;
+  --scrollbar-auto-track: transparent !important;
+  --scrollbar-thin-thumb: var(--oc-scrollbar-thumb) !important;
+  --scrollbar-thin-track: transparent !important;
+  --scrollbar-auto-scrollbar-color-thumb: var(--oc-scrollbar-thumb) !important;
+  --scrollbar-auto-scrollbar-color-track: transparent !important;
+
+  /* --- Typographie et rayons (tokens natifs Discord) ---
+     Discord expose ses propres échelles : les redéfinir ici propage la
+     police et l'arrondi à toute l'interface sans cibler un seul composant. */
+  --font-primary: var(--oc-font) !important;
+  --font-display: var(--oc-font) !important;
+  --font-headline: var(--oc-font) !important;
+
+  --radius-xs: calc(var(--oc-radius) * 0.25) !important;
+  --radius-sm: calc(var(--oc-radius) * 0.5) !important;
+  --radius-md: calc(var(--oc-radius) * 0.75) !important;
+  --radius-lg: var(--oc-radius) !important;
+  --radius-xl: calc(var(--oc-radius) * 1.25) !important;
+  --radius-xxl: calc(var(--oc-radius) * 1.75) !important;
+  --radius-round: 999px !important;
+
+  /* Les tokens `danger` restent volontairement aux valeurs Discord :
+     un bouton « Supprimer » doit rester distinct de l'accent du thème. */
+}
+
+/* ============================================================================
+   3. FOND RACINE
+   Évite les flashs gris pendant les transitions et le chargement.
+   ========================================================================= */
+
+html,
+body,
+#app-mount {
+  background-color: var(--oc-black) !important;
+}
+
+/* NE JAMAIS peindre `#app-mount > div` : ses enfants directs incluent les
+   conteneurs de calques (layerContainer, popouts, modales), qui sont en
+   position fixed plein écran par-dessus l'interface. Un fond opaque sur eux
+   agit comme un rideau noir et masque toute l'application. */
+
+/* Filet de sécurité : ces conteneurs restent transparents quoi qu'il arrive,
+   même si une règle plus bas venait à les cibler par mégarde. */
+#app-mount :is(
+  [class*="layerContainer"],
+  [class*="layerContainerWrapper"],
+  [class*="popouts_"],
+  [class*="uiKitRoot"],
+  [class*="ositionLayer"]
+) {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}
+
+/* ============================================================================
+   4. SURFACES RÉSIDUELLES
+   Certains conteneurs peignent leur fond en dur au lieu de lire un token.
+   Les sélecteurs par préfixe [class*="nom_"] survivent aux changements de
+   hash entre les builds de Discord, contrairement aux classes complètes.
+   ========================================================================= */
+
+/* `[class*="content_"]` est volontairement absent : il matche aussi le
+   contenu des items de la barre latérale, et y découpait un rectangle noir
+   par-dessus le fond de l'élément sélectionné. */
+#app-mount :is(
+  [class*="chatContent_"],
+  [class*="chat_"],
+  [class*="contentRegion"],
+  [class*="contentRegionScroller"],
+  [class*="standardSidebarView"],
+  [class*="pageWrapper_"],
+  [class*="pageContainer_"],
+  [class*="mainPageScroller_"],
+  [class*="tabBody_"],
+  [class*="peopleColumn_"],
+  [class*="nowPlayingColumn_"]
+) {
+  background-color: var(--oc-black) !important;
+}
+
+/* Le conteneur des membres porte un id dynamique (members-<channelId>) :
+   le préfixe est donc obligatoire ici. */
+#app-mount :is(
+  [data-list-id="chat-messages"],
+  [data-list-id="guildsnav"],
+  [data-list-id="channels"],
+  [data-list-id^="members-"]
+) {
+  background-color: var(--oc-black) !important;
+}
+
+/* Colonnes latérales, panneau utilisateur et barres d'en-tête */
+#app-mount :is(
+  [class*="guilds_"],
+  [class*="sidebar_"],
+  [class*="sidebarRegion"],
+  [class*="privateChannels_"],
+  [class*="membersWrap_"],
+  [class*="members_"],
+  [class*="panels_"],
+  [class*="panelContainer_"],
+  [class*="themed_"],
+  [class*="titleContainer_"],
+  [class*="tabBar_"]
+) {
+  /* `background-color` et non le raccourci `background` : ce dernier
+     réinitialiserait les `background-image`, donc les icônes et masques. */
+  background-color: var(--oc-black) !important;
+}
+
+/* ============================================================================
+   5. BORDURES
+   Le noir absolu efface toute hiérarchie : ces filets 1px la restituent.
+   ========================================================================= */
+
+#app-mount :is(
+  [class*="guilds_"],
+  [class*="sidebar_"],
+  [class*="privateChannels_"],
+  [class*="membersWrap_"],
+  [class*="panels_"]
+) {
+  border-color: var(--oc-border) !important;
+}
+
+/* Séparateurs verticaux entre les grandes colonnes */
+#app-mount [class*="sidebar_"] {
+  border-right: 1px solid var(--oc-border) !important;
+}
+
+#app-mount [class*="membersWrap_"] {
+  border-left: 1px solid var(--oc-border) !important;
+}
+
+/* En-tête de salon */
+#app-mount :is([class*="title_"][class*="container"], [class*="titleContainer_"]) {
+  border-bottom: 1px solid var(--oc-border) !important;
+  box-shadow: none !important;
+}
+
+/* ============================================================================
+   6. SURFACES FLOTTANTES
+   Modales, menus, popovers et infobulles : noir pur + contour marqué,
+   sans quoi ils deviendraient indiscernables du fond.
+   ========================================================================= */
+
+/* Uniquement des rôles ARIA, jamais `popout_` / `contentWrapper_` / `menu_` :
+   ces conteneurs servent au positionnement et sont plus grands que le contenu
+   visible. Transparents à l'origine, un fond noir et une bordure les
+   révélaient : le sélecteur d'émojis se retrouvait flanqué d'un grand
+   rectangle vide. Leur fond vient déjà du token --background-floating. */
+/* `[role="dialog"]` est restreint aux vraies modales via `aria-modal` :
+   Discord pose aussi ce rôle sur des popouts non modaux, comme le sélecteur
+   d'émojis, dont le conteneur est ancré au composer et large de toute la zone
+   de chat. Un fond opaque y dessinait un grand rectangle vide. */
+/* `[class*="_"]` exige une classe hachée par Discord. Le voile de la modale
+   des Paramètres porte lui aussi `role="dialog" aria-modal="true"` mais n'a
+   AUCUNE classe : sans ce garde-fou, il était peint en noir opaque et
+   masquait l'application au lieu de la laisser transparaître. */
+#app-mount :is(
+  [role="dialog"][aria-modal="true"][class*="_"],
+  [role="menu"],
+  [role="listbox"],
+  [class*="autocomplete_"]
+) {
+  background-color: var(--oc-black) !important;
+  border: 1px solid var(--oc-border-strong) !important;
+  box-shadow: none !important;
+}
+
+#app-mount [role="tooltip"] :is([class*="tooltip_"], [class*="tooltipContent"]),
+#app-mount [class*="tooltip_"]:not([class*="tooltipPointer"]) {
+  background-color: var(--oc-black) !important;
+  border: 1px solid var(--oc-border-strong) !important;
+  color: var(--oc-text) !important;
+  box-shadow: none !important;
+}
+
+/* Une seule bordure par surface flottante : la plus externe. Ces conteneurs
+   s'imbriquent : l'infobulle riche d'un serveur empile un [role="tooltip"],
+   un [class*="tooltip_"] et son contenu, et chacun héritait d'un contour,
+   d'où l'effet de double cadre au survol. Les niveaux internes sont donc
+   remis à plat et laissent voir le fond du conteneur parent. */
+#app-mount :is(
+  [role="tooltip"],
+  [role="dialog"],
+  [role="menu"],
+  [class*="tooltip_"],
+  [class*="popout_"],
+  [class*="contentWrapper_"]
+) :is(
+  [role="tooltip"],
+  [role="menu"],
+  [class*="tooltip_"],
+  [class*="tooltipContent"],
+  [class*="popout_"],
+  [class*="contentWrapper_"]
+) {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Sélecteur d'émojis / GIF / autocollants.
+   Ne jamais viser `expressionPicker` : `expressionPickerPositionLayer__…` en
+   porte le nom alors que ce n'est qu'un cadre d'ancrage de 939x486, bien plus
+   grand que le sélecteur : le peindre dessinait un grand rectangle noir dans
+   le chat. On cible donc les classes du contenu (`emojiPicker`, `gifPicker`,
+   `stickerPicker`), et le `:not()` final garantit qu'aucune couche d'ancrage
+   ne pourra être peinte, même si Discord renomme ses modules. */
+#app-mount :is(
+  [id$="-picker-tab-panel"],
+  [class*="emojiPicker"],
+  [class*="gifPicker"],
+  [class*="stickerPicker"],
+  [class*="pickerContent_"],
+  [class*="drawerSizingWrapper"]
+):not([class*="ositionLayer"]) {
+  background-color: var(--oc-black) !important;
+}
+
+/* Arrondi du sélecteur : sans `overflow: hidden`. La grille des autocollants
+   est virtualisée et mesure son conteneur en JavaScript pour en déduire le
+   nombre de colonnes : le clipping faussait cette mesure et la réduisait à
+   deux colonnes espacées. Les coins sont donc arrondis sur le conteneur et
+   sur ses deux enfants opaques plutôt que rognés. */
+#app-mount [class*="drawerSizingWrapper"]:not([class*="ositionLayer"]) {
+  border-radius: var(--oc-radius) !important;
+  border: 1px solid var(--oc-border) !important;
+}
+
+#app-mount [class*="drawerSizingWrapper"] [class*="header_"] {
+  border-radius: var(--oc-radius) var(--oc-radius) 0 0 !important;
+}
+
+#app-mount [class*="drawerSizingWrapper"] :is(
+  [class*="emojiPicker"],
+  [class*="gifPicker"],
+  [class*="stickerPicker"]
+) {
+  border-radius: 0 0 var(--oc-radius) var(--oc-radius) !important;
+}
+
+/* Pied de modale */
+#app-mount [role="dialog"] footer {
+  background-color: var(--oc-black) !important;
+  border-top: 1px solid var(--oc-border) !important;
+}
+
+/* ============================================================================
+   7. SAISIE ET CONTENU
+   ========================================================================= */
+
+/* Zone de rédaction, barres de recherche : fond seul. */
+#app-mount :is(
+  [class*="scrollableContainer_"],
+  [class*="themedBackground_"],
+  [class*="searchBar_"],
+  [class*="inner_"][class*="search"]
+) {
+  background-color: var(--oc-black) !important;
+  box-shadow: none !important;
+}
+
+/* La bordure va sur le conteneur externe uniquement. `themedBackground_` est
+   imbriqué dans `scrollableContainer_` : border sur les deux = double cadre. */
+#app-mount [class*="scrollableContainer_"] {
+  border: 1px solid var(--oc-border) !important;
+}
+
+#app-mount [class*="themedBackground_"] {
+  border: none !important;
+}
+
+/* Aligne la zone de saisie sur la largeur des bulles. La marge gauche
+   s'ajoute au retrait que le composer possède déjà (~8px) : d'où le calc,
+   qui reste juste si tu modifies --oc-bubble-inset. */
+#app-mount [class*="channelTextArea_"] {
+  margin-left: calc(var(--oc-bubble-inset) - 8px) !important;
+  margin-right: 16px !important;
+}
+
+#app-mount :is(input, textarea, [contenteditable="true"][role="textbox"]) {
+  color: var(--oc-text) !important;
+  caret-color: var(--oc-accent) !important;
+}
+
+#app-mount :is(input, textarea)::placeholder {
+  color: var(--oc-text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Sélection de texte */
+#app-mount ::selection {
+  background: hsl(var(--oc-accent-hsl) / 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* Liens dans les messages : les boutons stylés en <a> sont exclus */
+#app-mount [data-list-id="chat-messages"] a[href]:not([role="button"]) {
+  color: var(--oc-accent-bright) !important;
+  text-underline-offset: 2px;
+}
+
+#app-mount [data-list-id="chat-messages"] a[href]:not([role="button"]):hover {
+  color: #ffffff !important;
+}
+
+/* Blocs de code et embeds : contour au lieu d'un fond gris */
+#app-mount :is(pre, code, [class*="embedFull_"], [class*="embedWrapper_"], [class*="card_"]) {
+  background-color: var(--oc-black) !important;
+  border-color: var(--oc-border) !important;
+}
+
+/* Barre latérale des mentions et des réponses */
+#app-mount [class*="isMentioned_"] {
+  background-color: hsl(var(--oc-accent-hsl) / 0.10) !important;
+}
+
+#app-mount [class*="isMentioned_"]::before {
+  background-color: var(--oc-accent) !important;
+}
+
+/* Réaction à laquelle on a participé. Discord la teinte en blurple sans
+   passer par les tokens --brand-*, déjà repeints plus haut : il faut donc
+   viser la classe directement. */
+#app-mount [class*="reactionMe_"] {
+  background-color: hsl(var(--oc-accent-hsl) / 0.16) !important;
+  border-color: var(--oc-accent) !important;
+}
+
+#app-mount [class*="reactionMe_"]:hover {
+  background-color: hsl(var(--oc-accent-hsl) / 0.24) !important;
+}
+
+#app-mount [class*="reactionMe_"] [class*="reactionCount_"] {
+  color: var(--oc-accent-bright) !important;
+}
+
+/* ============================================================================
+   8. SCROLLBARS
+   ========================================================================= */
+
+#app-mount [class*="scroller_"],
+#app-mount [class*="scrollerBase_"] {
+  scrollbar-width: thin;
+  scrollbar-color: var(--oc-scrollbar-thumb) transparent;
+}
+
+#app-mount ::-webkit-scrollbar {
+  width: var(--oc-scrollbar-size) !important;
+  height: var(--oc-scrollbar-size) !important;
+}
+
+#app-mount ::-webkit-scrollbar-track,
+#app-mount ::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: none !important;
+}
+
+#app-mount ::-webkit-scrollbar-thumb {
+  background: var(--oc-scrollbar-thumb) !important;
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
+  border-radius: 999px !important;
+}
+
+#app-mount ::-webkit-scrollbar-thumb:hover {
+  background: var(--oc-scrollbar-thumb-hover) !important;
+  background-clip: padding-box !important;
+}
+
+/* ============================================================================
+   9. ACCESSIBILITÉ
+   Le focus clavier doit rester visible malgré la suppression des ombres.
+   ========================================================================= */
+
+/* Les champs de saisie sont volontairement exclus : Discord dessine déjà
+   leur état de focus, et un contour tracé par-dessus encadrait toute la
+   barre de recherche d'un cadre rouge pleine largeur. */
+#app-mount :is(
+  a[href],
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"]
+):focus-visible {
+  outline: 2px solid var(--oc-accent) !important;
+  outline-offset: 1px !important;
+}
+
+/* L'éditeur Slate rogne son propre contour : il garde sa bordure à la place. */
+#app-mount :is([data-slate-editor="true"], [contenteditable="true"][role="textbox"]):focus-visible {
+  outline: none !important;
+}
+
+/* ============================================================================
+   10. FINITIONS MATERIAL
+   Reprend l'esprit de Material Discord (typographie, arrondis, bulles,
+   mouvement) sans en reprendre l'architecture. Chaque règle est
+   indépendante : supprimer un bloc n'en casse aucun autre.
+   ========================================================================= */
+
+/* --- 10.1 Typographie ---------------------------------------------------- */
+
+#app-mount,
+#app-mount :is(button, input, textarea, select, [class*="markup_"]) {
+  font-family: var(--oc-font) !important;
+}
+
+/* Les blocs de code gardent une chasse fixe. */
+#app-mount :is(pre, code, [class*="hljs"]) {
+  font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace !important;
+}
+
+/* Titres de salons et d'en-têtes légèrement plus affirmés. */
+#app-mount :is([class*="title_"], [class*="header_"] h1, [class*="header_"] h2) {
+  letter-spacing: -0.01em;
+}
+
+/* --- 10.2 Bulles de message ---------------------------------------------- */
+
+/* Chaque message devient une surface arrondie et délimitée. La bordure est
+   neutre : c'est sa version rouge qui donnait un quadrillage cramoisi, pas
+   le principe de l'englobage lui-même. */
+#app-mount [id^="chat-messages-"] {
+  background-color: var(--oc-bubble) !important;
+  border: 1px solid var(--oc-border) !important;
+  border-radius: var(--oc-radius) !important;
+  margin: 1px 16px 1px var(--oc-bubble-inset) !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  transition: background-color var(--oc-motion-fast), border-color var(--oc-motion-fast);
+}
+
+#app-mount [id^="chat-messages-"]:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: var(--oc-border-strong) !important;
+}
+
+/* Discord applique son propre survol au message interne, légèrement moins
+   haut que la bulle : superposé au nôtre, il éclaircissait le centre et
+   laissait les bandes de padding plus sombres. Un seul survol, sur la bulle. */
+#app-mount [id^="chat-messages-"] [class*="message_"],
+#app-mount [id^="chat-messages-"] [class*="message_"]:hover {
+  background-color: transparent !important;
+}
+
+/* Structure réelle d'un message :
+     <li id="chat-messages-…">            <- porte l'id, donc la bulle
+       <div class="message_ groupStart_ mentioned_ …">   <- porte les états
+   Viser ces classes sur l'élément qui porte l'id ne matche donc rien : elles
+   se trouvent sur l'enfant. C'est ce qui laissait le vide en haut des bulles
+   et les mentions en jaune. */
+#app-mount [id^="chat-messages-"] [class*="message_"] {
+  margin-top: 0 !important;
+  padding-top: 2px !important;
+}
+
+/* L'écart entre groupes est reporté sur la bulle, donc à l'extérieur. */
+#app-mount [id^="chat-messages-"]:has([class*="groupStart_"]) {
+  margin-top: 10px !important;
+}
+
+/* Groupes : Discord n'enveloppe pas les messages successifs d'un même auteur
+   dans un conteneur commun : chaque message reste un <li> indépendant. Une
+   bulle unique par groupe se simule en soudant les bulles voisines, côté
+   haut ou bas selon que le groupe se poursuit. */
+
+/* Message qui prolonge un groupe : soudé à celui du dessus. */
+#app-mount [id^="chat-messages-"]:not(:has([class*="groupStart_"])) {
+  margin-top: 0 !important;
+  border-top: none !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* Le bas est soudé par défaut, puis rouvert en fin de groupe. Écrire
+   directement « le suivant n'est pas un début de groupe » demanderait un
+   :has() dans un :has(), ce que CSS interdit : la règle serait invalide,
+   donc ignorée en silence. D'où cette formulation inversée. */
+#app-mount [id^="chat-messages-"] {
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Fin de groupe : le message suivant en démarre un autre, ou il n'y a pas
+   de message suivant (dernier de la liste, ou séparateur de date). */
+#app-mount [id^="chat-messages-"]:has(+ [id^="chat-messages-"] [class*="groupStart_"]),
+#app-mount [id^="chat-messages-"]:not(:has(+ [id^="chat-messages-"])) {
+  margin-bottom: 1px !important;
+  border-bottom: 1px solid var(--oc-border) !important;
+  border-bottom-left-radius: var(--oc-radius) !important;
+  border-bottom-right-radius: var(--oc-radius) !important;
+}
+
+/* Mention et message auquel on répond : Discord les teinte en jaune-orangé
+   et en bleu via ses propres règles. La couleur est portée par la bulle
+   seule ; l'enfant doit rester transparent, faute de coins arrondis son
+   rectangle déborderait du contour. */
+#app-mount [id^="chat-messages-"]:has([class*="mentioned_"]),
+#app-mount [id^="chat-messages-"]:has([class*="replying_"]) {
+  background-color: hsl(var(--oc-accent-hsl) / 0.14) !important;
+}
+
+#app-mount [class*="message_"]:is([class*="mentioned_"], [class*="replying_"]) {
+  background-color: transparent !important;
+}
+
+/* Le trait vertical est supprimé : il se cale sur le bord du conteneur, donc
+   en dehors de la bulle arrondie, et débordait à gauche. Le fond rouge
+   signale déjà la mention comme la réponse en cours. */
+#app-mount [class*="message_"]:is([class*="mentioned_"], [class*="replying_"])::before {
+  display: none !important;
+}
+
+/* Le séparateur « nouveaux messages » et les divers dividers restent nets. */
+#app-mount [class*="divider_"] {
+  border-radius: var(--radius-xs) !important;
+}
+
+/* --- 10.3 Arrondis et pilules -------------------------------------------- */
+
+#app-mount :is(
+  [class*="embedFull_"],
+  [class*="embedWrapper_"],
+  [class*="card_"],
+  [class*="attachment_"],
+  [class*="imageWrapper_"],
+  [class*="clickableWrapper_"],
+  [class*="reaction_"]
+) {
+  border-radius: var(--radius-md) !important;
+}
+
+/* Salons et conversations privées en pilules, comme les Navigation Drawers. */
+#app-mount :is([class*="link_"], [class*="channel_"] [class*="mainContent_"]) {
+  border-radius: var(--radius-round) !important;
+}
+
+/* Boutons pleins et secondaires en pilules. */
+#app-mount button:is([class*="lookFilled"], [class*="lookOutlined"]) {
+  border-radius: var(--radius-round) !important;
+}
+
+/* Zone de rédaction arrondie. */
+#app-mount [class*="scrollableContainer_"] {
+  border-radius: var(--oc-radius) !important;
+}
+
+/* Menus, modales et infobulles suivent le même rayon. */
+#app-mount :is([role="dialog"], [role="menu"], [class*="popout_"], [class*="autocomplete_"]) {
+  border-radius: var(--radius-lg) !important;
+}
+
+#app-mount [class*="tooltip_"]:not([class*="tooltipPointer"]) {
+  border-radius: var(--radius-sm) !important;
+}
+
+/* --- 10.4 Mouvement ------------------------------------------------------ */
+
+/* Transitions courtes sur les éléments réellement interactifs uniquement :
+   une transition globale sur `*` dégraderait le défilement du chat. */
+#app-mount :is(
+  button,
+  [role="button"],
+  [role="menuitem"],
+  [role="tab"],
+  [class*="link_"],
+  [class*="channel_"] [class*="mainContent_"],
+  [class*="listItem_"] [class*="wrapper_"]
+) {
+  transition:
+    background-color var(--oc-motion-fast),
+    color var(--oc-motion-fast),
+    border-radius var(--oc-motion-slow),
+    transform var(--oc-motion-fast) !important;
+}
+
+/* Icône de serveur : squircle qui s'arrondit à la sélection, façon Material. */
+#app-mount [data-list-id="guildsnav"] [class*="wrapper_"] [class*="childWrapper_"] {
+  border-radius: var(--radius-lg) !important;
+  transition: border-radius var(--oc-motion-slow), background-color var(--oc-motion-fast) !important;
+}
+
+#app-mount [data-list-id="guildsnav"] [class*="wrapper_"]:hover [class*="childWrapper_"],
+#app-mount [data-list-id="guildsnav"] [class*="selected_"] [class*="childWrapper_"] {
+  border-radius: var(--radius-round) !important;
+}
+
+/* Le curseur de sélection des serveurs prend la couleur d'accent. */
+#app-mount [class*="guilds_"] [class*="pill_"] span {
+  background-color: var(--oc-accent) !important;
+}
+
+/* Respecte la préférence système de réduction des animations. */
+@media (prefers-reduced-motion: reduce) {
+  #app-mount * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================================
+   12. CARTES DES PAGES DE RÉGLAGES
+   Les cartes de plugins et de thèmes tirent leur fond d'un token désormais
+   noir, et n'ont pas de bordure propre : sans contour explicite, la page
+   entière paraît vide. Ces classes sont stables (préfixées par leur client).
+   ========================================================================= */
+
+/* `.vc-addon-header` est volontairement absent : imbriqué dans la carte, il
+   y ajoutait un second cadre. */
+#app-mount :is(
+  .vc-addon-card,
+  .vc-settings-card,
+  .vc-plugins-info-card,
+  .bd-addon-card
+) {
+  background-color: var(--oc-black) !important;
+  border: 1px solid var(--oc-border-strong) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+#app-mount .vc-addon-card :is(.vc-addon-header, .vc-addon-card) {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+/* ============================================================================
+   13. COUCHES DE POSITIONNEMENT
+   Aucune règle sur la vue Paramètres : Discord affiche déjà sa modale sur
+   l'application assombrie, et toute tentative de repeindre la couche ou son
+   voile masquait ce rendu natif au lieu de l'améliorer.
+   Ne subsiste que le garde-fou sur les couches d'ancrage.
+   ========================================================================= */
+
+/* `positionLayer` et `expressionPickerPositionLayer` portent aussi `layer_`,
+   mais ce ne sont que des cadres d'ancrage, plus grands que le contenu qu'ils
+   positionnent : les peindre dessine un rectangle parasite. */
+#app-mount [class*="ositionLayer"],
+[class*="ositionLayer"] {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}
+
+/* ============================================================================
+   11. BARRE DE TITRE LEGCORD
+   Sans effet sur Vencord/Vesktop : ces sélecteurs n'y existent pas.
+   Legcord peint déjà sa barre avec --background-base-lowest, donc elle suit
+   le thème ; ce bloc n'ajoute que la séparation et les états des contrôles.
+   ========================================================================= */
+
+.titlebar {
+  background-color: var(--oc-black) !important;
+  border-bottom: 1px solid var(--oc-border) !important;
+}
+
+#window-controls-container :is(#minimize, #maximize, #quit) {
+  transition: background-color var(--oc-motion-fast) !important;
+}
+
+#window-controls-container :is(#minimize, #maximize):hover {
+  background-color: var(--oc-hover) !important;
+}
+
+/* Fermeture en rouge franc : c'est une action destructive, elle doit rester
+   identifiable indépendamment de l'accent du thème. */
+#window-controls-container #quit:hover {
+  background-color: #d83c3e !important;
+}
+
+#window-controls-container #quit:hover #quit-icon {
+  background-color: #ffffff !important;
+}

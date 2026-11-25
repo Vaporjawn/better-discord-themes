@@ -1,0 +1,25 @@
+/**
+ * @name Shine
+ * @description Glossy, glassy theme based on a twitter design.
+ * @author Blade0, Zeealeid
+ * @authorId 1124341362955919371
+ * @version 1.2
+ * @updateUrl https://blade04208.github.io/shine/shine.theme.css
+ * @source https://github.com/Blade04208/shine
+ * @invite KEcCnVuTV7
+ */
+/* This contains the actual theme, removing will remove the theme, so dont ok thank you */
+@import url(https://blade04208.github.io/shine/src/import.css);
+
+:root {
+    --shine-gap: 8px;
+    /* gap between edge of app and chat content, accepts: any size  default: 8px */
+    --shine-radius: 12px;
+    /* border radius of chat content, accepts: any size  default: 12px */
+    --shine-base: default;
+    /* base color of non-nitro themes, accepts: any color  default: default */
+    --shine-fog: true;
+    /* Controls "prog-blur"/fog on surfaces like behind chatbox, set to false if causing visual bugs, accepts: true | false | no-threads, default: true */
+    --shine-indicator: true;
+    /*Controls the "No one is typing" indicator, accepts: true | false, default: true */
+}

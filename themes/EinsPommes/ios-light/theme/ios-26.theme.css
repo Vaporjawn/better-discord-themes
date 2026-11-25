@@ -1,0 +1,279 @@
+/**
+ * @name iOS 26
+ * @description iOS 26-inspired Discord theme with latest iOS features, enhanced blur effects, and modern UI elements.
+ * @author EinsPommes
+ * @version 1.0.0
+ * @website https://github.com/EinsPommes/ios-light
+ * @source https://github.com/EinsPommes/ios-light/blob/main/theme/ios-26.theme.css
+*/
+
+/* import theme modules */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+@import url('https://einspommes.github.io/ios-light/src/main.css');
+@import url('https://einspommes.github.io/ios-light/src/colors.css');
+@import url('https://einspommes.github.io/ios-light/src/ascii.css');
+@import url('https://einspommes.github.io/ios-light/src/panel-labels.css');
+@import url('https://einspommes.github.io/ios-light/src/spotify-bar.css');
+@import url('https://einspommes.github.io/ios-light/src/unrounding.css');
+@import url('https://einspommes.github.io/ios-light/src/ios.css');
+
+body {
+    /* iOS 26-specific overrides */
+    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    --code-font: 'SF Mono', 'Monaco', 'Menlo', monospace;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+
+    /* iOS 26 sizes - slightly tighter spacing */
+    --gap: 14px;
+    --divider-thickness: 0.5px;
+    --border-thickness: 0.5px;
+    --border-hover-transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* iOS 26 animations - enhanced */
+    --animations: on;
+    --list-item-transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --dms-icon-svg-transition: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* iOS 26 top bar */
+    --top-bar-height: 44px;
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: left;
+    --subtle-top-bar-title: on;
+
+    /* iOS 26 dms button */
+    --custom-dms-icon: custom;
+    --dms-icon-svg-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 27' width='24' height='24'%3E%3Cpath fill='currentColor' d='M0 0h7v1H6v1H5v1H4v1H3v1H2v1h5v1H0V6h1V5h1V4h1V3h1V2h1V1H0m13 2h5v1h-1v1h-1v1h-1v1h3v1h-5V7h1V6h1V5h1V4h-3m8 5h1v5h1v-1h1v1h-1v1h1v-1h1v1h-1v3h-1v1h-2v1h-1v1h1v-1h2v-1h1v2h-1v1h-2v1h-1v-1h-1v1h-6v-1h-1v-1h-1v-2h1v1h2v1h3v1h1v-1h-1v-1h-3v-1h-4v-4h1v-2h1v-1h1v-1h1v2h1v1h1v-1h1v1h-1v1h2v-2h1v-2h1v-1h1M8 14h2v1H9v4h1v2h1v1h1v1h1v1h4v1h-6v-1H5v-1H4v-5h1v-1h1v-2h2m17 3h1v3h-1v1h-1v1h-1v2h-2v-2h2v-1h1v-1h1m1 0h1v3h-1v1h-2v-1h1v-1h1'%3E%3C/path%3E%3C/svg%3E");
+    --custom-dms-background: color;
+    --dms-background-color: linear-gradient(135deg, #007AFF, #5856D6, #FF2D55);
+
+    /* iOS 26 transparency/blur - enhanced blur with glass effect */
+    --transparency-tweaks: on;
+    --panel-blur: on;
+    --blur-amount: 30px;
+    --bg-floating: rgba(255, 255, 255, 0.7);
+    --glass-effect: on; /* Enable glassmorphism effect */
+
+    /* iOS 26 unrounding */
+    --unrounding: off;
+
+    /* iOS 26 styling */
+    --ascii-titles: off;
+    --ascii-loader: off;
+
+    /* iOS 26 panel labels */
+    --label-color: rgba(0, 0, 0, 0.45);
+    --label-font-weight: 600;
+    --label-hover-color: #007AFF;
+}
+
+/* iOS 26 glass system variables */
+:root {
+    /* iOS 26 glass system */
+    --ios-blur-strong: 32px;
+    --ios-blur-medium: 24px;
+    --ios-blur-light: 18px;
+
+    --ios-glass-bg: rgba(255, 255, 255, 0.72);
+    --ios-glass-bg-strong: rgba(255, 255, 255, 0.82);
+
+    --ios-glass-border: rgba(0, 0, 0, 0.08);
+}
+
+/* color options - iOS 26 theme */
+:root {
+    --colors: on;
+
+    /* text colors - iOS 26 style */
+    --text-0: #FFFFFF;
+    --text-1: #000000;
+    --text-2: #000000;
+    --text-3: rgba(0, 0, 0, 0.88);
+    --text-4: rgba(0, 0, 0, 0.65);
+    --text-5: rgba(0, 0, 0, 0.45);
+
+    /* background and dark colors - iOS 26 light theme with glass effect */
+    --bg-1: rgba(0, 0, 0, 0.06);
+    --bg-2: rgba(0, 0, 0, 0.04);
+    --bg-3: rgba(245, 245, 247, 0.6); /* iOS system gray 6 with transparency */
+    --bg-4: rgba(255, 255, 255, 0.85); /* main background with glass effect */
+    --hover: rgba(0, 0, 0, 0.05);
+    --active: rgba(0, 0, 0, 0.1);
+    --active-2: rgba(0, 0, 0, 0.15);
+    --message-hover: rgba(0, 0, 0, 0.02);
+
+    /* accent colors - iOS 26 blue with enhanced gradients */
+    --accent-1: #007AFF;
+    --accent-2: #007AFF;
+    --accent-3: #007AFF;
+    --accent-4: #0051D5;
+    --accent-5: #0040AA;
+    --accent-new: #FF3B30;
+    --mention: linear-gradient(to right, rgba(0, 122, 255, 0.1) 40%, transparent);
+    --mention-hover: linear-gradient(to right, rgba(0, 122, 255, 0.15) 40%, transparent);
+    --reply: linear-gradient(to right, rgba(0, 0, 0, 0.04) 40%, transparent);
+    --reply-hover: linear-gradient(to right, rgba(0, 0, 0, 0.06) 40%, transparent);
+
+    /* status indicator colors - iOS 26 colors */
+    --online: #34C759;
+    --dnd: #FF3B30;
+    --idle: #FF9500;
+    --streaming: #5856D6;
+    --offline: rgba(0, 0, 0, 0.35);
+
+    /* border colors */
+    --border-light: rgba(0, 0, 0, 0.1);
+    --border: rgba(0, 0, 0, 0.15);
+    --border-hover: rgba(0, 122, 255, 0.5);
+    --button-border: rgba(0, 0, 0, 0.15);
+
+    /* base colors - iOS 26 color palette */
+    --red-1: #FF3B30;
+    --red-2: #FF3B30;
+    --red-3: #FF3B30;
+    --red-4: #D70015;
+    --red-5: #B50012;
+
+    --green-1: #34C759;
+    --green-2: #34C759;
+    --green-3: #34C759;
+    --green-4: #28A745;
+    --green-5: #1E7E34;
+
+    --blue-1: #007AFF;
+    --blue-2: #007AFF;
+    --blue-3: #007AFF;
+    --blue-4: #0051D5;
+    --blue-5: #0040AA;
+
+    --yellow-1: #FFCC00;
+    --yellow-2: #FFCC00;
+    --yellow-3: #FFCC00;
+    --yellow-4: #E6B800;
+    --yellow-5: #CC9900;
+
+    --purple-1: #5856D6;
+    --purple-2: #5856D6;
+    --purple-3: #5856D6;
+    --purple-4: #4A48C4;
+    --purple-5: #3D3BB2;
+
+    /* Discord background variables - iOS 26 with glass effect */
+    --background-base: rgba(255, 255, 255, 0.85) !important;
+    --background-base-low: transparent !important;
+    --background-base-lower: transparent !important;
+    --background-base-lowest: transparent !important;
+    --background-secondary: rgba(255, 255, 255, 0.8) !important;
+    --background-secondary-alt: rgba(245, 245, 247, 0.6) !important;
+    --background-tertiary: rgba(245, 245, 247, 0.5) !important;
+    --background-accent: rgba(0, 0, 0, 0.06) !important;
+    --background-floating: rgba(255, 255, 255, 0.75) !important;
+    --background-mobile-primary: #FFFFFF !important;
+    --background-mobile-secondary: #F5F5F7 !important;
+    --background-modifier-hover: rgba(0, 0, 0, 0.05) !important;
+    --background-modifier-active: rgba(0, 0, 0, 0.1) !important;
+    --background-modifier-selected: rgba(0, 122, 255, 0.12) !important;
+    --background-modifier-accent: rgba(0, 0, 0, 0.06) !important;
+    --background-mentioned: rgba(0, 122, 255, 0.1) !important;
+    --background-mentioned-hover: rgba(0, 122, 255, 0.15) !important;
+    --background-message-hover: rgba(0, 0, 0, 0.02) !important;
+    --background-message-automod: rgba(255, 59, 48, 0.12) !important;
+    --background-message-automod-hover: rgba(255, 59, 48, 0.18) !important;
+    --background-message-highlight: rgba(0, 122, 255, 0.1) !important;
+    --background-message-highlight-hover: rgba(0, 122, 255, 0.15) !important;
+    --background-primary: rgba(255, 255, 255, 0.85) !important;
+    --background-secondary-alt: rgba(245, 245, 247, 0.6) !important;
+    --background-tertiary: rgba(245, 245, 247, 0.5) !important;
+    --background-surface-high: rgba(0, 0, 0, 0.06) !important;
+    --background-surface-low: transparent !important;
+    --background-surface-lowest: transparent !important;
+    --brand-360: #007AFF !important;
+    --text-muted: rgba(0, 0, 0, 0.45) !important;
+    --text-normal: rgba(0, 0, 0, 0.88) !important;
+    --text-positive: rgba(0, 0, 0, 0.88) !important;
+    --text-link: #007AFF !important;
+    --text-link-low-saturation: #007AFF !important;
+    --interactive-normal: rgba(0, 0, 0, 0.88) !important;
+    --interactive-hover: rgba(0, 0, 0, 0.88) !important;
+    --interactive-active: rgba(0, 0, 0, 0.88) !important;
+    --interactive-muted: rgba(0, 0, 0, 0.45) !important;
+    --channeltextarea-background: rgba(0, 0, 0, 0.06) !important;
+    --input-background: rgba(0, 0, 0, 0.06) !important;
+    --input-placeholder-text: rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ===============================
+   iOS 26 – Glass Panels
+   =============================== */
+.visual-refresh {
+    /* Left sidebar (guilds + channels) */
+    [class*="guilds"],
+    [class*="sidebar"],
+    [class*="Sidebar"] {
+        background: var(--ios-glass-bg) !important;
+        backdrop-filter: blur(var(--ios-blur-strong)) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(var(--ios-blur-strong)) saturate(180%) !important;
+        border-right: 0.5px solid var(--ios-glass-border) !important;
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 12px 30px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Member list (right side) */
+    [class*="membersWrap"],
+    [class*="members"],
+    [class*="Members"] {
+        background: var(--ios-glass-bg) !important;
+        backdrop-filter: blur(var(--ios-blur-medium)) saturate(170%) !important;
+        -webkit-backdrop-filter: blur(var(--ios-blur-medium)) saturate(170%) !important;
+        border-left: 0.5px solid var(--ios-glass-border) !important;
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 12px 30px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Chat Background - blur only the wrapper, not messages */
+    [class*="messagesWrapper"],
+    [class*="MessagesWrapper"] {
+        position: relative;
+    }
+
+    [class*="messagesWrapper"]::before,
+    [class*="MessagesWrapper"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--ios-glass-bg);
+        backdrop-filter: blur(var(--ios-blur-light)) saturate(160%);
+        -webkit-backdrop-filter: blur(var(--ios-blur-light)) saturate(160%);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Actual messages above blur */
+    [class*="messagesWrapper"] > *,
+    [class*="MessagesWrapper"] > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Channel Text Input (iOS Keyboard-Bar-Vibe) */
+    [class*="channelTextArea"],
+    [class*="ChannelTextArea"] {
+        background: var(--ios-glass-bg-strong) !important;
+        backdrop-filter: blur(var(--ios-blur-medium)) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(var(--ios-blur-medium)) saturate(180%) !important;
+        border: 0.5px solid var(--ios-glass-border) !important;
+        border-radius: 16px !important;
+    }
+
+    /* Top Bar / Header (Navigation Blur) */
+    [class*="titleBar"],
+    [class*="TitleBar"],
+    [class*="container"]:has([class*="toolbar"]) {
+        background: var(--ios-glass-bg) !important;
+        backdrop-filter: blur(var(--ios-blur-medium)) saturate(160%) !important;
+        -webkit-backdrop-filter: blur(var(--ios-blur-medium)) saturate(160%) !important;
+        border-bottom: 0.5px solid var(--ios-glass-border) !important;
+    }
+}

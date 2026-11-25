@@ -1,0 +1,184 @@
+/**
+ * @name Gruvbox Ember
+ * @author ReCore
+ * @description Gruvbox's warm retro ground with an ember-orange accent, cream type and a soft paper grain.
+ * @version 1.0.0
+ * @license MIT
+ * @source https://github.com/morhetz/gruvbox
+ */
+
+/*
+ * Gruvbox Ember for Discord and ReCore: the dark warm palette, with the
+ * bright orange as the signal and a little paper grain over the window.
+ */
+
+:root,
+.theme-dark {
+    color-scheme: dark;
+
+    /* Gruvbox: palette */
+    --gb-bg0-hard: #1d2021;
+    --gb-bg0: #282828;
+    --gb-bg1: #3c3836;
+    --gb-bg2: #504945;
+    --gb-bg3: #665c54;
+    --gb-fg0: #fbf1c7;
+    --gb-fg1: #ebdbb2;
+    --gb-fg2: #d5c4a1;
+    --gb-fg3: #bdae93;
+    --gb-fg4: #a89984;
+    --gb-orange: #fe8019;
+    --gb-yellow: #fabd2f;
+    --gb-green: #b8bb26;
+    --gb-aqua: #8ec07c;
+    --gb-blue: #83a598;
+    --gb-purple: #d3869b;
+    --gb-red: #fb4934;
+
+    --rl-accent: #fe8019;
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: #fabd2f;
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 55%, #fbf1c7);
+    --rl-radius: 4px;
+    --rl-font: "Iosevka", "Pixel Operator", "gg sans", monospace;
+    --rl-tracking: 0.01em;
+    --rl-motion: full;
+    --rl-panel-opacity: 86%;
+    --rl-background-dim: 74%;
+    --rl-background-image: linear-gradient(150deg, #1d2021 0%, #282828 52%, #3c3836 100%);
+    --rl-scanline-opacity: 0.06;
+    --rl-grain-opacity: 0.08;
+    --rl-vignette-opacity: 0.22;
+    --rl-flicker-duration: 7s;
+    --rl-beam-opacity: 0.1;
+    --rl-frame-opacity: 0.2;
+
+    /* Backgrounds */
+    --background-primary: #282828;
+    --background-secondary: #1d2021;
+    --background-secondary-alt: #1d2021;
+    --background-tertiary: #1d2021;
+    --background-floating: #3c3836;
+    --background-nested-floating: #32302f;
+    --background-base-lowest: #1d2021;
+    --background-base-lower: #282828;
+    --background-base-low: #1d2021;
+    --background-surface-high: #3c3836;
+    --background-surface-higher: #504945;
+    --background-surface-highest: #665c54;
+    --background-code: #1d2021;
+    --background-tooltip: #3c3836;
+    --chat-background: #282828;
+    --channeltextarea-background: #1d2021;
+    --input-background-default: #1d2021;
+    --background-accent: #504945;
+
+    /* Text */
+    --text-normal: #ebdbb2;
+    --text-default: #ebdbb2;
+    --text-strong: #fbf1c7;
+    --text-muted: #bdae93;
+    --text-subtle: #a89984;
+    --header-primary: #fbf1c7;
+    --header-secondary: #d5c4a1;
+    --channels-default: #d5c4a1;
+    --channel-icon: #a89984;
+    --interactive-normal: #d5c4a1;
+    --interactive-hover: #ebdbb2;
+    --interactive-active: #fbf1c7;
+    --interactive-muted: #a89984;
+    --text-link: #8ec07c;
+
+    /* Accents */
+    --brand-experiment: #fe8019;
+    --brand-360: #fabd2f;
+    --brand-500: #fe8019;
+    --brand-530: #e97312;
+    --brand-560: #d0640c;
+    --brand-600: #b55607;
+    --control-primary-background-default: #fe8019;
+    --control-primary-background-hover: #e97312;
+    --control-primary-text-default: #1d2021;
+    --control-secondary-background-default: #3c3836;
+    --control-secondary-background-hover: #504945;
+
+    /* Status */
+    --status-positive: #b8bb26;
+    --status-warning: #fabd2f;
+    --status-danger: #fb4934;
+    --status-green: #b8bb26;
+    --status-yellow: #fabd2f;
+    --online: #b8bb26;
+    --idle: #fabd2f;
+
+    /* Borders and surfaces */
+    --border-subtle: #3c3836;
+    --border-normal: #504945;
+    --border-strong: #665c54;
+    --background-modifier-hover: rgba(254, 128, 25, 0.08);
+    --background-modifier-active: rgba(254, 128, 25, 0.14);
+    --background-modifier-selected: rgba(254, 128, 25, 0.2);
+    --background-modifier-accent: #3c3836;
+    --message-background-hover: rgba(254, 128, 25, 0.06);
+    --avatar-background: #504945;
+    --app-frame-background: #1d2021;
+    --app-frame-border: #3c3836;
+    --spine-default: #665c54;
+
+    /* Typography and shape */
+    --font-primary: var(--rl-font);
+    --font-display: var(--rl-font);
+    --font-code: "Iosevka", "Cascadia Code", monospace;
+    --radius-xs: 0px;
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 6px;
+    --radius-round: 9999px;
+}
+
+[class*="guilds_"] {
+    background: #1d2021;
+    border-right: 1px solid #3c3836;
+}
+
+[class*="sidebarList_"],
+[class*="privateChannels_"],
+[class*="membersWrap_"] {
+    background: #1d2021;
+}
+
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: transparent;
+}
+
+[class*="channelTextArea_"],
+[class*="textArea_"] {
+    background: #1d2021;
+    border: 1px solid #504945;
+    border-radius: 4px;
+}
+
+[class*="message_"]:hover {
+    background: rgba(254, 128, 25, 0.06);
+    border-radius: 2px;
+}
+
+[class*="selected_"],
+[class*="selected-"] {
+    background: rgba(254, 128, 25, 0.2);
+    border-radius: 2px;
+}
+
+[class*="card_"],
+[class*="modal_"],
+[class*="popout_"],
+[class*="menu_"] {
+    border: 1px solid #504945;
+    border-radius: 4px;
+}
+
+::selection {
+    background: #fe8019;
+    color: #1d2021;
+}

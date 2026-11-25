@@ -1,0 +1,96 @@
+/**
+ * @name CustomizableTyufunTheme
+ * @author TYUFUN
+ * @version 1.0.0
+ * @description main fully customizable theme 
+ * @source https://github.com/TYUFUN/CustomizableTyufunTheme
+ * @updateUrl https://raw.githubusercontent.com/TYUFUN/CustomizableTyufunTheme/main/CustomizableTyufunTheme.theme.css
+* @authorId 796890999158734898
+ */
+
+ /* dont change the import! */
+ @import url(https://tyufun.github.io/CustomizableTyufunTheme/coretheme.css);
+
+/* Insert the link into the @import url(link), then type its name into the --font: ;
+allowed sources: github, google fonts, gitlab, Codeberg */
+@import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC&display=swap');
+
+/* IMPORTANT INFORMATION!
+if you dont know css this is a short guide:
+what does  rgba(255, 255, 255, 0.3) mean?
+rgba means red, green, blue, and alpha (transparency) 
+so if you want to change the transparency of an element, you adjust the last value (0.3 in this case).
+Transperency can be from 0 (fully transparent) to 1 (fully opaque)
+AND of course you always can change not only the transparency but also the color of an element.
+you can use any color picker, you need the HEX or RGB values. BUT if you want transparency too,
+you have to use the rgba() function first 3 numbers is color RGB and last one is transparency */
+  :root {
+     /* font 
+     The font that has already been imported is "WDXL Lubrifont SC", if you want to default discord font use none */
+     --font: none;
+
+
+
+    /* Main theme color (actually doesn't change much, it is used for borders, hovers, and highlights)*/
+    --main-theme-color: rgba(255, 255, 255, 0.3);
+
+    /* Background image (you can only use images from sources like github, imgur, gitlub, codeberg,
+     AND link must end with .jpeg, .png, or .gif or any other image extension)*/
+    --background-image: url(https://i.imgur.com/6QOMD5Y.jpeg);
+
+    /* main bg transparency */
+    --theme-transparency: rgba(0, 0, 0, 0.3);
+
+
+    /* transperency for spotify player (if you use plugin) AND control panel (where you can mute microphone, headphones, etc.) */
+    --vc-spotify-player-transparency: rgba(0, 0, 0, 0.3);
+    /* height ONLY for spotify player (for example: 50px) */
+    --vc-spotify-player-height: ;
+
+    /* transparency and color for message box (where you can type messages) */
+    --message-box-transparency: rgba(0, 0, 0, 0.6);
+
+    /* scrollbar color */
+    --scrollbar-color: rgba(255, 255, 255, 0.2);
+
+     /* background image for settings */
+     --background-settings-image: url(https://i.imgur.com/VFX5gNu.jpeg);
+     /* transparency for settings */
+     --settings-transparency: rgba(0, 0, 0, 0.8);
+
+     /* transparency for user profile */
+     --user-profile-transparency: rgba(0, 0, 0, 1);
+
+     /* transparency for user mini-profile */
+     --user-mini-profile-transparency: rgba(0, 0, 0, 1);
+
+
+     /* mentioned color */
+          --mentioned-color:  rgba(172, 152, 22, 0.1);
+          /* --mentioned-color: rgba(96, 68, 129, 0.2); */
+          --mentioned-hover-color: rgba(172, 152, 22, 0.2);
+
+          
+     /* private channels icon. If you want to have default icon write like this:  */
+     /* --dm-icon-image: none;
+     --display-icon-image: ; */
+          --dm-icon-image: url(https://i.imgur.com/oEzZRqe.jpeg);
+          --display-icon-image: none;
+
+
+     /* hover color for messages */
+     --hover-color: rgba(255, 255, 255, 0.1);
+
+     /* context menu (right click menu and others) */
+     --context-menu-transparency: rgba(0, 0, 0, 1);
+     --server-columns: 1;
+     /* recommended size */
+     --server-slot-size : 54px; 
+
+
+     /* BE CAREFUL WITH THESE SETTINGS! THEY CAN WORK UNEXPECTEDLY AND CHANGE THE WHOLE THEME */
+     /* text color */
+     --text-color: ;
+     /* font size */
+     --font-size: ;
+}

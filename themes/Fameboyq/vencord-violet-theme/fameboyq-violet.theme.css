@@ -1,0 +1,141 @@
+/**
+ * @name Fameboyq Violet White
+ * @description Clean aesthetic White & Violet theme for Vencord, BetterDiscord, and Vesktop.
+ * @author Fameboyq (https://github.com/Fameboyq)
+ * @version 1.1.0
+ * @website https://fameboyq.fun
+ * @source https://github.com/Fameboyq/vencord-violet-theme
+ */
+
+/* Import midnight base engine */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+body {
+    /* font */
+    --font: 'gg sans', 'Segoe UI', sans-serif;
+    --code-font: 'Consolas', monospace;
+    font-weight: 400;
+
+    /* geometry */
+    --gap: 12px;
+    --divider-thickness: 3px;
+    --border-thickness: 1px;
+
+    /* animations */
+    --animations: on;
+    --list-item-transition: 0.2s ease;
+    --border-hover-transition: 0.2s ease;
+
+    /* top bar & window controls */
+    --top-bar-height: var(--gap);
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: off;
+    --custom-window-controls: on;
+    --window-control-size: 14px;
+
+    /* DMs home icon - white to violet gradient */
+    --custom-dms-icon: custom;
+    --dms-icon-svg-url: url('https://refact0r.github.io/midnight-discord/assets/Font_Awesome_5_solid_moon.svg');
+    --dms-icon-color-before: #ddd6fe;
+    --dms-icon-color-after: #ffffff;
+    --dms-background-color: linear-gradient(135deg, #ffffff, #c084fc, #7e22ce);
+
+    --small-user-panel: on;
+}
+
+/* White-Violet Color Palette */
+:root {
+    --colors: on;
+
+    /* crisp white & lavender text */
+    --text-0: #0e0c16;
+    --text-1: #ffffff;              /* pure bright white */
+    --text-2: #ede9fe;              /* snow white with lavender tint */
+    --text-3: #c4b5fd;              /* soft lilac */
+    --text-4: #8b5cf6;              /* muted violet */
+    --text-5: #6366f1;              /* subtle timestamp */
+
+    /* dark amethyst & deep violet-slate backgrounds */
+    --bg-1: #2c2447;                /* active buttons */
+    --bg-2: #211b38;                /* cards / hovers */
+    --bg-3: #171328;                /* secondary panels */
+    --bg-4: #0e0c18;                /* main deep backdrop */
+
+    /* interactive hovers with lavender-white glow */
+    --hover: rgba(192, 132, 252, 0.12);
+    --active: rgba(192, 132, 252, 0.22);
+    --active-2: rgba(255, 255, 255, 0.16);
+    --message-hover: rgba(255, 255, 255, 0.03);
+
+    /* accents: glowing violet & white */
+    --accent-1: #ffffff;            /* links and crisp white highlights */
+    --accent-2: #c084fc;            /* radiant lilac */
+    --accent-3: #a855f7;            /* vibrant violet buttons */
+    --accent-4: #9333ea;            /* hovered buttons */
+    --accent-5: #7e22ce;            /* active pressed buttons */
+    --accent-new: #ffffff;          /* white notification pills */
+
+    /* mentions & replies: soft lavender wash */
+    --mention: linear-gradient(90deg, rgba(168, 85, 247, 0.28) 0%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
+    --mention-hover: linear-gradient(90deg, rgba(168, 85, 247, 0.38) 0%, rgba(255, 255, 255, 0.1) 60%, transparent 100%);
+    --reply: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0%, transparent 80%);
+    --reply-hover: linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0%, transparent 80%);
+
+    /* borders: subtle white-violet edges */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border: rgba(192, 132, 252, 0.25);
+    --border-hover: rgba(255, 255, 255, 0.45);
+    --button-border: rgba(255, 255, 255, 0.25);
+
+    /* status indicator colors */
+    --online: #4ade80;
+    --dnd: #f43f5e;
+    --idle: #fbbf24;
+    --streaming: #c084fc;
+    --offline: #6d6c82;
+}
+
+/* Selected channel: clean white glow with lilac border */
+.modeSelected__2ea32 .link__2ea32 {
+    background: linear-gradient(90deg, rgba(168, 85, 247, 0.32), rgba(255, 255, 255, 0.08)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Hovered channel */
+.modeMuted__2ea32:hover .link__2ea32,
+.wrapper__2ea32:hover .link__2ea32 {
+    background: rgba(192, 132, 252, 0.12) !important;
+    border: 1px solid rgba(192, 132, 252, 0.2) !important;
+}
+
+/* Server pill unread badge */
+.item__58105 {
+    background: #ffffff !important;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(192, 132, 252, 0.6) !important;
+}
+
+/* Mentions badge */
+.numberBadge__2b1f5 {
+    background: linear-gradient(135deg, #c084fc, #9333ea) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.6) !important;
+}
+
+/* Chat text box glowing border on focus */
+.channelTextArea__74017:focus-within {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0 12px rgba(192, 132, 252, 0.35) !important;
+}
+
+/* Buttons primary */
+.lookFilled__201d5.colorBrand__201d5 {
+    background: linear-gradient(135deg, #a855f7, #7e22ce) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(126, 34, 206, 0.35) !important;
+}
+
+.lookFilled__201d5.colorBrand__201d5:hover {
+    background: linear-gradient(135deg, #c084fc, #9333ea) !important;
+    box-shadow: 0 0 14px rgba(192, 132, 252, 0.5) !important;
+}

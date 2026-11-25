@@ -1,0 +1,382 @@
+/**
+ * @name WindowsXI
+ * @author Leeprky#2063
+ * @version 1.1.2
+ * @description A Simple Theme Based On The New Windows 11! With Rounded Edges To Every Element Matching In Colour With Dark/Light Mode Variations & Border Radius'.
+ * @source https://github.com/leeprky/WindowsXI
+ * @updateUrl https://github.com/leeprky/WindowsXI/blob/main/source/support/betterdiscord/windowsXI.theme.css
+ * @authorId 224524143482241035
+ * @invite Ff3rqAYB89
+ * @donate https://www.paypal.com/paypalme/leeparkinson22
+ * @website https://leeprky.github.io/
+*/
+
+/* ██╗    ██╗██╗███╗   ██╗██████╗  ██████╗ ██╗    ██╗███████╗    ██╗  ██╗██╗
+   ██║    ██║██║████╗  ██║██╔══██╗██╔═══██╗██║    ██║██╔════╝    ╚██╗██╔╝██║
+   ██║ █╗ ██║██║██╔██╗ ██║██║  ██║██║   ██║██║ █╗ ██║███████╗     ╚███╔╝ ██║
+   ██║███╗██║██║██║╚██╗██║██║  ██║██║   ██║██║███╗██║╚════██║     ██╔██╗ ██║
+   ╚███╔███╔╝██║██║ ╚████║██████╔╝╚██████╔╝╚███╔███╔╝███████║    ██╔╝ ██╗██║
+    ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚══════╝    ╚═╝  ╚═╝╚═╝
+
+                                 １．１．2                                 
+                              By leeprky#2063                                    */
+
+/* █ █▀▄▀█ █▀█ █▀█ █▀█ ▀█▀ █▀
+   █ █░▀░█ █▀▀ █▄█ █▀▄ ░█░ ▄█
+           No Touch           */
+
+@import "https://leeprky.github.io/themes/WindowsXI/master-import.css";
+@import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/betterdiscord/betterdiscord.css";
+
+/* HorizontalServerlist */
+/* @import url("https://leeprky.github.io/themes/BaseStuff/horizontallist.css");
+
+/*         ▄▀█ █▀█ █▀█ █▀▀ █▀█ ▄▀█ █▄░█ █▀▀ █▀▀
+           █▀█ █▀▀ █▀▀ ██▄ █▀▄ █▀█ █░▀█ █▄▄ ██▄
+              Delete `/*` At Start Of Import       */
+
+/* For WindowsXI */  
+/* Default If Needed */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/default.css";
+
+/* Blurple */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/blurple-theme.css";
+
+/* Ovel Scheme */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/ovel-theme.css";
+
+/* Lode Scheme */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/lode-theme.css";
+
+/* Naive Scheme */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/naive-theme.css";
+
+/* Slook Scheme */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/slook-theme.css";
+
+/* Couve Scheme */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/couve-theme.css";
+
+/* Linux Mint */
+/* @import "https://leeprky.github.io/themes/WindowsXI/imports/support-09/schemes/linx.mint-scheme.css";
+
+/* Lode Imported Schemes */
+/* MAY NOT WORK AS GOOD - WARNING */
+
+/* Citric (Yellow & Green / Blue Colour */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/lode-schemes/citris.css); 
+/* Crimson ( Maroon )*/
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/lode-schemes/crimson.css);
+
+/* Other User's Themes */
+/* MAY NOT WORK AS GOOD - WARNING */
+
+/* midnight mars by #Luckfire */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/MidnightMars.css); 
+/* Nebula */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/nebula.css); 
+/* DuvBox */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/duvbox.css); 
+/* Miyua */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/MiyuaTheme.css);
+/* LilyPichu */ 
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/LilyPichu.css);
+/* Fey-Theme */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/fey.css); 
+/* Neptune */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/neptune.css); 
+/* Midnightcord */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/midnightcord.css); 
+/* CTP */
+/* @import url(https://raw.githack.com/leeprky/Lode/main/default/schemes/ctp.css);
+
+/*  █▀▀ █░░ ▄▀█ █▀ █▀ █▀▀ █▀█ █▀█ █▀▄
+    █▄█ █▄▄ █▀█ ▄█ ▄█ █▄▄ █▄█ █▀▄ █▄▀    
+        ▀█▀ █▀█ ▄▀█ █▄░█ █▀ █▀█ ▄▀█ █▀█ █▀▀ █▄░█ █▀▀ █▄█   
+        ░█░ █▀▄ █▀█ █░▀█ ▄█ █▀▀ █▀█ █▀▄ ██▄ █░▀█ █▄▄ ░█░   */
+
+/*
+@import "https://leeprky.github.io/themes/WindowsXI/imports/glass-05/glasscord.css";
+
+:root{ 
+   --glasscord-win-blur: blurbehind;
+   --glasscord-linux-blur: true;
+   --glasscord-macos-vibrancy: fullscreen-ui;
+   
+   --glasscord-background: #262b3d6e !important;
+   --glasscord-secondary-alt: #1f1f1f80 !important; 
+   --glasscord-floating: #222222f1 !important;  
+   --background-modifier-hover: #32323256 !important; 
+   --background-modifier-active: #32323260 !important; 
+   --background-modifier-selected: #32323254 !important; 
+   --background-modifier-accent: #4c46a309 !important;  
+}
+
+/* █▀▀ █░█ █▀ ▀█▀ █▀█ █▀▄▀█ █ █▀ ▄▀█ ▀█▀ █ █▀█ █▄░█
+   █▄▄ █▄█ ▄█ ░█░ █▄█ █░▀░█ █ ▄█ █▀█ ░█░ █ █▄█ █░▀█ */
+
+:root {
+
+    /* Gradients */
+    --default-gradient: 315deg, rgba(var(--alt-color), 0.6) 0%, rgba(var(--alt-color), 0.8) 74%;
+    --special-gradient: 315deg, rgba(var(--alt-color), 0.1) 0%, #c987b8 74%;
+    --red-gradient: 315deg, #AA3738 0%, #F04747 74%;
+    --red-hsl: hsl(359, 63%, 53%);
+    --yellow-gradient: 315deg, #c29b1b 0%, #ffa640 74%;
+    --yellow-hsl: hsl(46, 72%, 52%);
+    --green-gradient: 315deg, #507a73 0%, #4b7c72  74%;
+    --grey-gradient: 315deg, rgba(var(--alt-color), 0.6) 0%, rgba(var(--alt-color), 0.8) 74%;
+    --white-gradient: 315deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.342) 74%;
+       
+    /* Transitions */
+    --font-normal: 500;
+    --font-hover: bold;
+    --font-size-hover: 15px;
+    --hover-transition: 0.1s linear;
+    --transform-normal: scale(1);
+    --hover-transform: scale(1.15);
+    --setting-hover-transform: scale(1.025);
+    --button-hover-transform: scale(1.03);
+ 
+    /* Greenple Colour*/
+    --green-color: var(--alt-color2);
+    --green-color2: var(--alt-color);
+    --green-bar-on: #2b3555;
+    --green-bar-bg: var(--green-color);
+    --green-slider-on: var(--green-color);
+    --green-slider-off: #2b3555;
+    --green-slider-dot: #fff;
+
+    /* Indiicator */
+    --indicator-connected: 60, 150, 60;
+    --indicator-hovered: rgba(36, 36, 36, 0.25);
+    --indicator-unread: 255, 255, 255;
+    --indicator-selected: var(--alt-color);
+    --indicator-rounding: 4px !important;
+}
+
+/* Rounding Things */
+:root {
+   --roundness: 8px;
+   --borders-buttons-rounded: 6px !important; /*Border shapes for rounded buttons. 25px for circle, 0px for square*/
+   --borders-buttons-circle: 12px!important; /*Border shapes for circle buttons. 25px for circle, 0px for square*/
+   --borders-switches: 8px !important; /*Border shapes for switches. 15px for circle, 0px for square*/
+   --borders-checkboxes: 35% !important; /*Border shapes for checkboxes. 50% for circle, 0% for square*/
+   --borders-slider-bars: 5px !important; /*Border shapes for slider bars. 5px for circle, 0px for square*/
+   --borders-slider-grabbers: 3px !important; /*Border shapes for slider grabbers. 8px for circle, 0px for square*/
+   --borders-progress-bars: 2px !important; /*Border shapes for progress bars. 5px for circle, 0px for square*/
+   --borders-inputs: 8px !important; /*Border shapes for inputs. 25px for circle, 0px for square*/
+   --borders-contexts: 8px !important; /*Border shapes for context menus. 25px for circle, 0px for square*/
+   --borders-popouts: 8px !important; /*Border shapes for popouts. 25px for circle, 0px for square*/
+   --borders-modals: 8px !important; /*Border shapes for modals. 25px for circle, 0px for square*/
+   --borders-cards: 8px !important; /*Border shapes for cards. 25px for circle, 0px for square*/
+   --borders-media: 8px !important; /*Border shapes for images, videos, audios and gifs. 25px for circle, 0px for square*/
+   --borders-previews: 8px !important; /*Border shapes for previews. 25px for circle, 0px for square*/
+   --borders-servers-default: 14% !important; /*Border shapes for server icons and circle buttons on server side. 50% for circle, 0% for square*/
+   --borders-servers-interactive: 18% !important; /*Border shapes for hovered or selected elements mentioned in previous description. 50% for circle, 0% for square*/
+   --borders-folders: 18px !important; /*Border shapes for server folders. 35px for circle, 0px for square*/
+   --borders-avatars: 28% !important; /*Border shapes for avatars. 50% for circle, 0% for square*/
+   --borders-icons-default: 17% !important; /*Border shapes for icons that have width equal height. 50% for circle, 0% for square*/
+   --borders-icons-wide: 2.5px !important; /*Border shapes for icons that have more width than height. 5px for circle, 0px for square*/
+   --borders-labels-large: 7px !important; /*Border shapes for large text and number indicators. 15px for circle, 0px for square*/
+   --borders-labels-small: 7px !important; /*Border shapes for small text and number indicators. 10px for circle, 0px for square*/
+   --borders-pills: 2.5px !important; /*Border shapes for unread badges and selected server pills. 5px for circle, 0px for square*/
+   --borders-lines: 2.5px !important; /*Border shapes for lines when you drag categories or channels. 2px for circle, 0px for square*/
+   --borders-role-outlines: 5px !important; /*Border shapes for roles outlines. 10px for circle, 0px for square*/
+   --borders-role-dots: 5px !important; /*Border shapes for roles dots. 10px for circle, 0px for square*/
+   --borders-messages: 8px !important; /*Border shapes for hovered or highlighted messages. 25px for circle, 0px for square*/
+   --borders-mentions: 5px !important; /*Border shapes for mentions. 10px for circle, 0px for square*/
+   --borders-reactions: 5px !important; /*Border shapes for reactions. 10px for circle, 0px for square*/
+   --borders-codes: 8px !important; /*Border shapes for codes and codeblocks. 10px for circle, 0px for square*/
+   --borders-embeds: 8px !important; /*Border shapes for embeds. 25px for circle, 0px for square*/
+   --borders-replies: 8px !important; /*Shape for top left replies border. 15px for circle, 0px for square*/
+   --borders-quotes: 8px !important; /*Border shapes for quote icon. 2px for circle, 0px for square*/
+   --borders-spoilers: 2px !important; /*Border shapes for spoilers. 10px for circle, 0px for square*/
+   --borders-tooltips: 8px !important; /*Border shapes for tooltips. 25px for circle, 0px for square*/
+   --borders-scrollbars: 8px !important; /*Border shapes for scrollbars. 10px for circle, 0px for square*/
+   --borders-sidebar-and-notices: 8px !important; /*Shape for top left sidebar and notices border. 25px for circle, 0px for square*/
+   --borders-navigation-highlight: 8px !important; /*Border shapes for navigation highlight when you press TAB. 25px for circle, 0px for square*/
+   --borders-toasts: 8px !important; /*Border shapes for toasts. 25px for circle, 0px for square*/
+   --borders-code-editors: 2px !important; /*Border shapes for code editors workspace. 10px for circle, 0px for square*/
+}
+
+ .theme-dark, .theme-light {
+  --bg-avatar: url(https://i.imgur.com/g37HbBe.png);
+  --Watermark-Alignment: 49%;
+  --display-version: none !important; /* Flex To Show | None To Hide */
+  --public-servers: none; 
+ }
+   
+/*  █▀▄ ▄▀█ █▀█ █▄▀
+    █▄▀ █▀█ █▀▄ █░█ */
+   
+   .theme-dark {
+   
+      --channeltextarea-background: var(--background-secondary);
+   
+      --bd-color: #35AAFA ;
+      --bd-color-hover: #3099df;
+      --alt-color: 53, 170, 250;
+      --alt-color2: #35AAFA ;
+      --alt-color3: 204 ;/* HSL */
+      
+      --playing-color: var(--alt-color2) ;
+      --spotify-color: var(--alt-color2);
+      --streaming-color: rgb(127, 50, 179) ;
+      
+       /* Header Colors */
+       --header-primary: #FFFFFF ;
+       --header-secondary: #c7c7c7 ;
+       --channels-headings: var(--alt-color2) ;
+     
+       /* Text Colours */
+       --text-normal: #F0F0F0 ;
+       --text-muted: #B3B3B3 ;
+       --text-link: var(--alt-color2) ;
+       --channels-default: #dddddd ;
+       --interactive-normal: #F0F0F0 ;
+       --interactive-hover: #F0F0F0 ;
+       --interactive-hover-icons: var(--background-accent2) ;
+       --interactive-active: #fefeff ;
+        --interactive-active-icons: var(--background-accent2) ;
+       --interactive-muted: #585858 ;
+      
+       /* Background Colours */
+       --background-primary: #202020 ;
+       --background-primary-alt: #202020 ;
+       --background-secondary: #191919 ;
+       --background-secondary-alt: #191919;
+       --background-tertiary: #0f0f0f ;
+       --background-accent: var(--alt-color2) ;
+       --background-floating: #161616 ;
+      
+       /* Mentioned  Colours */
+       --background-mentioned: rgba(var(--alt-color), 0.1) ;
+       --background-mentioned-hover: rgba(var(--alt-color), 0.2) ;
+       --info-warning-foreground: #bdbdbdc5;
+      
+       --background-help-warning: rgba(250,166,26,0.1) ;
+       --background-help-info: rgba(0,176,244,0.1) ;
+      
+       /* Hovering Colours */
+       --background-modifier-hover: rgba(var(--alt-color), 0.2) ;
+       --background-modifier-active: rgba(var(--alt-color), 0.8) ;
+       --background-modifier-selected: rgba(var(--alt-color), 0.5) ; 
+       --background-modifier-accent: rgba(var(--alt-color), 0.1) ;  
+      
+      /* Box Shadow On Floating Elements Colours */
+      --elevation-stroke: 0 0 0 1px rgba(4,4,5,0.15) ;
+      --elevation-low: 0 1px 0 rgba(18, 20, 36, 0.767),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05) ;
+      --elevation-medium: 0 4px 4px rgba(0,0,0,0.16) ;
+      --elevation-high: 0 8px 16px rgba(0,0,0,0.24) ;
+      
+      --scrollbar-thin-thumb: #6c6c6c ;
+      --scrollbar-thin-track: #17171700;
+      --scrollbar-auto-thumb: #6c6c6c;
+      --scrollbar-auto-track: #17171700 ;
+      --scrollbar-auto-scrollbar-color-thumb: #6c6c6c ;
+      --scrollbar-auto-scrollbar-color-track: #171717da ;
+          
+      /* Other */
+      --radio-group-dot-foreground: var(--alt-color) ;
+      }
+   
+   
+      /* █░░ █ █▀▀ █░█ ▀█▀
+         █▄▄ █ █▄█ █▀█ ░█░ */
+   
+    .theme-light {
+       
+         --indicator-unread: 0, 0, 0 !important;
+    
+      --channeltextarea-background: var(--background-secondary);
+     
+      --bd-color: #35AAFA ;
+      --bd-color-hover: #3099df;
+      --alt-color: 53, 170, 250 ;
+      --alt-color2: #35AAFA ;
+      --alt-color3: 235;
+      
+      --playing-color: var(--alt-color2) ;
+      --spotify-color: var(--alt-color2) ;
+      --streaming-color: rgb(127, 50, 179) ;
+      
+       /* Header Colors */
+       --header-primary: #1A1A1A ;
+       --header-secondary: #5E5D5F ;
+       --channels-headings: var(--alt-color2) ;
+     
+       /* Text Colours */
+       --text-normal: #585858 ;
+       --text-muted: #9e9d9d ;
+       --text-link: var(--alt-color2) ;
+       --channels-default: #585858 ;
+       --interactive-normal: #585858 ;
+       --interactive-hover: #424242 ;
+       --interactive-hover-icons: var(--background-accent2) ;
+       --interactive-active: #333333 ;
+        --interactive-active-icons: var(--background-accent2) ;
+       --interactive-muted: #989898 ;
+      
+       /* Background Colours */
+     --background-primary: #F3F3F3 ; 
+     --background-primary-alt: #F3F3F3 ; 
+     --background-secondary: #eeeeee ; 
+     --background-secondary-alt: #eeeeee ; 
+     --background-tertiary: #f3f3f3 ; 
+     --background-accent: var(--alt-color2) ; 
+     --background-floating: #ffffff ; 
+      
+       /* Mentioned  Colours */
+       --background-mentioned: #fcfcfc ; 
+       --background-mentioned-hover: #ebebeb ;
+       --info-warning-foreground: #1f1e1ec5;
+      
+       --background-help-warning: rgba(250,166,26,0.1);
+       --background-help-info: rgba(0,176,244,0.1) ;
+      
+       /* Scrollbar Colours */
+       --background-modifier-hover: rgba(var(--alt-color), 0.2) ;
+       --background-modifier-active: rgba(var(--alt-color), 0.8) ;
+       --background-modifier-selected: rgba(var(--alt-color), 0.5) ; 
+       --background-modifier-accent: rgba(var(--alt-color), 0.1) ;  
+      
+      /* Box Shadow On Floating Elements Colours */
+      --elevation-stroke: 0 0 0 1px rgba(4,4,5,0.15) ;
+
+      --elevation-low: 0 1px 0 rgba(18, 20, 36, 0.767),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05);
+      --elevation-medium: 0 4px 4px rgba(0,0,0,0.16) ;
+      --elevation-high: 0 8px 16px rgba(0,0,0,0.24) ;
+      
+      --scrollbar-thin-thumb: #8A8A8A ;
+      --scrollbar-thin-track: #f7f7f700;
+      --scrollbar-auto-thumb: #8A8A8A;
+      --scrollbar-auto-track: #ffffff36 ;
+      --scrollbar-auto-scrollbar-color-thumb: #6c6c6c ;
+      --scrollbar-auto-scrollbar-color-track: #171717da ;
+          
+      /* Other */
+      --radio-group-dot-foreground: var(--alt-color2) ;/* Ignore */
+      }
+
+/* █ █▀▀ █▄░█ █▀█ █▀█ █▀▀
+   █ █▄█ █░▀█ █▄█ █▀▄ ██▄ */
+
+:root {--outdated_windowsXI-082: none; --version: "1.1.2BD"; --build: "082"}
+.wrapper-1_HaEi > ul > .scroller-3X7KbA > div[aria-label="Servers"] {margin-top: 00px;}.guilds-2JjMmN .scroller-3X7KbA > [aria-label], .guilds-2JjMmN .scroller-3X7KbA > [style]:nth-child(2) { margin-top: 00px;}
+
+ /* Put The User Info Back */
+ .container-1NXEtd, .privateChannels-oVe7HL {
+   order: 2 !important; /* Change To 0 - Default 2 */
+}
+
+/* ---------------------------------------------
+             ███████╗███╗░░██╗██████╗░
+             ██╔════╝████╗░██║██╔══██╗
+             █████╗░░██╔██╗██║██║░░██║
+             ██╔══╝░░██║╚████║██║░░██║
+             ███████╗██║░╚███║██████╔╝
+             ╚══════╝╚═╝░░╚══╝╚═════╝░
+             ╚══════╝╚═╝░░╚══╝╚═════╝░
+                 Version 1.1.2
+   --------------------------------------------- */

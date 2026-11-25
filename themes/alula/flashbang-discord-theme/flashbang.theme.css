@@ -1,0 +1,73 @@
+/**
+ * @name Flashbang (HDR)
+ * @description I heard you crying that the light theme is too bright. But I don't think so - here's a TRULY BRIGHT Discord theme (requires a HDR capable monitor).
+ * @author Alula
+ * @version 1.0.0
+ * @invite 5g9qdABNQ8
+ * @website https://github.com/alula/flashbang-discord-theme
+ * @source https://github.com/alula/flashbang-discord-theme/blob/master/theme/flashbang.theme.css
+ * @authorId 219067402174988290
+ * @authorLink https://alula.me
+*/
+
+:root {
+    /* Adjust brightness here */
+    --hdr-base-factor: 1;
+
+    --hdr-factor-10: calc(var(--hdr-base-factor) * 1.0);
+    --hdr-factor-11: calc(var(--hdr-base-factor) * 1.1);
+    --hdr-factor-12: calc(var(--hdr-base-factor) * 1.2);
+    --hdr-factor-125: calc(var(--hdr-base-factor) * 1.25);
+    --hdr-factor-13: calc(var(--hdr-base-factor) * 1.3);
+    --hdr-factor-135: calc(var(--hdr-base-factor) * 1.35);
+    --hdr-factor-14: calc(var(--hdr-base-factor) * 1.4);
+    --hdr-factor-145: calc(var(--hdr-base-factor) * 1.45);
+    --hdr-factor-15: calc(var(--hdr-base-factor) * 1.5);
+
+    --hdr-10: color(display-p3 var(--hdr-base-factor) var(--hdr-base-factor) var(--hdr-base-factor));
+    --hdr-11: color(display-p3 var(--hdr-factor-11) var(--hdr-factor-11) var(--hdr-factor-11));
+    --hdr-12: color(display-p3 var(--hdr-factor-12) var(--hdr-factor-12) var(--hdr-factor-12));
+    --hdr-125: color(display-p3 var(--hdr-factor-125) var(--hdr-factor-125) var(--hdr-factor-125));
+    --hdr-13: color(display-p3 var(--hdr-factor-13) var(--hdr-factor-13) var(--hdr-factor-13));
+    --hdr-135: color(display-p3 var(--hdr-factor-135) var(--hdr-factor-135) var(--hdr-factor-135));
+    --hdr-14: color(display-p3 var(--hdr-factor-14) var(--hdr-factor-14) var(--hdr-factor-14));
+    --hdr-145: color(display-p3 var(--hdr-factor-145) var(--hdr-factor-145) var(--hdr-factor-145));
+    --hdr-15: color(display-p3 var(--hdr-factor-15) var(--hdr-factor-15) var(--hdr-factor-15));
+}
+
+.theme-light:not(.custom-theme-background) {
+    --white: var(--hdr-15);
+    --white-500: var(--hdr-15);
+    --background-primary: var(--hdr-135);
+    --background-secondary: var(--hdr-13);
+    --background-tertiary: var(--hdr-125);
+    --background-base-low: var(--hdr-125);
+    --background-base-lower: var(--hdr-125);
+    --background-base-lowest: var(--hdr-13);
+    --background-surface-high: var(--hdr-125);
+    --background-surface-higher: var(--hdr-13);
+    --background-surface-highest: var(--hdr-14);
+    --chat-background-default: var(--hdr-15);
+    --bg-overlay-3: var(--hdr-15);
+    --bg-overlay-floating: var(--hdr-15);
+    --card-primary-bg: var(--hdr-12);
+    --bg-base-secondary: var(--hdr-125);
+    --bg-base-tertiary: var(--hdr-12);
+    --bg-overlay-1: var(--hdr-13);
+    --bg-overlay-4: var(--hdr-13);
+    --bg-overlay-chat: var(--hdr-14);
+}
+
+:after {
+    content: "";
+    opacity: 0.001;
+    background: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/4gKMSUNDX1BST0ZJTEUAAQEAAAJ8AAAAAARAAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/AAAAFxyWFlaAAABWAAAABRnWFlaAAABbAAAABRiWFlaAAABgAAAABR3dHB0AAABlAAAABRyVFJDAAABqAAAAIxnVFJDAAABqAAAAIxiVFJDAAABqAAAAIxjaWNwAAACNAAAAAxjcHJ0AAACQAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAD4AAAAcAFIAZQBjADIAMAAyADAAIABHAGEAbQB1AHQAIAB3AGkAdABoACAASABMAEcAIABUAHIAYQBuAHMAZgBlAHIAAFhZWiAAAAAAAACsaAAAR2////+BWFlaIAAAAAAAACppAACs4wAAB61YWVogAAAAAAAAIAcAAAuuAADME1hZWiAAAAAAAAD21gABAAAAANMtY3VydgAAAAAAAABAAAAADQAuAF8AoQDxAVABvAI2Ar0DUgPyBKAFWQYeBvAHzQi1CaoKqQu0DMoN7A8XEE4RkBLcFDMVlBcAGHYZ+BuGHTMfBiEAIyYlfCgFKsUtwTD/NIM4VTx5QPhF2EsjUOBXGl3bZS9tIHW+fxeJOpQ4oCKtD7sTykXawOyg//9jaWNwAAAAAAkSAAFtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb//gAPTGF2YzYwLjMuMTAwAP/bAEMACAQEBAQEBQUFBQUFBgYGBgYGBgYGBgYGBgcHBwgICAcHBwYGBwcICAgICQkJCAgICAkJCgoKDAwLCw4ODhERFP/EAEwAAQEAAAAAAAAAAAAAAAAAAAAFAQEBAAAAAAAAAAAAAAAAAAAABBABAAAAAAAAAAAAAAAAAAAAABEBAAAAAAAAAAAAAAAAAAAAAP/AABEIAAEAAQMBEgACEgADEgD/2gAMAwEAAhEDEQA/AKQjFA//2Q==);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}

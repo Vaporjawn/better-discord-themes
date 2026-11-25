@@ -1,0 +1,103 @@
+/**
+ * @name zedcord (gruvbox dark)
+ * @description discord, but it's zed-themed (gruvbox dark).
+ * @author refact0r
+ * @version 0.1.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/zedcord
+ * @source https://github.com/refact0r/zedcord/blob/main/theme/flavors/zedcord-gruvbox-dark.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+ * @donate https://ko-fi.com/refact0r
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=Lilex:wght@400;700&display=swap');
+
+@import url('https://refact0r.github.io/zedcord/build/zedcord.css');
+
+/* zed "Gruvbox Dark" (assets/themes/gruvbox/gruvbox.json, copy in research/). token keys are in
+   theme/zedcord.theme.css */
+:root {
+    /* surfaces: laid out like one dark */
+    --zed-title-bar: #4c4642;
+    --zed-status-bar: #4c4642;
+    --zed-panel: #3a3735;
+    --zed-surface: #3a3735;
+    --zed-elevated-surface: #3a3735;
+    --zed-tab-bar: #3a3735;
+    --zed-tab-active: #282828;
+    --zed-editor: #282828;
+    --zed-active-line: #3a3735bf;
+
+    --zed-border: #5b534d;
+    --zed-border-variant: #494340;
+    --zed-border-focused: #303a36;
+    --zed-border-selected: #303a36;
+
+    --zed-element: #3a3735;
+    --zed-element-hover: #494340;
+    --zed-element-active: #5b524c;
+    --zed-element-selected: #5b524c;
+    --zed-ghost-element: #00000000;
+    --zed-ghost-element-hover: #494340;
+    --zed-ghost-element-active: #5b524c;
+    --zed-ghost-element-selected: #5b524c;
+
+    --zed-text: #fbf1c7;
+    --zed-text-muted: #c5b597;
+    --zed-text-placeholder: #998b78;
+    --zed-text-accent: #83a598;
+    --zed-text-ignored: #998b78;
+    --zed-editor-fg: #ebdbb2;
+    --zed-line-number: #6e6b5e;
+    --zed-scrollbar-thumb: #a899844c;
+    --zed-selection: #83a5983d;
+
+    --zed-syntax-keyword: #fb4833;
+    --zed-syntax-string: #b8bb25;
+    --zed-syntax-number: #d3869b;
+    --zed-syntax-function: #b8bb25;
+    --zed-syntax-type: #fabd2e;
+    --zed-syntax-operator: #8ec07c;
+    --zed-syntax-comment: #a89984;
+    --zed-syntax-comment-style: normal;
+    --zed-syntax-comment-doc: #c6b697;
+    --zed-syntax-property: #ebdbb2;
+    --zed-syntax-variable: #ebdbb2;
+    --zed-syntax-punctuation: #a89984;
+    --zed-syntax-tag: #8ec07c;
+    --zed-syntax-attribute: #83a598;
+    --zed-syntax-selector: #fabd2e;
+    --zed-syntax-emphasis: #83a598;
+    --zed-syntax-emphasis-strong: #83a598;
+
+    /* discord-only: server icon tiles (`background`, as in one dark) */
+    --zed-guild-icon: #4c4642;
+
+    /* accents. 2 is the theme's value, purple is bright magenta. other steps keep one dark's lightness and chroma */
+    --red-1: #ff8471;
+    --red-2: #fb4a35;
+    --red-3: #ee1900;
+    --red-4: #d21400;
+    --red-5: #b41000;
+    --green-1: #c9ce67;
+    --green-2: #b7bb26;
+    --green-3: #a4a700;
+    --green-4: #8f9200;
+    --green-5: #7a7d00;
+    --blue-1: #a2bbb1;
+    --blue-2: #83a598;
+    --blue-3: #6f9688;
+    --blue-4: #5e8778;
+    --blue-5: #4d7567;
+    --yellow-1: #ffd175;
+    --yellow-2: #f9bd2f;
+    --yellow-3: #e9ad00;
+    --yellow-4: #d29b00;
+    --yellow-5: #b38400;
+    --purple-1: #e5a8b8;
+    --purple-2: #d3869b;
+    --purple-3: #c37189;
+    --purple-4: #b16078;
+    --purple-5: #9a5066;
+}

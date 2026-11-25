@@ -1,0 +1,105 @@
+/**
+ * @name zedcord (catppuccin mocha)
+ * @description discord, but it's zed-themed (catppuccin mocha).
+ * @author refact0r
+ * @version 0.1.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/zedcord
+ * @source https://github.com/refact0r/zedcord/blob/main/theme/flavors/zedcord-catppuccin-mocha.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+ * @donate https://ko-fi.com/refact0r
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=Lilex:wght@400;700&display=swap');
+
+@import url('https://refact0r.github.io/zedcord/build/zedcord.css');
+
+/* zed "Catppuccin Mocha" (catppuccin extension, mauve accent, copy in research/). token keys are in
+   theme/zedcord.theme.css */
+:root {
+    /* surfaces: title bar, status bar and tab bar are the darkest (crust), panels mantle, the editor lightest */
+    --zed-title-bar: #11111b;
+    --zed-status-bar: #11111b;
+    --zed-panel: #181825;
+    --zed-surface: #181825;
+    --zed-elevated-surface: #181825;
+    --zed-tab-bar: #11111b;
+    --zed-tab-active: #1e1e2e;
+    --zed-editor: #1e1e2e;
+    --zed-active-line: #cdd6f412;
+
+    --zed-border: #313244;
+    --zed-border-variant: #2c293d;
+    --zed-border-focused: #b4befe;
+    --zed-border-selected: #cba6f7;
+
+    /* selected rows are a fainter fill than hovered ones, as in zed */
+    --zed-element: #11111b;
+    --zed-element-hover: #313244;
+    --zed-element-active: #585b704d;
+    --zed-element-selected: #3132444d;
+    --zed-ghost-element: #00000000;
+    --zed-ghost-element-hover: #45475a4d;
+    --zed-ghost-element-active: #585b7099;
+    --zed-ghost-element-selected: #6f728d66;
+
+    --zed-text: #cdd6f4;
+    --zed-text-muted: #bac2de;
+    --zed-text-placeholder: #585b70;
+    --zed-text-accent: #cba6f7;
+    --zed-text-ignored: #6c7086;
+    --zed-editor-fg: #cdd6f4;
+    --zed-line-number: #7f849c;
+    --zed-scrollbar-thumb: #585b7080;
+    --zed-selection: #9399b240;
+
+    --zed-syntax-keyword: #cba6f7;
+    --zed-syntax-string: #a6e3a1;
+    --zed-syntax-number: #fab387;
+    --zed-syntax-function: #89b4fa;
+    --zed-syntax-type: #f9e2af;
+    --zed-syntax-operator: #89dceb;
+    --zed-syntax-comment: #9399b2;
+    --zed-syntax-comment-style: italic;
+    --zed-syntax-comment-doc: #9399b2;
+    --zed-syntax-property: #b4befe;
+    --zed-syntax-variable: #cdd6f4;
+    --zed-syntax-punctuation: #9399b2;
+    --zed-syntax-tag: #89b4fa;
+    --zed-syntax-attribute: #f9e2af;
+    --zed-syntax-selector: #cdd6f4; /* catppuccin sets no selector colour, so zed draws plain text */
+    --zed-syntax-emphasis: #eba0ac;
+    --zed-syntax-emphasis-strong: #eba0ac;
+
+    /* discord-only: server icon tiles (`background`) */
+    --zed-guild-icon: #27273b;
+
+    /* accents. 2 is the theme's value: red, green, mauve (the accent), yellow, pink. other steps keep one dark's
+       lightness and chroma */
+    --red-1: #ffb2c6;
+    --red-2: #f38ba8;
+    --red-3: #e77295;
+    --red-4: #d75e84;
+    --red-5: #be5174;
+    --green-1: #c3f4be;
+    --green-2: #a6e3a1;
+    --green-3: #8fd08a;
+    --green-4: #79bb75;
+    --green-5: #67a463;
+    --blue-1: #dfc5ff;
+    --blue-2: #cba6f7;
+    --blue-3: #bd92ee;
+    --blue-4: #ae80e0;
+    --blue-5: #9b6ecb;
+    --yellow-1: #fff4dc;
+    --yellow-2: #f9e2af;
+    --yellow-3: #edd193;
+    --yellow-4: #dbbe7b;
+    --yellow-5: #bfa569;
+    --purple-1: #ffd5f2;
+    --purple-2: #f2aede;
+    --purple-3: #e299cd;
+    --purple-4: #cf86bb;
+    --purple-5: #b876a6;
+}

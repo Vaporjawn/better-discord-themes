@@ -1,0 +1,100 @@
+/*
+ * @name Hide Nitro Upselling
+ * @description Hide all Nitro upselling
+ * @author Vendicated, msm8916, D3SOX
+ * @version 1.2
+*/
+[class^=channel_] > div > [href="/store"],
+[class^=channel_] > div > [href="/shop"],
+[class^=channelTextArea] [class^=buttons_] > button,
+[class^=upsellVisible_],
+[class^=premiumIconWrapper],
+[class^=characterCount_] [class*=upsell_],
+[class^=emojiSection_] [class*=shinyButton_],
+[class*=tryItOutSection_],
+[class^=premiumIcon],
+[class^=customizationSection_] + [class^=upsellContainer_],
+[class^=customizationSection_][class*=disabled_],
+[class*=bannerNitroUpsell_],
+[class^=imageUploaderHint_],
+[class^=imagePickerContainer_] > [class^=optionBox_]:nth-child(2) {
+  display: none !important;
+}
+
+[class^=premiumTab],
+#user-settings-cog-Discord_Nitro,
+#user-settings-cog-Billing,
+[class^=subscribeAction],
+[class^=upsellBanner],
+[class^=userPopoutInner] > [class^=wrapper] > [class^=banner],
+[class^=userPopoutInner] > [class^=containerWrapper],
+[style='background-image: url("/assets/30e2c68819facd98.png");'],
+[class*=premiumFeatureBorder], [class^=customizationSection__]:has([class^=nitroWheel__]),
+[class^=userPanelInner] > [class*=inSidebar],
+[class^=messageLengthUpsellContainer_],
+a[href*="/snowsgiving"], [class^=customizationSection] > [class^=limitedFeatureBorder],
+[class*=botTagRemix_],
+[class^=nitroFileSizeUpsell__],
+[class^=upsellOverlayContainer_],
+[class*=sansAttachButton] > [class^=buttons] > [class^=container],
+[id^=popout] [class*=contentPremium],
+[id^=popout]:has([class*=poweredByNitroContainer__]),
+[id^=popout] [class*=upsellTooltipWrapper__],
+[class^=birthdayFeatureBorder],
+[class^=nitroAuthorBadgeContainer_],
+[class^=container_]:has([class^=falloweenArtContainer_]),
+[class^=sidebar] > [class^=container] > [class^=wrapper] > [class^=container] > [class^=content],
+[class^=themeEditor],
+[class*=cozyMessage] > [class*=buttonContainer] > [class*=buttons] > [class*=wrapper] > [aria-label*="Add Super Reaction"],
+[id^=popout] [class*=colorPremiumGradient],
+#message [class*=colorPremiumGradient],
+[class^=notAppAsidePanel__] > [class^=layerContainer_] > [id^=popout_] > [class^=animatorRight__] > div:has([class*=artInline_]),
+[class^=notAppAsidePanel__] > [class^=layerContainer_] > [id^=popout_] > [class^=animatorBottom_] > div:has(.image_f4d883),
+[class^=burstReactionTooltipPrompt],
+[class^=upsellTooltipWrapper__],
+#emoji-picker-tab-panel [class^=burstToggle],
+[class^=questsContainer__],
+[aria-label="Add Super Reaction"],
+[aria-label=GET_PREMIUM],
+[id=gdm-context-notification-sounds], [id=user-context-notification-sounds], [id=guild-context-notification-sounds],
+[class^=emojiPickerListWrapper_] [class^=upsellContainer__],
+[role=tabpanel] [class^=upsellContainer_],
+[class*=overlayBackground_]:has([class*=learnMoreButton_]),
+button:has([class*=premiumSubscribeButton]),
+[class*=autocompleteInner__]:has([class*=premiumHeader_]) [class*=nitroTopDividerContainer__], [class*=autocompleteInner__]:has([class*=premiumHeader_]) [class*=premiumHeader_], [class*=autocompleteInner__]:has([class*=premiumHeader_]) [class*=premiumHeader_] ~ [class*=premiumEmoji__],
+[class^=giftButtonContainer__],
+[class*=container_][class*=giftNitro_],
+[aria-label=Bookmarks], [aria-label="Save for Later"], #message-actions-save-for-later-upsell,
+div[class*=focusLock_]:has([class*=freeTrialPillWithSparkles_]),
+[class^=base_] > [class*=notice_][class*=colorPremiumTier2_]:has([class*=premiumIcon_]),
+[class^=accountProfilePopoutWrapper_] > [class^=popoutContainer__] > [class^=container__],
+[class^=profileButtons__] span:has(button[aria-label*=Shop]),
+[class^=side_] > [class^=header_] + [class^=premiumTab] + [class^=item_] + [class^=item_] + [class^=item_] + [class^=item_],
+#emoji-picker-tab-panel > [class*=emojiPickerHeader]:first-child > [class^=tooltipContainer]:nth-child(2) {
+  display: none !important;
+}
+
+[class^=emojiSection] > div > div > div > a {
+  color: inherit;
+  pointer-events: none;
+}
+
+[class^=reactionInner][aria-label*="burst react"] {
+  pointer-events: none;
+}
+
+[class*=categorySectionNitroLocked_] {
+  background-color: unset !important;
+}
+
+[class^=userPopoutInner] > [class^=containerWrapper] {
+  top: 0 !important;
+}
+
+[class^=tier0Button],
+[class^=shinyButton]:not([class*=ctaButtonWrapper_]) {
+  color: red !important;
+  background-color: black !important;
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}

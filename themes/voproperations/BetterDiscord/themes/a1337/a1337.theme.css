@@ -1,0 +1,154 @@
+/**
+* @name a1337
+* @version 1.0.0
+* @description A dark, colorful, and customizable theme for all of your 1337 days and nights.
+* @author CelestialReaver
+* @authorId 859547769798656001
+* @source https://github.com/CelestialReaver/BetterDiscord/tree/main/themes/a1337
+* @website https://celestialreaver.github.io/
+* @updateUrl https://raw.githubusercontent.com/CelestialReaver/BetterDiscord/main/themes/a1337/a1337.theme.css
+*/
+@import url("https://celestialreaver.github.io/BetterDiscord/themes/a1337/css/source.css");
+/* -------------------------- Do not edit anything above this line ----------------------------- */
+
+/*-----------------------------------------------------------------------------------------------*/
+/* THEME BACKGROUND PICTURE                                                                      */
+/*-----------------------------------------------------------------------------------------------*/
+:root {
+    /* There are several built-in background options to choose from. Put the proper ID for the 
+       background you want to use. 
+
+    Options are:
+    --------------------------------------------
+    |   ID  |           Background              |
+    |-------------------------------------------|
+    | --bg0 |     No Background                 |
+    | --bg1 |     Green Glow (Animated)         |
+    | --bg2 |     Binary Code (Animated)        |
+    | --bg3 |     Cyberpunk City (Animated)     |
+    | --bg4 |     Comet (Animated)              |
+    | --bg5 |     Garage (Animated)             |
+    | --bg6 |     Red Power (Animated)          |
+    | --bg7 |     Burst (Animated)              |
+    | --bg8 |     Terminal (Animated)           |
+    | --bg9 |     Molecule (Animated)           |
+    | --bg10|     Wargames (Animated)           |
+    | --bg11|     Cyberpunk City - Dark (Static)|
+    | --bg12|     Cyberpunk City (Static)       |
+    --------------------------------------------
+
+    Replace --bg11 below with the background you want to display. Example: if you want Garage
+    for your background you would change --bg11 to --bg5. Save and the background would
+    automatically change.
+    */
+
+    --bg-choice: var(--bg3);
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/* CRT EFFECTS                                                                                   */
+/*-----------------------------------------------------------------------------------------------*/
+body::before {
+    /* Enable or disable the flicker overlay effect. To disable remove the 
+    comment decorators. To re-enable, add comment decorators. */
+    
+    /* animation: initial; */
+}
+
+body::after {
+    /* Enable or disable the scan line overlay effect. To disable remove the 
+    comment decorators. To re-enable, add comment decorators. */
+
+   /* animation: initial; */
+}
+
+:root {
+    /* Remove the comment decorators below to disable the text shadow animation effect. */
+    /* --text-shadow-animation: none; */
+
+    /* Remove the comment decorators below to disable the text shadow effect. */
+    /* --text-shadow-shadow: none; */
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/* CHAT BUBBLES                                                                                  */
+/*-----------------------------------------------------------------------------------------------*/
+:root {
+/* Enable or disable the CHAT BUBBLES effect. The 1 value denotes CHAT BUBBLES is on, the 0 value
+       denotes CHAT BUBBLES is off.*/
+
+    --chat-bubble: 1;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/* THEME COLORS                                                                                  */
+/*-----------------------------------------------------------------------------------------------*/
+:root {
+    /* Here you can change the color of the theme by the values below.
+
+        Example: To change the color of the background text to red you would change the value of
+        --background-text to the color code for red (#ff0000).
+
+    */
+    --background: #100d23;
+    --background-text: #1e1e44;
+    --button: #00ff9da6;
+    --button-alt: #00e676;
+    --button-alt-svg: invert(15%) sepia(81%) saturate(952%) hue-rotate(186deg) brightness(88%) contrast(102%);
+    /*--text: #B3FFB3;*/
+    --text: #2BFF2B;
+    /*--text:rgb(255, 255, 255);*/
+    --text-shadow-text: rgba(0, 30, 255, 0.5) 1.868px 0 1px, rgba(255, 0, 80, 0.3) -1.868px 0 1px, ##2BFF2B 0 0 3px;
+    --text-shadow-secondary: rgba(0, 30, 255, 0.5) 3.89137px 0 1px, rgba(255, 0, 80, 0.3) -3.89137px 0 1px, #FFFFFF 0 0 3px;
+    --text-shadow-tertiary: rgb(79, 255, 6) 1px 1px 2px, rgb(79, 255, 6) 0px 0px 1vmin, rgb(79, 255, 6) 0px 0px 5px;
+    --text-svg: invert(50%) sepia(85%) saturate(1552%) hue-rotate(144deg) brightness(101%) contrast(92%);
+    --text-alt: rgba(0, 195, 255, .6);
+    --accent: #ff4081;
+    --accent-svg: invert(17%) sepia(98%) saturate(7408%) hue-rotate(299deg) brightness(106%) contrast(108%);
+    --select: #002f6de8;
+    --select-alt: #283593;
+    --green: #009550;
+    --avatar-rgb: 255 0 76;
+    --font-size-custom: 1.2rem !important;
+    --cursor-color: #ffff00;
+    --main-color: var(--text);
+    --mainColor: var(--text);
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/* MISCELLANEOUS THEME TWEAKS                                                                    */
+/*-----------------------------------------------------------------------------------------------*/
+:root {
+/* This is where you can put a URL for the logo you would like to appear at the top left 
+   of Discord. Uncomment the line below and place your URL inside of the quotes. */
+
+    /* --theme-logo: url("YourCustomLogoURLHere"); */
+}
+
+/* Here you can change theme background color and transparency. */
+.appMount-2yBXZl {
+    background-color: rgba(16, 13, 35, 0) !important;
+}
+
+/* Modify remaining dark theme colors and transparency by adjusting the values below to 
+   your choosing. */
+.theme-dark {
+    --background-primary: rgba(16, 13, 35, .7) !important;
+    --background-secondary: rgba(19, 19, 65, .4) !important;
+    --background-tertiary: rgba(19, 19, 65, .4) !important;
+    --deprecated-panel-background: rgba(16, 13, 35, .4) !important;
+    --channeltextarea-background: rgba(40, 53, 147, .7) !important;
+    --background-secondary-alt: rgba(16, 13, 35, .7) !important;
+}
+
+.theme-dark .inset-3sAvek {
+    background-color: var(--channeltextarea-background) !important;
+}
+
+.theme-dark .container-2cd8Mz {
+    background-color: transparent;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/* END OF THEME CONFIGURATION                                                                    */
+/*-----------------------------------------------------------------------------------------------*/

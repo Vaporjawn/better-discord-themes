@@ -1,0 +1,18 @@
+/**
+ * @name RWX Luna: Explorer Bliss
+ * @author Rwyn
+ * @version 1.0.0
+ * @description A Windows XP Luna theme that will hopefully take you back to the old, simpler times.
+ * @website https://github.com/rwynx/RWX-Luna
+ * @source https://github.com/rwynx/RWX-Luna
+ */
+
+/* import core css */
+@import url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/RWX-Luna.css");
+
+:root,
+.theme-dark,
+.theme-light,
+#app-mount {
+    --luna-home-icon: url("https://raw.githubusercontent.com/rwynx/RWX-Luna/main/assets/RWX-Luna-ExplorerBliss_96.png") !important;
+}

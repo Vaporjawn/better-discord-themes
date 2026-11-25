@@ -1,0 +1,551 @@
+/**
+ * @name sugarglass
+ * @author loveranmar
+ * @version 2.1.0
+ * @description NotAnotherAnimeTheme's layout and server grid with pastel rainbow colors, a rounded anime font and a light touch of glass. Turn on "Enable window transparency" in Vencord's settings to see your wallpaper through it.
+ * @source https://github.com/loveranmar/sugarglass
+ */
+
+/* NotAnotherAnimeTheme: server grid, layout, unread animation, home icon */
+@import url(https://puckzxz.github.io/NotAnotherAnimeTheme/build/v3/naat.v3.css);
+
+/*
+  Fonts to try. Put one of these names in --anime-font below.
+  Only the font you pick gets downloaded.
+
+  Want a different one? Find it on fontsource.org, then copy one of these
+  lines and swap in its name from the page URL (fontsource.org/fonts/<name>).
+  Fonts installed on your PC need no line here, just put their name in --anime-font.
+  Google Fonts links won't work: Vencord blocks their font files.
+*/
+/* "M PLUS Rounded 1c" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/m-plus-rounded-1c@5.3.0/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/m-plus-rounded-1c@5.3.0/latin-500.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/m-plus-rounded-1c@5.3.0/latin-700.css);
+/* "Zen Maru Gothic" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/zen-maru-gothic@5.3.1/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/zen-maru-gothic@5.3.1/latin-700.css);
+/* "Kiwi Maru" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/kiwi-maru@5.3.1/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/kiwi-maru@5.3.1/latin-500.css);
+/* "Nunito" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.3.0/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.3.0/latin-700.css);
+/* "Quicksand" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/quicksand@5.3.0/latin-500.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/quicksand@5.3.0/latin-700.css);
+/* "Comfortaa" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/comfortaa@5.3.0/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/comfortaa@5.3.0/latin-700.css);
+/* "Fredoka" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.3.0/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.3.0/latin-600.css);
+/* "Baloo 2" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/baloo-2@5.3.0/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/baloo-2@5.3.0/latin-600.css);
+/* "Sniglet" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/sniglet@5.3.0/latin-400.css);
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/sniglet@5.3.0/latin-800.css);
+/* "Varela Round" */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/varela-round@5.3.0/latin-400.css);
+/* "Mochiy Pop One" (very bubbly, best for headings) */
+@import url(https://cdn.jsdelivr.net/npm/@fontsource/mochiy-pop-one@5.3.0/latin-400.css);
+
+/* "Fredoka Chunky": Fredoka one weight heavier everywhere */
+@font-face {
+  font-family: "Fredoka Chunky";
+  font-weight: 100 449;
+  font-display: swap;
+  src: url(https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.3.0/files/fredoka-latin-500-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Fredoka Chunky";
+  font-weight: 450 549;
+  font-display: swap;
+  src: url(https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.3.0/files/fredoka-latin-600-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Fredoka Chunky";
+  font-weight: 550 900;
+  font-display: swap;
+  src: url(https://cdn.jsdelivr.net/npm/@fontsource/fredoka@5.3.0/files/fredoka-latin-700-normal.woff2) format("woff2");
+}
+
+:root {
+  /*
+    Theme Background
+    none = see your desktop through Discord (needs Vencord's "Enable window transparency")
+    or use an image instead, like url(https://i.imgur.com/j1Z6HVc.jpg)
+  */
+  --theme-background-image: none;
+
+  /*
+    Background Tint
+    Laid over whatever is behind Discord. Lower the last number to see more
+    of your wallpaper, raise it if text gets hard to read.
+  */
+  --theme-transparency: rgba(18, 12, 30, 0.64);
+
+  /*
+    Rainbow Wash
+    The soft pastel colors over the background. Set to none to turn it off
+  */
+  --rainbow-wash: linear-gradient(135deg, rgba(255, 143, 207, 0.20), rgba(255, 179, 138, 0.08) 30%, rgba(143, 240, 192, 0.06) 50%, rgba(143, 211, 255, 0.12) 70%, rgba(185, 163, 255, 0.20));
+
+  /*
+    Settings / Pop-up Background
+    How solid settings, pop-up windows and menus are. Raise the last number
+    to make them more solid, lower it for more see-through
+  */
+  --overlay-lowest: rgba(14, 10, 24, 0.94);
+  --overlay-lower: rgba(20, 14, 34, 0.92);
+  --overlay-low: rgba(30, 21, 48, 0.92);
+  --settings-background: rgba(18, 12, 30, 0.82);
+
+  /*
+    Pastel Rainbow
+  */
+  --pastel-pink: #ff8fcf;
+  --pastel-peach: #ffb38a;
+  --pastel-lemon: #ffe58f;
+  --pastel-mint: #8ff0c0;
+  --pastel-sky: #8fd3ff;
+  --pastel-lavender: #b9a3ff;
+  --rainbow: linear-gradient(90deg, var(--pastel-pink), var(--pastel-peach), var(--pastel-lemon), var(--pastel-mint), var(--pastel-sky), var(--pastel-lavender), var(--pastel-pink));
+
+  /* How fast the rainbow borders and lines move. Set to 0s to stop them */
+  --rainbow-speed: 8s;
+
+  /*
+    Font
+    Swap "Fredoka Chunky" for any font name from the list at the top of
+    this file, e.g. "Fredoka" or "Quicksand". Keep the quotes.
+    Use var(--font-discord) alone to go back to Discord's font
+  */
+  --font-discord: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --anime-font: "Fredoka Chunky", var(--font-discord);
+
+  /*
+    Main Theme Color
+  */
+  --main-theme-color: var(--pastel-pink);
+
+  /*
+    Home Icon Image
+  */
+  --home-icon-image: url(https://i.imgur.com/63g6Em8.jpg);
+  --home-icon-image-position: center center;
+  --home-icon-image-zoom: 100%;
+
+  /*
+    Server Listing Width
+    Single Column:  62px
+    Double Column:  126px
+    Triple Column:  184px
+    Quad Column:    242px
+  */
+  --server-listing-width: 126px;
+
+  /*
+    Unread server animation.
+    Replace it with "none" to remove the animation and use the main color instead
+  */
+  --unread-server-animation: rainbow;
+
+  /*
+    Message Box
+    Chat scrolls underneath it, so keep it fairly solid or messages show through
+  */
+  --message-box-transparency: rgba(26, 18, 42, 0.86);
+  --message-box-focus: rgba(38, 22, 54, 0.9);
+
+  /*
+    Glass, kept light
+  */
+  --glass-blur: 8px;
+  --glass-panel: rgba(12, 8, 24, 0.24);           /* channel list, member list */
+  --glass-surface: rgba(26, 18, 42, 0.86);        /* popouts, menus, modals, user panel */
+  --glass-surface-strong: rgba(32, 22, 50, 0.92);
+  --glass-border: rgba(255, 170, 225, 0.14);
+  --glass-radius: 14px;
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--glass-border);
+
+  --font-primary: var(--anime-font);
+  --font-display: var(--anime-font);
+  --font-headline: var(--anime-font);
+}
+
+.theme-dark,
+.theme-darker,
+.theme-midnight {
+  /* Settings, pop-up windows and everything else outside the main app: mostly solid */
+  --background-base-lowest: var(--overlay-lowest);
+  --background-base-lower: var(--overlay-lower);
+  --background-base-low: var(--overlay-low);
+  --background-surface-high: var(--glass-surface);
+  --background-surface-higher: var(--glass-surface);
+  --background-surface-highest: var(--glass-surface-strong);
+  --modal-background: var(--glass-surface);
+  --background-scrim: rgba(10, 4, 20, 0.6);
+  --app-frame-border: var(--glass-border);
+  --border-subtle: var(--glass-border);
+
+  /* Pastel hover / selected */
+  --interactive-background-hover: rgba(185, 163, 255, 0.12);
+  --interactive-background-active: rgba(255, 143, 207, 0.26);
+  --interactive-background-selected: rgba(255, 143, 207, 0.20);
+
+  /* Pastel accents */
+  --text-link: var(--pastel-sky);
+  --text-brand: var(--pastel-pink);
+  --mention-foreground: #ffd6ee;
+  --mention-background: rgba(255, 143, 207, 0.24);
+  --message-mentioned-background-default: rgba(255, 143, 207, 0.10);
+  --message-mentioned-background-hover: rgba(255, 143, 207, 0.15);
+  --background-feedback-notification: #ff5fa8;
+
+  /* Text, a little brighter so it reads over the wallpaper */
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: hsl(300, 20%, 82%);
+  --text-default: hsl(300, 15%, 90%);
+  --text-muted: hsl(290, 15%, 74%);
+  --text-strong: hsl(0, 0%, 100%);
+  --channels-default: hsl(290, 15%, 76%);
+  --channel-icon: hsl(290, 15%, 76%);
+  --interactive-normal: hsl(290, 15%, 80%);
+  --interactive-hover: hsl(0, 0%, 94%);
+  --interactive-active: hsl(0, 0%, 100%);
+  --interactive-muted: hsl(290, 10%, 45%);
+
+  /* Scrollbars */
+  --scrollbar-auto-thumb: rgba(255, 143, 207, 0.35);
+  --scrollbar-auto-track: transparent;
+  --scrollbar-thin-thumb: rgba(255, 143, 207, 0.35);
+  --scrollbar-thin-track: transparent;
+}
+
+/* The main app (servers, channels, chat): see-through */
+.baseLayer_Fd0FEH,
+.baseLayer_Fd0FEH .theme-dark,
+.baseLayer_Fd0FEH .theme-darker,
+.baseLayer_Fd0FEH .theme-midnight {
+  --background-base-lowest: transparent;
+  --background-base-lower: transparent;
+  --background-base-low: var(--glass-panel);
+  --app-frame-background: transparent;
+  --custom-channel-members-bg: transparent;
+}
+
+@keyframes sugarglass-rainbow-slide {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/*
+  Background: wallpaper (or image) + tint + rainbow wash.
+  It sits on the app root so settings and every other screen get it too
+*/
+html,
+body,
+.app_QbT-Jy,
+.layers_QbT-Jy,
+.bg_Fd0FEH {
+  background: transparent !important;
+}
+
+.appMount_gEkNtR {
+  background:
+    var(--rainbow-wash),
+    linear-gradient(var(--theme-transparency), var(--theme-transparency)),
+    var(--theme-background-image) center / cover no-repeat !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+::selection {
+  background: rgba(255, 143, 207, 0.45);
+}
+
+/*
+  Settings and other full screen pages get their own backing so the chat
+  behind doesn't show through
+*/
+.layer_Fd0FEH:not(.baseLayer_Fd0FEH) {
+  background: var(--settings-background);
+}
+
+/*
+  Rainbow line under the title bar
+*/
+.bar_3zSH5d::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  pointer-events: none;
+  background: var(--rainbow);
+  background-size: 200% 100%;
+  animation: sugarglass-rainbow-slide var(--rainbow-speed) linear infinite;
+  opacity: 0.85;
+}
+
+/*
+  Rainbow text: window title, channel name
+*/
+.title_3zSH5d,
+.title_ybUK7Z {
+  background: var(--rainbow);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  animation: sugarglass-rainbow-slide var(--rainbow-speed) linear infinite;
+}
+
+/*
+  Side panels
+*/
+.sidebar_pog62O {
+  background: transparent;
+}
+
+.sidebarList_pog62O,
+.members_86es0b {
+  background: var(--glass-panel);
+}
+
+.container_ybUK7Z,
+.themed_ybUK7Z {
+  background: transparent !important;
+}
+
+/*
+  Server icons glow on hover
+*/
+.listItem_rwEpIL svg:has(> foreignObject) {
+  transition: filter 0.2s ease;
+}
+
+.listItem_rwEpIL svg:has(> foreignObject):hover {
+  filter: drop-shadow(0 0 6px rgba(255, 143, 207, 0.75));
+}
+
+/*
+  User panel: rainbow border.
+  The background sits on a ::before layer so popouts opened from inside
+  (status menu, audio settings) still position correctly
+*/
+.panels_pog62O {
+  isolation: isolate;
+  background: transparent;
+  border: none;
+  border-radius: var(--glass-radius);
+}
+
+.panels_pog62O::before,
+.panels_pog62O::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.panels_pog62O::before {
+  z-index: -1;
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.panels_pog62O::after,
+.channelTextArea_2x8-Qn::after {
+  padding: 1.5px;
+  background: var(--rainbow);
+  background-size: 200% 100%;
+  animation: sugarglass-rainbow-slide var(--rainbow-speed) linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/*
+  Message box: soft pink edge, full rainbow edge while typing
+*/
+.channelTextArea_z_gUBg {
+  background: transparent;
+}
+
+.channelTextArea_2x8-Qn {
+  isolation: isolate;
+  background: transparent;
+  border: none;
+  border-radius: var(--glass-radius);
+}
+
+/* Background + blur on a ::before layer so the emoji picker still positions correctly */
+.channelTextArea_2x8-Qn::before,
+.channelTextArea_2x8-Qn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.channelTextArea_2x8-Qn::before {
+  z-index: -1;
+  background: var(--message-box-transparency);
+  backdrop-filter: blur(var(--glass-blur));
+  transition: background-color 0.2s ease;
+}
+
+.channelTextArea_2x8-Qn::after {
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.channelTextArea_2x8-Qn:focus-within::before {
+  background: var(--message-box-focus);
+}
+
+.channelTextArea_2x8-Qn:focus-within::after {
+  opacity: 1;
+}
+
+.channelTextArea_2x8-Qn .scrollableContainer_2x8-Qn {
+  background: transparent;
+}
+
+/*
+  Popouts
+*/
+.menu_M3qk4j {
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: var(--glass-radius);
+  box-shadow: none;
+}
+
+.menu_M3qk4j::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+}
+
+.menu_M3qk4j .item_M3qk4j {
+  border-radius: calc(var(--glass-radius) - 6px);
+}
+
+.menu_M3qk4j .item_M3qk4j.focused_M3qk4j {
+  background: linear-gradient(90deg, rgba(255, 143, 207, 0.38), rgba(185, 163, 255, 0.28));
+  color: #fff;
+}
+
+.user-profile-popout,
+.root__KoJTP,
+.contentWrapper_58b0l2,
+.autocomplete_CAMiwx {
+  border: none;
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.tooltipPrimary_3_v8qp {
+  border-radius: 10px;
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+/*
+  Hide Nitro extras: profile frames, profile effects, avatar decorations,
+  nameplates and fancy name fonts/effects. Delete this whole section to get them back.
+  (Pure CSS can't tell your own profile apart, so yours are hidden too.)
+*/
+
+/* Profile frames (like the cat frame) */
+.profileFrameContainer_v8co33,
+.profileFrameLayer_v8co33 {
+  display: none !important;
+}
+
+.custom-profile-frame {
+  --custom-profile-frame-overflow-horizontal: 0 !important;
+  --custom-profile-frame-overflow-top: 0 !important;
+  --custom-profile-frame-overflow-bottom: 0 !important;
+}
+
+/* Profile effects (sparkles and animations over profiles) */
+.profileEffects_ZjcCyW {
+  display: none !important;
+}
+
+/* Avatar decorations */
+.avatarDecorationContainer_XpIUHy,
+.avatarDecoration_XpIUHy,
+.avatarDecoration_2i8Bfm,
+img[src*="avatar-decoration-presets"] {
+  display: none !important;
+}
+
+/* Nameplates (the picture behind names in the DM and member lists) */
+img[src*="collectibles"],
+video[src*="collectibles"],
+video:has(source[src*="collectibles"]) {
+  display: none !important;
+}
+
+/* The nameplate's color fade. Kept to the DM and member lists: in chat the same
+   kind of image sits next to the message text, which would hide the message */
+.channel_zln_tS :has(> img[src*="collectibles"]),
+.channel_zln_tS :has(> video[src*="collectibles"]),
+.member_86es0b :has(> img[src*="collectibles"]),
+.member_86es0b :has(> video[src*="collectibles"]) {
+  display: none !important;
+}
+
+/* Fancy name fonts and effects */
+.dnsFont_OAgVZM {
+  font-family: inherit !important;
+}
+
+.container_or4Hj- .solid_or4Hj-,
+.container_or4Hj- .gradient_or4Hj-,
+.container_or4Hj- .prism_or4Hj-,
+.container_or4Hj- .neon_or4Hj-,
+.container_or4Hj- .toon_or4Hj-,
+.container_or4Hj- .pop_or4Hj-,
+.container_or4Hj- .gummy_or4Hj-,
+.container_or4Hj- .gummyLetter_or4Hj- {
+  color: inherit !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.container_or4Hj- [class*="_or4Hj-"]::before,
+.container_or4Hj- [class*="_or4Hj-"]::after {
+  display: none !important;
+}
+
+/*
+  Hide the Nitro, Shop and Quests links above your DMs.
+  Delete this section to get them back.
+  The second selector only matches on the part of the class name Discord
+  doesn't scramble, so it keeps working when they reshuffle class names
+*/
+.channel_zln_tS:has(a[href="/store"], a[href="/shop"], a[href="/quest-home"], a[href="/discovery/quests"]),
+li[class*="channel_"]:has(a[href="/store"], a[href="/shop"], a[href="/quest-home"], a[href="/discovery/quests"]) {
+  display: none !important;
+}

@@ -1,0 +1,117 @@
+/**
+ * @name WORLDWID3 (FEMTANYL, ZombAe)
+ * @author Syirezz
+ * @version 1.0.0
+ * @description I'm in your city, bitch
+*/
+
+@import url('https://maendisease.github.io/Solana/Solana.css');
+@import url('https://maendisease.github.io/BetterDiscordStuff/css/bdAddonMini.css');
+
+/* @import url('https://maendisease.github.io/BetterDiscordStuff/Themes/Solana/addon/mac-titlebar.css');  */
+@import url('https://discordstyles.github.io/Addons/windows-titlebar.css');
+
+:root {
+  --accent-hue: 23;
+  --accent-saturation: 100%;
+  --accent-brightness: 50%;
+  --background-accent-hue: 213;
+  --background-accent-saturation: 100%;
+  --background-accent-brightness: 50%;
+  --background-image: url('https://i.imgur.com/IIOkdx3.png');
+  --background-image-position: center;
+  --background-image-size: cover;
+  /* --background-image-blur: 5px; */
+  --background-overlay-opacity: 80%;
+  --background-overlay-color-lightness: 0;
+  --background-hue-shift-strength: 100%;
+  --window-background-image: initial;
+  --window-background-image-position: center;
+  --window-background-image-size: cover;
+  --window-background-image-attachment: fixed;
+  --window-opacity: 100%;
+  --window-blur: 0;
+  --window-friends-blur: 0;
+  --window-margin: 24;
+  --window-margin-left: 0;
+  --window-border-radius: 10px;
+  --window-background-lightness: 0;
+  --window-accent-tint-strength: 5%;
+  --chat-bubble: 1;
+  --text-link-hue: 48;
+  --chat-text-brightness: 0;
+  --home-icon: initial;
+  --favorites-icon: initial;
+  --dock-blur: 0; /* Blur intensity of the dock. */
+  --dock-border-radius: 0;
+  --sidebar-width: 240px;
+  --members-width: 240px;
+  --sidebar-text-brightness: 0;
+  --background-floating-blur: 20px;
+  --floating-background-lightness: 0;
+  --background-floating-opacity: 1;
+  --enable-floating-transparency: 1;
+  --custom-font-display: Outfit Bold;
+  --custom-font-regular: Outfit Regular;
+  --custom-font-primary: "";
+  --custom-font-code: "";
+  --enable-blur: 1;
+}
+
+/* Any custom CSS below here */
+
+.wrapper_d880dc .noChat_d880dc .video_d880dc {
+  opacity: 80% !important;
+}
+
+.wrapper_d880dc .video_d880dc {
+  opacity: 80% !important;
+}
+
+.overlayContainer_ba4b17  {
+  opacity: 100% !important;
+}
+
+/* Text Chat Opacity */
+
+.subtitleContainer_a7d72e {
+  opacity: 97% !important;
+}
+
+.content_a7d72e {
+  opacity: 97% !important;
+}
+
+.chatContent_a7d72e{
+  opacity: 97% !important;
+}
+
+/* Text Chat End */
+
+/* Call container */
+.callContainer_d880dc {
+  opacity: 97% !important;
+}
+
+.overlayContainer_ba4b17 {
+  opacity: 100% !important;
+}
+
+/* Call container end */
+
+/* Main Menu */
+.container_c2739c {
+  opacity: 70% !important;
+}
+
+.shop_e77fa3 {
+  opacity: 70% !important;
+}
+
+.applicationStore_cecc86 {
+  opacity: 70% !important;
+}
+
+.biteSizeInner_c69a7b .userProfileInner_c69a7b .biteSizeInnerThemed_c69a7b {
+  opacity: 30% !important;
+}

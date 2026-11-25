@@ -1,0 +1,12 @@
+/**
+ * @name Dusk
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(180deg, var(--bg-gradient-dusk-1) 12.84%, var(--bg-gradient-dusk-2) 85.99%);
+}

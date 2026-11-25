@@ -1,0 +1,190 @@
+/**
+ * @name iOS Dark
+ * @description A dark iOS-inspired Discord theme featuring San Francisco fonts, dark iOS color palette, rounded corners, blur effects, and modern UI elements.
+ * @author EinsPommes
+ * @version 1.0.0
+ * @website https://github.com/EinsPommes/ios-light
+ * @source https://github.com/EinsPommes/ios-light/blob/main/theme/ios-dark.theme.css
+*/
+
+/* import theme modules */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+@import url('https://einspommes.github.io/ios-light/src/main.css');
+@import url('https://einspommes.github.io/ios-light/src/colors.css');
+@import url('https://einspommes.github.io/ios-light/src/ascii.css');
+@import url('https://einspommes.github.io/ios-light/src/panel-labels.css');
+@import url('https://einspommes.github.io/ios-light/src/spotify-bar.css');
+@import url('https://einspommes.github.io/ios-light/src/unrounding.css');
+@import url('https://einspommes.github.io/ios-light/src/ios.css');
+
+body {
+    /* iOS-specific overrides - dark theme */
+    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    --code-font: 'SF Mono', 'Monaco', 'Menlo', monospace;
+    font-weight: 400;
+    letter-spacing: 0;
+
+    /* iOS sizes */
+    --gap: 16px;
+    --divider-thickness: 0.5px;
+    --border-thickness: 0.5px;
+    --border-hover-transition: 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
+
+    /* iOS animations */
+    --animations: on;
+    --list-item-transition: 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    --dms-icon-svg-transition: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+
+    /* iOS top bar */
+    --top-bar-height: 44px;
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: left;
+    --subtle-top-bar-title: on;
+
+    /* iOS dms button */
+    --custom-dms-icon: custom;
+    --dms-icon-svg-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 27' width='24' height='24'%3E%3Cpath fill='currentColor' d='M0 0h7v1H6v1H5v1H4v1H3v1H2v1h5v1H0V6h1V5h1V4h1V3h1V2h1V1H0m13 2h5v1h-1v1h-1v1h-1v1h3v1h-5V7h1V6h1V5h1V4h-3m8 5h1v5h1v-1h1v1h-1v1h1v-1h1v1h-1v3h-1v1h-2v1h-1v1h1v-1h2v-1h1v2h-1v1h-2v1h-1v-1h-1v1h-6v-1h-1v-1h-1v-2h1v1h2v1h3v1h1v-1h-1v-1h-3v-1h-4v-4h1v-2h1v-1h1v-1h1v2h1v1h1v-1h1v1h-1v1h2v-2h1v-2h1v-1h1M8 14h2v1H9v4h1v2h1v1h1v1h1v1h4v1h-6v-1H5v-1H4v-5h1v-1h1v-2h2m17 3h1v3h-1v1h-1v1h-1v2h-2v-2h2v-1h1v-1h1m1 0h1v3h-1v1h-2v-1h1v-1h1'%3E%3C/path%3E%3C/svg%3E");
+    --custom-dms-background: color;
+    --dms-background-color: linear-gradient(135deg, #007AFF, #5856D6);
+
+    /* iOS transparency/blur */
+    --transparency-tweaks: on;
+    --panel-blur: on;
+    --blur-amount: 20px;
+    --bg-floating: rgba(28, 28, 30, 0.8);
+
+    /* iOS unrounding */
+    --unrounding: off;
+
+    /* iOS styling */
+    --ascii-titles: off;
+    --ascii-loader: off;
+
+    /* iOS panel labels */
+    --label-color: rgba(255, 255, 255, 0.4);
+    --label-font-weight: 600;
+    --label-hover-color: #0A84FF;
+}
+
+/* color options - iOS dark theme */
+:root {
+    --colors: on;
+
+    /* text colors - iOS dark style */
+    --text-0: #000000;
+    --text-1: #FFFFFF;
+    --text-2: #FFFFFF;
+    --text-3: rgba(255, 255, 255, 0.9);
+    --text-4: rgba(255, 255, 255, 0.7);
+    --text-5: rgba(255, 255, 255, 0.5);
+
+    /* background and dark colors - iOS dark theme */
+    --bg-1: rgba(255, 255, 255, 0.1);
+    --bg-2: rgba(255, 255, 255, 0.05);
+    --bg-3: #1C1C1E;
+    --bg-4: #000000;
+    --hover: rgba(255, 255, 255, 0.08);
+    --active: rgba(255, 255, 255, 0.12);
+    --active-2: rgba(255, 255, 255, 0.18);
+    --message-hover: rgba(255, 255, 255, 0.03);
+
+    /* accent colors - iOS blue */
+    --accent-1: #0A84FF;
+    --accent-2: #0A84FF;
+    --accent-3: #0A84FF;
+    --accent-4: #0051D5;
+    --accent-5: #0040AA;
+    --accent-new: #FF453A;
+    --mention: linear-gradient(to right, rgba(10, 132, 255, 0.15) 40%, transparent);
+    --mention-hover: linear-gradient(to right, rgba(10, 132, 255, 0.2) 40%, transparent);
+    --reply: linear-gradient(to right, rgba(255, 255, 255, 0.05) 40%, transparent);
+    --reply-hover: linear-gradient(to right, rgba(255, 255, 255, 0.08) 40%, transparent);
+
+    /* status indicator colors - iOS dark colors */
+    --online: #30D158;
+    --dnd: #FF453A;
+    --idle: #FF9F0A;
+    --streaming: #5E5CE6;
+    --offline: rgba(255, 255, 255, 0.3);
+
+    /* border colors */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.15);
+    --border-hover: rgba(10, 132, 255, 0.5);
+    --button-border: rgba(255, 255, 255, 0.15);
+
+    /* base colors - iOS dark color palette */
+    --red-1: #FF453A;
+    --red-2: #FF453A;
+    --red-3: #FF453A;
+    --red-4: #D70015;
+    --red-5: #B50012;
+
+    --green-1: #30D158;
+    --green-2: #30D158;
+    --green-3: #30D158;
+    --green-4: #28A745;
+    --green-5: #1E7E34;
+
+    --blue-1: #0A84FF;
+    --blue-2: #0A84FF;
+    --blue-3: #0A84FF;
+    --blue-4: #0051D5;
+    --blue-5: #0040AA;
+
+    --yellow-1: #FFD60A;
+    --yellow-2: #FFD60A;
+    --yellow-3: #FFD60A;
+    --yellow-4: #E6B800;
+    --yellow-5: #CC9900;
+
+    --purple-1: #5E5CE6;
+    --purple-2: #5E5CE6;
+    --purple-3: #5E5CE6;
+    --purple-4: #4A48C4;
+    --purple-5: #3D3BB2;
+
+    /* Discord background variables - iOS dark theme */
+    --background-base: #000000 !important;
+    --background-base-low: transparent !important;
+    --background-base-lower: transparent !important;
+    --background-base-lowest: transparent !important;
+    --background-secondary: #1C1C1E !important;
+    --background-secondary-alt: #1C1C1E !important;
+    --background-tertiary: #2C2C2E !important;
+    --background-accent: rgba(255, 255, 255, 0.1) !important;
+    --background-floating: rgba(28, 28, 30, 0.9) !important;
+    --background-mobile-primary: #000000 !important;
+    --background-mobile-secondary: #1C1C1E !important;
+    --background-modifier-hover: rgba(255, 255, 255, 0.08) !important;
+    --background-modifier-active: rgba(255, 255, 255, 0.12) !important;
+    --background-modifier-selected: rgba(10, 132, 255, 0.2) !important;
+    --background-modifier-accent: rgba(255, 255, 255, 0.1) !important;
+    --background-mentioned: rgba(10, 132, 255, 0.15) !important;
+    --background-mentioned-hover: rgba(10, 132, 255, 0.2) !important;
+    --background-message-hover: rgba(255, 255, 255, 0.03) !important;
+    --background-message-automod: rgba(255, 69, 58, 0.15) !important;
+    --background-message-automod-hover: rgba(255, 69, 58, 0.2) !important;
+    --background-message-highlight: rgba(10, 132, 255, 0.15) !important;
+    --background-message-highlight-hover: rgba(10, 132, 255, 0.2) !important;
+    --background-primary: #000000 !important;
+    --background-secondary-alt: #1C1C1E !important;
+    --background-tertiary: #2C2C2E !important;
+    --background-surface-high: rgba(255, 255, 255, 0.1) !important;
+    --background-surface-low: transparent !important;
+    --background-surface-lowest: transparent !important;
+    --brand-360: #0A84FF !important;
+    --text-muted: rgba(255, 255, 255, 0.5) !important;
+    --text-normal: rgba(255, 255, 255, 0.9) !important;
+    --text-positive: rgba(255, 255, 255, 0.9) !important;
+    --text-link: #0A84FF !important;
+    --text-link-low-saturation: #0A84FF !important;
+    --interactive-normal: rgba(255, 255, 255, 0.9) !important;
+    --interactive-hover: rgba(255, 255, 255, 0.9) !important;
+    --interactive-active: rgba(255, 255, 255, 0.9) !important;
+    --interactive-muted: rgba(255, 255, 255, 0.5) !important;
+    --channeltextarea-background: rgba(255, 255, 255, 0.1) !important;
+    --input-background: rgba(255, 255, 255, 0.1) !important;
+    --input-placeholder-text: rgba(255, 255, 255, 0.5) !important;
+}
+

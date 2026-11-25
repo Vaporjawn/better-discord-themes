@@ -1,0 +1,84 @@
+/**
+ * @name bd-Plata
+ * @author emil1003
+ * @source https://github.com/emil1003/bd-Plata.git
+ * @version 0.3.2
+ * @description A theme to match the Plata GTK theme.
+ * Includes support for light and dark (Lumine/Noir) variants.
+ */
+
+/* Set base variables */
+:root {
+	--background-primary: var(--plata-primary);
+	--background-secondary: var(--plata-primary);
+	--background-secondary-alt: var(--plata-primary);
+	--background-tertiary: var(--plata-secondary);
+	--background-floating: var(--background-tertiary);
+	--channeltextarea-background: var(--plata-secondary);
+
+	--background-mentioned: rgba(var(--plata-rgb-accent),0.05);
+	--background-mentioned-hover: rgba(var(--plata-rgb-accent),0.1);
+
+	--scrollbar-thin-thumb: var(--plata-secondary);
+	--scrollbar-thin-track: transparent;
+	--scrollbar-auto-thumb: var(--plata-secondary);
+	--scrollbar-auto-track: transparent;
+}
+
+/* Inherit colors from Plata-Lumine */
+.theme-light {
+	--plata-primary: #f8f8f8;
+	--plata-secondary: #e7e7e7;
+	--plata-accent: #8ab4f8;
+	--plata-rgb-accent: 138, 180, 248;
+}
+
+/* Inherit colors from Plata-Noir */
+.theme-dark {
+	--plata-primary: #1d1d1d;
+	--plata-secondary: #080808;
+	--plata-accent: #8ab4f8;
+	--plata-rgb-accent: 138, 180, 248;
+}
+
+/* Recolor dialog boxes */
+.root-g14mjS {
+	background-color: var(--background-primary) !important;
+}
+
+.footer-31IekZ {
+	background-color: var(--background-secondary) !important;
+}
+
+/* Color mentioned message left margin */
+.mentioned-Tre-dv:before {
+	background: var(--plata-accent) !important;
+}
+
+/* Fix friendlist redesign content/header using static values */
+.container-2cd8Mz {
+	background-color: var(--background-secondary) !important;
+}
+.container-ZMc96U, .children-3xh0VB:after {
+	background: var(--plata-primary) !important;
+}
+
+/* Add rounded corner on server header (as is on Windows) */
+.app-focused .layers-OrUESM > div > div > .base-2jDfDU {
+	border-radius: 10px 0 0 0;
+}
+
+/* Recolor servers list when unfocused... */
+nav > ul > .scroller-3X7KbA {
+	background: var(--background-primary);
+}
+
+/* ..and give it back when focused (:not, y u no work)*/
+.app-focused nav > ul > .scroller-3X7KbA {
+	background: var(--background-tertiary);
+}
+
+/* Remove messageGroup border in pinned messages */
+.messageGroupWrapper-1jf_7C {
+	border: none;
+}

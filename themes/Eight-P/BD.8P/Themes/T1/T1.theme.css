@@ -1,0 +1,198 @@
+/**
+ * @name T1
+ * @description Simple design with focus on improvements and a horizontal server bar. 🛈 Edit the theme file for more options.
+ * @version 0.11.0
+ * @author Eight_P
+ * @authorLink https://github.com/Eight-P
+ * @website https://betterdiscord.app/theme/T1
+ * @source https://github.com/Eight-P/BD.8P/tree/master/Themes/T1
+*/
+
+@import url(https://eight-p.github.io/BD.8P/Themes/T1/dist/T1.css);
+
+/*
+==> Info <==
+
+  - Report any issues at: https://github.com/Eight-P/BD.8P/issues
+    Or ask questions at: https://github.com/Eight-P/BD.8P/discussions
+
+  - To reduce potential bugs, Discord's stable client is highly recommended.
+
+
+==> Settings <==
+
+  - To configure the theme, it's best to copy & paste the variables into your Custom/Quick CSS.
+    For more information check: https://github.com/Eight-P/BD.8P/tree/master/Themes
+
+  - Unless overwise stated: 0 = Visible/Off | 1 = Hidden/On
+*/
+
+:root {
+
+/* -- Chat */
+
+/* Hide chat input buttons */
+
+--hide-chatBtn-nitro: 1 ;
+--hide-chatBtn-gif: 0 ;
+--hide-chatBtn-sticker: 0 ;
+--hide-chatBtn-emoji: 0 ;
+--hide-chatBtn-apps: 0 ;
+
+
+/*  Hide message background hover
+/*  -  0: Highlight on hover
+/*  -  1: Hide unless btns are hovered or expanded
+/*  -  2: Never highlight */
+
+--hide-messageHover: 1 ;
+
+
+/*  Hide emojis in message buttons
+/*  -  0: Show all
+/*  -  1: Hide until hovered
+/*  -  2: Hidden */
+
+--hide-messageBtnEmojis: 1 ;
+
+
+/*  Reduce all message buttons
+/*  -  0: Show all
+/*  -  1: Reduce until hovered */
+/*  -  2: Hidden */
+
+--reduce-messageBtns: 0 ;
+
+
+/*  Keep button overlay in call view (reduces the height)
+/*  -  0: Only show on hover
+/*  -  1: Always show  */
+
+--keep-voiceChannelBtns: 0 ;
+
+
+/*  Highlight chat input when focused/selected */
+
+--highlight-focusedChatInput: 0 ;
+
+
+/*  Show the URL next to a masked link
+/*  -  0: Masked
+/*  -  1: Show URL in messages (except embeds)
+/*  -  2: Show URL everywhere */
+
+--unmask-links: 0 ;
+
+
+/*  -- Effects & Decorations */
+
+/* Hide profile popout/modal background effects */
+
+--hide-profileEffects: 0 ;
+
+
+/* Hide user avatar decorations */
+
+--hide-avatarDecorations: 0 ;
+
+
+/*  Hide nameplates
+/*  -  0: Show all
+/*  -  1: Hide in member list
+/*  -  2: Hide own in profile panel
+/*  -  3: Hide all */
+
+--hide-nameplates: 0 ;
+
+
+/*  Hide clan tags
+/*  -  0: Show all
+/*  -  1: Hide in member list
+/*  -  2: hide all */
+
+--hide-clanTags: 0 ;
+
+
+/*  Hide username holographic gradient & animation
+/*  -  0: Show
+/*  -  1: Hide using color 1
+/*  -  2: Hide using color 2 */
+
+--disable-roleGradients: 0 ;
+
+
+/* Hide super reaction animations */
+
+--hide-reactionAnimations: 0 ;
+
+
+/* -- Server bar / Guilds list */
+
+/*  Folder background-style
+/*  -  0: No background
+/*  -  1: Background */
+
+--serverBar-FolderStyle: 1 ;
+
+
+/*  Space between server bar icons (unit should be px) */
+
+--serverBar-Spacing: 17px ;
+
+
+/*  Server icon size (can make the images look blurry)
+/*  -  100: default | lower number = smaller */
+
+--serverBar-IconSize: 100 ;
+
+
+/* -- Backgrounds */
+
+/*  Background images | Can be links, colors, gradients or none (links must be HTTPS) */
+
+--background-app: url(https://eight-p.github.io/BD.8P/Themes/T1/assets/Main-bg.jpg);
+--background-server: url(https://eight-p.github.io/BD.8P/Themes/T1/assets/Server-bg.jpg);
+
+
+/*  Background images brightness | lower = darker / higher = brighter */
+
+--backgroundBrightness-app: 80 ;
+--backgroundBrightness-server: 100 ;
+
+
+/*  Background blur effect | 0: Off / higher number = more blur */
+
+--backgroundBlur-app: 0 ;
+--backgroundBlur-server: 0 ;
+
+
+/* -- Misc */
+
+/*  Hide friend activities section in home tab
+/*  -  0: Always show
+/*  -  1: Hide when empty
+/*  -  2: Always Hide */
+
+--hide-friendsActivity: 1 ;
+
+
+/*  Hide server boost goal in the channel sidebar */
+
+--hide-serverBoostStats: 0 ;
+
+
+/*  Add scrollbars */
+
+--show-sidebarScrollbar: 0 ;
+--show-memberListScrollbar: 0 ;
+
+
+/*  Change default font
+/*  -  Prioritization: left to right | Fonts should be installed locally & may need quotation marks */
+
+--font: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif ;
+
+}
+
+
+:root { --T1Fv: 11 }

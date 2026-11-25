@@ -1,0 +1,30 @@
+/**
+ * @name Logarithm
+ * @author Saltssaumure
+ * @authorLink https://github.com/Saltssaumure
+ * @description A fullscreen Windows XP style theme.
+ * @license GPL-3.0
+ * @version 1.0
+ * @invite uy8nKQVatp
+ * @source https://github.com/Saltssaumure/xp2-discord-theme
+ * @donate https://ko-fi.com/saltssaumure
+*/
+
+@import url("https://saltssaumure.github.io/xp2-discord-theme/xp2.min.css");
+
+/* See https://github.com/Saltssaumure/xp2-discord-theme#customisation for customisation settings. */
+:root {
+    /* Variables */
+}
+
+.theme-dark {
+    --xp2-background: black;
+    --xp2-background-2: rgb(17, 34, 51);
+    --xp2-text: white;
+}
+
+.theme-light {
+    --xp2-background: white;
+    --xp2-background-2: rgb(17, 34, 51);
+    --xp2-text: black;
+}

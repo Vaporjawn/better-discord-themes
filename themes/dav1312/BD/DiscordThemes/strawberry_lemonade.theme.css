@@ -1,0 +1,12 @@
+/**
+ * @name Strawberry Lemonade
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(161.03deg, var(--bg-gradient-strawberry-lemonade-1) 18.79%, var(--bg-gradient-strawberry-lemonade-2) 49.76%, var(--bg-gradient-strawberry-lemonade-3) 80.72%);
+}

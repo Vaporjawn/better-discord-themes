@@ -1,0 +1,120 @@
+/**
+ * @name Relaxed Discord
+ * @author Yuri
+ * @authorLink https://github.com/yuri-becker
+ * @description A few adjustments to make Discord less cluttered.
+ * @source https://github.com/yuri-becker/relaxed-discord
+ * @version 1.1.0
+ */
+
+/* ADD BACKGROUND TO CHAT */
+main[class*="chatContent"]::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-image: var(--relaxed-background-image);
+  background-size: cover;
+  background-position: 40% cover;
+  filter: var(--relaxed-background-image-filter, blur(3px) brightness(50%));
+  opacity: .3;
+
+}
+
+/* RESTRICT CHAT MESSAGE WIDTH */
+ol[class*="scrollerInner"] {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40rem;
+}
+
+main[class*="chatContent"]>form>* {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ADD MARGIN IN DM LIST */
+div[class*="peopleListItem"] {
+  border-top-color: transparent;
+  margin-bottom: .3rem;
+}
+
+div[class*="peopleListItem"]:last-of-type {
+  margin-bottom: 0;
+}
+
+/* ADD MARGIN IN FRIENDS LIST */
+[class*="privateChannels"] [class*="scroller"] ul>li:nth-child(n+5) {
+  margin-bottom: .8rem;
+}
+
+[class*="privateChannels"] [class*="scroller"] ul>li:last-of-type {
+  margin-bottom: 0;
+}
+
+/* CORRECT CURSOR ON OWN AVATAR ON THE BOTTOM LEFT */
+[class *="avatarWrapper"] {
+  cursor: pointer;
+}
+
+/* REMOVE STATUS TEXT */
+[class*="nameTag"] [class*="panelSubtextContainer"] {
+  display: none;
+}
+
+/* REMOVE GIFT BUTTON IN MESSAGE FIELD */
+button[aria-label="Send a gift"] {
+  display: none;
+}
+
+/* REMOVES HELP */
+a[href="https://support.discord.com"] {
+  display: none;
+
+}
+
+/* ADDS MARGIN TO THE NOW PLAYING COLUMN */
+div[class*="nowPlayingColumn"] div[class*="itemCard"] {
+  border: none;
+  background-color: transparent;
+  margin-bottom: .8rem;
+}
+
+div[class*="nowPlayingColumn"] div[class*="itemCard"]:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Remove backgrounds in activity panel */
+
+div[class*="members"]>div[role="list"]>div>div[role="listitem"]>div[class*="container"] {
+  background: none;
+  border: 0;
+}
+
+
+/* Vertically align chat box with profile panel */
+form[class*="formWithLoadedChatInput"] {
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+form[class*="formWithLoadedChatInput"]>div[class*="typing"] {
+  position: absolute;
+  top: 0;
+  padding-left: var(--space-xs);
+}
+
+form[class*="formWithLoadedChatInput"]>div[class*="channelBottomBarArea"]>div[class*="channelTextArea"] {
+  margin-bottom: var(--space-8);
+}
+
+form[class*="formWithLoadedChatInput"]>div[class*="channelBottomBarArea"]>div[class*="channelTextArea"]:not(:focus-within) {
+  border-color: transparent;
+}
+
+div[class*="sidebar"]>section[class*="panels"]>div[class*="container"] {
+  --height: 3.25rem;
+  min-height: var(--height);
+  height: var(--height);
+}

@@ -1,0 +1,301 @@
+/**
+ * @name DIKORD
+ * @author chimi420
+ * @version 1.1.0
+ * @description A highly sophisticated Dikky Kordy theme , for dikord
+ */
+
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+:root {
+    /* layout: flush panels, like stock Discord */
+    --gap: 0px;
+    --border-thickness: 1px;
+
+    /* Corner rounding -- deliberately heavy, this theme is meant to read soft.
+
+       These were 6px/4px/3px, which is why settings rows and hover pills
+       looked near-square. Midnight's build consumes var(--radius-*) in 22
+       places but never defines them, so leaving them unset falls through to
+       Discord's native radii; setting them here overrides that upward.
+
+       These are global -- popouts, modals, message bubbles and buttons all
+       follow. Two spots in midnight's build derive from them:
+         border-radius: calc(var(--radius-lg) - 4px)   -> 20px at current values
+         left: calc(var(--radius-sm) / 2)             -> 6px, a small offset
+       Both stay well-behaved at this range, but pushing --radius-lg much past
+       ~28px starts to make the derived value look detached from its parent.
+
+       To tune: raise/lower these three together, or edit --chatbar-radius below
+       for the message composer on its own. */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+
+    /* Chat text box: Midnight never sets a radius on the message composer, so
+       this one is set here independently of the panels.
+       Targets the form's inner wrapper, not .form_ itself -- .form_ is a
+       full-bleed flex column and rounding it clips the whole chat column. */
+    --chatbar-radius: 20px;
+
+    /* backgrounds, darkest -> lightest */
+    --bg-4: hsla(230, 20%, 8%, 1);   /* main background */
+    --bg-3: hsla(230, 18%, 11%, 1);  /* secondary elements / sidebar */
+    --bg-2: hsla(230, 16%, 14%, 1);  /* buttons */
+    --bg-1: hsla(230, 16%, 18%, 1);  /* buttons clicked */
+    --hover: hsla(235, 30%, 60%, 0.08);
+    --active: hsla(235, 30%, 60%, 0.16);
+    --active-2: hsla(235, 30%, 60%, 0.24);
+    --message-hover: hsla(0, 0%, 0%, 0.12);
+
+    /* text */
+    --text-1: hsl(230, 25%, 95%);
+    --text-2: hsl(230, 15%, 75%);
+    --text-3: hsl(230, 12%, 62%);
+    --text-4: hsl(230, 10%, 42%);
+    --text-5: hsl(230, 10%, 28%);
+
+    /* blue-purple accent */
+    --accent-1: #9fa4ff;
+    --accent-2: #7c81f2;
+    --accent-3: #6b6ee8;
+    --accent-4: #5a5dd6;
+    --accent-5: #4a4dc2;
+
+    /* channel name colors */
+    --channels-default: var(--text-4);
+    --channels-hover: #5b9dff;
+    --channels-active: #7cbaff;
+    --channels-icon-hover: #5b9dff;
+}
+
+/* DMs/home button icon: eggplant instead of the default moon.
+   Midnight sets --dms-icon-svg-url on `body`, not `:root`, so the override
+   has to target `body` too or it gets shadowed by body's own declaration. */
+body {
+    --dms-icon-svg-url: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48dGV4dCB4PSIyNTYiIHk9IjM5MCIgZm9udC1zaXplPSI0NDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfjYY8L3RleHQ+PC9zdmc+Cg==');
+}
+
+/* channel names: vertical gradient, white on top fading into the hover blue */
+[class*="sidebar_"] [class*="link_"]:hover [class*="name_"],
+[class*="sidebar_"] [class*="interactive_"]:hover [class*="name_"] {
+    background: linear-gradient(180deg, #ffffff 0%, var(--channels-hover) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: all 0.15s ease;
+}
+
+/* DM list names: same gradient. The DM row's <li class="channel_ dm_ ...">
+   paints its visible text in a nested .overflowTooltip_ div, not directly on
+   .name_ like channels do, and that div carries its own explicit color that
+   blocks a transparent-color ancestor - so it has to be targeted directly. */
+li[class*="dm_"] [class*="link_"]:hover [class*="name_"] [class*="overflowTooltip_"],
+li[class*="dm_"] [class*="interactive_"]:hover [class*="name_"] [class*="overflowTooltip_"] {
+    background: linear-gradient(180deg, #ffffff 0%, var(--channels-hover) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: all 0.15s ease;
+}
+
+/* emotes inside a channel/DM name: exempt from the gradient/transparent-fill trick above,
+   which otherwise flattens color emoji into solid blobs */
+[class*="sidebar_"] [class*="link_"]:hover [class*="name_"] img,
+[class*="sidebar_"] [class*="interactive_"]:hover [class*="name_"] img,
+[class*="sidebar_"] [class*="name_"] [class*="emoji"],
+li[class*="dm_"] [class*="link_"]:hover [class*="name_"] img,
+li[class*="dm_"] [class*="interactive_"]:hover [class*="name_"] img,
+li[class*="dm_"] [class*="name_"] [class*="emoji"] {
+    -webkit-text-fill-color: initial;
+    color: initial;
+    opacity: 1;
+    filter: none;
+}
+
+/* DM list avatars spin on hover, same as server icons */
+li[class*="dm_"] [class*="link_"] [class*="avatar_"] {
+    transition: transform 0.6s ease;
+}
+li[class*="dm_"] [class*="link_"]:hover [class*="avatar_"] {
+    transform: rotate(360deg);
+}
+
+/* chat message avatars, member list avatars, and the avatar in a user's
+   profile popout/modal all spin on hover too. "user-profile-popout" is a
+   real (non-hashed) class Discord itself adds to the profile card, so it's
+   used directly instead of a wildcard guess. */
+[class*="chat_"] [class*="avatar_"],
+[class*="members_"] [class*="avatar_"],
+[class*="membersWrap_"] [class*="avatar_"],
+.user-profile-popout [class*="avatar_"],
+[class*="userProfileOuter"] [class*="avatar_"],
+[class*="userProfileInner"] [class*="avatar_"] {
+    transition: transform 0.6s ease;
+}
+[class*="chat_"] [class*="avatar_"]:hover,
+[class*="members_"] [class*="avatar_"]:hover,
+[class*="membersWrap_"] [class*="avatar_"]:hover,
+.user-profile-popout [class*="avatar_"]:hover,
+[class*="userProfileOuter"] [class*="avatar_"]:hover,
+[class*="userProfileInner"] [class*="avatar_"]:hover {
+    transform: rotate(360deg);
+}
+
+/* category names: grey -> blue-purple gradient, same as DIKORD */
+[class*="sidebar_"] [class*="title_"] {
+    background: linear-gradient(90deg, var(--text-2) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* server name: vertical gradient, white on top fading into blue-purple */
+[class*="sidebar_"] [class*="header_"] [class*="name_"] {
+    background: linear-gradient(180deg, #ffffff 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* server icons spin on hover. real guild items are a plain
+   <div class="wrapper__xxxx" data-list-item-id="guildsnav___<id>"> wrapping
+   an <img class="icon__xxxx">, no nested childWrapper like the home button has */
+[class*="wrapper__"][data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]) [class*="icon__"] {
+    transition: transform 0.6s ease;
+}
+[class*="wrapper__"][data-list-item-id^="guildsnav___"]:not([data-list-item-id="guildsnav___home"]):hover [class*="icon__"] {
+    transform: rotate(360deg);
+}
+
+/* server icons: big (56px) + circular, like 2018 Discord.
+   Discord nests every icon: <div.wrapper_ style="width:40px"> > <svg viewBox> >
+   <foreignObject mask="squircle"> > (same again for guilds) > <img>. Instead of
+   fighting the SVG geometry, zoom the outermost 40px wrapper to 56px (x1.4),
+   strip every squircle mask, and leave the icon art unclipped (see --dikord-icon-radius). Column width is set explicitly so nothing is cropped. */
+body {
+    --custom-guild-list-width: 72px;
+}
+/* --dikord-icon-radius: 0 = show the full, uncropped icon art (default);
+   set e.g. 50% for true circles (crops the corners of square icons) */
+[class*="listItem_"] > span > div > [style*="width: 40px"] {
+    zoom: 1.4;
+    overflow: visible;
+    border-radius: var(--dikord-icon-radius, 0);
+}
+[data-list-item-id^="guildsnav___"] [class*="icon_"] {
+    border-radius: var(--dikord-icon-radius, 0);
+}
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"] {
+    border-radius: 50%;
+}
+[class*="listItem_"] foreignObject {
+    mask: none !important;
+    -webkit-mask: none !important;
+}
+[class*="circleIconButton_"] {
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: transparent !important;
+    border: 1px dashed currentColor;
+}
+[data-list-id="guildsnav"] [class*="stack_"] {
+    gap: 8px !important;
+}
+/* add-server / discover buttons: glow on hover, tinted from this theme's own
+   accent ramp so they read as part of the palette instead of clashing with it.
+   Add-server uses --accent-2 (#7c81f2) and discover --accent-1 (#9fa4ff) --
+   adjacent steps of the same blue-purple, distinct enough to tell apart.
+   (These were hardcoded neon #39ff14 / #bf40ff, which matched nothing.)
+   Discord's own hover colours made the buttons vanish against the transparent
+   background, hence the explicit overrides.
+   To recolour, change --accent-1 / --accent-2 above -- no edits needed here. */
+[data-list-item-id="guildsnav___create-join-button"]:hover,
+[data-list-item-id="guildsnav___create-join-button"]:focus-visible {
+    color: var(--accent-2) !important;
+    border: 1px solid var(--accent-2) !important;
+    background-color: color-mix(in srgb, var(--accent-2) 12%, transparent) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-2) 60%, transparent),
+        inset 0 0 8px color-mix(in srgb, var(--accent-2) 30%, transparent) !important;
+}
+[data-list-item-id="guildsnav___guild-discover-button"]:hover,
+[data-list-item-id="guildsnav___guild-discover-button"]:focus-visible {
+    color: var(--accent-1) !important;
+    border: 1px solid var(--accent-1) !important;
+    background-color: color-mix(in srgb, var(--accent-1) 12%, transparent) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-1) 60%, transparent),
+        inset 0 0 8px color-mix(in srgb, var(--accent-1) 30%, transparent) !important;
+}
+[class*="circleIconButton_"] {
+    transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+[class*="circleIconButton_"]:hover [class*="circleIcon_"] {
+    color: inherit !important;
+    filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* ---------- extra roundness on the chat box and server list ---------- */
+/* The three --radius-* vars above cover most panels, but two elements need
+   their own rules:
+
+   - the chat message composer has no Midnight rule at all, so it keeps
+     Discord's native radius and looks visibly tighter than its neighbours
+   - the server list is a plain <nav> with no radius, so it reads as a hard
+     rectangle against the rounded chat column beside it
+
+   Both are scoped to layout containers only, so nothing clips. */
+[class*="chatContent_"] [class*="form_"] > div {
+    border-radius: var(--chatbar-radius);
+}
+[class*="chatContent_"] [class*="slidingContainer_"] {
+    border-radius: var(--chatbar-radius);
+}
+/* NOTE: deliberately no overflow:hidden here. The guild icons are scaled to
+   1.4x and intentionally overflow their slots (see the icon block below), so
+   clipping this container would cut them off. border-radius alone only rounds
+   the background corners and leaves the icons untouched. */
+[class*="guilds_"],
+[class*="sidebar_"] {
+    border-radius: var(--radius-lg);
+}
+
+/* ---------- DIKORD watermark, top-left corner ---------- */
+/* split into two pseudo-elements: gradient-clip transparent fill turns color
+   emoji into flat blobs in Chromium, so the emoji get their own plain-colored layer */
+#app-mount::before {
+    content: "DIKORD";
+    position: fixed;
+    top: 4px;
+    left: 76px;
+    z-index: 9999;
+    font-family: var(--font-display, "gg sans", sans-serif);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--text-2) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    opacity: 0.9;
+    pointer-events: none;
+    user-select: none;
+}
+
+#app-mount::after {
+    content: "🍆💦";
+    position: fixed;
+    top: 4px;
+    left: 164px;
+    z-index: 9999;
+    font-size: 16px;
+    opacity: 0.9;
+    pointer-events: none;
+    user-select: none;
+}

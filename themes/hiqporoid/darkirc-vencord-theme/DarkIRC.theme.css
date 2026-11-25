@@ -1,0 +1,2049 @@
+/**
+ * @name DarkIRC
+ * @author DarkIRC contributors
+ * @version 1.0.13
+ * @description A compact blue-black IRC-style theme, based on Compact++ 1.9.3. Requires Discord Compact message display.
+ * @license BSD-2-Clause-Patent
+ */
+
+/* DarkIRC v1.0.13 — Copyright (c) 2026 DarkIRC contributors.
+ * Includes a modified Compact++ 1.9.3 by Grzesiek11.
+ * Compact++: Copyright (c) 2023-2026 Grzesiek11.
+ * Upstream: https://git.stary.pc.pl/Grzesiek11/compactpp
+ * Full BSD+Patent terms follow in this standalone distribution.
+ * Build: node scripts/build.cjs. Edit src/, not the generated theme.
+ */
+
+/*
+Compact++: Copyright (c) 2023-2026 Grzesiek11
+Source: https://git.stary.pc.pl/Grzesiek11/compactpp
+License: BSD-2-Clause-Patent (BSD+Patent)
+
+Copyright (c) <YEAR> <COPYRIGHT HOLDERS>
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+Subject to the terms and conditions of this license, each copyright holder and contributor hereby grants to those receiving rights under this license a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except for failure to satisfy the conditions of this license) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer this software, where such license applies only to those patent claims, already acquired or hereafter acquired, licensable by such copyright holder or contributor that are necessarily infringed by:
+
+(a) their Contribution(s) (the licensed copyrights of copyright holders and non-copyrightable additions of contributors, in source or binary form) alone; or
+
+(b) combination of their Contribution(s) with the work of authorship to which such Contribution(s) was added by such copyright holder or contributor, if, at the time the Contribution is added, such addition causes such combination to be necessarily infringed. The patent license shall not apply to any other combinations which include the Contribution.
+
+Except as expressly stated above, no rights or licenses from any copyright holder or contributor is granted under this license, whether expressly, by implication, estoppel or otherwise.
+
+DISCLAIMER
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+/* ===== 05-compactpp.css ===== */
+/* Modified Compact++ 1.9.3; copyright 2023-2026 Grzesiek11.
+ * Full BSD+Patent license is embedded by scripts/build.cjs.
+ * Changes: retained AutoMod action control; removed expanding hover popups
+ * for names, AutoMod names and pronouns. Other upstream layout fixes follow.
+ */
+:root {
+  /* Hide tags */
+  --compactpp-hide-tags: false;
+  /* Hide icons */
+  --compactpp-hide-icons: false;
+  /* Minimize replies */
+  --compactpp-minimize-replies: false;
+  /* Header width */
+  --compactpp-header-width: 160px;
+  /* Header left margin */
+  --compactpp-header-margin-left: 10px;
+  /* Header right margin */
+  --compactpp-header-margin-right: 5px;
+  /* Message right margin */
+  --compactpp-message-margin-right: 15px;
+  /* Avatar size */
+  --compactpp-avatar-size: 1.25rem;
+  /* Reply link line offset */
+  --compactpp-reply-link-line-offset: 30px;
+  /* UserMessagesPronouns pronouns width */
+  --compactpp-pronoundb-pronouns-width: 45px;
+}
+/* Message container */
+:is(.compact_c19a55, .compact_2i8Bfm):is(.wrapper_c19a55, .wrapper_2i8Bfm) {
+  padding-left: 0;
+  padding-right: var(--compactpp-message-margin-right) !important;
+}
+/* Message content container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) {
+  margin-left: 0;
+  padding-left: 0;
+  text-indent: 0;
+}
+/* Message markup first header 1 */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) h1:first-child,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) h2:first-child,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) h3:first-child {
+  margin-top: 0;
+}
+/* Message markup last header 1 */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) h1:last-child,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) h2:last-child,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) h3:last-child {
+  margin-bottom: 0;
+}
+/* Message markup first unordered list */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) ul:first-child,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) ol:first-child {
+  margin-top: 0;
+}
+/* Message markup list last element */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) li:last-child {
+  margin-bottom: 0;
+}
+/* Message markup unordered list */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) ul,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) ol {
+  margin-bottom: 4px;
+}
+/* Message markup last unordered list */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) ul:last-child,
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) ol:last-child {
+  margin-bottom: 0px;
+}
+/* Message markup code block */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) pre {
+  max-width: unset;
+}
+/* Message markup quote container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) blockquote {
+  padding-right: 0;
+  max-width: unset;
+  min-width: 0;
+}
+/* Message markup quote line */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.blockquoteContainer__75297, .blockquoteContainer_ku1OHH) :is(.blockquoteDivider__75297, .blockquoteDivider_ku1OHH) {
+  flex-shrink: 0;
+}
+/* Message header container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm),
+:is(.zalgo_c19a55, .zalgo_2i8Bfm):is(.gradient_c19a55, .gradient_2i8Bfm):is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm),
+:is(.withDisplayNameStyles_c19a55, .withDisplayNameStyles_2i8Bfm):is(.withDisplayNameStyles_c19a55, .withDisplayNameStyles_2i8Bfm):is(.withDisplayNameStyles_c19a55, .withDisplayNameStyles_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) {
+  margin-left: var(--compactpp-header-margin-left);
+  position: absolute;
+  display: flex;
+  width: var(--compactpp-header-width);
+  align-items: center;
+}
+/* Message timestamp */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) :is(.timestamp_c19a55, .timestamp_2i8Bfm) {
+  flex-grow: 1;
+  margin-right: 0;
+  text-align: left;
+  white-space: nowrap;
+  width: unset;
+}
+/* Hidden message timestamp */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.timestampVisibleOnHover_c19a55, .timestampVisibleOnHover_2i8Bfm) {
+  opacity: unset;
+}
+/* Message avatar */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.avatar_c19a55, .avatar_2i8Bfm) {
+  position: static;
+  width: var(--compactpp-avatar-size);
+  height: var(--compactpp-avatar-size);
+  margin-left: 5px;
+  margin-right: 0;
+  z-index: auto;
+  order: 1;
+}
+/* Message username container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 0;
+  min-width: 0;
+  order: 2;
+}
+/* Message tag */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.botTag_c19a55, .botTag_2i8Bfm),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.systemTag__44492, .systemTag_bbJCi7),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.systemTag_b99f57, .systemTag_q-l2Gj),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.clanTagChiplet_c19a55, .clanTagChiplet_2i8Bfm) {
+  margin-left: 0;
+  margin-right: 5px;
+}
+/* Message tag */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.botTag_c19a55, .botTag_2i8Bfm) {
+  position: static;
+}
+/* Message clan tag */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.clanTagChiplet_c19a55, .clanTagChiplet_2i8Bfm) {
+  white-space: nowrap;
+}
+@container style(--compactpp-hide-tags: true) {
+  /* Message tag */
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.botTag_c19a55, .botTag_2i8Bfm),
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.systemTag__44492, .systemTag_bbJCi7),
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.systemTag_b99f57, .systemTag_q-l2Gj),
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.clanTagChiplet_c19a55, .clanTagChiplet_2i8Bfm) {
+    display: none;
+  }
+}
+/* Message username */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* Gradient glow is absolute, we want it relative to the username */
+  position: relative;
+  flex-shrink: 1;
+  z-index: 1;
+  order: 2;
+}
+/* AutoMod message username container */
+:is(.compact__44492, .compact_bbJCi7):is(.usernameContainer__44492, .usernameContainer_bbJCi7) > :nth-child(2),
+:is(.compact_b99f57, .compact_q-l2Gj):is(.usernameContainer_b99f57, .usernameContainer_q-l2Gj) > :nth-child(2) {
+  overflow: hidden;
+  margin-left: 5px;
+}
+/* DarkIRC: names and pronouns remain clipped on hover. Use the native
+ * profile control for the full name; do not paint a popup over messages. */
+/* Role and new member icon container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :has(:is(.newMemberBadge_f80704, .newMemberBadge_P4-UkH)),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :has(:is(.roleIcon_c19a55, .roleIcon_2i8Bfm)) {
+  order: 1;
+}
+/* Role icon */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.roleIcon_c19a55, .roleIcon_2i8Bfm),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.newMemberBadge_f80704, .newMemberBadge_P4-UkH) {
+  margin-right: 5px;
+  margin-left: 0;
+}
+@container style(--compactpp-hide-icons: true) {
+  /* Role icon */
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.roleIcon_c19a55, .roleIcon_2i8Bfm),
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.newMemberBadge_f80704, .newMemberBadge_P4-UkH) {
+    display: none;
+  }
+}
+/* Message tag in username container (like the Remix tag) */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.botTag_c19a55, .botTag_2i8Bfm) {
+  order: 0;
+}
+/* Silent message icon container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.badgesContainer_c19a55, .badgesContainer_2i8Bfm) {
+  margin-right: 0;
+  margin-left: 5px;
+}
+/* Silent message icon */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.badge__6ba43, .badge_1jaGB6) {
+  position: static;
+}
+@container style(--compactpp-hide-icons: true) {
+  /* Silent message icon container */
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.badgesContainer_c19a55, .badgesContainer_2i8Bfm) {
+    display: none;
+  }
+}
+/* Message content */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm) {
+  display: block;
+  overflow: visible;
+}
+/* Message content */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm),
+:is(.compact_c19a55, .compact_2i8Bfm) > :is(.container_b7e1cb, .container_YUQhib),
+:is(.compact__44492, .compact_bbJCi7):is(.messageContent__44492, .messageContent_bbJCi7),
+:is(.compact__44492, .compact_bbJCi7):is(.footerContainer__44492, .footerContainer_bbJCi7),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.channelTextArea__5126c, .channelTextArea_SY_P2T),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.operations_bab751, .operations_h_zE4S),
+:is(.compact_b99f57, .compact_q-l2Gj):is(.embedCard_b99f57, .embedCard_q-l2Gj),
+:is(.compact_b99f57, .compact_q-l2Gj):is(.content_b99f57, .content_q-l2Gj) > :nth-child(2) {
+  margin-left: calc(var(--compactpp-header-width) + var(--compactpp-header-margin-left) + var(--compactpp-header-margin-right));
+}
+/* Message content of message with empty embed container */
+:is(.compact_c19a55, .compact_2i8Bfm):has(> :is(.container_b7e1cb, .container_YUQhib):empty) :is(.contents_c19a55, .contents_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm) {
+  /* Make the content have at least 1 line of height, in case the client
+     * renders a message with no content and no embeds */
+  /* This has happened before with the 2023-09_soundmoji experiment. If a
+     * client without the experiment enabled received a message with only a
+     * soundmoji, it got rendered without content. */
+  min-height: 1lh;
+}
+/* AutoMod notice content */
+:is(.compact_b99f57, .compact_q-l2Gj):is(.content_b99f57, .content_q-l2Gj) > :nth-child(2) {
+  line-height: var(--chat-markup-line-height);
+}
+/* AutoMod blocked message notice container */
+:is(.blockedNoticeContainer_b7ab2c, .blockedNoticeContainer_REFxkR):is(.compact_b7ab2c, .compact_REFxkR) {
+  margin-left: 0;
+}
+/* AutoMod blocked message accessories container */
+:is(.ephemeralAccessories_b7ab2c, .ephemeralAccessories_REFxkR):is(.compact_b7ab2c, .compact_REFxkR) {
+  margin-left: 0;
+}
+/* System message container */
+:is(.compact__235ca, .compact_bLMKT5) {
+  margin-left: 0;
+}
+/* System message content */
+:is(.compact_c19a55, .compact_2i8Bfm):is(.systemMessage__5126c, .systemMessage_SY_P2T) > :is(.contents_c19a55, .contents_2i8Bfm) > :is(.messageContent_c19a55, .messageContent_2i8Bfm),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.blockedSystemMessage__7a70a, .blockedSystemMessage_cKojhe) {
+  margin-left: calc(var(--compactpp-header-width) + var(--compactpp-header-margin-left) - var(--compactpp-avatar-size));
+}
+/* System message icon */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.iconContainer__235ca, .iconContainer_bLMKT5):is(.iconContainer__235ca, .iconContainer_bLMKT5) {
+  margin-right: var(--compactpp-header-margin-right);
+  width: var(--compactpp-avatar-size);
+  height: var(--compactpp-avatar-size);
+  align-items: center;
+  padding-top: 0;
+  /* Attributes copied from Compact mode rule as the group leave message has Cozy mode classes */
+  position: relative;
+  inset-inline-end: auto;
+}
+/* Send welcome sticker button */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.welcomeCTA_f5d1e2, .welcomeCTA_eZQ1Gc),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.container_f69538, .container_D5ZFqQ) {
+  margin-left: calc(var(--compactpp-avatar-size) + var(--compactpp-header-margin-right));
+}
+/* Non-AutoMod system message container */
+:is(.compact__235ca, .compact_bLMKT5):is(.container__235ca, .container_bLMKT5):not(:is(.mainContainer__44492, .mainContainer_bbJCi7)) {
+  align-items: center;
+}
+/* AutoMod message container */
+:is(.compact__44492, .compact_bbJCi7):is(.mainContainer__44492, .mainContainer_bbJCi7),
+:is(.compact_b99f57, .compact_q-l2Gj):is(.mainContainer_b99f57, .mainContainer_q-l2Gj) {
+  margin-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* AutoMod message header */
+:is(.compact__44492, .compact_bbJCi7):is(.usernameContainer__44492, .usernameContainer_bbJCi7),
+:is(.compact_b99f57, .compact_q-l2Gj):is(.usernameContainer_b99f57, .usernameContainer_q-l2Gj) {
+  margin-left: var(--compactpp-header-margin-left) !important;
+}
+/* AutoMod message timestamp */
+:is(.compact__44492, .compact_bbJCi7):is(.mainContainer__44492, .mainContainer_bbJCi7) :is(.timestamp_c19a55, .timestamp_2i8Bfm),
+:is(.compact_b99f57, .compact_q-l2Gj):is(.mainContainer_b99f57, .mainContainer_q-l2Gj) :is(.timestamp_c19a55, .timestamp_2i8Bfm) {
+  flex-shrink: 0;
+}
+/* AutoMod message username */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.username__44492, .username_bbJCi7),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.username_b99f57, .username_q-l2Gj) {
+  font-weight: 500;
+  margin-right: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  order: 1;
+  line-height: var(--chat-markup-line-height);
+}
+/* DarkIRC: retain the AutoMod action control; upstream hid the third child. */
+/* AutoMod message header flex container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.spanCorrection__44492, .spanCorrection_bbJCi7),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.spanCorrection_b99f57, .spanCorrection_q-l2Gj) {
+  flex-wrap: unset;
+  align-items: center;
+}
+/* AutoMod message content */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm):has(> div > :is(.compact__44492, .compact_bbJCi7):is(.mainContainer__44492, .mainContainer_bbJCi7)),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm):has(> div > :is(.compact_b99f57, .compact_q-l2Gj):is(.mainContainer_b99f57, .mainContainer_q-l2Gj)) {
+  margin-left: 0;
+}
+/* AutoMod referenced message container */
+:is(.compact__44492, .compact_bbJCi7):is(.messageContent__44492, .messageContent_bbJCi7) {
+  padding-left: 0;
+}
+/* AutoMod referenced message */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.messageContainer__44c9a, .messageContainer_CKGXbh) {
+  margin-left: 0;
+}
+/* AutoMod referenced message content */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.messageContainer__44c9a, .messageContainer_CKGXbh) :is(.messageContent_c19a55, .messageContent_2i8Bfm) {
+  margin-left: calc(var(--compactpp-header-width) + var(--compactpp-header-margin-right));
+}
+/* AutoMod referenced message avatar */
+:is(.compact__44c9a, .compact_CKGXbh) :is(.avatar_c19a55, .avatar_2i8Bfm),
+:is(.compact__44c9a, .compact_CKGXbh) :is(.headerText_c19a55, .headerText_2i8Bfm):not(:is(.avatar_c19a55, .avatar_2i8Bfm) + *) {
+  margin-left: auto;
+}
+/* AutoMod notice content container */
+:is(.compact_b99f57, .compact_q-l2Gj):is(.content_b99f57, .content_q-l2Gj) {
+  line-height: 1;
+  align-items: unset;
+}
+/* AutoMod notice embed */
+:is(.compact_b99f57, .compact_q-l2Gj):is(.embedCard_b99f57, .embedCard_q-l2Gj) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* Message reply container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) {
+  margin-left: calc(var(--compactpp-header-margin-left) + var(--compactpp-reply-link-line-offset));
+}
+/* Vencord UserMessagesPronouns plugin: Reply pronouns */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) :is(.timestamp_c19a55, .timestamp_2i8Bfm) {
+  margin-left: 0;
+}
+@container style(--compactpp-minimize-replies: true) {
+  /* Reply username */
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm),
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedTextPreview_c19a55, .repliedTextPreview_2i8Bfm),
+  :is(.compact_c19a55, .compact_2i8Bfm) .repliedTextContentIcon_da8b30 {
+    opacity: 0;
+    transition: 0.2s;
+  }
+  /* Reply username on message hover */
+  :is(.compact_c19a55, .compact_2i8Bfm):is(.message__5126c, .message_SY_P2T):hover :is(.repliedTextPreview_c19a55, .repliedTextPreview_2i8Bfm),
+  :is(.compact_c19a55, .compact_2i8Bfm):is(.message__5126c, .message_SY_P2T):hover :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm),
+  :is(.compact_c19a55, .compact_2i8Bfm):is(.message__5126c, .message_SY_P2T):hover .repliedTextContentIcon_da8b30 {
+    opacity: 1;
+  }
+}
+/* Message thread link line next to the message content */
+:is(.compact_c19a55, .compact_2i8Bfm):is(.hasThread_c19a55, .hasThread_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm)::before {
+  display: none;
+}
+/* Message thread link line next to the message embed container */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.spine__9271d, .spine_g2fiji) {
+  display: none;
+}
+/* Message thread embed */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.container__9271d, .container_g2fiji) {
+  margin-top: 0;
+}
+/* Edit input */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.channelTextArea__5126c, .channelTextArea_SY_P2T) {
+  width: unset;
+}
+/* Vencord MessageLatency plugin: Latency indicator */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) > svg {
+  flex-shrink: 0;
+  margin-right: 5px !important;
+}
+/* Vencord UserMessagesPronouns plugin: Message pronouns */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.timestamp_c19a55, .timestamp_2i8Bfm) {
+  width: var(--compactpp-pronoundb-pronouns-width);
+  max-width: fit-content;
+  flex-grow: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  order: 1;
+  margin-left: -2px;
+  margin-right: 4px;
+}
+/* DarkIRC: retain the pronoun column width in every interaction state. */
+/* Vencord PlatformIndicators plugin: Message platform indicator */
+:is(.compact_c19a55, .compact_2i8Bfm) .vc-platform-indicator {
+  margin-left: 0 !important;
+  position: static !important;
+  margin-right: 5px;
+}
+
+/* ===== 10-tokens.css ===== */
+/* Palette and dimensions. No network resources or downloaded fonts. */
+:root {
+  --darkirc-bg: #0B1117;
+  --darkirc-panel: #101A24;
+  --darkirc-header: #192431;
+  --darkirc-text: #DCE6F0;
+  --darkirc-muted: #9BAFC2;
+  --darkirc-accent: #78D0FF;
+  --darkirc-border: #2B3E50;
+  --darkirc-control-border: #526D84;
+  --darkirc-hover: #172838;
+  --darkirc-active: #203B50;
+  --darkirc-font: Consolas, "Cascadia Mono", "Cascadia Code", "Liberation Mono", monospace;
+  --darkirc-font-size: 13px;
+  --darkirc-line-height: 19px;
+  --darkirc-message-font-size: 14px;
+  --darkirc-message-line-height: 20px;
+  --darkirc-time-width: 8ch;
+  /* Message-font ch units; timestamp keeps its own 12px metrics. */
+  --darkirc-header-width: 22ch;
+  --darkirc-column-gap: 7px;
+  --darkirc-channel-width: 200px;
+  --darkirc-member-width: 180px;
+  --darkirc-server-width: 40px;
+  --darkirc-server-icon-size: 28px;
+}
+
+/* Also applies in portals, settings, light-mode roots and profile theme scopes.
+ * Discord's current semantic tokens come first; legacy aliases follow.
+ * Specificity intentionally exceeds a native .theme-dark token scope. */
+:root:root,
+:root :is(.theme-dark, .theme-light, .theme-darker, .theme-midnight),
+:root :is(.user-profile-popout, .user-profile-modal, .user-profile-sidebar) {
+  color-scheme: dark;
+  --font-primary: var(--darkirc-font);
+  --font-display: var(--darkirc-font);
+  --font-code: var(--darkirc-font);
+  --font-headline: var(--darkirc-font);
+  --background-base-lowest: var(--darkirc-bg);
+  --background-base-lower: var(--darkirc-bg);
+  --background-base-low: var(--darkirc-panel);
+  --background-surface-high: var(--darkirc-panel);
+  --background-surface-higher: var(--darkirc-header);
+  --background-surface-highest: var(--darkirc-header);
+  --background-mod-subtle: #142330;
+  --background-mod-normal: var(--darkirc-hover);
+  --background-mod-strong: var(--darkirc-active);
+  --background-mod-muted: #203346;
+  --background-accent: var(--darkirc-header);
+  --background-brand: #235575;
+  --background-code: #080E14;
+  --background-code-addition: #163629;
+  --background-code-deletion: #43262D;
+  --background-feedback-info: #17364A;
+  --background-feedback-positive: #17392D;
+  --background-feedback-warning: #42351E;
+  --background-feedback-critical: #43262D;
+  --background-feedback-notification: #17364A;
+  --background-scrim: rgb(0 5 10 / 80%);
+  --background-scrim-lightbox: rgb(0 5 10 / 90%);
+  --background-primary: var(--darkirc-bg);
+  --background-secondary: var(--darkirc-panel);
+  --background-secondary-alt: var(--darkirc-header);
+  --background-tertiary: var(--darkirc-panel);
+  --background-floating: var(--darkirc-header);
+  --background-nested-floating: var(--darkirc-panel);
+  --background-mobile-primary: var(--darkirc-bg);
+  --background-mobile-secondary: var(--darkirc-panel);
+  --background-modifier-hover: var(--darkirc-hover);
+  --background-modifier-active: var(--darkirc-active);
+  --background-modifier-selected: var(--darkirc-active);
+  --background-modifier-accent: var(--darkirc-border);
+  --bg-base-primary: var(--darkirc-bg);
+  --bg-base-secondary: var(--darkirc-panel);
+  --bg-base-tertiary: var(--darkirc-header);
+  --bg-surface-raised: var(--darkirc-header);
+  --bg-surface-overlay: var(--darkirc-header);
+  --bg-overlay-chat: var(--darkirc-bg);
+  --bg-overlay-2: var(--darkirc-panel);
+  --bg-overlay-3: var(--darkirc-header);
+  --bg-overlay-floating: var(--darkirc-header);
+  --chat-background: var(--darkirc-bg);
+  --chat-background-default: var(--darkirc-bg);
+  --chat-border: var(--darkirc-border);
+  --chat-text-muted: var(--darkirc-muted);
+  --channeltextarea-background: var(--darkirc-panel);
+  --custom-channel-members-bg: var(--darkirc-panel);
+  --text-default: var(--darkirc-text);
+  --text-normal: var(--darkirc-text);
+  --text-strong: #F0F6FC;
+  --text-primary: var(--darkirc-text);
+  --text-secondary: #B8CADA;
+  --text-muted: var(--darkirc-muted);
+  --text-link: var(--darkirc-accent);
+  --text-link-low-saturation: var(--darkirc-accent);
+  --text-brand: var(--darkirc-accent);
+  --text-positive: #91E0B0;
+  --text-warning: #F1CE80;
+  --text-danger: #FF9B9B;
+  --text-feedback-positive: #91E0B0;
+  --text-feedback-warning: #F1CE80;
+  --text-feedback-critical: #FF9B9B;
+  --text-feedback-info: var(--darkirc-accent);
+  --header-primary: #F0F6FC;
+  --header-secondary: #B8CADA;
+  --channels-default: #B8CADA;
+  --channel-icon: var(--darkirc-muted);
+  --icon-default: #B8CADA;
+  --icon-muted: var(--darkirc-muted);
+  --icon-strong: #F0F6FC;
+  --icon-feedback-positive: #91E0B0;
+  --icon-feedback-warning: #F1CE80;
+  --icon-feedback-critical: #FF9B9B;
+  --interactive-normal: #B8CADA;
+  --interactive-hover: #F0F6FC;
+  --interactive-active: var(--darkirc-accent);
+  --interactive-muted: #8194A7;
+  --interactive-text-default: #B8CADA;
+  --interactive-text-hover: #F0F6FC;
+  --interactive-text-active: var(--darkirc-accent);
+  --interactive-icon-default: #B8CADA;
+  --interactive-icon-hover: #F0F6FC;
+  --interactive-icon-active: var(--darkirc-accent);
+  --border-subtle: var(--darkirc-border);
+  --border-muted: var(--darkirc-border);
+  --border-normal: #3D556A;
+  --border-strong: #66839B;
+  --border-focus: var(--darkirc-accent);
+  --app-frame-border: var(--darkirc-border);
+  --input-background: var(--darkirc-bg);
+  --input-background-default: var(--darkirc-bg);
+  --input-border-default: var(--darkirc-control-border);
+  --input-border-hover: #66839B;
+  --input-border-active: var(--darkirc-accent);
+  --modal-background: var(--darkirc-panel);
+  --modal-footer-background: var(--darkirc-header);
+  --button-secondary-background: #253D50;
+  --button-secondary-background-hover: #304E65;
+  --button-secondary-background-active: #375B76;
+  --button-secondary-text: var(--darkirc-text);
+  --button-outline-primary-border: #66839B;
+  --button-outline-primary-text: var(--darkirc-text);
+  --button-border-radius: 0px;
+  --button-border-radius-lg: 0px;
+  --control-brand-foreground-new: var(--darkirc-accent);
+  --control-primary-background-default: #235575;
+  --control-primary-background-hover: #2C6689;
+  --control-primary-background-active: #1B4663;
+  --control-primary-border-default: #477C9B;
+  --control-primary-border-hover: #78D0FF;
+  --control-primary-border-active: #477C9B;
+  --control-primary-text-default: #F0F6FC;
+  --control-primary-text-hover: #F0F6FC;
+  --control-primary-text-active: #F0F6FC;
+  --control-primary-icon-default: #F0F6FC;
+  --control-primary-icon-hover: #F0F6FC;
+  --control-primary-icon-active: #F0F6FC;
+  --control-secondary-background-default: #253D50;
+  --control-secondary-background-hover: #304E65;
+  --control-secondary-background-active: #375B76;
+  --control-secondary-border-default: #3D556A;
+  --control-secondary-border-hover: #66839B;
+  --control-secondary-border-active: #78D0FF;
+  --control-secondary-text-default: var(--darkirc-text);
+  --control-secondary-text-hover: #F0F6FC;
+  --control-secondary-text-active: #F0F6FC;
+  --control-secondary-icon-default: var(--darkirc-text);
+  --control-secondary-icon-hover: #F0F6FC;
+  --control-secondary-icon-active: #F0F6FC;
+  --control-expressive-background-default: #235575;
+  --control-expressive-background-hover: #2C6689;
+  --control-expressive-background-active: #1B4663;
+  --control-expressive-border-default: #477C9B;
+  --control-expressive-border-hover: #78D0FF;
+  --control-expressive-border-active: #477C9B;
+  --control-expressive-text-default: #F0F6FC;
+  --control-expressive-text-hover: #F0F6FC;
+  --control-expressive-text-active: #F0F6FC;
+  --control-expressive-icon-default: #F0F6FC;
+  --control-expressive-icon-hover: #F0F6FC;
+  --control-expressive-icon-active: #F0F6FC;
+  --control-icon-only-background-hover: var(--darkirc-hover);
+  --control-icon-only-background-active: var(--darkirc-active);
+  --control-icon-only-border-hover: var(--darkirc-border);
+  --control-icon-only-border-active: var(--darkirc-accent);
+  --control-icon-only-icon-default: #B8CADA;
+  --control-icon-only-icon-hover: #F0F6FC;
+  --control-icon-only-icon-active: var(--darkirc-accent);
+  --checkbox-background-default: var(--darkirc-bg);
+  --checkbox-background-hover: var(--darkirc-hover);
+  --checkbox-background-active: var(--darkirc-active);
+  --checkbox-background-selected-default: #78D0FF;
+  --checkbox-background-selected-hover: #A4E1FF;
+  --checkbox-border-default: #66839B;
+  --checkbox-border-hover: #9BAFC2;
+  --checkbox-border-active: #78D0FF;
+  --checkbox-border-selected-default: #78D0FF;
+  --checkbox-border-selected-hover: #A4E1FF;
+  --checkbox-icon-active: #0B1117;
+  --notice-background-info: #17364A;
+  --notice-background-positive: #17392D;
+  --notice-background-warning: #42351E;
+  --notice-background-critical: #43262D;
+  --notice-text-info: #A4E1FF;
+  --notice-text-positive: #91E0B0;
+  --notice-text-warning: #F1CE80;
+  --notice-text-critical: #FF9B9B;
+  --brand-360: #78D0FF;
+  --brand-500: #235575;
+  --brand-500-hsl: 203.4 53.9% 29.8%;
+  --brand-560: #1B4663;
+  --brand-600: #163A52;
+  --mention-background: #1D3547;
+  --mention-foreground: #A4E1FF;
+  --background-mentioned: #28291F;
+  --background-mentioned-hover: #343529;
+  --background-message-highlight: #173044;
+  --background-message-highlight-hover: #203E54;
+  --background-message-hover: #111E2A;
+  --message-reacted-background: #203B50;
+  --message-reacted-text: #A4E1FF;
+  --info-positive-foreground: #91E0B0;
+  --info-warning-foreground: #F1CE80;
+  --info-danger-foreground: #FF9B9B;
+  --status-positive: #55C78A;
+  --status-warning: #E4BA64;
+  --status-danger: #F27882;
+  --control-brand-foreground: var(--darkirc-accent);
+  --focus-primary: var(--darkirc-accent);
+  --scrollbar-thin-thumb: #425B70;
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: #425B70;
+  --scrollbar-auto-track: var(--darkirc-bg);
+  --scrollbar-auto-scrollbar-color-thumb: #425B70;
+  --scrollbar-auto-scrollbar-color-track: var(--darkirc-bg);
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-xxl: 0px;
+  --shadow-low: none;
+  --shadow-medium: none;
+  --shadow-high: none;
+  --shadow-low-elevation: none;
+  --shadow-medium-elevation: none;
+  --shadow-high-elevation: none;
+  --shadow-border: 0 0 0 1px var(--darkirc-border);
+  --profile-gradient-primary-color: var(--darkirc-panel);
+  --profile-gradient-secondary-color: var(--darkirc-panel);
+  --profile-gradient-overlay-color: transparent;
+  --profile-body-background-color: var(--darkirc-bg);
+  --profile-body-divider-color: var(--darkirc-border);
+  --profile-body-border-color: var(--darkirc-border);
+  --profile-message-input-border-color: #66839B;
+}
+
+/* These dimensions inherit through the application, including thread panes. */
+:root:root,
+:root :is(.theme-dark, .theme-light, .theme-darker, .theme-midnight) {
+  --guildbar-avatar-size: var(--darkirc-server-icon-size);
+  --guildbar-folder-size: 36px;
+  --custom-guild-list-width: var(--darkirc-server-width);
+  --custom-guild-sidebar-width: calc(var(--darkirc-channel-width) + var(--darkirc-server-width) + 1px);
+  --custom-member-list-width: var(--darkirc-member-width);
+  --custom-channel-header-height: 38px;
+  --custom-channel-textarea-text-area-height: 42px;
+  --custom-channel-textarea-text-area-max-height: 40vh;
+  --custom-message-padding-vertical-container-compact: 0px;
+  --chat-markup-line-height: var(--darkirc-line-height);
+  --compactpp-header-width: var(--darkirc-header-width);
+  --compactpp-header-margin-left: 8px;
+  --compactpp-header-margin-right: var(--darkirc-column-gap);
+  --compactpp-message-margin-right: 12px;
+  --compactpp-avatar-size: 16px;
+  --compactpp-hide-tags: false;
+  --compactpp-hide-icons: false;
+  --compactpp-minimize-replies: false;
+}
+
+/* ===== 20-shell.css ===== */
+/* Main shell. Channel hierarchy verified in desktop Elements and its public
+ * lazy sheet on 2026-10-17; include voice buttons, not only href links. */
+body {
+  background: var(--darkirc-bg);
+  color: var(--darkirc-text);
+  font-family: var(--darkirc-font);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O),
+:is(.guilds__5e434, .guilds_pog62O),
+:is(.members_c8ffbb, .members_86es0b),
+:is(.container_c8ffbb, .container_86es0b),
+:is(.panels__5e434, .panels_pog62O) {
+  background: var(--darkirc-panel);
+  border-radius: 0;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) { border-inline-end: 1px solid var(--darkirc-border); }
+/* Desktop Elements: the inner nav paints background-base-lowest over the
+ * outer sidebar. Set the real surface rather than darkening global tokens. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.container__2637a, .container_H5ozaj),
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.scroller__629e4, .scroller_ysO7Gy) {
+  background: var(--darkirc-panel);
+  box-shadow: none;
+}
+:is(.sidebar__5e434, .sidebar_pog62O)::after { background: none; }
+:is(.guilds__5e434, .guilds_pog62O) {
+  /* Keep folder backgrounds centered without changing account/RTC padding. */
+  --custom-guild-list-padding: calc((var(--darkirc-server-width) - var(--guildbar-avatar-size)) / 2);
+  box-sizing: border-box;
+  border-inline-end: 1px solid var(--darkirc-border);
+}
+:is(.chatContent_f75fb0, .chatContent_z_gUBg) {
+  background: var(--darkirc-bg);
+  min-width: 0;
+  container: darkirc-chat / inline-size;
+}
+:is(.membersWrap_c8ffbb, .membersWrap_86es0b) {
+  width: var(--darkirc-member-width);
+  min-width: var(--darkirc-member-width);
+  border-inline-start: 1px solid var(--darkirc-border);
+}
+:is(.members_c8ffbb, .members_86es0b) { width: var(--darkirc-member-width); }
+:is(.member__5d473, .member_Iy0c7A) {
+  margin-inline: 3px;
+  max-width: calc(var(--darkirc-member-width) - 6px);
+}
+:is(.membersGroup_c8ffbb, .membersGroup_86es0b) {
+  color: var(--darkirc-muted);
+  font: 600 11px/16px var(--darkirc-font);
+  letter-spacing: 0;
+}
+/* Use Discord's size tokens for targets, badge masks and folder geometry.
+ * Image-backed guilds have no reliable short label on the clickable node;
+ * retain their recognizable art. Native acronyms remain text. */
+:is(.guilds__5e434, .guilds_pog62O) :is(.listItem__650eb, .listItem_rwEpIL) { margin-block: 3px; }
+:is(.guilds__5e434, .guilds_pog62O) :is(.stack_dbd263, .stack_TWWX0S) { gap: 4px !important; }
+/* Desktop React fixes both nested badge SVGs to a 40px coordinate space,
+ * independently of the avatar token. Scale their outer layout as one unit;
+ * shrinking only the image leaves a 40px target and off-center artwork.
+ * Do not scale nested wrappers twice. Keep badge text at its native size. */
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper_cc5dd2, .wrapper_hqZPsU):not(:is(.wrapper_cc5dd2, .wrapper_hqZPsU) :is(.wrapper_cc5dd2, .wrapper_hqZPsU)) {
+  --guildbar-avatar-size: 40px;
+  zoom: calc(var(--darkirc-server-icon-size) / 40px);
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper_cc5dd2, .wrapper_hqZPsU) :is(:is(.upperBadge_cc5dd2, .upperBadge_hqZPsU), :is(.lowerBadge_cc5dd2, .lowerBadge_hqZPsU)) {
+  zoom: calc(40px / var(--darkirc-server-icon-size));
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper_cc5dd2, .wrapper_hqZPsU) :is(.childWrapper__6e9f8, .childWrapper_JJ-hgR) {
+  font-size: calc(13px * 40px / var(--darkirc-server-icon-size));
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.item__58105, .item__o8_Xq):is(.selected__58105, .selected__o8_Xq) { height: var(--darkirc-server-icon-size); }
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR) {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--darkirc-border);
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.childWrapper__6e9f8, .childWrapper_JJ-hgR) {
+  border-radius: 2px;
+  background: var(--darkirc-header);
+  font-size: 13px;
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR):hover :is(.childWrapper__6e9f8, .childWrapper_JJ-hgR),
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR):focus-visible :is(.childWrapper__6e9f8, .childWrapper_JJ-hgR),
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR):is(.selected__6e9f8, .selected_JJ-hgR) :is(.childWrapper__6e9f8, .childWrapper_JJ-hgR) {
+  background: var(--darkirc-active);
+  color: var(--darkirc-accent);
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.childWrapperHoverScale__6e9f8, .childWrapperHoverScale_JJ-hgR) { scale: 1 !important; }
+:is(.guilds__5e434, .guilds_pog62O) :is(:is(.icon__6e9f8, .icon_JJ-hgR), :is(.folderPreviewGuildIcon__48112, .folderPreviewGuildIcon_RTMSuZ)) {
+  border-radius: 2px;
+  filter: saturate(.25);
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR):is(:hover, :focus-visible, :is(.selected__6e9f8, .selected_JJ-hgR), [aria-selected="true"]) :is(.icon__6e9f8, .icon_JJ-hgR) {
+  filter: saturate(.65);
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR):is(:is(.selected__6e9f8, .selected_JJ-hgR), [aria-selected="true"]) {
+  box-shadow: inset 0 0 0 1px var(--darkirc-accent);
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(:is(.wrapper__6e9f8, .wrapper_JJ-hgR), :is(.folderButton__48112, .folderButton_RTMSuZ)):focus-visible {
+  outline: 2px solid var(--darkirc-accent);
+  outline-offset: -2px;
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper_cc5dd2, .wrapper_hqZPsU) :is(.wrapper__6e9f8, .wrapper_JJ-hgR):focus-visible {
+  outline-width: calc(2px * 40px / var(--darkirc-server-icon-size)) !important;
+  outline-offset: calc(-2px * 40px / var(--darkirc-server-icon-size));
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(:is(.folderIcon__48112, .folderIcon_RTMSuZ), :is(.folderPreviewWrapper__48112, .folderPreviewWrapper_RTMSuZ)) {
+  background: var(--darkirc-header);
+  border-radius: 2px;
+}
+:is(.guilds__5e434, .guilds_pog62O) :is(.folderIcon__48112, .folderIcon_RTMSuZ) { color: var(--darkirc-muted); }
+
+:is(.container__9293f, .container_ybUK7Z) {
+  --__header-bar-background: var(--darkirc-header);
+  background: var(--darkirc-header);
+  border-bottom: 1px solid var(--darkirc-border);
+  box-shadow: none;
+  padding-block: 3px;
+  font: 13px/19px var(--darkirc-font);
+}
+:is(.container__9293f, .container_ybUK7Z) :is(h1, h2, h3) { font: 600 13px/19px var(--darkirc-font); }
+:is(.container__9293f, .container_ybUK7Z) :is([class^="topic_"], [class*=" topic_"]) {
+  font-size: 12px;
+  color: var(--darkirc-muted);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(header, :is(.searchBar_e6b769, .searchBar_u88IQl)) {
+  background: var(--darkirc-header);
+  border-bottom: 1px solid var(--darkirc-border);
+  box-shadow: none;
+  border-radius: 0;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) header { min-height: 38px; height: auto; padding: 8px; }
+/* Elements-observed native flex chain. Recover nested padding and 16px
+ * heading space; keep the 32px menu/invite targets and native full-name label.
+ * Ellipsis is confined to the name, including when a guild badge is present. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.header_f37cb1, .header_XH4OpX) {
+  padding: 2px 4px;
+  padding-inline-start: 4px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.headerContent_f37cb1, .headerContent_XH4OpX) {
+  min-width: 0;
+  gap: 4px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.guildDropdown_f37cb1, .guildDropdown_XH4OpX) {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-inline: 2px;
+  border-radius: 2px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.guildBadgeAndName_f37cb1, .guildBadgeAndName_XH4OpX) { min-width: 0; gap: 4px; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.name_f37cb1, .name_XH4OpX) {
+  min-width: 0;
+  margin: 0 auto 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 600 13px/19px var(--darkirc-font);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.headerChildren_f37cb1, .headerChildren_XH4OpX),
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.guildBadgeAndName_f37cb1, .guildBadgeAndName_XH4OpX) > :not(:is(.name_f37cb1, .name_XH4OpX)) { flex-shrink: 0; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(:is(.guildDropdown_f37cb1, .guildDropdown_XH4OpX), :is(.inviteButton_f37cb1, .inviteButton_XH4OpX), :is(.addActionButton_f37cb1, .addActionButton_XH4OpX)):hover {
+  background: var(--darkirc-hover);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(:is(.guildDropdown_f37cb1, .guildDropdown_XH4OpX), :is(.inviteButton_f37cb1, .inviteButton_XH4OpX), :is(.addActionButton_f37cb1, .addActionButton_XH4OpX)):focus-visible {
+  outline: 2px solid var(--darkirc-accent);
+  outline-offset: -2px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) [role="listitem"] { border-radius: 0; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(:is(.link__2ea32, .link_TNyK-N), a[href^="/channels/"]) {
+  box-sizing: border-box;
+  border-radius: 0;
+  min-height: 0;
+  padding-block: 0;
+  font-size: 12.5px;
+  line-height: 19px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) a[href^="/channels/"]:hover { background: var(--darkirc-hover); }
+:is(.sidebarList__5e434, .sidebarList_pog62O) a[href^="/channels/"][aria-current="page"] {
+  background: var(--darkirc-active);
+  color: var(--darkirc-accent);
+  box-shadow: inset 2px 0 var(--darkirc-accent);
+}
+/* Only real channel rows: category, forum, voice and thread icons survive. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is([class^="linkTop_"], [class*=" linkTop_"]) {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  height: 28px;
+  padding-block: 0;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is([class^="content_"], [class*=" content_"]):has(> a[href^="/channels/"]) {
+  border-radius: 0;
+  margin-inline: 3px;
+  padding-block: 0;
+  padding-inline: 5px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.containerDefault_c69b6d, .containerDefault_Wx6SnQ) {
+  /* A voice row may contain participants below its 28px clickable line. */
+  min-height: 28px;
+  padding-block: 0;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.wrapper__2ea32, .wrapper_TNyK-N) { padding-block: 0; margin-block: 0; }
+/* Shrink only text-bearing flex items. Native tooltips, unread badges and
+ * trailing actions keep their targets; names never expand on hover. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.link__2ea32, .link_TNyK-N),
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.linkTop__2ea32, .linkTop_TNyK-N) { min-width: 0; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.name__2ea32, .name_TNyK-N) {
+  font: 400 12.5px/19px var(--darkirc-font);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Current Desktop wraps the name in a separately sized text-md span.
+ * Inherit the channel metrics instead of letting that span restore 16/20px. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.name__2ea32, .name_TNyK-N) > [data-text-variant] { font: inherit; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) #channels [role="button"]:has(h3) {
+  color: var(--darkirc-muted);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) #channels [role="button"] h3 {
+  font: 500 11px/16px var(--darkirc-font);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(:is(.icon__2ea32, .icon_TNyK-N), :is(.iconContainer__2ea32, .iconContainer_TNyK-N)) {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is([class^="modeSelected_"], [class*=" modeSelected_"]) a[href^="/channels/"] {
+  color: var(--darkirc-accent);
+  background: var(--darkirc-active);
+  box-shadow: inset 2px 0 var(--darkirc-accent);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.wrapper__2ea32, .wrapper_TNyK-N):is(:is(.modeSelected__2ea32, .modeSelected_TNyK-N), :is(.modeUnreadImportant__2ea32, .modeUnreadImportant_TNyK-N)) :is(.name__2ea32, .name_TNyK-N) { font-weight: 600; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.channel__972a0, .channel_zln_tS) { border-radius: 0; margin-block: 1px; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.channel__972a0, .channel_zln_tS) :is(.link__972a0, .link_zln_tS) { padding-block: 0; }
+:is(.searchBar_e6b769, .searchBar_u88IQl) :is(.searchBarComponent_e6b769, .searchBarComponent_u88IQl) {
+  font: 12px/18px var(--darkirc-font);
+  padding: 4px 6px;
+  border-radius: 0;
+}
+:is(.searchBar_c322aa, .searchBar_i16Ad0) { border-radius: 0; height: 28px; }
+
+/* Sidebar participants only. This is the native expanded list, not the
+ * collapsed avatar grid or a call/video surface. Preserve the clickable row. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) {
+  /* The old 4px shorthand erased list_c3cd7d's native channel indent.
+   * Reserve real layout space, rather than shifting painted rows. */
+  box-sizing: border-box;
+  min-width: 0;
+  padding-inline: 28px 4px;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(:is(.draggable__55bab, .draggable_xIeVT2), :is(.voiceUser__07f91, .voiceUser_YUoOxm)) {
+  min-width: 0;
+  min-height: 22px;
+  height: auto;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.content__07f91, .content_YUoOxm) {
+  min-width: 0;
+  min-height: 22px;
+  height: auto;
+  padding: 1px 4px;
+  margin-inline: 0;
+  gap: 4px;
+  border-radius: 0;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(:is(.avatarContainer__07f91, .avatarContainer_YUoOxm), :is(.avatar__07f91, .avatar_YUoOxm)) { display: none; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.username__07f91, .username_YUoOxm) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 12.5px/20px var(--darkirc-font);
+}
+/* Current display-name wrapper must yield space to mute/deafen icons. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.content__07f91, .content_YUoOxm) > .container__394db {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) .usernameContainer__394db { min-width: 0; }
+/* Server tags are optional cosmetics, never voice controls. Prefix variants
+ * cover the shared tag component without targeting its profile/message uses. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.voiceUser__07f91, .voiceUser_YUoOxm) :is(
+  [class^="clanTag_"], [class*=" clanTag_"],
+  [class^="guildTag_"], [class*=" guildTag_"],
+  :is(.chipletContainerInner__10651, .chipletContainerInner_k8jyN7),
+  :is(.avatarDecorationContainer__44b0c, .avatarDecorationContainer_XpIUHy),
+  [class^="avatarDecoration_"], [class*=" avatarDecoration_"]
+) { display: none; }
+/* The native speaking name class remains; replace its hidden avatar ring
+ * with a fixed-width dot so speaking never shifts the nick or state icons. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.content__07f91, .content_YUoOxm)::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  flex: 0 0 4px;
+  border-radius: 50%;
+  background: var(--darkirc-muted);
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.content__07f91, .content_YUoOxm):has(:is(.usernameSpeaking__07f91, .usernameSpeaking_YUoOxm))::before { background: var(--status-positive, #91e0b0); }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(:is(.icons__07f91, .icons_YUoOxm), :is(.iconGroup__07f91, .iconGroup_YUoOxm)) { gap: 2px; flex-shrink: 0; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.icon__07f91, .icon_YUoOxm) { width: 14px; height: 14px; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.iconPriortySpeaker__07f91, .iconPriortySpeaker_YUoOxm) { position: static; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.listDefault__07f91, .listDefault_YUoOxm) :is(.voiceUser__07f91, .voiceUser_YUoOxm):focus-within :is(.content__07f91, .content_YUoOxm) {
+  outline: 2px solid var(--darkirc-accent);
+  outline-offset: -2px;
+}
+
+/* Account and RTC panels keep their native absolute positioning and sizing.
+ * No fixed panel height: connected voice controls must be able to expand. */
+:is(.panels__5e434, .panels_pog62O) { border-color: var(--darkirc-border); box-shadow: none; }
+:is(.container__37e49, .container_g6VwXp) {
+  background: var(--darkirc-panel);
+  box-shadow: none;
+  border-radius: 0;
+  min-height: 44px;
+  height: auto;
+  padding: 4px;
+  gap: 4px;
+  flex-direction: column;
+  align-items: stretch;
+}
+:is(.container__37e49, .container_g6VwXp) :is(.accountPopoutButtonWrapper__37e49, .accountPopoutButtonWrapper_g6VwXp) {
+  flex: 0 0 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 2px;
+  gap: 6px;
+  border-radius: 0;
+}
+/* Scale the existing SVG viewBox, including its status mask, as one unit. */
+:is(.container__37e49, .container_g6VwXp) :is(.avatar__37e49, .avatar_g6VwXp) {
+  width: 26px !important;
+  height: 26px !important;
+  flex: 0 0 26px;
+}
+:is(.container__37e49, .container_g6VwXp) :is(.avatar__37e49, .avatar_g6VwXp) > svg { width: 100%; height: 100%; }
+/* Account nameplate artwork is a separate, full-panel decorative sibling. */
+:is(.container__37e49, .container_g6VwXp) > :is(.container_df39b2, .container_AFi54G),
+:is(.container__37e49, .container_g6VwXp) :is(.avatarDecorationContainer__44b0c, .avatarDecorationContainer_XpIUHy) { display: none; }
+:is(.container__37e49, .container_g6VwXp) :is(.nameTag__37e49, .nameTag_g6VwXp) {
+  /* Native account container queries can hide this in a narrow panel. With
+   * controls on their own line there is now room for the name and status. */
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  font: 12px/16px var(--darkirc-font);
+}
+:is(.container__37e49, .container_g6VwXp) :is(:is(.panelTitleContainer__37e49, .panelTitleContainer_g6VwXp), :is(.panelSubtextContainer__37e49, .panelSubtextContainer_g6VwXp), :is(.customStatus__37e49, .customStatus_g6VwXp)) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  font: inherit;
+}
+:is(.container__37e49, .container_g6VwXp) :is(.panelTitleContainer__37e49, .panelTitleContainer_g6VwXp) :is(.withDisplayNameStyles__37e49, .withDisplayNameStyles_g6VwXp) { line-height: 16px; }
+:is(.container__37e49, .container_g6VwXp) :is(.panelSubtextContainer__37e49, .panelSubtextContainer_g6VwXp) {
+  color: var(--darkirc-muted);
+  font-size: 10px;
+  line-height: 14px;
+}
+:is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin: 0;
+  padding-top: 4px;
+  border-top: 1px solid var(--darkirc-border);
+}
+:is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) :is(.button__67645, .button_Y-8oZW) {
+  width: 100%;
+  height: 30px;
+  min-width: 0;
+  padding: 0;
+}
+:is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) :is(.audioButtonParent__5e764, .audioButtonParent_gKpIZP) {
+  display: grid;
+  grid-column: span 2;
+  grid-template-columns: subgrid;
+  min-width: 0;
+}
+/* Five equal targets, while retaining native audio group state/hover hooks. */
+:is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) :is(.buttonChevron__5e764, .buttonChevron_gKpIZP) {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  margin-inline-start: 0;
+  padding: 0;
+}
+:is(.container__37e49, .container_g6VwXp) :is(:is(.accountPopoutButtonWrapper__37e49, .accountPopoutButtonWrapper_g6VwXp), :is(.button__67645, .button_Y-8oZW)):hover {
+  background-color: var(--darkirc-hover);
+}
+:is(.container__37e49, .container_g6VwXp) :is(:is(.accountPopoutButtonWrapper__37e49, .accountPopoutButtonWrapper_g6VwXp), :is(.button__67645, .button_Y-8oZW)):active,
+:is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) [aria-pressed="true"] { background-color: var(--darkirc-active); }
+:is(.container_e131a9, .container_9U6LUN) { border-radius: 0; padding: 6px; gap: 6px; }
+:is(.container_e131a9, .container_9U6LUN) :is(button, [role="button"]) { min-width: 28px; min-height: 28px; }
+
+/* ===== 25-nicklist.css ===== */
+/* IRC nicklist only: keep the native row, profile target and context menu.
+ * Do not target DM rows, server icons, profile popouts or message media.
+ * Native list virtualization owns row/group heights and spacers. Retain the
+ * avatar's 32px vertical strut, but give it NO horizontal space or visible
+ * pixels. This preserves native 42px geometry without showing an avatar.
+ * CSS alone cannot safely turn Discord's virtualizer into a 20px list. */
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(.childContainer__91a9d, .childContainer_J1Adu_) {
+  padding: 0 5px;
+  border-radius: 0;
+  background: none !important;
+  box-shadow: none;
+}
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(.layout__91a9d, .layout_J1Adu_) {
+  width: 100%;
+  gap: 0;
+  border-radius: 0;
+}
+/* Desktop Elements: status SVGs use dynamic masks and localized avatar labels,
+ * not stable presence classes. Keep unknown presence neutral; only the native
+ * offline class is reliable here. Never infer status from name/role colors. */
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(.layout__91a9d, .layout_J1Adu_)::before {
+  content: "";
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  margin-inline-end: 6px;
+  border-radius: 50%;
+  background: var(--darkirc-muted);
+}
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A):is(.offline__5d473, .offline_Iy0c7A) { opacity: .65; }
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A):is(.offline__5d473, .offline_Iy0c7A):hover,
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A):is(.offline__5d473, .offline_Iy0c7A):focus-within { opacity: 1; }
+:is(.members_c8ffbb, .members_86es0b) :is(.offline__5d473, .offline_Iy0c7A) :is(.layout__91a9d, .layout_J1Adu_)::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--darkirc-muted);
+}
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(:is(.content__91a9d, .content_J1Adu_), :is(.username__5d473, .username_Iy0c7A), :is(.name__5d473, .name_Iy0c7A)) {
+  min-width: 0;
+  font: var(--darkirc-font-size)/var(--darkirc-line-height) var(--darkirc-font);
+}
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(:is(.name__5d473, .name_Iy0c7A), :is(.name__703b9, .name_Wo4EpK)) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Compact text only; retain the name-containing wrapper and native target. */
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(
+  :is(.roleIcon_c8ffbb, .roleIcon_86es0b), :is(.roleIcon_ee71ee, .roleIcon_3jSSrV),
+  :is(.icon__5d473, .icon_Iy0c7A), :is(.clanTag__5d473, .clanTag_Iy0c7A), :is(.botTag__5d473, .botTag_Iy0c7A),
+  :is(.roleDotLeft__703b9, .roleDotLeft_Wo4EpK), :is(.roleDotRight__703b9, .roleDotRight_Wo4EpK), :is(.subText__91a9d, .subText_J1Adu_)
+) { display: none; }
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(.avatar__91a9d, .avatar_J1Adu_) {
+  visibility: hidden;
+  overflow: hidden;
+  width: 0;
+  flex: 0 0 0;
+  margin-inline: 0;
+}
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is([class^="avatarDecoration_"], [class*=" avatarDecoration_"]) { display: none; }
+/* Elements verified container_df39b2 is an aria-hidden decorative sibling
+ * with an inline gradient/image. Hide that layer, never its name wrapper.
+ * Legacy artwork variants stay scoped to member rows, away from profiles. */
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(
+  :is(.container_df39b2, .container_AFi54G), .container__4bbc6, :is(.profileEffects__0dd08, .profileEffects_ZjcCyW),
+  :is(.avatarDecorationContainer__44b0c, .avatarDecorationContainer_XpIUHy),
+  [class^="nameplate_"], [class*=" nameplate_"]
+) { display: none; }
+/* Native nameplates reserve 32px on the right. Reclaim it for the name. */
+:is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A) :is(.childContainer__91a9d, .childContainer_J1Adu_):is(.nameplated__91a9d, .nameplated_J1Adu_) { padding-inline-end: 5px; }
+/* Group labels stay as text, including role and online/offline grouping. */
+:is(.members_c8ffbb, .members_86es0b) :is(.membersGroup_c8ffbb, .membersGroup_86es0b) :is(:is(.roleIcon_c8ffbb, .roleIcon_86es0b), :is(.membersGroupNitroWheel_c8ffbb, .membersGroupNitroWheel_86es0b)) {
+  display: none;
+}
+
+/* ===== 30-messages.css ===== */
+/* Compact++ supplies the core positioning; these rules refine its IRC layout.
+ * Scope geometry to Compact. Cozy remains usable with the same palette. */
+:is(.compact_c19a55, .compact_2i8Bfm):is(.wrapper_c19a55, .wrapper_2i8Bfm) {
+  --chat-markup-line-height: var(--darkirc-message-line-height);
+  font: 400 var(--darkirc-message-font-size)/var(--darkirc-message-line-height) var(--darkirc-font);
+  min-height: var(--darkirc-message-line-height);
+  padding-block: 0;
+  padding-inline-start: 0;
+  margin-block: 0;
+  border-radius: 0;
+  /* Keep the first column left-to-right even for Arabic/Hebrew message text. */
+  direction: ltr;
+}
+:is(.compact_c19a55, .compact_2i8Bfm):is(.wrapper_c19a55, .wrapper_2i8Bfm):is(.groupStart__5126c, .groupStart_SY_P2T) { margin-top: 2px; }
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.markup__75297, .markup_ku1OHH) {
+  font-size: var(--darkirc-message-font-size);
+  line-height: var(--darkirc-message-line-height);
+  font-weight: 400;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) { margin-inline-start: 0; padding-inline-start: 0; }
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) {
+  min-height: var(--darkirc-message-line-height);
+  gap: 0;
+  line-height: var(--darkirc-message-line-height);
+  font-size: var(--darkirc-message-font-size);
+  font-weight: 400;
+  text-indent: 0;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) > :is(.timestamp_c19a55, .timestamp_2i8Bfm) {
+  flex: 0 0 auto;
+  width: max-content;
+  min-width: var(--darkirc-time-width);
+  height: auto;
+  font: 12px/var(--darkirc-message-line-height) var(--darkirc-font);
+  font-variant-numeric: tabular-nums;
+  color: var(--darkirc-muted);
+  opacity: 1;
+  text-align: left;
+  margin-inline-end: 0;
+}
+/* Some builds already include accessible bracket separators. Avoid doubling. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) > :is(.timestamp_c19a55, .timestamp_2i8Bfm) time:not(:has([class*="separator_"]))::before { content: "["; }
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) > :is(.timestamp_c19a55, .timestamp_2i8Bfm) time:not(:has([class*="separator_"]))::after { content: "]"; }
+/* Native Compact's bracket nodes exist for selection/copying but are normally
+ * visually transparent and absolutely positioned. Make those nodes visible. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) > :is(.timestamp_c19a55, .timestamp_2i8Bfm) :is(.separator_c19a55, .separator_2i8Bfm) {
+  display: inline;
+  position: static;
+  opacity: 1;
+  z-index: auto;
+  font-style: normal;
+}
+/* The live Finnish 24-hour clock also carries latin12CompactTimeStamp.
+ * Measure native clock content instead of treating that class as a 12-hour
+ * signal. The 8ch minimum aligns ordinary clocks; wider locales can grow. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) {
+  flex: 1 1 0;
+  justify-content: flex-start;
+  min-width: 0;
+  overflow: hidden;
+  gap: 0;
+  margin-inline: 4px 0;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm) {
+  font: 600 var(--darkirc-message-font-size)/var(--darkirc-message-line-height) var(--darkirc-font);
+  min-width: 0;
+  max-width: 100%;
+  isolation: isolate;
+}
+/* CSS fallback is a single readable nick color. Per-user hashing belongs to
+ * IrcColors: inline colors and native role colors are deliberately preserved. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm):not([style*="color"]) {
+  color: var(--darkirc-accent);
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm)::before { content: "<"; }
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm)::after { content: ">"; }
+/* Keep modern nested names clipped too, including replies. No generated
+ * tooltip: CSS has no reliable full-name attribute on every native variant.
+ * The existing name node, accessible name and profile handlers are retained. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.headerText_c19a55, .headerText_2i8Bfm), :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm)) :is(.username_c19a55, .username_2i8Bfm) :is(:is(.nameContainer__703b9, .nameContainer_Wo4EpK), :is(.name__703b9, .name_Wo4EpK)) {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+/* An inset focus ring cannot cover either the next column or adjacent rows. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.headerText_c19a55, .headerText_2i8Bfm), :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm)) :is(.username_c19a55, .username_2i8Bfm):focus-visible {
+  outline: 2px solid var(--darkirc-accent);
+  outline-offset: -2px;
+  border-radius: 0;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) > :is(.avatar_c19a55, .avatar_2i8Bfm),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.avatarDecoration_c19a55, .avatarDecoration_2i8Bfm),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(:is(.roleIcon_c19a55, .roleIcon_2i8Bfm), :is(.roleIcon_ee71ee, .roleIcon_3jSSrV), :is(.roleDot_c19a55, .roleDot_2i8Bfm), :is(.roleDotLeft__703b9, .roleDotLeft_Wo4EpK), :is(.roleDotRight__703b9, .roleDotRight_Wo4EpK), :is(.newMemberBadge_f80704, .newMemberBadge_P4-UkH), :is(.clanTagChiplet_c19a55, .clanTagChiplet_2i8Bfm), :is(.profileEffects__0dd08, .profileEffects_ZjcCyW)) {
+  display: none;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) :is(.botTag_c19a55, .botTag_2i8Bfm) {
+  flex-shrink: 0;
+  font-size: 10px;
+  line-height: 14px;
+  border-radius: 0;
+  margin-inline-end: 3px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.badgesContainer_c19a55, .badgesContainer_2i8Bfm) { flex-shrink: 0; }
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) > :is(.container_b7e1cb, .container_YUQhib) { min-width: 0; max-width: calc(100% - var(--compactpp-header-width) - 30px); }
+/* Reactions and attachments retain the previous inherited metrics. Their
+ * native emoji sizing must not follow the larger message body. */
+:is(.compact_c19a55, .compact_2i8Bfm) > :is(.container_b7e1cb, .container_YUQhib) {
+  --chat-markup-line-height: var(--darkirc-line-height);
+  font: var(--darkirc-font-size)/var(--darkirc-line-height) var(--darkirc-font);
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) {
+  color: var(--darkirc-muted);
+  /* Resolve ch-based columns at the same font size as message text. */
+  font: 400 var(--darkirc-message-font-size)/18px var(--darkirc-font);
+  min-height: 18px;
+  min-width: 0;
+  /* Align references with message text, without Compact's extra reply indent. */
+  margin-inline-start: calc(var(--compactpp-header-width) + var(--compactpp-header-margin-left) + var(--compactpp-header-margin-right));
+  padding-inline-start: 0;
+  gap: 4px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm) {
+  opacity: 1;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: var(--darkirc-header-width);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) :is(.repliedTextPreview_c19a55, .repliedTextPreview_2i8Bfm) {
+  flex: 1 1 0;
+  min-width: 0;
+}
+/* Keep the native clickable spine in the gutter, clear of both columns. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessageClickableSpine_c19a55, .repliedMessageClickableSpine_2i8Bfm) {
+  inset-inline-start: -12px;
+  inset-inline-end: 100%;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.timestamp_c19a55, .timestamp_2i8Bfm):is(.timestampVisibleOnHover_c19a55, .timestampVisibleOnHover_2i8Bfm) {
+  opacity: 1;
+  color: var(--darkirc-muted);
+}
+/* One line of room for attachment-only messages and system/event notices. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.contents_c19a55, .contents_2i8Bfm) { min-height: var(--darkirc-message-line-height); }
+:is(.compact_c19a55, .compact_2i8Bfm):is(.isSystemMessage_c19a55, .isSystemMessage_2i8Bfm) { min-height: 22px; }
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm) :is(pre, blockquote) { max-width: 100%; }
+:is(.markup__75297, .markup_ku1OHH) pre {
+  border: 1px solid var(--darkirc-border);
+  border-radius: 0;
+  background: var(--background-code);
+  max-width: 100%;
+}
+:is(.markup__75297, .markup_ku1OHH) pre code {
+  display: block;
+  white-space: pre;
+  overflow-x: auto;
+  font: 12px/18px var(--darkirc-font);
+}
+:is(.markup__75297, .markup_ku1OHH) code.inline {
+  background: var(--background-code);
+  border-radius: 0;
+  color: inherit;
+  font-family: var(--darkirc-font);
+}
+:is(.markup__75297, .markup_ku1OHH) a { color: var(--darkirc-accent); text-underline-offset: 2px; }
+:is(.markup__75297, .markup_ku1OHH) a:hover { text-decoration: underline; }
+:is(.markup__75297, .markup_ku1OHH) blockquote { border-radius: 0; }
+/* Only message text: reaction/picker/media emoji keep native geometry. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm) .emoji {
+  width: 17px;
+  height: 17px;
+  vertical-align: middle;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.messageContent_c19a55, .messageContent_2i8Bfm) .emoji.jumboable {
+  width: 22px;
+  height: 22px;
+  min-height: 22px;
+}
+/* Keep spoiler masking, embed type/color rails, image aspect ratios and player
+ * controls native. Never apply a blanket height/overflow to media elements. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is([class^="embedFull_"], [class*=" embedFull_"], [class^="attachment_"], [class*=" attachment_"]) {
+  border-radius: 0;
+  background-color: var(--darkirc-panel);
+}
+/* Desktop Elements: group > animation wrapper > reaction > focusable inner.
+ * Keep native state/tooltip handlers, count min-width and wrap containers.
+ * 26px border box leaves a 24px-high native click target. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reaction__23977, .reaction_MmKct8), :is(.reaction_f8896c, .reaction_UNkajC)) {
+  border-radius: 2px;
+  border-width: 1px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reactionInner__23977, .reactionInner_MmKct8), :is(.reactionInner_f8896c, .reactionInner_UNkajC)) {
+  box-sizing: border-box;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 3px 5px;
+  line-height: 18px;
+}
+/* The emoji sits in its own inline-formatting div. Remove its baseline
+ * descender space without clipping animated/custom images or the tooltip. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reactionInner__23977, .reactionInner_MmKct8), :is(.reactionInner_f8896c, .reactionInner_UNkajC)) > div:has(> :is(.emoji, .emoji-text)) {
+  display: flex;
+  align-items: center;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reaction__23977, .reaction_MmKct8), :is(.reaction_f8896c, .reaction_UNkajC)) .emoji {
+  width: 18px;
+  height: 18px;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  object-fit: contain;
+  vertical-align: middle;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reaction__23977, .reaction_MmKct8), :is(.reaction_f8896c, .reaction_UNkajC)) .emoji-text {
+  font-size: 18px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reactionCount__23977, .reactionCount_MmKct8), :is(.reactionCount_f8896c, .reactionCount_UNkajC)) {
+  font: 500 12px/18px var(--darkirc-font);
+  margin-inline-start: 4px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reactionBtn__23977, .reactionBtn_MmKct8), :is(.reactionBtn_f8896c, .reactionBtn_UNkajC)) {
+  box-sizing: border-box;
+  min-width: 26px;
+  height: 26px;
+  padding: 3px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reactionBtn__23977, .reactionBtn_MmKct8), :is(.reactionBtn_f8896c, .reactionBtn_UNkajC)) :is(:is(.icon__23977, .icon_MmKct8), :is(.icon_f8896c, .icon_UNkajC)) {
+  width: 18px;
+  height: 18px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(:is(.reactionInner__23977, .reactionInner_MmKct8), :is(.reactionInner_f8896c, .reactionInner_UNkajC), :is(.reactionBtn__23977, .reactionBtn_MmKct8), :is(.reactionBtn_f8896c, .reactionBtn_UNkajC)):focus-visible {
+  outline: 2px solid var(--darkirc-accent);
+  outline-offset: -2px;
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is([class^="buttons_"], [class*=" buttons_"]) {
+  border-radius: 0;
+  box-shadow: none;
+}
+/* Do not change native hover/focus visibility of message action toolbars. */
+:is(.compact_c19a55, .compact_2i8Bfm) :is([class^="button_"], [class*=" button_"]) { border-radius: 0; }
+
+/* Main composer AND inline edit composer (different native class modules). */
+:is(.form_f75fb0, .form_z_gUBg),
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.channelTextArea__5126c, .channelTextArea_SY_P2T) {
+  /* Native Slate sizing and button alignment share these tokens. No fixed
+   * editor height: Discord can still measure and grow multiline content. */
+  --custom-channel-textarea-text-area-height: 38px;
+  --chat-markup-line-height: var(--darkirc-line-height);
+}
+:is(.channelTextArea__74017, .channelTextArea_2x8-Qn),
+:is(.channelTextArea__5126c, .channelTextArea_SY_P2T) {
+  background: var(--darkirc-panel);
+  border: 1px solid var(--darkirc-control-border);
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 4px;
+}
+:is(.channelTextArea__74017, .channelTextArea_2x8-Qn):focus-within,
+:is(.channelTextArea__5126c, .channelTextArea_SY_P2T):focus-within { border-color: var(--darkirc-accent); }
+:is(.scrollableContainer__74017, .scrollableContainer_2x8-Qn) { background: var(--darkirc-panel); border-radius: 0; }
+:is(.form_f75fb0, .form_z_gUBg) :is(.channelTextArea__74017, .channelTextArea_2x8-Qn) :is(:is(.button__74017, .button_2x8-Qn), :is(.attachButtonInner__0923f, .attachButtonInner_7TM4SO)) {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--darkirc-muted);
+}
+:is(.form_f75fb0, .form_z_gUBg) :is(.channelTextArea__74017, .channelTextArea_2x8-Qn) :is(:is(.button__74017, .button_2x8-Qn), :is(.attachButtonInner__0923f, .attachButtonInner_7TM4SO)):hover {
+  background: var(--darkirc-hover);
+  color: var(--darkirc-text);
+}
+:is(.textArea__74017, .textArea_2x8-Qn),
+:is(.channelTextArea__5126c, .channelTextArea_SY_P2T) [role="textbox"] {
+  font: var(--darkirc-font-size)/var(--darkirc-line-height) var(--darkirc-font);
+  min-width: 0;
+}
+/* Keep the verified bottom layout: restoring native -16px requires live
+ * typing/scroll anchoring evidence, not just a reconstructed spacer fixture. */
+:is(.form_f75fb0, .form_z_gUBg) { margin-top: 0; padding-inline: 8px; }
+:is(.form_f75fb0, .form_z_gUBg) :is(.inner__74017, .inner_2x8-Qn) { padding-inline-start: 8px; }
+:is(.form_f75fb0, .form_z_gUBg) :is(.attachButton__74017, .attachButton_2x8-Qn) { margin-inline: 0 4px; }
+/* Modern + action lives outside module 74017. Its native 12px + 12px
+ * padding around a 32px icon made the REAL inner container 56px tall even
+ * while Slate and the old fixture measured 38px. Size this wrapper too. */
+:is(.form_f75fb0, .form_z_gUBg) :is(.attachWrapper__0923f, .attachWrapper_7TM4SO) {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  height: var(--custom-channel-textarea-text-area-height);
+  padding: 0 4px 0 0;
+}
+:is(.form_f75fb0, .form_z_gUBg) { --chat-input-icon-size: 20px; }
+:is(.form_f75fb0, .form_z_gUBg) :is(.attachButtonInner__0923f, .attachButtonInner_7TM4SO) {
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 0;
+}
+:is(.form_f75fb0, .form_z_gUBg) :is(.buttons__74017, .buttons_2x8-Qn) { gap: 2px; }
+:is(.form_f75fb0, .form_z_gUBg) :is(.buttons__74017, .buttons_2x8-Qn) :is(.button__74017, .button_2x8-Qn) {
+  min-width: 28px;
+  min-height: 28px;
+}
+:is(.form_f75fb0, .form_z_gUBg) :is(.placeholder__1b31f, .placeholder_SHcSVi) {
+  color: var(--darkirc-muted);
+  opacity: 1;
+  font: var(--darkirc-font-size)/var(--darkirc-line-height) var(--darkirc-font);
+}
+:is(.compact_c19a55, .compact_2i8Bfm) :is(.operations_bab751, .operations_h_zE4S) { font: 12px/19px var(--darkirc-font); }
+
+/* ===== 35-nick-styles.css ===== */
+/* Flatten display-name cosmetics in account, nicklist and message metadata only.
+ * Inline IrcColors / role colors remain on the real name nodes. In particular,
+ * do not apply these rules to messageContent, emoji, media or profile portals. */
+:is(:is(.container__37e49, .container_g6VwXp), :is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A), :is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm), :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm)) :is(
+  :is(.username_c19a55, .username_2i8Bfm), :is(.name__5d473, .name_Iy0c7A), :is(.name__703b9, .name_Wo4EpK), :is(.nameContainer__703b9, .nameContainer_Wo4EpK),
+  :is(.usernameGradient_e5de78, .usernameGradient_HG2xvK)
+) {
+  font-family: var(--darkirc-font) !important;
+  font-size: inherit;
+  line-height: inherit;
+  font-style: normal;
+  letter-spacing: normal;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+:is(:is(.container__37e49, .container_g6VwXp), :is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A), :is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm), :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm)) :is(:is(.nameGlow__703b9, .nameGlow_Wo4EpK), :is(.usernameGlow_e5de78, .usernameGlow_HG2xvK)) {
+  display: none;
+}
+:is(:is(.container__37e49, .container_g6VwXp), :is(.members_c8ffbb, .members_86es0b) :is(.member__5d473, .member_Iy0c7A), :is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm), :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm)) :is(.convenienceGlowGradient_e5de78, .convenienceGlowGradient_HG2xvK)::after {
+  content: none;
+}
+/* Hover/focus keep the same inline, role or fallback color as the resting name. */
+
+/* ===== 40-surfaces.css ===== */
+/* Native roles keep dialog/menu behavior, focus management and semantics. */
+[role="menu"],
+:is(.menu_c1e9c4, .menu_M3qk4j),
+:is(.root__49fc1, .root__KoJTP),
+:is(.outer_c0bea0, .outer_P1YEjQ),
+[class^="vc-notification"],
+[class*=" vc-notification"] {
+  background-color: var(--darkirc-panel);
+  border: 1px solid var(--darkirc-border);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--darkirc-font);
+}
+:is(.root__49fc1, .root__KoJTP):is(.root__49fc1, .root__KoJTP) { border-radius: 0; }
+[role="dialog"] { color: var(--darkirc-text); font-family: var(--darkirc-font); }
+[role="dialog"] :is(h1, h2, h3) { font-family: var(--darkirc-font); }
+[role="dialog"] :is(input, textarea, select),
+[role="combobox"] {
+  font-family: var(--darkirc-font);
+  border-radius: 0;
+}
+:is(.menu_c1e9c4, .menu_M3qk4j) {
+  --custom-menu-separator-margin: 4px;
+  --custom-menu-viewport-padding: 8px;
+}
+[role="menuitem"],
+[role="menuitemcheckbox"],
+[role="menuitemradio"] {
+  border-radius: 0;
+  min-height: 28px;
+  font-size: 13px;
+  line-height: 19px;
+}
+/* Respect native danger/checked colors: only supply the common hover fill. */
+[role="menuitem"]:hover,
+[role="menuitemcheckbox"]:hover,
+[role="menuitemradio"]:hover { background-color: var(--darkirc-active); }
+:is(.inner_c0bea0, .inner_P1YEjQ) { border-radius: 0; }
+:is(.outer_c0bea0, .outer_P1YEjQ) {
+  /* Nitro profile colors are inline custom properties. Scope the override to
+   * profile surfaces so name/role colors and user banner images stay native. */
+  --profile-gradient-primary-color: var(--darkirc-panel) !important;
+  --profile-gradient-secondary-color: var(--darkirc-panel) !important;
+  --profile-gradient-overlay-color: transparent !important;
+  background: var(--darkirc-panel);
+}
+:is(.user-profile-popout, .user-profile-modal, .user-profile-sidebar) {
+  --profile-gradient-primary-color: var(--darkirc-panel);
+  --profile-gradient-secondary-color: var(--darkirc-panel);
+  --profile-gradient-overlay-color: transparent;
+  background-color: var(--darkirc-panel);
+  border-radius: 0;
+  box-shadow: none;
+}
+/* Profile banners, badges, roles and presence are user content: retained. */
+.user-profile-popout { max-width: calc(100vw - 16px); }
+.user-profile-modal { max-width: calc(100vw - 24px); }
+:is([class^="tooltip_"], [class*=" tooltip_"]) {
+  --background-floating: var(--darkirc-header);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--darkirc-font);
+}
+/* Search/threads use intrinsic max sizing; no content is hidden at breakpoints. */
+:is([class^="searchResultsWrap_"], [class*=" searchResultsWrap_"]) {
+  background: var(--darkirc-panel);
+  border-inline-start: 1px solid var(--darkirc-border);
+  width: clamp(240px, 30vw, 380px);
+  min-width: 0;
+}
+:is([class^="searchResult_"], [class*=" searchResult_"]) {
+  border: 1px solid var(--darkirc-border);
+  border-radius: 0;
+  background: var(--darkirc-bg);
+}
+:is([class^="autocomplete_"], [class*=" autocomplete_"]) {
+  background: var(--darkirc-header);
+  border: 1px solid var(--darkirc-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+[role="alert"], [role="status"] { font-family: var(--darkirc-font); }
+/* Keep the native new-message controls, stacking and 32px hit area. */
+:is(.newMessagesBar__0f481, .newMessagesBar_j9Vvzj) {
+  background-color: var(--darkirc-header);
+  color: var(--darkirc-text);
+  border-inline-start: 2px solid var(--darkirc-accent);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Flat controls without altering SVGs, avatar status masks or toggle shapes. */
+:is(button, input, textarea, select, [role="button"], [role="tab"]) {
+  font-family: var(--darkirc-font);
+}
+button, input, textarea, select { border-radius: 0; }
+/* Keyboard ring remains distinct from hover/selection. No outline:none rule. */
+:is(a, button, input, textarea, select, [tabindex], [contenteditable="true"]):focus-visible {
+  outline: 2px solid var(--darkirc-accent) !important;
+  outline-offset: 2px;
+}
+::selection { background: #315773; color: #F0F6FC; }
+/* Preserve native scrollbar widths (Discord uses them for layout/scrolling). */
+::-webkit-scrollbar-thumb { background-color: #425B70; border-radius: 0; }
+::-webkit-scrollbar-track { background-color: var(--darkirc-bg); }
+::-webkit-scrollbar-thumb:hover { background-color: #66839B; }
+
+/* Remove only decorative transitions. Voice activity, loading, typing, video
+ * and accessibility feedback retain their semantic animation/state changes. */
+:is(.guilds__5e434, .guilds_pog62O) :is(.wrapper__6e9f8, .wrapper_JJ-hgR),
+:is(.guilds__5e434, .guilds_pog62O) :is(.childWrapper__6e9f8, .childWrapper_JJ-hgR),
+:is(.sidebarList__5e434, .sidebarList_pog62O) a,
+:is(.member__5d473, .member_Iy0c7A),
+:is(.channelTextArea__74017, .channelTextArea_2x8-Qn),
+:is(.channelTextArea__5126c, .channelTextArea_SY_P2T),
+:is(.searchBar_c322aa, .searchBar_i16Ad0),
+[role="menuitem"] { transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  :is(.guilds__5e434, .guilds_pog62O) *,
+  [role="menu"],
+  [role="dialog"] { scroll-behavior: auto; transition-duration: 0s !important; }
+}
+@media (forced-colors: active) {
+  :root:root { --darkirc-accent: Highlight; --darkirc-border: CanvasText; }
+  :is(a, button, input, textarea, select, [tabindex]):focus-visible { outline-color: Highlight !important; }
+}
+
+/* ===== 45-interface.css ===== */
+/* Interface Consistency. PTB 643186 / host 1.0.1226, 2026-10-20.
+ * The native sidebar is a subgrid spanning guilds + channels. Its absolute
+ * panels default to the entire sidebar, including the guild rail. Use the
+ * existing named grid area as their containing block; retain bottom anchoring
+ * and intrinsic height for RTC/activity panels. No viewport offset is needed. */
+:is(.sidebar__5e434, .sidebar_pog62O) > :is(.panels__5e434, .panels_pog62O) {
+  grid-column: channelsList;
+  inset-inline: 0;
+  width: auto;
+  container: darkirc-panels / inline-size;
+}
+/* Keep the five controls at least 24px wide when responsive channels are
+ * below 152px: four audio targets, then a full-width settings target. */
+@container darkirc-panels (max-width: 151px) {
+  :is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) { grid-template-columns: repeat(4, minmax(24px, 1fr)); }
+  :is(.container__37e49, .container_g6VwXp) :is(.buttons__37e49, .buttons_g6VwXp) > :is(.button__67645, .button_Y-8oZW) { grid-column: 1 / -1; }
+}
+
+/* Friends are ordinary flow rows, not the member-list virtualizer. PTB puts
+ * an animated 61px inline height on them; allow content to grow beyond 46px.
+ * The native rowButton still covers the full row and owns keyboard behavior. */
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) {
+  box-sizing: border-box;
+  min-height: 46px;
+  height: auto !important;
+  padding: 6px 8px;
+  border-radius: 2px;
+  font: 13px/19px var(--darkirc-font);
+}
+:is(.container__133bf, .container_zrUwGA) :is(.rowContent_cc6179, .rowContent_y75PxA) { min-height: 34px; }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.userInfo__0a06e, .userInfo_jPuNMC) { min-width: 0; }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.avatar__0a06e, .avatar_jPuNMC) {
+  width: 28px !important;
+  height: 28px !important;
+  flex: 0 0 28px;
+  margin-inline-end: 8px;
+}
+/* Scale the complete native SVG/status mask rather than the image alone. */
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.avatar__0a06e, .avatar_jPuNMC) > svg { width: 100%; height: 100%; }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(:is(.text__0a06e, .text_jPuNMC), :is(.discordTag__0a06e, .discordTag_jPuNMC)) { min-width: 0; }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.username__0a06e, .username_jPuNMC) { font: 600 13px/18px var(--darkirc-font); }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.discriminator__0a06e, .discriminator_jPuNMC) { font: 12px/16px var(--darkirc-font); }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(:is(.subtext__0a06e, .subtext_jPuNMC), :is(.text__19b6d, .text_CXmngM)) { font: 12px/16px var(--darkirc-font); }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.actions_fc004c, .actions_4Y31So) { gap: 8px; flex-shrink: 0; }
+:is(.container__133bf, .container_zrUwGA) :is(.peopleListItem_cc6179, .peopleListItem_y75PxA) :is(.actionButton_f8fa06, .actionButton_5GqXgh) {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+}
+
+/* Activity information remains content-sized, including games and parties. */
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__7d20c, .header_GNEh_C) { font: 600 16px/22px var(--darkirc-font); margin-block: 4px 8px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.itemCard__7e549, .itemCard_-7KzVR) { border-radius: 2px; margin-bottom: 8px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__00943, .header_o3hXTo) { padding: 10px 12px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.section__00943, .section_o3hXTo) { padding: 10px 12px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.textContent__00943, .textContent_o3hXTo) { font-size: 12px; line-height: 18px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__00943, .header_o3hXTo) :is(.textContent__00943, .textContent_o3hXTo):first-child { font-size: 13px; }
+
+/* PTB's replacement search button has nested text wrappers. Let the full
+ * localized prompt wrap instead of forcing a 160px ellipsis; it still opens
+ * Discord's native search dialog. Legacy search component remains supported. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) { height: auto; min-height: 38px; padding: 4px; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(:is(.button_a22cb0, .button_F7qvhY), :is(.searchBarComponent_e6b769, .searchBarComponent_u88IQl)) {
+  height: auto;
+  min-height: 30px;
+  padding: 4px 6px;
+  white-space: normal;
+  text-align: start;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(:is(.buttonChildrenWrapper_a22cb0, .buttonChildrenWrapper_F7qvhY), :is(.buttonChildren_a22cb0, .buttonChildren_F7qvhY)) { min-width: 0; height: auto; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(:is(.lineClamp1__4bd52, .lineClamp1_MMUIw6), :is(.overflow_b0dfc2, .overflow__WDjet)) {
+  display: block;
+  white-space: normal;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  overflow-wrap: anywhere;
+  font: 12px/16px var(--darkirc-font);
+}
+
+/* Current modal settings body, legacy settings column and Vencord's own
+ * settings/modal components only. Never change global heading/input metrics.
+ * Text variants carry native weights, colors and accessible labels. */
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), .vc-settings-tab, :is(.root__49fc1, .root__KoJTP)) {
+  font: 13px/19px var(--darkirc-font);
+}
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), :is(.root__49fc1, .root__KoJTP)) :is(
+  [data-text-variant^="text-"], [data-text-variant^="experimental/body-"],
+  .vc-text-base, input, textarea, select
+) { font-size: 13px; line-height: 19px; }
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), :is(.root__49fc1, .root__KoJTP)) :is(h1, h2) {
+  font-size: 20px;
+  line-height: 26px;
+}
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), :is(.root__49fc1, .root__KoJTP)) :is(
+  h3, [data-text-variant^="heading-md"],
+  [data-text-variant^="experimental/heading-md"]
+) { font-size: 17px; line-height: 23px; }
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), :is(.root__49fc1, .root__KoJTP)) :is(
+  [data-text-variant^="heading-sm"], [data-text-variant^="heading-xs"],
+  [data-text-variant^="experimental/heading-sm"], [data-text-variant^="experimental/heading-xs"]
+) { font-size: 16px; line-height: 22px; }
+/* Limit spacing tokens to settings content; native stack/field relationships
+ * keep their relative spacing. Do not impose heights on inputs or switches. */
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m)) {
+  --space-xl: 20px;
+  --space-lg: 16px;
+  --space-md: 12px;
+}
+:is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.panel__6131a, .panel_nNq2Vb) { margin-block: 24px; }
+:is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.container__75920, .container_Gl6U0S) > :is(.stack_dbd263, .stack_TWWX0S) { padding-bottom: 12px !important; }
+.vc-settings-tab .vc-text-base { font-size: 13px; line-height: 19px; }
+:is(.vc-settings-tab, :is(.root__49fc1, .root__KoJTP)) .vc-h5 {
+  font: 600 16px/22px var(--darkirc-font);
+  text-transform: none;
+  margin-block: 12px 8px;
+}
+.vc-settings-tab .vc-special-title { font-size: 20px; line-height: 26px; margin-top: 0; }
+.vc-settings-tab .vc-special-card { padding: 12px 16px; }
+.vc-settings-tab .vc-margin-bottom-20 { margin-bottom: 12px; }
+.vc-settings-tab .vc-divider { margin-block: 16px; }
+
+/* ===== 46-cohesion.css ===== */
+/* UI Cohesion, PTB 643186, 2026-10-20. Component scopes include the native
+ * text leaves: setting a font on their flex parents does not override them.
+ * These UI tokens deliberately do not replace the IRC message tokens. */
+:root {
+  --darkirc-ui-meta: 12px;
+  --darkirc-ui-body: 13px;
+  --darkirc-ui-section: 15px;
+  --darkirc-ui-title: 18px;
+}
+
+/* PTB's floating-panel bottom inset is 8px. Its decorative sidebar ::after
+ * covers the same strip. Remove only that outer inset; retain border, inner
+ * padding, intrinsic height and all RTC/audio siblings above the account. */
+:is(.sidebar__5e434, .sidebar_pog62O) > :is(.panels__5e434, .panels_pog62O) { bottom: 0; }
+:is(.container__37e49, .container_g6VwXp) :is(.panelTitleContainer__37e49, .panelTitleContainer_g6VwXp) > [data-text-variant] {
+  font-size: var(--darkirc-ui-body);
+  line-height: 18px;
+}
+:is(.container__37e49, .container_g6VwXp) :is(.panelSubtextContainer__37e49, .panelSubtextContainer_g6VwXp) > [data-text-variant] {
+  font-size: var(--darkirc-ui-meta);
+  line-height: 16px;
+}
+
+/* Private channels are flow rows. Avatars/status masks scale together;
+ * multi-line status grows the row rather than clipping user information. */
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.channel__972a0, .channel_zln_tS) { margin-inline: 4px 0; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.channel__972a0, .channel_zln_tS) :is(.interactive__972a0, .interactive_zln_tS) {
+  min-height: 28px;
+  height: auto;
+}
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.channel__972a0, .channel_zln_tS) :is(.link__972a0, .link_zln_tS) {
+  flex: 1;
+  min-width: 0;
+  min-height: 28px;
+  padding-inline: 6px 4px;
+}
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.layout__20a53, .layout_TBNqol) {
+  flex: 1;
+  min-width: 0;
+  min-height: 24px;
+  height: auto;
+  padding-block: 2px;
+}
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.dm__972a0, .dm_zln_tS) :is(.link__972a0, .link_zln_tS) { min-height: 30px; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.avatar__20a53, .avatar_TBNqol) { margin-inline-end: 6px; flex-shrink: 0; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.dm__972a0, .dm_zln_tS) :is(.avatar__20a53, .avatar_TBNqol),
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.dm__972a0, .dm_zln_tS) :is(.avatar__20a53, .avatar_TBNqol) > :is(.wrapper__44b0c, .wrapper_XpIUHy) {
+  width: 24px !important;
+  height: 24px !important;
+  flex: 0 0 24px;
+}
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.dm__972a0, .dm_zln_tS) :is(.avatar__20a53, .avatar_TBNqol) > :is(.wrapper__44b0c, .wrapper_XpIUHy) > svg { width: 100%; height: 100%; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(:is(.content__20a53, .content_TBNqol), :is(.nameAndDecorators__20a53, .nameAndDecorators_TBNqol), :is(.name__20a53, .name_TBNqol)) { min-width: 0; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.content__20a53, .content_TBNqol) { flex: 1; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.name__20a53, .name_TBNqol) {
+  font: 500 var(--darkirc-ui-body)/18px var(--darkirc-font);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.name__20a53, .name_TBNqol) :is(.overflow_b0dfc2, .overflow__WDjet) { font: inherit; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(:is(.subText__20a53, .subText_TBNqol), :is(.subtext__972a0, .subtext_zln_tS), :is(.activityStatusText__972a0, .activityStatusText_zln_tS)) {
+  font-size: var(--darkirc-ui-meta);
+  line-height: 14px;
+}
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.iconsContainer__972a0, .iconsContainer_zln_tS) { height: auto; align-self: stretch; flex-shrink: 0; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.closeButton__972a0, .closeButton_zln_tS) { min-width: 24px; min-height: 24px; padding-inline-end: 4px; }
+:is(.privateChannels_e6b769, .privateChannels_u88IQl) :is(.privateChannelsHeaderContainer__99e7c, .privateChannelsHeaderContainer_Bce46W) {
+  font-size: var(--darkirc-ui-meta);
+  line-height: 16px;
+  padding-inline-start: 10px;
+}
+/* The 22px nested horizontal padding caused the Finnish prompt to wrap.
+ * A single line with native tooltip/accessible name fits regular widths;
+ * ellipsis handles narrow panes without expanding the sidebar. */
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) { height: 38px; padding: 4px; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(:is(.button_a22cb0, .button_F7qvhY), :is(.searchBarComponent_e6b769, .searchBarComponent_u88IQl)) {
+  height: 30px;
+  padding: 3px 2px;
+  white-space: nowrap;
+}
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(.buttonChildrenWrapper_a22cb0, .buttonChildrenWrapper_F7qvhY) { padding: 0; width: 100%; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(.buttonChildren_a22cb0, .buttonChildren_F7qvhY) { width: 100%; }
+:is(.sidebarList__5e434, .sidebarList_pog62O) :is(.searchBar_e6b769, .searchBar_u88IQl) :is(:is(.lineClamp1__4bd52, .lineClamp1_MMUIw6), :is(.overflow_b0dfc2, .overflow__WDjet)) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: normal;
+  font: var(--darkirc-ui-meta)/16px var(--darkirc-font);
+  letter-spacing: -.2px;
+}
+
+/* Preserve the successful central friend rows. Only activity cards change. */
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__7d20c, .header_GNEh_C) { font-size: var(--darkirc-ui-section); line-height: 20px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.itemCard__7e549, .itemCard_-7KzVR) { margin-block: 6px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(:is(.header__00943, .header_o3hXTo), :is(.section__00943, .section_o3hXTo)) { padding: 6px 8px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__00943, .header_o3hXTo) :is(.textContent__00943, .textContent_o3hXTo) { font-size: var(--darkirc-ui-meta); line-height: 16px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__00943, .header_o3hXTo) :is(.textContent__00943, .textContent_o3hXTo):is([data-text-variant^="text-sm/"], [data-text-variant^="text-xs/"]) { font-size: var(--darkirc-ui-meta); }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.header__00943, .header_o3hXTo) [data-text-variant="text-md/semibold"] { font-size: var(--darkirc-ui-body); line-height: 18px; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.headerAvatar__00943, .headerAvatar_o3hXTo) { width: 28px !important; height: 28px !important; }
+:is(.nowPlayingColumn__133bf, .nowPlayingColumn_zrUwGA) :is(.headerAvatar__00943, .headerAvatar_o3hXTo) > svg { width: 100%; height: 100%; }
+
+/* Settings: body, native nested variants, navigation and Vencord buttons.
+ * No global heading/form selectors and no imposed field/switch heights. */
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), .vc-settings-tab, :is(.sidebar__409aa, .sidebar_cR4ic2), :is(.contentHeader_e9e3ed, .contentHeader_3Rvb29)) {
+  font: var(--darkirc-ui-body)/19px var(--darkirc-font);
+}
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), .vc-settings-tab, :is(.sidebar__409aa, .sidebar_cR4ic2), :is(.contentHeader_e9e3ed, .contentHeader_3Rvb29)) :is(
+  [data-text-variant^="text-"], [data-text-variant^="experimental/body-"],
+  [class*="text-md/"], [class*="text-sm/"], .vc-text-base, .vc-btn-base, input, textarea, select
+) { font-size: var(--darkirc-ui-body); line-height: 19px; }
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), .vc-settings-tab, :is(.root__49fc1, .root__KoJTP)) :is(
+  h1, h2, .vc-special-title, [data-text-variant^="heading-lg"], [data-text-variant^="heading-xl"],
+  [data-text-variant^="experimental/heading-lg"], [data-text-variant^="experimental/heading-xl"]
+) { font-size: var(--darkirc-ui-title); line-height: 24px; }
+:is(:is(.contentBody_e9e3ed, .contentBody_3Rvb29), :is(.contentColumn__23e6b, .contentColumn_jnk11m), .vc-settings-tab, :is(.root__49fc1, .root__KoJTP)) :is(
+  h3, .vc-h5:not(.vc-special-title), [data-text-variant^="heading-md"],
+  [data-text-variant^="heading-sm"], [data-text-variant^="heading-xs"],
+  [data-text-variant^="experimental/heading-md"], [data-text-variant^="experimental/heading-sm"],
+  [data-text-variant^="experimental/heading-xs"]
+) { font-size: var(--darkirc-ui-section); line-height: 21px; }
+:is(.sidebar__409aa, .sidebar_cR4ic2) :is(:is(.label__409aa, .label_cR4ic2), [data-text-variant^="text-xs"], [data-text-variant^="text-xxs"]) {
+  font-size: var(--darkirc-ui-meta); line-height: 16px;
+}
+:is(.sidebar__409aa, .sidebar_cR4ic2) { min-width: 0; }
+:is(.sidebar__409aa, .sidebar_cR4ic2) :is(.compactInfo__081d7, .compactInfo_LlTAVD) { overflow-wrap: anywhere; }
+:is(.sidebar__409aa, .sidebar_cR4ic2) :is(.item_caf372, .item_xyJHva) { padding-block: 6px; gap: 8px; min-height: 32px; }
+:is(.sidebar__409aa, .sidebar_cR4ic2) :is(.itemContent_caf372, .itemContent_xyJHva) { min-width: 0; }
+:is(.sidebar__409aa, .sidebar_cR4ic2) :is(.navScroller__409aa, .navScroller_cR4ic2) { padding-top: 8px; gap: 16px; }
+:is(.sidebar__409aa, .sidebar_cR4ic2) :is(.sublist__409aa, .sublist_cR4ic2) { gap: 4px; }
+:is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.panel__6131a, .panel_nNq2Vb) { margin-block: 16px; }
+
+/* Profile portals: keep banners, avatars, badges, roles, descriptions, media
+ * and controls. Full names may wrap; never truncate profile information. */
+:is(.user-profile-popout, .user-profile-modal, .user-profile-modal-v2) { font: var(--darkirc-ui-body)/19px var(--darkirc-font); }
+:is(.user-profile-popout, .user-profile-modal, .user-profile-modal-v2) :is(
+  [data-text-variant^="text-"], [data-text-variant^="experimental/body-"],
+  :is(.userTag__26b1f, .userTag_C2XpHA), :is(.userTagUsername__26b1f, .userTagUsername_C2XpHA), :is(.markup__75297, .markup_ku1OHH), .input__983bc
+) { font-size: var(--darkirc-ui-body); line-height: 19px; }
+:is(.user-profile-popout, .user-profile-modal, .user-profile-modal-v2) :is(
+  [data-text-variant^="heading-"], [data-text-variant^="experimental/heading-"]
+) { font-size: var(--darkirc-ui-section); line-height: 21px; }
+:is(.user-profile-popout, .user-profile-modal, .user-profile-modal-v2) :is(
+  :is(.displayNameRow__26b1f, .displayNameRow_C2XpHA) [data-text-variant^="heading-"], :is(.displayName__26b1f, .displayName_C2XpHA)
+) { font-size: var(--darkirc-ui-title); line-height: 24px; }
+.user-profile-popout :is(.body_ce8328, .body_nitlyF) { padding: 4px 8px 12px 12px; gap: 8px; }
+.user-profile-modal-v2 :is(.profileBody__9c3be, .profileBody_s3DB6Y) { padding: 4px 16px 20px 20px; gap: 16px; }
+
+/* Pins are a separate cozy-message surface. Preserve all media and native
+ * action buttons; only its own message padding and text sizes are adjusted. */
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) {
+  max-width: calc(100vw - 16px);
+  background: var(--darkirc-panel);
+  border: 1px solid var(--darkirc-border);
+  border-radius: 0;
+  font: var(--darkirc-ui-body)/19px var(--darkirc-font);
+}
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(:is(.header__432f4, .header_6bgemo), :is(.footer__432f4, .footer_6bgemo)) { padding: 8px 12px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) [data-text-variant] { font-size: var(--darkirc-ui-body); line-height: 19px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.titleContainer__432f4, .titleContainer_6bgemo) [data-text-variant] { font-size: 16px; line-height: 22px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.footer__432f4, .footer_6bgemo) [data-text-variant] { font-size: var(--darkirc-ui-meta); line-height: 18px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.messageGroupCozy__432f4, .messageGroupCozy_6bgemo) { padding: 8px 12px 8px 56px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.messageGroupCozy__432f4, .messageGroupCozy_6bgemo) :is(.avatar_c19a55, .avatar_2i8Bfm) { left: 8px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.messageGroupCozy__432f4, .messageGroupCozy_6bgemo) :is(.messageContent_c19a55, .messageContent_2i8Bfm) { margin-inline-start: -56px; padding-inline-start: 56px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(:is(.markup__75297, .markup_ku1OHH), :is(.username_c19a55, .username_2i8Bfm)) { font-size: var(--darkirc-ui-body); line-height: 19px; }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.timestamp_c19a55, .timestamp_2i8Bfm) { font-size: var(--darkirc-ui-meta); }
+:is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.emptyPlaceholder__432f4, .emptyPlaceholder_6bgemo) { margin-block: 8px 16px; }
+
+@media (max-width: 700px) {
+  /* Native account rows have non-shrinking trailing stacks. At 640px these
+   * put edit/reveal controls beyond the content scroller. Wrap only settings
+   * control rows and retain every target and the navigation scroll area. */
+  .container_abd9a8 :is(.sidebar__409aa, .sidebar_cR4ic2):not(:is(.mobile__409aa, .mobile_cR4ic2)) { flex-basis: 180px; }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) { min-width: 0; }
+  :is(.sidebar__409aa, .sidebar_cR4ic2) :is(.itemContent_caf372, .itemContent_xyJHva) [data-text-variant] {
+    white-space: normal;
+    -webkit-line-clamp: unset;
+    overflow-wrap: anywhere;
+  }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.panel__6131a, .panel_nNq2Vb) { min-width: 0; margin-inline: 8px; padding-inline: 8px; }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.baseControlItem_dbfbe0, .baseControlItem_FiiQ6I) { flex-wrap: wrap; }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.baseControlItemContent_dbfbe0, .baseControlItemContent_FiiQ6I) { min-width: 0; flex-basis: 160px; }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.baseControlItemTitle_dbfbe0, .baseControlItemTitle_FiiQ6I) { min-width: 0; flex-wrap: wrap; }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.baseControlItemTrailingElement_dbfbe0, .baseControlItemTrailingElement_FiiQ6I),
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.baseControlItemTrailingElement_dbfbe0, .baseControlItemTrailingElement_FiiQ6I) > :is(.stack_dbd263, .stack_TWWX0S) {
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  :is(.contentBody_e9e3ed, .contentBody_3Rvb29) :is(.baseControlItemTrailingElement_dbfbe0, .baseControlItemTrailingElement_FiiQ6I) [data-text-variant] { overflow-wrap: anywhere; }
+  .user-profile-modal-v2 :is(.profileBody__9c3be, .profileBody_s3DB6Y) { padding-inline: 12px; }
+  :is(.messagesPopoutWrap__432f4, .messagesPopoutWrap_6bgemo) :is(.header__432f4, .header_6bgemo) { padding-inline: 8px; }
+}
+
+/* ===== 50-responsive.css ===== */
+@media (max-width: 1100px) {
+  :root {
+    --darkirc-channel-width: 180px;
+    --darkirc-member-width: 160px;
+  }
+}
+@media (max-width: 850px) {
+  :root {
+    --darkirc-channel-width: 160px;
+    --darkirc-member-width: 140px;
+  }
+  :is(.container__9293f, .container_ybUK7Z) { padding-inline: 6px; }
+}
+@media (max-width: 600px) {
+  :root {
+    --darkirc-channel-width: clamp(120px, 27vw, 150px);
+    --darkirc-member-width: clamp(100px, 23vw, 130px);
+  }
+  :is(.form_f75fb0, .form_z_gUBg) { padding-inline: 4px; }
+  /* Toolbar can scroll horizontally instead of removing its controls. */
+  :is(.container__9293f, .container_ybUK7Z) :is([class^="toolbar_"], [class*=" toolbar_"]) {
+    overflow-x: auto;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+}
+
+/* Also handles narrow split/thread panes on a wide desktop. Group metadata
+ * becomes its own line, leaving the complete pane width for message content. */
+@container darkirc-chat (max-width: 420px) {
+  :is(.compact_c19a55, .compact_2i8Bfm):is(.wrapper_c19a55, .wrapper_2i8Bfm) {
+    --compactpp-header-width: 0px;
+    --compactpp-header-margin-right: 0px;
+    padding-block: 2px;
+  }
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm),
+  :is(.zalgo_c19a55, .zalgo_2i8Bfm):is(.gradient_c19a55, .gradient_2i8Bfm):is(.compact_c19a55, .compact_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm),
+  :is(.withDisplayNameStyles_c19a55, .withDisplayNameStyles_2i8Bfm):is(.withDisplayNameStyles_c19a55, .withDisplayNameStyles_2i8Bfm):is(.withDisplayNameStyles_c19a55, .withDisplayNameStyles_2i8Bfm) :is(.header_c19a55, .header_2i8Bfm) {
+    position: relative;
+    width: auto;
+    margin-inline: 8px 0;
+  }
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.headerText_c19a55, .headerText_2i8Bfm) { flex: 0 1 auto; justify-content: flex-start; }
+  :is(.compact_c19a55, .compact_2i8Bfm) > :is(.container_b7e1cb, .container_YUQhib) { max-width: calc(100% - 8px); }
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) { margin-inline-start: 16px; }
+  /* Keep every composer action reachable when a thread/pane is narrow. */
+  :is(.form_f75fb0, .form_z_gUBg) :is(.inner__74017, .inner_2x8-Qn) { flex-wrap: wrap; }
+  :is(.form_f75fb0, .form_z_gUBg) :is(.textArea__74017, .textArea_2x8-Qn) { flex: 1 1 8ch; }
+  :is(.form_f75fb0, .form_z_gUBg) :is(.buttons__74017, .buttons_2x8-Qn) { margin-inline-start: auto; }
+  :is(.compact_c19a55, .compact_2i8Bfm) :is(.repliedMessage_c19a55, .repliedMessage_2i8Bfm) :is(.username_c19a55, .username_2i8Bfm) { max-width: 40%; }
+}

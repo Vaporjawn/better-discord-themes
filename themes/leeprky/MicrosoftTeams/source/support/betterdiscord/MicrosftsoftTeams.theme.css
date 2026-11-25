@@ -1,0 +1,427 @@
+/**
+ * @name MicrosoftTeams
+ * @author Leeprky#2063
+ * @version 0.1.1
+ * @description Theme Based On The Microsoft Teams Application
+ * @source https://github.com/leeprky/MicrosoftTeams
+ * @updateUrl https://raw.githubusercontent.com/leeprky/MicrosoftTeams/main/source/support/betterdiscord/MicrosftsoftTeams.theme.css
+ * @authorId 224524143482241035
+ * @invite Ff3rqAYB89
+ * @donate https://www.paypal.com/paypalme/leeparkinson22
+ * @website https://leeprky.github.io/
+*/
+
+/* 
+░▒█▀▄▀█░░▀░░█▀▄░█▀▀▄░▄▀▀▄░█▀▀░▄▀▀▄░█▀▀░▀█▀░░░▀▀█▀▀░█▀▀░█▀▀▄░█▀▄▀█░█▀▀
+░▒█▒█▒█░░█▀░█░░░█▄▄▀░█░░█░▀▀▄░█░░█░█▀░░░█░░░░░▒█░░░█▀▀░█▄▄█░█░▀░█░▀▀▄
+░▒█░░▒█░▀▀▀░▀▀▀░▀░▀▀░░▀▀░░▀▀▀░░▀▀░░▀░░░░▀░░░░░▒█░░░▀▀▀░▀░░▀░▀░░▒▀░▀▀▀
+
+░▒█▀▀▄░▒█░░▒█░░░▒█░░░░▒█▀▀▀░▒█▀▀▀░▒█▀▀█░▒█▀▀▄░▒█░▄▀░▒█░░▒█
+░▒█▀▀▄░▒▀▄▄▄▀░░░▒█░░░░▒█▀▀▀░▒█▀▀▀░▒█▄▄█░▒█▄▄▀░▒█▀▄░░▒▀▄▄▄▀
+░▒█▄▄█░░░▒█░░░░░▒█▄▄█░▒█▄▄▄░▒█▄▄▄░▒█░░░░▒█░▒█░▒█░▒█░░░▒█░░
+*/
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█▄ ▄██ ▄▀▄ ██ ▄▄ ██ ▄▄▄ ██ ▄▄▀█▄▄ ▄▄
+██ ███ █ █ ██ ▀▀ ██ ███ ██ ▀▀▄███ ██
+█▀ ▀██ ███ ██ █████ ▀▀▀ ██ ██ ███ ██
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+
+@import "https://leeprky.github.io/themes/MicrosoftTeams/master-import.css";
+@import "https://leeprky.github.io/themes/MicrosoftTeams/source/client/betterdiscord/betterdiscord.css";
+@import "https://leeprky.github.io/themes/MicrosoftTeams/source/client/betterdiscord/usrbg.css";
+
+/*
+░▒█▀▀▄░▒█░▒█░▒█▀▀▀█░▀▀█▀▀░▒█▀▀▀█░▒█▀▄▀█░▀█▀░▒█▀▀▀█░█▀▀▄░▀▀█▀▀░▀█▀░▒█▀▀▀█░▒█▄░▒█
+░▒█░░░░▒█░▒█░░▀▀▀▄▄░░▒█░░░▒█░░▒█░▒█▒█▒█░▒█░░░▀▀▀▄▄▒█▄▄█░░▒█░░░▒█░░▒█░░▒█░▒█▒█▒█
+░▒█▄▄▀░░▀▄▄▀░▒█▄▄▄█░░▒█░░░▒█▄▄▄█░▒█░░▒█░▄█▄░▒█▄▄▄█▒█░▒█░░▒█░░░▄█▄░▒█▄▄▄█░▒█░░▀█
+*/
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██ ▄▄▄ ██ ▄▄▀██ ██ ██ ▄▄▄██ ▄▀▄ ██ ▄▄▄██ ▄▄▄ 
+██▄▄▄▀▀██ █████ ▄▄ ██ ▄▄▄██ █ █ ██ ▄▄▄██▄▄▄▀▀
+██ ▀▀▀ ██ ▀▀▄██ ██ ██ ▀▀▀██ ███ ██ ▀▀▀██ ▀▀▀ 
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+these schemes are to be used standalone - so disadle all other imports!!!
+*/
+
+/* Ovel */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/ovel-scheme.css";
+
+/* Lode */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/lode-scheme.css";
+
+/* Naive */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/naive-scheme.css";
+
+/* Slook */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/slook-scheme.css";
+
+/* Linix Mint */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/linix-mint-scheme.css";
+
+/* Couve */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/couve-scheme.css";
+
+/* Duvbox */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/schemes/duvbox-scheme.css";
+*/
+
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██ ▄▄▀██ ▄▄▄ ██ █████ ▄▄▄ ██ ██ ██ ▄▄▀██ ▄▄▄ 
+██ █████ ███ ██ █████ ███ ██ ██ ██ ▀▀▄██▄▄▄▀▀
+██ ▀▀▄██ ▀▀▀ ██ ▀▀ ██ ▀▀▀ ██▄▀▀▄██ ██ ██ ▀▀▀ 
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+
+/* - GREEN */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/green.css";
+
+/* - PINK */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/pink.css";
+
+/* - BLUE */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/blue.css";
+
+/* - ORANGE */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/orange.css";
+
+/* - YELLOW */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/yellow.css";
+
+/* - RED */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/red.css";
+
+/* - CYAN */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/cyan.css";
+
+/* - PLUM */
+/* @import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/plum.css";
+
+/* - BROWN */
+/*@import "https://leeprky.github.io/themes/MicrosoftTeams/source/themes/brown,.css";
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█▄▄ ▄▄██ ▄▄▄ ██ ▄▄ ██ ▄▄▀█ ▄▄▀██ ▄▄▀
+███ ████ ███ ██ ▀▀ ██ ▄▄▀█ ▀▀ ██ ▀▀▄
+███ ████ ▀▀▀ ██ █████ ▀▀ █ ██ ██ ██ 
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+remove the /* remove above the import (have none of the options above toggled) and choice between custom or preset schemes..
+*/
+
+/*
+@import "https://leeprky.github.io/themes/MicrosoftTeams/source/TopBar/main.css";
+:root {
+  --speed: 16s !important 
+}
+
+/* Ocean Scheme */
+/* REMOVE
+:root { 
+  --topbar-animation-colour: 124deg, #22577A, #38A3A5, #57CC99, #80ed99, #c7f9cc;
+}
+
+/* Fading Red Scheme */
+/* REMOVE
+:root { 
+  --topbar-animation-colour: 124deg, #800f2f, #a4133c, #c9184a, #ff4d6d, #ff8fa3, #ff4d6d, #c9184a, #a4133c;
+}
+
+/* Red To Blue Scheme */
+/*
+:root { 
+  --topbar-animation-colour: 0deg, #b7094c, #a01a58, #892b64, #723c70, #5c4d7d,
+                                   #455e89, #2e6f95, #1780a1, #0091ad, #1780a1,
+                                   #2e6f95, #455e89, #5c4d7d, #723c70, #892b64,
+                                   #a01a58, #b7094c;
+}
+
+/* CUSTOM COLOUR HERE */ /* DISABLE THE OCEAN PRESET TO ENABLE THIS */
+/*  
+ :root { 
+  --topbar-animation-colour: 124deg, red, yellow, green, orange, purple, blue !important;
+}
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██ ▄▄▀█ ▄▄▀██ ▄▄▀██ █▀▄███▄▄ ▄▄██ ██ ██ ▄▄▄██ ▄▀▄ ██ ▄▄▄
+██ ██ █ ▀▀ ██ ▀▀▄██ ▄▀██████ ████ ▄▄ ██ ▄▄▄██ █ █ ██ ▄▄▄
+██ ▀▀ █ ██ ██ ██ ██ ██ █████ ████ ██ ██ ▀▀▀██ ███ ██ ▀▀▀
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+
+.theme-dark {
+
+  /* Main Colours - Try Keep These The Same */
+  --main-colour: 70, 71, 117; /* RGB ONLY */
+  --main-colour2: #464775; /* HEX ONLY */
+  --main-colour3: 239; /* HSL ONLY */
+  
+  --bd-color: var(--main-colour2);
+  --bd-color-hover: var(--main-colour2);
+
+  /* Green Colours */
+  --green-color: var(--alt-color2); /* HEX ONLY */
+  --green-color2: var(--alt-color); /* RGB ONLY */
+  --green-bar-on: rgba(var(--alt-color), 0.3); /* RGBA ONLY */
+  --green-bar-bg: var(--green-color); /* RGB ONLY */
+  --green-slider-on: var(--green-color); /* RGB ONLY */
+  --green-slider-off: rgba(var(--alt-color), 0.4); /* RGBA ONLY */
+  --green-slider-dot: #fff;
+
+  /* Status/Other Things Colours */
+  --purple: #464775;
+  --red: #B1273E;
+  --call-button-red: #AF243D;
+  --yellow: #FDB913;
+  --green: #92C353;
+
+  /* Header Colours */
+  --headers: #FFFFFF; /* */
+  --headers-secondary: #c7c7c7;
+
+  --chatbox-colour: var(--background-secondary);
+  --messages-colour: #333333;
+  --mentioned: rgba(var(--alt-color), 0.4);
+  --mentioned-hover: rgba(var(--alt-color), 0.2);
+
+  /* Text Colours */
+  --namesusernames: #F0F0F0;
+  --text: #F0F0F0;
+  --text-positive1: var(--green-color);
+  --muted: #646262;
+  --links: var(--alt-color2);
+  --links-from-self: #989bff;
+  
+  /* Interative Buttons */
+  --button-interactive: #F0F0F0;
+  --button-interactive-hover: #F0F0F0;
+  --button-interactive-active: #fefeff;
+  --button-interactive-muted: #585858;
+
+  /* Backgrounds */
+  --main-background: #1f1f1f;
+  --main-background-alternative: #111111;
+  --secondary-background: #141414;
+  --secondary-background-alternative: #0a0a0a;
+  --tertiary: #171717;
+  --accent: var(--alt-color2);
+  --floating: #161616;
+
+  /* Hovering Colours */
+  --main-hover: rgba(var(--alt-color), 0.2);
+  --main-hover-active: rgba(var(--alt-color), 0.8);
+  --main-hover-selected: rgba(var(--alt-color), 0.5); 
+  --main-hover-accent: rgba(var(--alt-color), 0.1); 
+
+  /* Channel Indicators */
+  --connected: 108, 95, 135; /* RGB ONLY */
+  --hovered: rgba(var(--alt-color), 0.2); /* RGBA ONLY */
+  --unread: 255, 255, 255; /* RGB ONLY */
+  --selected: var(--alt-color); /* RGB ONLY */
+  --rounding: 3px;
+
+  /* Infos */
+  --info-warning: var(--red);
+  --help-warning: var(--red);
+  --help-info: var(--alt-color2);
+  --radio-group-dot: var(--alt-color);
+
+  /* Drop Shadow */
+  --shadow-stroke: 0 0 0 1px rgba(4,4,5,0.15);
+  --shadow-low: 0 1px 0 rgba(18, 20, 36, 0.767),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05);
+  --shadow-medium: 0 4px 4px rgba(0,0,0,0.16);
+  --shadow-high: 0 8px 16px rgba(0,0,0,0.24);
+
+  /* Scollbars */
+  --scrollbars: flex; /* Flex To See Scrollbars / None For None */
+  --scrollbar-small: #797979;
+  --scrollbar-small-track: transparent;
+  --scrollbar-large-thumb: #797979;
+  --scrollbar-large-track: transparent;
+  --scrollbar-small-scrollbar-color: #6c6c6c;
+  --scrollbar-small-scrollbar-color-track: transparent;
+
+  /* Button Gradients */
+  --default-gradient: 315deg, rgba(var(--alt-color), 0.6) 0%, rgba(var(--alt-color), 0.8) 74%;
+  --special-gradient: 315deg, rgba(var(--alt-color), 0.1) 0%, #c987b8 74%;
+  --red-gradient: 315deg, #AA3738 0%, #F04747 74%;
+  --red-hsl: hsl(359, 63%, 53%);
+  --yellow-gradient: 315deg, #c29b1b 0%, #ffa640 74%;
+  --yellow-hsl: hsl(46, 72%, 52%);
+  --green-gradient: 315deg, #507a73 0%, #4b7c72  74%;
+  --grey-gradient: 315deg, rgba(var(--alt-color), 0.6) 0%, rgba(var(--alt-color), 0.8) 74%;
+  --white-gradient: 315deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.342) 74%;
+  --font-normal: 500;
+  --font-hover: bold;
+  --font-size-hover: 15px;
+  --hover-transition: 0.1s linear;
+  --transform-normal: scale(1);
+  --hover-transform: scale(1.15);
+  --setting-hover-transform: scale(1.025);
+  --button-hover-transform: scale(1.03);
+
+  /* Others */
+  --public-servers: none; /* Flex for displaying | none for none */
+
+  /* Modals */
+  --user-modal-avatar-size: 230px;
+  --blur-the-things: 0;
+  --premium-size: 480px;
+  --premium-opacity: .13;
+  --premium-blur: blur(1.2px)
+}
+
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██ ██ █▄ ▄██ ▄▄ ██ ██ ████ ▄▄▀██ ▄▄▄ ██ ▀██ █▄▄ ▄▄██ ▄▄▀█ ▄▄▀██ ▄▄▄ █▄▄ ▄▄
+██ ▄▄ ██ ███ █▀▀██ ▄▄ ████ █████ ███ ██ █ █ ███ ████ ▀▀▄█ ▀▀ ██▄▄▄▀▀███ ██
+██ ██ █▀ ▀██ ▀▀▄██ ██ ████ ▀▀▄██ ▀▀▀ ██ ██▄ ███ ████ ██ █ ██ ██ ▀▀▀ ███ ██
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+
+/* work in progress */
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██ ████▄ ▄██ ▄▄ ██ ██ █▄▄ ▄▄███▄▄ ▄▄██ ██ ██ ▄▄▄██ ▄▀▄ ██ ▄▄▄
+██ █████ ███ █▀▀██ ▄▄ ███ ███████ ████ ▄▄ ██ ▄▄▄██ █ █ ██ ▄▄▄
+██ ▀▀ █▀ ▀██ ▀▀▄██ ██ ███ ███████ ████ ██ ██ ▀▀▀██ ███ ██ ▀▀▀
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+
+.theme-light {
+
+  /* Main Colours - Try Keep These The Same */
+  --main-colour: 118, 120, 187; /* RGB ONLY */
+  --main-colour2: #6e71bb; /* HEX ONLY */
+  --main-colour3: 238; /* HSL ONLY */
+
+  /* Green Colours */
+  --green-color: var(--alt-color2); /* HEX ONLY */
+  --green-color2: var(--alt-color); /* RGB ONLY */
+  --green-bar-on: rgba(var(--alt-color), 0.3); /* RGBA ONLY */
+  --green-bar-bg: var(--green-color); /* RGB ONLY */
+  --green-slider-on: var(--green-color); /* RGB ONLY */
+  --green-slider-off: rgba(var(--alt-color), 0.4); /* RGBA ONLY */
+  --green-slider-dot: #fff;
+
+  /* Status/Other Things Colours */
+  --purple: #464775;
+  --red: #B1273E;
+  --call-button-red: #AF243D;
+  --yellow: #FDB913;
+  --green: #92C353;
+
+  /* Header Colours */
+  --headers: #1A1A1A; /* */
+  --headers-secondary: #5E5D5F;
+
+  --chatbox-colour: var(--background-secondary);
+  --messages-colour: #e9e9e9;
+  --mentioned: rgba(var(--alt-color), 0.4);
+  --mentioned-hover: rgba(var(--alt-color), 0.2);
+
+  /* Text Colours */
+  --namesusernames: #2e2e2e;
+  --text: #3E3E3E;
+  --text-positive1: var(--green-color);
+  --muted: #252525;
+  --links: var(--alt-color2);
+  --links-from-self: #6365a1;
+  
+  /* Interative Buttons */
+  --button-interactive: #555555;
+  --button-interactive-hover: var(--alt-color2);
+  --button-interactive-active: var(--alt-color2);
+  --button-interactive-muted: #989898;
+
+  /* Backgrounds */
+  --main-background: #F3F3F3; 
+  --main-background-alternative: #F3F3F3; 
+  --secondary-background: #EBEBEB; 
+  --secondary-background-alternative: #EBEBEB; 
+  --tertiary: rgba(253, 251, 251, 0.979); 
+  --accent: var(--alt-color2);
+  --floating: #ffffff; 
+
+  /* Hovering Colours */
+  --main-hover: rgba(var(--alt-color), 0.2) ;
+  --main-hover-active: rgba(var(--alt-color), 0.6) ;
+  --main-hover-selected: rgba(var(--alt-color), 0.4) ; 
+  --main-hover-accent: rgba(var(--alt-color), 0.1) ; 
+
+  /* Channel Indicators */
+  --connected: 108, 95, 135; /* RGB ONLY */
+  --hovered: rgba(var(--alt-color), 0.1); /* RGBA ONLY */
+  --unread: 255, 255, 255; /* RGB ONLY */
+  --selected: var(--alt-color); /* RGB ONLY */
+  --rounding: 3px;
+
+  /* Infos */
+  --info-warning: var(--red);
+  --help-warning: var(--red);
+  --help-info: var(--alt-color2);
+  --radio-group-dot: var(--alt-color);
+
+  /* Drop Shadow */
+  --shadow-stroke: 0 0 0 1px rgba(4,4,5,0.15) ;
+  --shadow-low: 0 1px 0 rgba(18, 20, 36, 0.767),0 1.5px 0 rgba(6,6,7,0.05),0 2px 0 rgba(4,4,5,0.05) ;
+  --shadow-medium: 0 4px 4px rgba(0,0,0,0.16) ;
+  --shadow-high: 0 8px 16px rgba(0,0,0,0.24) ;
+
+  /* Scollbars */
+  --scrollbars: flex;
+  --scrollbar-small: #8A8A8A ;
+  --scrollbar-small-track: transparent;
+  --scrollbar-large-thumb: #8A8A8A;
+  --scrollbar-large-track: transparent;
+  --scrollbar-small-scrollbar-color: #6c6c6c;
+  --scrollbar-small-scrollbar-color-track: transparent;
+
+  /* Button Gradients */
+  --default-gradient: 315deg, rgba(var(--alt-color), 0.6) 0%, rgba(var(--alt-color), 0.8) 74%;
+  --special-gradient: 315deg, rgba(var(--alt-color), 0.1) 0%, #c987b8 74%;
+  --red-gradient: 315deg, #AA3738 0%, #F04747 74%;
+  --red-hsl: hsl(359, 63%, 53%);
+  --yellow-gradient: 315deg, #c29b1b 0%, #ffa640 74%;
+  --yellow-hsl: hsl(46, 72%, 52%);
+  --green-gradient: 315deg, #507a73 0%, #4b7c72  74%;
+  --grey-gradient: 315deg, rgba(var(--alt-color), 0.6) 0%, rgba(var(--alt-color), 0.8) 74%;
+  --white-gradient: 315deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.342) 74%;
+  --font-normal: 500;
+  --font-hover: bold;
+  --font-size-hover: 15px;
+  --hover-transition: 0.1s linear;
+  --transform-normal: scale(1);
+  --hover-transform: scale(1.15);
+  --setting-hover-transform: scale(1.025);
+  --button-hover-transform: scale(1.03);
+
+  /* Others */
+  
+
+  /* Modals */
+  --user-modal-avatar-size: 230px;
+  --blur-the-things: 0;
+  --premium-size: 480px;
+  --premium-opacity: .13;
+  --premium-blur: blur(1.2px)
+}
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██ ███ ██ ▄▄▄██ ▄▄▀██ ▄▄▄ █▄ ▄██ ▄▄▄ ██ ▀██ 
+███ █ ███ ▄▄▄██ ▀▀▄██▄▄▄▀▀██ ███ ███ ██ █ █ 
+███▄▀▄███ ▀▀▀██ ██ ██ ▀▀▀ █▀ ▀██ ▀▀▀ ██ ██▄ 
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+
+:root {--outdated_msteams-007: none !important; --version: "0.1.1BD (ALPHA)" !important; --build: "007" !important}

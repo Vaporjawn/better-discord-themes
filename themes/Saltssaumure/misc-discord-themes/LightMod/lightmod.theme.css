@@ -1,0 +1,52 @@
+/**
+ * @name LightMod
+ * @author Saltssaumure#7557
+ * @description Minor light mode modifications for readability.
+ * @version 2
+*/
+
+@import url(https://saltssaumure.github.io/misc-discord-themes/snippets/LightDarkModeIndicator.css);
+
+/* Warn users in dark mode */
+.theme-dark #LightMod-card .bd-description::after {
+    content: " Switch to light mode to see effects.";
+    font-weight: 700;
+}
+
+.theme-light {
+    --font-primary: sans-serif;
+    --text-normal: black;
+    --interactive-active: black;
+    --interactive-hover: black;
+    --interactive-normal: black;
+    --channels-default: black;
+    --text-muted: #666;
+    --background-secondary: white;
+}
+
+/* Interesting settings to top */
+[aria-controls="plugins-tab"],
+[aria-controls="themes-tab"],
+[aria-controls="pluginrepo-tab"],
+[aria-controls="pluginrepo-tab"] + .separator-2wx7h6,
+[aria-controls="themerepo-tab"] + .separator-2wx7h6,
+[aria-controls="themerepo-tab"],
+[aria-controls="appearance-tab"],
+[aria-controls="accessibility-tab"] {
+    order: -2;
+}
+[aria-controls="customcss-tab"],
+[aria-controls="themes-tab"] + .separator-2wx7h6 {
+    order: -1;
+}
+
+/* BD public servers */
+.bd-server-card {
+    height: auto;
+}
+.bd-server-header {
+    height: 32px;
+}
+.bd-server-splash-container {
+    display: none;
+}

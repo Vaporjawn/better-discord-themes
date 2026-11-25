@@ -1,0 +1,224 @@
+/**
+ * @name Shellcord
+ * @description A terminal-inspired Discord theme for developers.
+ * @author nihitdev
+ * @version 1.0.0
+ * @source https://github.com/nihitdev/shellcord
+ */
+@import url('https://raw.githubusercontent.com/nihitdev/shellcord/main/build/shellcord.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+body {
+    /* font, change to '' for default discord font */
+    --font: 'DM Mono';
+    --code-font: 'DM Mono';
+    font-weight: 400;
+    letter-spacing: -0.05ch;
+
+    /* sizes */
+    --gap: 12px;
+    --divider-thickness: 4px;
+    --border-thickness: 2px;
+    --border-hover-transition: 0.2s ease;
+
+    /* animation/transition options */
+    --animations: on;
+    --list-item-transition: 0.2s ease;
+    --dms-icon-svg-transition: 0.4s ease;
+
+    /* top bar options */
+    --top-bar-height: var(--gap);
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: off;
+    --subtle-top-bar-title: off;
+
+    /* window controls */
+    --custom-window-controls: on;
+    --window-control-size: 14px;
+
+    /* dms button options */
+    --custom-dms-icon: hide;
+    --dms-icon-svg-url: url('');
+    --dms-icon-svg-size: 90%;
+    --dms-icon-color-before: var(--icon-subtle);
+    --dms-icon-color-after: var(--white);
+    --custom-dms-background: image;
+    --dms-background-image-url: url('https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/assets/logos/exports/macchiato_square.png');
+    --dms-background-image-size: cover;
+    --dms-background-color: linear-gradient(70deg, var(--blue-2), var(--purple-2), var(--red-2));
+
+    /* background image options */
+    --background-image: off;
+    --background-image-url: url('');
+
+    /* transparency/blur options */
+    --transparency-tweaks: off;
+    --remove-bg-layer: off;
+    --panel-blur: on;
+    --blur-amount: 18px;
+    --bg-floating: var(--bg-3);
+
+    /* other options */
+    --small-user-panel: on;
+
+    /* unrounding options */
+    --unrounding: off;
+
+    /* styling options */
+    --custom-spotify-bar: on;
+    --ascii-titles: on;
+    --ascii-loader: system24;
+
+    /* panel labels */
+    --panel-labels: on;
+    --label-color: var(--text-muted);
+    --label-font-weight: 500;
+
+    /* polish */
+    --custom-chatbar: separated;
+    --chatbar-height: 56px;
+}
+
+:root {
+    --colors: on;
+
+    /* text colors */
+    --text-0: var(--bg-3);
+    --text-1: hsl(226, 64%, 95%);
+    --text-2: #cdd6f4;
+    --text-3: #bac2de;
+    --text-4: #7f849c;
+    --text-5: #585b70;
+
+    /* background and dark colors */
+    --bg-1: #45475a;
+    --bg-2: #313244;
+    --bg-3: #181825;
+    --bg-4: #1e1e2e;
+    --hover: hsla(235, 15%, 53%, 0.1);
+    --active: hsla(235, 15%, 53%, 0.2);
+    --active-2: hsla(235, 15%, 53%, 0.3);
+    --message-hover: hsla(235, 0%, 0%, 0.1);
+    --bg-overlay: hsla(240, 21%, 15%, 0.72);
+
+    /* accent colors */
+    --accent-1: var(--purple-1);
+    --accent-2: var(--purple-2);
+    --accent-3: var(--purple-3);
+    --accent-4: var(--purple-4);
+    --accent-5: var(--purple-5);
+    --accent-new: var(--accent-2);
+    --mention: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 90%) 40%, transparent);
+    --mention-hover: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 95%) 40%, transparent);
+    --reply: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 90%) 40%, transparent);
+    --reply-hover: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 95%) 40%, transparent);
+
+    /* status indicator colors */
+    --online: var(--green-2);
+    --dnd: var(--red-2);
+    --idle: var(--yellow-2);
+    --streaming: var(--purple-2);
+    --offline: var(--text-4);
+
+    /* border colors */
+    --border-light: var(--hover);
+    --border: var(--active);
+    --border-hover: #cba6f7;
+    --button-border: hsl(235, 0%, 100%, 0.1);
+    --selection-bg: color-mix(in hsl, var(--purple-2), transparent 68%);
+    --selection-text: var(--text-1);
+
+    /* base colors */
+    --red-1: hsl(343deg, 81%, 80%);
+    --red-2: hsl(343deg, 81%, 75%);
+    --red-3: hsl(343deg, 81%, 75%);
+    --red-4: hsl(343deg, 81%, 70%);
+    --red-5: hsl(343deg, 81%, 65%);
+
+    --green-1: hsl(115deg, 54%, 81%);
+    --green-2: hsl(115deg, 54%, 76%);
+    --green-3: hsl(115deg, 54%, 76%);
+    --green-4: hsl(115deg, 54%, 71%);
+    --green-5: hsl(115deg, 54%, 66%);
+
+    --blue-1: hsl(199deg, 76%, 74%);
+    --blue-2: hsl(199deg, 76%, 69%);
+    --blue-3: hsl(199deg, 76%, 69%);
+    --blue-4: hsl(199deg, 76%, 64%);
+    --blue-5: hsl(199deg, 76%, 59%);
+
+    --yellow-1: hsl(41deg, 86%, 88%);
+    --yellow-2: hsl(41deg, 86%, 83%);
+    --yellow-3: hsl(41deg, 86%, 83%);
+    --yellow-4: hsl(41deg, 86%, 78%);
+    --yellow-5: hsl(41deg, 86%, 73%);
+
+    --purple-1: hsl(267deg, 84%, 86%);
+    --purple-2: hsl(267deg, 84%, 81%);
+    --purple-3: hsl(267deg, 84%, 81%);
+    --purple-4: hsl(267deg, 84%, 76%);
+    --purple-5: hsl(267deg, 84%, 71%);
+}
+
+::selection {
+    color: var(--selection-text);
+    background: var(--selection-bg);
+}
+
+#app-mount {
+    --background-base-lower: var(--bg-4);
+    --background-base-low: var(--bg-3);
+    --background-surface-high: var(--bg-2);
+    --background-surface-higher: var(--bg-1);
+    --brand-360: var(--purple-2);
+    --brand-500: var(--purple-3);
+}
+
+/* Rounder corners; these override Discord's component-level radius rules. */
+.guilds__5e434,
+.panels__5e434,
+.sidebar__5e434,
+.sidebarList__5e434,
+.chat_f75fb0,
+.page__5e434,
+.chatContent_f75fb0,
+.messagesWrapper__36d07,
+.channelTextArea_f75fb0,
+.content_f75fb0 > .membersWrap_c8ffbb,
+.container_c8ffbb,
+.container__133bf,
+.container__01ae2,
+.peopleColumn__133bf,
+.nowPlayingColumn__133bf,
+.callContainer_cb9592,
+[class*="searchResultsWrap"] {
+    border-radius: 18px !important;
+}
+
+.guilds__5e434,
+.panels__5e434,
+.sidebarList__5e434,
+.chat_f75fb0,
+.messagesWrapper__36d07,
+.channelTextArea_f75fb0,
+.content_f75fb0 > .membersWrap_c8ffbb,
+.container_c8ffbb,
+.peopleColumn__133bf,
+.nowPlayingColumn__133bf,
+.callContainer_cb9592 {
+    box-shadow: 0 0 0 1px color-mix(in hsl, var(--purple-2), transparent 86%);
+}
+
+.guilds__5e434:hover,
+.panels__5e434:hover,
+.sidebarList__5e434:hover,
+.chat_f75fb0:hover,
+.messagesWrapper__36d07:hover,
+.channelTextArea_f75fb0:hover,
+.content_f75fb0 > .membersWrap_c8ffbb:hover,
+.container_c8ffbb:hover,
+.peopleColumn__133bf:hover,
+.nowPlayingColumn__133bf:hover,
+.callContainer_cb9592:hover {
+    box-shadow: 0 0 0 1px var(--border-hover);
+}

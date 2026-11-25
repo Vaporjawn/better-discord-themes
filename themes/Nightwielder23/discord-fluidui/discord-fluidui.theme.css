@@ -1,0 +1,408 @@
+/**
+ * @name Discord FluidUI
+ * @author nightwielder23
+ * @version 1.0.2
+ * @description A complete UI motion and interaction polish for Discord. Smooth animations, satisfying hovers, and subtle highlights — works on any theme without changing colors.
+ * @website https://github.com/nightwielder23/discord-fluidui
+ */
+
+@keyframes fluidSlideUp {
+  from { transform: translateY(7px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fluidSlideDown {
+  from { transform: translateY(-5px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fluidScaleIn {
+  from { transform: scale(0.94); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes fluidSlideInLeft {
+  from { transform: translateX(-8px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fluidSlideInRight {
+  from { transform: translateX(8px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fluidFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ENTRANCE ANIMATIONS */
+
+[class*="menu_"] {
+  will-change: transform;
+  animation: fluidSlideInLeft 0.14s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[class*="userPopout_"] > :first-child,
+.user-profile-popout > :first-child {
+  will-change: transform;
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[class*="userProfileModal_"] > :first-child,
+.user-profile-modal > :first-child,
+.user-profile-modal-v2 > :first-child {
+  will-change: transform;
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[class*="modal_"][class*="root_"] > :first-child {
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[class*="layer_"] > [class*="animatorLeft_"],
+[class*="layer_"] > [class*="animatorRight_"],
+[class*="layer_"] > [class*="animatorBottom_"],
+[class*="layer_"] > [class*="animatorTop_"] {
+  will-change: transform;
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[class*="backdrop_"] {
+  animation: fluidFadeIn 0.18s ease;
+}
+
+[class*="tooltip_"] {
+  animation: fluidFadeIn 0.15s ease;
+}
+
+[class*="emojiPicker_"],
+[class*="gifPicker_"],
+[class*="stickerPickerInner_"] {
+  will-change: transform;
+  animation: fluidSlideUp 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[class*="reactionPicker_"],
+[class*="expressionPicker_"] {
+  will-change: transform;
+  animation: fluidSlideUp 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[class*="autocomplete_"] {
+  will-change: transform;
+  animation: fluidSlideUp 0.14s ease;
+}
+
+[class*="searchResults_"] {
+  will-change: transform;
+  animation: fluidSlideDown 0.18s ease;
+}
+
+[class*="inboxContent_"] {
+  will-change: transform;
+  animation: fluidSlideInRight 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[class*="threadSidebar_"] {
+  will-change: transform;
+  animation: fluidSlideInRight 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[class*="typing_"] {
+  animation: fluidFadeIn 0.15s ease;
+}
+
+[class*="buttonsInner_"] {
+  will-change: transform;
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Settings sidebar main items — confirmed class from DevTools */
+[class*="item_caf372"],
+[data-settings-sidebar-item] {
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
+}
+
+[class*="item_caf372"]:hover,
+[data-settings-sidebar-item]:hover {
+  transform: scale(1.01) translateX(1px);
+}
+
+/* Settings sub-items */
+[class*="item_e4d939"][role="listitem"] {
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
+}
+
+[class*="item_e4d939"][role="listitem"]:hover {
+  transform: scale(1.01) translateX(1px);
+}
+
+
+/* Server icons — confirmed working selector */
+nav[class*="guilds"] [class*="listItem"] {
+  transition: transform 0.25s cubic-bezier(0.34, 1.15, 0.64, 1);
+  will-change: transform;
+}
+
+nav[class*="guilds"] [class*="listItem"]:hover {
+  transform: scale(1.1);
+}
+
+nav[class*="guilds"] [class*="listItem"]:active {
+  transform: scale(0.95);
+}
+
+/* DM and friends list rows — confirmed working selector */
+[aria-label="Direct Messages"] [role="listitem"] {
+  transition: transform 0.18s cubic-bezier(0.34, 1.1, 0.64, 1), background 0.15s ease !important;
+  transform-origin: left center !important;
+}
+
+[aria-label="Direct Messages"] [role="listitem"]:hover {
+  transform: scale(1.02) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+[aria-label="Direct Messages"] [role="listitem"]:active {
+  transform: scale(0.99) !important;
+}
+
+/* CHANNEL LIST ITEMS — inner link only */
+[class*="containerDefault_"]:has([class*="link_"]):not(:has([class*="voiceUser_"])) {
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
+}
+
+[class*="containerDefault_"]:has([class*="link_"]):not(:has([class*="voiceUser_"])):hover {
+  transform: scale(1.02);
+}
+
+/* MEMBER LIST */
+[class*="member_"] {
+  will-change: transform;
+  transition: transform 0.15s ease;
+}
+
+[class*="member_"]:hover {
+  transform: translateX(2px);
+}
+
+/* BUTTONS */
+[class*="button_"][class*="lookFilled_"],
+[class*="button_"][class*="lookOutlined_"] {
+  will-change: transform;
+  transition: transform 0.1s ease;
+}
+
+[class*="button_"][class*="lookFilled_"]:hover,
+[class*="button_"][class*="lookOutlined_"]:hover {
+  transform: scale(1.03);
+}
+
+[class*="button_"][class*="lookFilled_"]:active,
+[class*="button_"][class*="lookOutlined_"]:active {
+  transform: scale(0.96);
+}
+
+/* ROLE PILLS */
+[class*="role_"] {
+  will-change: transform;
+  transition: transform 0.12s ease;
+}
+
+[class*="role_"]:hover {
+  transform: scale(1.05);
+}
+
+/* REACTIONS */
+[class*="reactionBtn_"],
+[class*="reaction_"] {
+  will-change: transform;
+  transition: transform 0.12s ease;
+}
+
+[class*="reactionBtn_"]:hover,
+[class*="reaction_"]:hover {
+  transform: scale(1.08) translateY(-1px);
+}
+
+[class*="reactionBtn_"]:active,
+[class*="reaction_"]:active {
+  transform: scale(0.95);
+}
+
+/* USER AVATAR BOTTOM LEFT */
+[class*="avatarWrapper_"] {
+  will-change: transform;
+  transition: transform 0.15s ease;
+}
+
+[class*="avatarWrapper_"]:hover {
+  transform: scale(1.08);
+}
+
+/* SERVER FOLDERS */
+[class*="folder_"] {
+  will-change: transform;
+  transition: transform 0.18s ease;
+}
+
+[class*="folder_"]:hover {
+  transform: scale(1.06);
+}
+
+/* EMOJI PICKER ITEMS */
+[class*="emojiItemWrapper_"] {
+  will-change: transform;
+  transition: transform 0.12s ease;
+}
+
+[class*="emojiItemWrapper_"]:hover {
+  transform: scale(1.2) translateY(-2px);
+}
+
+/* IMAGE THUMBNAILS */
+
+/* TOOLBAR ICONS */
+[class*="iconWrapper_"] {
+  will-change: transform;
+  transition: transform 0.15s ease;
+}
+
+[class*="iconWrapper_"]:hover {
+  transform: scale(1.1);
+}
+
+/* MESSAGE HOVER */
+[class*="message_"][class*="cozy_"] {
+  transition: box-shadow 0.15s ease, background 0.15s ease;
+}
+
+[class*="message_"][class*="cozy_"]:hover {
+  box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* FOCUS STATES */
+[class*="channelTextArea_"] {
+  transition: box-shadow 0.2s ease;
+}
+
+[class*="channelTextArea_"]:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+[class*="input_"]:focus {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+  transition: box-shadow 0.15s ease;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* SMOOTH SCROLL */
+[class*="scrollerBase_"] {
+  scroll-behavior: smooth;
+}
+
+/* UNREAD PILL GLOW */
+nav[class*="guilds"] [class*="unread_"] {
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+/* SELECTED CHANNEL */
+[class*="containerDefault_"][class*="modeSelected_"],
+[class*="containerDefault_"][class*="modeConnected_"] {
+  box-shadow:
+    inset 3px 0 0 rgba(255, 255, 255, 0.35),
+    inset 6px 0 12px -6px rgba(255, 255, 255, 0.08);
+}
+
+/* UNREAD CHANNEL GLOW */
+li:has([class*="unread"]) [class*="name_"] {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+li:has([class*="unread"]) {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+}
+
+/* USER PANEL BOTTOM LEFT — subtle glow on hover */
+[class*="container__37e49"] {
+  transition: background 0.2s ease;
+  border-radius: 8px;
+}
+
+[class*="container__37e49"]:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* CHANNEL CATEGORY HEADERS — scale on hover */
+[class*="mainContent_"][role="button"] {
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
+}
+
+[class*="mainContent_"][role="button"]:hover {
+  transform: scale(1.02);
+}
+
+/* SEARCH BAR — expand and glow on focus */
+[class*="searchBar_"] {
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+[class*="searchBar_"]:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* VOICE CHANNEL — individual user row only */
+[class*="voiceUser_"] [class*="userAvatar_"] {
+  transition: transform 0.15s ease;
+}
+
+[class*="voiceUser_"]:hover [class*="userAvatar_"] {
+  transform: scale(1.15);
+}
+
+/* DIRECT MESSAGES HEADER — styled with glow and decorative sides */
+[class*="privateChannelsHeaderContainer_"] [class*="headerText_"] {
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  overflow: visible !important;
+}
+
+[class*="privateChannelsHeaderContainer_"] [class*="headerText_"]::before,
+[class*="privateChannelsHeaderContainer_"] [class*="headerText_"]::after {
+  content: "·" !important;
+  opacity: 0.5 !important;
+  font-size: 1em !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+

@@ -1,0 +1,19 @@
+/**
+ * @name Frostcord
+ * @author intergrav, Saltssaumure
+ * @authorLink https://github.com/Saltssaumure
+ * @description Translucent blur for overlay backgrounds.
+ * @license MIT
+ * @version 2.0.0
+ * @invite uy8nKQVatp
+ * @source https://github.com/MiniDiscordThemes/Frostcord
+ * @donate https://ko-fi.com/saltssaumure
+ */
+
+ @import url("https://minidiscordthemes.github.io/Frostcord/frost.min.css");
+
+/* See https://github.com/MiniDiscordThemes/Frostcord#customisation for customisation settings. */
+:root {
+    --frostcord-blur: 16px;
+    --frostcord-opacity: 80%;
+}

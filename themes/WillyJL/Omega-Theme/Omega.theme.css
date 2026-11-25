@@ -1,0 +1,136 @@
+/**
+
+ * @name Omega
+ * @version 4.0 Auto
+ * @description Darker version of Discord, with beautiful gradient accents.
+ * @source https://github.com/Willy-JL/omega-theme
+ * @author WillyJL
+ * @website https://linktr.ee/WillyJL
+ * @authorLink https://linktr.ee/WillyJL
+ * @donate https://ko-fi.com/willyjl
+
+**/
+
+/* MAIN IMPORT */
+@import url('https://willy-jl.github.io/Omega-Theme/base.css');
+
+/*
+
+ ██████╗ ███╗   ███╗███████╗ ██████╗  █████╗            ██╗    ██╗██╗██╗     ██╗  ██╗   ██╗   ██╗██╗
+██╔═══██╗████╗ ████║██╔════╝██╔════╝ ██╔══██╗           ██║    ██║██║██║     ██║  ╚██╗ ██╔╝   ██║██║
+██║   ██║██╔████╔██║█████╗  ██║  ███╗███████║           ██║ █╗ ██║██║██║     ██║   ╚████╔╝    ██║██║
+██║   ██║██║╚██╔╝██║██╔══╝  ██║   ██║██╔══██║           ██║███╗██║██║██║     ██║    ╚██╔╝██   ██║██║
+╚██████╔╝██║ ╚═╝ ██║███████╗╚██████╔╝██║  ██║    By     ╚███╔███╔╝██║███████╗███████╗██║ ╚█████╔╝███████╗
+ ╚═════╝ ╚═╝     ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝            ╚══╝╚══╝ ╚═╝╚══════╝╚══════╝╚═╝  ╚════╝ ╚══════╝
+
+*/
+
+
+
+
+
+/* ADDONS - COMMENT OR UNCOMMENT ( *//* ) TO DISABLE AND ENABLE*/
+
+/* Settings Icons */
+@import url('https://codedotspectra.github.io/themes/core/settings-icons.css');
+
+/* Circle Status */
+/*@import url('https://gibbu.github.io/BetterDiscord-Themes/RadialStatus/base.css');*/
+
+/* Big Profile Pics on Popout */
+/* @import url('https://xcruxiex.github.io/BBDThemes/MiniThemes/LargeProfilePicture.theme.css'); */
+
+
+
+
+/* EDIT HERE THE THEME OPTIONS! */
+
+:root {
+    --homeIconURL: url(https://discord.com/assets/2d20a45d79110dc5bf947137e9d99b66.svg);
+    --homeIconSize: 80%;
+    --backgroundDark: rgb(35, 35, 35);
+    --backgroundDarker: rgb(31, 31, 31);
+    --backgroundDarkerer: rgb(26, 26, 26);
+    --backgroundDarkest: rgb(20, 20, 20);
+    --primary: #523EFF;
+    --primaryGradient1: #0083ef;
+    --primaryGradient2: #CB00EF;
+
+    /* Circle Status Addon Options */
+    --rs-small-spacing: 1px;
+    --rs-large-spacing: 2px;
+    --rs-width: 1px;
+    --rs-avatar-shape: 100%;
+    --rs-online-color: #2FD157;
+    --rs-idle-color: #faa61a;
+    --rs-dnd-color: #F12E2E;
+    --rs-offline-color: #636b75;
+    --rs-streaming-color: #643da7;
+    --rs-invisible-color: #747f8d;
+}
+
+
+
+
+/* HERE ARE SOME GENERAL GLOBAL COLOR OPTIONS, UNCOMMENT (remove the *//* ) TO ACTIVATE THEM */
+
+.theme-dark {
+    --background-modifier-hover: none;
+    /* --header-primary: var(--primary); */
+    /* --header-secondary: var(--primary); */
+    /* --channels-default: var(--primary); */
+    /* --interactive-normal: var(--primary); */
+    /* --interactive-hover: var(--primary); */
+    /* --interactive-active: var(--primary); */
+    /* --interactive-muted: var(--primary); */
+    /* --text-normal: var(--primary); */
+    /* --text-muted: var(--primary); */
+    /* --background-primary:transparent; */
+    /* --background-secondary:transparent; */
+    /* --background-tertiary:transparent; */
+    /* --background-modifier-hover:transparent; */
+    /* --background-modifier-active:transparent; */
+    /* --background-modifier-selected:transparent; */
+}
+
+
+
+/*                                        `-.`'.-'
+                                       `-.        .-'.
+                                    `-.    -./\.-    .-'
+                                        -.  /__\  .-
+                                    `-.   `/____\'   .-'.
+                                 `-.    -./.-""-.\.-      '
+                                    `-.  /< (()) >\  .-'
+                                  -   .`/__`-..-'__\'   .-
+                                ,...`-./___|____|___\.-'.,.
+                                   ,-'   ,` . . ',   `-,
+                                ,-'   ________________  `-,
+                                   ,'/____|_____|_____\
+                                  / /__|_____|_____|___\
+                                 / /|_____|_____|_____|_\
+                                ' /____|_____|_____|_____\
+                              .' /__|_____|_____|_____|___\
+                             ,' /|_____|_____|_____|_____|_\
+,,---''--...___...--'''--.. /../____|_____|_____|_____|_____\ ..--```--...___...--``---,,
+                           '../__|_____|_____|_____|_____|___\
+      \    )              '.:/|_____|_____|_____|_____|_____|_\               (    /
+      )\  / )           ,':./____|_____|_____|_____|_____|_____\             ( \  /(
+     / / ( (           /:../__|_____|_____|_____|_____|_____|___\             ) ) \ \
+    | |   \ \         /.../|_____|_____|_____|_____|_____|_____|_\           / /   | |
+ .-.\ \    \ \       '..:/____|_____|_____|_____|_____|_____|_____\         / /    / /.-.
+(=  )\ `._.' |       \:./ _|_____|_____|_____|_____|_____|_____|___\        | `._.' /(  =)
+ \ (_)       )       \./|_____|_____|_____|_____|_____|_____|_____|_\       (       (_) /
+  \    `----'         """"""""""""""""""""""""""""""""""""""""""""""""       `----'    /
+   \   ____\__                                                              __/____   /
+    \ (=\     \                                                            /     /-) /
+     \_)_\     \                                                          /     /_(_/
+          \     \                                                        /     /
+           )     )  _                                                _  (     (
+          (     (,-' `-..__                                    __..-' `-,)     )
+           \_.-''          ``-..____                  ____..-''          ``-._/
+            `-._                    ``--...____...--''                    _.-'
+                `-.._                                                _..-'
+                      `-..__      Made with <3 by WillyJL     __..-'
+                           ``-..____                  ____..-''
+                                    ``--...____...--''                                  */

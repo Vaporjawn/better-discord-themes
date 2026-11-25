@@ -1,0 +1,106 @@
+/**
+ * @name zedcord (rosé pine)
+ * @description discord, but it's zed-themed (rosé pine).
+ * @author refact0r
+ * @version 0.1.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/zedcord
+ * @source https://github.com/refact0r/zedcord/blob/main/theme/flavors/zedcord-rose-pine.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+ * @donate https://ko-fi.com/refact0r
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&family=Lilex:wght@400;700&display=swap');
+
+@import url('https://refact0r.github.io/zedcord/build/zedcord.css');
+
+/* zed "Rosé Pine" (rose-pine-theme extension, copy in research/). token keys are in theme/zedcord.theme.css */
+:root {
+    /* surfaces: title bar, status bar and panels use the editor colour, the tab bar is lighter */
+    --zed-title-bar: #191724;
+    --zed-status-bar: #191724;
+    --zed-panel: #191724;
+    --zed-surface: #1f1d2e;
+    --zed-elevated-surface: #1f1d2e;
+    --zed-tab-bar: #1f1d2e;
+    --zed-tab-active: #191724;
+    --zed-editor: #191724;
+    --zed-active-line: #1f1d2e;
+
+    /* borders: border.variant is the brighter one here */
+    --zed-border: #403d52;
+    --zed-border-variant: #524f67;
+    --zed-border-focused: #1f1d2e;
+    --zed-border-selected: #1f1d2e;
+
+    --zed-element: #1f1d2e;
+    --zed-element-hover: #26233a;
+    --zed-element-active: #26233a;
+    --zed-element-selected: #524f67;
+    /* subtle buttons get a visible resting fill */
+    --zed-ghost-element: #21202e;
+    --zed-ghost-element-hover: #403d52;
+    --zed-ghost-element-active: #908caa;
+    --zed-ghost-element-selected: #524f67;
+
+    --zed-text: #e0def4;
+    --zed-text-muted: #908caa;
+    --zed-text-placeholder: #6e6a86;
+    --zed-text-accent: #9ccfd8;
+    --zed-text-ignored: #6e6a86;
+    --zed-editor-fg: #e0def4;
+    --zed-line-number: #6e6a86;
+    --zed-scrollbar-thumb: #6e6a86;
+    --zed-selection: #e0def422;
+
+    --zed-syntax-keyword: #31748f;
+    --zed-syntax-string: #f6c177;
+    --zed-syntax-number: #ebbcba;
+    --zed-syntax-function: #ebbcba;
+    --zed-syntax-type: #9ccfd8;
+    --zed-syntax-operator: #908caa;
+    --zed-syntax-comment: #6e6a86;
+    --zed-syntax-comment-style: italic;
+    --zed-syntax-comment-doc: #908caa;
+    --zed-syntax-property: #c4a7e7;
+    --zed-syntax-variable: #e0def4;
+    --zed-syntax-punctuation: #908caa;
+    --zed-syntax-tag: #9ccfd8;
+    --zed-syntax-attribute: #c4a7e7;
+    --zed-syntax-selector: #e0def4; /* rosé pine sets no selector colour, so zed draws plain text */
+    --zed-syntax-emphasis: #c4a7e7;
+    --zed-syntax-emphasis-strong: #9ccfd8;
+
+    /* discord-only: server icon tiles. rosé pine's `background` is the panel colour, so use
+       ghost_element.background */
+    --zed-guild-icon: #21202e;
+
+    /* accents. 2 is the theme's value: love, pine, foam, gold, iris. other steps keep one dark's lightness and
+       chroma */
+    --red-1: #f997b0;
+    --red-2: #eb6f92;
+    --red-3: #e0527f;
+    --red-4: #cf3b6e;
+    --red-5: #b62f5f;
+    --green-1: #52859b;
+    --green-2: #31748f;
+    --green-3: #10627f;
+    --green-4: #004f68;
+    --green-5: #003c50;
+    --blue-1: #c1e5ec;
+    --blue-2: #9ccfd8;
+    --blue-3: #85c0ca;
+    --blue-4: #72b0ba;
+    --blue-5: #609da7;
+    --yellow-1: #fed49c;
+    --yellow-2: #f6c177;
+    --yellow-3: #eeae4e;
+    --yellow-4: #dd9a29;
+    --yellow-5: #bf831a;
+    --purple-1: #ddc7f9;
+    --purple-2: #c4a7e7;
+    --purple-3: #b393d8;
+    --purple-4: #a181c6;
+    --purple-5: #8d70ae;
+}

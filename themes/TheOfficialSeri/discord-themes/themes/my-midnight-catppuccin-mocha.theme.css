@@ -1,0 +1,325 @@
+/**
+ * @name My midnight (catppuccin mocha) Theme
+ * @author TheOfficialSeri
+ * @description The midnight (catppuccin mocha) theme adapted to my setup.
+ * @version 1.0.0
+ * @authorId 1230163145884962998
+ * @authorLink https://github.com/TheOfficialSeri
+ * @website https://github.com/TheOfficialSeri/discord-themes
+ * @source https://raw.githubusercontent.com/TheOfficialSeri/discord-themes/refs/heads/master/my-midnight-catppuccin-mocha.theme.css
+*/
+
+@import url("https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-mocha.theme.css");
+
+body {
+    /* font options */
+    --font: "figtree"; /* change to '' for default discord font */
+    --code-font: "JetBrains Mono"; /* change to '' for default discord font */
+    font-weight: 400; /* normal text font weight. DOES NOT AFFECT BOLD TEXT */
+
+    /* sizes */
+    --gap: 12px; /* spacing between panels */
+    --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
+    --border-thickness: 1px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
+
+    /* animation/transition options */
+    --animations: off; /* off: disable animations/transitions, on: enable animations/transitions */
+    --list-item-transition: 0.2s ease; /* transition for list items */
+    --dms-icon-svg-transition: 0.4s ease; /* transition for the dms icon */
+    --border-hover-transition: 0.2s ease; /* transition for borders when hovered */
+
+    /* top bar options */
+    --top-bar-height: var(
+        --gap
+    ); /* height of the top bar (discord default is 36px, old discord style is 24px, var(--gap) recommended if button position is set to titlebar) */
+    --top-bar-button-position: titlebar; /* off: default position, hide: hide buttons completely, serverlist: move inbox button to server list, titlebar: move inbox button to channel titlebar (will hide title) */
+    --top-bar-title-position: off; /* off: default centered position, hide: hide title completely, left: left align title (like old discord) */
+    --subtle-top-bar-title: off; /* off: default, on: hide the icon and use subtle text color (like old discord) */
+
+    /* window controls */
+    --custom-window-controls: on; /* off: default window controls, on: custom window controls */
+    --window-control-size: 14px; /* size of custom window controls */
+
+    /* dms button options */
+    --custom-dms-icon: custom; /* off: use default discord icon, hide: remove icon entirely, custom: use custom icon */
+    --dms-icon-svg-url: url("https://refact0r.github.io/midnight-discord/assets/Font_Awesome_5_solid_moon.svg"); /* icon svg url. MUST BE A SVG. */
+    --dms-icon-svg-size: 90%; /* size of the svg (css mask-size property) */
+    --dms-icon-color-before: var(--icon-secondary); /* normal icon color */
+    --dms-icon-color-after: var(
+        --white
+    ); /* icon color when button is hovered/selected */
+    --custom-dms-background: off; /* off to disable, image to use a background image (must set url variable below), color to use a custom color/gradient */
+    --dms-background-image-url: url(""); /* url of the background image */
+    --dms-background-image-size: cover; /* size of the background image (css background-size property) */
+    --dms-background-color: linear-gradient(
+        70deg,
+        var(--blue-2),
+        var(--purple-2),
+        var(--red-2)
+    ); /* fixed color/gradient (css background property) */
+
+    /* background image options */
+    --background-color: #dbc500; /* fallback background color when using background image */
+    --background-image: on; /* off: no background image, on: enable background image (must set url variable below) */
+    --background-image-url: url("https://raw.githubusercontent.com/FrenzyExists/wallpapers/refs/heads/main/Linkin%20Park/0002.png"); /* url of the background image */
+    --background-blend-mode: normal; /* blend mode for background image */
+
+    /* transparency/blur options */
+    /* NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); */
+    --transparency-tweaks: on; /* off: no changes, on: remove some elements for better transparency */
+    --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+    --panel-blur: on; /* off: no changes, on: blur the background of panels */
+    --blur-amount: 12px; /* amount of blur */
+    --bg-floating: var(
+        --bg-3
+    ); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
+    --transparency-decimal: 192; /* decimal value for transparency (255 = opaque, 0 = fully transparent) */
+
+    /* chatbar options */
+    --custom-chatbar: off; /* off: default chatbar, separated: chatbar separated from chat */
+    --chatbar-height: 47px; /* height of the chatbar (56px by default, 47px to align with user panel, 56px recommended for separated) */
+
+    /* other options */
+    --small-user-panel: on; /* off: default user panel, on: smaller user panel like in old discord */
+    --user-panel-nameplate: off; /* off: remove nameplate from user panel, on: no changes */
+    --call-container-gradient: off; /* off: remove gradient background, on: no changes */
+
+    --top-bar-button-count: 4;
+}
+
+/* color options */
+:root {
+    --colors: on; /* off: discord default colors, on: midnight custom colors */
+
+    /* text colors */
+    --text-0: #140e28; /* text on colored elements */
+    --text-1: hsl(226, 64%, 95%); /* other normally white text */
+    --text-2: #cdd6f4; /* headings and important text */
+    --text-3: #bac2de; /* normal text */
+    --text-4: #7f849c; /* icon buttons and channels */
+    --text-5: #585b70; /* muted channels/chats and timestamps */
+
+    /* background and dark colors */
+    --bg-1: #30264ac0; /* dark buttons when clicked */
+    --bg-2: #201834c0; /* dark buttons */
+    --bg-3: #140e28c0; /* spacing, secondary elements */
+    --bg-4: #1a102cc0; /* main background color */
+    --hover: hsla(235, 15%, 53%, 0.1); /* channels and buttons when hovered */
+    --active: hsla(
+        235,
+        15%,
+        53%,
+        0.2
+    ); /* channels and buttons when clicked or selected */
+    --active-2: hsla(
+        235,
+        15%,
+        53%,
+        0.3
+    ); /* extra state for transparent buttons */
+    --message-hover: hsla(235, 0%, 0%, 0.1); /* messages when hovered */
+
+    /* accent colors */
+    --accent-1: var(--purple-1); /* links and other accent text */
+    --accent-2: var(--purple-2); /* small accent elements */
+    --accent-3: var(--purple-3); /* accent buttons */
+    --accent-4: var(--purple-4); /* accent buttons when hovered */
+    --accent-5: var(--purple-5); /* accent buttons when clicked */
+    --accent-new: var(
+        --accent-2
+    ); /* stuff that's normally red like mute/deafen buttons */
+    --mention: linear-gradient(
+        to right,
+        color-mix(in hsl, var(--accent-2), transparent 90%) 40%,
+        transparent
+    ); /* background of messages that mention you */
+    --mention-hover: linear-gradient(
+        to right,
+        color-mix(in hsl, var(--accent-2), transparent 95%) 40%,
+        transparent
+    ); /* background of messages that mention you when hovered */
+    --reply: linear-gradient(
+        to right,
+        color-mix(in hsl, var(--text-3), transparent 90%) 40%,
+        transparent
+    ); /* background of messages that reply to you */
+    --reply-hover: linear-gradient(
+        to right,
+        color-mix(in hsl, var(--text-3), transparent 95%) 40%,
+        transparent
+    ); /* background of messages that reply to you when hovered */
+
+    /* status indicator colors */
+    --online: var(--green-2); /* change to #43a25a for default */
+    --dnd: var(--red-2); /* change to #d83a42 for default */
+    --idle: var(--yellow-2); /* change to #ca9654 for default */
+    --streaming: var(--purple-2); /* change to #593695 for default */
+    --offline: var(--text-4); /* change to #83838b for default offline color */
+
+    /* border colors */
+    --border-light: var(--hover); /* general light border color */
+    --border: var(--active); /* general normal border color */
+    --border-hover: var(--active); /* border color of panels when hovered */
+    --button-border: hsl(
+        235,
+        0%,
+        100%,
+        0.1
+    ); /* neutral border color of buttons */
+
+    /* base colors */
+    --red-1: hsl(343deg, 81%, 80%);
+    --red-2: hsl(343deg, 81%, 75%);
+    --red-3: hsl(343deg, 81%, 75%);
+    --red-4: hsl(343deg, 81%, 70%);
+    --red-5: hsl(343deg, 81%, 65%);
+
+    --green-1: hsl(115deg, 54%, 81%);
+    --green-2: hsl(115deg, 54%, 76%);
+    --green-3: hsl(115deg, 54%, 76%);
+    --green-4: hsl(115deg, 54%, 71%);
+    --green-5: hsl(115deg, 54%, 66%);
+
+    --blue-1: hsl(199deg, 76%, 74%);
+    --blue-2: hsl(199deg, 76%, 69%);
+    --blue-3: hsl(199deg, 76%, 69%);
+    --blue-4: hsl(199deg, 76%, 64%);
+    --blue-5: hsl(199deg, 76%, 59%);
+
+    --yellow-1: hsl(41deg, 86%, 88%);
+    --yellow-2: hsl(41deg, 86%, 83%);
+    --yellow-3: hsl(41deg, 86%, 83%);
+    --yellow-4: hsl(41deg, 86%, 78%);
+    --yellow-5: hsl(41deg, 86%, 73%);
+
+    --purple-1: hsl(267deg, 84%, 86%);
+    --purple-2: hsl(267deg, 84%, 81%);
+    --purple-3: hsl(267deg, 84%, 81%);
+    --purple-4: hsl(267deg, 84%, 76%);
+    --purple-5: hsl(267deg, 84%, 71%);
+
+    --gold-1: hsl(54, 100%, 58%);
+    --gold-2: hsl(54, 100%, 53%);
+    --gold-3: hsl(54, 100%, 53%);
+    --gold-4: hsl(54, 100%, 48%);
+    --gold-5: hsl(54, 100%, 43%);
+}
+
+@property --call-container-gradient {
+    syntax: "off | on";
+    inherits: false;
+    initial-value: on;
+}
+
+@property --user-panel-nameplate {
+    syntax: "off | on";
+    inherits: false;
+    initial-value: on;
+}
+
+@container body style(--call-container-gradient: off) {
+    .cb9592ad77576717-callContainer .bfe55a0aaaf62375-root {
+        background: none;
+
+        ._116642f293ef6ec6-pulseGradient {
+            display: none;
+        }
+    }
+}
+
+@container body style(--panel-blur: on) {
+    .visual-refresh {
+        ._16eb0bfd5c5a90d1-container,
+        ._5fa2fb5c4d963128-selectDropdown,
+        ._8946359d8adb1488-contentContainer,
+        ._8a7fc664acf53af6-backdrop,
+        .a16aea1526925c2c-popout,
+        ._36be84b4087a5355-gameSearchCombobox,
+        ._8a031a135bfcb9ba-container,
+        .e4491282b6a5364a-modal,
+        ._4e35b986167c457d-tooltip,
+        .popoverReactionHoverBar_f84418,
+        .c36707910f687430-tooltip,
+        ._084343c4f11eaaab-contentWrapper,
+        ._49fc18ba07c5025f-root,
+        .c0bea05627c5dc35-outer.user-profile-popout:not(
+                .custom-theme-background
+            ),
+        ._6b0e07cbaf13ec4e-autocomplete,
+        ._55c999adcf6db265-container,
+        .e8b59c4b335dd2fc-messagesPopoutWrap,
+        ._76f047ded9fef6d4-popout,
+        ._7aaec78b97ff00f7-bar {
+            backdrop-filter: var(--panel-backdrop-filter);
+        }
+    }
+
+    .c1e9c47c23f12ca3-menu::before {
+        position: absolute;
+        backdrop-filter: var(--panel-backdrop-filter);
+        border-radius: 8px;
+        background: transparent;
+        width: 100%;
+        height: 100%;
+        content: " ";
+    }
+
+    .c1e9c47c23f12ca3-submenuPaddingContainer > .c1e9c47c23f12ca3-menu::before {
+        width: calc(100% - 16px);
+    }
+
+    .ce832809562bf737-submenuPaddingContainer > .c1e9c47c23f12ca3-menu::before {
+        width: calc(100% - 24px);
+    }
+}
+
+@container body style(--user-panel-nameplate: off) {
+    ._4bbc6dc06e75ad52-container {
+        display: none;
+    }
+
+    :is(._37e49614b9f110a9-plated, ._67645e1530f1195d-plated):hover {
+        backdrop-filter: none;
+        background-color: var(--background-mod-subtle) !important;
+    }
+}
+
+/* fix title bar buttons right padding */
+@container body style(--top-bar-button-position: titlebar) {
+    ._5e434347c823b592-base
+        .f75fb00fb7356cbe-chat.f75fb00fb7356cbe-threadSidebarOpen {
+        --top-bar-right-margin: 0;
+    }
+    ._5e434347c823b592-base:has(
+        .c38106a3f0c3ca76-trailing > ._85643a485899904b-button:nth-of-type(3)
+    ) {
+        --top-bar-right-margin: calc(32px * 3 + 3 * var(--space-xs));
+    }
+    ._5e434347c823b592-base:has(.c38106a3f0c3ca76-winButtons) {
+        --top-bar-right-margin: calc(
+            32px * var(--top-bar-button-count) +
+                (4 + var(--top-bar-button-count)) * var(--space-xs) + 6 *
+                var(--window-control-size) + 1px
+        );
+    }
+    ._5e434347c823b592-base:has(.c38106a3f0c3ca76-winButtons):has(
+            .c38106a3f0c3ca76-trailing
+                > ._85643a485899904b-button:nth-of-type(3)
+        ) {
+        --top-bar-right-margin: calc(
+            32px * (1 + var(--top-bar-button-count)) +
+                (5 + var(--top-bar-button-count)) * var(--space-xs) + 6 *
+                var(--window-control-size) + 1px
+        );
+    }
+}
+
+/* hide horizontal ruler above chats (specifically threads) */
+.ee72fabfa6dc01df-chat::before {
+    display: none !important;
+}
+
+/* fix chat button size in call container */
+._233f8e0899e46d2b-chatIcon {
+    width: var(--space-32);
+}

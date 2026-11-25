@@ -1,0 +1,284 @@
+/**
+* @name Astolfo Theme
+* @author Fandrest
+* @description A simple Astolfo theme for y'all degenerates
+* @source https://github.com/TheXploler/Astolfo-Theme
+* @version 0.1
+*/
+:root {
+    /* Background Color Palette */
+    --dark-red: #6B0F1A;
+    --gold: #C69B7B;
+    --light-pink: #FFBFB2;
+    --black: #000000;
+    --white: #FFFFFF;
+    --pink-blush: #FFACB7;
+    --pink-red: #DC143C;
+    --pale-peach: #FFE4C4;
+    
+    /* Astolfo Color Palette */
+    --cape-inside: #82453a;
+    --straps-accents: #c87066;
+    --cape-outside: #ffffff;
+    --hood-scarf: #e1d6d0;
+    --armor-accents: #f1d3b2;
+    --armor-accents-secondary: #b99874;
+    --armor-accents-tertiary: #c8bebe;
+    --underclothes-main: #454545;
+    --hair-ties: #665f5c;
+    --hair-main: #ffc8be;
+    --hair-accent: #fffafa;
+    --eyes-primary: #6e5064;
+    --eyes-secondary: #f0c4da;
+    --skin-primary: #fbf0e2;
+    --skin-secondary: #eec2a8;
+    
+    --status-danger: #DC143C !important;
+    
+    /* Transparent Background */
+    --background-primary: rgba(0, 0, 0, 0.2);
+    --background-secondary: rgba(0, 0, 0, 0.2);
+    --background-secondary-alt: rgba(0, 0, 0, 0.2);
+    --background-tertiary: rgba(0, 0, 0, 0.2);
+    --background-modifier-selected: rgba(255, 191, 178, 0.3);
+    --header-secondary: white !important;
+    --header-primary: white !important;
+    }
+    
+    /* Backgrounds */
+    .app_a01fb1 {
+        background-image: url(https://images4.alphacoders.com/906/906149.png);
+        background-size: cover;
+    }
+    
+    /* Server List */
+    .itemsContainer_fea3ef {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    
+    /* Pill Selector */
+    .item_c4cd66 {
+    background-color: var(--pink-blush) !important;
+    }
+    
+    /* Discord Logo */
+    .childWrapper_f90abb {
+        background-image: url(https://raw.githubusercontent.com/TheXploler/Resources/main/asto.svg) !important;
+    
+     background-color: var(--pink-blush) !important;
+    svg {
+        display: none;
+    }
+    }
+    
+    /* Discovery Button */
+    .circleIconButton_db6521 {
+        background-color: var(--pink-blush) !important;
+        border: var(--light-pink) 3px solid;
+        border-radius: 100%;
+    }
+    
+    /* Folder */
+    .guildSeparator_d0c57e {
+        background-color: var(--pink-blush);
+    }
+    
+    .folder_bc7085{
+     background-color: rgba(255, 191, 178, 0.5) !important;
+     border-radius: 100%;
+    }
+    
+    .expandedFolderBackground_bc7085 {
+        background-color: rgba(255, 191, 178, 0.6) !important;
+        border: var(--light-pink) 3px solid;
+        left: 9.5px;
+    } 
+    
+    /* Message Area */
+    .scrollableContainer_bdf0de {
+        background-color: rgba(255, 191, 178, 0.6) !important;
+        border: var(--light-pink) 3px solid;
+        border-radius: 25px/25px;    
+    }
+    
+    .channelTextArea_a7d72e {
+        background-color: transparent !important;
+    }
+    
+    .button_df39bd {
+        background-color: rgba(255, 191, 178, 0.6) !important;
+        border: var(--light-pink) 3px solid;
+        bottom: 2.5px;
+        border-radius: 100%;
+    }
+    
+    .placeholder_a552a6 {
+        color: white !important;
+    } 
+    
+    /* Stubborn whitening SVG */
+    .attachButtonInner_f298d4, .lottieIcon_f73ef7, .upperContainer_fc4f04, .inner_bdf0de, .iconWrapper_fc4f04, .vc-spotify-button-row, .iconContainer_d90b3d, .searchBar_a46bef, .inboxIcon_f0cd33, .titleContainer_ac90a2, .threadIcon_e664f3, .inner_c18ec9 {
+        filter: brightness(130%) contrast(100%);
+        }
+    
+    /* Top Bar */
+    .subtitleContainer_a7d72e{
+        background-color: rgba(255, 191, 178, 0.6);
+        border-radius: 25px / 25px;
+        border: var(--light-pink) 3px solid;
+        --background-primary: transparent;
+        margin: 1.5%;
+    }
+    
+    .upperContainer_fc4f04 {
+        opacity: 0.9;
+    }
+    
+    .search_ff5f90 {
+        background-color: rgba(255, 191, 178, 0.6) !important;
+        border: var(--light-pink) 3px solid;
+        border-radius: 25px/25px;
+    }
+    
+    /* Server Header */
+    .header_fd6364{
+        background-color: rgba(255, 191, 178, 0.6);
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        margin: 5%;
+        box-shadow: none !important;
+    }
+    
+    /* Message Date Divider */
+    .divider_d5deea, .content_c2654d {
+        background-color: var(--pink-red);
+        color: white !important;
+    }
+    
+    .bar_eba0ba {
+        background-color: var(--pink-red) !important;
+    }
+    
+    /* Unread Message */
+    .newMessagesBar_cf58b5 {
+        background-color: var(--pink-red) !important;
+        border-radius: 25px/25px;
+        color: white !important;
+    } 
+    
+    /* User */
+    .container_b2ca13 {
+        background-color: rgba(255, 191, 178, 0.4) !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+    }
+    
+    #vc-spotify-player {
+        background-color: rgba(255, 191, 178, 0.4) !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        margin-bottom: 4%;
+    
+    }
+    
+    /* Popout */
+    .menu_d90b3d {
+        background-color: var(--gold) !important;
+        color: white !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        opacity: 0.9;
+    } 
+    .separator_d90b3d {
+        background-color: var(--pink-red) !important;
+    }
+    .label_d90b3d {
+        color: white !important;
+    }
+    
+    .focused_d90b3d {
+        background-color: var(--pink-blush) !important;
+        border-radius: 25px/25px;
+    }
+    
+    .container_f8a938, .container_f1c3d9, .recentMentionsPopout_ddb5b4, .messagesPopoutWrap_ac90a2, .messageGroupWrapper_ac90a2, .container_e664f3, .container_acb8b3, .container_eedf95 {
+        background-color: var(--gold) !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        opacity: 0.9;
+    } 
+    .container_fe1358 {
+        background-color: var(--gold) !important;
+    }
+    .button_e258f5 {
+        background-color: var(--pink-blush) !important;
+        border: var(--light-pink) 3px solid;
+        border-radius: 100%;
+        color: white !important;
+    } 
+    .friendRequestsButton_c0c071 {
+        background-color: var(--pink-blush) !important;
+        border: var(--light-pink) 3px solid;
+        border-radius: 25px/25px;
+        color: white !important;
+    }
+    .channelHeader_f3978e {
+        background-color: var(--gold) !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        opacity: 0.9;
+        color:  white !important;
+    }
+    .subtext_f3978e {
+        color: white !important;
+    }
+    .messages_c06487 {
+        background-color: var(--gold) !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        opacity: 0.9;
+        margin-top: 5px;
+    }
+    .timestamp_f9f2ca, .subtext_d90b3d, .resultsGroup_b0286e, .displayUsername_b0286e {
+        color: white !important;
+    }
+    .header_e664f3 {
+        background-color: var(--pink-blush);
+        color: white !important;
+    }
+    .searchBox_e664f3 {
+        background-color: var(--pink-blush) !important;
+        border-radius: 25px/25px;
+        border: var(--light-pink) 3px solid;
+        opacity: 0.9;
+    }
+    .input_c18ec9, .sectionHeader_c6aa12, .left_acb8b3 {
+        filter: brightness(500%);
+    }
+    
+    .createButton_e664f3 {
+        background-color: var(--pink-red) !important;
+        border-radius: 25px/25px;
+        color: white !important;
+    }
+    
+    .queryContainer_eedf95 {
+        background-color: var(--gold) !important;
+        opacity: 0.9;
+    }
+    
+    .mentioned_d5deea{
+        background-color: rgba(255, 191, 178, 0.4)  !important;
+        color: white !important;
+    } 
+    .link_d8bfb3:hover{
+        background-color: rgba(255, 191, 178, 0.4)  !important;
+        color: white !important;
+    }
+    .contentWrapper_af5dbb {
+    opacity: 0.95;
+    }
+    .botTagCozy_f9f2ca, .botTag_f9f2ca, .botTagRegular_a9e77f, .botTag_a9e77f {
+        background-color: var(--pink-red) !important;
+    }

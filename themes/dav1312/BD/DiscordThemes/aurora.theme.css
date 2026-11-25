@@ -1,0 +1,12 @@
+/**
+ * @name Aurora
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(239.16deg, var(--bg-gradient-aurora-1) 10.39%, var(--bg-gradient-aurora-2) 26.87%, var(--bg-gradient-aurora-3) 48.31%, var(--bg-gradient-aurora-4) 64.98%, var(--bg-gradient-aurora-5) 92.5%);
+}

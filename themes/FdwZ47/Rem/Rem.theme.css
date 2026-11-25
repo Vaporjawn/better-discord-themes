@@ -1,0 +1,90 @@
+
+/**
+* @name Rem(Re:Zero)
+* @author Ketzunya#0762
+* @version 1.0
+* @description Rem From Re:Zero Anime
+* @source https://github.com/FdwZ47/Rem
+*/
+
+
+
+@import url("https://FdwZ47.github.io/Rem/Base.css");
+@import url("https://gibbu.github.io/BetterDiscord-Themes/addons/windows-titlebar.css");
+
+:root {
+   /* Brightness/Opacity */
+  
+    --light: 0.1; /* light Opacity            Default 0.1*/
+   
+    --dark: 0.4; /* dark Opacity              Default 0.4*/
+  
+    --night: 0.65; /* darker Opacity          Default 0.65*/
+
+    --dark-blue: 0.45; /* blue color Opacity             Default 0.45*/
+
+  
+  
+    /*main background/image */
+
+    --main-background: url("https://cdn.discordapp.com/attachments/827127242005020702/898537267252039710/1269054.png");
+
+    --home-icon: url('https://cdn.discordapp.com/attachments/826711468207767564/898541814531903498/5503fcff74d103cf.jpg');
+}
+
+ :root {
+     --ne-white: rgb(255, 255, 255); /* white color           Default rgb(255, 255, 255) */
+
+    --ne-dark: rgba(0, 0, 0, var(--dark)); /*  Default  0, 0, 0*/
+
+    --ne-light: rgba(0, 0, 0, var(--light)); 
+
+    --ne-night: rgba(0, 0, 0, var(--night)); 
+
+    --ne-blue: 103, 141, 166; /*Default 103, 141, 166 */
+
+    --ne-red: #dd2525; /*Default #dd2525 */
+
+    --X-button: rgb(255, 0, 0); /*close button               Default  rgb(255, 0, 0)*/ 
+
+    --ne-button-color: var(--ne-dark-blue); 
+
+    --ne-dark-blue: rgba(var(--ne-blue), var(--dark-blue)); 
+
+    --banner-width: 50%; /*Default 50%           change it to 100% for normal width*/
+
+    --banner-border: 1rem; /*Default  1rem           normal 0rem or 0px*/
+
+    --bot-tag: rgba(85,57,204, 0.5); /*Default rgba(85,57,204, 0.5) */
+
+    --scrollbar-thin-thumb: var(--ne-dark-blue); 
+
+    --scrollbar-thin-track: transparent; /*Default transparent */
+
+    --scrollbar-auto-thumb: var(--ne-dark-blue);
+
+    --scrollbar-auto-track: transparent; /*Default transparent */
+   
+    --scrollbar-auto-scrollbar-color-thumb: var(--ne-dark-blue);
+
+    --scrollbar-auto-scrollbar-color-track: transparent; /*Default transparent */
+    
+    --background-accent: var(--ne-dark);
+
+    --background-primary: var(--ne-dark);
+
+    --background-secondary: var(--ne-dark);
+
+    --background-secondary-alt: var(--ne-dark);
+
+    --background-tertiary: var(--ne-dark);
+
+    --text-link: rgb(3, 174, 226); /*Default rgb(3, 174, 226) */
+
+    --text-muted: rgb(163, 163, 163, 0.5); /*Default rgb(163, 163, 163, 0.5) */
+
+    --background-floating: var(--ne-dark);
+
+    --text-normal: var(--ne-white);
+
+}  

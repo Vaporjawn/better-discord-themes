@@ -1,0 +1,185 @@
+/**
+ * @name Solarized Paper
+ * @author ReCore
+ * @description Solarized's warm paper light palette with a teal accent, quiet ink text and crisp square panels.
+ * @version 1.0.0
+ * @license MIT
+ * @source https://ethanschoonover.com/solarized/
+ */
+
+/*
+ * Solarized Paper, for Discord and ReCore. This is the light half of
+ * Solarized: base3 paper, base00 ink, teal and blue signals, and the same
+ * restrained contrast the original terminal palette uses.
+ */
+
+:root,
+.theme-light,
+html.theme-light {
+    color-scheme: light;
+
+    /* Solarized: palette */
+    --sol-base3: #fdf6e3;
+    --sol-base2: #eee8d5;
+    --sol-base1: #93a1a1;
+    --sol-base0: #839496;
+    --sol-base00: #657b83;
+    --sol-base01: #586e75;
+    --sol-base02: #073642;
+    --sol-base03: #002b36;
+    --sol-yellow: #b58900;
+    --sol-orange: #cb4b16;
+    --sol-red: #dc322f;
+    --sol-magenta: #d33682;
+    --sol-violet: #6c71c4;
+    --sol-blue: #268bd2;
+    --sol-cyan: #2aa198;
+    --sol-green: #859900;
+
+    --rl-accent: #2aa198;
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: #268bd2;
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 55%, #073642);
+    --rl-radius: 2px;
+    --rl-font: "Iosevka", "Pixel Operator", "gg sans", monospace;
+    --rl-tracking: 0.01em;
+    --rl-motion: full;
+    --rl-panel-opacity: 90%;
+    --rl-background-dim: 62%;
+    --rl-background-image: linear-gradient(150deg, #fdf6e3 0%, #eee8d5 55%, #e4ddc8 100%);
+    --rl-scanline-opacity: 0.03;
+    --rl-grain-opacity: 0.06;
+    --rl-vignette-opacity: 0.1;
+    --rl-flicker-duration: 0s;
+    --rl-beam-opacity: 0;
+    --rl-frame-opacity: 0.18;
+
+    /* Backgrounds */
+    --background-primary: #fdf6e3;
+    --background-secondary: #eee8d5;
+    --background-secondary-alt: #e9e2cd;
+    --background-tertiary: #e9e2cd;
+    --background-floating: #f5efdd;
+    --background-nested-floating: #eee8d5;
+    --background-base-lowest: #e9e2cd;
+    --background-base-lower: #fdf6e3;
+    --background-base-low: #eee8d5;
+    --background-surface-high: #f5efdd;
+    --background-surface-higher: #e9e2cd;
+    --background-surface-highest: #ddd6c1;
+    --background-code: #eee8d5;
+    --background-tooltip: #f5efdd;
+    --chat-background: #fdf6e3;
+    --channeltextarea-background: #eee8d5;
+    --input-background-default: #eee8d5;
+    --background-accent: #d8d1bb;
+
+    /* Text */
+    --text-normal: #586e75;
+    --text-default: #586e75;
+    --text-strong: #073642;
+    --text-muted: #657b83;
+    --text-subtle: #839496;
+    --header-primary: #073642;
+    --header-secondary: #586e75;
+    --channels-default: #586e75;
+    --channel-icon: #839496;
+    --interactive-normal: #586e75;
+    --interactive-hover: #073642;
+    --interactive-active: #002b36;
+    --interactive-muted: #93a1a1;
+    --text-link: #268bd2;
+
+    /* Accents */
+    --brand-experiment: #2aa198;
+    --brand-360: #268bd2;
+    --brand-500: #2aa198;
+    --brand-530: #248f87;
+    --brand-560: #1f7d76;
+    --brand-600: #196b65;
+    --control-primary-background-default: #2aa198;
+    --control-primary-background-hover: #248f87;
+    --control-primary-text-default: #fdf6e3;
+    --control-secondary-background-default: #eee8d5;
+    --control-secondary-background-hover: #e9e2cd;
+
+    /* Status */
+    --status-positive: #859900;
+    --status-warning: #b58900;
+    --status-danger: #dc322f;
+    --status-green: #859900;
+    --status-yellow: #b58900;
+    --online: #859900;
+    --idle: #b58900;
+
+    /* Borders and surfaces */
+    --border-subtle: #ddd6c1;
+    --border-normal: #d0c9b4;
+    --border-strong: #b9b29d;
+    --background-modifier-hover: rgba(42, 161, 152, 0.08);
+    --background-modifier-active: rgba(42, 161, 152, 0.14);
+    --background-modifier-selected: rgba(42, 161, 152, 0.2);
+    --background-modifier-accent: #ddd6c1;
+    --message-background-hover: rgba(42, 161, 152, 0.06);
+    --avatar-background: #d8d1bb;
+    --app-frame-background: #e9e2cd;
+    --app-frame-border: #ddd6c1;
+    --spine-default: #d0c9b4;
+
+    /* Typography and shape */
+    --font-primary: var(--rl-font);
+    --font-display: var(--rl-font);
+    --font-code: "Iosevka", "Cascadia Code", monospace;
+    --radius-xs: 0px;
+    --radius-sm: 0px;
+    --radius-md: 2px;
+    --radius-lg: 4px;
+    --radius-round: 9999px;
+}
+
+[class*="guilds_"] {
+    background: #e9e2cd;
+    border-right: 1px solid #ddd6c1;
+}
+
+[class*="sidebarList_"],
+[class*="privateChannels_"],
+[class*="membersWrap_"] {
+    background: #eee8d5;
+}
+
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: transparent;
+}
+
+[class*="channelTextArea_"],
+[class*="textArea_"] {
+    background: #eee8d5;
+    border: 1px solid #d0c9b4;
+    border-radius: 2px;
+}
+
+[class*="message_"]:hover {
+    background: rgba(42, 161, 152, 0.06);
+    border-radius: 0;
+}
+
+[class*="selected_"],
+[class*="selected-"] {
+    background: rgba(42, 161, 152, 0.2);
+    border-radius: 2px;
+}
+
+[class*="card_"],
+[class*="modal_"],
+[class*="popout_"],
+[class*="menu_"] {
+    border: 1px solid #d0c9b4;
+    border-radius: 2px;
+}
+
+::selection {
+    background: #2aa198;
+    color: #fdf6e3;
+}

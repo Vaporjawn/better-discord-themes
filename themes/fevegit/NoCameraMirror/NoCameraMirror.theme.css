@@ -1,0 +1,13 @@
+﻿/**
+ * @name NoCameraMirror
+ * @author feve
+ * @authorLink https://github.com/fevegit
+ * @version 1.0.1
+ * @description Removes Discord's camera mirror effect from your own preview. Other users' view is not changed.
+ * @website https://github.com/fevegit/NoCameraMirror
+ * @source https://github.com/fevegit/NoCameraMirror
+ */
+
+[class*="mirror_"] {
+    transform: none;
+}

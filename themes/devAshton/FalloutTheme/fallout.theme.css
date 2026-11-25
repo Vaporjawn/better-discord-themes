@@ -1,0 +1,651 @@
+/**
+* @name Fallout theme
+* @description Theme created by Ashton
+* @version 1.0
+* @author Ashton#0420
+*/
+
+.sidebarRegionScroller-3MXcoP.thin-1ybCId.scrollerBase-289Jih.fade-2kXiP2 {
+    background-color: #283b52;
+}
+
+.contentRegionScroller-26nc1e.auto-Ge5KZx.scrollerBase-289Jih {
+    background-color: #244468;
+}
+
+.userInfo-iCloHO {
+    background-color: #315c8d;   
+}
+
+.background-1QDuV2 {
+    background-color: #315c8d; 
+}
+
+.fieldList-21DyL8 {
+    background-color: #315c8d; 
+}
+
+.accountProfileCard-1XCH88 {
+    background-color: #315c8d; 
+}
+
+.avatar-1uQSZT {
+    border-color: #447ab9;
+}
+
+.avatar-1uQSZT.wrapper-3t9DeA {
+    background-color: #447ab9;
+}
+
+.colorStandard-2KCXvj.size14-e6ZScH.description-3_Ncsb.formText-3fs7AJ.marginBottom20-32qID7.modeDefault-3a2Ph1 {
+    color: rgb(255, 255, 255);
+}
+
+.colorStandard-2KCXvj.size14-e6ZScH.description-3_Ncsb.formText-3fs7AJ.modeDefault-3a2Ph1 {
+    color: rgb(255, 255, 255);
+}
+
+
+.colorStandard-2KCXvj.size14-e6ZScH.h5-18_1nd.title-3sZWYQ.fieldTitle-3h2iLW {
+    color: yellow;
+}
+
+.username-2b1r56 {
+    color: yellow;
+}
+
+.header-2RyJ0Y {
+    color: yellow;
+}
+
+.item-PXvHYJ.themed-OHr7kt {
+    color: white;
+}
+
+.button-38aScr.lookFilled-1Gx00P.colorBrand-3pXr91.sizeSmall-2cSMqn.grow-q77ONN {
+    background-color: yellow;
+    color: black;
+}
+
+.fieldButton-27bJrp.button-38aScr.lookFilled-1Gx00P.colorGrey-2DXtkV.sizeSmall-2cSMqn.grow-q77ONN {
+    background-color: yellow;
+    color: black;
+}
+
+.typeWindows-1za-n7.withFrame-haYltI.titleBar-AC4pGV.horizontalReverse-3tRjY7.flex-1O1GKY.directionRowReverse-m8IjIq.justifyStart-2NDFzi.alignStretch-DpGPf3 {
+    background-color: yellow;
+}
+
+.bg-h5JY_x {
+    background-color: yellow;
+}
+
+.colorStandard-2KCXvj.size14-e6ZScH.h5-18_1nd.title-3sZWYQ.defaultMarginh5-2mL-bP {
+    color: yellow;
+}
+
+.winButtonClose-1HsbF-.winButton-iRh8-Z.flexCenter-3_1bcw.flex-1O1GKY.justifyCenter-3D2jYp.alignCenter-1dQNNs {
+    color: black;
+    background-color: rgb(255, 238, 0);
+}
+
+.winButtonMinMax-PBQ2gm.winButton-iRh8-Z.flexCenter-3_1bcw.flex-1O1GKY.justifyCenter-3D2jYp.alignCenter-1dQNNs {
+    color: black;
+    background-color: rgb(255, 238, 0);
+}
+
+.headerTop-3vNv-a {
+    background-color: #111f30;
+}
+
+.popoutInfo-pKbpvG {
+    background-color: #447ab9;
+}
+
+.avatarUploaderInner-3UNxY3.avatarUploaderInner-Oiob_P {
+    border-color: #244468;
+}
+
+.radioBar-bMNUI- {
+    background-color: #22538b;
+}
+
+.colorStandard-2KCXvj.size14-e6ZScH.h5-18_1nd.title-3sZWYQ.marginBottom4-2qk4Hy {
+    color: yellow;
+}
+
+.colorStandard-2KCXvj.size14-e6ZScH.h5-18_1nd.title-3sZWYQ.marginBottom8-AtZOdT {
+    color: yellow;
+}
+
+.button-38aScr.lookOutlined-3sRXeN.colorBrand-3pXr91.sizeMedium-1AC_Sl.grow-q77ONN {
+    background-color: yellow;
+    color: black;
+    border-color: yellow;
+}
+
+.accountList-33MS45 {
+    background-color: #1e2b3a;
+}
+
+.connectionOptionsWrapper-3KIj1Z {
+    background-color: #1c334d;
+}
+
+.connectionHeader-2MDqhu {
+    background-color: #1a3350;
+}
+
+.billingInformation-1MZXzx.detailsBlock-FoDTGA {
+    background-color: #1a3350;
+}
+
+.detailsBlock-FoDTGA {
+    background-color: #1a3350;
+}
+
+.button-38aScr.lookFilled-1Gx00P.colorPrimary-3b3xI6.sizeMedium-1AC_Sl.fullWidth-1orjjo.grow-q77ONN {
+    background-color: yellow;
+    color: black;
+}
+
+.accountCredit-3kfYY9.premiumSubscriptionAccountCredit-25i0tQ {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featurePremiumGuild-2KpCr6 {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureEmoji-3pTtR2 {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureProfile-tTo0C- {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureBadge-3ZA-Ca {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureUploadSize-2CAVFL {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureGoLive-30cvVw {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureMoreServers-14Thw5 {
+    background-color: #1a3350;
+}
+
+.feature-2w65J5.featureLongerMessageContent-1RADxx {
+    background-color: #1a3350;
+}
+
+.guildSubscriptionSlots-JPXXvN {
+    background-color: #1a3350;
+}
+
+.card-3AyPWq.outer-1AjyKL.padded-302COx {
+    background-color: #1a3350;
+}
+
+.codeRedemptionRedirect-1wVR4b.card-3Qj_Yx {
+    background-color: #1a3350;
+}
+
+.preview-2nSL_2.group-spacing-16.cardPrimaryOutline-29Ujqw.card-3Qj_Yx { /* make this the chat color */
+    background-color: #1a3350;
+}
+
+.preview-2Vkbi6.cardPrimary-1Hv-to.card-3Qj_Yx {
+    background-color: #1c4777;
+    border-color: #1c4777;;
+}
+
+.previewMessage-1ZN7YG {
+    background-color: #111f30;
+}
+
+.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyCenter-3D2jYp.alignCenter-1dQNNs.noWrap-3jynv6.previewOverlayInner-1WXURq {
+    background-color: #111f30;
+} 
+
+.repoHeader-2KfNvH {
+    background-color: #111f30;  
+}
+
+.scrollerInner-2YIMLh {
+    background-color: #111f30;  
+}
+
+.timestamp-3ZCmNB.timestampInline-yHQ6fX {
+    color: white;
+}
+
+.username-1A8OIy.desaturateUserColors-1gar-1.clickable-1bVtEA {
+    color: rgb(255, 255, 255);
+}
+
+.header-2V-4Sw {
+    background-color: #111f30;
+}
+
+.title-3qD0b-.container-1r6BKw.themed-ANHk51 {
+    background-color: #111f30;
+}
+
+.scroller-2LSbBU::-webkit-scrollbar-thumb {
+    background: black
+}
+.scroller-2LSbBU::-webkit-scrollbar-track {
+    background: #111f30
+}
+
+.markup-2BOw-j.messageContent-2qWWxC {
+    color: white;
+}
+
+.repliedTextPreview-2NBljf.clickable-1bVtEA {
+    color: white;
+}
+
+.form-2fGMdU {
+    background-color: #111f30;
+}
+
+.form-2fGMdU:before {
+    
+    content: "";
+    position: relative;
+    top: 0;
+    left: 0;
+    height: .5rem;
+    width: 1.25rem;
+}
+
+.scrollableContainer-2NUZem.webkit-HjD9Er {
+    background-color: #111f30;
+}
+
+.layout-2DM8Md {
+    background-color: #111f30;
+
+
+}
+
+.members-1998pB.thin-1ybCId.scrollerBase-289Jih.fade-2kXiP2 {
+    background-color: #111f30;
+}
+
+
+
+.membersGroup-v9BXpm {
+    background-color: #111f30;
+}
+
+.members-1998pB {
+    background-color: #111f30;
+}
+
+.members-1998pB>div {
+    background-color: #111f30;
+}
+
+.scroller-1JbKMe {
+    background-color: #111f30;
+}
+
+.icon-22AiRD {
+    color: rgb(255, 255, 0);
+}
+
+.children-19S4PO:after {
+    content: "";
+    position: invisible;
+    top: 0;
+    left: 0;
+    height: .5rem;
+    width: 1.25rem;
+}
+
+.searchBar-6Kv8R2 {
+    background-color: #111f30;
+}
+
+.searchBar-6Kv8R2 {
+    background-color: #111f30;
+}
+
+.scroller-1Bvpku.none-2Eo-qx.scrollerBase-289Jih {
+    background-color: #111f30;
+}
+
+.childWrapper-anI2G9.acronym-2mOFsV {
+    background-color: rgb(77, 77, 77);
+    color: black;
+}
+
+.acronym-1e2Mdt {
+    background-color: rgb(77, 77, 77);
+    color: black;
+}
+
+.circleIconButton-1QV--U.circleButtonBase-2DCxIZ {
+    background-color: rgb(77, 77, 77);
+    color: black;
+}
+
+.childWrapper-anI2G9.button-Jt-tIg {
+    background-color: yellow;
+    color: black;
+}
+
+.container-3baos1 {
+    background-color: #111f30;
+}
+.content-1x5b-n {
+    background-color: #111f30;
+}
+
+.containerDefault-3tr_sE {
+    background-color: #111f30;
+}
+
+.iconVisibility-sTNpHs.wrapper-2jXpOf {
+    background-color: #111f30;
+}
+
+.scroller-RmtA4e.thin-1ybCId.scrollerBase-289Jih.fade-2kXiP2 {
+    background-color: #111f30;
+}
+
+.theme-dark {
+    --scrollbar-thin-thumb: rgb(255, 251, 0);
+}
+
+.container-1r6BKw.themed-ANHk51 {
+    background-color: #111f30;
+}
+
+.scroller-2ZPeAD.thin-1ybCId.scrollerBase-289Jih {
+    background-color: #111f30;
+}
+
+.peopleColumn-29fq28 {
+    background-color: #111f30;
+}
+
+.itemCard-v9viV7.wrapper-3D2qGf.outer-1AjyKL.padded-302COx.interactive-3B9GmY {
+    background-color: #111f30;
+    border-color: rgba(238, 255, 0, 0.411);
+}
+
+.section-2gLsgF {
+    background-color: #111f30;
+}
+
+.actionButton-uPB8Fs {
+    background-color: rgb(255, 255, 0);
+    color: black;
+}
+
+.container-24CyRY.auto-Ge5KZx.scrollerBase-289Jih {
+    background-color: #111f30;
+}
+
+.contentContainer-1fklqj {
+    background-color: #132c49;
+}
+
+.scroller-3BxosC.thin-1ybCId.scrollerBase-289Jih {
+    background-color: #132c49;
+}
+
+.body-3HBlXn.thin-1ybCId.scrollerBase-289Jih {
+    background-color: #132c49;
+}
+
+.footer-3UKYOU {
+    background-color: #132c49;
+}
+
+.bodyInnerWrapper-26fQXj {
+    background-color: #132c49;
+}
+
+.inputDefault-_djjkz.input-cIJ7To.input-2_SIlA {
+    background-color: #132c49;
+}
+
+.topSection-y3p-_D {
+    background-color: #132c49;
+}
+
+.infoScroller-1Qu30O.thin-1ybCId.scrollerBase-289Jih.fade-2kXiP2 {
+    background-color: #132c49;
+}
+
+.avatar-AvHqJA.wrapper-3t9DeA {
+    border-color: #132c49;
+    background-color: #132c49;
+}
+
+.anchor-3Z-8Bb.anchorUnderlineOnHover-2ESHQB {
+    color: yellow;
+}
+
+.grid-1nZz7S {
+    background-color: #132c49;
+}
+
+.scrollerContent-WzeG7R.content-3YMskv {
+    background-color: #132c49;
+}
+
+.container-1CE3eW {
+    background-color: #132c49;
+}
+
+.container-UC8Ug1 {
+    background-color: #132c49;
+}
+
+.flex-1xMQg5.flex-1O1GKY.horizontalReverse-2eTKWD.horizontalReverse-3tRjY7.flex-1O1GKY.directionRowReverse-m8IjIq.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.footer-2gL1pp.footer-1NnaNd {
+    background-color: #132c49;
+
+}
+
+.title-3w8xhj.base-1x0h_U.size24-RIRrxO {
+    color: white;
+}
+
+.colorHeaderSecondary-3Sp3Ft.size16-1P40sf.subtitle-Nw1LLR {
+    color: yellow;
+}
+
+.colorStandard-2KCXvj.size16-1P40sf.text-1FOLJS {
+    color: white;
+}
+
+.footerTitle-2CYZch.base-1x0h_U.size20-17Iy80 {
+    color: white;
+}
+
+.footerButton-ayFTfX.button-38aScr.lookFilled-1Gx00P.colorGrey-2DXtkV.sizeMedium-1AC_Sl.grow-q77ONN {
+    background-color: yellow;
+    color: black;
+}
+
+.scroller-1d5FgU.auto-Ge5KZx.scrollerBase-289Jih {
+    background-color: #132c49;
+}
+
+.thin-1ybCId.scrollerBase-289Jih {
+    background-color: #111f30;
+} 
+
+.button-1ZiXG9 {
+    background-color: #111f30;
+}
+
+.button-1ZiXG9.selected-LCBEAU {
+    background-color: #143155;
+}
+
+.button-1ZiXG9:hover {
+    background-color: #143155;
+}
+
+.attachment-33OFj0.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.alignCenter-1dQNNs.embedWrapper-lXpS3L {
+    background-color: #143155;
+}
+
+.container-1giJp5 {
+    background-color: #143155;
+}
+
+.root-217Brm {
+    background-color: #143155;
+}
+
+.wrapper-35wsBm.userSelectNone-Iy6XEP.cursorDefault-331ZcI {
+    background-color: #143155;
+}
+
+.controlButton-2MhVEL.centerButton-3CaNcJ.colorable-1bkp8v.primaryDark-3mSFDl.button-38aScr.lookBlank-3eh9lL.colorBrand-3pXr91.grow-q77ONN {
+    background-color: #0c1e33;
+}
+
+.staticButton-1B0rfQ.centerButton-3CaNcJ.colorable-1bkp8v.primaryDark-3mSFDl.button-38aScr.lookBlank-3eh9lL.colorBrand-3pXr91.grow-q77ONN {
+    background-color: #0c1e33;
+}
+
+.header-2mZ9Ov.stickyHeader-hH_ZLl {
+    background-color: #1a3350;
+}
+
+.titleContainer-2CXtJo {
+    background-color: #1a3350;
+}
+
+.container-_phMUq {
+    background-color: #1a3350;  
+}
+
+.circleButton-3RB01i.button-1-5Aqk.secondary-dIudih.size36-1Ff1kn {
+    background-color: #1a3350; 
+}
+
+.customScroller-26gWhv.scroller-1J_F7B.auto-Ge5KZx.scrollerBase-289Jih {
+    background-color: #1a3350; 
+}
+
+.container-3XJ8ns {
+    background-color: #1a3350; 
+}
+
+.descriptionBox-1EKQKL {
+    background-color: #1a3350; 
+}
+
+.upsellContent-1JlpHe {
+    background-color: #1a3350; 
+}
+
+.upsellFooter-ZYsio_ {
+    background-color: #1a3350; 
+}
+
+.developerPortalCtaWrapper-2XNafh {
+    background-color: #1a3350; 
+}
+
+.analyticsCard-qckucw {
+    background-color: #1a3350; 
+}
+
+.featureCard-1RR4Tl {
+    background-color: #1a3350; 
+}
+
+.checklistHeader-1KWcEY.desaturate-qhyunI {
+    background-color: #1a3350; 
+}
+
+.checklistItem-37OOck {
+    background-color: #1a2e46; 
+}
+
+.header-2Y0-A- {
+    background-color: #15345a; 
+}
+
+.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignCenter-1dQNNs.noWrap-3jynv6.enableContainer-2DIT9Q {
+    background-color: #15345a; 
+}
+
+.settingsFormItem-103g1I {
+    background-color: #15345a;   
+}
+
+.formFieldWrapper-malor5.wrapperBase-x09xGp.settingsFormFieldWrapper-3Y77Pr.wrapperBase-x09xGp {
+    background-color: #132c49;
+}
+
+.previewContainer-1SS3uO {
+    background-color: #132c49; 
+}
+
+.welcomeChannel-1rFrIO {
+    background-color: #132c49; 
+}
+
+.addChannelButton-3j20Ox.button-38aScr.lookFilled-1Gx00P.colorPrimary-3b3xI6.sizeMedium-1AC_Sl.grow-q77ONN {
+    background-color: #efff0d;
+    color: black;
+}
+
+.tierBody-3aUxuc {
+    background-color: #132c49; 
+}
+
+.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyCenter-3D2jYp.alignCenter-1dQNNs.noWrap-3jynv6.header-1TKi98.header-kk07Uz {
+    background-color: #1a3350;
+}
+
+.flex-1xMQg5.flex-1O1GKY.horizontalReverse-2eTKWD.horizontalReverse-3tRjY7.flex-1O1GKY.directionRowReverse-m8IjIq.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.footer-2gL1pp {
+    background-color: #1a3350;
+}
+
+.scrollbarGhostHairline-1mSOM1.scrollbar-3dvm_9.hljs {
+    background-color: #1a3350;
+}
+
+.container-1taM1r.clickable-25tGDB:hover {
+    background-color: #1a3350;
+}
+
+.cardContent-qqqwo8 {
+    background-color: #1a3350;
+}
+
+.item-1yAxl1 {
+    background-color: #1a3350;
+}
+
+.scroller-305q3I.thin-1ybCId.scrollerBase-289Jih.fade-2kXiP2 {
+    background-color: #244468;
+}
+
+.channelNotice-1-XFjC.publicUpsell-31ZSJ8 {
+    background-color: #1a3350;
+}
+
+.acronym-1e2Mdt {
+    background-color: #244468;
+    border-radius: 60px;
+}

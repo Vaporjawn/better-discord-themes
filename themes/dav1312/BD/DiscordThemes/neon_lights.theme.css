@@ -1,0 +1,12 @@
+/**
+ * @name Neon Lights
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(180deg, var(--bg-gradient-neon-nights-1) 0%, var(--bg-gradient-neon-nights-2) 50%, var(--bg-gradient-neon-nights-3) 100%);
+}

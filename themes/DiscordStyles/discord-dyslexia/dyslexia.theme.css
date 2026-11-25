@@ -1,0 +1,25 @@
+/**
+ * @name Dyslexia
+ * @author Tropical#8908 & Qwerasd#5202
+ * @version 1.0
+ * @description A simple discord theme which makes the app more accommodating to people with dyslexia.
+ * @source https://github.com/DiscordStyles/discord-dyslexia/
+ */
+
+/* ----------------------------------------------------------------------- */
+
+/* IMPORT SOURCE CODE */
+
+@import url(https://discordstyles.github.io/discord-dyslexia/src/base.css);
+
+/* ----------------------------------------------------------------------- */
+
+/* SETTINGS */
+
+:root {
+    --word-spacing: 3px;       /* Word spacing */
+    --letter-spacing: 0.25px;  /* Letter Spacing */
+    --message-line-spacing: 2; /* Line spacing on messages */
+}
+
+/* ----------------------------------------------------------------------- */

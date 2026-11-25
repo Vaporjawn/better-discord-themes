@@ -1,0 +1,87 @@
+/**
+ * @name Windows XP Terminal Theme
+ * @author Grok (inspired by Bates' Fallout 4 Terminal)
+ * @version 1.0.0
+ * @description A theme inspired by Windows XP with a CRT terminal aesthetic
+ * @source https://github.com/B4T3S/Fallout4TerminalTheme (original source)
+*/
+
+@import url('https://B4T3S.github.io/Fallout4TerminalTheme/mainRewrite.css');
+/* ^ Main Import ^ DO NOT TOUCH. Without this, the theme won't load!!! */
+
+@import url('https://B4T3S.github.io/Fallout4TerminalTheme/css/crtEffect.css');
+/* ^ CRT effect ^ Kept for retro terminal look. Remove or comment out if not desired! */
+
+/* CUSTOMIZE COLORS AND XP-INSPIRED STYLES */
+:root,
+.visual-refresh,
+.visual-refresh.theme-dark {
+  --rgb-highlight: 255, 165, 0; /* Primary orange highlight color */
+  --rgb-background: 0, 0, 0; /* Black background for terminal-like contrast */
+  --rgb-text: 255, 165, 0; /* Orange text for main content */
+  --rgb-close-button: 255, 0, 0; /* Red for close/deny buttons, XP style */
+  --rgb-online-color: 0, 128, 0; /* Green for online status, classic XP feel */
+  --rgb-afk-color: 255, 215, 0; /* Yellow for idle status */
+  --rgb-dnd-color: 255, 0, 0; /* Red for do not disturb */
+  --rgb-streaming-color: 128, 0, 128; /* Purple for streaming status */
+
+  --transition-time: .3s; /* Animation speed, kept from original */
+
+  --background-image: unset; /* No background image, XP-like simplicity */
+  --background-position: center;
+  --background-size: cover;
+  --background-blur: 5px;
+  --background-brightness: 100%;
+
+  --show-original-title: 0; /* Hide Discord's original title */
+  --show-custom-title: 1; /* Show custom XP-inspired title */
+  --custom-title-text: "Windows XP Terminal"; /* XP-inspired title */
+  --custom-title-font-size: 16px;
+  --custom-title-font-weight: bold;
+  --custom-title-margin-top: 0px;
+  --custom-title-margin-left: 0px;
+
+  /* Windows XP-inspired styles (inspired by xp.css) */
+  --xp-window-border: 1px solid #005566; /* XP window border color */
+  --xp-window-bg: rgba(192, 192, 192, 0.1); /* Light gray, semi-transparent XP window */
+  --xp-button-bg: #d4d0c8; /* XP button background */
+  --xp-button-border: 1px solid #000;
+  --xp-button-hover: #e0e0e0; /* Lighter gray for hover */
+}
+
+/* XP-inspired window styling for main container */
+[class*="app-"], [class*="chat-"] {
+  background: var(--xp-window-bg);
+  border: var(--xp-window-border);
+  border-radius: 3px; /* XP window rounded edges */
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff; /* XP 3D effect */
+}
+
+/* XP-style buttons */
+[class*="button-"], [class*="clickable-"] {
+  background: var(--xp-button-bg);
+  border: var(--xp-button-border);
+  border-radius: 3px;
+  color: var(--rgb-text);
+  padding: 4px 8px;
+  box-shadow: inset -1px -1px #000, inset 1px 1px #fff;
+  transition: background var(--transition-time);
+}
+
+[class*="button-"]:hover, [class*="clickable-"]:hover {
+  background: var(--xp-button-hover);
+}
+
+/* Apply orange text to most elements */
+[class*="message-"], [class*="content-"], [class*="title-"], [class*="username-"] {
+  color: rgb(var(--rgb-text));
+}
+
+/* Keep CRT effect intact, ensure it plays nicely with XP styling */
+.crt::after {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0.1) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 2px;
+}

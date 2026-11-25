@@ -1,0 +1,60 @@
+/**
+    * @name Button Recolor
+    * @version 1.0.0
+    * @description Simply change Discord's default button colors.
+    * @author LuckFire#4800
+    *
+    * @website https://github.com/Discord-Theme-Addons
+    * @source https://github.com/Discord-Theme-Addons/button-recolor/tree/master/src
+**/
+
+/* <-------------------- To change button colors, change the variable's values in :root{}. Do NOT change or remove the import. --------------------> */
+/* <----- All values are done in an RGB (Red, Green, Blue) format. You can use https://www.google.com/search?q=colorpicker to choose colors. -----> */
+@import url("https://discord-theme-addons.github.io/button-recolor/src/support/compiled.css");
+
+:root {
+    /* -------- DEFAULTS ---- */
+    --default-white: #FFFFFF;
+    --default-inverted: var(--default-white);
+    --default-inverted-hover: #F8F9FD;
+    --default-ghost-opacity: 0.8;
+
+    /* -------- BLURPLE ---- */
+    --blurple: 114, 137, 218;
+    --blurple-filled-hover: rgb(103, 123, 196);
+
+    /* -------- GREEN ---- */
+    --green: 67, 181, 129;
+    --green-filled-hover: rgb(60, 163, 116);
+    
+    /* -------- YELLOW ---- */
+    --yellow: 250, 166, 26;
+    --yellow-filled-hover: rgb(225, 149, 23);
+
+    /* -------- RED ---- */
+    --red: 240, 71, 71;
+    --red-filled-hover: rgb(216, 64, 64);
+
+    /* -------- GREY ---- */
+    --grey: 79, 84, 92;
+    --grey-filled-hover: rgb(71, 76, 83);
+
+    /* -------- PRIMARY ---- */
+    --primary: 79, 84, 92;
+    --primary-white: 255, 255, 255;
+    --primary-filled-hover: rgb(114, 118, 125);
+
+    /* -------- LINK ---- */
+    --link: 0, 176, 244;
+    --link-filled-hover: rgb(16, 158, 214);
+
+    /* -------- BLACK ---- */
+    --black: 4, 4, 5;
+    --black-filled-hover: rgb(24, 25, 28);
+
+    /* -------- WHITE ---- */
+    --white: 255, 255, 255;
+    --white-black: 0, 0, 0;
+    --white-filled-hover: rgb(230, 230, 230);
+    --white-inverted-hover: rgb(104, 107, 114);
+}

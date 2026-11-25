@@ -1,0 +1,192 @@
+/**
+ * @name Sakura Aesthetic Patel
+ * @author Cali
+ * @version 1.0.4
+ * @description Tema en tonos rosados pastel, suaves y aesthetic, con la fuente Anonymous Pro.
+ * @source https://github.com/Caliuq
+ * @website 
+ * @invite https://discord.com/channels/783572486759514123/1284708135340212296/1288518843358117969
+ */
+
+/*
+ * @name SakuraAesthetic
+ * @description Tema combinado con tonos rosados pastel, suaves y aesthetic, con la fuente Anonymous Pro.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400&display=swap');
+
+:root {
+    /* Paleta de colores */
+    --primary-bg: #ffeef2; /* Fondo principal (rosa pálido) */
+    --secondary-bg: #fddde6; /* Fondo secundario (rosa claro) */
+    --accent-color: #f99aaa; /* Rosa pastel intenso */
+    --text-color: #2C2C2C; /* Negro suave para texto principal */
+    --secondary-text-color: #333333; /* Gris más oscuro para texto secundario */
+    --placeholder-color: #6C6C6C; /* Gris oscuro para textos de relleno */
+    --border-color: #E4A3B7; /* Rosa medio para bordes */
+
+    /* Transparencias */
+    --transparency: rgba(251, 227, 234, 0.5); /* Fondo translúcido */
+    --hover-transparency: rgba(228, 163, 183, 0.3); /* Rosa medio translúcido */
+    --message-transparency: rgba(199, 116, 120, 0.4); /* Rosa oscuro para mensajes */
+
+    /* Fuentes */
+    --font-family: 'Anonymous Pro', monospace;
+    --selection-bg: #ffadc6; /* Fondo de selección de texto (rosa claro) */
+    --selection-text: #ffffff; /* Texto sobre fondo seleccionado (blanco) */
+    --user-color-dm-dark: #d97a93; /* Rosa más oscuro para nombres de usuario en tema oscuro */
+    --user-color-dm-light: #2c2c2c; /* Gris oscuro para nombres de usuario en tema claro */
+    --widget-bg-dark: #d97a93; /* Fondo del widget de música en oscuro */
+    --widget-bg-light: #fddde6; /* Fondo del widget de música en claro */
+    --widget-text-dark: #ffffff; /* Texto del widget en oscuro */
+    --widget-text-light: #2c2c2c; /* Texto del widget en claro */
+    --scrollbar-color: #f99aaa; /* Color fijo de la barra de scroll */
+    --scrollbar-hover: #ffadc6; /* Color de hover en la barra de scroll */
+    --menu-bg: #ffeef2; /* Fondo de menús emergentes */
+    --menu-text: #2c2c2c; /* Texto en menús emergentes */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    background-attachment: fixed;
+    backdrop-filter: blur(8px); /* Difuminado del fondo */
+}
+
+/* Personalización de selección de texto */
+::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
+}
+
+/* Mensajes */
+.message {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px;
+    color: var(--text-color);
+    transition: background-color 0.2s ease;
+}
+.message:hover {
+    background: var(--hover-transparency);
+}
+
+/* Lista de canales y miembros */
+.channels-wrap, .members-wrap {
+    background: var(--secondary-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+/* Botones */
+.button {
+    background: var(--accent-color);
+    color: #ffffff;
+    border-radius: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.button:hover {
+    background: #ffadc6; /* Un tono más claro para hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Barras superiores e inferiores */
+.guilds-wrapper, .chat-bar {
+    background: var(--primary-bg);
+    color: var(--secondary-text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Ventanas emergentes */
+.popout, .modal, .menu {
+    background: var(--menu-bg);
+    color: var(--menu-text);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-hover);
+}
+::-webkit-scrollbar-track {
+    background-color: var(--primary-bg);
+}
+
+/* Notificaciones */
+.badge {
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-weight: bold;
+}
+
+/* Enlaces */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: #ffadc6; /* Un rosa más claro */
+}
+
+/* Ajuste de elementos oscuros */
+.theme-dark {
+    --background-primary: var(--primary-bg) !important;
+    --background-secondary: var(--secondary-bg) !important;
+    --background-tertiary: var(--secondary-bg) !important;
+    --channeltextarea-background: var(--secondary-bg) !important;
+    --text-normal: var(--text-color) !important;
+    --text-muted: var(--secondary-text-color) !important;
+    --scrollbar-thumb: var(--scrollbar-color) !important;
+    --input-background: var(--secondary-bg) !important;
+    --input-placeholder: var(--placeholder-color) !important;
+    --dm-channel-color: var(--user-color-dm-dark) !important;
+    --widget-bg: var(--widget-bg-dark) !important;
+    --widget-text: var(--widget-text-dark) !important;
+}
+
+/* Ajuste de elementos claros */
+.theme-light {
+    --background-primary: var(--primary-bg) !important;
+    --background-secondary: var(--secondary-bg) !important;
+    --background-tertiary: var(--secondary-bg) !important;
+    --channeltextarea-background: var(--secondary-bg) !important;
+    --text-normal: var(--text-color) !important;
+    --text-muted: var(--secondary-text-color) !important;
+    --scrollbar-thumb: var(--scrollbar-color) !important;
+    --input-background: var(--secondary-bg) !important;
+    --input-placeholder: var(--placeholder-color) !important;
+    --dm-channel-color: var(--user-color-dm-light) !important;
+    --widget-bg: var(--widget-bg-light) !important;
+    --widget-text: var(--widget-text-light) !important;
+}
+
+/* Ajuste de nombres de usuario en mensajes privados */
+.dm-channel {
+    color: var(--dm-channel-color) !important;
+}
+
+/* Ajuste del widget de música */
+.now-playing {
+    background: var(--widget-bg);
+    color: var(--widget-text);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

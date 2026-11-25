@@ -1,0 +1,647 @@
+/**
+ * @name freedom
+ * @author spandan
+ * @description Black, grey and rounded. Strips Discord down to what you use.
+ * @version 1.0.0
+ * @source https://github.com/SPANDANS04/freedom-theme
+ */
+
+/* ── Settings ───────────────────────────────────────────────────────────
+   Override any of these from your client's Quick CSS, for example:
+
+	:root {
+		--freedom-role-mode: custom;
+		--freedom-role-color: #eba4e6;
+	}
+
+   Everything is declared with :where(:root), so a plain :root override
+   always wins. */
+:where(:root) {
+	/* Role colours. real: every role keeps its server colour.
+	   custom: every role uses --freedom-role-color instead. */
+	--freedom-role-mode: real;
+	--freedom-role-color: #ffffff;
+
+	/* Palette */
+	--freedom-bg: #000000;
+	--freedom-input: #0a0a0a;
+	--freedom-panel: #0e0e0e;
+	--freedom-card: #181818;
+	--freedom-hover: #202020;
+	--freedom-button: #2a2a2a;
+	--freedom-button-hover: #363636;
+	--freedom-border: #333333;
+	--freedom-fg: #e0e0e0;
+	--freedom-dim: #666666;
+	--freedom-dimmer: #444444;
+	--freedom-accent: #ffffff;
+	--freedom-warn: #ff6b6b;
+}
+
+/* Discord's own variables, mapped onto the palette. Discord renames these
+   every few months, so both the old and new names are set. .theme-light is
+   included because light-coloured profile themes flip their card to it;
+   this keeps their text light on black. */
+.theme-light,
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.visual-refresh.theme-dark {
+	/* surfaces */
+	--background-primary: var(--freedom-bg);
+	--background-secondary: var(--freedom-bg);
+	--background-secondary-alt: var(--freedom-bg);
+	--background-tertiary: var(--freedom-bg);
+	--background-floating: var(--freedom-panel);
+	--background-nested-floating: var(--freedom-panel);
+	--background-base-lowest: var(--freedom-bg);
+	--background-base-lower: var(--freedom-bg);
+	--background-base-low: var(--freedom-bg);
+	--background-surface-high: var(--freedom-panel);
+	--background-surface-higher: var(--freedom-panel);
+	--background-surface-highest: var(--freedom-card);
+	--chat-background-default: var(--freedom-bg);
+	--bg-base-primary: var(--freedom-bg);
+	--bg-base-secondary: var(--freedom-bg);
+	--bg-base-tertiary: var(--freedom-bg);
+	--bg-surface-raised: var(--freedom-panel);
+	--bg-surface-overlay: var(--freedom-panel);
+	--modal-background: var(--freedom-panel);
+	--modal-footer-background: var(--freedom-panel);
+	--home-background: var(--freedom-bg);
+	--input-background: var(--freedom-input);
+	--channeltextarea-background: var(--freedom-input);
+	--background-message-hover: var(--freedom-panel);
+	--background-modifier-hover: var(--freedom-hover);
+	--background-modifier-active: var(--freedom-button);
+	--background-modifier-selected: var(--freedom-button);
+	--background-modifier-accent: var(--freedom-border);
+	--background-mod-subtle: var(--freedom-hover);
+	--background-mod-normal: var(--freedom-button);
+	--background-mod-strong: var(--freedom-button-hover);
+
+	/* borders */
+	--border-subtle: var(--freedom-border);
+	--border-normal: var(--freedom-border);
+	--border-strong: var(--freedom-border);
+	--border-faint: transparent;
+
+	/* text */
+	--text-normal: var(--freedom-fg);
+	--text-default: var(--freedom-fg);
+	--text-primary: var(--freedom-fg);
+	--text-secondary: var(--freedom-dim);
+	--text-muted: var(--freedom-dim);
+	--text-strong: var(--freedom-accent);
+	--header-primary: var(--freedom-accent);
+	--header-secondary: var(--freedom-dim);
+	--channels-default: var(--freedom-dim);
+	--channel-icon: var(--freedom-dim);
+	--interactive-normal: var(--freedom-dim);
+	--interactive-hover: var(--freedom-fg);
+	--interactive-active: var(--freedom-accent);
+	--interactive-muted: var(--freedom-dimmer);
+	--text-link: var(--freedom-accent);
+	--text-danger: var(--freedom-warn);
+
+	/* the blurple goes grey */
+	--brand-500: var(--freedom-button-hover);
+	--brand-560: var(--freedom-button);
+	--brand-600: var(--freedom-button);
+	--brand-experiment: var(--freedom-button-hover);
+	--button-filled-brand-background: var(--freedom-button);
+	--button-filled-brand-background-hover: var(--freedom-button-hover);
+	--button-filled-brand-text: var(--freedom-fg);
+	--control-brand-foreground: var(--freedom-accent);
+	--control-brand-foreground-new: var(--freedom-accent);
+	--mention-foreground: var(--freedom-accent);
+	--mention-background: var(--freedom-button);
+	--info-warning-foreground: var(--freedom-warn);
+	--status-danger: var(--freedom-warn);
+
+	--scrollbar-auto-thumb: var(--freedom-button);
+	--scrollbar-thin-thumb: var(--freedom-button);
+	--scrollbar-auto-track: transparent;
+
+	/* Noto Sans / JetBrains Mono when installed, otherwise Discord's own
+	   gg sans, so Windows and macOS never fall back to Arial. */
+	--font-primary: "Noto Sans", "gg sans", "Segoe UI", -apple-system, sans-serif;
+	--font-display: "Noto Sans", "gg sans", "Segoe UI", -apple-system, sans-serif;
+	--font-headline: "Noto Sans", "gg sans", "Segoe UI", -apple-system, sans-serif;
+	--font-code: "JetBrainsMono Nerd Font", "JetBrains Mono", "gg mono", Consolas, Menlo, monospace;
+}
+
+/* Soft corners on the boxes you look at most. */
+[class*="menu_"],
+[class*="popout_"],
+[class*="userPopoutOuter_"],
+[class*="root_"][role="dialog"],
+[class*="autocomplete_"],
+[class*="channelTextArea_"],
+[class*="channelTextArea_"] [class*="scrollableContainer_"],
+[class*="searchBar_"] {
+	border-radius: 12px !important;
+}
+
+/* No glow, no blur, no gradients. */
+* {
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+/* Floating things (menus, popouts, modals) get a faint edge. */
+[class*="menu_"],
+[class*="popout_"],
+[class*="userPopoutOuter_"],
+[class*="root_"][role="dialog"],
+[class*="autocomplete_"] {
+	border: 1px solid var(--freedom-border) !important;
+}
+
+/* Message box and search sit just off black. */
+[class*="channelTextArea_"],
+[class*="channelTextArea_"] [class*="scrollableContainer_"],
+[class*="searchBar_"] {
+	background: var(--freedom-input) !important;
+}
+
+/* Mentions: a white bar instead of a yellow wash. */
+[class*="mentioned_"] {
+	background: var(--freedom-panel) !important;
+}
+[class*="mentioned_"]::before {
+	background: var(--freedom-accent) !important;
+}
+
+/* Unread pill and selected-server marker in white. */
+[class*="pill_"] [class*="item_"] {
+	background: var(--freedom-accent) !important;
+}
+
+/* Hide Nitro / shop / quests clutter. The :has() rows take the whole list
+   entry with them so no empty gap is left in the DM sidebar. */
+[href="/store"],
+[href="/shop"],
+[href="/quest-home"],
+[href^="/discovery/quests"],
+li:has(> * [href="/store"]),
+li:has(> * [href="/shop"]),
+li:has(> * [href="/quest-home"]),
+li:has(> * [href^="/discovery/quests"]),
+[class*="giftButton_"],
+[aria-label="Send a gift"],
+[class*="premiumTrialAcknowledgedBadge_"],
+[class*="nitroWheel_"] {
+	display: none !important;
+}
+
+/* Thin, plain scrollbars. */
+::-webkit-scrollbar {
+	width: 6px !important;
+	height: 6px !important;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--freedom-button) !important;
+	border-radius: 6px !important;
+	border: none !important;
+}
+::-webkit-scrollbar-track {
+	background: transparent !important;
+}
+
+/* Message box: keep upload, GIF and emoji; drop stickers and apps. */
+[class*="buttons_"] > :has([aria-label="Open sticker picker"]),
+[class*="buttons_"] > :has([aria-label="Send a gift"]),
+[class*="buttons_"] [aria-label="Open sticker picker"],
+[class*="channelAppLauncher_"],
+[class*="app-launcher-entrypoint"],
+[class*="buttons_"] > :has([aria-label="Apps"]),
+[class*="buttons_"] [aria-label="Apps"],
+[class*="buttons_"] > :has([class*="appLauncher" i]) {
+	display: none !important;
+}
+
+/* Header: keep pinned, member list and search. Call buttons in DMs stay. */
+[class*="toolbar_"] [aria-label="Threads"],
+[class*="toolbar_"] [aria-label="Notification Settings"],
+[aria-label="Inbox"],
+[aria-label="Help"],
+a[href^="https://support.discord.com"] {
+	display: none !important;
+}
+
+/* Server list: no Discover or Download Apps. */
+[class*="listItem_"]:has([data-list-item-id="guildsnav___guild-discover-button"]),
+[class*="listItem_"]:has([data-list-item-id="guildsnav___app-download-button"]) {
+	display: none !important;
+}
+
+/* Home: no Active Now column. */
+[class*="nowPlayingColumn_"] {
+	display: none !important;
+}
+
+/* Plain profiles: no avatar decorations, profile effects, nameplates or
+   display name fonts and gradients. */
+[class*="avatarDecoration_"],
+[class*="profileEffects_"],
+[class*="nameplate_"],
+[class*="nameplated_"] [class*="container_"] > [class*="videoContainer_"] {
+	display: none !important;
+}
+[class*="dnsFont_"],
+[class*="displayNameStyles"] {
+	font-family: var(--font-primary) !important;
+	background: none !important;
+	-webkit-text-fill-color: currentColor !important;
+	animation: none !important;
+}
+
+/* User panel: avatar and one big white name, no status line. The name
+   column is centred against the avatar now that the status row is gone. */
+[class*="panelSubtextContainer_"] {
+	display: none !important;
+}
+[class*="accountPopoutButtonWrapper_"] {
+	display: flex !important;
+	align-items: center !important;
+}
+[class*="accountPopoutButtonWrapper_"] [class*="nameTag_"] {
+	display: flex !important;
+	align-items: center !important;
+	align-self: stretch !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+[class*="panelTitleContainer_"] {
+	display: flex !important;
+	align-items: center !important;
+	margin: 0 !important;
+}
+[class*="panelTitleContainer_"],
+[class*="panelTitleContainer_"] * {
+	font-size: 22px !important;
+	line-height: 28px !important;
+	font-weight: 600 !important;
+	color: var(--freedom-accent) !important;
+}
+
+/* Chat breathes: more gap between groups, lines no wider than ~90 chars. */
+[class*="groupStart_"] {
+	margin-top: 1.4rem !important;
+}
+[class*="messageContent_"] {
+	max-width: 90ch;
+}
+
+/* Role colours: real server colours unless --freedom-role-mode is custom,
+   then every role (names in chat and member list, gradient roles, role
+   mentions, role dots) uses --freedom-role-color. Only names that carry a
+   role colour change; role-less names keep the normal text colour. Uses a
+   style query; where unsupported, roles simply keep their real colours. */
+@container style(--freedom-role-mode: custom) {
+	[class*="username_"][style*="color"],
+	[class*="name_"] [style*="color"],
+	[class*="nameAndDecorators_"] [style*="color"] {
+		color: var(--freedom-role-color) !important;
+		background: none !important;
+		-webkit-text-fill-color: currentColor !important;
+	}
+	[class*="roleMention"] {
+		color: var(--freedom-role-color) !important;
+		background: var(--freedom-button) !important;
+	}
+	[class*="roleCircle_"],
+	[class*="roleDot_"] {
+		background-color: var(--freedom-role-color) !important;
+		color: var(--freedom-role-color) !important;
+	}
+}
+
+/* Hover fades in instead of snapping. */
+[class*="containerDefault_"] [class*="link_"],
+[class*="interactive_"],
+[class*="message_"],
+[class*="item_"] {
+	transition: background-color 120ms ease, color 120ms ease !important;
+}
+
+/* Selected channel or DM: a white bar on the left instead of a filled
+   background. */
+[class*="modeSelected_"] [class*="link_"],
+li[class*="channel_"] [class*="interactiveSelected_"] {
+	background: transparent !important;
+	box-shadow: inset 2px 0 0 var(--freedom-accent) !important;
+	border-radius: 0 6px 6px 0 !important;
+}
+[class*="modeSelected_"] [class*="name_"],
+li[class*="channel_"] [class*="interactiveSelected_"] [class*="name_"] {
+	color: var(--freedom-accent) !important;
+}
+
+/* No upsells: boost goal bars, the Server Boosts entry at the top of the
+   channel list, Get Nitro banners and Nitro badges. */
+li:has(> * > [aria-label="Server Boosts"]),
+li:has([class*="basicChannelRowLink_"]):has([aria-label="Server Boosts"]),
+[class*="containerDefault_"]:has([aria-label="Server Boosts"]),
+[class*="upsell" i],
+[class*="premiumPromo" i],
+[class*="guildBoostBar" i],
+[class*="progressBarContainer_"]:has([class*="boost" i]),
+[aria-label^="Subscriber since"],
+[aria-label^="Server boosting since"],
+a[href*="/settings/premium"] {
+	display: none !important;
+}
+
+/* Game activity: hidden in profiles and the member list. Anything that
+   links to or mentions Spotify stays. */
+[class*="activityCard" i]:not(:has(a[href*="spotify.com"], [class*="spotify" i])),
+[class*="userProfileActivity" i]:not(:has(a[href*="spotify.com"], [class*="spotify" i])),
+[class*="member_"] [class*="activity_"]:not(:has([class*="spotify" i], [aria-label*="Spotify"])) {
+	display: none !important;
+}
+
+/* No clan / server tags next to names. */
+[class*="clanTag_"],
+[class*="guildTag" i],
+[class*="chipletContainerInner_"] {
+	display: none !important;
+}
+
+/* Every profile is plain black: no theme colours, gradient border or
+   banner image. Discord paints profiles from these variables. */
+[class*="userProfileOuter"],
+[class*="userProfileInner"],
+[class*="userPopoutOuter"],
+[class*="userPopoutInner"],
+[class*="profileCard"],
+[class*="fullProfile"],
+[class*="customProfileTheme_"],
+.custom-profile-theme,
+.custom-theme-background {
+	--profile-gradient-primary-color: #000000 !important;
+	--profile-gradient-secondary-color: #000000 !important;
+	--profile-gradient-overlay-color: transparent !important;
+	--profile-gradient-button-color: var(--freedom-button) !important;
+	--profile-body-background-color: #000000 !important;
+	--profile-body-background-hover: var(--freedom-hover) !important;
+	--profile-body-divider-color: var(--freedom-border) !important;
+	--profile-body-border-color: var(--freedom-border) !important;
+	--profile-message-input-border-color: var(--freedom-border) !important;
+	--profile-note-background-color: var(--freedom-input) !important;
+	--profile-role-pill-background-color: var(--freedom-card) !important;
+	--profile-role-pill-border-color: var(--freedom-border) !important;
+	--profile-avatar-border-color: #000000 !important;
+	--custom-user-profile-theme-color-blend: none !important;
+	background: #000000 !important;
+	background-image: none !important;
+}
+[class*="userProfile"] [class*="banner_"],
+[class*="userPopout"] [class*="banner_"],
+[class*="profile" i] [class*="bannerImage"],
+[class*="profile" i] [class*="bannerSVGWrapper"] [class*="banner_"] {
+	background: #000000 !important;
+	background-image: none !important;
+}
+[class*="userProfile"] [class*="banner_"] > *,
+[class*="userPopout"] [class*="banner_"] > *,
+[class*="profile" i] [class*="bannerImg"],
+[class*="animatedBannerHoverLayer_"] {
+	display: none !important;
+}
+/* The message box and activity cards inside profiles. */
+[class*="userProfile"] [class*="channelTextArea"],
+[class*="userPopout"] [class*="channelTextArea"],
+[class*="userPopout"] [class*="activity" i] {
+	background: var(--freedom-input) !important;
+	color: var(--freedom-fg) !important;
+}
+
+/* No badges on profiles. */
+[class*="badgeList_"],
+[class*="profileBadges_"],
+[class*="userProfile"] [class*="badges_"],
+[class*="userPopout"] [class*="badges_"],
+[class*="userProfile"] [class*="badgeContainer_"],
+[class*="userPopout"] [class*="badgeContainer_"] {
+	display: none !important;
+}
+
+/* One font for every name: no display name fonts, gradients, glows or
+   outlines. */
+[class*="username_"],
+[class*="displayName" i],
+[class*="nickname" i],
+[class*="nameTag"],
+[class*="name_"],
+[class*="dnsFont_"],
+[class*="displayNameStyles" i],
+[class*="displayNameStyles" i] * {
+	font-family: var(--font-primary) !important;
+	background-image: none !important;
+	-webkit-text-stroke: 0 !important;
+	-webkit-text-fill-color: currentColor !important;
+	filter: none !important;
+	animation: none !important;
+}
+
+/* No top bar (back/forward, title, inbox) on Linux, where the window
+   manager draws the frame. It stays on Windows and macOS, and anywhere the
+   bar holds window buttons, so nobody loses minimise / maximise / close.
+   The reserved row shrinks to a 16px gap so nothing touches the top edge. */
+html:not(.platform-win):not(.platform-osx):has([class*="base_"] > [class*="bar_"]:not(:has([class*="winButton"], [aria-label="Minimize"], [aria-label="Maximize"]))),
+html:not(.platform-win):not(.platform-osx) [class*="base_"]:has(> [class*="bar_"]:not(:has([class*="winButton"], [aria-label="Minimize"], [aria-label="Maximize"]))) {
+	--custom-app-top-bar-height: 16px !important;
+}
+html:not(.platform-win):not(.platform-osx) [class*="base_"] > [class*="bar_"]:not(:has([class*="winButton"], [aria-label="Minimize"], [aria-label="Maximize"])) {
+	display: none !important;
+}
+
+/* Message / image right-click menu: no Create Thread, Bookmark, Create
+   Reminder, Apps or Speak Message. Menu item ids are stable, unlike class names. */
+[role="menu"] [id="message-thread"],
+[role="menu"] [id^="message-"][id*="thread"],
+[role="menu"] [id^="message-"][id*="bookmark"],
+[role="menu"] [id^="message-"][id*="remind"],
+[role="menu"] [id^="message-"][id*="tts"],
+[role="menu"] [id^="message-"][id*="speak"],
+[role="menu"] [id="message-apps"],
+[role="menu"] [id^="message-"][id$="-apps"],
+[role="menu"] [id^="message-"][id*="app-launcher"],
+[role="menu"] [id^="message-"][id*="application"] {
+	display: none !important;
+}
+
+/* No "Edit Image with Apps" button on image hover. */
+[aria-label="Edit Image with Apps"],
+[class*="hoverButtonGroup_"] > :has([aria-label*="with Apps"]) {
+	display: none !important;
+}
+
+/* Round server icons, matching avatars. Discord clips them with an SVG
+   squircle mask; drop it and round the icon itself. */
+[data-list-item-id^="guildsnav___"] foreignObject,
+[class*="listItem_"] foreignObject[mask*="squircle"] {
+	mask: none !important;
+}
+[data-list-item-id^="guildsnav___"] img,
+[data-list-item-id^="guildsnav___"] [class*="childWrapper_"],
+[class*="listItem_"] foreignObject [class*="wrapper_"] {
+	border-radius: 50% !important;
+}
+
+/* Search: a thin outlined field that fills in once focused. */
+[class*="searchBar_"] {
+	background: transparent !important;
+	border: 1px solid var(--freedom-border) !important;
+	transition: background-color 120ms ease, border-color 120ms ease !important;
+}
+[class*="searchBar_"]:focus-within {
+	background: var(--freedom-input) !important;
+	border-color: var(--freedom-dim) !important;
+}
+
+/* Voice channel users sit as small pills that wrap, not a tall list. */
+:has(> [class*="voiceUser_"]) {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	gap: 4px !important;
+	padding: 2px 8px 4px 32px !important;
+}
+[class*="voiceUser_"] {
+	width: fit-content !important;
+	max-width: 100% !important;
+}
+[class*="voiceUser_"] [class*="content_"] {
+	background: var(--freedom-card) !important;
+	border-radius: 999px !important;
+	padding: 2px 10px 2px 2px !important;
+	height: auto !important;
+}
+
+/* Shorter banners: the whole header slides up 40px and the popout clips
+   the top of the (already black) banner, so avatar and text move together. */
+[class*="userPopoutOuter"],
+[class*="userProfileOuter"] {
+	overflow: hidden !important;
+}
+[class*="userPopout"] header:has([class*="banner_"]),
+[class*="userProfile"] header:has([class*="banner_"]) {
+	margin-top: -40px !important;
+}
+
+/* Folders follow the round icons: the closed folder is a circle with round
+   mini icons inside, and an open folder's backdrop is a pill whose ends
+   hug the first and last circle. */
+[class*="folderIconWrapper_"],
+[class*="closedFolderIconWrapper_"],
+[class*="expandedFolderIconWrapper_"],
+[class*="folderButton_"],
+[class*="folderButtonInner_"] {
+	border-radius: 50% !important;
+}
+[class*="closedFolderIconWrapper_"] img,
+[class*="closedFolderIconWrapper_"] [class*="guildIcon"],
+[class*="closedFolderIconWrapper_"] [class*="icon_"] {
+	border-radius: 50% !important;
+}
+[class*="expandedFolderBackground_"],
+[class*="folderGroupBackground_"] {
+	border-radius: 999px !important;
+}
+[class*="folder_"] foreignObject,
+[class*="wrapper_"]:has([class*="folderIconWrapper_"]) foreignObject {
+	mask: none !important;
+}
+
+/* Badges everywhere: Discord serves every profile badge from /badge-icons/,
+   so hide those images and the links or buttons that wrap them. */
+img[src*="/badge-icons/"],
+a:has(> img[src*="/badge-icons/"]),
+[role="button"]:has(> img[src*="/badge-icons/"]),
+[aria-label="User Badges" i],
+[class*="badgeList" i],
+[class*="profileBadge" i] {
+	display: none !important;
+}
+
+/* No pronouns, in profiles or next to names, and no "•" left dangling
+   before them. */
+[class*="pronouns" i],
+[aria-label="Pronouns" i],
+:has(+ [class*="pronouns" i]):not(:has(*)):is([class*="dot" i], [class*="separator" i], [class*="spacer" i]) {
+	display: none !important;
+}
+
+/* Buttons in the server list (home, add a server) lost their squircle with
+   the mask; round them like the icons. */
+[data-list-item-id^="guildsnav___"] foreignObject > *,
+[data-list-item-id^="guildsnav___"][class*="circleIconButton_"],
+[data-list-item-id="guildsnav___create-join-button"],
+[data-list-item-id="guildsnav___home"],
+[class*="listItem_"] foreignObject > *,
+[class*="circleIconButton_"] {
+	border-radius: 50% !important;
+}
+
+/* Create a server: only "Create My Own". The template header and every
+   template after the first button go. */
+[class*="templatesList" i] > :not(:first-child),
+[class*="templates_"] > :not(:first-child),
+[role="dialog"] [class*="optionHeader" i],
+[role="dialog"] [class*="templateHeader" i] {
+	display: none !important;
+}
+
+/* With the templates gone, let their area shrink to the one button so the
+   modal stops reserving the old height. */
+[class*="templatesList" i],
+[class*="templates_"],
+[role="dialog"] [class*="scroller" i]:has(> * > [class*="templatesList" i], > [class*="templatesList" i], > * > [class*="templates_"], > [class*="templates_"]) {
+	height: auto !important;
+	min-height: 0 !important;
+	max-height: none !important;
+	flex: 0 0 auto !important;
+}
+
+/* Sit "Have an invite already?" snugly under Create My Own. */
+[role="dialog"]:has([class*="templatesList" i], [class*="templates_"]) [class*="footer" i] {
+	margin-top: -8px !important;
+}
+[role="dialog"]:has([class*="templatesList" i], [class*="templates_"]) [class*="footer" i] button {
+	margin-top: 10px !important;
+}
+
+/* Same tight gap between the subtitle and Create My Own as under the
+   invite heading. */
+[role="dialog"]:has([class*="templatesList" i], [class*="templates_"]) [class*="header" i] {
+	padding-bottom: 16px !important;
+	margin-bottom: 0 !important;
+}
+[class*="templatesList" i],
+[class*="templates_"] {
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+}
+
+/* User / DM right-click menu: no Start a Call, Add Note, Apps or Ignore. */
+[role="menu"] [id^="user-context-"][id*="call"],
+[role="menu"] [id^="user-context-"][id*="note"],
+[role="menu"] [id^="user-context-"][id*="apps"],
+[role="menu"] [id^="user-context-"][id*="app-launcher"],
+[role="menu"] [id^="user-context-"][id*="application"],
+[role="menu"] [id^="user-context-"][id*="ignore"] {
+	display: none !important;
+}
+
+/* "+" menu in the message box: keep Upload a File and Create Poll. */
+[role="menu"] [id^="channel-attach-"][id*="thread" i],
+[role="menu"] [id^="channel-attach-"][id*="app" i],
+[role="menu"] [id^="channel-attach-"][id*="schedule" i],
+[role="menu"] [id^="channel-attach-"][id*="slash" i],
+[role="menu"] [id^="channel-attach-"][id*="command" i],
+[role="menu"] [id^="channel-attach-"][id*="activit" i],
+[role="menu"] [id^="channel-attach-"][id*="launcher" i] {
+	display: none !important;
+}

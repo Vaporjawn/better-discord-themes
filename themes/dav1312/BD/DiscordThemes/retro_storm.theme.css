@@ -1,0 +1,12 @@
+/**
+ * @name Retro Storm
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(148.71deg, var(--bg-gradient-retro-storm-1) 5.64%, var(--bg-gradient-retro-storm-2) 26.38%, var(--bg-gradient-retro-storm-2) 49.92%, var(--bg-gradient-retro-storm-1) 73.12%);
+}

@@ -1,0 +1,93 @@
+/**
+ * @name Your Theme Name
+ * @author YourName
+ * @version 0.0.1
+ * @description A customizable BetterDiscord theme with modern styling
+ * @authorId YOUR_DISCORD_ID_HERE
+ * @authorLink https://github.com/yourusername
+ * @source https://github.com/yourusername/your-theme
+ * @updateUrl https://raw.githubusercontent.com/yourusername/your-theme/main/example.theme.css
+ * @website https://yourusername.github.io/your-theme
+ * @invite YOUR_DISCORD_INVITE
+ * @donate https://paypal.me/yourusername
+ * @patreon https://patreon.com/yourusername
+ */
+
+/* ==========================================
+   USER CUSTOMIZABLE VARIABLES
+   Modify these values to customize your theme
+   ========================================== */
+
+:root {
+  /* ============ Colors ============ */
+  --primary-color: #5865f2; /* Main accent color | DEFAULT: #5865f2 */
+  --secondary-color: #3ba55d; /* Success/positive color | DEFAULT: #3ba55d */
+  --accent-color: #ed4245; /* Error/negative color | DEFAULT: #ed4245 */
+  --background-primary: #36393f; /* Main background | DEFAULT: #36393f */
+  --background-secondary: #2f3136; /* Secondary background | DEFAULT: #2f3136 */
+  --background-tertiary: #202225; /* Tertiary background | DEFAULT: #202225 */
+  --text-primary: #dcddde; /* Primary text color | DEFAULT: #dcddde */
+  --text-secondary: #b9bbbe; /* Secondary text color | DEFAULT: #b9bbbe */
+  --text-muted: #72767d; /* Muted text color | DEFAULT: #72767d */
+
+  /* ============ Backgrounds ============ */
+  --custom-background: url("https://i.imgur.com/your-image.jpg"); /* Custom background image URL */
+  --background-blur: 5px; /* Blur amount for background | DEFAULT: 5px */
+  --background-opacity: 0.85; /* Background transparency (0-1) | DEFAULT: 0.85 */
+  --use-custom-background: 0; /* Set to 1 to enable custom background | DEFAULT: 0 */
+
+  /* ============ Fonts ============ */
+  --primary-font: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif; /* Main font family */
+  --code-font: "Consolas", "Monaco", monospace; /* Code block font */
+  --font-size-base: 16px; /* Base font size | DEFAULT: 16px */
+  --font-weight-normal: 400; /* Normal font weight | DEFAULT: 400 */
+  --font-weight-bold: 600; /* Bold font weight | DEFAULT: 600 */
+
+  /* ============ Sizing ============ */
+  --server-size: 48px; /* Server icon size | DEFAULT: 48px */
+  --avatar-size-small: 32px; /* Small avatar size | DEFAULT: 32px */
+  --avatar-size-medium: 40px; /* Medium avatar size | DEFAULT: 40px */
+  --avatar-size-large: 80px; /* Large avatar size | DEFAULT: 80px */
+  --border-radius: 8px; /* Standard border radius | DEFAULT: 8px */
+  --border-radius-small: 4px; /* Small border radius | DEFAULT: 4px */
+  --spacing-small: 8px; /* Small spacing | DEFAULT: 8px */
+  --spacing-medium: 16px; /* Medium spacing | DEFAULT: 16px */
+  --spacing-large: 24px; /* Large spacing | DEFAULT: 24px */
+
+  /* ============ Effects ============ */
+  --shadow-elevation-low: 0 1px 5px rgba(0, 0, 0, 0.2); /* Light shadow */
+  --shadow-elevation-medium: 0 4px 8px rgba(0, 0, 0, 0.3); /* Medium shadow */
+  --shadow-elevation-high: 0 8px 16px rgba(0, 0, 0, 0.4); /* Heavy shadow */
+  --transition-speed: 0.2s; /* Animation speed | DEFAULT: 0.2s */
+}
+
+/* ==========================================
+   IMPORT COMPILED THEME STYLES
+   Do not modify below this line
+   ========================================== */
+
+@import url("https://yourdomain.com/path/to/compiled-theme.css");
+
+/* ==========================================
+   CUSTOM BACKGROUND (if enabled)
+   ========================================== */
+
+.bg-h5JY_x,
+.appMount-2yBXZl {
+  background: var(--custom-background) center/cover no-repeat fixed;
+  background-blend-mode: overlay;
+}
+
+.bg-h5JY_x::before,
+.appMount-2yBXZl::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(calc(var(--background-blur) * var(--use-custom-background)));
+  background: rgba(0, 0, 0, calc((1 - var(--background-opacity)) * var(--use-custom-background)));
+  z-index: -1;
+  pointer-events: none;
+}

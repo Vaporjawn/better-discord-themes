@@ -1,0 +1,18 @@
+/**
+ * @name CyanColorways
+ * @description Theme that enables compatibility between Cyan and DiscordColorways
+ * @author DaBluLite#7409
+ * @authorId 582170007505731594
+ * @version 1.0.0
+ * @source https://github.com/DaBluLite/Cyan
+ * @invite ZfPH6SDkMW
+ */
+
+
+:root {
+    --cyan-background-primary: hsla(var(--primary-700-hsl) / 60%) !important;
+    --cyan-accent-color: hsl(var(--brand-500-hsl)) !important;
+}
+.theme-dark #app-mount .lookFilled_dd4f85.colorBrand_dd4f85 {
+    color: #fff !important;
+}

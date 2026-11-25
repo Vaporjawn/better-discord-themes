@@ -1,0 +1,35 @@
+/**
+ * @name MacLike
+ * @version 1.2.5
+ * @description A theme borrowing MacOS design language. Part of the WAM project.
+ * @author syrys
+*/
+
+/* DO NOT TOUCH (unless you know what you are doing) */
+@import url(https://syryz.github.io/MacLike-Discord/src/sidebar.css);
+@import url(https://syryz.github.io/MacLike-Discord/src/window-buttons.css);
+@import url(https://syryz.github.io/MacLike-Discord/src/tweaks.css);
+/* @import url(https://syryz.github.io/MacLike-Discord/src/settings.css); Currently not working due to Discord's changes */
+
+/* All lines below are settings. Remove as you wish. */
+/* Safari-like Header/Address Bar !!EXPERIMENTAL!! */
+@import url(https://syryz.github.io/MacLike-Discord/src/header.css);
+/* Apple Emojis */
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/Apple.css);
+
+/* MAIN SETTINGS */
+:root {
+  --main-app-bg_light: rgba(36, 36, 36, 0.8);
+  --main-app-bg_dark: rgba(36, 36, 36, 0.8);
+
+  --window-button-size: 13px; /* Mac Default: 13px */
+
+  --enable-window-border: 1; /* Disable: 0 */
+
+  --glass-opacity_active: 80%; /* Mac Default: 80% */
+  --glass-opacity_inactive: 100%; /* Mac Default: 100% */
+  --glass-brightness_dark: 90%; /* Mac Default: 90% */
+  --glass-brightness_light: 110%; /* Mac Default: 100% */
+  --glass-blur-strength: 33px; /* Mac Default: 33px */
+  --glass-blur-saturation: 150%; /* Mac Default: 150% */
+}

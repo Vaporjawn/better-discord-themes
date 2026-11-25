@@ -1,0 +1,1020 @@
+/**
+* @name Nightcord
+* @author mfycode, Miya (heya puddpudd!!), Ren (@riamuyumemi)
+* @version 1.1.0
+* @description A theme made to look like the Nightcord UI from Project Sekai (プロセカ)!
+* @website https://mfycode.github.io
+*/
+/*Credits to @KageMiyaku and @Pudding77984612 for the original theme. Thank you!*/
+[data-popout-root],
+html {
+  --brand-experiment: #884499;
+  --brand-experiment-100: #e8d6ed;
+  --brand-experiment-130: #e3cde9;
+  --brand-experiment-160: #dec4e5;
+  --brand-experiment-200: #d9bbe1;
+  --brand-experiment-230: #d5b3dd;
+  --brand-experiment-260: #d0aad9;
+  --brand-experiment-300: #cba1d5;
+  --brand-experiment-330: #c18fcd;
+  --brand-experiment-360: #b77ec5;
+  --brand-experiment-400: #ad6cbe;
+  --brand-experiment-430: #a35ab6;
+  --brand-experiment-460: #984cab;
+  --brand-experiment-500: #884499;
+  --brand-experiment-530: #783c87;
+  --brand-experiment-560: #693476;
+  --brand-experiment-600: #592c64;
+  --brand-experiment-630: #492552;
+  --brand-experiment-660: #3a1d41;
+  --brand-experiment-700: #2a152f;
+  --brand-experiment-730: #221126;
+  --brand-experiment-760: #1a0d1d;
+  --brand-experiment-800: #120915;
+  --brand-experiment-830: #0a050c;
+  --brand-experiment-860: #030103;
+  --brand-experiment-900: black;
+  --brand-experiment-05a: rgba(136, 68, 153, 0.05);
+  --brand-experiment-10a: rgba(136, 68, 153, 0.1);
+  --brand-experiment-15a: rgba(136, 68, 153, 0.15);
+  --brand-experiment-20a: rgba(136, 68, 153, 0.2);
+  --brand-experiment-25a: rgba(136, 68, 153, 0.25);
+  --brand-experiment-30a: rgba(136, 68, 153, 0.3);
+  --brand-experiment-35a: rgba(136, 68, 153, 0.35);
+  --brand-experiment-40a: rgba(136, 68, 153, 0.4);
+  --brand-experiment-45a: rgba(136, 68, 153, 0.45);
+  --brand-experiment-50a: rgba(136, 68, 153, 0.5);
+  --brand-experiment-55a: rgba(136, 68, 153, 0.55);
+  --brand-experiment-60a: rgba(136, 68, 153, 0.6);
+  --brand-experiment-65a: rgba(136, 68, 153, 0.65);
+  --brand-experiment-70a: rgba(136, 68, 153, 0.7);
+  --brand-experiment-75a: rgba(136, 68, 153, 0.75);
+  --brand-experiment-80a: rgba(136, 68, 153, 0.8);
+  --brand-experiment-85a: rgba(136, 68, 153, 0.85);
+  --brand-experiment-90a: rgba(136, 68, 153, 0.9);
+  --brand-experiment-95a: rgba(136, 68, 153, 0.95);
+}
+
+.theme-dark,
+.theme-light {
+  --header-primary: #ffffff;
+  --header-secondary: #c0bfcb;
+  --text-normal: #ffffff;
+  --text-muted: #c0bfcb;
+  --text-link: #58e0fe;
+  --text-link-low-saturation: #57c3ff;
+  --text-positive: #57ff78;
+  --text-warning: #ffdd59;
+  --text-danger: #ff5754;
+  --text-brand: #884499;
+  --background-primary: #4e4869;
+  --background-secondary: #3d3659;
+  --background-secondary-alt: #393253;
+  --background-tertiary: #312d4a;
+  --background-accent: #884499;
+  --background-floating: #2d2944;
+  --background-nested-floating: #3d3659;
+  --background-mobile-primary: #4e4869;
+  --background-mobile-secondary: #3d3659;
+  --chat-background: #4e4869;
+  --chat-border: #312d4a;
+  --chat-input-container-background: #4e4869;
+  --background-modifier-hover: rgba(255, 255, 255, 0.15);
+  --background-modifier-selected: rgba(255, 255, 255, 0.2);
+  --background-modifier-accent: rgba(255, 255, 255, 0.26);
+  --background-modifier-active: rgba(255, 255, 255, 0.17);
+  --info-positive-background: rgba(87, 255, 120, 0.15);
+  --info-positive-foreground: #57ff78;
+  --info-positive-text: #ffffff;
+  --info-warning-background: rgba(255, 221, 89, 0.15);
+  --info-warning-foreground: #ffdd59;
+  --info-warning-text: #ffffff;
+  --info-danger-background: rgba(255, 87, 84, 0.15);
+  --info-danger-foreground: #ff5754;
+  --info-danger-text: #ffffff;
+  --info-help-background: rgba(88, 224, 254, 0.15);
+  --info-help-foreground: #58e0fe;
+  --info-help-text: #ffffff;
+  --status-positive-background: #57ff78;
+  --status-positive-text: #312d4a;
+  --status-warning-background: #ffdd59;
+  --status-warning-text: #312d4a;
+  --status-danger-background: #ff5754;
+  --status-danger-text: #ffffff;
+  --status-danger: #ff5754;
+  --status-positive: #57ff78;
+  --status-warning: #ffdd59;
+  --button-danger-background: #ff5754;
+  --button-danger-background-hover: #ff3e3b;
+  --button-danger-background-active: #ff312e;
+  --button-danger-background-disabled: #ff5754;
+  --button-positive-background: #57ff78;
+  --button-positive-background-hover: #3eff64;
+  --button-positive-background-active: #31ff59;
+  --button-positive-background-disabled: #57ff78;
+  --button-secondary-background: #665f7d;
+  --button-secondary-background-hover: #5a546f;
+  --button-secondary-background-active: #5a546f;
+  --button-secondary-background-disabled: #665f7d;
+  --button-outline-danger-text: #ffffff;
+  --button-outline-danger-border: #ff5754;
+  --button-outline-danger-background: transparent;
+  --button-outline-danger-background-hover: #ff4a47;
+  --button-outline-danger-text-hover: #ffffff;
+  --button-outline-danger-border-hover: #ff4a47;
+  --button-outline-danger-background-active: #ff3e3b;
+  --button-outline-danger-text-active: #ffffff;
+  --button-outline-danger-border-active: #ff4a47;
+  --button-outline-positive-text: #ffffff;
+  --button-outline-positive-border: #57ff78;
+  --button-outline-positive-background: transparent;
+  --button-outline-positive-background-hover: #4aff6e;
+  --button-outline-positive-text-hover: #312d4a;
+  --button-outline-positive-border-hover: #4aff6e;
+  --button-outline-positive-background-active: #3eff64;
+  --button-outline-positive-text-active: #ffffff;
+  --button-outline-positive-border-active: #4aff6e;
+  --button-outline-brand-text: #ffffff;
+  --button-outline-brand-border: #884499;
+  --button-outline-brand-background: transparent;
+  --button-outline-brand-background-hover: #804090;
+  --button-outline-brand-text-hover: #ffffff;
+  --button-outline-brand-border-hover: #804090;
+  --button-outline-brand-background-active: #783c87;
+  --button-outline-brand-text-active: #ffffff;
+  --button-outline-brand-border-active: #804090;
+  --button-outline-primary-text: #ffffff;
+  --button-outline-primary-border: #6a6681;
+  --button-outline-primary-background: transparent;
+  --button-outline-primary-background-hover: #64607a;
+  --button-outline-primary-text-hover: #ffffff;
+  --button-outline-primary-border-hover: #64607a;
+  --button-outline-primary-background-active: #5e5b73;
+  --button-outline-primary-text-active: #ffffff;
+  --button-outline-primary-border-active: #64607a;
+  --modal-background: #4e4869;
+  --modal-footer-background: #312d4a;
+  --scrollbar-thin-thumb: #312d4a;
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: #312d4a;
+  --scrollbar-auto-track: rgba(61, 54, 89, 0.65);
+  --scrollbar-auto-scrollbar-color-thumb: #884499;
+  --scrollbar-auto-scrollbar-color-track: rgba(61, 54, 89, 0.65);
+  --input-background: #312d4a;
+  --input-placeholder-text: #e3e3e8;
+  --logo-primary: #ffffff;
+  --control-brand-foreground: #884499;
+  --control-brand-foreground-new: #884499;
+  --background-mentioned: rgba(255, 221, 89, 0.1);
+  --background-mentioned-hover: rgba(255, 221, 89, 0.08);
+  --background-message-hover: rgba(49, 45, 74, 0.07);
+  --background-message-automod: rgba(242, 213, 207, 0.05);
+  --background-message-automod-hover: rgba(242, 213, 207, 0.1);
+  --background-message-highlight: rgba(136, 68, 153, 0.1);
+  --background-message-highlight-hover: rgba(136, 68, 153, 0.08);
+  --channels-default: #b2b1c0;
+  --channel-icon: #b2b1c0;
+  --channel-text-area-placeholder: rgba(255, 255, 255, 0.5);
+  --channeltextarea-background: #3d3659;
+  --activity-card-background: #312d4a;
+  --textbox-markdown-syntax: #5a5473;
+  --spoiler-revealed-background: #5a5473;
+  --spoiler-hidden-background: #6a6681;
+  --android-navigation-bar-background: #312d4a;
+  --android-ripple: rgba(49, 45, 74, 0.3);
+  --deprecated-card-bg: rgba(49, 45, 74, 0.6);
+  --deprecated-card-editable-bg: rgba(49, 45, 74, 0.3);
+  --deprecated-store-bg: #4e4869;
+  --deprecated-quickswitcher-input-background: #5e5b73;
+  --deprecated-quickswitcher-input-placeholder: rgba(49, 45, 74, 0.3);
+  --deprecated-text-input-bg: #312d4a;
+  --deprecated-text-input-border: rgba(49, 45, 74, 0.3);
+  --deprecated-text-input-border-hover: #27233a;
+  --deprecated-text-input-border-disabled: #3d3659;
+  --deprecated-text-input-prefix: #c0bfcb;
+  --focus-primary: #884499;
+  --interactive-normal: #ffffff;
+  --interactive-muted: rgba(255, 255, 255, 0.3);
+  --interactive-hover: #ffffff;
+  --interactive-active: #ffffff;
+}
+.theme-dark [class*=disabledPointerEvents],
+.theme-light [class*=disabledPointerEvents] {
+  --background-floating: #5a5473;
+  --background-tertiary: #554e72;
+}
+
+div[class*=titleBar-][class*=typeWindows-][class*=withFrame-] {
+  height: 28px;
+  margin: 0;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class*=winButton-] {
+  margin: 11px 0 0 9px;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class*=winButton-] svg * {
+  fill: transparent;
+  stroke: transparent;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=winButtonClose-] {
+  background-color: #ff55aa;
+  margin-right: 8px;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=winButtonClose-]:hover {
+  background-color: #ff2291;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=winButtonMinMax-]:nth-child(3) {
+  background-color: #ffdd59;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=winButtonMinMax-]:nth-child(3):hover {
+  background-color: #cea400;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=winButtonMinMax-]:nth-child(4) {
+  background-color: #58e0fe;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=winButtonMinMax-]:nth-child(4):hover {
+  background-color: #01a7cc;
+}
+div[class*=titleBar-][class*=typeWindows-] div[class^=wordmarkWindows-] svg {
+  display: none;
+}
+div[class*=titleBar-][class*=typeWindows-]::before {
+  content: "Nightcord ";
+  font-weight: 800;
+  font-size: 0.85em;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  color: #c0bfcb;
+  width: auto;
+}
+
+[class*=staffBadge-] {
+  background-image: url("data:image/svg+xml,%3Csvg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23312d4a'%3E%3Cpath d='m5.92127 6.03526s.22115-.33086.31286-.47743c.09172-.14657-.23743-.49286-.36514-.60257-.12772-.10971-.32914-.05486-.32914-.05486-1.60715.71229-2.41115 2.17372-2.52086 2.466-.10972.29229.27943.61115.56657.76715.132.072.342-.08743.47143-.20572l.04371-.04457.06772-.06857.00085-.00086 4.37229 4.35517.59743-.5975 1.09801-1.098-4.32173-4.43224z'/%3E%3Cpath d='m16.2505 10.6294.2306-.2194 2.0717 2.052c.0146.0129.03.018.0437.018.0395 0 .072-.036.072-.036s2.2937-2.2757 2.3015-2.2834c.0677-.0669 0-.1037 0-.1037l-1.7692-1.78119-.0026.00258-.2425-.23743.1354-.13029.2897.03343-.0548-.384.0728-.07371-.1088-.55372c-.378-.53571-1.4135-1.39371-1.4135-1.39371l-.5417-.09772-.0548.07286-.408-.06086.0394.348.0257.02572-.1209.12171-.6685-.654s-3.8795-2.10686-4.086-2.20457c-.1166-.054-.2023-.09-.2846-.09-.0634 0-.1251.02143-.1963.072-.1646.11571-.0677.34886-.0677.34886l2.412 4.45714.4826.47829-.1509.15085-.0557.05572-.3857-.05315.0591.38229-.1114.11143-.0197-.01972c-.018-.018-.0429-.02742-.0669-.02742s-.048.00942-.0668.02742c-.0369.03686-.0369.09686 0 .13372l.0197.01971-.0532.054-.0137-.01457c-.0188-.018-.0428-.02743-.0668-.02743-.0249 0-.0489.00943-.0669.02743-.0368.03686-.0368.09686 0 .13372l.0146.01457-1.0149 1.02004-.0231-.0232c-.0189-.018-.0429-.0274-.0669-.0274s-.048.0094-.0668.0274c-.0369.0369-.0369.0969 0 .1337l.024.0232-.054.054-.018-.0172c-.018-.0188-.0429-.0283-.066-.0283-.0249 0-.0489.0095-.0677.0283-.036.0369-.036.096 0 .1329l.018.018-.132.1337-.018.1697.0694.0712-.0017.0008-.084.0857-5.47632 5.4755-.07114-.0592-.22714.0326-.12858.1303-.00857-.0086c-.01885-.0189-.04285-.0283-.06685-.0283s-.04886.0094-.06686.0283c-.03686.0369-.03686.096 0 .1329l.01028.0102-.05314.0549-.00514-.0051c-.018-.0189-.04286-.0283-.06686-.0283s-.048.0094-.06686.0283c-.036.0368-.036.096 0 .1328l.006.0069-1.002 1.0191-.02057-.0206c-.01885-.0188-.042-.0274-.06685-.0274-.024 0-.048.0086-.06686.0274-.03686.0369-.03686.0969 0 .1338l.02228.0214-.05314.054-.01628-.0163c-.01886-.018-.04286-.0274-.06772-.0274-.02314 0-.048.0094-.066.0274-.03686.0369-.03686.0969 0 .1337l.01714.018-.07457.0763-.38828-.0694.02914.4337-.12257.1251.10628.5846s.16286.5091.498.8469c.32486.3274.82029.4842.84172.5005l.55971.0977.138-.1354.38572.0626-.06343-.3814.11743-.1149.054.054c.018.018.042.0274.066.0274s.04885-.0094.06685-.0274c.03686-.0377.03686-.0969 0-.1337l-.05314-.0532.05486-.0531.04628.0463c.018.0188.04286.0283.06686.0283s.048-.0095.06686-.0283c.03686-.0369.03686-.096 0-.1329l-.04543-.0463 1.01743-1.0037.04457.0446c.018.0189.04286.0274.06686.0274s.048-.0085.06685-.0274c.036-.0369.036-.0969 0-.1337l-.04371-.0429.054-.054.03771.0377c.018.018.042.0275.066.0275.02486 0 .04886-.0095.06686-.0275.03686-.0368.03686-.0968 0-.1337l-.03686-.0368.114-.1115.04115-.2442-.06086-.0609.00086-.0009.11057-.1097 5.43946-5.4411-.0026-.0052.1063.1098.1706-.0189.1534-.1543.0248.0249c.0189.018.0429.0274.0669.0274s.0489-.0094.0669-.0274c.0368-.0369.0368-.0969 0-.1337l-.0249-.0249.054-.0531.0189.0188c.018.018.042.0274.0668.0274.024 0 .048-.0094.066-.0274.0369-.0368.0369-.0968 0-.1337l-.0188-.0197 1.0165-1.0183.0266.0266c.018.018.042.0274.066.0274.0249 0 .0489-.0094.0669-.0274.0368-.0369.0368-.0969 0-.1337l-.0266-.0266.054-.054.0206.0214c.0188.018.0428.0274.0668.0274s.048-.0094.0669-.0274c.0368-.0377.0368-.0968 0-.1337l-.0206-.0214.1131-.1132.378.0592z'/%3E%3Cpath d='m17.0057 16.7793-2.4111-1.8274-.4294-.4423-1.6637 1.6637.4183.3995 1.5711 2.3562 2.1188 2.3203 2.4421-2.2783z'/%3E%3C/g%3E%3C/svg%3E") !important;
+}
+
+[class*=permissionCheckmark-] {
+  background-image: url("%3Csvg height='18' width='18' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='m0 0h18v18h-18z'/%3E%3Cpath d='m14.25 14.25h-10.5v-10.5h7.5v-1.5h-7.5c-.8325 0-1.5.6675-1.5 1.5v10.5c0 .8284271.67157288 1.5 1.5 1.5h10.5c.8284271 0 1.5-.6715729 1.5-1.5v-6h-1.5zm-7.5675-6.94-1.0575 1.065 3.375 3.375 7.5-7.5-1.0575-1.065-6.4425 6.4425z' fill='%2357ff78'/%3E%3C/g%3E%3C/svg%3E") !important;
+}
+
+.theme-dark svg[class*=tier1ProfilePerk-],
+.theme-light svg[class*=tier1ProfilePerk-] {
+  color: #5789ff;
+}
+
+.theme-dark svg[class*=tier1BoostPerk-],
+.theme-light svg[class*=tier1BoostPerk-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=tier1CustomEmojiPerk-],
+.theme-light svg[class*=tier1CustomEmojiPerk-] {
+  color: #ffdd59;
+}
+
+.theme-dark svg[class*=tier1UploadPerk-],
+.theme-light svg[class*=tier1UploadPerk-] {
+  color: #bb94ff;
+}
+
+.theme-dark svg[class*=tier1StreamPerk-],
+.theme-light svg[class*=tier1StreamPerk-] {
+  color: #57ff78;
+}
+
+.theme-dark svg[class*=guildBoostingIcon-],
+.theme-light svg[class*=guildBoostingIcon-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=guildSubscriptionSlotIcon-],
+.theme-light svg[class*=guildSubscriptionSlotIcon-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=guildSubscriberCountIcon-],
+.theme-light svg[class*=guildSubscriberCountIcon-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=gemWithLabel-],
+.theme-light svg[class*=gemWithLabel-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=gemWithoutLabel-],
+.theme-light svg[class*=gemWithoutLabel-] {
+  color: #848196;
+}
+
+.theme-dark svg[class*=memberBadgeIcon-],
+.theme-light svg[class*=memberBadgeIcon-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=stickerIcon-],
+.theme-light svg[class*=stickerIcon-] {
+  color: #e357ff;
+}
+
+.theme-dark svg[class*=audioQualityIcon-],
+.theme-light svg[class*=audioQualityIcon-] {
+  color: #57c3ff;
+}
+
+.theme-dark svg[class*=uploadSizeIcon-],
+.theme-light svg[class*=uploadSizeIcon-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=threadIcon-],
+.theme-light svg[class*=threadIcon-] {
+  color: #57ffc8;
+}
+
+.theme-dark svg[class*=premiumIcon-],
+.theme-light svg[class*=premiumIcon-] {
+  color: #ff55aa;
+}
+
+.theme-dark svg[class*=gameIcon-],
+.theme-light svg[class*=gameIcon-] {
+  color: #ffffff;
+}
+
+.theme-dark svg[class*=circleIcon-],
+.theme-light svg[class*=circleIcon-] {
+  color: #57ff78;
+}
+
+.theme-dark svg[class*=noItemsIcon-],
+.theme-light svg[class*=noItemsIcon-] {
+  background-color: #665f7d;
+}
+
+[class*=lookFilled-][class*=colorLink-], [class*=lookFilled-][class*=colorYellow-], [class*=lookFilled-][class*=colorRed-], [class*=lookFilled-][class*=colorBrand-], [class*=lookFilled-][class*=colorBrandNew-], [class*=lookFilled-][class*=colorPrimary-] {
+  color: #ffffff;
+}
+[class*=lookFilled-][class*=colorBrandNew-], [class*=lookFilled-][class*=colorBrand-] {
+  background-color: #884499;
+}
+[class*=lookFilled-][class*=colorGreen-] {
+  color: #312d4a;
+}
+
+[class*=lookInverted-][class*=colorBrand-] {
+  color: var(--brand-experiment-600);
+}
+[class*=lookInverted-][class*=colorBrand-] svg[class^=premiumIcon] {
+  color: #ff0984;
+}
+
+.theme-dark [class*=lookLink-][class*=colorPrimary-],
+.theme-light [class*=lookLink-][class*=colorPrimary-] {
+  color: #ffffff;
+}
+
+div[class^=sidebarRegion-] div[class^=premiumTab-] > div > svg > path {
+  fill: #ff55aa;
+}
+
+div[class^=contentRegion-] #appearance-tab [class^=bar-],
+div[class^=contentRegion-] #appearance-tab [class^=markDash-],
+div[class^=contentRegion-] #accessibility-tab [class^=bar-],
+div[class^=contentRegion-] #accessibility-tab [class^=markDash-],
+div[class^=contentRegion-] [id="voice-&-video-tab"] [class^=bar-],
+div[class^=contentRegion-] [id="voice-&-video-tab"] [class^=markDash-] {
+  background: #665f7d;
+}
+div[class^=contentRegion-] [id="privacy-&-safety-tab"] div[class^=radioBar-][style*="hsl(139,"] {
+  border-color: #57ff78;
+}
+div[class^=contentRegion-] [id="privacy-&-safety-tab"] div[class^=radioBar-][style*="hsl(37,"] {
+  border-color: #ffdd59;
+}
+div[class^=contentRegion-] [id="privacy-&-safety-tab"] div[class^=radioBar-][style*="hsl(359,"] {
+  border-color: #ff5754;
+}
+div[class^=contentRegion-] #nitro-server-boost-tab circle[class^=circleProgress-] {
+  color: #ff55aa;
+}
+div[class^=contentRegion-] #nitro-server-boost-tab div[class*=gemIndicatorContainer-] {
+  background-color: #4e4869;
+}
+div[class^=contentRegion-] #nitro-server-boost-tab div[class*=gemIndicatorContainer-] div[class^=tierLabel-] {
+  color: #e3e3e8;
+}
+div[class^=contentRegion-] #subscriptions-tab [class^=sectionAccountCredit-],
+div[class^=contentRegion-] #subscriptions-tab [class^=subscriptionDetails-] {
+  border-color: var(--background-modifier-accent);
+}
+div[class^=contentRegion-] #library-inventory-tab div[class^=promotionIcon-] {
+  background-color: #4e4869;
+}
+div[class^=contentRegion-] #billing-tab [class*=Divider] {
+  border-color: var(--background-modifier-accent);
+}
+div[class^=contentRegion-] #billing-tab div[class^=defaultIndicator-] {
+  color: #ffffff;
+  background-color: #6a6681;
+}
+div[class^=contentRegion-] #billing-tab div[class*=summaryInfo],
+div[class^=contentRegion-] #billing-tab [class^=paymentHeader-] {
+  color: #ffffff;
+  border-color: var(--background-modifier-accent);
+}
+div[class^=contentRegion-] #billing-tab div[class^=paymentPane-],
+div[class^=contentRegion-] #billing-tab div[class*=paginator-],
+div[class^=contentRegion-] #billing-tab div[class*=payment-] {
+  background-color: #5a5473;
+  color: #ffffff;
+}
+div[class^=contentRegion-] #billing-tab div[class^=expandedInfo-] {
+  background-color: #665f7d;
+}
+div[class^=contentRegion-] #billing-tab [class*=paymentText-] {
+  color: #e3e3e8;
+}
+div[class^=contentRegion-] #billing-tab div[class^=codeRedemptionRedirect-] {
+  background-color: #3d3659;
+  color: #ffffff;
+  border-color: #5a5473;
+}
+div[class^=contentRegion-] [id="voice-&-video-tab"] div[class^=backgroundOptionRing-] {
+  border-color: #884499;
+}
+div[class^=contentRegion-] #keybinds-tab div[class^=keybindShortcut-] > span[class^=key-] {
+  color: #312d4a;
+}
+div[class^=contentRegion-] #keybinds-tab div[class^=keybindShortcut-] > span[class^=key-] svg > g {
+  fill: #312d4a;
+}
+div[class^=contentRegion-] #game-activity-tab div[class*=nowPlayingAdd-],
+div[class^=contentRegion-] #game-activity-tab div[class*=lastPlayed-],
+div[class^=contentRegion-] #game-activity-tab div[class*=overlayStatusText-] {
+  color: var(--text-muted);
+}
+div[class^=contentRegion-] #game-activity-tab div[class*=activeGame-][class*=nowPlaying] * {
+  color: #312d4a;
+}
+div[class^=contentRegion-] #game-activity-tab div[class*=activeGame-][class*=nowPlaying] * svg > g > path {
+  fill: #312d4a;
+}
+div[class^=contentRegion-] #game-activity-tab input[class^=gameName-] {
+  color: #ffffff;
+}
+div[class^=contentRegion-] #game-activity-tab input[class*=gameNameInput-]:hover, div[class^=contentRegion-] #game-activity-tab input[class*=gameNameInput-]:focus {
+  background-color: #3d3659;
+  border-color: rgba(61, 54, 89, 0.3);
+}
+div[class^=contentRegion-] #game-activity-tab div[class*=game-] {
+  -webkit-box-shadow: 0 1px 0 0 var(--background-modifier-accent);
+  box-shadow: 0 1px 0 0 var(--background-modifier-accent);
+}
+div[class^=contentRegion-] #overlay-tab label[class^=disabled-] {
+  color: #78748c;
+}
+div[class^=contentRegion-] #overlay-tab label[class*=option-]:not([class*=selected-]) {
+  color: #78748c;
+  background-color: #78748c;
+}
+div[class^=contentRegion-] section[class^=inputSensitivityToggle-] div[class*=speaking-] {
+  background: #57ff78 !important;
+}
+div[class^=contentRegion-] div[class*=reactionMe-] {
+  background-color: #5a5473 !important;
+}
+div[class^=contentRegion-] div[class^=control-] > div[class*=checked-],
+div[class^=contentRegion-] div[class^=sensitivity-] div[class*=checked-] {
+  background-color: #00a420 !important;
+}
+div[class^=contentRegion-] div[class^=control] > div[style*="background-color: hsl(218, calc(var(--saturation-factor, 1) * 4.6%), 46.9%)"] {
+  background-color: #6a6681 !important;
+}
+
+.bd-settings-title {
+  color: #ffffff;
+}
+
+.bd-switch-body {
+  --switch-color: #6a6681;
+}
+.bd-switch input:checked + .bd-switch-body {
+  --switch-color: #57ff78;
+}
+.bd-switch input:checked + .bd-switch-body svg.bd-switch-symbol path {
+  fill: #008a1b;
+}
+
+.bd-button {
+  background-color: #884499;
+  color: #ffffff;
+}
+.bd-button.bd-button-danger {
+  background-color: #ff5754;
+}
+
+.bd-controls > .bd-addon-button svg {
+  fill: #ffffff;
+}
+
+.bd-addon-views .bd-view-button.selected {
+  background-color: #884499;
+}
+.bd-addon-views .bd-view-button.selected svg {
+  fill: #ffffff;
+}
+
+div[class^=perksModal] {
+  background-color: #4e4869;
+}
+div[class^=perksModal] li[class^=perk] {
+  background-color: #3d3659;
+}
+div[class^=perksModal] li[class^=perk] svg {
+  color: #ff55aa;
+}
+div[class^=perksModal] svg[class^=giftIcon] {
+  color: #312d4a;
+}
+div[class^=perksModal] div[class^=tierHeaderUnlocked] {
+  background-image: linear-gradient(90deg, #5789ff, #e357ff);
+  color: #4e4869;
+}
+div[class^=perksModal] div[class^=tierUnlocked],
+div[class^=perksModal] div[class^=tierMarkerBackground] {
+  background-color: #4e4869;
+}
+div[class^=perksModal] div[class^=barBackground],
+div[class^=perksModal] div[class^=tierMarkerInProgress],
+div[class^=perksModal] div[class^=tierBody] {
+  background-color: #312d4a;
+}
+div[class^=perksModal] div[class^=tierMarkerInProgress] [class^=currentTierIcon] {
+  color: #ff55aa;
+}
+div[class^=perksModal] div[class^=barForeground],
+div[class^=perksModal] div[class^=tierMarkerAccomplished] {
+  background-color: #ff55aa;
+}
+div[class^=perksModal] svg[class^=currentTierIcon] {
+  color: #4e4869;
+}
+div[class^=perksModal] div[class*=tierMarkerLabelText],
+div[class^=perksModal] svg[class^=tierLock] {
+  color: var(--text-muted);
+}
+div[class^=perksModal] div[class*=selectedTier] div[class*=tierMarkerLabelText] {
+  color: var(--text-normal);
+}
+div[class^=perksModal] div[class^=tierHeaderLocked] {
+  background-color: #27233a;
+  color: var(--text-muted);
+}
+div[class^=perksModal] svg[class*=unlocked] {
+  color: #57ff78;
+}
+
+div[class^=sidebar-] div[class^=container] div[class^=progressBar-] {
+  background: linear-gradient(90deg, #5789ff, #e357ff);
+}
+div[class^=sidebar-] div[class^=container]:hover div[class^=progressBar-] {
+  background: linear-gradient(90deg, hsl(221deg, 70%, 55.5%), #e357ff 34%, #5789ff 67%, #e357ff);
+}
+div[class^=sidebar-] div[class^=container] div[class^=divider-] {
+  border-color: var(--background-modifier-accent);
+}
+
+div[class^=pageWrapper-] {
+  background: #4e4869 !important;
+}
+
+div[class^=homeContainer-] {
+  background: #4e4869 !important;
+}
+div[class^=homeContainer-] > div[class^=homeContent-] div[class*=card-] {
+  background: #5a5473 !important;
+}
+
+section[class^=guildListSection-] div[class^=guildList]:first-child div[class^=iconContainer-] {
+  background-color: #57ff78;
+}
+section[class^=guildListSection-] div[class^=guildList]:first-child div[class^=iconContainer-] > div[class^=icon-] {
+  background-image: url("data:image/svg+xml,%3Csvg fill='none' height='24' viewBox='0 0 25 24' width='25' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23312d4a'%3E%3Cpath clip-rule='evenodd' d='m13.25 18v-12h-1.5v12z' fill-rule='evenodd'/%3E%3Cpath clip-rule='evenodd' d='m7 12.75c-.69036 0-1.25.5596-1.25 1.25v4h-1.5v-4c0-1.5188 1.23122-2.75 2.75-2.75h11c1.5188 0 2.75 1.2312 2.75 2.75v4h-1.5v-4c0-.6904-.5596-1.25-1.25-1.25z' fill-rule='evenodd'/%3E%3Cpath d='m12.5 7c-1.3807 0-2.5-1.11929-2.5-2.5s1.1193-2.5 2.5-2.5 2.5 1.11929 2.5 2.5-1.1193 2.5-2.5 2.5z'/%3E%3Cpath d='m20 22c-1.3807 0-2.5-1.1193-2.5-2.5s1.1193-2.5 2.5-2.5 2.5 1.1193 2.5 2.5-1.1193 2.5-2.5 2.5z'/%3E%3Cpath d='m12.5 22c-1.3807 0-2.5-1.1193-2.5-2.5s1.1193-2.5 2.5-2.5 2.5 1.1193 2.5 2.5-1.1193 2.5-2.5 2.5z'/%3E%3Cpath d='m5 22c-1.38071 0-2.5-1.1193-2.5-2.5s1.11929-2.5 2.5-2.5 2.5 1.1193 2.5 2.5-1.11929 2.5-2.5 2.5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+section[class^=guildListSection-] div[class^=guildList]:first-child div[class*=addButton-] {
+  color: #312d4a;
+}
+
+nav[class*=guilds-] foreignObject > div[data-list-item-id^=guildsnav_] {
+  background-color: #4a426c;
+}
+nav[class*=guilds-] div[data-list-item-id=guildsnav___home] {
+  --background-primary: #4c436f;
+}
+nav[class*=guilds-] span[class^=expandedFolderBackground-] {
+  background-color: #4c436f;
+}
+nav[class*=guilds-] div[class^=folder-][class*=hover-] {
+  background-color: #5b5185;
+}
+nav[class*=guilds-] [data-list-item-id=guildsnav___home] svg[class^=homeIcon-] {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='172.3 169 667.59 666.93'%3E%3Cpath d='M839.88,498.33C836.41,597.16,802,678,733.48,743.4c-50.3,48-110.29,77.38-178.9,88.38-78.6,12.6-151.76-4-219.18-45C253.62,737,201.92,664.49,180.6,571.45c-20.23-88.28-2.81-170.83,45.58-246.52,50.72-79.32,123.26-129,215.15-148.58,92.93-19.8,178.45,1.07,255.31,55.33,77.14,54.47,122.94,129.61,138.43,222.85C837.72,470.43,838.63,486.61,839.88,498.33ZM584.51,254.09c-15.54,1.61-31.25,2.23-46.58,5C461,272.87,402.78,314.13,364.2,381.85c-30.55,53.62-38,111.92-27.16,172.07,14.7,81.39,59.92,141.22,133.65,178.43C527.57,761.06,588.22,766,649.16,750.1c88.5-23.07,147.26-79.87,175.61-166.91,13-39.78,14-80.86,7.29-122.05-8.95-54.6-33.78-101.08-74-138.82C709.44,276.72,651.12,255.12,584.51,254.09Z M498.39,548.53C479.6,546.93,461,533,456.17,511.71c-3.38-15.07,3.85-26.8,13.89-37,6.56-6.63,14.77-11.34,24.05-12.1a40.12,40.12,0,0,1,18.31,2.95c16.06,6.86,26.16,19.25,28.63,36.76.66,4.66-.53,9.94-2.13,14.49A47.84,47.84,0,0,1,498.39,548.53Z M679.75,461.81c19.26,1.58,38.93,15.78,43.09,38.5,2.65,14.43-4.36,26-14.38,35.39C683.61,558.92,646.14,546,638,511.8c-2.39-10.06.88-18.73,5.87-27C652.22,471.15,664.67,463.75,679.75,461.81Z'%3E%3C/path%3E%3C/svg%3E") center/cover no-repeat;
+  min-width: 48px;
+  min-height: 48px;
+  transform: scale(0.7);
+}
+nav[class*=guilds-] [data-list-item-id=guildsnav___home] svg[class^=homeIcon-] path {
+  fill: transparent;
+}
+
+div[class^=upperBadge] > div[class^=iconBadge] path {
+  color: #ffffff;
+}
+div[class^=upperBadge] div[class*=participating-] {
+  background: #57ff78;
+}
+
+div[class^=sidebar-] #channels svg[class^=spine-] {
+  color: #6a6681;
+}
+
+main[class^=chatContent-] form[class^=form-] div[class^=channelTextArea-] {
+  border: solid 1px #665f7d;
+}
+main[class^=chatContent-] form[class^=form-] div[class^=channelTextArea-] div[class^=attachedBars-] {
+  border-top: solid 1px #665f7d;
+}
+main[class^=chatContent-] form[class^=form-] div[class^=channelTextArea-] div[class^=attachedBars-] div[class^=replyBar-],
+main[class^=chatContent-] form[class^=form-] div[class^=channelTextArea-] div[class^=attachedBars-] div[class^=threadSuggestionBar-] {
+  background: #2d2944;
+}
+main[class^=chatContent-] form[class^=form-] div[class^=channelTextArea-] svg[class*=stickerIcon-] {
+  color: var(--interactive-normal) !important;
+}
+
+div[class^=channelTextArea-] button[class*=emojiButton-] {
+  background: transparent !important;
+}
+
+div[class*=autocomplete-] {
+  background-color: #312d4a !important;
+}
+div[class*=autocomplete-] div[class*=categoryHeader] {
+  background-color: #3d3659 !important;
+}
+div[class*=autocomplete-] div[class*=autocompleteRowSubheading] {
+  background-color: transparent;
+}
+div[class*=autocomplete-] div[class*=autocompleteRowContentSecondary] {
+  background-color: transparent;
+}
+div[class*=autocomplete-] div[class^=usageWrapper-] > div[class*=title-] {
+  color: #884499 !important;
+}
+div[class*=autocomplete-] strong {
+  color: #884499 !important;
+}
+
+main[class^=chatContent-] div[class^=messageAttachment-] {
+  --background-secondary: #6a6681;
+  --background-secondary-alt: #6a6681;
+  --text-link: #ffffff;
+}
+main[class^=chatContent-] div[class^=messageAttachment-] div[class^=attachmentInner-] div[class^=metadata-] {
+  color: var(--text-muted);
+}
+main[class^=chatContent-] div[class^=messageAttachment-] > div {
+  border-radius: 10px;
+}
+main[class^=chatContent-] div[class^=messageAttachment-] svg[class*=metadataIcon-],
+main[class^=chatContent-] div[class^=messageAttachment-] svg[class*=downloadButton-] {
+  color: transparent !important;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' x='0' y='0' version='1.1' viewBox='162.98 233.98 770.93 629.87'%3E%3Cpath fill='%23e3e3e8' d='M194.2 474.7c117-1 586.9-.7 703.6-.6 5.6 0 14.9 17.2 11.4 21.1-29.5 33.1-320.7 341.8-346 363.2-6.7 5.6-29.5 8.4-37.5.8-40.9-38.8-317.4-338.4-341.8-367.9-1.1-1.3 5.8-16.6 10.3-16.6zM218.4 234.1s568.8-.6 688 1.1c8.9.1 22.7 15.1 25.2 25.5 4.2 17.1 1.4 36 1 54.2-.6 29.1-19.9 41.8-54 36.4-6.7-1.1-441.5-2.1-652.1-2.2-17.3 0-40.6 2-50.4-7.7-10.9-10.8-12.3-33.9-12.8-51.8-1.4-55.5-.5-55.5 55.1-55.5z'%3E%3C/path%3E%3C/svg%3E") center/cover no-repeat;
+  transform: scale(0.65);
+}
+main[class^=chatContent-] div[class^=messageAttachment-] img[class^=icon-] {
+  top: -2px;
+  left: 1px;
+  position: relative;
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' viewBox='2.69 2.82 880.44 1077.05'%3E%3Cg%3E%3Cpath fill='%23e3e3e8' d='M794.4 1079.5c-4.1-.5-488.6-.3-710-.3-5.7 0-12.2-.3-16.8-3.1-10.7-6.5-20.6-14.5-30.6-22.1-22.7-17.2-34.2-39.8-34.2-68.6.1-181.8.2-363.7.1-545.5 0-114.9.2-229.8-.2-344.7-.1-23.6 10.9-41.6 25.8-57.6 7.6-8.1 18.4-13.1 26.9-20.5C68.4 5.9 83.8 3 99.8 3c141.6-.2 283.2-.2 424.7-.1 25.9 0 48.5 10.3 67.5 26.3 17.8 15 221.7 221.6 245.3 242.9 19.4 17.5 35.4 37.1 45.8 61.2v673.1l-4.5 9.9c-10.6 23.2-28.8 39.3-49.3 53.4-10.5 7.3-21.7 11.4-34.9 9.8zM73.2 538.8v428.5c0 26.9 6.9 39.3 25 43.3 9.5 2 19.2 3 28.9 3 187.2.2 374.4.2 561.6 0 28.6 0 57.2-2.5 85.7-2 27.7.5 37.9-15.3 37.9-40.1.4-202.7.3-405.3-.4-608 0-11.1-5.9-24.6-13.5-32.9-20.1-22.1-209.6-209-239.7-238-14.5-14-94.4-19.6-115.6-19.6-110.1.2-220.2.8-330.4-.3-28.4-.2-39.8 14.5-39.7 40 .3 142 .3 284.1.2 426.1z M623.5 791.2H279.1c-10.7 0-21.6 1.4-32-.4-10.4-1.9-13.1-11.7-12.6-20.9.5-9.1 6.7-13.5 15.8-13.5h351.8c11.1 0 22.2-.2 33.3-.1 9 .1 14.6 4.5 16 13.6 1.5 9.5-3.4 15.8-11.3 19.6-5.1 2.3-16.5 2.8-16.6 1.7zM620.2 639.9c-59.4.2-299.2.1-359.7.1-15 0-22.2-4.9-25.4-17-2.4-9.2 3-17.3 12.7-17.8 9.5-.5 19-.1 28.5-.1h355c9 0 18.7-1.3 20.2 11.7 1.3 11.3-3.8 18-16.5 20.9-4.8 1.3-9.8 2.1-14.8 2.2zM252.9 454c59.8-.1 316.5 0 379.8 0 15.5 0 23.9 8.4 17.9 20-3.1 6.1-13.2 11.2-20.5 11.8-16.3 1.4-269.2.6-371.8.5-15.3 0-23.6-5.6-24-16-.5-11.2 5.1-16.3 18.6-16.3z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+  background: transparent;
+}
+main[class^=chatContent-] div[class^=messageAttachment-] div[class^=audioMetadata-]:before {
+  content: "";
+  width: 30px;
+  height: 38px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='2.68 0.3 879.95 1078.95'%3E%3Cg%3E%3Cpath fill='%23e3e3e8' d='M882.6 331.5v674.2l-4.5 9.9c-10.5 23.2-28.8 39.4-49.2 53.5-10.6 7.3-21.8 11.4-34.9 9.8-4.1-.5-488.5-.3-709.9-.3-5.7 0-12.2-.4-16.8-3.2-10.7-6.6-20.5-14.5-30.6-22.2-22.3-17-34-39.2-34-67.6.2-297.3.2-594.5 0-891.8 0-28.9 13.9-50.8 34.9-67.3C52.2 15.1 70.8 8.8 87.5.3h448.3c1.1.9 2.2 2.4 3.4 2.4 20.7 1.1 37.6 12 52.5 24.3 17.6 14.6 32.5 32.5 48.7 48.8 25 25.2 50.1 50.3 75.2 75.3 17.6 17.6 35.1 35.1 52.8 52.5 22.7 22.3 44.9 45.2 68.5 66.6 19.4 17.6 35.4 37.1 45.7 61.3zM73 111.6c.2 141.5.1 668.9.2 791.1.1 27 1.8 54.1 2.1 81.1.2 13.8 7.6 21.5 19.6 24.5 10.4 2.6 21.3 4.5 32 4.6 188.3.3 376.6.3 564.9.1 27.4 0 54.8-2.5 82.1-2 27.9.6 38-15.6 38-40.1.4-203 .3-406-.4-609 0-11.2-5.9-24.6-13.4-33-20.1-22.2-43-41.8-64.1-63.1-28.8-29-56.7-59-85.7-87.9-29.5-29.5-59.8-58.3-89.8-87.4-14.5-14-30.7-23.5-52-22.2-21.1 1.4-42.3 2.3-63.5 2.4-110 .3-220.1.9-330.1-.3-28.5-.2-40 14.5-39.9 41.2z M405.3 457.4c0-33.5-.4-67 .5-100.4.1-5 6.6-9.8 9.9-14.8 7.2-11.3 17.7-12.5 30.3-12.8 46-1 86.9 12.9 122.3 41.4 43.8 35.2 71 81.4 82.6 136.3 3.8 17.9 5.4 36.4 7.1 54.7 1.6 17.4-14.7 33.9-32.1 32.7-3.9-.3-8.2-2.4-11.4-4.8-23.2-17.5-50.2-26.4-77.8-33.3-16-4-23.1 2.4-23.1 18.9.2 49.6 1.5 99.3 0 148.9-1.2 40.7-21.8 73-52.4 98.5-23.6 19.8-51.7 30-82.4 30.9-34.1 1-65.2-9.4-92-30.8-28.4-22.6-47-51.3-53.1-87.9-6.8-40.8 2.5-77.2 27.3-109.9 24-31.8 56.3-49.9 95.1-55.9 11.8-1.9 24.3-.5 36.4.1 10.1.5 14.1-3.3 13.9-13.8-.4-32.7-.2-65.4-.2-98.1l-.9.1zm43.4 44.2h.1c0 36.7.2 73.3-.2 110-.1 6.6-2.3 13.2-3.6 19.8-5.9-2.3-12.1-4.2-17.7-7.2-38.8-20.7-77.5-20.6-113.3 5.1s-50.3 62-41.6 105.5c10.9 54.9 59.1 86.7 107.4 83.4 64.6-4.4 96.6-54.2 100.6-105.5 2.7-34.4.5-69.2.4-103.8 0-28.6.1-57.2-.4-85.8-.1-7.3 1.7-11 9.4-11.5 43.9-3 85.5 4 123.3 28 2.8 1.8 6.3 2.5 9.5 3.7.1-3.5 1.2-7.4.2-10.5-8.2-23.8-14.6-48.6-25.9-70.9-10.1-19.8-22.8-40.8-39.9-54.1-25.8-20.3-56.5-33.5-89-38.3-15.6-2.3-19.4.3-19.4 16.3.1 38.5.1 77.2.1 115.8z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;
+}
+main[class^=chatContent-] div[class^=messageAttachment-] div[class^=audioControls-],
+main[class^=chatContent-] div[class^=messageAttachment-] div[class^=videoControls-] {
+  background-color: #3d3659;
+}
+
+div[class^=chat] > div[class^=content-] > div[class^=container-] {
+  background-color: #4e4869;
+}
+div[class^=chat] > div[class^=content-] > div[class^=container-] div[class*=mainCard-] {
+  background-color: #5a5473;
+}
+
+div[class^=sidebar-] > section[class^=panels-] svg[class*=buttonIcon-],
+div[class^=sidebar-] > section[class^=panels-] div[class*=buttonContents] {
+  fill: #ffffff;
+  color: #ffffff;
+}
+
+[data-list-id^=forum-channel-list-] div[class^=body-] > div[class^=tags] div[class*=pill] {
+  background-color: #3d3659;
+}
+[data-list-id^=forum-channel-list-] button[class^=submitButton-][class*=colorBrand] {
+  background-color: #884499;
+  color: #ffffff;
+}
+
+div[class^=chat] > div[class^=content-] main[class^=chatContent-] + div[class^=container-] {
+  background-color: var(--background-secondary);
+}
+
+.theme-dark div[class^=layerContainer] div[id^=popout_] > div[class*=didRender-] > div,
+.theme-light div[class^=layerContainer] div[id^=popout_] > div[class*=didRender-] > div {
+  background-color: var(--background-floating);
+}
+.theme-dark div[class^=layerContainer] div[id^=popout_] > div[class*=didRender-] > div div[class*=flowerStarContainer-] svg[class*=flowerStar-] *,
+.theme-light div[class^=layerContainer] div[id^=popout_] > div[class*=didRender-] > div div[class*=flowerStarContainer-] svg[class*=flowerStar-] * {
+  fill: #884499;
+}
+
+div[class*=recentMentionsPopout] div[class^=header-] div[class^=controls-] {
+  --background-secondary: #5a5473;
+  --background-primary: rgba(90, 84, 115, 0.9);
+}
+div[class*=recentMentionsPopout] div[class^=scroller-] [role=button] {
+  --background-tertiary: rgba(192, 191, 203, 0.15);
+  --background-floating: rgba(192, 191, 203, 0.12);
+}
+
+div[class*=rolesList] div[class^=role-],
+div[class*=rolesList] button[class^=addButton-] {
+  background-color: #463e66;
+}
+div[class*=rolesList] div[class^=role-] span[class^=roleCircle-][style*="background-color: rgb(185, 187, 190)"] {
+  background-color: #c0bfcb !important;
+}
+div[class*=rolesList] div[class^=role-] span[class^=roleCircle-][style*="background-color: rgb(54, 57, 62)"], div[class*=rolesList] div[class^=role-] span[class^=roleCircle-][style*="background-color: rgb(53, 57, 64)"] {
+  background-color: #4e4869 !important;
+}
+
+div[class^=layerContainer] > div[class^=layer] div[class^=reactors] {
+  background-color: var(--background-primary);
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=scroller] {
+  background-color: var(--background-secondary);
+}
+div[class^=layerContainer] > div[class^=layer] div[class*=reactorDefault] {
+  -webkit-box-shadow: inset 0 -1px 0 var(--background-modifier-accent);
+  box-shadow: inset 0 -1px 0 var(--background-modifier-accent);
+}
+div[class^=layerContainer] > div[class^=layer] div[class*=reactionSelected] {
+  background-color: var(--background-modifier-selected);
+}
+
+section[class^=positionContainer-] [class*=stickerInspected-] [class^=inspectedIndicator],
+section[class^=positionContainer-] [class^=emojiItem-][class*=emojiItemSelected-] {
+  background-color: var(--brand-experiment-50a);
+}
+
+.theme-light > div[class^=focusLock] > div[class^=root] > div[class^=container] div[class*=footer][class*=footerSeparator-] {
+  box-shadow: inset 0 1px 0 #5a5473;
+  -webkit-box-shadow: inset 0 1px 0 #5a5473;
+}
+.theme-light > div[class^=focusLock] > div[class^=root] {
+  box-shadow: 0 0 0 1px #5a5473, 0 2px 10px 0 hsla(0, calc(var(--saturation-factor, 1) * 0%), 0%, 0.1);
+  -webkit-box-shadow: 0 0 0 1px #5a5473, 0 2px 10px 0 hsla(0, calc(var(--saturation-factor, 1) * 0%), 0%, 0.1);
+}
+
+div[class^=layerContainer] #guild-header-popout,
+div[class^=layerContainer] #guild-context,
+div[class^=layerContainer] div[id^=channel-context],
+div[class^=layerContainer] div[id^=user-context] {
+  background: #312d4a;
+}
+div[class^=layerContainer] > div[class^=layer] div[role=listbox] {
+  background-color: #3d3659;
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modal-],
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modalSize-] {
+  background-color: #3d3659;
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modal-] li,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modal-] p,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modal-] span,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modalSize-] li,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modalSize-] p,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class^=modalSize-] span {
+  color: #ffffff;
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class*=footer] {
+  background-color: #312d4a;
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h1[class^=fixed-],
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h2[class^=fixed-],
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h3[class^=fixed-],
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h4[class^=fixed-],
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h5[class^=fixed-],
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h6[class^=fixed-] {
+  color: #ff5754;
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h1[class^=fixed-]:after,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h2[class^=fixed-]:after,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h3[class^=fixed-]:after,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h4[class^=fixed-]:after,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h5[class^=fixed-]:after,
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] h6[class^=fixed-]:after {
+  background-color: #ff5754;
+}
+div[class^=layerContainer] > div[class^=layer] div[class^=focusLock] div[class*=message-] {
+  background-color: #5a5473;
+}
+div[class^=layerContainer] div[class^=addGamePopout-] {
+  background-color: #3d3659;
+}
+div[class^=layerContainer] div[class*=searchOption-]::after,
+div[class^=layerContainer] div[class*=option-]::after,
+div[class^=layerContainer] li[class*=option-]::after {
+  display: none;
+}
+div[class^=layerContainer] div[class^=queryContainer] {
+  background-color: #312d4a;
+}
+div[class^=layerContainer] div[class^=queryContainer] span[class^=key] {
+  color: #ffffff;
+  background-color: #4e4869;
+}
+div[class^=layerContainer] [class*=tooltipBrand-] {
+  color: #312d4a;
+}
+div[class^=layerContainer] div[class^=popout-] div[class^=row][role=button]:hover {
+  color: #312d4a;
+}
+div[class^=layerContainer] div[class^=popout-] div[class^=row][role=button]:hover [class*=timestamp] {
+  color: #312d4a;
+}
+
+form[class*=card-] {
+  background-color: #4e4869;
+}
+
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-meta.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-subst,
+.hljs-symbol {
+  color: #ffae54;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-class.hljs-title,
+.hljs-class .hljs-title,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable {
+  color: #ffdd59;
+}
+
+.hljs-built_in,
+.hljs-deletion {
+  color: #ff94a2;
+}
+
+.hljs-doctag,
+.hljs-literal,
+.hljs-meta.hljs-meta-string,
+.hljs-meta .hljs-meta-string,
+.hljs-number,
+.hljs-regexp,
+.hljs-string {
+  color: #57ffc8;
+}
+
+.hljs-addition,
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #57ff78;
+}
+
+.hljs-name,
+.hljs-section,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-title {
+  color: #5789ff;
+}
+
+rect[fill^="hsl(139"],
+foreignObject[mask="url(#svg-mask-status-online)"] > div,
+div[class^=dotOnline] {
+  fill: #95fff0 !important;
+  background-color: #95fff0 !important;
+}
+
+rect[fill^="hsl(38"],
+foreignObject[mask="url(#svg-mask-status-idle)"] > div {
+  fill: #ffdd59 !important;
+  background-color: #ffdd59 !important;
+}
+
+rect[fill^="hsl(359"],
+foreignObject[mask="url(#svg-mask-status-dnd)"] > div {
+  fill: #ff5754 !important;
+  background-color: #ff5754 !important;
+}
+
+rect[fill^="hsl(214"],
+foreignObject[mask="url(#svg-mask-status-offline)"] > div,
+div[class^=dotOffline] {
+  fill: #c0bfcb !important;
+  background-color: #c0bfcb !important;
+}
+
+svg[class^=cursorDefault-] svg[class^=dots-] circle {
+  fill: #312d4a !important;
+}
+
+[style*="background-color: hsl(235, calc(var(--saturation-factor, 1) * 85.6%), 64.7%)"] {
+  background-color: #884499 !important;
+  color: #ffffff;
+}
+
+span[class^=username-][style*="color: rgb(54, 57, 62)"],
+span[class^=username-][style*="color: rgb(53, 57, 64)"] {
+  color: var(--background-primary) !important;
+}
+
+div[class*=flowerStarContainer-][class*=boostedGuildTierIconBackgroundWithVisibleBanner] svg[class*=flowerStar-] * {
+  fill: #fff;
+}
+div[class*=flowerStarContainer-][class*=boostedGuildTierIconBackgroundWithVisibleBanner] div[class^=childContainer-] svg * {
+  fill: #312d4a;
+}
+div[class*=flowerStarContainer-][class*=iconBackgroundTierOne-] svg[class*=flowerStar-] *, div[class*=flowerStarContainer-][class*=iconBackgroundTierTwo-]:not([class*=boostedGuildTierIconBackgroundWithVisibleBanner]) svg[class*=flowerStar-] * {
+  fill: #6a6681;
+}
+div[class*=flowerStarContainer-][class*=iconBackgroundTierOne-] div[class^=childContainer-] svg *, div[class*=flowerStarContainer-][class*=iconBackgroundTierTwo-]:not([class*=boostedGuildTierIconBackgroundWithVisibleBanner]) div[class^=childContainer-] svg * {
+  fill: #ffffff;
+}
+div[class*=flowerStarContainer-][class*=iconBackgroundTierThree-] svg[class*=flowerStar-] * {
+  fill: #ff55aa;
+}
+div[class*=flowerStarContainer-][class*=iconBackgroundTierThree-] div[class^=childContainer-] svg * {
+  fill: #ffffff;
+}
+div[class*=flowerStarContainer-][class*=verified-] svg[class*=flowerStar-] * {
+  fill: #57ff78;
+}
+div[class*=flowerStarContainer-][class*=verified-] div[class^=childContainer-] svg * {
+  fill: #312d4a;
+}
+div[class*=flowerStarContainer-][class*=partnered-] svg[class*=flowerStar-] * {
+  fill: #884499;
+}
+div[class*=flowerStarContainer-][class*=partnered-] div[class^=childContainer-] svg * {
+  fill: #ffffff;
+}
+
+div[class^=communityInfoPill] {
+  --background-accent: rgba(78, 72, 105, 0.7);
+  color: #ffffff;
+}
+div[class^=communityInfoPill] div[class^=text] {
+  font-weight: 500;
+}
+
+a[class*=socialLink-][href*=discord] {
+  color: #c0bfcb;
+}
+
+svg[class^=uploadIcon] {
+  color: #312d4a;
+}
+
+.theme-dark h2[class^=emptyStateHeader-],
+.theme-light h2[class^=emptyStateHeader-] {
+  color: #ffffff;
+}
+.theme-dark p[class^=emptyStateSubtext-],
+.theme-light p[class^=emptyStateSubtext-] {
+  color: #c0bfcb;
+}
+
+button[class*=emojiButtonNormal] > div > div {
+  filter: grayscale(0.82) hue-rotate(185deg) brightness(1.33) opacity(100%) !important;
+}

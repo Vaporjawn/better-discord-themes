@@ -1,0 +1,397 @@
+/**
+ * @name Futuristic
+ * @author TheRealMagyar
+ * @version 2.3.2
+ * @description Liquid-glass Discord theme with a full restyle of the Vencord AI plugin.
+ * @source https://github.com/TheRealMagyar/Futuristic
+ * @website https://github.com/TheRealMagyar/Futuristic
+ *
+ * Vencord / Equicord / Vesktop / BetterDiscord.
+ * Enable only this file. Edit the values below — the rest lives in engine/.
+ */
+
+@import url("https://raw.githubusercontent.com/TheRealMagyar/Futuristic/main/engine/main.css?v=2.3.2t");
+@import url("https://raw.githubusercontent.com/TheRealMagyar/Futuristic/main/engine/vencord.css?v=2.3.2t");
+@import url("https://raw.githubusercontent.com/TheRealMagyar/Futuristic/main/engine/betterdiscord.css?v=2.3.2t");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&display=swap");
+@import url("https://raw.githubusercontent.com/TheRealMagyar/Futuristic/main/engine/futuristic.css?v=2.3.2t");
+
+:root {
+  /* Colors */
+  --main-color: #7c5cff;
+  --hover-color: #9b82ff;
+  --success-color: #3ecf8e;
+  --danger-color: #ff5c7a;
+  --warning-color: #f5a623;
+  --info-color: #67e8f9;
+
+  /* Status */
+  --online-color: #3ecf8e;
+  --idle-color: #f5a623;
+  --dnd-color: #ff5c7a;
+  --streaming-color: #a78bfa;
+  --offline-color: #6b7280;
+
+  /* Background — gradient by default. For the repo photo, uncomment Void photo below. */
+  --background-shading-percent: 64%;
+  --background-image: radial-gradient(
+    1400px 920px at 16% -8%,
+    color-mix(in srgb, var(--main-color) 40%, #0a0a12) 0%,
+    #0a0a12 46%,
+    #06060a 100%
+  );
+  --background-position: center;
+  --background-size: cover;
+  --background-attachment: scroll;
+  --background-filter: none;
+  --futuristic-void-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/futuristic-void.jpg");
+  --futuristic-nebula-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/nebula.jpg");
+  --futuristic-ice-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/ice.jpg");
+  --futuristic-orbit-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/orbit.jpg");
+  --futuristic-aurora-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/aurora.jpg");
+
+  /* User popout / modal (ignored for Nitro profiles) */
+  --user-popout-image: var(--background-image);
+  --user-popout-position: var(--background-position);
+  --user-popout-size: var(--background-size);
+  --user-popout-attachment: var(--background-attachment);
+  --user-popout-filter: none;
+  --user-modal-image: var(--background-image);
+  --user-modal-position: var(--background-position);
+  --user-modal-size: var(--background-size);
+  --user-modal-attachment: var(--background-attachment);
+  --user-modal-filter: none;
+
+  /* Home icon — none keeps Discord's DMs mark */
+  --home-icon: none;
+  --home-size: cover;
+
+  /* Fonts (must be installed, except Orbitron which is loaded above) */
+  --main-font: "gg sans", "Inter", "Segoe UI", system-ui, sans-serif;
+  --code-font: "JetBrains Mono", "Fira Code", "gg mono", Consolas, monospace;
+
+  /* Channels */
+  --channel-normal: var(--interactive-text-default);
+  --channel-muted: var(--interactive-muted);
+  --channel-hover: var(--interactive-text-hover);
+  --channel-selected: var(--interactive-text-active);
+  --channel-selected-bg: color-mix(in srgb, var(--main-color) 26%, transparent);
+  --channel-unread: var(--main-color);
+  --channel-unread-hover: var(--hover-color);
+
+  /* Other */
+  --focus-color: var(--main-color);
+  --futuristic-overlay-filter: none; /* menus. blur(14px) saturate(1.18) if you want frost */
+}
+
+/* Variants — uncomment ONE */
+
+/* Cyan */
+/*
+:root { --main-color: #22d3ee; --hover-color: #67e8f9; }
+*/
+
+/* Emerald */
+/*
+:root { --main-color: #34d399; --hover-color: #6ee7b7; }
+*/
+
+/* Rose */
+/*
+:root { --main-color: #fb7185; --hover-color: #fda4af; }
+*/
+
+/* Amber */
+/*
+:root { --main-color: #f59e0b; --hover-color: #fbbf24; }
+*/
+
+/* Pure black */
+/*
+:root {
+  --main-color: #e5e7eb;
+  --hover-color: #ffffff;
+  --background-shading-percent: 86%;
+  --background-image: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+}
+*/
+
+/* Wallpapers — uncomment ONE. Photos live in assets/.
+   Discord blocks raw.githubusercontent.com inside CSS url(); jsDelivr serves the same GitHub files. */
+
+/* Void — abstract purple bokeh */
+/*
+:root {
+  --background-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/futuristic-void.jpg");
+  --background-shading-percent: 40%;
+}
+*/
+
+/* Nebula — violet dust, dark center */
+/*
+:root {
+  --background-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/nebula.jpg");
+  --background-shading-percent: 40%;
+}
+*/
+
+/* Ice — cyan / teal nebula */
+/*
+:root {
+  --background-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/ice.jpg");
+  --background-shading-percent: 42%;
+}
+*/
+
+/* Orbit — ringed planet and moon */
+/*
+:root {
+  --background-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/orbit.jpg");
+  --background-shading-percent: 38%;
+}
+*/
+
+/* Aurora — glass shards and ribbons */
+/*
+:root {
+  --background-image: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/aurora.jpg");
+  --background-shading-percent: 40%;
+}
+*/
+
+/* Icons — off by default (Discord native). Uncomment to use assets/icons. */
+/*
+:root {
+  --home-native: none;
+  --icon-native: none;
+  --icon-fill: currentColor;
+  --home-icon: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/home.svg");
+  --icon-discover: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/discover.svg");
+  --icon-add: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/add.svg");
+  --icon-settings: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/settings.svg");
+  --icon-inbox: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/inbox.svg");
+  --icon-help: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/help.svg");
+  --icon-nitro: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/nitro.svg");
+  --icon-shop: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/shop.svg");
+  --icon-gift: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/gift.svg");
+  --icon-emoji: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/emoji.svg");
+  --icon-gif: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/gif.svg");
+  --icon-sticker: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/sticker.svg");
+  --icon-search: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/search.svg");
+  --icon-pins: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/pins.svg");
+  --icon-threads: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/threads.svg");
+  --icon-members: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/members.svg");
+  --icon-call: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/call.svg");
+  --icon-video: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/video.svg");
+  --icon-mute: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/mute.svg");
+  --icon-deaf: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/deaf.svg");
+  --icon-send: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/send.svg");
+  --icon-notifications: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/notifications.svg");
+  --icon-notifications-off: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/notifications-off.svg");
+  --icon-attach: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/attach.svg");
+  --icon-apps: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/apps.svg");
+  --icon-disconnect: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/disconnect.svg");
+  --icon-screenshare: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/screenshare.svg");
+  --icon-soundboard: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/soundboard.svg");
+  --icon-activity: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/activity.svg");
+  --icon-invite: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/invite.svg");
+  --icon-events: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/events.svg");
+  --icon-reply: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/reply.svg");
+  --icon-forward: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/forward.svg");
+  --icon-more: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/more.svg");
+  --icon-edit: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/edit.svg");
+  --icon-bookmark: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/bookmark.svg");
+  --icon-friends: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/friends.svg");
+  --icon-download: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/download.svg");
+  --icon-mention: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/mention.svg");
+  --icon-copy: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/copy.svg");
+  --icon-delete: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/delete.svg");
+  --icon-create: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/create.svg");
+  --icon-info: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/info.svg");
+  --icon-link: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/link.svg");
+  --icon-boost: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/boost.svg");
+  --icon-react: url("https://cdn.jsdelivr.net/gh/TheRealMagyar/Futuristic@main/assets/icons/react.svg");
+}
+*/
+
+/* Extra CSS below this line */
+/* Live rules. These sit after the imports, so they apply even when
+   Electron still has an older copy of engine/futuristic.css cached. */
+
+html body:is(.theme-dark, .theme-darker, .theme-midnight) {
+  --background-base-low: rgba(18, 18, 24, 0.42) !important;
+  --background-base-lower: rgba(12, 12, 18, 0.55) !important;
+  --background-gradient-lowest: rgba(8, 8, 12, 0.22) !important;
+  --background-gradient-lower: rgba(12, 12, 18, 0.34) !important;
+  --background-gradient-low: rgba(12, 12, 18, 0.38) !important;
+  --background-gradient-high: rgba(12, 12, 18, 0.4) !important;
+  --background-gradient-highest: rgba(18, 18, 24, 0.48) !important;
+  --background-gradient-chat: rgba(12, 12, 18, 0.55) !important;
+  --app-frame-background: transparent !important;
+  --background-gradient-app-frame: transparent !important;
+  --home-background: transparent !important;
+}
+
+html body [class^="app_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+html body .sidebar_pog62O,
+html body .sidebarList_pog62O,
+html body .privateChannels_u88IQl,
+html body .guildSidebar_iar92T,
+html body [class*="sidebarList"],
+html body [class*="privateChannels"],
+html body .panels_pog62O,
+html body [class*="panels_"],
+html body .bar_3zSH5d,
+html body .container_ybUK7Z,
+html body .themed_ybUK7Z,
+html body .header_iar92T,
+html body .guildSidebarHeader_iar92T,
+html body .directMessagesHeader_u88IQl,
+html body .wrapper_5dqHTG,
+html body .refresh-fast-follow-guild-bg .wrapper_5dqHTG,
+html body .custom-theme-background .tree_5dqHTG,
+html body [class*="wrapper"]:has([data-list-item-id^="guildsnav"]),
+html body [class*="tree"]:has([data-list-item-id^="guildsnav"]) {
+  background: rgba(12, 12, 18, 0.4) !important;
+  background-color: rgba(12, 12, 18, 0.4) !important;
+  background-image: none !important;
+}
+
+html body .sidebar_pog62O::after,
+html body .bottomRailNotifCenterButton_5dqHTG::before,
+html body [class*="bottomRail"]::before {
+  background: none !important;
+  content: none !important;
+}
+
+/* Only the AI card is solid. The scrim and every larger shell stay clear. */
+html body [class*="layer"]:has(.vc-grokai-root),
+html body [class*="layer"]:has(.vc-grokai-nc),
+html body [class*="layer"]:has(.vc-grokai-root) [class*="backdrop"],
+html body [class*="layer"]:has(.vc-grokai-nc) [class*="backdrop"],
+html body [class*="focusLock"]:has(.vc-grokai-root),
+html body [class*="focusLock"]:has(.vc-grokai-nc),
+html body [class*="outerContainer"]:has(.vc-grokai-root),
+html body [class*="outerContainer"]:has(.vc-grokai-nc),
+html body [role="dialog"]:has(.vc-grokai-root):not(.container_dvN-MP),
+html body [role="dialog"]:has(.vc-grokai-nc):not(.container_dvN-MP),
+html body [class*="container"]:has(.vc-grokai-root):not(.container_dvN-MP),
+html body [class*="container"]:has(.vc-grokai-nc):not(.container_dvN-MP) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html body .container_dvN-MP:has(.vc-grokai-root),
+html body .container_dvN-MP:has(.vc-grokai-nc) {
+  --background-surface-high: #0c0c12 !important;
+  --modal-background: #0c0c12 !important;
+  --hsl-modal-shading: #0c0c12 !important;
+  background: #0c0c12 !important;
+  background-color: #0c0c12 !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html body .vc-grokai-root,
+html body .vc-grokai-nc {
+  background: #0c0c12 !important;
+  background-color: #0c0c12 !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html body .vc-grokai-sidebar,
+html body .vc-grokai-toolbar,
+html body .vc-grokai-messages,
+html body .vc-grokai-nc-summary {
+  background: #12121a !important;
+  background-color: #12121a !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Selected DM button. ClearVision paints .selected_tQErD4 with a
+   solid brand square behind the logo. Discord keeps the class; drop
+   only that fill. Do not mask the foreignObject or the pill. */
+html body [data-guilds-bar-home] .selected_tQErD4,
+html body [data-guilds-bar-home] .selected_tQErD4:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+html body [data-guilds-bar-home] defs > path {
+  d: path("M20 0a20 20 0 1 0 0 40a20 20 0 1 0 0-40Z") !important;
+}
+
+html body [data-guilds-bar-home] .childWrapper_JJ-hgR {
+  border-radius: 50% !important;
+  clip-path: circle(50% at 50% 50%) !important;
+}
+
+html body [class*="homeIcon"] {
+  width: 22px !important;
+  height: 16px !important;
+  max-width: 22px !important;
+  max-height: 16px !important;
+  flex: 0 0 auto !important;
+  clip-path: none !important;
+  transform: none !important;
+  translate: none !important;
+}
+
+html body .vc-grokai-sl {
+  display: flex !important;
+  align-items: center !important;
+  align-self: stretch !important;
+  justify-content: center !important;
+  width: var(--custom-guild-list-width, 72px) !important;
+  max-width: var(--custom-guild-list-width, 72px) !important;
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  translate: none !important;
+  float: none !important;
+  box-sizing: border-box !important;
+}
+
+html body .vc-grokai-sl > *,
+html body .vc-grokai-sl-btn,
+html body .vc-grokai-sl-btn:hover,
+html body .vc-grokai-sl-btn:focus-visible {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  translate: none !important;
+}
+
+html body .vc-grokai-sl-btn {
+  border-radius: 50% !important;
+  width: var(--guildbar-avatar-size, 48px) !important;
+  height: var(--guildbar-avatar-size, 48px) !important;
+  flex: 0 0 auto !important;
+}

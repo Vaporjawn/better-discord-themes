@@ -1,0 +1,26 @@
+/**
+ * @name Purple Night
+ * @description I hope you enjoy in this theme with pop up elements and clean purple background!
+ * @author Mr. プロキシ#2066
+ * @version 1.0.0
+ * @invite Uerdjskuxb
+ * @donate https://www.paypal.com/paypalme/Bypasssss
+ * @website https://github.com/Mr-Proxy-source
+ * @authorId 822146955127816223
+ */ 
+
+@import url('https://mr-proxy-source.github.io/Discord-Themes/Purple-Night/src/purplenight.css');
+
+:root {
+
+    /*Background settings*/
+
+    --app-background: url('https://images.hdqwalls.com/wallpapers/purple-night-ride-4k-qz.jpg'); /*App background*/
+    --app--bg-opacity: 0; /*App background opacity*/
+    --background-image: url('https://images.hdqwalls.com/wallpapers/purple-night-ride-4k-qz.jpg'); /*Main background image*/
+    --bg-blur: 0px; /*Main background blur*/
+    --bg-opacity: 0; /*Main background opacity*/
+    --popout-bg: url('https://images.hdqwalls.com/wallpapers/purple-night-ride-4k-qz.jpg'); /*Background for popouts*/
+    --popout-opacity: 0; /*Popout background opacity*/
+    --popout-blur: 7px; /*Popout background blur*/
+}

@@ -1,0 +1,672 @@
+/**
+ * @name Tokyo-night
+ * @description Tokyo Night colors. Shared reading and voice workspace.
+ * @author ussmarines
+ * @version 3.0.1
+ * @website https://github.com/ussmarines/Sibylla-Discord-Theme
+ * @source https://github.com/ussmarines/Sibylla-Discord-Theme/blob/main/themes/tokyo-night.theme.css
+ * @authorLink https://github.com/ussmarines
+ */
+/* 00-tokens.css */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* North Polar — approved composition contract (standalone rebuild).
+THESIS: A quiet reading room for long Discord discussions and voice sessions.
+OWN-WORLD: Dark Polar Night planes, Frost affordances, Figtree and reviewed Lucide outlines.
+STORY: Find the channel, read the conversation, reply, and reach native voice controls.
+FIRST VIEWPORT: 72px compact server index, continuous channel index, uninterrupted conversation, single 56px
+composer and integrated identity; Lecture et reperes plus Cabinet initial account reference.
+FORM: Native Discord semantics and state; restrained borders, no decorative nesting,
+glow or blur. Popups open in 130ms and respect reduced motion. No legacy imports.
+*/
+:root {
+    --sibnight-nord0: #2e3440;
+    --sibnight-nord1: #3b4252;
+    --sibnight-nord2: #434c5e;
+    --sibnight-nord3: #4c566a;
+    --sibnight-nord4: #d8dee9;
+    --sibnight-nord5: #e5e9f0;
+    --sibnight-nord6: #eceff4;
+    --sibnight-nord7: #8fbcbb;
+    --sibnight-nord8: #88c0d0;
+    --sibnight-nord9: #81a1c1;
+    --sibnight-nord10: #5e81ac;
+    --sibnight-nord11: #bf616a;
+    --sibnight-nord12: #d08770;
+    --sibnight-nord13: #ebcb8b;
+    --sibnight-nord14: #a3be8c;
+    --sibnight-nord15: #b48ead;
+
+    /* Polar Night depth, derived from Nord; accents retain their exact values. */
+    --sibnight-canvas: color-mix(in srgb, color-mix(in srgb, var(--sibnight-nord0) 55%, var(--sibnight-nord10)) 45%, #000);
+    --sibnight-index: color-mix(in srgb, var(--sibnight-nord0) 90%, var(--sibnight-canvas));
+    --sibnight-header: var(--sibnight-nord0);
+    --sibnight-control: color-mix(in srgb, var(--sibnight-nord2) 60%, var(--sibnight-canvas));
+    --sibnight-raised: var(--sibnight-nord0);
+    --sibnight-hover: color-mix(in srgb, var(--sibnight-nord3) 40%, transparent);
+    --sibnight-selected: color-mix(in srgb, var(--sibnight-nord9) 28%, var(--sibnight-index));
+    --sibnight-line: color-mix(in srgb, var(--sibnight-nord4) 16%, transparent);
+    --sibnight-foreground: var(--sibnight-nord4);
+    --sibnight-heading: var(--sibnight-nord6);
+    --sibnight-muted: color-mix(in srgb, var(--sibnight-nord4) 76%, var(--sibnight-nord0));
+    --sibnight-focus: var(--sibnight-nord8);
+    --sibnight-attention: color-mix(in srgb, var(--sibnight-nord11) 85%, #000);
+    --sibnight-channel-rest: color-mix(in srgb, var(--sibnight-nord4) 55%, var(--sibnight-nord3));
+    --sibnight-radius: 8px;
+    --sibnight-rail: 72px;
+    --sibnight-sidebar: var(--custom-guild-sidebar-width, 344px);
+    --sibnight-members: 272px;
+    --sibnight-reading-measure: 74ch;
+    --sibnight-composer-height: 56px;
+    --sibnight-header-height: 60px;
+    color-scheme: dark;
+}
+
+body {
+    --font-primary: 'Figtree', 'gg sans', sans-serif;
+    --font-display: var(--font-primary);
+    --font-code: 'gg mono', Consolas, monospace;
+    --custom-app-top-bar-height: 36px;
+    --custom-channel-textarea-text-area-height: var(--sibnight-composer-height);
+    font-weight: 400;
+}
+
+@media (max-width: 1200px) {
+    :root { --sibnight-members: 256px; }
+}
+
+/* 10-native-colors.css */
+/* Discord keeps ownership of its components, permissions and profile themes. */
+.theme-dark:not(.custom-user-profile-theme),
+.theme-light:not(.custom-user-profile-theme) {
+    --brand-500: var(--sibnight-nord8);
+    --brand-560: var(--sibnight-nord9);
+    --brand-600: var(--sibnight-nord10);
+    --brand-experiment: var(--sibnight-nord8);
+    --blurple-50: var(--sibnight-nord8);
+    --bg-brand: var(--sibnight-nord9);
+    --button-filled-brand-background: var(--sibnight-nord8);
+    --button-filled-brand-background-hover: var(--sibnight-nord7);
+    --button-filled-brand-background-active: var(--sibnight-nord9);
+    --button-filled-brand-text: var(--sibnight-nord0);
+    --background-brand: var(--sibnight-nord8);
+    --background-feedback-notification: var(--sibnight-attention);
+    --control-brand-foreground-new: var(--sibnight-nord8);
+    --control-positive-primary-background-default: var(--sibnight-nord14);
+    --control-positive-primary-background-hover: color-mix(in srgb, var(--sibnight-nord14) 85%, var(--sibnight-nord6));
+    --control-positive-primary-text-default: var(--sibnight-nord0);
+    --control-positive-primary-icon-default: var(--sibnight-nord0);
+    --radio-background-selected-default: var(--sibnight-nord8);
+    --radio-border-selected-default: var(--sibnight-nord8);
+    --radio-background-selected-hover: var(--sibnight-nord7);
+    --radio-border-selected-hover: var(--sibnight-nord7);
+    --radio-thumb-background-active: var(--sibnight-nord0);
+    --checkbox-background-selected-default: var(--sibnight-nord8);
+    --checkbox-border-selected-default: var(--sibnight-nord8);
+    --checkbox-background-selected-hover: var(--sibnight-nord7);
+    --checkbox-border-selected-hover: var(--sibnight-nord7);
+    --checkbox-icon-active: var(--sibnight-nord0);
+    --switch-background-selected-default: var(--sibnight-nord8);
+    --switch-background-selected-hover: var(--sibnight-nord7);
+    --switch-background-active: var(--sibnight-nord9);
+    --switch-thumb-background-selected-default: var(--sibnight-nord0);
+    --switch-thumb-icon-active: var(--sibnight-nord8);
+    --control-primary-background-default: var(--sibnight-nord8);
+    --control-primary-background-hover: var(--sibnight-nord7);
+    --control-primary-text-default: var(--sibnight-nord0);
+    --background-primary: var(--sibnight-canvas);
+    --background-secondary: var(--sibnight-index);
+    --background-secondary-alt: var(--sibnight-index);
+    --background-tertiary: var(--sibnight-canvas);
+    --background-floating: var(--sibnight-raised);
+    --background-base-low: var(--sibnight-canvas);
+    --background-base-lower: var(--sibnight-canvas);
+    --background-base-lowest: var(--sibnight-canvas);
+    --background-surface-high: var(--sibnight-raised);
+    --background-surface-higher: var(--sibnight-control);
+    --background-surface-highest: var(--sibnight-nord2);
+    --background-modifier-hover: var(--sibnight-hover);
+    --background-modifier-active: var(--sibnight-selected);
+    --background-modifier-selected: var(--sibnight-selected);
+    --background-message-hover: color-mix(in srgb, var(--sibnight-nord3) 10%, transparent);
+    --background-code: var(--sibnight-index);
+    --channeltextarea-background: var(--sibnight-control);
+    --chat-background: var(--sibnight-canvas);
+    --chat-border: var(--sibnight-line);
+    --input-background: var(--sibnight-control);
+    --modal-background: var(--sibnight-raised);
+    --modal-footer-background: var(--sibnight-index);
+    --text-normal: var(--sibnight-foreground);
+    --text-primary: var(--sibnight-foreground);
+    --text-secondary: var(--sibnight-muted);
+    --text-muted: var(--sibnight-muted);
+    --mention-foreground: var(--sibnight-nord8);
+    --mention-background: color-mix(in srgb, var(--sibnight-nord8) 18%, transparent);
+    --mention-background-hover: color-mix(in srgb, var(--sibnight-nord8) 28%, transparent);
+    --text-link: var(--sibnight-nord8);
+    --text-positive: var(--sibnight-nord14);
+    --text-danger: var(--sibnight-nord11);
+    --text-warning: var(--sibnight-nord13);
+    --header-primary: var(--sibnight-heading);
+    --header-secondary: var(--sibnight-muted);
+    --channels-default: var(--sibnight-muted);
+    --channel-icon: var(--sibnight-muted);
+    --interactive-text-default: var(--sibnight-muted);
+    --interactive-text-hover: var(--sibnight-heading);
+    --interactive-text-active: var(--sibnight-heading);
+    --interactive-icon-default: var(--sibnight-muted);
+    --interactive-icon-hover: var(--sibnight-heading);
+    --interactive-icon-active: var(--sibnight-heading);
+    --control-secondary-background-default: var(--sibnight-control);
+    --control-secondary-background-hover: var(--sibnight-nord3);
+    --control-secondary-text-default: var(--sibnight-heading);
+    --control-secondary-icon-default: var(--sibnight-foreground);
+    --control-critical-primary-background-default: var(--sibnight-attention);
+    --control-critical-primary-text-default: var(--sibnight-nord6);
+    --control-critical-primary-icon-default: var(--sibnight-nord6);
+    --interactive-normal: var(--sibnight-foreground);
+    --interactive-hover: var(--sibnight-heading);
+    --interactive-active: var(--sibnight-heading);
+    --interactive-muted: var(--sibnight-muted);
+    --icon-primary: var(--sibnight-foreground);
+    --icon-secondary: var(--sibnight-muted);
+    --icon-default: var(--sibnight-foreground);
+    --icon-muted: var(--sibnight-muted);
+    --icon-strong: var(--sibnight-heading);
+    --border-subtle: var(--sibnight-line);
+    --border-normal: var(--sibnight-line);
+    --border-strong: var(--sibnight-nord3);
+    --focus-primary: var(--sibnight-focus);
+    --border-focus: var(--sibnight-focus);
+    --notice-background-critical: var(--sibnight-control);
+    --notice-text-critical: var(--sibnight-heading);
+    --notice-background-positive: var(--sibnight-index);
+    --notice-text-positive: var(--sibnight-nord14);
+    --notice-background-warning: var(--sibnight-index);
+    --notice-text-warning: var(--sibnight-nord13);
+    --notice-background-info: var(--sibnight-index);
+    --notice-text-info: var(--sibnight-nord8);
+    --status-positive: var(--sibnight-nord14);
+    --status-danger: var(--sibnight-nord11);
+    --status-warning: var(--sibnight-nord13);
+    --scrollbar-auto-thumb: var(--sibnight-nord3);
+    --scrollbar-auto-track: transparent;
+    --scrollbar-thin-thumb: var(--sibnight-nord3);
+    --scrollbar-thin-track: transparent;
+    --channel-text-area-placeholder: var(--sibnight-muted);
+}
+
+/* Native message/mention notices: distinct from read channels, without hiding state. */
+#app-mount .newMessagesBar__0f481 { background: var(--sibnight-nord8); color: var(--sibnight-nord0); }
+#app-mount .newMessagesBar__0f481 button { color: inherit; }
+#app-mount .unreadPill__908e2 { color: var(--sibnight-nord6); background: var(--sibnight-nord11); }
+#app-mount .numberBadge__463b7 { background-color: var(--sibnight-attention); color: var(--sibnight-nord6); font-weight: 700; }
+
+#app-mount .toolbar__9293f .selected__9293f .icon__9293f { color: var(--sibnight-nord8); }
+#app-mount .toolbar__9293f .iconBadgeStyleImportant__9293f { background: var(--sibnight-attention); }
+#app-mount .toolbar__9293f .iconBadgeStyleUnread__9293f { background: var(--sibnight-nord8); }
+/* One bounded state query: native spring writes this legacy track color inline. */
+#app-mount .container_a28278:has(> .hiddenVisually_b18fe2 > input:checked) > .switchIndicator_a28278 {
+    background-color: var(--sibnight-nord10) !important;
+}
+
+/* 20-shell.css */
+/* Native grid tracks remain native. Only their shared dimensions are supplied. */
+#app-mount, .bg__960e4, .app__160d8, .base__5e434, .page__5e434 {
+    background: var(--sibnight-canvas);
+}
+#app-mount .base__5e434 {
+    --custom-guild-list-width: var(--sibnight-rail);
+}
+#app-mount .sidebar__5e434 {
+    width: var(--sibnight-sidebar);
+    margin: 0;
+    border-radius: 0;
+}
+#app-mount .page__5e434 { padding: 0; }
+#app-mount .guilds__5e434 {
+    --guildbar-avatar-size: 40px;
+    --guildbar-folder-size: 48px;
+    --custom-guild-list-padding: 16px;
+    width: var(--sibnight-rail);
+    margin: 0;
+    background: var(--sibnight-canvas);
+    border-radius: 0;
+    border-inline-end: 1px solid var(--sibnight-line);
+    box-sizing: border-box;
+}
+#app-mount .guilds__5e434 .listItem__650eb {
+    width: var(--sibnight-rail);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Native SVGs retain their 40px coordinate system, badges and hit targets. */
+#app-mount .guilds__5e434 .blobContainer_e5445c { position: relative; margin-block: 0; }
+#app-mount .guilds__5e434 .wrapper__6e9f8 { width: 40px; height: 40px; }
+#app-mount .guilds__5e434 .icon__6e9f8 { width: 40px; height: 40px; object-fit: cover; }
+#app-mount .guilds__5e434 .listItem__650eb > .wrapper__58105 { left: 0; }
+/* A flat index tab supports the native selection pill, without circling the logo. */
+#app-mount .guilds__5e434 .blobContainer_e5445c.selected_e5445c {
+    isolation: isolate;
+}
+#app-mount .guilds__5e434 .blobContainer_e5445c.selected_e5445c::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -8px;
+    inset-block-start: -4px;
+    width: 56px;
+    height: 48px;
+    background: var(--sibnight-selected);
+    border-radius: var(--sibnight-radius);
+    pointer-events: none;
+    z-index: -1;
+}
+#app-mount .guilds__5e434 .folderGroupBackground__48112 {
+    inset-inline-start: calc((var(--sibnight-rail) - 56px) / 2);
+    width: 56px;
+    background: var(--sibnight-index);
+    border-color: var(--sibnight-line);
+    border-radius: 8px;
+}
+/* Change only the base silhouette: badge cutouts and native status masks remain intact. */
+#app-mount .guilds__5e434 .svg_cc5dd2 > defs > path {
+    d: path("M8 0H32Q40 0 40 8V32Q40 40 32 40H8Q0 40 0 32V8Q0 0 8 0Z");
+}
+#app-mount .guilds__5e434 .folderIcon__48112 { color: var(--sibnight-nord8); }
+#app-mount .guilds__5e434 .folderButtonInner__48112 { border-radius: var(--sibnight-radius); }
+#app-mount .guilds__5e434 .folderPreviewWrapper__48112 {
+    background: var(--sibnight-index);
+    border-radius: var(--sibnight-radius);
+}
+/* Sparse folders keep their artwork centred on the native tooltip anchor. */
+#app-mount .guilds__5e434 .folderPreview__48112 { align-content: center; justify-content: center; }
+.keyboard-mode #app-mount .guilds__5e434 .focusStroke_cc5dd2 { stroke: var(--sibnight-nord8); }
+#app-mount .scroller_ef3116 { padding-top: 16px; }
+#app-mount .sidebarList__5e434 {
+    min-width: 0;
+    /* Native channel/DM scrollers already reserve the measured account/voice panels. */
+    margin-bottom: 0;
+    background: var(--sibnight-index);
+    border-radius: 0;
+    border-right: 1px solid var(--sibnight-line);
+}
+#app-mount :is(.container__2637a, .privateChannels_e6b769, .scroller__629e4, .header_f37cb1) { background: transparent; }
+/* Navigation uses Nord; the account panel keeps its native personal banner. */
+#app-mount .privateChannels_e6b769 .dm__972a0 .container_df39b2 { visibility: hidden; }
+#app-mount .privateChannels_e6b769 .interactiveSelected__972a0 { background: var(--sibnight-selected); color: var(--sibnight-heading); }
+#app-mount .header_f37cb1 { min-height: var(--sibnight-header-height); padding-inline: 20px; box-shadow: none; }
+#app-mount .privateChannels_e6b769 .searchBar_e6b769 { height: var(--sibnight-header-height); }
+#app-mount .name_f37cb1 { color: var(--sibnight-heading); font-size: 18px; font-weight: 650; }
+/* Row heights belong to Discord's virtualizer, including its density settings. */
+#app-mount .link__2ea32 { border-radius: 6px; }
+#app-mount .name__2ea32 { color: var(--sibnight-channel-rest); font-size: 16px; font-weight: 400; }
+#app-mount .icon__2ea32 { color: var(--sibnight-channel-rest); }
+#app-mount .modeMuted__2ea32 :is(.name__2ea32, .icon__2ea32) { color: var(--sibnight-channel-rest); opacity: .7; }
+#app-mount .link__2ea32:hover :is(.name__2ea32, .icon__2ea32) { color: var(--sibnight-heading); }
+#app-mount .unread__2ea32 { width: 4px; height: 10px; margin-top: -5px; background: var(--sibnight-nord8); border-radius: 0 2px 2px 0; }
+#app-mount .modeUnreadImportant__2ea32 .link__2ea32 { background: color-mix(in srgb, var(--sibnight-nord8) 5%, transparent); }
+#app-mount .modeUnreadImportant__2ea32 .icon__2ea32 { color: var(--sibnight-nord8); }
+#app-mount .modeSelected__2ea32 .link__2ea32 { background: var(--sibnight-selected); }
+#app-mount .modeSelected__2ea32 .name__2ea32 { color: var(--sibnight-heading); font-weight: 650; }
+#app-mount .modeUnreadImportant__2ea32 :is(.name__2ea32, .icon__2ea32) { color: var(--sibnight-heading); font-weight: 700; }
+#app-mount .container__9293f {
+    min-height: var(--sibnight-header-height);
+    margin: 0;
+    background: var(--sibnight-header);
+    box-shadow: none;
+    border-bottom: 1px solid var(--sibnight-line);
+}
+#app-mount .subtitleContainer_f75fb0 { margin: 0; }
+#app-mount .toolbar__9293f { gap: 8px; padding-right: 16px; }
+#app-mount .toolbar__9293f .iconWrapper__9293f {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 6px;
+}
+#app-mount .toolbar__9293f .iconWrapper__9293f:hover { background: var(--sibnight-hover); }
+#app-mount .toolbar__9293f .search__49676 {
+    width: clamp(128px, 18vw, 220px);
+    min-width: 128px;
+    flex: 0 1 220px;
+}
+#app-mount .searchBar_c322aa {
+    height: 34px;
+    padding-inline: 10px;
+    background: var(--sibnight-canvas);
+    border: 1px solid var(--sibnight-line);
+    border-radius: 6px;
+}
+#app-mount :is(.container_c8ffbb, .membersWrap_c8ffbb, .members_c8ffbb) {
+    width: var(--sibnight-members);
+    min-width: 0;
+    margin: 0;
+    background: var(--sibnight-index);
+    border-radius: 0;
+}
+#app-mount .container_c8ffbb { flex: 0 0 var(--sibnight-members); border-left: 1px solid var(--sibnight-line); }
+#app-mount .member_c8ffbb { margin-inline: 8px; max-width: calc(100% - 16px); border-radius: 6px; background: transparent; }
+#app-mount .member_c8ffbb:is(:hover, :focus-within) { background: var(--sibnight-hover); }
+#app-mount .member__5d473.offline__5d473 { opacity: 1; }
+#app-mount .container__91a9d { max-width: none; }
+#app-mount .bar_c38106 { min-height: 36px; background: var(--sibnight-canvas); }
+/* Keep native window chrome; align history with the conversation rather than the rail edge. */
+#app-mount .backForwardButtons__63abb { margin-inline-start: var(--sibnight-sidebar); min-width: 88px; gap: 4px; padding-inline: 8px; }
+#app-mount .button__63abb { min-width: 28px; min-height: 28px; }
+@media (max-width: 1200px) {
+    #app-mount .toolbar__9293f { gap: 4px; padding-right: 8px; }
+    #app-mount .toolbar__9293f .search__49676 { width: 128px; flex-basis: 128px; }
+    /* Keep the native stage wide enough to retain its commands; chat occupies the lower track. */
+    #app-mount .wrapper_cb9592.sidebarOpen_cb9592 {
+        height: max(284px, 52%);
+        box-sizing: border-box;
+    }
+    #app-mount .wrapper_cb9592.sidebarOpen_cb9592 ~ .layerContainer__59d0d > .chatLayerWrapper__01ae2.connectedRight__01ae2 {
+        top: max(284px, 52%);
+        height: calc(100% - max(284px, 52%));
+        width: 100%;
+    }
+    #app-mount .wrapper_cb9592.sidebarOpen_cb9592 ~ .layerContainer__59d0d > .chatLayerWrapper__01ae2.connectedRight__01ae2 > .container__01ae2 {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+#app-mount .callContainer_cb9592 {
+    min-width: 0;
+    container: sibnight-call / inline-size;
+}
+@container sibnight-call (max-width: 560px) {
+    #app-mount .bottomControls_bfe55a {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+    #app-mount .centerControls_bfe55a {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        min-width: 0;
+    }
+    #app-mount .centerControls_bfe55a > :last-child {
+        max-width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    #app-mount .edgeControls_bfe55a { grid-row: 2; gap: 8px; }
+}
+
+/* Reuse the native page grid area: history follows notices without fixed coordinates. */
+@supports (display: contents) {
+    #app-mount .base__5e434 > .bar_c38106,
+    #app-mount .base__5e434 > .bar_c38106 > .leading_c38106 { display: contents; }
+    #app-mount .base__5e434 > .bar_c38106 > .title_c38106 {
+        grid-area: titleBar;
+        position: relative;
+        inset: auto;
+        min-height: var(--custom-app-top-bar-height);
+        -webkit-app-region: drag;
+    }
+    #app-mount .base__5e434 > .bar_c38106 > .trailing_c38106 {
+        grid-area: titleBar;
+        justify-self: end;
+        align-self: center;
+    }
+    #app-mount .backForwardButtons__63abb {
+        grid-area: page;
+        align-self: start;
+        justify-self: start;
+        position: relative;
+        margin: 12px 8px;
+        height: 36px;
+        z-index: 101;
+    }
+    #app-mount .subtitleContainer_f75fb0 .title_f75fb0,
+    #app-mount .headerWrapper_cb9592 > .subtitleContainer__49508 > .headerBar__49508,
+    #app-mount .container__133bf .container__9293f { padding-inline-start: 112px; }
+}
+
+/* 30-conversation.css */
+#app-mount :is(.chatContent_f75fb0, .messagesWrapper__36d07, .chat_fb64c9, .container__01ae2) {
+    background: var(--sibnight-canvas);
+    border-radius: 0;
+}
+#app-mount .message__5126c { border-radius: 0; }
+/* Avatar, decoration and reply geometry share the native sizing/spacing tokens. */
+#app-mount .cozy_c19a55 .markup__75297 {
+    max-width: var(--sibnight-reading-measure);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--sibnight-foreground);
+    overflow-wrap: break-word;
+}
+#app-mount .cozy_c19a55.groupStart__5126c { margin-top: 24px; }
+#app-mount .username_c19a55 { font-size: 16px; font-weight: 650; }
+#app-mount .timestamp_c19a55 { color: var(--sibnight-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+#app-mount .markup__75297 a { color: var(--sibnight-nord8); text-decoration: underline; text-underline-offset: 3px; }
+#app-mount .markup__75297 :is(code, pre, .hljs) { background: var(--sibnight-index); border-color: var(--sibnight-line); }
+#app-mount .embedFull__623de { background: var(--sibnight-index); border-radius: 6px; }
+#app-mount :is(.reaction__23977, .reaction_f8896c) {
+    background: var(--sibnight-control);
+    border: 1px solid transparent;
+    border-radius: 6px;
+}
+#app-mount :is(.reactionMe__23977, .reactionMe_f8896c) { border-color: var(--sibnight-nord8); }
+#app-mount :is(.mentioned__5126c, .replying__5126c) { background: color-mix(in srgb, var(--sibnight-nord8) 8%, transparent); }
+#app-mount .mentioned__5126c::before { background: var(--sibnight-nord8); }
+#app-mount .divider__908e2 { border-width: 1px; border-radius: 0; }
+#app-mount .divider__908e2 .content__908e2 { color: var(--sibnight-muted); background: var(--sibnight-canvas); }
+#app-mount .endCap__908e2 { border-radius: 4px; }
+
+#app-mount .mention { color: var(--sibnight-nord8); background: var(--mention-background); }
+#app-mount .mention:hover { background: var(--mention-background-hover); color: var(--sibnight-nord6); }
+
+/* 40-composer.css */
+/* One surface, not a form containing another painted input container. */
+#app-mount .form_f75fb0 { padding-inline: 20px; background: transparent; }
+#app-mount .channelTextArea_f75fb0 {
+    margin-bottom: 18px;
+    background: var(--sibnight-control);
+    border: 0;
+    border-radius: var(--sibnight-radius);
+    box-shadow: none;
+}
+#app-mount .channelTextArea_f75fb0 :is(.scrollableContainer__74017, .themedBackground__74017, .inner__74017) {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+#app-mount .channelTextArea_f75fb0 .inner__74017 { min-height: var(--sibnight-composer-height); align-items: center; }
+#app-mount .slateTextArea_ec4baf { padding-block: 16px; caret-color: var(--sibnight-nord8); }
+#app-mount .channelTextArea_f75fb0:focus-within { outline: 1px solid var(--sibnight-focus); outline-offset: 0; }
+#app-mount .attachWrapper__0923f { display: flex; align-items: center; padding-block: 0; }
+#app-mount .channelTextArea_f75fb0 :is(.attachButton__74017, .attachWrapper__0923f button) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border-radius: 50%;
+    background: var(--sibnight-foreground);
+    color: var(--sibnight-canvas);
+}
+#app-mount .channelTextArea_f75fb0 :is(.attachButton__74017, .attachWrapper__0923f button) svg { width: 20px; height: 20px; color: inherit; }
+@media (max-width: 1200px) {
+    #app-mount .form_f75fb0 { padding-inline: 12px; }
+}
+
+/* 50-dock.css */
+/* Cabinet initial: an integrated identity row below a distinct native voice card. */
+#app-mount .panels__5e434 {
+    left: var(--sibnight-rail);
+    right: 0;
+    bottom: 0;
+    width: auto;
+    padding: 0;
+    gap: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--sibnight-index);
+}
+/* Preserve the owner's native account nameplate behind identity and controls. */
+#app-mount .panels__5e434 .fitInAccount_df39b2 { border-radius: 0; }
+#app-mount .panels__5e434 .container__37e49 > .buttons__37e49 { position: relative; z-index: 1; }
+#app-mount .panels__5e434 .container__37e49 {
+    height: auto;
+    min-height: 76px;
+    padding: 10px 4px;
+    gap: 4px;
+    flex-wrap: nowrap;
+    background: transparent;
+    border-top: 1px solid var(--sibnight-line);
+    border-radius: 0;
+    box-sizing: border-box;
+}
+#app-mount .panels__5e434 .accountPopoutButtonWrapper__37e49 { flex: 1 1 auto; min-width: 0; }
+#app-mount .panels__5e434 .avatar__37e49 { width: 36px; height: 36px; }
+#app-mount .panels__5e434 .nameTag__37e49 { min-width: 0; }
+#app-mount .panels__5e434 .nameTag__37e49 :is(.container_dfb989, .innerContainer_dfb989) { color: var(--sibnight-heading); text-shadow: none; -webkit-text-stroke: 0; font-family: inherit; }
+#app-mount .panels__5e434 .buttons__37e49 { flex: 0 0 auto; gap: 0; }
+#app-mount .panels__5e434 .buttons__37e49 :is(button, [role='switch']) { width: 28px; min-width: 0; padding-inline: 0; border-radius: 6px; }
+#app-mount .panels__5e434 .buttons__37e49 :is([aria-label="Options d'entrée"], [aria-label='Options de sortie'], [aria-label='Input Options'], [aria-label='Output Options']) { width: 24px; min-width: 24px; }
+#app-mount .panels__5e434 .wrapper_e131a9 { padding: 8px; margin: 0; }
+/* The native container owns BOTH connection status and the four action buttons. */
+#app-mount .panels__5e434 .container_e131a9 {
+    padding: 12px;
+    gap: 12px;
+    border: 1px solid var(--sibnight-line);
+    border-radius: var(--sibnight-radius);
+    background: var(--sibnight-canvas);
+}
+#app-mount .panels__5e434 .connection_e131a9 {
+    min-height: 40px;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+#app-mount .connection_e131a9 > .inner_e131a9 { min-width: 0; height: auto; }
+#app-mount .actionButtons_e131a9 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+#app-mount .actionButtons_e131a9 .button_e131a9 { min-width: 0; min-height: 40px; height: 40px; padding: 0; }
+#app-mount .actionButtons_e131a9 .buttonContents_e131a9 { justify-content: center; width: 100%; }
+#app-mount .actionButtons_e131a9 .buttonIcon_e131a9 { flex: 0 0 20px; }
+#app-mount .rtcConnectionStatusConnected__06d62 { color: var(--sibnight-nord14); }
+/* Native quality paths/levels remain native; remove the large-ping frame and padding. */
+#app-mount .connection_e131a9 .ping__06d62 {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    padding: 0;
+    margin-inline: 0 8px;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#app-mount .actionButtons_e131a9 :is(.button_e131a9.buttonActive_e131a9, .buttonColor_e131a9.buttonActive_e131a9) {
+    background: color-mix(in srgb, var(--sibnight-nord14) 16%, var(--sibnight-canvas));
+    border-color: color-mix(in srgb, var(--sibnight-nord14) 35%, transparent);
+    color: var(--sibnight-nord14);
+}
+
+/* 60-overlays.css */
+/* Style the actual floating component, never its full-window layer. */
+#app-mount :is(.menu_c1e9c4, .messagesPopoutWrap__45690, .recentMentionsPopout__95796, .contentWrapper__08434, .autocomplete__6b0e0) {
+    background: var(--sibnight-raised);
+    border: 1px solid var(--sibnight-line);
+    border-radius: var(--sibnight-radius);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 24%);
+}
+#app-mount .item_c1e9c4.focused_c1e9c4 { background: var(--sibnight-selected); }
+#app-mount .menu_c1e9c4 .label_c1e9c4 { white-space: normal; overflow-wrap: break-word; }
+#app-mount .tooltip__382e7 { background: var(--sibnight-control); color: var(--sibnight-heading); }
+#app-mount .autocomplete__6b0e0 [role='option'] { background: transparent; }
+#app-mount .autocomplete__6b0e0 [role='option'][aria-selected='true'] { background: var(--sibnight-selected); }
+
+/* Pinned entries form one readable list, rather than cards inside the popover. */
+#app-mount .messagesPopoutWrap__45690 .messageGroupWrapper__45690 {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+#app-mount .messagesPopoutWrap__45690 .messageGroupWrapper__45690 + .messageGroupWrapper__45690 { border-top: 1px solid var(--sibnight-line); }
+
+/* 70-icons.css */
+/* Generated by scripts/icons.js from the pinned, licensed Lucide SVGs. */
+#app-mount .toolbar__9293f :is([aria-label="Fils"],[aria-label="Threads"]) svg { width: 24px; height: 24px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z'/%3E%3Cpath d='M7 11h10'/%3E%3Cpath d='M7 15h6'/%3E%3Cpath d='M7 7h8'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .toolbar__9293f :is([aria-label="Fils"],[aria-label="Threads"]) svg > * { opacity: 0; }
+#app-mount .toolbar__9293f :is([aria-label="Messages épinglés"],[aria-label="Pinned Messages"]) svg { width: 24px; height: 24px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 17v5'/%3E%3Cpath d='M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z'/%3E%3C/svg%3E") center / contain no-repeat; rotate: 35deg; }
+#app-mount .toolbar__9293f :is([aria-label="Messages épinglés"],[aria-label="Pinned Messages"]) svg > * { opacity: 0; }
+#app-mount .toolbar__9293f :is([aria-label="Masquer la liste des membres"],[aria-label="Afficher la liste des membres"],[aria-label="Hide Member List"],[aria-label="Show Member List"]) svg { width: 24px; height: 24px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M18 21a8 8 0 0 0-16 0'/%3E%3Ccircle cx='10' cy='8' r='5'/%3E%3Cpath d='M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .toolbar__9293f :is([aria-label="Masquer la liste des membres"],[aria-label="Afficher la liste des membres"],[aria-label="Hide Member List"],[aria-label="Show Member List"]) svg > * { opacity: 0; }
+#app-mount .guilds__5e434 [data-list-item-id='guildsnav___home'] .childWrapper__6e9f8 > svg { width: 28px; height: 28px; color: var(--sibnight-nord8); background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'/%3E%3Cpath d='M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .guilds__5e434 [data-list-item-id='guildsnav___home'] .childWrapper__6e9f8 > svg > * { opacity: 0; }
+#app-mount .toolbar__9293f .searchBar_c322aa svg { background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m21 21-4.34-4.34'/%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .toolbar__9293f .searchBar_c322aa svg > * { opacity: 0; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(1) .buttonContents_e131a9 { width: 20px; height: 20px; flex: 0 0 20px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10.66 6H14a2 2 0 0 1 2 2v2.5l5.248-3.062A.5.5 0 0 1 22 7.87v8.196'/%3E%3Cpath d='M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2'/%3E%3Cpath d='m2 2 20 20'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(1) .buttonContents_e131a9 > * { opacity: 0; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(1).buttonActive_e131a9 .buttonContents_e131a9 { width: 20px; height: 20px; flex: 0 0 20px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5'/%3E%3Crect x='2' y='6' width='14' height='12' rx='2'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(1).buttonActive_e131a9 .buttonContents_e131a9 > * { opacity: 0; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(2) .buttonContents_e131a9 { width: 20px; height: 20px; flex: 0 0 20px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3'/%3E%3Cpath d='M8 21h8'/%3E%3Cpath d='M12 17v4'/%3E%3Cpath d='m17 8 5-5'/%3E%3Cpath d='M17 3h5v5'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(2) .buttonContents_e131a9 > * { opacity: 0; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(3) .buttonContents_e131a9 { width: 20px; height: 20px; flex: 0 0 20px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z'/%3E%3Crect x='3' y='14' width='7' height='7' rx='1'/%3E%3Ccircle cx='17.5' cy='17.5' r='3.5'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .actionButtons_e131a9 > button:nth-of-type(3) .buttonContents_e131a9 > * { opacity: 0; }
+#app-mount .actionButtons_e131a9 [aria-label="Ouvrir Soundboard"] .buttonContents_e131a9 { width: 20px; height: 20px; flex: 0 0 20px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5.8 11.3 2 22l10.7-3.79'/%3E%3Cpath d='M4 3h.01'/%3E%3Cpath d='M22 8h.01'/%3E%3Cpath d='M15 2h.01'/%3E%3Cpath d='M22 20h.01'/%3E%3Cpath d='m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10'/%3E%3Cpath d='m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17'/%3E%3Cpath d='m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7'/%3E%3Cpath d='M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+#app-mount .actionButtons_e131a9 [aria-label="Ouvrir Soundboard"] .buttonContents_e131a9 > * { opacity: 0; }
+
+/* 75-motion.css */
+/* Menus settle beside their trigger; native positioning transforms stay intact. */
+@keyframes north-polar-open {
+    from { opacity: 0; translate: 0 4px; }
+    to { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) #app-mount :is(.menu_c1e9c4, .messagesPopoutWrap__45690, .contentWrapper__08434) {
+        animation: north-polar-open 130ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+/* 80-accessibility.css */
+#app-mount :is(button, a[href], input, textarea, select, [tabindex], [role='button'], [role='tab'], [role='option']):focus-visible {
+    outline: 2px solid var(--sibnight-focus) !important;
+    outline-offset: -2px;
+}
+#app-mount ::selection { color: var(--sibnight-heading); background: var(--sibnight-nord3); }
+@media (forced-colors: active) {
+    #app-mount :focus-visible { outline-color: Highlight !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #app-mount :is(.menu_c1e9c4, .messagesPopoutWrap__45690, .contentWrapper__08434) { animation: none !important; }
+    #app-mount :is(.messageListItem__5126c, .link__2ea32, .member_c8ffbb) { transition: none !important; }
+}
+.reduce-motion #app-mount :is(.menu_c1e9c4, .messagesPopoutWrap__45690, .contentWrapper__08434) { animation: none !important; }
+
+/* tokyo-night: color roles only; geometry belongs to the shared source. */
+:root {
+    --sibnight-nord0: #1a1b26;
+    --sibnight-nord1: #202330;
+    --sibnight-nord2: #292e42;
+    --sibnight-nord3: #565f89;
+    --sibnight-nord4: #a9b1d6;
+    --sibnight-nord5: #c0caf5;
+    --sibnight-nord6: #d5ddff;
+    --sibnight-nord7: #7dcfff;
+    --sibnight-nord8: #7aa2f7;
+    --sibnight-nord9: #89b4fa;
+    --sibnight-nord10: #3d59a1;
+    --sibnight-nord11: #f7768e;
+    --sibnight-nord12: #ff9e64;
+    --sibnight-nord13: #e0af68;
+    --sibnight-nord14: #9ece6a;
+    --sibnight-nord15: #bb9af7;
+    --sibnight-canvas: #1a1b26;
+    --sibnight-index: #16161e;
+    --sibnight-header: #1a1b26;
+    --sibnight-control: #24283b;
+    --sibnight-raised: #202330;
+    --sibnight-muted: #a9b1d6;
+    --sibnight-channel-rest: #969fc5;
+    color-scheme: dark;
+}
+#app-mount :is(.vc-addon-card, .vc-settings-card, .vc-card-base, .vc-settings-quickActions-card) { background: var(--sibnight-index); color: var(--sibnight-foreground); }

@@ -1,0 +1,394 @@
+/**
+ * @name 🌘 Seloris' Tweaks
+ * @author Seloris (@allocazione)
+ * @version 1.0.4
+ * @description 🌘 A collection of tweaks for Vencord (or any other client) to enhance the Discord experience.
+ * @website https://github.com/allocazione/seloris-tweaks
+ * @source https://github.com/allocazione/seloris-tweaks/blob/main/css/seloris-tweaks.theme.css
+ * @updateUrl https://raw.githubusercontent.com/allocazione/seloris-tweaks/main/css/seloris-tweaks.theme.css
+ */
+
+
+/*
+* ||||||||||||||||||||||||||||||||||||||
+* |          BEGIN SCRIPT              |
+* ||||||||||||||||||||||||||||||||||||||
+*/
+
+
+/*
+* ||||||||||||||||||||||||||||||||||||||
+* |      Imports (External CSS)        |
+* ||||||||||||||||||||||||||||||||||||||
+*/
+
+
+/* Transparent quick switcher */
+@import url('https://raw.githubusercontent.com/acheronx0577/Transparent-Quick-Switcher-Discord/main/Transparent%20Quick%20Switcher.css');
+/* Add Apple-like icons for emojis */
+@import url('https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/Apple.css');
+/* Remove excessive clutter in Discord */
+@import url('https://abbie.github.io/discord-css/import.css');
+
+
+/*
+* ||||||||||||||||||||||||||||||||||||||
+* |        Root code (Styling)         |
+* ||||||||||||||||||||||||||||||||||||||
+*/
+
+
+:root {
+  --tag-order: 1;
+  --status-enabled: true;
+  --background-width: full;
+  --right-gradient: false;
+  --show-notes: false;
+  --rolepills: true;
+
+  --compact-input-box: true;
+  --hide-gift-button: true;
+  --hide-apps-button: true;
+  --hide-nitro-upsells: true;
+  --fix-minor-icon-misalignments: true;
+  --darker-scrollbar: true;
+  --hide-hover-quick-reactions: true;
+}
+
+
+/*
+* ||||||||||||||||||||||||||||||||||||||
+* |        Extra styling               |
+* ||||||||||||||||||||||||||||||||||||||
+*/
+
+
+/* Make context menu more compact */
+.layer_da8173 > .menu_c1e9c4 {
+    min-width: 0;
+    width: 171px !important;
+    .scroller_c1e9c4 {
+        margin: -4px;
+    }
+    .separator_c1e9c4 {
+        margin: 1px 8px !important;
+    }
+    .wrapper_f563df {
+        padding: 0px !important;
+        margin: 1px;
+    }
+    .item_c1e9c4 {
+        min-height: 0;
+        padding: 4px 8px;
+    }
+    .icon_f563df {
+        width: 18px;
+    }
+    .button_f563df {
+        width: 36px;
+        height: 36px;
+        border-radius: 4px;
+    }
+    .icon_c1e9c4 {
+        width: 18px;
+        height: 18px;
+    }
+    .iconContainer_c1e9c4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Swap clantag and role icon */
+[class^="headerText"] {
+  display: inline-flex;
+}
+
+[class^="headerText"] > span:has([class^="roleIcon"]) {
+  order: 2;
+}
+
+[class^="headerText"] > span:has([class^="chipletContainerInner"])  {
+  order: 3;
+}
+
+[class^="headerText"] > span:is([class^="username"]) {
+  order: 1;
+}
+
+[class^="headerText"] > span[style="display: none;"] {
+  order: 4;
+}
+
+[class^="headerText"] > .vc-message-decorations-wrapper {
+  order: 5;
+}
+
+[class^="headerText"] > span:has(> [class^="newMemberBadge"]) {
+  order: 6;
+}
+
+[class^="headerText"] > span:is([class^="botTag"]) {
+  order: 7;
+}
+
+/* Trim long tags */
+[class*=clanTag]>span>span {
+  max-width: 4em;
+  display: -webkit-inline-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+/* Remove profile reactions */
+.avatarPopover__2d0ab, .statusPopover__2d0ab, .activityPopover__2d0ab { 
+  display: none;
+}
+
+/* Change collapse icon order */
+.containerDefault__29444 {
+  > div {
+    padding-left: 0.5em;
+
+    > div {
+      display: flex !important;
+      place-content: start !important;
+      flex-direction: row-reverse !important;
+    }
+  }
+}
+
+/* Revert user area */
+.visual-refresh div[class^="sidebar_"] section[class^="panels_"] {
+    width: calc(var(--custom-guild-sidebar-width) - var(--custom-guild-list-width) + 1px);
+    left: var(--custom-guild-list-width);
+    bottom: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.visual-refresh nav[class*=guilds_] {
+  margin-bottom: unset;
+}
+
+/* Fix modal height */
+.visual-refresh [class^="layer_"] > form > [class^="focusLock__"] {
+  position: relative;
+  max-height: calc(100vh - var(--space-24) * 3);
+  top: calc(var(--space-24) / 2);
+}
+
+/* Fix discord height overflow */
+[class*=userPopoutOverlayBackground] {
+  max-height: 60vh;
+}
+
+/* Hide chatbox if unable to write in said channel */
+[class*=channelTextAreaDisabled] {
+    display: none!important;
+}
+
+/* View full bio */
+[style="-webkit-line-clamp: 6;"] {
+  -webkit-line-clamp: 10000000 !important;
+  line-clamp: 10000000 !important;
+}
+
+[class*=descriptionClamp] {
+  -webkit-line-clamp: unset; /* 9999999 */
+  line-clamp: unset; /* 9999999 */
+  max-height: unset;
+}
+
+[class*=viewFullBio] {
+  display: none;
+}
+
+/* Fully hide profile effects */
+[class^="profileEffects"] {
+  display: none;
+}
+
+/* Add old invite popouts */
+.guildInviteContainer__083ae {
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: end;
+  justify-content: space-between;
+  padding: 8px;
+  gap: 8px;
+  height: calc(48px + 72px);
+
+  .cardHeightMeasure__083ae {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 8px;
+    flex: 1 1 auto!important;
+  min-width: 0;               
+  }
+
+  .mainContent__083ae,
+  .established__6e500 {
+    display: none;
+  }
+
+  .avatarContainer_dca174 {
+    margin-top: 0px;
+    padding: 0px;
+    overflow: hidden;
+    min-width: 48px;
+
+    foreignObject {
+      mask: none !important;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    >svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .footer__083ae {
+    width: fit-content;
+    flex-shrink: 0 !important;
+    height: 48px;
+align-content: center;
+    .buttonContainer__083ae {
+      padding: 0px;
+      width: fit-content;
+
+      .button__201d5 {
+        width: auto;
+      }
+    }
+  }
+
+  .header__6e500 {
+    width: max-content !important;
+    padding: 0px;
+    margin: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .nameContainer__6e500, .members__6e500, .memberCount__6e500{
+      width: 100%!important;
+      flex-wrap: nowrap;
+    }
+
+    [data-text-variant] {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .banner__083ae {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+  }
+}
+
+/* Compact member list */
+.member__5d473 {
+    height: 32px!important;
+    padding: var(--space-xxs) var(--space-xs);
+    margin: calc(var(--space-xxs) / 2) var(--space-xxs);
+        &:hover {
+        background: var(--bg-overlay-hover, var(--background-modifier-hover));
+    }
+}
+
+.memberInner__5d473, .childContainer__91a9d {
+    padding: 0px!important;
+    display: flex!important;
+    align-items: center!important;
+    align-content: center!important;
+    max-width: 100%;
+}
+
+.avatar__91a9d {
+    scale: 0.75;
+    margin-right: 4px;
+}
+
+.content__91a9d {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 8px;
+}
+
+.memberInner__5d473 {
+    position: absolute;
+    top: calc(0px - var(--space-xxs) / 3);
+    left: var(--space-xxs);
+    max-width: calc(100% - var(--space-sm));
+}
+
+.membersGroup_c8ffbb {
+    padding: var(--space-xs) var(--space-xxs) var(--space-xs) var(--space-sm)!important;
+}
+
+/* Make chatbar more constsistent */
+.channelBottomBarArea_f75fb0>div {
+  margin: 5px 6px 9px 6px !important;
+  min-height: 60px;
+}
+
+.channelBottomBarArea_f75fb0>div>div.scrollableContainer__74017 {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(-4px);
+  width: 100%;
+}
+
+.attachWrapper__0923f>button {
+  margin-left: -9px !important;
+}
+
+.stackedBars__74017 {
+  margin-bottom: 55px;
+}
+
+.typing_b88801.base_b88801 {
+  margin-bottom: 6px;
+  margin-left: 4px;
+}
+
+.typing_b88801.base_b88801 > * {
+  line-height: 10px !important;
+  font-size: 10px !important;
+}
+
+.typing_b88801.base_b88801 > div > span > strong > div > svg {
+  height:10px !important;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Add chat-input fix */
+.align-chat-input .inner_e131a9, .align-chat-input .rtcConnectionStatus__06d62 {
+    height: fit-content
+}
+
+
+/*
+* ||||||||||||||||||||||||||||||||||||||
+* |          END OF SCRIPT             |
+* ||||||||||||||||||||||||||||||||||||||
+*/

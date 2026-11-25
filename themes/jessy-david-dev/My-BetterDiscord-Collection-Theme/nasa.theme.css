@@ -1,0 +1,41 @@
+/**
+ * @name Nasa
+ * @author UltraLion
+ * @version 2.0
+ * @description Nasa Theme created by UltraLion.
+ * @donate paypal.me/UltraLionFr404
+ * @authorId 281113457833672706
+ * @source https://github.com/UltraLionfr/My-BetterDiscord-Collection-Theme
+ * @website ultralion.online
+*/
+
+/*
+ /$$   /$$  /$$$$$$   /$$$$$$   /$$$$$$ 
+| $$$ | $$ /$$__  $$ /$$__  $$ /$$__  $$
+| $$$$| $$| $$  \ $$| $$  \__/| $$  \ $$
+| $$ $$ $$| $$$$$$$$|  $$$$$$ | $$$$$$$$
+| $$  $$$$| $$__  $$ \____  $$| $$__  $$
+| $$\  $$$| $$  | $$ /$$  \ $$| $$  | $$
+| $$ \  $$| $$  | $$|  $$$$$$/| $$  | $$
+|__/  \__/|__/  |__/ \______/ |__/  |__/
+*/
+
+@import url("https://ultralionfr.github.io/My-BetterDiscord-Collection-Theme/css/nasa.css");
+@import url("https://gibbu.github.io/BetterDiscord-Themes/RadialStatus/base.css");
+@import url("https://mwittrien.github.io/BetterDiscordAddons/Themes/_res/SettingsIcons.css");
+
+
+/*radialstatuts*/
+:root {
+    --rs-small-spacing: 2px;  /* spacing between avatar and status */
+    --rs-large-spacing: 3px;  /* spacing between avatar and status for user popouts & modals/profiles */
+    --rs-width: 2px;  /* Width/thickness of status border */
+    --rs-avatar-shape: 50%;  /* 50% for round - 0% for square */
+    --rs-online-color: #43b581;  /* color for online status */
+    --rs-idle-color: #faa61a;  /* color for idle status */
+    --rs-dnd-color: #f04747;  /* color for dnd status */
+    --rs-offline-color: #636b75;  /* color for offline status */
+    --rs-streaming-color: #643da7;  /* color for streaming status */
+    --rs-invisible-color: #747f8d;  /* color for invisible status - Note this will only show for your own invisibility */
+  }
+  /*End radialstatuts*/

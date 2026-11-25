@@ -1,0 +1,144 @@
+/**
+ * @name Pokémon x ClearDark+v2
+ * @author Lighty.Jr
+ * @authorId 975102868564639835
+ * @version 2.4.0-S
+ * @description Version 2 of that Translucent Clear Dark Glass Discord theme with a special acolyte
+ * @website https://fo-lighty.github.io/ClearDark-Plus
+ * @source https://github.com/FO-Lighty/ClearDark-Plus
+ */
+
+  /* IMPORT CSS */
+  @import url("https://fo-lighty.github.io/ClearDark-Plus/css/PxCD-main.css");
+  @import url("https://fo-lighty.github.io/ClearDark-Plus/css/additionals.css");
+  /* SETTINGS */
+:root {
+  /* ACCENT COLORS */
+  --main-color: #c2be8b; /* main accent color (hex, rgb or hsl) [default: #c2be8b] */
+  --hover-color: #ddb39a; /* hover accent color (hex, rgb or hsl) [default: #ddb39a] */
+  --success-color: #9d9a71; /* positive accent color (hex, rgb or hsl) [default: #9d9a71] */
+  --danger-color: #703f56; /* danger accent color (hex, rgb or hsl) [default: #703f56] */
+  --accent-text-color: hsl(0,0%,98%); /* The accent text color [default: hsl(0,0%,98%)]. */
+  --hsl-danger-color-hover: hsl(331, 28%, 35%); /* danger accent color hovered (hex, rgb or hsl) [default: hsl(331, 28%, 35%)] */
+  --darker-main-color: #27231c; /* darker main color (hex, rgb or hsl) [default: #27231c] */
+  /* STATUS COLORS */
+  --online-color: #43b581; /* online status color (hex, rgb or hsl) [default: #43b581] */
+  --idle-color: #faa61a; /* idle status color (hex, rgb or hsl) [default: #faa61a] */
+  --dnd-color: #982929; /* dnd status color (hex, rgb or hsl) [default: #982929] */
+  --streaming-color: #593695; /* streaming status color (hex, rgb or hsl) [default: #593695] */
+  --offline-color: #5a5a5a; /* offline/invisible status color (hex, rgb or hsl) [default: #5a5a5a] */
+  /* APP BACKGROUND */
+  --background-shading-percent: 100%; /* app background shading amount (0 for complete smoothness) [default: 100%] */
+  --background-image: url(https://fo-lighty.github.io/ClearDark-Plus/assets/images/pikachu.jpg); /* app background image (link must be HTTPS) [default: url(https://fo-lighty.github.io/ClearDark-Plus/assets/images/pikachu.jpg)]*/
+  --background-position: center; /* app background position [default: center] */
+  --background-size: cover; /* app background size (px) [default: cover] */
+  --background-attachment: fixed; /* app background attachment [default: fixed] */
+  --background-filter: saturate(calc(var(--saturation-factor, 1) * 1)); /* app background adjustments (ex: blur, saturation, brightness) [default: saturate(calc(var(--saturation-factor, 1) * 1))] */
+  --background-modifier-hover: hsl(0,0%,100%,0.075); /*The background modifier for hover effect [Default: hsl(0,0%,100%,0.075)]*/
+  --background-modifier-active: hsl(0,0%,100%,0.1); /*The background modifier for hover effect [Default: hsl(0,0%,100%,0.1)]*/
+  --background-modifier-selected: hsl(0,0%,100%,0.125); /*The background modifier for hover effect [Default: hsl(0,0%,100%,0.125)]*/
+  --background-modifier-accent: hsl(0,0%,100%,0.175); /*The background modifier for hover effect [Default: hsl(0,0%,100%,0.175)]*/
+  /* USER POPOUT BACKGROUND */
+  --user-popout-image: var(--background-image); /* user popout background image (link must be HTTPS) (not applied to nitro users) [default: var(--background-image)] */
+  --user-popout-position: var(--background-position); /* user popout position [default: var(--background-position)] */
+  --user-popout-size: var(--background-size); /* user popout size (px) [default: var(--background-size)] */
+  --user-popout-attachment: var(--background-attachment); /* user popout background attachment [default: var(--background-attachment)] */
+  --user-popout-filter: var(--background-filter); /* user popout background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: var(--background-filter);] */
+  /* REPLY COLOR SETTINGS */
+  --reply-accent: #d4d2ae; /* reply accent color (hex, rgb or hsl) [default: #d4d2ae] */
+  /* VERSION LOCAL THEME*/
+  --user-local-version: "2.4.0-S"; /* your current installed version [DO NOT EDIT] */
+  /* CARD SETTINGS */
+  --card-color: hsl(0,0%,0%,0.4); /* the background color of the cards [default: hsl(0,0%,0%,0.4)] */
+  --card-color-hover: hsl(0,0%,0%,0.5); /* the background color of the cards when hovered [default: hsl(0,0%,0%,0.5)] */
+  --card-color-select: hsl(0,0%,0%,0.625); /* the background color of the cards when selected [default: hsl(0,0%,0%,0.625)] */
+  --card-radius: 10px; /* the border radius of the cards [default: 10px] */
+  --card-header-shadow: 0px 3px 9px 0px hsl(0,0%,0%,0.25); /* The box-shadow for the card header [default: 0px 3px 9px 0px hsl(0,0%,0%,0.25)] */
+  /* LIQUID GLASS */
+  --glass-blur: 12px; /* blur behind popouts, menus and modals (0px to turn the blur off) [default: 12px] */
+  --glass-saturation: 140%; /* colours seen through the glass (100% = unchanged) [default: 140%] */
+  --glass-brightness: 1; /* brightness seen through the glass (below 1 = darker) [default: 1] */
+  --glass-tint: 0%; /* how much of the main color tints the glass (0% = theme shading only) [default: 0%] */
+  --glass-reflex: 0.6; /* strength of the light reflections on the glass edges (0 to turn them off) [default: 0.6] */
+  --glass-light-color: hsl(0, 0%, 100%); /* color of the reflections (hex, rgb or hsl) [default: hsl(0, 0%, 100%)] */
+  --glass-light-angle: 225deg; /* where the light comes from: 225deg top-left, 270deg top, 315deg top-right [default: 225deg] */
+  --glass-radius: 12px; /* corners of popouts, menus and chat input [default: 12px] */
+  --glass-radius-large: 16px; /* corners of modals and settings [default: 16px] */
+  --glass-backdrop-blur: 4px; /* blur of the app behind an open modal (0px to turn it off) [default: 4px] */
+  /* MENTION HSL COLOR SETTINGS */
+  --mention-color: var(--main-color); /* The mention color [default: var(--main-color)]. */
+  --mention-opacity: 1; /* The opacity of the mention color [default: 1]. */
+  /* MESSAGE COLOR SETTINGS */
+  --message-color: hsl(0,0%,0%,0.4); /* The background color of a message [default: hsl(0,0%,0%,0.4)]. */
+  --message-color-hover: hsl(0,0%,0%,0.55); /* The background color of a message when hovered [default: hsl(0,0%,0%,0.55)]. */
+  --message-radius: 10px; /* The border-radius of the messages [default: 10px]. */
+  --message-padding-top: 8px; /* The top padding of the messages [default: 8px]. */
+  --message-padding-side: 8px; /* The side padding of the messages [default: 8px]. */
+  /* USER MODAL BACKGROUND */
+  --user-modal-image: var(--background-image); /* user modal background image (link must be HTTPS) (not applied to nitro users) [default: var(--background-image)] */
+  --user-modal-position: var(--background-position); /* user modal position [default: var(--background-position)] */
+  --user-modal-size: var(--background-size); /* user modal size (px) [default: var(--background-size)] */
+  --user-modal-attachment: var(--background-attachment); /* user modal background attachment [default: var(--background-attachment)] */
+  --user-modal-filter: var(--background-filter); /* user modal background adjustments (ex: blur, saturation, brightness) [default: var(--background-filter);] */
+  /* HOME ICON */
+  --home-icon: url(https://fo-lighty.github.io/ClearDark-Plus/assets/icons/discord.svg); /* home button icon (link must be HTTPS) [default: url(https://fo-lighty.github.io/ClearDark-Plus/assets/icons/discord.svg)]*/
+  --home-size: cover; /* home button icon size (px) [default:cover] */
+  /* FONTS */
+  --main-font: "gg sans", "Helvetica Neue", Helvetica, Arial, sans-serif; /* main font for app (font must be installed) [default: gg sans, Helvetica Neue, Helvetica, Arial, sans-serif] */
+  --code-font: Consolas, "gg mono", "Liberation Mono", Menlo, Courier, monospace; /* font for codeblocks (font must be installed) [default: Consolas, Liberation Mono, Menlo, Courier, monospace] */
+ /* CHANNEL COLORS */
+  --channel-normal: var(--interactive-text-default); /* channel text color [default: var(--interactive-text-default)] */
+  --channel-muted: var(--interactive-muted); /* muted channel text color [default: var(--interactive-muted)] */
+  --channel-hover: var(--interactive-text-hover); /* hovered channel text color [default: var(--interactive-text-hover)] */
+  --channel-selected: var(--interactive-text-active); /* selected channel text color [default: var(--interactive-text-active)] */
+  --channel-selected-bg: var(--main-color); /* selected channel background [default: var(--main-color)] */
+  --channel-unread: var(--main-color); /* unread channel text color [default: var(--main-color)] */
+  --channel-unread-hover: var(--hover-color); /* unread channel hover color [default: var(--hover-color)] */
+  /* ACCESSIBILITY */
+  --focus-color: var(--main-color); /* outline when pressing TAB key [default: var(--main-color)] */
+}
+
+/* THEME SPECIFIC SHADING */
+/* LIGHT THEME */
+:is(.theme-light, .theme-dark .theme-light) {
+  --background-shading: rgba(252, 252, 252, 0.2); /* app background shading color [default: rgba(252, 252, 252, 0.2)] */
+  --card-shading: rgba(252, 252, 252, 0.3); /* cards background shading color [default: rgba(252, 252, 252, 0.3)] */
+  --popout-shading: rgba(252, 252, 252, 0.7); /* popouts background shading color [default: rgba(252, 252, 252, 0.7)] */
+  --modal-shading: rgba(252, 252, 252, 0.5); /* modals background shading color [default: rgba(0, 0, 0, 0.5)] */
+  --input-shading: rgba(0, 0, 0, 0.3); /* inputs background shading color [default: rgba(0, 0, 0, 0.3)] */
+  --normal-text: #36363c; /* text color [default: #36363c] */
+  --muted-text: #75757e; /* muted text color [default: #75757e] */
+}
+
+/* ASH THEME */
+:is(.theme-dark, .theme-light .theme-dark) {
+  --background-shading: rgba(0, 0, 0, 0.3); /* app background shading color [default: rgba(0, 0, 0, 0.3)] */
+  --card-shading: rgba(0, 0, 0, 0.2); /* cards background shading color [default: rgba(0, 0, 0, 0.2)] */
+  --popout-shading: rgba(0, 0, 0, 0.6); /* popouts background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --modal-shading: rgba(0, 0, 0, 0.4); /* modals background shading color [default: rgba(0, 0, 0, 0.4)] */
+  --input-shading: rgba(255, 255, 255, 0.05); /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #d8d8db; /* text color [default: #d8d8db] */
+  --muted-text: #aeaeb4; /* muted text color [default: #aeaeb4] */
+}
+
+/* DARK THEME */
+:is(.theme-darker, .theme-light .theme-darker) {
+  --background-shading: rgba(0, 0, 0, 0.5); /* app background shading color [default: rgba(0, 0, 0, 0.5)] */
+  --card-shading: rgba(0, 0, 0, 0.3); /* cards background shading color [default: rgba(0, 0, 0, 0.3)] */
+  --popout-shading: rgba(0, 0, 0, 0.7); /* popouts background shading color [default: rgba(0, 0, 0, 0.7)] */
+  --modal-shading: rgba(0, 0, 0, 0.5); /* modals background shading color [default: rgba(0, 0, 0, 0.5)] */
+  --input-shading: rgba(255, 255, 255, 0.05); /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #fbfbfb; /* text color [default: #fbfbfb] */
+  --muted-text: #94949c; /* muted text color [default: #94949c] */
+}
+
+/* ONYX THEME */
+:is(.theme-midnight, .theme-light .theme-midnight) {
+  --background-shading: rgba(0, 0, 0, 0.6); /* app background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --card-shading: rgba(0, 0, 0, 0.4); /* cards background shading color [default: rgba(0, 0, 0, 0.4)] */
+  --popout-shading: rgba(0, 0, 0, 0.8); /* popouts background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --modal-shading: rgba(0, 0, 0, 0.6); /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --input-shading: rgba(255, 255, 255, 0.05); /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #dcdcde; /* text color [default: #dcdcde] */
+  --muted-text: #86868e; /* muted text color [default: #86868e] */
+}

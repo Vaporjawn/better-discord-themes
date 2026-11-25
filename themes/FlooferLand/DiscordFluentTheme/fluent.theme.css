@@ -1,0 +1,24 @@
+/**
+ * @name Fluent Discord
+ * @author TakosThings & FlooferLand
+ * @description FlooferLand's "TakosThings Fluent Theme patches" (Auto-updating)
+ * @source https://github.com/FlooferLand/DiscordFluentTheme
+*/
+
+@import url(https://raw.githubusercontent.com/FlooferLand/DiscordFluentTheme/main/fluent.base.theme.css);
+
+:root {
+	/* OrchidLight */
+	--fluent-accent-hue-sat: 307, 55%;
+	--fluent-accent-lightness: 49%;
+
+	/* The colour text appears against the accent colour */
+	--fluent-text-on-accent-color: 0, 0, 0;
+
+	/* Ignore the gay */
+	--fluent-acrylic-background: url(https://images2.alphacoders.com/129/1291151.png);
+	--fluent-acrylic-background-blur: 2px;
+	--fluent-acrylic-background-dimness: 60%;
+	--fluent-acrylic-background-saturate: 50%;
+	--fluent-guilds-icon-size: 38px;
+}

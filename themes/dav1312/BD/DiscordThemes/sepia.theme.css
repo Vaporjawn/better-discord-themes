@@ -1,0 +1,12 @@
+/**
+ * @name Sepia
+ * @author _david_
+ * @description
+ * @version 1.0.0
+ */
+
+@import url("https://dav1312.github.io/BD/DiscordThemes/main.css");
+
+:root {
+	--custom-theme-background: linear-gradient(69.98deg, var(--bg-gradient-sepia-1) 14.14%, var(--bg-gradient-sepia-2) 60.35%);
+}

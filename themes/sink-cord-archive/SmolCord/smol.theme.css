@@ -1,0 +1,135 @@
+/**
+
+ * @name SmolCord
+ * @version 1.0
+ * @description Make the most of your screen space. Works best with 80% zoom.
+ * @authorId 435026627907420161
+ * @author Yellowsink
+
+**/
+
+.content-3YMskv .containerDefault--pIXnN .wrapper-2jXpOf {
+	padding: 0;
+}
+
+.content-3YMskv .containerDefault-3tr_sE {
+	padding-top: .5rem;
+}
+
+.cozy-3raOZG .header-23xsNx {
+	margin-bottom: 0;
+}
+
+.membersGroup-v9BXpm {
+	padding-top: .5rem;
+	height: 1.5rem;
+}
+
+.header-2V-4Sw, .title-3qD0b- {
+	height: 2.5rem;
+}
+
+.recentMentionsPopout-3rCiI6 .header-ykumBX {
+	height: 3rem;
+	min-height: 3rem;
+	padding-top: .5rem;
+	padding-bottom: 0;
+}
+
+.container-3iAQ-0 {
+	margin-bottom: 0;
+}
+
+.container-3iAQ-0 .messageContainer-gbhlwo {
+	padding: .5rem 0;
+}
+
+.messagesPopoutWrap-1MQ1bW:not(.recentMentionsPopout-3rCiI6) .header-ykumBX {
+	height: 2rem;
+	min-height: 2rem;
+	padding-top: .5rem;
+	padding-bottom: 0;
+}
+
+.modal-3O0aXp {
+	min-height: 150px;
+}
+
+.modal-3O0aXp > div {
+	padding: .5rem 16px;
+}
+
+.content-1LAB8Z .content-38qMG0 {
+	padding: 0;
+}
+
+.item-1tOPte {
+	padding: .2rem;
+	min-height: 1.75rem;
+}
+
+.marginTop40-i-78cZ {
+	margin-top: 30px;
+}
+
+.defaultMarginh2-2LTaUL,
+.marginBottom20-32qID7 {
+	margin-bottom: 10px;
+}
+
+.changePasswordButton-1LGVWT {
+	margin-bottom: 30px;
+}
+
+.fieldList-21DyL8 .fieldSpacer-wgewFh {
+	margin-top: .75rem;
+}
+
+.background-1QDuV2 {
+	padding: .5rem;
+}
+
+.profile-1eT9hT {
+	margin: 0 1rem .5rem 1rem;
+}
+
+.userPopout-3XzG_A {
+	max-height: calc(100vh - 5rem);
+}
+
+.userPopout-3XzG_A .activityUserPopout-2yItg2,
+  .userPopout-3XzG_A .body-3iLsc4 {
+	padding: .75rem;
+}
+
+
+.userPopout-3XzG_A .rolesList-22qj2L {
+	margin: .5rem 0;
+}
+
+.userPopout-3XzG_A .textarea-2r0oV8 {
+	height: calc(34px / 1.5) !important;
+}
+
+.userPopout-3XzG_A .headerTop-3C2Zn0 {
+	padding: 0.5rem;
+	flex-flow: row wrap;
+}
+
+.userPopout-3XzG_A .headerTop-3C2Zn0 .avatarWrapperNormal-3wFMbf {
+	margin: 0 .5rem 0 0;
+}
+
+.userPopout-3XzG_A .headerTop-3C2Zn0 .headerTag-2pZJzA, .userPopout-3XzG_A .headerTop-3C2Zn0 .customStatus-1bh2V9 {
+	margin-top: .5rem;
+}
+
+.listScroller-2_vlfo {
+	display: grid;
+	grid-template-columns: repeat(2, 50%);
+	grid-template-rows: repeat(auto-fit, 3.5rem);
+}
+
+.listScroller-2_vlfo .empty-2WtT5s {
+	grid-column: span 2;
+}

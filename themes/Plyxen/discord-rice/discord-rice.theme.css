@@ -1,0 +1,1495 @@
+/**
+ * @name discord-rice
+ * @description Linux-rice Discord: misty wallpaper, tiled panes split by thin lines, Iosevka, greyscale, plain folders, no top bar, no store or quest clutter.
+ * @author Pota
+ * @version 4.2.9
+ * @license GPL-3.0-or-later
+ * @source https://github.com/Plyxen/discord-rice
+ */
+
+/* Iosevka, the usual rice terminal font. 400 for text, 600 for names and headings */
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/iosevka@5.3.0/400.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/iosevka@5.3.0/600.css');
+
+/* ================================================================
+   options
+   The DiscordRice plugin sets these from its settings window. Without the plugin, edit them here.
+   The on / off ones are read further down with style queries: @container style(--name: on)
+   ================================================================ */
+body {
+    /* font: 'Iosevka' for the terminal look, '' for Discord's own */
+    --font: 'Iosevka';
+    --code-font: 'Iosevka';
+    font-weight: 400;
+
+    /* corners: small, like a tiling WM. 0px for dead sharp. Avatars and pills stay round */
+    --corners: 3px;
+
+    /* wallpaper: any image url works (imgur, github.io, raw.githubusercontent.com...).
+       The default is the misty forest, embedded at the bottom of this file. */
+    --wallpaper: var(--wallpaper-default);
+    --wallpaper-dim: 0.5; /* 0 = raw wallpaper, 1 = black. Raise it if text is hard to read */
+    --grain: on; /* off | on: film grain over the wallpaper */
+
+    /* home (DMs) button: arch = the Arch logo, discord = Discord's own */
+    --home-icon: arch;
+
+    /* window buttons: small dots instead of Windows' - [] x */
+    --dot-size: 13px;
+    --mono-window-controls: on; /* off | on: grey dots that light up on hover */
+
+    /* ---- declutter (on = hidden) ---- */
+    --hide-store-tabs: on; /* Nitro Home, Shop and Quests at the top of the DM list */
+    --hide-quests: on; /* the quest card above your user panel, and quest embeds in chat */
+    --hide-nameplates: on; /* the picture strips behind names in the member list, DM list and user panel */
+    --hide-gift-button: on; /* gift button in the chat bar */
+    --hide-apps-button: on; /* apps / activities launcher in the chat bar */
+    --hide-sticker-button: off; /* sticker button in the chat bar */
+    --hide-notification-button: on; /* the bell in the channel header (right-click a channel for its notification settings) */
+    --hide-video-call-button: on; /* the camera in the DM header. The voice call button stays, and you can turn the camera on in the call */
+    --hide-add-server-button: off; /* the + under your servers. Hidden, an invite link still joins a server, but nothing creates one */
+    --hide-discover-button: off; /* the compass under your servers */
+
+    /* ---- look ---- */
+    --mono-server-icons: off; /* off | on | hover: black-and-white server pictures. hover = colour under the mouse */
+    --glass-menus: on; /* off | on: frosted-glass menus and pickers. off = solid dark */
+    --plain-folders: on; /* off | on: a closed folder shows a folder icon instead of a 2x2 grid of its servers.
+                            A picture set with the FolderPictures plugin takes the icon's place */
+
+    /* ---- internals, no need to touch ---- */
+    /* the wallpaper is three layers: grain, a shade, the picture */
+    --wallpaper-layers: var(--grain-layer), var(--wallpaper-shade), var(--wallpaper);
+    --wallpaper-shade:
+        /* the misty sky is brightest top right, so shade it down to match the left */
+        radial-gradient(ellipse 60% 80% at 70% 0%, hsla(0, 0%, 0%, 0.4), transparent),
+        radial-gradient(ellipse at 60% 40%, transparent 35%, hsla(0, 0%, 0%, 0.45) 100%),
+        linear-gradient(90deg, hsla(0, 0%, 0%, 0.5) 0%, hsla(0, 0%, 0%, 0.3) 30%, transparent 50%),
+        linear-gradient(hsla(0, 0%, 0%, var(--wallpaper-dim)), hsla(0, 0%, 0%, var(--wallpaper-dim)));
+    --grain-layer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 .07'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* Discord's own corner sizes and fonts, from the options above */
+    --radius-xs: min(var(--corners), 4px);
+    --radius-sm: var(--corners);
+    --radius-md: calc(var(--corners) * 1.34);
+    --radius-lg: calc(var(--corners) * 1.34);
+    --radius-xl: calc(var(--corners) * 2);
+    --radius-xxl: calc(var(--corners) * 2);
+    --font-primary: var(--font), 'gg sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-display: var(--font-primary);
+    --font-code: var(--code-font), 'gg mono', 'Source Code Pro', Consolas, Monaco, monospace;
+}
+
+/* a style query can't restyle the element it asks about, so drop the grain one level down */
+@container style(--grain: off) {
+    #app-mount {
+        --wallpaper-layers: var(--wallpaper-shade), var(--wallpaper);
+    }
+}
+
+/* colours: greyscale, to match the black-and-white wallpaper and desktop. Only status dots, unread badges
+   and red "danger" bits keep a muted colour. A touch brighter than usual because text sits on the wallpaper */
+:root {
+    /* text, brightest to faintest */
+    --ink: hsl(0, 0%, 8%); /* dark text on the light selection bars and buttons */
+    --fg-bright: hsl(0, 0%, 98%);
+    --fg-strong: hsl(0, 0%, 92%); /* headings, names */
+    --fg: hsl(0, 0%, 84%); /* message text */
+    --fg-dim: hsl(0, 0%, 64%); /* icons, channels */
+    --fg-faint: hsl(0, 0%, 50%); /* muted channels, timestamps */
+
+    /* see-through white layers, for things that sit on the wallpaper */
+    --message-hover: hsla(0, 0%, 100%, 0.03);
+    --glass: hsla(0, 0%, 100%, 0.04); /* inputs and cards */
+    --hover: hsla(0, 0%, 100%, 0.06);
+    --raised: hsla(0, 0%, 100%, 0.08); /* buttons */
+    --active: hsla(0, 0%, 100%, 0.1);
+    --pressed: hsla(0, 0%, 100%, 0.14);
+
+    /* solid surfaces, for what floats above the app */
+    --popup: hsl(0, 0%, 11%); /* popouts, tooltips */
+    --panel: hsl(0, 0%, 8%); /* modals, settings, the game page */
+    --float-tint: hsla(0, 0%, 7%, 0.7); /* glass menus and pickers: tint over the blur */
+    --float-blur: 20px;
+    --float-border: hsla(0, 0%, 100%, 0.2); /* border of menus and pickers */
+
+    /* lines. --line splits the panes, --line-focus lights the chat bar's line while you type */
+    --line: hsla(0, 0%, 100%, 0.12);
+    --line-focus: hsla(0, 0%, 100%, 0.6);
+    --edge-faint: hsla(0, 0%, 100%, 0.05); /* borders: barely there */
+    --edge: hsla(0, 0%, 100%, 0.08);
+    --edge-strong: hsla(0, 0%, 100%, 0.14);
+    --button-edge: hsla(0, 0%, 100%, 0.12);
+
+    /* light greys where Discord uses its blurple. Links keep a faint cool tint so they still read as links */
+    --link: oklch(84% 0.035 250);
+    --bar: hsl(0, 0%, 84%); /* open picker tab, hovered menu item, ticked switches */
+    --channel-bar: hsl(0, 0%, 64%); /* selected channel: dimmer than --bar, since it stays on screen the whole time */
+    --button: hsl(0, 0%, 88%);
+    --button-hover: hsl(0, 0%, 80%);
+    --button-press: hsl(0, 0%, 72%);
+
+    /* the only colours, muted */
+    --red: oklch(70% 0.12 15);
+    --green: oklch(73% 0.11 155);
+    --yellow: oklch(77% 0.1 85);
+    --blue: oklch(73% 0.07 240);
+    --purple: oklch(71% 0.1 305);
+    --online: var(--green);
+    --idle: var(--yellow);
+    --dnd: var(--red);
+    --streaming: var(--purple);
+    --offline: var(--fg-faint);
+
+    /* messages that ping you: a faint grey band that fades out to the right */
+    --mention: linear-gradient(to right, color-mix(in hsl, var(--fg-bright), transparent 93%) 30%, transparent);
+    --mention-hover: linear-gradient(to right, color-mix(in hsl, var(--fg-bright), transparent 95%) 30%, transparent);
+    --reply: linear-gradient(to right, color-mix(in hsl, var(--fg), transparent 90%) 40%, transparent);
+    --reply-hover: linear-gradient(to right, color-mix(in hsl, var(--fg), transparent 94%) 40%, transparent);
+    /* a ping in a role's colour is never darker than this (0 is black, 1 is white; 0 leaves every colour alone) */
+    --ping-floor: 0.65;
+
+    /* sizes Discord reads */
+    --custom-guild-list-padding: 6px; /* space left and right of the server icons (Discord: 12px) */
+    --custom-app-top-bar-height: 0px; /* the title bar row: gone, see "layout" */
+    --custom-channel-header-height: 48px;
+    --custom-channel-textarea-text-area-height: 47px; /* so the chat bar's line is level with the user panel's */
+    --corner-room: 168px; /* room kept free at the right end of the channel header for the buttons parked
+                             there (see "layout"): enough for two. The theme adds 40px by itself for
+                             each further one, up to six */
+}
+
+/* ================================================================
+   Discord's colour names
+   Discord builds its look from about a thousand named colours, set on whatever element carries a theme
+   class. These are the ones the rice changes, by what they are for. Anything not listed keeps Discord's
+   own dark-theme colour.
+   ================================================================ */
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.theme-light {
+    /* text */
+    --content-inventory-overlay-text-secondary: var(--fg);
+    --input-text-default: var(--fg);
+    --input-text-error-default: var(--fg);
+    --reaction-text-default: var(--fg);
+    --text-default: var(--fg);
+    --app-message-embed-secondary-text: var(--fg-strong);
+    --content-inventory-overlay-text-primary: var(--fg-strong);
+    --reaction-text-active: var(--fg-strong);
+    --reaction-text-hover: var(--fg-strong);
+    --text-strong: var(--fg-strong);
+    --channels-default: var(--fg-dim);
+    --text-subtle: var(--fg-dim);
+    --textbox-markdown-syntax: var(--fg-dim);
+    --channel-text-area-placeholder: var(--fg-faint);
+    --chat-text-muted: var(--fg-faint);
+    --input-placeholder-text-default: var(--fg-faint);
+    --text-muted: var(--fg-faint);
+    --mention-foreground: var(--link);
+    --text-brand: var(--link);
+    --text-feedback-info: var(--link);
+    --text-link: var(--link);
+    --button-outline-primary-text: var(--fg-bright);
+    --reaction-text-reacted-default: var(--fg-bright);
+    --notice-text-critical: var(--ink);
+    --notice-text-info: var(--ink);
+    --notice-text-positive: var(--ink);
+    --notice-text-warning: var(--ink);
+    --text-overlay-light: var(--ink);
+
+    /* icons, and text you can click */
+    --channel-icon: var(--fg-dim);
+    --control-icon-only-icon-default: var(--fg-dim);
+    --icon-default: var(--fg-dim);
+    --icon-link: var(--fg-dim);
+    --icon-subtle: var(--fg-dim);
+    --interactive-icon-default: var(--fg-dim);
+    --interactive-text-default: var(--fg-dim);
+    --control-icon-only-icon-active: var(--fg);
+    --control-icon-only-icon-hover: var(--fg);
+    --icon-strong: var(--fg);
+    --interactive-icon-active: var(--fg);
+    --interactive-icon-hover: var(--fg);
+    --interactive-text-active: var(--fg);
+    --interactive-text-hover: var(--fg);
+    --gradient-progress-pill-background: var(--fg-faint);
+    --icon-muted: var(--fg-faint);
+    --interactive-muted: var(--fg-faint);
+    --spine-default: var(--fg-faint);
+
+    /* hover and selection tints */
+    --message-background-hover: var(--message-hover);
+    --background-mod-muted: var(--hover);
+    --background-mod-subtle: var(--hover);
+    --control-icon-only-background-hover: var(--hover);
+    --interactive-background-hover: var(--hover);
+    --reaction-background-default: var(--hover);
+    --user-profile-background-hover: var(--hover);
+    --user-profile-overlay-background-hover: var(--hover);
+    --background-accent: var(--raised);
+    --background-mod-normal: var(--raised);
+    --channeltextarea-background: var(--raised);
+    --control-icon-only-background-active: var(--active);
+    --interactive-background-active: var(--active);
+    --interactive-background-selected: var(--active);
+    --reaction-background-active: var(--active);
+    --reaction-background-hover: var(--active);
+    --background-mod-strong: var(--pressed);
+    --content-inventory-media-seekbar-container: var(--pressed);
+    --scrollbar-auto-thumb: var(--pressed);
+    --scrollbar-thin-thumb: var(--pressed);
+    --scrollbar-auto-track: transparent;
+    --scrollbar-thin-track: transparent;
+
+    /* solid surfaces: popouts and tooltips, then modals and settings */
+    --background-secondary-alt: var(--popup);
+    --background-surface-high: var(--popup);
+    --background-surface-higher: var(--popup);
+    --background-surface-highest: var(--popup);
+    --bg-surface-raised: var(--popup);
+    --notice-background-critical: var(--popup);
+    --user-profile-toolbar-background: var(--popup);
+    --modal-background: var(--panel);
+    --modal-footer-background: var(--panel);
+    --user-profile-note-background-focus: var(--panel);
+    --user-profile-overlay-background: var(--panel);
+    --background-scrim: hsla(0, 0%, 0%, 0.7);
+    --background-scrim-lightbox: hsla(0, 0%, 0%, 0.9);
+    --elevation-high: none;
+    --elevation-low: none;
+    --elevation-medium: none;
+
+    /* borders */
+    --app-frame-border: var(--edge);
+    --border-feedback-critical: var(--edge);
+    --border-focus: var(--edge);
+    --border-normal: var(--edge);
+    --border-strong: var(--edge);
+    --border-subtle: var(--edge);
+    --user-profile-border: var(--edge);
+    --user-profile-toolbar-border: var(--edge);
+    --border-muted: var(--edge-faint);
+
+    /* buttons: the filled ones are light with dark text */
+    --control-primary-background-default: var(--button);
+    --control-primary-background-hover: var(--button-hover);
+    --control-primary-background-active: var(--button-press);
+    --control-expressive-background-default: var(--fg-bright);
+    --control-overlay-primary-background-default: var(--fg-bright);
+    --control-expressive-background-hover: var(--fg-strong);
+    --control-overlay-primary-background-hover: var(--fg-strong);
+    --control-expressive-background-active: var(--fg);
+    --control-overlay-primary-background-active: var(--fg);
+    --control-critical-primary-background-default: oklch(from var(--red) calc(l - 0.05) c h);
+    --control-critical-primary-background-hover: oklch(from var(--red) calc(l - 0.1) c h);
+    --control-critical-primary-background-active: oklch(from var(--red) calc(l - 0.15) c h);
+    --control-critical-primary-icon-active: var(--ink);
+    --control-critical-primary-icon-default: var(--ink);
+    --control-critical-primary-icon-hover: var(--ink);
+    --control-critical-primary-text-active: var(--ink);
+    --control-critical-primary-text-default: var(--ink);
+    --control-critical-primary-text-hover: var(--ink);
+    --control-expressive-icon-active: var(--ink);
+    --control-expressive-icon-default: var(--ink);
+    --control-expressive-icon-hover: var(--ink);
+    --control-expressive-text-active: var(--ink);
+    --control-expressive-text-default: var(--ink);
+    --control-expressive-text-hover: var(--ink);
+    --control-overlay-primary-icon-active: var(--ink);
+    --control-overlay-primary-icon-default: var(--ink);
+    --control-overlay-primary-icon-hover: var(--ink);
+    --control-overlay-primary-text-active: var(--ink);
+    --control-overlay-primary-text-default: var(--ink);
+    --control-overlay-primary-text-hover: var(--ink);
+    --control-primary-icon-active: var(--ink);
+    --control-primary-icon-default: var(--ink);
+    --control-primary-icon-hover: var(--ink);
+    --control-primary-text-active: var(--ink);
+    --control-primary-text-default: var(--ink);
+    --control-primary-text-hover: var(--ink);
+    --control-critical-primary-border-active: var(--button-edge);
+    --control-critical-primary-border-default: var(--button-edge);
+    --control-critical-primary-border-hover: var(--button-edge);
+    --control-expressive-border-active: var(--button-edge);
+    --control-expressive-border-default: var(--button-edge);
+    --control-expressive-border-hover: var(--button-edge);
+    --control-overlay-primary-border-active: var(--button-edge);
+    --control-overlay-primary-border-default: var(--button-edge);
+    --control-overlay-primary-border-hover: var(--button-edge);
+    --control-primary-border-active: var(--button-edge);
+    --control-primary-border-default: var(--button-edge);
+    --control-primary-border-hover: var(--button-edge);
+    --control-critical-secondary-background-default: var(--raised);
+    --control-secondary-background-default: var(--raised);
+    --control-critical-secondary-background-hover: var(--pressed);
+    --control-secondary-background-hover: var(--pressed);
+    --control-critical-secondary-background-active: hsla(0, 0%, 100%, 0.2);
+    --control-secondary-background-active: hsla(0, 0%, 100%, 0.2);
+    --control-overlay-secondary-icon-active: var(--fg);
+    --control-overlay-secondary-icon-default: var(--fg);
+    --control-overlay-secondary-icon-hover: var(--fg);
+    --control-overlay-secondary-text-active: var(--fg);
+    --control-overlay-secondary-text-default: var(--fg);
+    --control-overlay-secondary-text-hover: var(--fg);
+    --control-secondary-icon-active: var(--fg);
+    --control-secondary-icon-default: var(--fg);
+    --control-secondary-icon-hover: var(--fg);
+    --control-secondary-text-active: var(--fg);
+    --control-secondary-text-default: var(--fg);
+    --control-secondary-text-hover: var(--fg);
+    --control-critical-secondary-icon-active: var(--red);
+    --control-critical-secondary-icon-default: var(--red);
+    --control-critical-secondary-icon-hover: var(--red);
+    --control-critical-secondary-text-active: var(--red);
+    --control-critical-secondary-text-default: var(--red);
+    --control-critical-secondary-text-hover: var(--red);
+    --control-critical-secondary-border-active: var(--edge-faint);
+    --control-critical-secondary-border-default: var(--edge-faint);
+    --control-critical-secondary-border-hover: var(--edge-faint);
+    --control-icon-only-border-active: var(--edge-faint);
+    --control-icon-only-border-hover: var(--edge-faint);
+    --control-overlay-secondary-border-active: var(--edge-faint);
+    --control-overlay-secondary-border-default: var(--edge-faint);
+    --control-overlay-secondary-border-hover: var(--edge-faint);
+    --control-secondary-border-active: var(--edge-faint);
+    --control-secondary-border-default: var(--edge-faint);
+    --control-secondary-border-hover: var(--edge-faint);
+    --control-overlay-secondary-background-default: hsla(0, 0%, 0%, 0.5);
+    --control-overlay-secondary-background-hover: hsla(0, 0%, 0%, 0.6);
+    --control-overlay-secondary-background-active: hsla(0, 0%, 0%, 0.4);
+    --control-brand-foreground: var(--bar);
+
+    /* text boxes */
+    --input-border-default: var(--edge-faint);
+    --input-border-hover: var(--edge);
+    --input-border-active: var(--fg);
+    --input-border-error-default: var(--red);
+    --input-background-error-default: oklch(from var(--red) l c h / 0.1);
+
+    /* checkboxes, radio buttons, switches: light grey when on. A switch that is on is a dark knob
+       on the light track; off, a grey knob on a dark track */
+    --switch-thumb-background-default: var(--fg-dim);
+    --switch-thumb-background-selected-default: var(--ink);
+    --switch-thumb-icon-default: var(--ink);
+    --switch-thumb-icon-active: var(--bar);
+    --checkbox-background-default: var(--raised);
+    --radio-background-default: var(--raised);
+    --switch-background-default: var(--raised);
+    --switch-background-hover: var(--raised);
+    --checkbox-background-hover: var(--pressed);
+    --radio-background-active: var(--pressed);
+    --radio-background-hover: var(--pressed);
+    --checkbox-background-selected-default: var(--bar);
+    --radio-background-selected-default: var(--bar);
+    --switch-background-selected-default: var(--bar);
+    --switch-background-selected-hover: var(--bar);
+    --checkbox-background-selected-hover: var(--button);
+    --radio-background-selected-hover: var(--button);
+    --checkbox-border-active: var(--edge);
+    --checkbox-border-default: var(--edge);
+    --checkbox-border-hover: var(--edge);
+    --radio-border-active: var(--edge);
+    --radio-border-default: var(--edge);
+    --radio-border-hover: var(--edge);
+    --switch-border-default: var(--edge);
+    --checkbox-border-selected-default: var(--button-edge);
+    --checkbox-border-selected-hover: var(--button-edge);
+    --radio-border-selected-default: var(--button-edge);
+    --radio-border-selected-hover: var(--button-edge);
+    --switch-border-selected-default: var(--edge-faint);
+    --switch-border-hover: var(--edge-strong);
+    --switch-border-selected-hover: var(--edge-strong);
+    --checkbox-icon-active: var(--ink);
+    --radio-thumb-background-active: var(--ink);
+
+    /* badges, reactions, progress bars */
+    --background-brand: var(--bar);
+    --badge-primary-background: var(--bar);
+    --badge-primary-border: var(--bar);
+    --progressbar-indicator-background: var(--bar);
+    --badge-expressive-background: var(--fg-bright);
+    --background-feedback-notification: var(--red);
+    --badge-critical-background: var(--red);
+    --badge-notification-background: var(--red);
+    --badge-success-background: var(--green);
+    --badge-warning-background: var(--yellow);
+    --badge-critical-text: var(--ink);
+    --badge-expressive-text: var(--ink);
+    --badge-notification-text: var(--ink);
+    --badge-primary-text: var(--ink);
+    --badge-success-text: var(--ink);
+    --badge-warning-text: var(--ink);
+    --badge-secondary-background: var(--raised);
+    --badge-secondary-text: var(--fg);
+    --reaction-border-default: var(--edge-faint);
+    --reaction-border-hover: var(--edge-faint);
+    --reaction-border-active: var(--edge);
+    --reaction-border-reacted-default: var(--fg);
+    --reaction-background-reacted-default: color-mix(in srgb, var(--fg) 20%, transparent);
+    --reaction-background-reacted-hover: color-mix(in srgb, var(--fg) 30%, transparent);
+    --progressbar-track-background: var(--raised);
+    --slider-track-background: var(--raised);
+
+    /* pings and replies */
+    --mention-background: color-mix(in srgb, var(--fg) 10%, transparent);
+    --polls-voted-fill: color-mix(in srgb, var(--fg) 10%, transparent);
+    --message-mentioned-background-default: var(--mention);
+    --message-mentioned-background-hover: var(--mention-hover);
+    --message-highlight-background-default: var(--reply);
+    --message-highlight-background-hover: var(--reply-hover);
+
+    /* status and feedback: the muted colours */
+    --icon-status-online: var(--online);
+    --status-online: var(--online);
+    --status-positive: var(--online);
+    --status-positive-background: var(--online);
+    --status-speaking: var(--online);
+    --text-status-online: var(--online);
+    --icon-status-idle: var(--idle);
+    --status-warning: var(--idle);
+    --text-status-idle: var(--idle);
+    --icon-status-dnd: var(--dnd);
+    --icon-voice-muted: var(--dnd);
+    --status-danger: var(--dnd);
+    --text-status-dnd: var(--dnd);
+    --icon-status-offline: var(--offline);
+    --text-status-offline: var(--offline);
+    --icon-feedback-critical: oklch(from var(--red) calc(l + 0.05) c h);
+    --text-feedback-critical: oklch(from var(--red) calc(l + 0.05) c h);
+    --icon-feedback-positive: oklch(from var(--green) calc(l + 0.05) c h);
+    --text-feedback-positive: oklch(from var(--green) calc(l + 0.05) c h);
+    --icon-feedback-warning: oklch(from var(--yellow) calc(l + 0.05) c h);
+    --text-feedback-warning: oklch(from var(--yellow) calc(l + 0.05) c h);
+    --icon-feedback-info: oklch(from var(--blue) calc(l + 0.05) c h);
+    --background-code-deletion: oklch(from var(--red) l c h / 0.2);
+    --background-feedback-critical: oklch(from var(--red) l c h / 0.2);
+    --background-code-addition: oklch(from var(--green) l c h / 0.2);
+    --background-feedback-positive: oklch(from var(--green) l c h / 0.2);
+    --background-feedback-warning: oklch(from var(--yellow) l c h / 0.2);
+    --background-feedback-info: oklch(from var(--blue) l c h / 0.2);
+    --polls-victor-fill: oklch(from var(--green) l c h / 0.1);
+    --notice-background-info: oklch(from var(--blue) calc(l - 0.05) c h);
+    --notice-background-positive: oklch(from var(--green) calc(l - 0.05) c h);
+    --notice-background-warning: oklch(from var(--yellow) calc(l - 0.05) c h);
+}
+
+/* These sit on body and on themed elements inside it, but not on <html>, so that the named colours above
+   (which Discord works out on <html>) are still built from the real values.
+   - The base backgrounds: solid and dark for whatever is outside the main app layer (settings, popups). Inside
+     that layer they are see-through, see "no panels" below.
+   - A few colours of Discord's base palette that parts of it read directly. "White" is dark here: it is what
+     Discord writes on its blurple, and blurple is light grey in this theme. */
+body,
+body :is(.theme-dark, .theme-darker, .theme-midnight, .theme-light) {
+    --background-base-low: var(--panel);
+    --background-base-lower: var(--panel);
+    --background-base-lowest: var(--panel);
+    --white: var(--ink);
+    --white-500: var(--ink);
+    --blurple-50: var(--bar);
+    --brand-260: var(--bar);
+    --brand-360: var(--bar);
+    --brand-500: var(--bar);
+    --red-400: var(--red);
+    --red-500: oklch(from var(--red) calc(l - 0.05) c h);
+    --green-360: var(--green);
+    --yellow-300: var(--yellow);
+    --primary-300: var(--fg-bright);
+    --primary-400: var(--fg-dim);
+}
+
+/* ================================================================
+   layout
+   ================================================================ */
+
+/* the wallpaper goes on the layer behind the whole app, and nothing in front of it gets a fill */
+body,
+#app-mount,
+.app_QbT-Jy {
+    background: transparent;
+}
+#app-mount .bg_Fd0FEH {
+    background: var(--wallpaper-layers);
+    background-size: cover;
+    background-position: center;
+}
+
+/* no title bar. Discord's window is a grid with a title bar row on top. That row is 0 high here
+   (--custom-app-top-bar-height above), and the bar itself floats over the right end of the channel header,
+   carrying only what is still wanted from it: the inbox and plugin buttons, and the window buttons */
+.bar_3zSH5d /* title bar */ {
+    position: absolute;
+    top: 0;
+    inset-inline-end: 0;
+    z-index: 101;
+    height: var(--custom-channel-header-height);
+    min-height: 0;
+    padding: 0;
+    gap: 0;
+    -webkit-app-region: no-drag;
+}
+.bar_3zSH5d > :is(.title_3zSH5d, .leading_3zSH5d) /* window title, back and forward arrows */,
+.trailing_3zSH5d > a /* help */ {
+    display: none;
+}
+/* the buttons parked there are the size and colour of the channel header's own */
+.trailing_3zSH5d {
+    gap: 8px;
+    padding-inline-end: 8px;
+}
+.trailing_3zSH5d > div {
+    display: flex;
+}
+.trailing_3zSH5d .clickable_fErCLM {
+    width: 32px;
+    height: 32px;
+    color: var(--fg-dim);
+}
+.trailing_3zSH5d .clickable_fErCLM > svg {
+    width: 20px;
+    height: 20px;
+}
+/* ...and the channel header keeps that corner free */
+.toolbar_ybUK7Z /* buttons at the right of a channel header */ {
+    padding-inline-end: calc(var(--corner-room) + var(--corner-more, 0px));
+}
+/* --corner-room is room for two buttons. A third (Discord's green "update ready" arrow, a plugin's button)
+   made the row 40px wider, and the first button ended up on the X of the search box. So count the buttons
+   and keep 40px more for each extra one. The row comes before the rest of the window in the page, which
+   is how the count gets from there to the header; it only changes when a button comes or goes */
+.bar_3zSH5d:has(> .trailing_3zSH5d > :nth-child(3 of div:not(.winButtons_3zSH5d))) ~ .content_pog62O {
+    --corner-more: 40px;
+}
+.bar_3zSH5d:has(> .trailing_3zSH5d > :nth-child(4 of div:not(.winButtons_3zSH5d))) ~ .content_pog62O {
+    --corner-more: 80px;
+}
+.bar_3zSH5d:has(> .trailing_3zSH5d > :nth-child(5 of div:not(.winButtons_3zSH5d))) ~ .content_pog62O {
+    --corner-more: 120px;
+}
+.bar_3zSH5d:has(> .trailing_3zSH5d > :nth-child(6 of div:not(.winButtons_3zSH5d))) ~ .content_pog62O {
+    --corner-more: 160px;
+}
+.clickable_ybUK7Z .icon_ybUK7Z /* its icons: a step brighter than Discord's muted grey, so they read on the wallpaper */ {
+    color: var(--fg-dim);
+}
+/* Discord sizes the header search box as if the header ended at the window edge (100cqi - 320px), so on
+   smaller windows the channel name got squeezed to nothing. Let the box shrink a little earlier */
+.search_bWCaDq {
+    flex: 0 1 auto;
+    width: clamp(var(--space-64), 100cqi - 360px - var(--corner-more, 0px), 244px);
+}
+
+/* window buttons: three dots. Each button is twice as wide as its dot, so it stays easy to hit */
+.winButtons_3zSH5d {
+    gap: 0;
+    padding-inline-start: 8px;
+}
+.winButtons_3zSH5d::before /* a divider line */,
+.winButtons_3zSH5d > .winButton_3zSH5d > svg {
+    display: none;
+}
+.winButtons_3zSH5d > .winButton_3zSH5d {
+    width: calc(var(--dot-size) * 2);
+    height: calc(var(--dot-size) * 2);
+    background: none;
+    --dot: var(--online);
+}
+.winButtons_3zSH5d > .winButton_3zSH5d::after {
+    content: '';
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    background-color: var(--dot);
+    transition: background-color 0.15s ease;
+}
+.winButtons_3zSH5d > .winButtonMinMax_3zSH5d:nth-child(1) /* minimise */ {
+    --dot: var(--idle);
+}
+.winButtons_3zSH5d > .winButtonClose_3zSH5d {
+    --dot: var(--dnd);
+}
+@container style(--mono-window-controls: on) {
+    .winButton_3zSH5d:not(:hover)::after {
+        background-color: var(--fg-faint);
+    }
+}
+
+/* the user panel sits under the channel list only, and the server list runs the full height. Discord
+   floats the panel across both columns, in a box with a gap around it, and has the lists run on underneath
+   it. Here the channel list simply ends where the panel starts: Discord tells the page how tall the panel
+   is (--custom-app-panels-height), so keep that for the list's bottom margin, and tell the list's insides
+   there is no panel to leave room for */
+.sidebar_pog62O {
+    --panels-height: var(--custom-app-panels-height, 0px);
+}
+.panels_pog62O /* user panel */ {
+    inset-inline-start: var(--custom-guild-list-width);
+    bottom: 0;
+    width: calc(100% - var(--custom-guild-list-width));
+    border: none;
+    border-radius: 0;
+    background: none;
+}
+.wrapper_5dqHTG /* server list */ {
+    margin-bottom: 0;
+    -webkit-mask: none;
+    mask: none;
+}
+.scroller_5dqHTG /* its scrolling part: a little room above the home button, now that no title bar gives it */ {
+    padding-top: var(--custom-guild-list-padding) !important;
+}
+.sidebar_pog62O::after /* a strip Discord draws under the floating panel */ {
+    display: none;
+}
+/* Discord frames the channel list and the chat with 1px borders. The panes get their own lines further
+   down, so these go, and nothing shifts by a pixel */
+.sidebarList_pog62O /* channel / DM list */ {
+    border: none;
+    border-radius: 0;
+    margin-bottom: var(--panels-height);
+    --custom-app-panels-height: 0px;
+}
+/* ...which leaves three leftovers of Discord's "room for the panel" sums */
+.scroller_Bce46W /* DM list */,
+.scroller_ysO7Gy /* channel list */ {
+    margin-bottom: 0;
+}
+.bottom_t1P8Sn /* "new mentions" bar at the bottom of the channel list */ {
+    bottom: 0;
+}
+/* the stream and voice panels above the user row sit on the wallpaper like everything else */
+.panels_pog62O {
+    --background-surface-high: transparent;
+}
+.chat_z_gUBg[data-has-border='true'] /* chat column */ {
+    border-top: none;
+}
+/* a forum post, a thread or a voice channel's chat opens in a pane beside the channel. In a window too
+   narrow for both, Discord floats that pane over the channel instead, on one of the base backgrounds.
+   Those are see-through in here, so the post list and the header underneath showed straight through it,
+   text over text. It is a floating window like the menus: their glass (solid dark with --glass-menus:
+   off) and their thin light edge in place of Discord's drop shadow. The [class*] one is a fallback for
+   when the exact names change */
+:is(.floating_FrbQJp, [class*='chatLayerWrapper_'] > [class*='floating_']) {
+    background: var(--panel);
+    border-inline-start-color: var(--float-border);
+    box-shadow: none;
+}
+@container style(--glass-menus: on) {
+    :is(.floating_FrbQJp, [class*='chatLayerWrapper_'] > [class*='floating_']) {
+        background: var(--float-tint);
+        backdrop-filter: blur(var(--float-blur)) saturate(1.2);
+    }
+}
+
+/* server list: the unread pill is a thin rounded bar next to the icon, not a tab stuck to the window edge */
+.item__o8_Xq {
+    width: 4px;
+    margin-inline-start: 1px;
+    border-radius: 4px;
+}
+/* ...and the "new" markers at its top and bottom fit the narrow column */
+.unreadMentionsIndicatorTop_5dqHTG,
+.unreadMentionsIndicatorBottom_5dqHTG {
+    padding: 3px;
+}
+.bar_oJAkDB {
+    color: var(--fg-dim);
+}
+/* the small badge on a server's icon that says people are in voice there: Discord draws a white speaker on
+   a black dot, and "white" is dark in this theme (see the colour names above), so the speaker was lost.
+   Light again. The green badge, for a call you are in yourself, keeps its dark icon */
+.iconBadge_rwEpIL:not(.isCurrentUserConnected_rwEpIL) {
+    color: var(--fg-bright);
+}
+
+/* home button: Discord writes "white" on it when it is hovered or open, which is dark in this theme (see
+   the colour names above). Keep the icon light: it sits on a faint tint here, not on blurple */
+[data-list-item-id='guildsnav___home']:is(:hover, .selected_JJ-hgR) > .childWrapper_JJ-hgR {
+    color: var(--fg-bright);
+}
+/* ...and with the Arch logo, drawn with a mask so it takes the button's text colour. It makes one turn when
+   you point at the button or open the home page, and turns back when you leave */
+@container style(--home-icon: arch) {
+    [data-list-item-id='guildsnav___home'] > .childWrapper_JJ-hgR > svg {
+        display: none;
+    }
+    [data-list-item-id='guildsnav___home'] > .childWrapper_JJ-hgR::before {
+        content: '';
+        width: 26px;
+        height: 26px;
+        background-color: currentColor;
+        mask: var(--arch-logo) center / contain no-repeat;
+    }
+    [data-list-item-id='guildsnav___home']:is(:hover, .selected_JJ-hgR) > .childWrapper_JJ-hgR::before {
+        rotate: 1turn;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        [data-list-item-id='guildsnav___home'] > .childWrapper_JJ-hgR::before {
+            transition: rotate 0.4s ease;
+        }
+    }
+}
+
+/* calls: a few icons that Discord draws in "white" over video and dark overlays. White is dark in this theme
+   (see the colour names above), so give them a light colour of their own */
+.iconContainer_1uD6uZ > svg /* buttons in the call's header */,
+.qualityIndicatorFullQuality__be5Bx,
+.premiumStreamIcon__be5Bx,
+.selectedIcon_7NOr2f,
+.blocked_7NOr2f {
+    color: var(--fg);
+}
+/* ...and text Discord means to be "always white": channel and user names over video. It is dark in this
+   theme because the same colour is also written on light pills and buttons. On the call screen and in the
+   small preview window it is light again (also on themed elements inside them, which the colour names
+   above would darken) */
+.wrapper_hbKzX7,
+.callContainer_hbKzX7,
+.callContainer_DwQMm_,
+.pictureInPictureWindow_69M0s9,
+:is(.wrapper_hbKzX7, .callContainer_hbKzX7, .callContainer_DwQMm_, .pictureInPictureWindow_69M0s9) :is(.theme-dark, .theme-darker, .theme-midnight, .theme-light) {
+    --text-overlay-light: var(--fg-bright);
+}
+/* the preview window's back arrow and buttons, which use plain "white" */
+.pictureInPictureWindow_69M0s9,
+.pictureInPictureWindow_69M0s9 :is(.theme-dark, .theme-darker, .theme-midnight, .theme-light) {
+    --white: var(--fg-bright);
+    --white-500: var(--fg-bright);
+    --interactive-text-default: var(--fg-strong);
+    --interactive-text-active: var(--fg-bright);
+}
+
+/* the call screen is all video and dark overlays, so plain "white" is light there too: the round buttons
+   (mute, camera, share...) draw their icons in it, and fill the pressed ones with it */
+.wrapper_hbKzX7,
+.callContainer_hbKzX7,
+.callContainer_DwQMm_,
+:is(.wrapper_hbKzX7, .callContainer_hbKzX7, .callContainer_DwQMm_) :is(.theme-dark, .theme-darker, .theme-midnight, .theme-light) {
+    --white: var(--fg-bright);
+    --white-500: var(--fg-bright);
+}
+/* ...except on the round buttons this theme fills with a light colour, where the icon stays dark */
+.colorable_K9Xq13:is(.green_K9Xq13, .join_K9Xq13, .yellow_K9Xq13) {
+    --white: var(--ink);
+}
+
+/* screen share picker (the grid of windows and screens to stream): the "Share Screen" button that appears
+   over the tile you hover is Discord's "white" with black text. White is dark in this theme (see the
+   colour names above), so the button was black on near-black. It takes the theme's light button colours */
+.source_4HfQya .sourceOverlayCTA_4HfQya {
+    background-color: var(--button);
+    color: var(--ink);
+}
+
+/* a profile with colours of its own (Nitro): Discord fills the filled button on it ("Edit Profile", "Add
+   Friend") with a colour taken from the profile, and this theme writes dark on filled buttons. On a dark
+   profile that was dark text on dim grey. The button is the theme's light one there too, the same as
+   "Store" on a bot's profile. Discord's rule is ":root .custom-user-profile-theme.theme-dark", so this
+   one is written just as heavy */
+:root .custom-user-profile-theme:is(.theme-dark, .theme-darker, .theme-midnight, .theme-light) {
+    --control-primary-background-default: var(--button);
+    --control-primary-background-hover: var(--button-hover);
+    --control-primary-background-active: var(--button-press);
+}
+
+/* a video or sound file in chat: the player writes on the picture and on its own dark strips, and it does
+   so in plain "white": the time, the file's name, the icons under the mouse, the round play button in the
+   middle (the second name, which the previews of links to videos use too). So "white" is light there */
+.wrapper_FJ99sr,
+.wrapper_lj7V-K {
+    --white: var(--fg-bright);
+    --white-500: var(--fg-bright);
+}
+
+/* ---- the mod's own interface ----
+   The theme works in Vencord and in BetterDiscord. Each draws its own settings screens, with its own
+   switches and accent colour, so each gets a few rules to look like the rest. */
+
+/* Vencord's own switches (plugin and theme lists), which don't use Discord's switch colours: the same look
+   as Discord's here. Off is a grey knob with a dark cross, on a dark knob with a light tick on the light track */
+.vc-switch-slider > rect {
+    fill: var(--fg-dim);
+}
+.vc-switch-slider path {
+    fill: var(--ink);
+}
+.vc-switch-checked .vc-switch-slider > rect {
+    fill: var(--ink);
+}
+.vc-switch-checked .vc-switch-slider path {
+    fill: var(--bar);
+}
+
+/* BetterDiscord has a blue accent and writes white on it. Here the accent is the theme's light grey. Its
+   filled buttons take their text from Discord's "white", which is dark in this theme, so those already
+   read right; the rest follows */
+:root {
+    --bd-brand: var(--button);
+    --bd-brand-hover: var(--button-hover);
+    --bd-brand-active: var(--button-press);
+}
+.bd-addon-controls .bd-button.selected svg,
+.bd-controls-basic .bd-button:active svg /* icons it draws in white on the accent */,
+.bd-checkbox-input:checked + .bd-checkbox-box /* the tick of a ticked checkbox */ {
+    color: var(--ink);
+}
+.bd-button-filled.bd-button-color-blurple {
+    background-color: var(--button);
+}
+/* ...and where it uses "white" for text on something dark, or for a white button, it is light again */
+.bd-button-color-white,
+.bd-button-link.bd-button-color-primary,
+.bd-text-white {
+    --white-500: var(--fg-bright);
+}
+.bd-notice /* its notice bar: dark like a popup, not blurple */ {
+    background: var(--color, var(--popup));
+}
+/* its switches: the same look as Discord's and Vencord's here */
+.bd-switch-body {
+    --switch-color: var(--raised);
+}
+.bd-switch .bd-switch-handle {
+    fill: var(--fg-dim);
+}
+.bd-switch .bd-switch-symbol path {
+    fill: var(--ink);
+}
+.bd-switch input:checked + .bd-switch-body .bd-switch-handle {
+    fill: var(--ink);
+}
+.bd-switch input:checked + .bd-switch-body .bd-switch-symbol path {
+    fill: var(--bar);
+}
+
+/* status dots and the "playing" icon: Discord paints these from script, with its own green, yellow and red,
+   so the colour names above don't reach them. The dot is told apart by the mask that cuts its shape */
+rect[mask*='status-online'] {
+    fill: var(--online);
+}
+rect[mask*='status-idle'] {
+    fill: var(--idle);
+}
+rect[mask*='status-dnd'] {
+    fill: var(--dnd);
+}
+rect[mask*='status-offline'] {
+    fill: var(--offline);
+}
+rect[mask*='status-streaming'] {
+    fill: var(--streaming);
+}
+.icon_HigqCD > path[fill='#45a366' i] /* "playing a game", next to a name */ {
+    fill: var(--online);
+}
+
+/* member list: see-through, like the other panes. Its colour is one Discord works out on <html>, from
+   its own grey, so the see-through base colours ("no panels" below) never reach it. Set here instead */
+body {
+    --custom-channel-members-bg: transparent;
+}
+/* Discord fills each row from script too (it is what a nameplate picture sits on). No fill: the rows sit
+   on the wallpaper. The hover tint is on an inner element and still works */
+.member_Iy0c7A {
+    background: none !important;
+}
+
+/* chat: the bar is lower than Discord's (47px, see the sizes above), so centre its attach button, and
+   don't let the bar ride up over the last message */
+.attachWrapper_7TM4SO {
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+}
+.form_z_gUBg {
+    margin-top: 0;
+}
+/* messages: the hover band stops short of the left edge and has the small corners */
+.message_SY_P2T {
+    margin-inline-start: 4px;
+    border-radius: var(--radius-md);
+}
+/* pings: a role's ping is written in the role's colour (a person's too, with Vencord's RoleColorEverywhere),
+   so a black or very dark role was black on black. The text is drawn at --ping-floor lightness or lighter,
+   in the same hue; a colour that is light enough stays exactly as it is. Discord sets the colour and the
+   faint box behind it from script, on the element, so the box needs !important (0.1, and 0.3 when hovered,
+   are Discord's own strengths) */
+.wrapper_NDaLCQ[style*='color'] {
+    -webkit-text-fill-color: oklch(from currentColor max(l, var(--ping-floor)) c h);
+    text-decoration-color: oklch(from currentColor max(l, var(--ping-floor)) c h);
+    background-color: oklch(from currentColor max(l, var(--ping-floor)) c h / 0.1) !important;
+}
+.wrapper_NDaLCQ[style*='color']:hover {
+    background-color: oklch(from currentColor max(l, var(--ping-floor)) c h / 0.3) !important;
+}
+/* reactions: a slightly heavier outline */
+.reaction_MmKct8,
+.reactionBtn_MmKct8,
+.reactionBtn_MmKct8.forceShow_MmKct8 {
+    border-width: 2px;
+}
+/* pictures in chat get the same corners as everything else (Discord fixes them at 3px) */
+.imageWrapper_W6wEGA {
+    border-radius: var(--radius-md);
+}
+/* the line between days, and the "new messages" line: thicker and softer */
+.divider_SY_P2T {
+    border-top-width: 3px;
+    border-radius: 3px;
+}
+.divider_SY_P2T > .content_4TfzT5 /* its label */ {
+    margin-top: -3px;
+}
+
+
+/* ================================================================
+   dialogs
+   Invite people, create a channel, "are you sure?" and the like look like the discord-rice settings
+   window, a floating terminal window: a title bar with a line under it (the title bold, the line
+   Discord writes under it dim beside it), a small close button, a line above the buttons, and the same
+   see-through glass as the menus. The frame itself (thin light border, small corners, flat inputs) is
+   set with the other floating windows further down.
+   Discord has two kinds of dialog. First the newer one.
+   ================================================================ */
+
+/* the title bar starts at the dialog's top edge. A big centred header with a picture is left alone */
+.container_dvN-MP .header_dvN-MP:not(.headerCentered_dvN-MP) {
+    margin-top: calc(var(--custom-modal-padding-top) * -1);
+    padding: 7px 44px 7px 14px; /* 44px: room for the close button */
+    border-bottom: 1px solid var(--line);
+}
+/* title and subtitle side by side, like "discord-rice ~/.config/..."; a subtitle that is too long for
+   that drops to a row of its own. Discord sets the gap on the element, hence !important */
+.header_dvN-MP:not(.headerCentered_dvN-MP) > .stack_TWWX0S {
+    flex-flow: row wrap;
+    align-items: baseline;
+    gap: 0 10px !important;
+}
+.header_dvN-MP:not(.headerCentered_dvN-MP) .headerLayout_dvN-MP {
+    display: contents;
+}
+.header_dvN-MP:not(.headerCentered_dvN-MP) .headerMain_dvN-MP {
+    flex: 0 1 auto;
+}
+.header_dvN-MP:not(.headerCentered_dvN-MP) .headerLeading_dvN-MP /* a back button, when there is one */ {
+    align-self: center;
+    margin: 0;
+}
+.header_dvN-MP:not(.headerCentered_dvN-MP) .headerTitle_dvN-MP {
+    color: var(--fg-bright);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+.header_dvN-MP:not(.headerCentered_dvN-MP) .headerSubtitle_dvN-MP {
+    color: var(--fg-dim);
+    font-size: 13px;
+    line-height: 1.45;
+}
+/* close: small, in the bar's right corner */
+.header_dvN-MP:not(.headerCentered_dvN-MP) .headerTrailing_dvN-MP {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    margin: 0;
+    padding: 0;
+}
+/* ...and its button, like a back button on the left, is as small as the bar */
+.header_dvN-MP:not(.headerCentered_dvN-MP) :is(.headerLeading_dvN-MP, .headerTrailing_dvN-MP) .buttonChildrenWrapper_F7qvhY {
+    min-width: 26px;
+    min-height: 26px;
+}
+.header_dvN-MP:not(.headerCentered_dvN-MP) :is(.headerLeading_dvN-MP, .headerTrailing_dvN-MP) svg {
+    width: 16px;
+    height: 16px;
+}
+/* Discord draws a line under the header and over the footer while the content is scrolled. The bar and
+   the footer have their own lines now, so those would be second ones */
+.container_dvN-MP .bodySpacerTopBorder_dvN-MP {
+    border-bottom-color: transparent;
+}
+.container_dvN-MP .bodyScrollingSpacerBottom_dvN-MP {
+    border-top-color: transparent;
+}
+/* a line above what sits under the content: the row of buttons, or an extra like the invite link */
+.container_dvN-MP footer.section_dvN-MP {
+    padding-block: 12px;
+    border-top: 1px solid var(--line);
+}
+.container_dvN-MP footer.section_dvN-MP:last-child {
+    margin-bottom: calc(var(--custom-modal-padding-bottom) * -1);
+}
+
+/* the older kind, which Vencord's and BetterDiscord's own dialogs use too. Its header is whatever each
+   dialog puts there, so it only gets the bar's size, its line and a small title */
+.root__KoJTP .header__KoJTP {
+    padding: 7px 8px 7px 14px;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+}
+.root__KoJTP .header__KoJTP :is(h1, h2, h3, .heading-md\/semibold_RAOoio, .heading-lg\/semibold_RAOoio, .heading-xl\/semibold_RAOoio) {
+    color: var(--fg-bright);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+.root__KoJTP .close__KoJTP {
+    height: 16px;
+    padding: 2px;
+}
+.root__KoJTP .close__KoJTP svg {
+    width: 16px;
+    height: 16px;
+}
+.root__KoJTP .footer__KoJTP {
+    padding-block: 12px;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+}
+
+/* glass, as on the menus: a see-through dark tint with what is behind blurred. Only the plain dialog
+   sizes: the profile window and the picture viewer are built on the older kind too and keep their own
+   backgrounds. --glass-menus: off gives solid dark dialogs */
+@container style(--glass-menus: on) {
+    :is(.container_dvN-MP, .small__KoJTP, .medium__KoJTP, .large__KoJTP) {
+        background: var(--float-tint) !important;
+        backdrop-filter: blur(var(--float-blur)) saturate(1.2);
+        --modal-background: transparent;
+        --modal-footer-background: transparent;
+        --background-surface-high: transparent;
+    }
+}
+/* ================================================================
+   no panels: inside the main app layer every base surface is see-through, so the wallpaper is the
+   background. Menus, popouts, modals and settings live outside this layer and keep solid colours.
+   ================================================================ */
+[class*='layers_'] > [class*='layer_'][class*='baseLayer_'],
+[class*='layers_'] > [class*='layer_'][class*='baseLayer_'] :is(.theme-dark, .theme-darker, .theme-midnight, .theme-light) {
+    --background-gradient-low: transparent;
+    --background-gradient-high: transparent;
+    --background-gradient-highest: transparent;
+    --background-base-low: transparent;
+    --background-base-lower: transparent;
+    --background-base-lowest: transparent;
+    --home-background: transparent;
+    --app-frame-background: transparent;
+    --chat-background-default: var(--glass);
+    --input-background-default: var(--glass);
+    --card-background-default: var(--glass);
+    --background-code: hsla(0, 0%, 0%, 0.3);
+}
+
+/* calls: drop the black backdrop behind the tiles so the wallpaper shows. Video and screen share tiles
+   keep their own background. The [class*] one is a fallback for when the exact names change. */
+[class*='baseLayer_']
+    :is(.wrapper_hbKzX7, .callContainer_hbKzX7, .callContainer_hbKzX7 > [class*='root_'], .callContainer_DwQMm_, [class*='callContainer_']) {
+    background: transparent !important;
+}
+/* and the dark fades Discord lays over the top and bottom of a call while you hover it */
+[class*='callContainer_'] :is(.gradientContainer_rTsZa_, [class*='gradientContainer_']) {
+    background-image: none;
+}
+/* same for the small picture-in-picture preview you get after leaving the call screen. Without the dark
+   bands, a soft shadow keeps its back arrow, name and buttons readable over bright video. */
+body :is(.videoControls_qOjco6, .pipHeaderContentOpen_W1lBQu) {
+    background: none;
+}
+body .videoControls_qOjco6 > * {
+    filter: drop-shadow(0 1px 2px hsla(0, 0%, 0%, 0.75));
+}
+
+/* drag the window by the empty part of the channel header (next to the name), not just the thin strip above.
+   Only the title area is a drag region: the inbox and window buttons sit over the header's right end and
+   would stop taking clicks if the whole header were draggable. Anything clickable in the title stays clickable. */
+.children_ybUK7Z {
+    -webkit-app-region: drag;
+}
+.children_ybUK7Z :is(a, button, input, [role='button'], [role='link'], [role='textbox'], [tabindex]:not([tabindex='-1'])) {
+    -webkit-app-region: no-drag;
+}
+/* ...and by the empty part of the server header, the strip with the server's name above the channels.
+   The name with its arrow (the server menu) and the invite button keep taking clicks */
+.header_XH4OpX {
+    -webkit-app-region: drag;
+}
+.header_XH4OpX :is(.guildDropdown_XH4OpX, .headerChildren_XH4OpX) {
+    -webkit-app-region: no-drag;
+}
+
+/* server list: Discord keeps room for a scrollbar on both sides of it, which pushes the icons 8px right.
+   That was fine in a wide column, but in this narrow one it cut off their right edge. Drop the scrollbar
+   (the wheel still scrolls) so the icons sit centred. */
+:is(.scroller_5dqHTG, [class*='guilds_'] [class*='scrollerBase_']) {
+    scrollbar-gutter: auto !important;
+    scrollbar-width: none !important;
+}
+
+/* home button: Discord fills it with the accent when hovered or open, which is a bright light grey here.
+   Use the same faint tint as a selected DM instead, so the light logo stays on a dark button */
+.wrapper_JJ-hgR[data-list-item-id='guildsnav___home']:hover > .childWrapper_JJ-hgR {
+    background-color: var(--active);
+}
+.wrapper_JJ-hgR[data-list-item-id='guildsnav___home'].selected_JJ-hgR > .childWrapper_JJ-hgR {
+    background-color: var(--pressed);
+}
+
+/* ================================================================
+   declutter and switches
+   Selectors lean on hrefs and aria-labels where possible, which survive Discord's class renames.
+   ================================================================ */
+
+
+/* black-and-white server pictures (and the DM avatars that pop into the server list), plus folders: the
+   mini icons in a closed folder, the folder colour and the open-folder glyph and tint. Only pictures and
+   folders are greyed: unread, mention and voice badges keep their colour. */
+@container style(--mono-server-icons: on) or style(--mono-server-icons: hover) {
+    :is(.guilds_pog62O, nav[class*='guilds_'])
+        :is(img, [class*='folderPreviewWrapper_'], [class*='folderIcon_'], [class*='folderGroupBackground_']) {
+        filter: grayscale(1);
+        transition: filter 0.2s ease;
+    }
+}
+@container style(--mono-server-icons: hover) {
+    :is(.guilds_pog62O, nav[class*='guilds_'])
+        :is([class*='listItem_'], [class*='folderHeader_']):hover
+        :is(img, [class*='folderPreviewWrapper_'], [class*='folderIcon_']) {
+        filter: none;
+    }
+}
+
+/* plain folders: a closed folder is its colour with a folder icon on it, like an open one, instead of a
+   2x2 grid of its servers. The FolderPictures plugin puts a picture in the same spot and hides the icon */
+@container style(--plain-folders: on) {
+    /* exact class names: a rule ending in "*" under a loose [class*=] match is checked against every
+       element in the window */
+    .folderPreviewWrapper_RTMSuZ > .folderPreview_RTMSuZ {
+        position: relative;
+    }
+    .folderPreviewWrapper_RTMSuZ > .folderPreview_RTMSuZ > * {
+        display: none;
+    }
+    .folderPreviewWrapper_RTMSuZ > .folderPreview_RTMSuZ::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 20px;
+        height: 20px;
+        background-color: color-mix(in srgb, var(--custom-folder-color, var(--fg-dim)), white 30%);
+        mask: var(--folder-glyph) center / contain no-repeat;
+    }
+}
+
+/* quests: the quest card that sits on top of the user panel (hidden from the outside in, but never a box
+   that also holds the user panel), and quest embeds in chat. The Quests tab goes with --hide-store-tabs.
+   Speed: exact class names inside :has(). With loose [class*=] matches in there, any class change anywhere
+   in the window made Discord check this rule again (about 10 ms per click, measured) */
+@container style(--hide-quests: on) {
+    .panels_pog62O
+        *:has(:is(.questPromoContent_ZzrVHV, .questAcceptedContent_ZzrVHV, .contentCollapsedBackground_ZzrVHV, .contentCollapsedBackgroundWrapper_ZzrVHV,
+                .postEnrollmentBackground_ZzrVHV, .postEnrollmentBackgroundCollapsed_ZzrVHV, .postEnrollmentBackgroundExpanded_ZzrVHV)):not(:has(.accountPopoutButtonWrapper_g6VwXp)),
+    :is([class*='questsEmbed_'], [class*='questEmbedCard_']) {
+        display: none !important;
+    }
+}
+
+/* nameplates: the picture strips behind names in the member list, DM list and user panel. The previews
+   in the shop and in profile settings stay, so you can still see what one looks like */
+@container style(--hide-nameplates: on) {
+    .container_AFi54G:not(:has(:is(.preview_AFi54G, .mini_preview_AFi54G))),
+    :is(aside, nav, [class*='membersWrap_'], [class*='members_'], [class*='panels_']) :is(img, video)[src*='collectibles/nameplates'] {
+        display: none !important;
+    }
+}
+
+/* Nitro Home / Shop / Quests rows above the DM list */
+@container style(--hide-store-tabs: on) {
+    nav :is(li, [role='listitem'], .channel_zln_tS):has(a:is([href='/store'], [href='/shop'], [href='/quest-home'])),
+    nav a:is([href='/store'], [href='/shop'], [href='/quest-home']) {
+        display: none;
+    }
+}
+
+/* chat bar buttons */
+@container style(--hide-gift-button: on) {
+    /* the label varies ("Send a gift", "Send a gift to <name>"...), so match any gift button */
+    [class*='channelTextArea'] :is(button, [role='button'])[aria-label*='gift' i] {
+        display: none;
+    }
+}
+@container style(--hide-apps-button: on) {
+    [class*='channelTextArea'] :is([class*='channelAppLauncher_'], .app-launcher-entrypoint) {
+        display: none;
+    }
+}
+@container style(--hide-sticker-button: on) {
+    [class*='channelTextArea'] .expression-picker-chat-input-button:has([aria-label='Open sticker picker']) {
+        display: none;
+    }
+}
+
+/* the notification bell in the channel and thread header. The same settings are a right-click away on the
+   channel, so it only takes room up there */
+@container style(--hide-notification-button: on) {
+    [class*='toolbar_'] [aria-label='Notification Settings'] {
+        display: none;
+    }
+}
+@container style(--hide-video-call-button: on) {
+    [class*='toolbar_'] [aria-label='Start Video Call'] {
+        display: none;
+    }
+}
+
+/* the two round buttons under your servers: "Add a Server" (+) and "Discover" (the compass). The whole row
+   goes, not only the button, so no gap is left. Both are off unless you ask: with the + hidden there is no
+   button to create a server (an invite link still joins one).
+   Speed: an exact class name in front of :has(), so only the rows of the server list are looked at */
+@container style(--hide-add-server-button: on) {
+    :is(.tutorialContainer_rwEpIL, .listItem_rwEpIL):has([data-list-item-id='guildsnav___create-join-button']) {
+        display: none;
+    }
+}
+@container style(--hide-discover-button: on) {
+    .listItem_rwEpIL:has([data-list-item-id='guildsnav___guild-discover-button']) {
+        display: none;
+    }
+}
+
+/* the DM profile button greys out when the window is under 1132px wide or a call is open. It does nothing
+   then, so don't show it */
+[class*='toolbar_'] [aria-label='Show User Profile (Unavailable)'] {
+    display: none;
+}
+
+
+/* ================================================================
+   rice: tiled panes, a terminal prompt, ranger-style selection
+   ================================================================ */
+
+/* tiled panes: no boxes and no gaps, just a 1px line between the columns, like tmux or i3. Drawn with
+   inset shadows so nothing shifts by a pixel (the server column is exactly as wide as its icons) */
+.guilds_pog62O /* server list */,
+.sidebarList_pog62O /* channel / DM list */ {
+    box-shadow: inset -1px 0 var(--line);
+}
+.panels_pog62O /* user panel */ {
+    box-shadow: inset 0 1px var(--line), inset -1px 0 var(--line);
+    /* Discord works out the padding of everything in here (the stream and voice panels during a call, the
+       user row) from the server list padding. The rice halves that, so they came out at 2px, or 0 at the
+       top, and looked cramped. Give the panels Discord's own 12px back, which makes their padding 8px */
+    --custom-guild-list-padding: 12px;
+}
+/* the user row: pin the padding so the settings cog keeps its room at the edge, and let the name shrink
+   (Discord only allows that under 260px) so the buttons always fit */
+.container_g6VwXp /* user panel row */ {
+    padding: 8px 5px 8px 8px; /* 5px on the right: the cog has its own room inside its button */
+    gap: 4px;
+    margin-inline-start: 0;
+}
+.accountPopoutButtonWrapper_g6VwXp /* avatar and name */ {
+    min-width: 0;
+    margin-inline-start: 0;
+    padding: 4px;
+}
+.buttons_g6VwXp /* mic, headphones, settings */ {
+    flex-shrink: 0;
+    gap: 4px;
+}
+.chat_z_gUBg > .subtitleContainer_z_gUBg /* chat header */,
+.container_zrUwGA > .container_ybUK7Z /* friends header */,
+.container_nMe-a6 > .container_ybUK7Z /* message requests header */,
+.container_FrbQJp > .container_ybUK7Z /* voice chat / thread header */,
+.container_UU236g > .container_ybUK7Z /* new thread header */ {
+    box-shadow: inset 0 -1px var(--line);
+}
+.container_86es0b /* member list */,
+.content_z_gUBg > .membersWrap_86es0b /* forum post member list */,
+.content_z_gUBg > aside > .outer_P1YEjQ /* DM profile */,
+.searchResultsWrap_QHVbp3 /* search results */,
+.nowPlayingColumn_zrUwGA /* active now */ {
+    box-shadow: inset 1px 0 var(--line);
+}
+
+/* the chat bar is a prompt line: no box, a line across the chat above it that lights up while you
+   type, and a ❯ in front */
+.form_z_gUBg {
+    padding-inline: 0;
+}
+#app-mount .channelTextArea_z_gUBg {
+    border: none;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    transition: border-color 0.15s ease;
+}
+#app-mount .channelTextArea_z_gUBg:focus-within {
+    border-top-color: var(--line-focus);
+}
+.channelTextArea_z_gUBg .scrollableContainer_2x8-Qn {
+    background: none;
+}
+.channelTextArea_z_gUBg .inner_2x8-Qn::before {
+    content: '❯';
+    align-self: center;
+    padding-inline: 16px 4px;
+    color: var(--fg-strong);
+    font-family: var(--font-code);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* selected channel: a solid bar with dark text, like the cursor line in ranger */
+#app-mount .modeSelected_TNyK-N .link_TNyK-N {
+    background: var(--channel-bar);
+}
+#app-mount .modeSelected_TNyK-N .link_TNyK-N :is(.name_TNyK-N, .icon_TNyK-N, .actionIcon_Wx6SnQ, .iconItem_Wx6SnQ) {
+    color: var(--ink);
+}
+/* a channel with a second row (a voice channel you are in: its name and call timer, then its status) made
+   the solid bar a big bright block. It gets the faint tint of a selected DM instead.
+   Speed: exact class names only. A :has() in front of a loose [class*=] match made Discord restyle the
+   whole window on every click (about 70 ms each, measured) */
+#app-mount .modeSelected_TNyK-N .link_TNyK-N:has(.linkBottom_TNyK-N) {
+    background: var(--pressed);
+}
+#app-mount .modeSelected_TNyK-N .link_TNyK-N:has(.linkBottom_TNyK-N) .name_TNyK-N {
+    color: var(--fg-bright);
+}
+#app-mount .modeSelected_TNyK-N .link_TNyK-N:has(.linkBottom_TNyK-N) :is(.icon_TNyK-N, .actionIcon_Wx6SnQ, .iconItem_Wx6SnQ) {
+    color: var(--fg-strong);
+}
+
+/* categories read like directories in ls: brighter and bold */
+#app-mount .wrapper_yOdhm_ :is(.name_yOdhm_, .icon_yOdhm_) {
+    color: var(--fg-strong);
+}
+#app-mount .wrapper_yOdhm_ .name_yOdhm_ {
+    font-weight: 600;
+}
+#app-mount .wrapper_yOdhm_:hover :is(.name_yOdhm_, .icon_yOdhm_) {
+    color: var(--fg-bright);
+}
+
+/* message times in brackets, like an IRC log: [05/11/2026 21:41] */
+.cozy_2i8Bfm .timestamp_2i8Bfm:not(.alt_2i8Bfm) time::before {
+    content: '[';
+}
+.cozy_2i8Bfm .timestamp_2i8Bfm:not(.alt_2i8Bfm) time::after {
+    content: ']';
+}
+
+/* floating windows: right-click menus, the GIF / sticker / emoji picker, inbox, autocomplete, search
+   suggestions, dialogs. Styled like rofi or a floating window in Hyprland: small corners, a thin
+   light border instead of a drop shadow, flat inputs */
+:is(.menu_M3qk4j, .contentWrapper_58b0l2, .autocomplete_rg6La1, .container_cbVzxY,
+    .messagesPopoutWrap_6bgemo, .popout_j5xNzb, .browser_l-3BKx, .root__KoJTP, .container_dvN-MP) {
+    border: 1px solid var(--float-border) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: none !important;
+    --input-background-default: transparent;
+    --input-border-default: var(--line);
+    --input-border-hover: var(--edge-strong);
+    --input-border-active: var(--line-focus);
+    --input-border-focused: var(--line-focus);
+}
+
+/* ...and frosted glass, so they have the same dark, misty look as the rest of the window: a see-through
+   dark tint with whatever is behind blurred, like Hyprland's blur. The glass sits on a layer behind the
+   content (a blur straight on a menu would break its submenus). Their inner panels (sticker sidebar,
+   picker footer) go see-through too, slightly darker. --glass-menus: off gives solid dark menus instead */
+@container style(--glass-menus: on) {
+    /* the glass layer needs a positioned parent. :where() has no weight, so popups Discord already
+       positions keep theirs: the autocomplete above the chat bar (emoji, @, /) is position: absolute,
+       and making it relative pushes the chat bar up the screen */
+    :where(.menu_M3qk4j, .contentWrapper_58b0l2, .autocomplete_rg6La1, .container_cbVzxY,
+        .messagesPopoutWrap_6bgemo, .popout_j5xNzb, .browser_l-3BKx) {
+        position: relative;
+    }
+    :is(.menu_M3qk4j, .contentWrapper_58b0l2, .autocomplete_rg6La1, .container_cbVzxY,
+        .messagesPopoutWrap_6bgemo, .popout_j5xNzb, .browser_l-3BKx) {
+        isolation: isolate;
+        background: transparent !important;
+        --background-surface-high: transparent;
+        --background-surface-higher: transparent;
+        --background-surface-highest: var(--raised);
+        --background-base-low: transparent;
+        --background-base-lower: hsla(0, 0%, 0%, 0.3);
+        --background-base-lowest: hsla(0, 0%, 0%, 0.3);
+        --background-secondary-alt: hsla(0, 0%, 0%, 0.3);
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: inherit;
+            background: var(--float-tint);
+            backdrop-filter: blur(var(--float-blur)) saturate(1.2);
+            pointer-events: none;
+        }
+    }
+    /* the search suggestion rows fade out on the right with a mask made from --background-surface-high.
+       That's see-through in here, so the mask hid the whole row. Same fade, solid mask */
+    .container_cbVzxY .item_lm2_KW {
+        -webkit-mask-image: linear-gradient(to right, #000 90%, transparent);
+        mask-image: linear-gradient(to right, #000 90%, transparent);
+    }
+}
+
+/* picker tabs (GIFs / Stickers / Emoji): the open one is a light bar, like the selected channel */
+.navButton_58b0l2 {
+    border-radius: var(--radius-xs);
+    color: var(--fg-dim);
+}
+:is(.navButtonActive_58b0l2, .navButtonActive_58b0l2:hover, .navButtonActive_58b0l2:active) {
+    background-color: var(--bar);
+    color: var(--ink);
+}
+
+/* menu items: the one under the mouse is a light bar with dark text, like rofi's selected entry.
+   Red for the dangerous ones (leave, delete...) */
+.colorDefault_M3qk4j.focused_M3qk4j {
+    background-color: var(--bar);
+    border-radius: var(--radius-xs);
+    color: var(--ink);
+}
+.colorDefault_M3qk4j.focused_M3qk4j
+    :is(.label_M3qk4j, .subtext_M3qk4j, .caret_M3qk4j, .icon_M3qk4j, .check_M3qk4j, .radioSelection_M3qk4j) {
+    color: var(--ink);
+}
+.colorDefault_M3qk4j.focused_M3qk4j:not(.checkboxContainer_M3qk4j) path {
+    fill: var(--ink);
+}
+.colorDanger_M3qk4j.focused_M3qk4j {
+    background-color: var(--red);
+    border-radius: var(--radius-xs);
+}
+.colorDanger_M3qk4j.focused_M3qk4j :is(.label_M3qk4j, .subtext_M3qk4j, .icon_M3qk4j, .check_M3qk4j),
+.colorDanger_M3qk4j.focused_M3qk4j {
+    color: var(--ink);
+}
+
+/* game page (what opens when you click the game you're playing): Discord fills the whole window with it,
+   and its close button ends up under the window dots. Make it a smaller window in the middle instead,
+   with the same thin border as the menus. Esc still closes it */
+.container_WtnPzl:has(.heroContent_3tF3Yo) {
+    width: min(1100px, 100% - 120px);
+    height: calc(100% - 96px);
+    margin: 48px auto;
+    background: var(--panel);
+    border: 1px solid var(--float-border);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+}
+
+/* default wallpaper: misty forest, embedded so it works without hosting. Keep this block last. */
+:root {
+    /* a filled folder, for --plain-folders */
+    --folder-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 6a2 2 0 0 1 2-2h5.17a2 2 0 0 1 1.42.59L12.4 6.4H20a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z'/%3E%3C/svg%3E");
+    /* Arch Linux logo for the home button (Simple Icons, CC0) */
+    --arch-logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11.39.605C10.376 3.092 9.764 4.72 8.635 7.132c.693.734 1.543 1.589 2.923 2.554-1.484-.61-2.496-1.224-3.252-1.86C6.86 10.842 4.596 15.138 0 23.395c3.612-2.085 6.412-3.37 9.021-3.862a6.61 6.61 0 01-.171-1.547l.003-.115c.058-2.315 1.261-4.095 2.687-3.973 1.426.12 2.534 2.096 2.478 4.409a6.52 6.52 0 01-.146 1.243c2.58.505 5.352 1.787 8.914 3.844-.702-1.293-1.33-2.459-1.929-3.57-.943-.73-1.926-1.682-3.933-2.713 1.38.359 2.367.772 3.137 1.234-6.09-11.334-6.582-12.84-8.67-17.74z'/%3E%3C/svg%3E");
+    --wallpaper-default: url('data:image/jpeg;base64,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');
+}

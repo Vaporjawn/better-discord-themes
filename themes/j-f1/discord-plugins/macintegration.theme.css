@@ -1,0 +1,590 @@
+/**
+ * @name MacIntegration
+ * @version 1.4.4
+ * @description Aligns some parts of Discord's UI with the macOS HIG
+ * @author Jed Fox
+ * @authorLink https://jedfox.com
+ * @authorId 706842348239323199
+ * @website https://jedfox.com
+ * @source https://raw.githubusercontent.com/j-f1/discord-plugins/main/macintegration.theme.css
+ */
+
+/*
+Key:
+.container-1eFtFS: top level container, below modals etc
+.searchBar-3TnChZ: "Find or start a conversation" on homepage
+.searchBarComponent-3N7dCG: contents of that button/text field
+.header-3OsQeK: server name header
+.container-ZMc96U: main title bar/toolbar with channel name
+.macButtons-eIdy0e: window buttons (removed?)
+.macDragRegion-3RTnKp: background behind window buttons
+.guilds-2JjMmN: servers sidebar
+.item-3XjbnG.themed-2-lozF: online/all/pending/blocked tabs
+.item-3XjbnG: friends toolbar tabs
+.title-31SJ6t: channel header (also has the class below)
+.children-3xh0VB: wraps channel title
+.title-17SveM: channel title
+.divider-q3P9HC: line between channel title and topic
+.topic-11NuQZ: topic
+.status-12NUUC: DM status
+.akaBadge-3i7V3p: DM AKA badge
+.nicknames-10Sg6e: DM nickname list
+.followButton-1N-GGp: follow button on announcement channels
+.caret-1le2LN: thread caret in title bar
+.parentChannelName-R4UlaT: thread parent channel in title bar
+.titleWrapper-24Kyzc: wrapper for thread parent channel in title bar
+.scroller-3X7KbA: server list scroll view
+.scroller-WSmht3: friends/dms list scroll view
+[class^="strikethrough"]: red slash across icon
+.sidebar-1tnWFu: channel sidebar (list + server name + voice status)
+.container-1NXEtd: channel list
+.topControls-23RE3h: wraps top bar in voice channel
+.iconWrapper-2awDjA: icon buttons in toolbar
+.content-1jQy2l: main text channel content (incl. right sidebar)
+.toolbar-3_r2xA: toolbar buttons in title bar
+.expandedFolderBackground-1kSAf6: expanded folder backdrop
+.folder-241Joy: folder icon
+.panels-3wFtMD: bottom of sidebar ("User Area")
+.circleIconButton-1VxDrg: add/join server buttons in sidebar
+.wrapper-3Hk9OB: wrapper around "Voice Connected" card in sidebar
+.buttonColor-3bP3fX: buttons in Voice Connected card
+.container-YkUktl: username/avatar card in sidebar
+.members-3WRCEx: chat member sidebar
+.mask-1FEkla: <svg> around avatar + status lockup
+.clickable-ZD7xvu: top toolbar buttons
+.tab-TRrPC8: inbox tabs
+.button-1_oXub: inbox buttons
+.mainContent-20q_Hp: voice/text chats in sidebar
+.clickable-2AoIYN: channel section header
+.wrapper-28eC3z: server/folder wrappers
+.button-3bklZh: message action buttons
+.menu-1QACrS: any menu
+.scroller-1bVxF5: any menu scroller
+.item-1OdjEX: any menu item
+.buttonWrapper-3YFQGJ: GIF button
+.peopleListItem-u6dGxF: people in main friends list
+.actionButton-3-B2x-: friend action button
+.privateChannelsHeaderContainer-1UWASm: header of dms list
+.interactive-2zD88a: active now card
+.channel-1Shao0: DM thread in sidebar
+.closeButton-mupH76: hide DM thread
+.cursorPointer-3JF56F: header of dm thread
+.clickable-28SzVr .layout-1qmrhw: users in server right sidebar
+.actionIcon-2sw4Sl: channel sidebar action button
+.threadSidebarOpen-1LSXvU: main chat when the thread sidebar is open
+.container-3XgAHv: thread sidebar
+.bannerImage-ubW8K-: the fancy image at the top of the sidebar of some servers
+.bannerImage-ubW8K-::before: a gradient overlay for that image
+.bannerVisible-Vkyg1I: added when the above-mentioned image is present
+.hasBanner-2IrYih: added when the banner image is present and not scrolled away
+.titleBar-1it3bQ: wrapper for window buttons
+.panel-2ZFCRb: screen sharing panel above user area
+.submenuPaddingContainer-_k62dJ: wraps submenus
+.notice-2HEN-u: “viewing server as [role]” notice (and other things? idk)
+.content-1SgpWY: wrapper for everything to the right of the server list
+.boostedGuildTierIconBackgroundWithVisibleBanner-2KrNB1: the background around the shield gem in the title bar
+.boostedGuildTierIconWithVisibleBanner-3XawD_: the shield gem in the title bar
+.verified-1Jv_7P: the verified server badge in the title bar
+.communityInfoVisible-3zc5_s: applied to the title bar when the community info badge is visible
+.communityInfoContainer-1dMVpU: the public badge below the title bar
+.avatarWrapper-1B9FTW: name/avatar lockup at the bottom of the channel list
+*/
+
+/* font */
+:root {
+  --font-primary: system-ui !important;
+  --font-display: system-ui !important;
+}
+
+/* todo: something about font size because system-ui is bigger than the default font */
+
+/* shrink title bar to match native toolbars */
+.container-ZMc96U,
+.searchBar-3TnChZ,
+.macButtons-eIdy0e,
+.header-3OsQeK,
+.container-1eFtFS::before {
+  height: 38px;
+}
+
+.macDragRegion-3RTnKp {
+  padding-bottom: 38px;
+}
+
+.guilds-2JjMmN {
+  margin-top: 38px !important;
+  z-index: 1;
+}
+.container-1eFtFS::before {
+  content: "";
+  padding-left: 2px;
+  box-shadow: var(--elevation-low);
+  box-sizing: border-box;
+  width: 73px;
+  display: block;
+  z-index: 2;
+  clip-path: inset(0 0 -10px 0); /* clip horizontal shadow */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.scroller-3X7KbA {
+  padding-top: 12px !important;
+  background: var(--background-secondary);
+}
+.expandedFolderBackground-1kSAf6,
+.folder-241Joy {
+  background: var(--background-tertiary);
+}
+
+.children-3xh0VB .iconWrapper-2awDjA svg {
+  height: 20px;
+  margin: 0;
+  margin-right: 2px;
+  margin-top: 2px;
+}
+
+/* title bar: move description to second row */
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB) {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  grid-template-rows: 1fr auto;
+  transform: translateY(-1.5px);
+}
+
+/* hashtag icon */
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .iconWrapper-2awDjA:is(
+    :nth-last-child(3),
+    :nth-last-child(6),
+    :nth-last-child(5)
+  ) {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin-left: 0;
+}
+/* shift chats with title */
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .title-17SveM[role="button"]:nth-last-child(3),
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .status-12NUUC:nth-last-child(2) {
+  transform: translateY(0.5px);
+}
+
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .iconWrapper-2awDjA {
+  transform: translateY(1.5px);
+}
+
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .iconWrapper-2awDjA:not(:nth-last-child(3)):not(:nth-last-child(6)):not(
+    :nth-last-child(5)
+  ) {
+  grid-column: 2;
+  grid-row: 2;
+  height: 16px;
+  margin-left: 0;
+  margin-right: 2px;
+}
+
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .iconWrapper-2awDjA:not(:nth-last-child(3)):not(:nth-last-child(6)):not(
+    :nth-last-child(5)
+  )
+  svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 0;
+}
+
+.nicknames-10Sg6e,
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .titleWrapper-24Kyzc:not(:last-child):not(:nth-last-child(3)):not(
+    :nth-last-child(4)
+  ) {
+  grid-column: 3 / span 2;
+  grid-row: 2;
+}
+
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .title-17SveM,
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .titleWrapper-24Kyzc:last-child {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+}
+
+:is(.title-31SJ6t.children-3xh0VB, .title-31SJ6t .children-3xh0VB)
+  .status-12NUUC {
+  grid-column: 4;
+  grid-row: 1;
+  justify-self: start;
+}
+
+.divider-q3P9HC,
+.caret-1le2LN {
+  display: none;
+}
+
+.akaBadge-3i7V3p {
+  grid-column: 2;
+  grid-row: 2;
+  margin-left: 0;
+  font-size: 8px;
+  height: 10px;
+  min-height: 10px;
+  line-height: 10px;
+  padding: 0 3px;
+  background-color: var(--background-tertiary);
+}
+
+.topic-11NuQZ {
+  grid-column: 2 / span 3;
+  grid-row: 2;
+  margin-left: 0;
+}
+
+.nicknames-10Sg6e,
+.topic-11NuQZ,
+.parentChannelName-R4UlaT {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.followButton-1N-GGp {
+  grid-column: 5;
+  grid-row: 1 / span 2;
+  transform: translateY(1.5px);
+}
+
+/* friends tab bar */
+.item-3XjbnG.themed-2-lozF {
+  margin: 0 4px;
+}
+
+/* tweak shadow */
+.theme-light,
+.theme-dark {
+  --elevation-low: 0 0.5px 0 rgba(0, 0, 0, 0.1);
+}
+.app-focused.theme-light,
+.app-focused .theme-light {
+  /* variant of elevation-medium */
+  --elevation-low: 0 1px 3px rgba(0, 0, 0, 0.12), 0 0.5px 0 rgba(0, 0, 0, 0.1);
+  /* --background-floating: rgba(255, 255, 255, 0.25); */
+}
+.app-focused.theme-dark,
+.app-focused .theme-dark {
+  /* variant of elevation-medium */
+  --elevation-low: 0 1.5px 1.5px rgba(0, 0, 0, 0.16);
+}
+
+.wrapper-3Hk9OB {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.wrapper-3Hk9OB:empty + .container-YkUktl,
+.wrapper-3Hk9OB:not(empty):first-child,
+.panel-2ZFCRb {
+  z-index: 1;
+  box-shadow: var(--elevation-low);
+}
+.wrapper-3Hk9OB:empty + .container-YkUktl,
+.wrapper-3Hk9OB:not(empty):first-child,
+.wrapper-3Hk9OB:empty + .container-YkUktl > *,
+.wrapper-3Hk9OB:not(empty):first-child > *,
+.panel-2ZFCRb,
+.panel-2ZFCRb > * {
+  transform: scaleY(-1);
+}
+.panel-2ZFCRb {
+  border-top: 1px solid var(--background-modifier-accent);
+}
+
+:root:not(.app-focused) .mask-1FEkla [mask^="url(#svg-mask-status-"],
+:root:not(.app-focused) .mask-1FEkla svg > mask + rect {
+  fill: var(--text-muted) !important;
+  opacity: 0.75;
+}
+
+.wrapper-3Hk9OB .buttonColor-3bP3fX:not(.buttonActive-Uc1jHx),
+.app-focused
+  .wrapper-3Hk9OB
+  .buttonColor-3bP3fX:not(.buttonActive-Uc1jHx):hover {
+  background: var(--background-tertiary);
+}
+
+.app-focused
+  .wrapper-3Hk9OB
+  .buttonColor-3bP3fX:not(.buttonActive-Uc1jHx):not(:hover) {
+  background: var(--background-secondary);
+}
+
+/* dim/grayscale UI elements when window is not focused */
+.container-ZMc96U.container-ZMc96U,
+.searchBar-3TnChZ,
+.header-3OsQeK,
+.hasBanner-2IrYih .header-3OsQeK, /* specificity hack */
+.container-1eFtFS::before,
+.app-focused .panels-3wFtMD > *,
+.bannerVisible-Vkyg1I,
+:root:not(.app-focused) .panels-3wFtMD > * {
+  background: var(--background-secondary);
+}
+
+:root:not(.app-focused) .scroller-3X7KbA,
+:root:not(.app-focused) .container-1NXEtd,
+:root:not(.app-focused) .scroller-WSmht3,
+:root:not(.app-focused) .members-3WRCEx,
+:root:not(.app-focused) .members-3WRCEx > div {
+  background: var(--background-secondary-alt) !important;
+}
+
+.theme-light:not(.app-focused) .children-3xh0VB::after {
+  background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 100%, 0) 0,
+    var(--background-secondary)
+  );
+}
+.theme-dark:not(.app-focused) .children-3xh0VB::after {
+  background: linear-gradient(
+    90deg,
+    rgba(54, 57, 63, 0) 0,
+    var(--background-secondary)
+  );
+}
+
+/* scroller-2TZvBN got rerolled; not sure what it is now. oops! */
+:root:not(.app-focused) [aria-controls="ADD_FRIEND-tab"],
+:root:not(.app-focused) .scroller-2TZvBN > * {
+  filter: grayscale();
+}
+:root:not(.app-focused) [class^="strikethrough"] {
+  color: currentColor;
+  opacity: 0.75;
+}
+
+.searchBar-3TnChZ {
+  padding: 0 5px;
+}
+
+.searchBarComponent-3N7dCG {
+  text-align: center !important;
+}
+.searchBarComponent-3N7dCG::before {
+  content: "􀊫";
+  font-family: "SF Pro Text", "SF Pro";
+  font-size: 90%;
+  display: inline-block;
+  margin-right: 0.35em;
+  transform: translateY(-0.5px);
+}
+
+/* make the title bar white to match Big Sur */
+.app-focused .container-ZMc96U.container-ZMc96U,
+.app-focused .searchBar-3TnChZ,
+.app-focused .header-3OsQeK,
+.app-focused .hasBanner-2IrYih .header-3OsQeK, /* specificity hack */
+.app-focused .container-1eFtFS::before,
+.app-focused .bannerVisible-Vkyg1I,
+.app-focused .panels-3wFtMD > * {
+  background: var(--background-primary);
+}
+
+.header-3OsQeK {
+  transition: none; /* fix crossfade when switching apps */
+  padding-block: 6px 12px;
+}
+
+/* divider between channel list and main body */
+.sidebar-1tnWFu,
+.guilds-2JjMmN,
+.container-1eFtFS::before,
+.threadSidebarOpen-1LSXvU {
+  border-right: 0.5px solid var(--background-tertiary);
+}
+
+/* always show top controls in voice channel */
+.topControls-23RE3h {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* highlight icons on hover */
+.toolbar-3_r2xA .iconWrapper-2awDjA {
+  padding: 3px;
+  margin: 0 4px;
+  height: 30px;
+  border-radius: 5px;
+}
+.toolbar-3_r2xA .iconWrapper-2awDjA:hover {
+  background: var(--background-modifier-selected);
+}
+
+/* make shadow consistent across title bar */
+.content-1jQy2l::before {
+  top: -38px;
+  height: 38px;
+}
+
+.header-3OsQeK {
+  box-shadow: var(--elevation-low) !important;
+}
+
+.communityInfoVisible-3zc5_s .communityInfoContainer-1dMVpU {
+  margin-top: 8px;
+}
+
+/* tweaks to fancy header image in special servers */
+.bannerImage-ubW8K-::before {
+  display: none;
+}
+
+.app-focused .hasBanner-2IrYih .header-3OsQeK {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12.5px) saturate(180%);
+}
+.theme-dark.app-focused .hasBanner-2IrYih .header-3OsQeK {
+  background: rgba(0, 0, 0, 0.4);
+}
+.theme-dark .bannerImage-ubW8K- {
+  filter: brightness(0.8);
+}
+
+.boostedGuildTierIconBackgroundWithVisibleBanner-2KrNB1 {
+  color: var(--background-accent);
+}
+.boostedGuildTierIconWithVisibleBanner-3XawD_ {
+  color: #fff;
+}
+.verified-1Jv_7P {
+  color: hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%);
+}
+
+.theme-light .bannerVisible-Vkyg1I .header-3OsQeK {
+  color: inherit;
+  filter: none;
+}
+
+/* tweaks to thread sidebar */
+.container-3XgAHv,
+.threadSidebarOpen-1LSXvU {
+  border-radius: 0 !important;
+}
+.container-3XgAHv {
+  margin-left: 0;
+}
+.container-3XgAHv .toolbar-3_r2xA {
+  order: -1;
+  flex-direction: row-reverse;
+}
+
+/* disable cursor: pointer; */
+.header-3OsQeK,
+.clickable-ZD7xvu,
+.tab-TRrPC8,
+.button-1_oXub,
+.mainContent-20q_Hp,
+.clickable-2AoIYN,
+button,
+.wrapper-28eC3z,
+.folder-241Joy,
+.circleIconButton-1VxDrg,
+.button-3bklZh,
+.item-1OdjEX,
+.buttonWrapper-3YFQGJ,
+.peopleListItem-u6dGxF,
+.actionButton-3-B2x-,
+.interactive-2zD88a,
+.channel-1Shao0,
+.channel-1Shao0 > *,
+.cursorPointer-3JF56F,
+.item-3XjbnG,
+.clickable-28SzVr:hover .layout-1qmrhw,
+.actionIcon-2sw4Sl {
+  cursor: default !important;
+}
+.closeButton-mupH76,
+.lookLink-9FtZy- {
+  cursor: pointer !important;
+}
+
+.channel-1Shao0:hover,
+.privateChannelsHeaderContainer-1UWASm:hover {
+  color: var(--channels-default) !important;
+}
+
+.channel-1Shao0.highlighted-3PcOfB::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: var(--bdfdb-blurple);
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* native-like menus */
+/* credit: @TheCommieAxolotl https://github.com/TheCommieAxolotl/BetterDiscord-Stuff/blob/4f0327c270727639b402752ab2a37c267bcf9ada/OSX/OSX.css#L205-L221 */
+.menu-1QACrS {
+  background: #ececedc0;
+  min-width: 240px;
+}
+.theme-dark .menu-1QACrS {
+  background: #26262bb4;
+}
+
+.menu-1QACrS::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  backdrop-filter: blur(20px);
+  border-radius: 7px;
+  position: absolute;
+  box-shadow: inset 0 0 0 1px #bfbfc1;
+}
+.theme-dark .menu-1QACrS::before {
+  box-shadow: inset 0 0 0 1px #fff3;
+}
+
+.scroller-1bVxF5 {
+  padding: 4px 6px;
+  margin-right: -2px;
+}
+
+/* .modeSelected-346R90 .content-1x5b-n, .modeSelected-346R90:hover .content-1x5b-n {
+  background: blue !important;
+} */
+
+/* menus */
+.submenuPaddingContainer-_k62dJ {
+  padding-left: 0;
+  margin-top: -6px;
+}
+.item-1OdjEX {
+  border-radius: 5px;
+}
+
+/* notice */
+
+.notice-2HEN-u {
+  border-radius: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.notice-2HEN-u + .content-1SgpWY {
+  margin-bottom: 40px;
+}
+
+/* move mute/deafen icons to the right */
+.avatarWrapper-1B9FTW {
+  flex-grow: 1;
+}

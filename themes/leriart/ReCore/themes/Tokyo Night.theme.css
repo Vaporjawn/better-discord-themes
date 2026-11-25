@@ -1,0 +1,198 @@
+/**
+ * @name Tokyo Night
+ * @author ReCore
+ * @description Tokyo Night's ink-blue city palette with a bright blue accent, a neon-violet secondary and crisp, low-radius panels.
+ * @version 1.0.0
+ * @license MIT
+ * @source https://github.com/folke/tokyonight.nvim
+ */
+
+/*
+ * Tokyo Night for Discord and ReCore. The palette follows the editor theme:
+ * storm-blue grounds, a pale ink text and the neon blue, purple and cyan
+ * accents. ReCore paints the same colours natively.
+ */
+
+:root,
+.theme-dark {
+    color-scheme: dark;
+
+    /* Tokyo Night: palette */
+    --tn-bg: #1a1b26;
+    --tn-bg-dark: #16161e;
+    --tn-bg-highlight: #292e42;
+    --tn-terminal: #15161e;
+    --tn-fg: #c0caf5;
+    --tn-fg-dark: #a9b1d6;
+    --tn-comment: #565f89;
+    --tn-blue: #7aa2f7;
+    --tn-cyan: #7dcfff;
+    --tn-purple: #bb9af7;
+    --tn-magenta: #c678dd;
+    --tn-green: #9ece6a;
+    --tn-yellow: #e0af68;
+    --tn-red: #f7768e;
+
+    --rl-accent: #7aa2f7;
+    --rl-signal: var(--rl-accent);
+    --rl-signal-hot: #7dcfff;
+    --rl-signal-soft: color-mix(in srgb, var(--rl-accent) 52%, #c0caf5);
+    --rl-radius: 8px;
+    --rl-font: "Inter", "gg sans", "Noto Sans", sans-serif;
+    --rl-tracking: 0.005em;
+    --rl-motion: full;
+    --rl-panel-opacity: 88%;
+    --rl-background-dim: 68%;
+    --rl-background-image: linear-gradient(160deg, #16161e 0%, #1a1b26 55%, #292e42 100%);
+    --rl-scanline-opacity: 0.04;
+    --rl-grain-opacity: 0;
+    --rl-vignette-opacity: 0.18;
+    --rl-flicker-duration: 0s;
+    --rl-beam-opacity: 0;
+    --rl-frame-opacity: 0;
+
+    /* Backgrounds */
+    --background-primary: #1a1b26;
+    --background-secondary: #16161e;
+    --background-secondary-alt: #15161e;
+    --background-tertiary: #15161e;
+    --background-floating: #292e42;
+    --background-nested-floating: #1f2335;
+    --background-base-lowest: #15161e;
+    --background-base-lower: #1a1b26;
+    --background-base-low: #16161e;
+    --background-surface-high: #292e42;
+    --background-surface-higher: #343b58;
+    --background-surface-highest: #3b4261;
+    --background-code: #16161e;
+    --background-tooltip: #292e42;
+    --chat-background: #1a1b26;
+    --channeltextarea-background: #16161e;
+    --input-background-default: #16161e;
+    --background-accent: #292e42;
+
+    /* Text */
+    --text-normal: #c0caf5;
+    --text-default: #c0caf5;
+    --text-strong: #d5e0ff;
+    --text-muted: #a9b1d6;
+    --text-subtle: #565f89;
+    --header-primary: #d5e0ff;
+    --header-secondary: #a9b1d6;
+    --channels-default: #a9b1d6;
+    --channel-icon: #7aa2f7;
+    --interactive-normal: #a9b1d6;
+    --interactive-hover: #c0caf5;
+    --interactive-active: #d5e0ff;
+    --interactive-muted: #565f89;
+    --text-link: #7dcfff;
+
+    /* Accents */
+    --brand-experiment: #7aa2f7;
+    --brand-360: #7dcfff;
+    --brand-500: #7aa2f7;
+    --brand-530: #6a91e0;
+    --brand-560: #5a80cd;
+    --brand-600: #4b6fba;
+    --control-primary-background-default: #7aa2f7;
+    --control-primary-background-hover: #6a91e0;
+    --control-primary-text-default: #15161e;
+    --control-secondary-background-default: #292e42;
+    --control-secondary-background-hover: #343b58;
+
+    /* Status */
+    --status-positive: #9ece6a;
+    --status-warning: #e0af68;
+    --status-danger: #f7768e;
+    --status-green: #9ece6a;
+    --status-yellow: #e0af68;
+    --online: #9ece6a;
+    --idle: #e0af68;
+
+    /* Borders and surfaces */
+    --border-subtle: #292e42;
+    --border-normal: #3b4261;
+    --border-strong: #545c7e;
+    --background-modifier-hover: rgba(122, 162, 247, 0.08);
+    --background-modifier-active: rgba(122, 162, 247, 0.14);
+    --background-modifier-selected: rgba(122, 162, 247, 0.2);
+    --background-modifier-accent: #292e42;
+    --message-background-hover: rgba(122, 162, 247, 0.06);
+    --avatar-background: #292e42;
+    --app-frame-background: #15161e;
+    --app-frame-border: #292e42;
+
+    /* Typography and shape */
+    --font-primary: var(--rl-font);
+    --font-display: var(--rl-font);
+    --font-code: "JetBrains Mono", "Cascadia Code", monospace;
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-round: 9999px;
+}
+
+[class*="guilds_"] {
+    background: #15161e;
+    border-right: 1px solid #292e42;
+}
+
+[class*="sidebarList_"],
+[class*="privateChannels_"],
+[class*="membersWrap_"] {
+    background: #16161e;
+}
+
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: transparent;
+}
+
+[class*="channelTextArea_"],
+[class*="textArea_"] {
+    background: #16161e;
+    border: 1px solid #3b4261;
+    border-radius: 8px;
+}
+
+[class*="message_"]:hover {
+    background: rgba(122, 162, 247, 0.06);
+    border-radius: 6px;
+}
+
+[class*="selected_"],
+[class*="selected-"] {
+    background: rgba(122, 162, 247, 0.2);
+    border-radius: 6px;
+}
+
+::selection {
+    background: #7aa2f7;
+    color: #15161e;
+}
+
+@keyframes tokyo-glow {
+    from {
+        background-color: rgba(122, 162, 247, 0.06);
+        opacity: 0.2;
+    }
+    50% {
+        background-color: rgba(187, 154, 247, 0.1);
+        opacity: 0.45;
+    }
+    to {
+        background-color: rgba(122, 162, 247, 0.06);
+        opacity: 0.2;
+    }
+}
+
+body {
+    animation: tokyo-glow 26s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        animation: none;
+    }
+}
